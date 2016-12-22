@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+  // const HtmlWebpackPlugin = require('html-webpack-plugin');
+  // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/app.jsx',
@@ -12,7 +12,7 @@ module.exports = {
     hot: true,
   },
   output: {
-    filename: '[hash].js',
+    filename: 'index.js',
     path: './dist',
   },
   resolve: {
@@ -30,16 +30,8 @@ module.exports = {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.UglifyJsPlugin({ minimize: true }),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['docs', 'dist']),
-    new ExtractTextPlugin('styles.css', { allChunks: true }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      filename: 'index.html',
-      template: 'src/index.ejs',
-      files: {
-        css: ['/styles.css'],
-      },
-    }),
+    new CleanWebpackPlugin(['dist']),
+      // new ExtractTextPlugin('styles.css', { allChunks: true }),
   ],
   module: {
     preLoaders: [
