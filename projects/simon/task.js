@@ -1,6 +1,7 @@
 module.exports = {
   title: '',
   task: '',
-  src: '',
+  challenge: '',
+  example: '',
   stroies: [],
 };
