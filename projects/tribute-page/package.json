@@ -1,7 +1,7 @@
 {
-  "name": "free-code-camp-front-end-skeleton",
+  "name": "free-code-camp-front-end-tribute-page",
   "version": "0.0.1",
-  "description": "Skeleton repository",
+  "description": "",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton/"
+    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-tribute-page/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^6.5.4",
+    "autoprefixer": "^6.6.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
@@ -36,7 +36,10 @@
     "node-sass": "^4.1.1",
     "normalize.css": "^5.0.0",
     "postcss-loader": "^1.2.1",
+    "precss": "^1.4.0",
+    "resolve-url-loader": "^1.6.1",
     "sass-loader": "^4.1.0",
+    "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
