@@ -1,5 +1,5 @@
 {
-  "name": "free-code-camp-front-end-skeleton",
+  "name": "free-code-camp-front-end-quote-machine",
   "version": "0.0.1",
   "description": "Skeleton repository",
   "main": "index.jsx",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton/"
+    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-quote-machine/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "ISC",
