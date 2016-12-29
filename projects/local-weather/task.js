@@ -1,4 +1,6 @@
 module.exports = {
-  Objective: [],
-  'User Story': [],
+  title: '',
+  task: '',
+  src: '',
+  stroies: [],
 };
