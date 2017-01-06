@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Container from './index';
-import TweetButton from './src/components/TweetButton';
+import Container, { TweetButton, NextButton } from './index';
 
 require('./src/styles/main.scss');
 
 const App = () => (
   <Container>
     <TweetButton />
+    <NextButton />
   </Container>
 );
 
