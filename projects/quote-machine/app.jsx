@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Most of the App should come from index.js */
-import App from './index';
+import Container from './index';
+import TweetButton from './src/components/TweetButton';
 
 require('./src/styles/main.scss');
+
+const App = () => (
+  <Container>
+    <TweetButton />
+  </Container>
+);
 
 ReactDOM.render(
   <App />,
