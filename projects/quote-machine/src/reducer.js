@@ -2,8 +2,7 @@ import {
   REQUEST_QUOTE,
   RECEIVE_QUOTE,
   RECEIVE_ERROR,
-  TWEET_QUOTE,
-} from './actions'
+} from './actions';
 
 const defaultState = {
   error: null,

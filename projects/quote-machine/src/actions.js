@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_QUOTE = 'REQUEST_QUOTE';
 export const RECEIVE_QUOTE = 'RECEIVE_QUOTE';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-export const TWEET_QUOTE = 'TWEET_QUOTE';
+// export const TWEET_QUOTE = 'TWEET_QUOTE';
 
 export function requestQuote() {
   return { type: REQUEST_QUOTE };

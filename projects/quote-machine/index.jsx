@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import reducer from './src/reducer';
 import TweetButton from './src/components/TweetButton';
 import NextButton from './src/components/NextButton';
+import Display from './src/components/Display';
 
 const composeEnhancers = process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : compose;
 
@@ -35,4 +36,4 @@ QuoteMachine.defaultProps = {
 };
 
 export default QuoteMachine;
-export { TweetButton, NextButton };
+export { TweetButton, NextButton, Display };
