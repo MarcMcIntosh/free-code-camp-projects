@@ -11,6 +11,7 @@ import { tweetQuote } from '../actions';
 
 const TwitterButton = props => (
   <button
+    tabIndex="0"
     className={props.classed}
     disabled={props.disabled}
     onClick={(e) => {
@@ -34,6 +35,7 @@ TwitterButton.propTypes = {
 
 TwitterButton.defaultProps = {
   classed: 'qm__tweet',
+  children: 'Tweet',
 };
 
 const mapStateToProps = state => ({
