@@ -40,6 +40,8 @@ TwitterButton.defaultProps = {
 
 const mapStateToProps = state => ({
   disabled: state.done,
+  quote: state.quote,
+  author: state.author,
 });
 
 const mapDispatchToProps = dispatch => ({

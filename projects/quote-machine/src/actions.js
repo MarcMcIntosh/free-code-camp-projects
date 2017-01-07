@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_QUOTE = 'REQUEST_QUOTE';
 export const RECEIVE_QUOTE = 'RECEIVE_QUOTE';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-// export const TWEET_QUOTE = 'TWEET_QUOTE';
+export const TWEET_QUOTE = 'TWEET_QUOTE';
 
 export function requestQuote() {
   return { type: REQUEST_QUOTE };
@@ -35,14 +35,14 @@ export function fetchQuote() {
 }
 
 export function tweetQuote(str) {
-  // const twt = `https://twitter.com/intent/tweet?text=${str}`;
-  const w = 550;
-  const h = 420;
-  const sh = screen.height;
-  const sw = screen.width;
+  const url = `https://twitter.com/intent/tweet?text=${str}`;
+  const [w, h, sh, sw] = [550, 420, screen.height, screen.width];
   const left = Math.round((sw / 2) - (w / 2));
   const top = (sh > h) ? Math.round((sh / 2) - (h / 2)) : 0;
-  const opts = `text=${str},scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=${w},height=${h},left=${left},top=${top}`;
+  const opts = `scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=${w},height=${h},left=${left},top=${top}`;
 
-  window.open('https://twitter.com', 'intent', opts);
+  return (dispatch) => {
+    dispatch({ type: TWEET_QUOTE });
+    window.open(url, 'intent', opts);
+  };
 }
