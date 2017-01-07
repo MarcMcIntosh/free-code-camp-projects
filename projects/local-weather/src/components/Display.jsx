@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { getWeather } from '../actions';
+import Icon from './Icon';
 
 class Display extends Component {
   componentDidMount() {
@@ -9,13 +10,30 @@ class Display extends Component {
     }
   }
   render() {
-    return (<div className={this.props.classed}>Hello</div>);
+    const { success, icon, error, classed, weather, description } = this.props;
+    if (success) {
+      return (<div className={classed}>
+        <h1>{weather}</h1>
+        <p>{description}</p>
+        <Icon src={`http://openweathermap.org/img/w/${icon}.png`} />
+      </div>);
+    } else if (error) {
+      return (<div className={`${classed} error`}>{error}</div>);
+    }
+    return (<div className={this.props.classed}>{
+
+    }</div>);
   }
 }
 
 Display.propTypes = {
-  classed: PropTypes.string,
+  success: PropTypes.bool,
   hasCoords: PropTypes.bool,
+  classed: PropTypes.string,
+  icon: PropTypes.string,
+  error: PropTypes.string,
+  weather: PropTypes.string,
+  description: PropTypes.string,
   getWeather: PropTypes.func,
 };
 
@@ -25,12 +43,18 @@ const mapStateToProps = (state) => {
     hasCoords,
     isPermitting,
     error,
+    icon,
+    success,
+    weather,
   } = state;
   return {
     isFetching,
     hasCoords,
     isPermitting,
     error,
+    icon,
+    success,
+    weather,
   };
 };
 

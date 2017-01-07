@@ -16,7 +16,19 @@ export function requestCoords() {
   return { type: REQUEST_COORDS };
 }
 export function receiveWeather(payload) {
-  return { type: RECEIVE_WEATHER, payload };
+  const { description, icon, main } = payload.weather[0];
+  const { latitude, longitude } = payload.coords;
+  return {
+    type: RECEIVE_WEATHER,
+    payload: {
+      icon,
+      description,
+      latitude,
+      longitude,
+      weather: main,
+      temperature: payload.main.temp,
+    },
+  };
 }
 export function receiveError(payload) {
   return { type: RECEIVE_ERROR, payload };

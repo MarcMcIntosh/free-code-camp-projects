@@ -11,12 +11,15 @@ export const DEFAULT_STATE = {
   isFetching: false,
   hasCoords: false,
   isPermitting: false,
-  error: null,
   success: false,
-  weather: null,
-  timestamp: Date.now(),
   latitude: null,
   longitude: null,
+  timestamp: Date.now(),
+  error: '',
+  weather: '',
+  icon: '',
+  temperature: '',
+  description: '',
 };
 
 export default function (state = DEFAULT_STATE, action) {
@@ -26,7 +29,11 @@ export default function (state = DEFAULT_STATE, action) {
       // Include url or somthing?
     };
     case RECEIVE_WEATHER: return {
-      ...state, isFetching: false, weather: action.payload, success: true,
+      ...state,
+      ...action.payload,
+      error: null,
+      isFetching: false,
+      success: true,
     };
     case RECEIVE_ERROR: return {
       ...state,
