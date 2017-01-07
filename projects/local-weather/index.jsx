@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('dotenv');
+
 const App = () => (
   <h1>Hello World</h1>
 );
