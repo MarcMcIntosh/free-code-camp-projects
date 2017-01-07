@@ -3,33 +3,27 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
-  entry: './app.jsx',
-  target: 'web',
-  devtool: 'cheap-source-map',
-  devServer: {
-    inline: true,
-    hot: true,
-  },
-  output: {
-    filename: '[hash].js',
-    path: './docs',
-      //publicPath: '/git-hub-repo-name/'
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    modulesDirectories: ['node_modules'],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+const name = require('./package.json').name;
+
+const publicPathUrl = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return `/${name}/`;
+  }
+  return '/';
+};
+
+const pluginConf = () => {
+  const {
+    OccurenceOrderPlugin,
+    DedupePlugin,
+    AggressiveMergingPlugin,
+    UglifyJsPlugin,
+  } = webpack.optimize;
+
+  const DEFAULT_PLUGINS = [
+    new OccurenceOrderPlugin(),
+    new DedupePlugin(),
+    new AggressiveMergingPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(['docs']),
     new ExtractTextPlugin('styles.css', { allChunks: true }),
@@ -41,7 +35,39 @@ module.exports = {
         css: ['/styles.css'],
       },
     }),
-  ],
+  ];
+  if (process.env.NODE_ENV === 'production') {
+    return DEFAULT_PLUGINS.concat([
+      new webpack.DefinePlugin({ 'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      } }),
+      new UglifyJsPlugin({
+        minimize: true,
+        comments: false,
+      }),
+    ]);
+  }
+  return DEFAULT_PLUGINS;
+};
+
+module.exports = {
+  entry: './app.jsx',
+  target: 'web',
+  devtool: 'cheap-source-map',
+  devServer: {
+    inline: true,
+    hot: true,
+  },
+  output: {
+    filename: '[hash].js',
+    path: './docs',
+    publicPath: publicPathUrl(),
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules'],
+  },
+  plugins: pluginConf(),
   module: {
     preLoaders: [
       {
