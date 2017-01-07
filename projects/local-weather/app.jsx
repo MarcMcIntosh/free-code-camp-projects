@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Most of the App should come from index.js */
-import App from './index';
+import Container, { Display } from './index';
+
+const App = () => (
+  <Container>
+    <Display />
+  </Container>
+);
 
 require('./src/styles/main.scss');
 
