@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "es6-promise": "^4.0.5",
-    "free-code-camp-front-end-taskbar": "git+https://git.marcmcintosh.ninja/free-code-camp-front-end-taskbar/",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
