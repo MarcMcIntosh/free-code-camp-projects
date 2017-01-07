@@ -1,20 +1,22 @@
 import React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './src/reducer';
 import TweetButton from './src/components/TweetButton';
 import NextButton from './src/components/NextButton';
 import Display from './src/components/Display';
 
-const composeEnhancers = process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : compose;
-
-const enhancer = composeEnhancers(applyMiddleware(thunkMiddleware));
+const store = createStore(reducer, compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ),
+);
 
 class QuoteMachine extends React.Component {
   constructor(props) {
     super(props);
-    this.store = createStore(reducer, enhancer);
+    this.store = store;
   }
   render() {
     return (

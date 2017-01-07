@@ -4,25 +4,22 @@ import { fetchQuote } from '../actions';
 
 class Display extends Component {
   componentWillMount() {
-    if (!this.props.author || this.props.quote) {
+    if (!this.props.done) {
       this.props.fetchQuote();
     }
   }
 
   render() {
     const cn = this.props.classed;
-    if (this.props.isLoading) {
+    if (this.props.isFetching) {
       return (<div className={`${cn} loading`}>Loading</div>);
     }
     if (this.props.error) {
       return (<div className={`${cn} error`}>{this.props.error}</div>);
     }
-    return (
-      <div className={cn}>
-        <q>{this.props.quote}</q>
-        <bdo dir="rtl">-- {this.props.author}</bdo>
-      </div>
-    );
+    return (<div className={cn}>
+      <q>{this.props.quote}</q> -- <small>{this.props.author}</small>
+    </div>);
   }
 }
 
@@ -32,19 +29,18 @@ Display.propTypes = {
   quote: PropTypes.string,
   fetchQuote: PropTypes.func,
   error: PropTypes.string,
-  isLoading: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  done: PropTypes.bool,
 };
 
 Display.defaultProps = {
   classed: 'qm__display',
 };
 
-const mapStateToProps = state => ({
-  ...state.author,
-  ...state.quote,
-  ...state.error,
-  ...state.isFetching,
-});
+const mapStateToProps = (state) => {
+  const { author, quote, error, isFetching, done } = state;
+  return { author, quote, error, isFetching, done };
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchQuote: () => dispatch(fetchQuote()),

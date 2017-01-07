@@ -13,7 +13,7 @@ const TwitterButton = props => (
   <button
     tabIndex="0"
     className={props.classed}
-    disabled={props.disabled}
+    disabled={!props.disabled}
     onClick={(e) => {
       e.preventDefault();
       const str = `${props.quote} -- ${props.author}`;

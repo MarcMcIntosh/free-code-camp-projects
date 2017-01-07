@@ -6,7 +6,7 @@ const NextButton = props => (
   <button
     tabIndex="0"
     className={props.classed}
-    disabled={props.disabled}
+    disabled={!props.disabled}
     onClick={(e) => {
       e.preventDefault();
       props.onClick();
@@ -17,12 +17,12 @@ const NextButton = props => (
 NextButton.propTypes = {
   classed: PropTypes.string,
   onClick: PropTypes.func,
-  disabled: PropTypes.disabled,
+  disabled: PropTypes.bool,
   children: PropTypes.node,
 };
 
 NextButton.defaultProps = {
-  chlidren: 'Next',
+  children: 'Next',
   classed: 'qm__next',
 };
 

@@ -29,10 +29,8 @@ export function fetchQuote() {
       if (res.status >= 200 && res.status < 300) {
         return res.json();
       } throw res.statusText;
-    }).then(json => receiveQuote({
-      author: json.author,
-      quote: json.quote,
-    })).catch(err => receiveError(err));
+    }).then(json => dispatch(receiveQuote(json)),
+    ).catch(err => dispatch(receiveError(err)));
   };
 }
 
