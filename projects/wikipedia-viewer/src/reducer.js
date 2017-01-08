@@ -2,6 +2,7 @@
 const DEFAULT_STATE = {
   isFetching: false,
   results: [],
+  term: '',
 };
 
 function reducer(state = DEFAULT_STATE, action) {
