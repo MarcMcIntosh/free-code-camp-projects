@@ -1,16 +1,10 @@
 {
-  "name": "free-code-camp-front-end-skeleton",
   "version": "0.0.1",
-  "description": "Skeleton repository",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress --colors ",
+    "start": "NODE_ENV=development webpack-dev-server --progress --colors ",
     "build": "NODE_ENV=production webpack "
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "ISC",
@@ -43,6 +37,15 @@
   },
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "name": "free-code-camp-front-end-wikipedia-viewer",
+  "description": "Wikipedia view built with react",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-wikipedia-viewer/"
   }
 }
