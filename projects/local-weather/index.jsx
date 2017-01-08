@@ -2,16 +2,14 @@ import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import Display from './src/components/Display';
+import Icon from './src/components/Icon';
+import TempControl from './src/components/TempControl';
+import Details from './src/components/Details';
 
 class Container extends Component {
   constructor(props) {
     super(props);
     this.store = store;
-  }
-  componentDidMount() {
-    if (!this.props.hasCoords) {
-      this.props.getWeather();
-    }
   }
   render() {
     return (
@@ -27,8 +25,6 @@ class Container extends Component {
 Container.propTypes = {
   classed: PropTypes.string,
   children: PropTypes.node,
-  hasCoords: PropTypes.bool,
-  getWeather: PropTypes.func,
 };
 
 Container.defaultProps = {
@@ -36,4 +32,4 @@ Container.defaultProps = {
 };
 
 export default Container;
-export { Display };
+export { Display, Icon, TempControl, Details };

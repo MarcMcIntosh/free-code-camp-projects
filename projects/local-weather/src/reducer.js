@@ -36,7 +36,7 @@ export default function (state = DEFAULT_STATE, action) {
     case RECEIVE_WEATHER: return {
       ...state,
       ...action.payload,
-      error: null,
+      error: '',
       isFetching: false,
       success: true,
     };

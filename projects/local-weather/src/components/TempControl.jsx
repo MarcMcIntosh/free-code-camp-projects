@@ -18,8 +18,8 @@ const TempControl = (props) => {
 TempControl.propTypes = {
   classed: PropTypes.string,
   celsius: PropTypes.number,
-  fahrenheit: PropTypes.numner,
-  degrees: PropTypes.degrees,
+  fahrenheit: PropTypes.number,
+  degrees: PropTypes.string,
   handleClick: PropTypes.func,
 };
 

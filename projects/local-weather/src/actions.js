@@ -23,8 +23,9 @@ const kelvinToFahrenheit = k => (k * (9 / 5)) - 459.67;
 
 
 export function receiveWeather(payload) {
+  // const report = payload.weather[0];
   const { description, icon, main } = payload.weather[0];
-  const { latitude, longitude } = payload.coords;
+  const { latitude, longitude } = payload.coord;
   return {
     type: RECEIVE_WEATHER,
     payload: {
@@ -35,7 +36,7 @@ export function receiveWeather(payload) {
       weather: main,
       temperature: payload.main.temp,
       celsius: kelvinToCelsius(payload.main.temp),
-      fahrenheit: kelvinToFahrenheit(payload.main.temp)
+      fahrenheit: kelvinToFahrenheit(payload.main.temp),
     },
   };
 }
@@ -80,16 +81,18 @@ export function getWeather() {
   return (dispatch) => {
     dispatch(requestCoords());
     getCoords((err, payload) => {
-      if (err) return dispatch(clientError(err));
-      dispatch(clientCoords(payload));
-      return fetch(apiUrl(payload.latitude, payload.longitude), {
-        headers: { Accept: 'application/json' },
-      }).then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-          return res.json();
-        } throw res.statusText;
-      }).then(json => dispatch(receiveWeather(json)),
-      ).catch(error => dispatch(clientError(error)));
+      if (err) {
+        dispatch(clientError(err));
+      } else {
+        dispatch(clientCoords(payload));
+        fetch(apiUrl(payload.latitude, payload.longitude), {
+          headers: { Accept: 'application/json' },
+        }).then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          } return dispatch(receiveError(res.statusText));
+        }).then(json => dispatch(receiveWeather(json)));
+      }
     });
   };
 }

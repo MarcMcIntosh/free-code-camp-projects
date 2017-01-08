@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { getWeather } from '../actions';
-import Icon from './Icon';
 
 class Display extends Component {
   componentDidMount() {
@@ -11,16 +10,13 @@ class Display extends Component {
   }
   render() {
     const { error, classed, weather, isPermitting, isLoading } = this.props;
-    if (isPermitting) {
-      return (<div className={`${classed} waiting`}>Allow ;)</div>);
-    } else if (isLoading) {
-      return (<div className={`${classed} loading`}>Loading :)</div>);
+    if (isPermitting || isLoading) {
+      return (<div className={`${classed} waiting`}>...Waiting</div>);
     } else if (error) {
-      return (<div className={`${classed} error`}>Error: {error} :(
-    </div>);
+      return (<div className={`${classed} error`}>Error: {error} :( </div>);
     }
     return (
-      <div className={this.props.classed}> {weather} <Icon /></div>
+      <div className={classed}>{weather}</div>
     );
   }
 }
