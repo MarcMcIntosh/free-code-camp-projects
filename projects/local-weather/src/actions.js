@@ -18,8 +18,8 @@ export function requestCoords() {
   return { type: REQUEST_COORDS };
 }
 
-const kelvinToCelsius = k => k - 273.15;
-const kelvinToFahrenheit = k => (k * (9 / 5)) - 459.67;
+const kelvinToCelsius = k => Math.round((k - 273.15) * 100) / 100;
+const kelvinToFahrenheit = k => Math.round(((k * (9 / 5)) - 459.67) * 100) / 100;
 
 
 export function receiveWeather(payload) {
