@@ -5,6 +5,7 @@ import {
   CLIENT_ERROR,
   CLIENT_COORDS,
   REQUEST_COORDS,
+  TOGGLE_TEMP,
 } from './actions';
 
 export const DEFAULT_STATE = {
@@ -18,7 +19,10 @@ export const DEFAULT_STATE = {
   error: '',
   weather: '',
   icon: '',
-  temperature: '',
+  temperature: null,
+  celsius: null,
+  fahrenheit: null,
+  degrees: 'C',
   description: '',
 };
 
@@ -28,6 +32,7 @@ export default function (state = DEFAULT_STATE, action) {
       ...state, isFetching: true, error: null,
       // Include url or somthing?
     };
+    case TOGGLE_TEMP: return { ...state, degrees: action.payload };
     case RECEIVE_WEATHER: return {
       ...state,
       ...action.payload,

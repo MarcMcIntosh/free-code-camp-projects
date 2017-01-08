@@ -8,6 +8,8 @@ export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 export const CLIENT_ERROR = 'CLIENT_ERROR';
 export const CLIENT_COORDS = 'CLIENT_COORDS';
 export const REQUEST_COORDS = 'REQUEST_COORDS';
+export const TOGGLE_TEMP = 'TOGGLE_TEMP';
+
 
 export function requestWeather() {
   return { type: REQUEST_WEATHER };
@@ -15,6 +17,11 @@ export function requestWeather() {
 export function requestCoords() {
   return { type: REQUEST_COORDS };
 }
+
+const kelvinToCelsius = k => k - 273.15;
+const kelvinToFahrenheit = k => (k * (9 / 5)) - 459.67;
+
+
 export function receiveWeather(payload) {
   const { description, icon, main } = payload.weather[0];
   const { latitude, longitude } = payload.coords;
@@ -27,6 +34,8 @@ export function receiveWeather(payload) {
       longitude,
       weather: main,
       temperature: payload.main.temp,
+      celsius: kelvinToCelsius(payload.main.temp),
+      fahrenheit: kelvinToFahrenheit(payload.main.temp)
     },
   };
 }
@@ -38,6 +47,14 @@ export function clientError(payload) {
 }
 export function clientCoords(payload) {
   return { type: CLIENT_COORDS, payload };
+}
+
+export function setTempDisplay(payload) {
+  return { type: TOGGLE_TEMP, payload };
+}
+export function toggleTemperature(curr) {
+  const nxt = (curr === 'C') ? 'F' : 'C';
+  return dispatch => dispatch(setTempDisplay(nxt));
 }
 
 function getCoords(cb) {

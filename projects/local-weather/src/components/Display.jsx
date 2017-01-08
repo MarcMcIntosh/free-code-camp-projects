@@ -10,50 +10,46 @@ class Display extends Component {
     }
   }
   render() {
-    const { success, icon, error, classed, weather, description } = this.props;
-    if (success) {
-      return (<div className={classed}>
-        <h1>{weather}</h1>
-        <p>{description}</p>
-        <Icon src={`http://openweathermap.org/img/w/${icon}.png`} />
-      </div>);
+    const { error, classed, weather, isPermitting, isLoading } = this.props;
+    if (isPermitting) {
+      return (<div className={`${classed} waiting`}>Allow ;)</div>);
+    } else if (isLoading) {
+      return (<div className={`${classed} loading`}>Loading :)</div>);
     } else if (error) {
-      return (<div className={`${classed} error`}>{error}</div>);
+      return (<div className={`${classed} error`}>Error: {error} :(
+    </div>);
     }
-    return (<div className={this.props.classed}>{
-
-    }</div>);
+    return (
+      <div className={this.props.classed}> {weather} <Icon /></div>
+    );
   }
 }
 
 Display.propTypes = {
-  success: PropTypes.bool,
+  isLoading: PropTypes.bool,
   hasCoords: PropTypes.bool,
   classed: PropTypes.string,
-  icon: PropTypes.string,
   error: PropTypes.string,
   weather: PropTypes.string,
-  description: PropTypes.string,
   getWeather: PropTypes.func,
+  isPermitting: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
   const {
     isFetching,
-    hasCoords,
     isPermitting,
+    hasCoords,
     error,
     icon,
-    success,
     weather,
   } = state;
   return {
     isFetching,
-    hasCoords,
     isPermitting,
+    hasCoords,
     error,
     icon,
-    success,
     weather,
   };
 };
