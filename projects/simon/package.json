@@ -1,16 +1,9 @@
 {
-  "name": "free-code-camp-front-end-skeleton",
-  "version": "0.0.1",
-  "description": "Skeleton repository",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --progress --colors ",
     "build": "NODE_ENV=production webpack "
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "ISC",
