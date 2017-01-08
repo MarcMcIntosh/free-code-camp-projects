@@ -8,6 +8,7 @@ const ListItem = (props) => {
         href={`https://en.wikipedia.org/?curid=${pageid}`}
         target="_blank"
         rel="noopener noreferrer"
+        tabIndex="0"
       >{title}</a></h1>
       <p>{extract}</p>
     </div>

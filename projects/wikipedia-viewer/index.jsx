@@ -4,6 +4,7 @@ import defaultStore from './src/store';
 import RandomWiki from './src/components/RandomWiki';
 import List from './src/components/List';
 import ListItem from './src/components/ListItem';
+import SearchBar from './src/components/SearchBar';
 
 const Container = (props) => {
   const { children, store, ...args } = props;
@@ -27,4 +28,4 @@ Container.defaultProps = {
 };
 
 export default Container;
-export { RandomWiki, List, ListItem };
+export { RandomWiki, List, ListItem, SearchBar };

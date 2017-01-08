@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-fetch';
+
 export const REQUEST_WIKIS = 'REQUEST_WIKI';
 export const RECEIVE_WIKIS = 'RECEIVE_WIKIS';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
+export const CHANGE_TERM = 'CHANGE_TERM';
 
 export function request() {
   return { type: REQUEST_WIKIS };
@@ -12,21 +14,23 @@ export function receiveWikis(payload) {
 export function receiveError(payload) {
   return { type: RECEIVE_ERROR, payload };
 }
-const wikiUrl = (str) => {
-  return [
-    'https://en.wikipedia.org/w/api.php?format=json',
-    'action=query',
-    'origin=*',
-    'generator=search',
-    'gsrnamespace=0',
-    'prop=extracts',
-    'exintro',
-    'explaintext',
-    'exsentences=1',
-    'exlimit=max',
-    `gsrsearch=${str}`,
-  ].join('&');
-};
+export function changeTerm(payload) {
+  return { type: CHANGE_TERM, payload };
+}
+
+const wikiUrl = str => [
+  'https://en.wikipedia.org/w/api.php?format=json',
+  'action=query',
+  'origin=*',
+  'generator=search',
+  'gsrnamespace=0',
+  'prop=extracts',
+  'exintro',
+  'explaintext',
+  'exsentences=1',
+  'exlimit=max',
+  `gsrsearch=${str}`,
+].join('&');
 
 export function searchWikipedia(term) {
   return dispatch => fetch(
