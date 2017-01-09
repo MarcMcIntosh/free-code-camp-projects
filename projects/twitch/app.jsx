@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Most of the App should come from index.js */
-import App from './index';
+import App, { Users } from './index';
 
 require('./src/styles/main.scss');
 
+const Test = () => (
+  <App>
+    <Users />
+  </App>
+);
+
 ReactDOM.render(
-  <App />,
+  <Test />,
   document.getElementById('App'),
 );
