@@ -15,12 +15,13 @@ const Container = (props) => {
 
 Container.propTypes = {
   children: PropTypes.node,
-  store: PropTypes.shape({
+  store: PropTypes.object,
+  /*store: PropTypes.shape({
     results: PropTypes.array.isRequired,
     term: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
-  }),
+  }),*/
 };
 
 Container.defaultProps = {

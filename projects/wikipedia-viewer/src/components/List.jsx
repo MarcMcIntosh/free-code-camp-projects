@@ -4,6 +4,7 @@ import ListItem from './ListItem';
 
 const List = (props) => {
   const { children, results, ...args } = props;
+  delete args.dispatch;
   return (<div {...args}>{results.map((d) => {
     const { title, extract, pageid } = d;
     return (<children
@@ -26,5 +27,6 @@ List.defaultProps = {
 const mapStateToProps = state => ({
   results: state.results,
 });
+
 
 export default connect(mapStateToProps)(List);
