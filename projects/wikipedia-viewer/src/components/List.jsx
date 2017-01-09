@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import ListItem from './ListItem';
 
 const List = (props) => {
   const { children, results, ...args } = props;
   delete args.dispatch;
-  return (<div {...args}>{results.map((d) => {
-    const { title, extract, pageid } = d;
-    return (<children
-      key={pageid}
-      title={title}
-      extract={extract}
-    />);
+  return (<div {...args}>{results.map((data) => {
+    const { title, extract, pageid } = data;
+    return cloneElement(children, { key: pageid,
+      pageid,
+      title,
+      extract,
+    });
   })}</div>);
 };
 
