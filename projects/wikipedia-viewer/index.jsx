@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import defaultStore from './src/store';
+import store from './src/store';
 import RandomWiki from './src/components/RandomWiki';
 import List from './src/components/List';
 import ListItem from './src/components/ListItem';
 import SearchBar from './src/components/SearchBar';
 
 const Container = (props) => {
-  const { children, store, ...args } = props;
+  const { children, ...args } = props;
   return (<Provider store={store}>
     <div {...args}>{children}</div>
   </Provider>);
@@ -15,17 +15,6 @@ const Container = (props) => {
 
 Container.propTypes = {
   children: PropTypes.node,
-  store: PropTypes.object,
-  /*store: PropTypes.shape({
-    results: PropTypes.array.isRequired,
-    term: PropTypes.string.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    error: PropTypes.string.isRequired,
-  }),*/
-};
-
-Container.defaultProps = {
-  store: defaultStore,
 };
 
 export default Container;
