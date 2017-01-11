@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App, { Users } from './index';
+import App, { UserList } from './index';
 
 require('./src/styles/main.scss');
 
 const Test = () => (
   <App>
-    <Users />
+    <UserList />
   </App>
 );
 
