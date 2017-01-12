@@ -22,9 +22,7 @@ const pluginConf = () => {
 
   const DEFAULT_PLUGINS = [
     new OccurenceOrderPlugin(),
-    // new DedupePlugin(),
     new AggressiveMergingPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(['docs']),
     new ExtractTextPlugin('styles.css', { allChunks: true }),
     new HtmlWebpackPlugin({
@@ -41,13 +39,17 @@ const pluginConf = () => {
       new webpack.DefinePlugin({ 'process.env': {
         NODE_ENV: JSON.stringify('production'),
       } }),
+      new DedupePlugin(),
       new UglifyJsPlugin({
         minimize: true,
         comments: false,
       }),
     ]);
   }
-  return DEFAULT_PLUGINS;
+  /* Development Plugins */
+  return DEFAULT_PLUGINS.concat([
+    new webpack.HotModuleReplacementPlugin(),
+  ]);
 };
 
 module.exports = {
