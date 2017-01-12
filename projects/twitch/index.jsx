@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-// import Users, { Error } from './src/components/UserList';
-import UserList, { UserError } from './src/components/UserList';
 
-// import Header from './src/components/Header';
-// import Container from './src/components/Container';
+import UserList, { UserError } from './src/components/UserList';
+import Header from './src/components/Header';
 
 const App = (props) => {
   const { children, ...args } = props;
@@ -21,4 +19,4 @@ App.propTypes = {
 };
 
 export default App;
-export { UserList, UserError };
+export { UserList, UserError, Header };
