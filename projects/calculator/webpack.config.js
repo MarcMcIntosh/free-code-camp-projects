@@ -22,7 +22,7 @@ const pluginConf = () => {
 
   const DEFAULT_PLUGINS = [
     new OccurenceOrderPlugin(),
-    new DedupePlugin(),
+    // new DedupePlugin(),
     new AggressiveMergingPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(['docs']),
