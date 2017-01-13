@@ -10,28 +10,24 @@ i.e:
 <Display tabIndex="0" />
 ```
 
-## Elements and classNames added to children of the componets are
+## Elements and classNames added to the top element in the component this.following structure can be used to access the children elements.
 ```scss
 // Display
-div {
-  input,
-}
+div > input,
 // ErrorMessage
-div {
-  button,
-}
+div > button,
 // Buttons
-div {
- button.number,
- button.ans,
- button.equals,
- button.minus,
- button.plus,
- button.point,
- button.times,
- button.divide,
- button.ac,
- button.cd,
- button.mod,
+table > tbody > tr > td > button {
+  .number,
+ .ans,
+ .equals,
+ .minus,
+ .plus,
+ .point,
+ .times,
+ .divide,
+ .ac,
+ .cd,
+ .mod,
 }
 ```
