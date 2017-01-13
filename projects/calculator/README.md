@@ -1,13 +1,15 @@
 
-Template File for front end assignments from [FreeCodeCamp](https://www.freecodecamp.com)
-
-# Usage
-```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
-npm install
-npm start
+## ClassNames used
+```scss
+button.number,
+button.ans,
+button.equals,
+button.minus,
+button.plus,
+button.point,
+button.times,
+button.divide,
+button.ac,
+button.cd,
+button.mod,
 ```
-Open browser at <localhost:8080>
