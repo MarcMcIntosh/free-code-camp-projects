@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import Buttons from './src/components/CalculatorButtons';
+import Display from './src/components/Display';
 
 class Calculator extends Component {
   constructor(props) {
@@ -23,4 +24,4 @@ Calculator.propTypes = {
 };
 
 export default Calculator;
-export { Buttons };
+export { Display, Buttons };
