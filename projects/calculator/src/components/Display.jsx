@@ -29,8 +29,6 @@ class Display extends Component {
       // space bar
       return this.props.onKey('ans');
     }
-    // return undefined;
-    // Try any way
     return undefined;
   }
   render() {

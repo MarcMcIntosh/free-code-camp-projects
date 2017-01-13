@@ -4,10 +4,29 @@ export const SET_ANSWER = 'SET_ANSWER';
 const setAnswer = payload => ({ type: SET_ANSWER, payload });
 export const SET_DISPLAY = 'SET_DISPLAY';
 const setDisplay = payload => ({ type: SET_DISPLAY, payload });
+// export const SET_ERROR = 'SET_ERROR';
+
 
 /* eslint no-new-func: "off" */
 const solve = calc => new Function(`return ${calc}`)();
 const append = (str, n) => str + n;
+
+export function clearError() {
+  return dispatch => dispatch(calcError({ error: null, errorId: null }));
+}
+
+export function handleUserError(err) {
+  return (dispatch, getState) => {
+    const last = getState().errorId;
+    /* Curently displaying an error */
+    if (last) { clearTimeout(last); }
+    const errorId = setTimeout(() => dispatch(calcError({
+      error: null,
+      errorOd: null,
+    })), 5000);
+    dispatch(calcError({ error: err, errorId }));
+  };
+}
 
 export function handleUserInput(d) {
   return (dispatch, getState) => {
@@ -20,7 +39,7 @@ export function handleUserInput(d) {
     } else if (!isNaN(d)) {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
-    } else if (d === 'del' && n > 0) {
+    } else if (d === 'del') {
       const nxt = display.slice(0, n);
       return dispatch(setDisplay(nxt));
     } else if (d === '.' && !isNaN(last)) {
@@ -28,7 +47,7 @@ export function handleUserInput(d) {
       return dispatch(setDisplay(nxt));
     } else if (d === '=' && !isNaN(last)) {
       const solution = solve(display);
-      return (isNaN(+solution)) ? dispatch(calcError('Invalid sum')) : dispatch(setAnswer(solution));
+      return (isNaN(+solution)) ? dispatch(handleUserError('Invalid sum')) : dispatch(setAnswer(solution));
     } else if (d === '-' && last !== '-') {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
@@ -42,6 +61,6 @@ export function handleUserInput(d) {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
     }
-    return dispatch(calcError('Invalid Input'));
+    return dispatch(handleUserError('Invalid Input'));
   };
 }

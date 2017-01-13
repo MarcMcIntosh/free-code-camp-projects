@@ -7,7 +7,8 @@ import {
 const DEFAULT_STATE = {
   display: '',
   answer: null,
-  error: null,
+  error: '',
+  errorId: null,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -18,7 +19,11 @@ function reducer(state = DEFAULT_STATE, action) {
       display: action.payload,
       answer: action.payload,
     };
-    case CALC_ERROR: return { ...state, error: action.payload };
+    case CALC_ERROR: return {
+      ...state,
+      error: action.payload.error,
+      errorId: action.payload.errorId,
+    };
     default: return state;
   }
 }
