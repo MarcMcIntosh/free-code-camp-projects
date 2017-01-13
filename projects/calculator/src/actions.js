@@ -23,6 +23,9 @@ export function handleUserInput(d) {
     } else if (d === 'del' && n > 0) {
       const nxt = display.slice(0, n);
       return dispatch(setDisplay(nxt));
+    } else if (d === '.' && !isNaN(last)) {
+      const nxt = append(display, d);
+      return dispatch(setDisplay(nxt));
     } else if (d === '=' && !isNaN(last)) {
       const solution = solve(display);
       return (isNaN(+solution)) ? dispatch(calcError('Invalid sum')) : dispatch(setAnswer(solution));
@@ -33,6 +36,9 @@ export function handleUserInput(d) {
       const nxt = append(display, answer);
       return dispatch(setDisplay(nxt));
     } else if (d !== answer && d !== last && /\d/.test(last)) {
+      const nxt = append(display, d);
+      return dispatch(setDisplay(nxt));
+    } else if (display === answer && /[0-9+-/.*%]/.test(d)) {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
     }

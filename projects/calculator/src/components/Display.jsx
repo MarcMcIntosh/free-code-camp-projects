@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { keyPress } from '../actions';
+import { handleUserInput } from '../actions';
+
 
 class Display extends Component {
   constructor(props) {
@@ -8,14 +9,29 @@ class Display extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   componentWillMount() {
-    window.addEventListener('keypress', this.handleKeyPress);
+    window.addEventListener('keydown', this.handleKeyPress);
   }
   componentWillUnmount() {
-    window.removeEventListener('keypress', this.handleKeyPress);
+    window.removeEventListener('keydown', this.handleKeyPress);
   }
   handleKeyPress(event) {
-    console.log(event);
-    return this.props.onKey(event);
+    if (!isNaN(event.key) || /[0-9+-/.*%]/.test(event.key)) {
+      // return these values early
+      return this.props.onKey(event.key);
+      // augment the follwoing keyCodes
+    } else if (+event.keyCode === 13) {
+      return this.props.onKey('=');
+    } else if (+event.keyCode === 8) {
+      return this.props.onKey('del');
+    } else if (+event.keyCode === 46) {
+      return this.props.onKey('clear');
+    } else if (+event.keyCode === 32) {
+      // space bar
+      return this.props.onKey('ans');
+    }
+    // return undefined;
+    // Try any way
+    return undefined;
   }
   render() {
     const { display, ...rest } = this.props;
@@ -39,7 +55,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onKey: event => dispatch(keyPress(event)),
+  onKey: str => dispatch(handleUserInput(str)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display);
