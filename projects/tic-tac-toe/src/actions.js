@@ -14,5 +14,5 @@ export function onSelectPlayer(player) {
 }
 
 export function onTakeTurn(arr) {
-  return dispatch => dispatch(takeTurn(arr)),
-};
+  return dispatch => dispatch(takeTurn(arr));
+}

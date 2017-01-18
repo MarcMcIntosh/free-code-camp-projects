@@ -1,7 +1,7 @@
 import resetBoard from './util/reset-board';
 import {
   RESET,
-  SELECT_MARK,
+  SET_PLAYER,
   TAKE_TURN,
 } from './actions';
 
@@ -24,7 +24,7 @@ function reducer(state = DEFAULT_STATE, action) {
       won: '',
       turn: 'O',
     };
-    case SELECT_MARK: return {
+    case SET_PLAYER: return {
       ...state,
       player: action.payload,
       ai: (action.payload === 'X') ? 'O' : 'X',

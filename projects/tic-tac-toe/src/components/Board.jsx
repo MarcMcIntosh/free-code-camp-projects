@@ -22,11 +22,18 @@ class Board extends Component {
   }
   handleClick(event) {
     console.log(event);
+    const arr = this.props.board.slice();
+    const val = event.target.value.split(':');
+    arr[val[0]][val[1]] = this.props.player;
+    this.props.takeTurn(arr);
   }
   render() {
     const { board, player, ai, turn, ...props } = this.props;
+    delete props.takeTurn;
+
     return (<table {...props}>
-      <thead>{(turn === player) ? 'Player\'s ' : 'Computer\'s '}Turn</thead>
+      <thead><tr><th colSpan="3">{
+        (turn === player) ? 'Player\'s ' : 'Computer\'s '}Turn</th></tr></thead>
       <tbody>{
         board.map((row, i) => (<tr key={i}>{
           row.map((cell, ii) => (<td key={ii}>

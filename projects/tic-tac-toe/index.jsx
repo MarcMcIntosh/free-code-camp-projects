@@ -18,7 +18,7 @@ class TicTacToe extends Component {
 }
 
 TicTacToe.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 
