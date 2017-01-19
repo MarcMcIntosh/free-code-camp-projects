@@ -1,12 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { onTakeTurn } from '../actions';
-import Button from './Button';
+import Game from './Game';
 
 const mapStateToProps = state => ({
   board: state.board,
   player: state.player,
-  ai: state.ai,
   turn: state.turn,
 });
 
@@ -20,40 +19,26 @@ class Board extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(event) {
-    console.log(event);
-    const arr = this.props.board.slice();
-    const val = event.target.value.split(':');
-    arr[val[0]][val[1]] = this.props.player;
-    this.props.takeTurn(arr);
+  handleClick(row, col) {
+    console.log(row, col, this.props.player);
+    // this.props.takeTurn(row, col, this.props.player);
   }
   render() {
-    const { board, player, ai, turn, ...props } = this.props;
-    delete props.takeTurn;
+    const { board, player, turn } = this.props;
 
-    return (<table {...props}>
-      <thead><tr><th colSpan="3">{
-        (turn === player) ? 'Player\'s ' : 'Computer\'s '}Turn</th></tr></thead>
-      <tbody>{
-        board.map((row, i) => (<tr key={i}>{
-          row.map((cell, ii) => (<td key={ii}>
-            <Button
-              disabled={turn !== player || cell === (ai || player)}
-              onClick={this.handleClick}
-              value={`${i}:${ii}`}
-            >{cell}</Button>
-          </td>))
-        }</tr>))
-      }</tbody>
-    </table>);
+    return (<Game
+      board={board}
+      player={player}
+      turn={turn}
+      onClick={this.handleClick}
+    />);
   }
 }
 
 Board.propTypes = {
   board: PropTypes.array,
-  player: PropTypes.string,
-  ai: PropTypes.string,
-  turn: PropTypes.string,
+  player: PropTypes.bool,
+  turn: PropTypes.bool,
   takeTurn: PropTypes.func,
 };
 

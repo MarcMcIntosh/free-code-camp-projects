@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import PlayerSelect from './src/components/PlayerSelect';
+import Header from './src/components/Header';
 import Board from './src/components/Board';
 
 class TicTacToe extends Component {
@@ -12,7 +12,7 @@ class TicTacToe extends Component {
   render() {
     const { children, ...props } = this.props;
     return (<Provider store={this.store}>
-      <div {...props}>{children}</div>
+      <table {...props}>{children}</table>
     </Provider>);
   }
 }
@@ -23,7 +23,4 @@ TicTacToe.propTypes = {
 
 
 export default TicTacToe;
-export {
-  PlayerSelect,
-  Board,
-};
+export { Header, Board };

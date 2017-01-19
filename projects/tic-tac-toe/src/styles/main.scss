@@ -1,1 +1,18 @@
 @import '~normalize.css/normalize.css';
+table {
+  table-layout: fixed;
+  // width: 100%;
+  text-align: center;
+}
+tbody button {
+  width: 3em;
+  height: 3em;
+  text-align: center;
+}
+
+thead button {
+  width: 2em;
+  height: 2em;
+  margin: auto 1em;
+  text-align: center;
+}

@@ -1,4 +1,5 @@
-export const RESET = 'RESET';
+export const RESET_GAME = 'RESET_GAME';
+const resetGame = () => ({ type: RESET_GAME });
 export const SET_PLAYER = 'SELECT_MARK';
 const setPlayer = payload => ({
   type: SET_PLAYER, payload,
@@ -14,5 +15,10 @@ export function onSelectPlayer(player) {
 }
 
 export function onTakeTurn(arr) {
+  console.log(arr);
   return dispatch => dispatch(takeTurn(arr));
+}
+
+export function onResetGame() {
+  return dispatch => dispatch(resetGame());
 }
