@@ -6,7 +6,7 @@ import TicTacToe, { Header, Board } from './index';
 require('./src/styles/main.scss');
 
 const App = () => (
-  <TicTacToe>
+  <TicTacToe className="TicTacToe">
     <Header />
     <Board />
   </TicTacToe>

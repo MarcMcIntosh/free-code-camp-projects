@@ -19,8 +19,8 @@ class Board extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(row, col) {
-    console.log(row, col, this.props.player);
+  handleClick(event) {
+    console.log(event.target.value, this.props.player);
     // this.props.takeTurn(row, col, this.props.player);
   }
   render() {
