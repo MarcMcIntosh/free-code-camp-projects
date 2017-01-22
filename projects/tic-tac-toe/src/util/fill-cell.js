@@ -1,5 +1,7 @@
+const Constants = require('../Constants');
+
+const { PLAYER } = Constants;
+
 module.exports = function fillCell(d) {
-  if (d === true) return 'O';
-  if (d === false) return 'X';
-  return ' ';
+  return (!d || d === PLAYER._) ? '&nbsp;' : d;
 };

@@ -1,23 +1,16 @@
 import React, { PropTypes } from 'react';
+import Constants from '../Constants';
 import Button from './Button';
-import Row from './Row';
-import Col from './Col';
 
+const { O, X } = Constants.PLAYER;
 
 const PlayerSelect = ({ onClick, ...props }) => {
-  const handleClick = event => onClick((event.target.value === 'O'));
-  return (<thead {...props}>
-    <Row>
-      <th colSpan="3">Select Player</th>
-    </Row>
-    <Row>
-      <Col colSpan="3">
-        <Button value="O" onClick={handleClick}>O</Button>
-        <span />
-        <Button value="X" onClick={handleClick}>X</Button>
-      </Col>
-    </Row>
-  </thead>);
+  const handleClick = event => onClick(event.target.value);
+  return (<div {...props}>
+    <h2>Select Player</h2>
+    <Button value={O} onClick={handleClick}>{O}</Button>
+    <Button value={X} onClick={handleClick}>{X}</Button>
+  </div>);
 };
 
 PlayerSelect.propTypes = {

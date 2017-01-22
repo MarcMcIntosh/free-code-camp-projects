@@ -4,6 +4,8 @@ import { onResetGame, onSelectPlayer } from '../actions';
 import TurnDisplay from './TurnDisplay';
 import WinnerDisplay from './WinnerDisplay';
 import PlayerSelect from './PlayerSelect';
+import Constants from '../Constants';
+
 
 const mapStateToProps = state => ({
   init: state.init,
@@ -32,7 +34,7 @@ const Header = ({
 }) => {
   if (init) return (<PlayerSelect onClick={selectPlayer} {...props} />);
 
-  return (<thead {...props}>{
+  return (<div {...props}>{
     (done) ? (<WinnerDisplay
       winner={winner}
       player={player}
@@ -42,16 +44,17 @@ const Header = ({
       player={player}
       turn={turn}
     />)
-  }</thead>);
+  }</div>);
 };
 
+const { _, O, X } = Constants.PLAYER;
 Header.propTypes = {
   init: PropTypes.bool.isRequired,
   done: PropTypes.bool.isRequired,
-  turn: PropTypes.oneOf([null, true, false]),
-  player: PropTypes.oneOf([null, true, false]),
-  ai: PropTypes.oneOf([null, true, false]),
-  winner: PropTypes.oneOf([null, true, false]),
+  turn: PropTypes.oneOf([_, O, X]),
+  player: PropTypes.oneOf([_, O, X]),
+  ai: PropTypes.oneOf([_, O, X]),
+  winner: PropTypes.oneOf([_, O, X]),
   resetGame: PropTypes.func.isRequired,
   selectPlayer: PropTypes.func.isRequired,
 };

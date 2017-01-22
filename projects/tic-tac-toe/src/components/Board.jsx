@@ -24,14 +24,17 @@ class Board extends Component {
     // this.props.takeTurn(row, col, this.props.player);
   }
   render() {
-    const { board, player, turn } = this.props;
+    const { board, player, turn, ...props } = this.props;
 
-    return (<Game
-      board={board}
-      player={player}
-      turn={turn}
-      onClick={this.handleClick}
-    />);
+    return (<div {...props}>
+      <Game
+        className="board"
+        board={board}
+        player={player}
+        turn={turn}
+        onClick={this.handleClick}
+      />
+    </div>);
   }
 }
 

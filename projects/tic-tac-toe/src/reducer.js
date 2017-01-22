@@ -1,46 +1,51 @@
-import resetBoard from './util/reset-board';
+import Constants from './Constants';
+import getOpponent from './util/get-opponent';
 import {
   RESET_GAME,
   SET_PLAYER,
   TAKE_TURN,
+  GAME_OVER,
 } from './actions';
 
-const DEFAULT_STATE = {
-  board: resetBoard(),
-  ai: null,
-  player: null,
-  winner: null,
-  turn: null,
-  rounds: 0,
-  done: false,
-  init: true,
-};
+function getInitialState() {
+  return {
+    board: [...Array(9)].map(() => Constants.PLAYER._),
+    ai: Constants.PLAYER._,
+    player: Constants.PLAYER._,
+    winner: null,
+    done: false,
+    turn: null,
+    init: true,
+  };
+}
 
-function reducer(state = DEFAULT_STATE, action) {
+function reducer(state = getInitialState(), action) {
   switch (action.type) {
-    case RESET_GAME: return {
-      ...state,
-      board: resetBoard(),
-      ai: null,
-      player: null,
-      winner: null,
-      turn: null,
-      rounds: 0,
-      done: false,
-      init: true,
-    };
+
+    case RESET_GAME: return getInitialState();
+
     case SET_PLAYER: return {
       ...state,
       player: action.payload,
-      ai: !action.payload,
-      turn: true,
+      ai: getOpponent(action.payload),
+      turn: Constants.PLAYER.O,
       init: false,
     };
+
     case TAKE_TURN: return {
       ...state,
-      board: action.payload,
-      turn: !state.turn,
+      board: action.payload.board,
+      turn: getOpponent(state.turn),
+      done: action.payload.done || false,
+      winner: action.payload.winner || null,
     };
+
+    case GAME_OVER: return {
+      ...state,
+      done: true,
+      winner: action.payload,
+    };
+
     default: return state;
   }
 }

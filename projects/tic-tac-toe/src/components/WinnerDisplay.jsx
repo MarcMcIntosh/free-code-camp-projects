@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-import Row from './Row';
-import Col from './Col';
 import Button from './Button';
-
+import Constants from '../Constants';
 import finalMessage from '../util/final-message';
 
 const WinnerDisplay = ({
@@ -11,13 +9,15 @@ const WinnerDisplay = ({
   ai,
   onClick,
   ...props
-}) => (<Row {...props}>
-  <th colSpan="2">{finalMessage(winner, player, ai)}</th>
-  <Col><Button onClick={onClick}>Reset</Button></Col>
-</Row>);
+}) => (<div {...props}>
+  <h2>{finalMessage(winner, player, ai)}</h2>
+  <Button onClick={onClick}>Reset</Button>
+</div>);
+
+const { PLAYER } = Constants;
 
 WinnerDisplay.propTypes = {
-  winner: PropTypes.oneOf([null, true, false]).isRequired,
+  winner: PropTypes.oneOf([PLAYER._, PLAYER.X, PLAYER.O]).isRequired,
   player: PropTypes.bool.isRequired,
   ai: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

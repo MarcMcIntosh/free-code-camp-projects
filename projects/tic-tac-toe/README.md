@@ -1,13 +1,8 @@
+Intresting algorythm to use
+minimax
+https://blog.vivekpanyam.com/how-to-build-an-ai-that-wins-the-basics-of-minimax-search/
 
-Template File for front end assignments from [FreeCodeCamp](https://www.freecodecamp.com)
+https://mostafa-samir.github.io/Tic-Tac-Toe-AI/
 
-# Usage
-```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
-npm install
-npm start
-```
-Open browser at <localhost:8080>
+/* Check this out */
+https://github.com/deepsyx/Redux_TicTacToe

@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import Row from './Row';
-import Col from './Col';
-import Cell from './Cell';
+import Button from './Button';
+import Constants from '../Constants';
 import fillCell from '../util/fill-cell';
+
+const { _, O, X } = Constants.PLAYER;
 
 const Game = ({
   board,
@@ -10,20 +11,21 @@ const Game = ({
   turn,
   onClick,
   ...props
-}) => (<tbody {...props}>{
-  board.map((row, i) => (<Row key={i}>{
-    row.map((col, ii) => (<Col key={ii}><Cell
-      row={i} col={ii}
-      onClick={() => onClick(i, ii, player)}
-      disabled={player === null || col !== null || turn !== player}
-    >{fillCell(col)}</Cell></Col>))
-  }</Row>))
-}</tbody>);
+}) => (<div {...props}>{
+  board.map((d, i) => (<Button
+    key={i}
+    value={d}
+    onClick={() => onClick(i, player)}
+    disabled={d !== _ || player !== turn}
+  >
+    <b>{fillCell(d)}</b>
+  </Button>))
+}</div>);
 
 Game.propTypes = {
   board: PropTypes.array.isRequired,
-  player: PropTypes.bool,
-  turn: PropTypes.turn,
+  player: PropTypes.oneOf([_, O, X]),
+  turn: PropTypes.oneOf([_, O, X]),
   onClick: PropTypes.func,
 };
 

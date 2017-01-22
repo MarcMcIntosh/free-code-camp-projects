@@ -12,7 +12,7 @@ class TicTacToe extends Component {
   render() {
     const { children, ...props } = this.props;
     return (<Provider store={this.store}>
-      <table {...props}>{children}</table>
+      <div {...props}>{children}</div>
     </Provider>);
   }
 }
