@@ -1,20 +1,73 @@
 @import '~normalize.css/normalize.css';
-.TicTacToe {
-  width: 100%;
-  height: 100%;
 
+.TicTacToe {
+  .header {
+    width: 90%;
+    padding: 5%;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    @media only screen and (min-width: 600px) {
+      width: 75%;
+    }
+    @media only screen and (min-width: 768px) {
+      width: 50%;
+    }
+     button {
+      margin: auto;
+      width: 10%;
+      &.reset {
+        width: 30%;
+        text-align: center;
+      }
+      &.X {
+        background-color: rgba(255, 0, 0, 0.86);
+        &::after {
+          content: "";
+          display: block;
+          padding-bottom: 100%;
+        }
+      }
+      &.O {
+        background-color: rgba(0, 0, 255, 0.86);
+        &::after {
+          content: "";
+          display: block;
+          padding-bottom: 100%;
+        }
+      }
+    }
+  }
   .board {
-    width: 80%;
-    height: 80%;
+    background: #eee;
+    padding: 5px;
+    border-width: 2px;
+    border-color: #fff;
+    border-style: groove;
+    margin: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-content: space-around;
+    align-items: center;
+    width: 90%;
+    @media only screen and (min-width: 600px) {
+      width: 75%;
+    }
+    @media only screen and (min-width: 768px) {
+      width: 50%;
+    }
     button {
       width: 30%;
-      min-height: 30px;
-      height: auto;
+      margin: 1%;
+      &::after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+      }
+      &.X { background-color: rgba(255, 0, 0, 0.86); }
+      &.O { background-color: rgba(0, 0, 255, 0.86); }
     }
   }
 }

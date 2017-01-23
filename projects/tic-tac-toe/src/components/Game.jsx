@@ -17,8 +17,9 @@ const Game = ({
     key={i}
     value={i}
     onClick={onClick}
-    disabled={!done && (d !== _ || player !== turn)}
-  >{d === _ ? ' ' : d}</Button>))
+    className={(d !== _) ? d : 'empty'}
+    disabled={done || player !== turn || d === X || d === O}
+  />))
 }</div>);
 
 Game.propTypes = {

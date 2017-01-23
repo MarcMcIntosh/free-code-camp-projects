@@ -8,8 +8,8 @@ const PlayerSelect = ({ onClick, ...props }) => {
   const handleClick = event => onClick(event.target.value);
   return (<div {...props}>
     <h2>Select Player</h2>
-    <Button value={O} onClick={handleClick}>{O}</Button>
-    <Button value={X} onClick={handleClick}>{X}</Button>
+    <Button value={O} className={O} onClick={handleClick} />
+    <Button value={X} className={X} onClick={handleClick} />
   </div>);
 };
 

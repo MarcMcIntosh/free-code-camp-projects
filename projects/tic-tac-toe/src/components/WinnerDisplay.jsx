@@ -11,7 +11,7 @@ const WinnerDisplay = ({
   ...props
 }) => (<div {...props}>
   <h2>{finalMessage(winner, player, ai)}</h2>
-  <Button onClick={onClick}>Reset</Button>
+  <Button className="reset" onClick={onClick}>Reset</Button>
 </div>);
 
 const { _, X, O } = Constants.PLAYER;

@@ -11,9 +11,11 @@ module.exports = function minimax(board, player, depth, cpu) {
   const winner = checkWinner(board);
   if (winner) return getScore(winner, ai, i);
   if (isFull(board)) return 0;
+  /* If the board is empty */
+  const spaces = freeSpaces(board);
+  if (spaces.length === board.length) return Math.floor(Math.random() * board.length);
 
   /* Calulcate free spaces and recurse in to potentual moves */
-  const spaces = freeSpaces(board);
   const scores = spaces.map((space) => {
     const sim = board.slice();
     sim[space] = player;
