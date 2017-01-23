@@ -32,13 +32,10 @@ function reducer(state = getInitialState(), action) {
       init: false,
     };
 
-    case TAKE_TURN: return {
-      ...state,
-      board: action.payload.board,
-      turn: getOpponent(state.turn),
-      done: action.payload.done || false,
-      winner: action.payload.winner || null,
-    };
+    case TAKE_TURN: {
+      const { turn, winner, done, board } = action;
+      return { ...state, turn, winner, done, board };
+    }
 
     case GAME_OVER: return {
       ...state,
