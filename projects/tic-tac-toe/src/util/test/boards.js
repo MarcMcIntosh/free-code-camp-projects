@@ -1,4 +1,3 @@
-const checkWinner = require('../check-winner');
 const Constants = require('../../Constants');
 
 const { _, O, X } = Constants.PLAYER;
@@ -76,6 +75,4 @@ const game1 = [
 
 const tests = { empty, row0, row1, row2, col0, col1, col2, dia0, dia1, game0, game1 };
 
-Object.keys(tests).forEach((d) => {
-  console.log(`Testing ${d}: ${checkWinner(tests[d])}`);
-});
+module.exports = tests;

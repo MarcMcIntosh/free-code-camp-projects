@@ -1,27 +1,31 @@
 const isFull = require('./is-full');
 const checkWinner = require('./check-winner');
 const freeSpaces = require('./free-spaces');
-const score = require('./score');
+const getScore = require('./score');
 const getOpponent = require('./get-opponent');
-const moveReducer = require('./move-reducer');
 
 module.exports = function minimax(board, player, depth, cpu) {
   const ai = (cpu !== undefined) ? cpu : player;
   const i = (depth !== undefined) ? depth : 0;
-  /* Early Exit */
+  /*  Exit Early and Return a Score */
   const winner = checkWinner(board);
-  if (winner) return score(winner, i);
+  if (winner) return getScore(winner, ai, i);
   if (isFull(board)) return 0;
+
   /* Calulcate free spaces and recurse in to potentual moves */
   const spaces = freeSpaces(board);
-  const moves = spaces.map((d) => {
+  const scores = spaces.map((space) => {
     const sim = board.slice();
-    sim[d] = player;
-    return minimax(sim, getOpponent(player), i + 1, ai);
+    sim[space] = player;
+    const score = minimax(sim, getOpponent(player), i + 1, ai);
+    return { space, score };
   });
-  /* Fgiure out if simulating or not */
-  if (i === 0 && player === ai) {
-    return moveReducer(spaces, player, ai);
-  }
-  return moveReducer(moves, player, ai);
+  /* Reduce the scores to the best choice */
+  const best = scores.reduce((a, b) => {
+    if (a.score < b.score && player === ai) { return b; }
+    if (a.score > b.score && player !== ai) { return b; }
+    return a;
+  });
+  /* Use A space and Score coupling to workout the best move */
+  return (i === 0 && player === ai) ? (best.space) : (best.score);
 };

@@ -14,12 +14,12 @@ const WinnerDisplay = ({
   <Button onClick={onClick}>Reset</Button>
 </div>);
 
-const { PLAYER } = Constants;
+const { _, X, O } = Constants.PLAYER;
 
 WinnerDisplay.propTypes = {
-  winner: PropTypes.oneOf([PLAYER._, PLAYER.X, PLAYER.O]).isRequired,
-  player: PropTypes.bool.isRequired,
-  ai: PropTypes.bool.isRequired,
+  winner: PropTypes.oneOf([_, X, O]),
+  player: PropTypes.string.isRequired,
+  ai: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

@@ -28,16 +28,10 @@ class Board extends Component {
     this.handleClick = this.handleClick.bind(this);
     // this.makeAiMove = this.makeAiMove.bind(this);
   }
-  componentDidMount() {
-    const { turn, ai, aiMove, board } = this.props;
-    if (turn === ai) { aiMove(board, ai); }
-  }
+
   /* Move this to did receive props  and check if board if full or if some-one have won*/
   componentWillReceiveProps(nextProps) {
-    const { turn, checkBoard, init, ai, aiMove, board } = this.props;
-    console.log('Will Recive Props');
-    console.log('Props', this.props);
-    console.log('nextProps', nextProps);
+    const { turn, checkBoard, init, aiMove } = this.props;
     if (!init && !nextProps.done && turn !== nextProps.turn) {
       checkBoard(nextProps.board);
     }
