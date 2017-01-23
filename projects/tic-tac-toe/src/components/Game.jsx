@@ -10,13 +10,14 @@ const Game = ({
   player,
   turn,
   onClick,
+  done,
   ...props
 }) => (<div {...props}>{
   board.map((d, i) => (<Button
     key={i}
     value={i}
     onClick={onClick}
-    disabled={d !== _ || player !== turn}
+    disabled={!done && (d !== _ || player !== turn)}
   >{d === _ ? ' ' : d}</Button>))
 }</div>);
 
@@ -25,6 +26,7 @@ Game.propTypes = {
   player: PropTypes.oneOf([_, O, X]),
   turn: PropTypes.oneOf([_, O, X]),
   onClick: PropTypes.func,
+  done: PropTypes.bool,
 };
 
 export default Game;

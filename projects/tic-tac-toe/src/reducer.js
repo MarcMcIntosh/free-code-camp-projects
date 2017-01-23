@@ -4,7 +4,7 @@ import {
   RESET_GAME,
   SET_PLAYER,
   TAKE_TURN,
-  GAME_OVER,
+  CHECK_BOARD,
 } from './actions';
 
 function getInitialState() {
@@ -31,16 +31,20 @@ function reducer(state = getInitialState(), action) {
       turn: Constants.PLAYER.O,
       init: false,
     };
-
+    /*
     case TAKE_TURN: {
       const { turn, winner, done, board } = action;
       return { ...state, turn, winner, done, board };
+    }*/
+    case TAKE_TURN: {
+      const { turn, board } = action;
+      return { ...state, turn, board };
     }
 
-    case GAME_OVER: return {
+    case CHECK_BOARD: return {
       ...state,
-      done: true,
-      winner: action.payload,
+      done: action.payload.done,
+      winner: action.payload.winner,
     };
 
     default: return state;

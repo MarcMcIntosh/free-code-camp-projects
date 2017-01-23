@@ -10,41 +10,41 @@ const setPlayer = payload => ({
   type: SET_PLAYER, payload,
 });
 
-export const GAME_OVER = 'GAME_OVER';
+export const CHECK_BOARD = 'CHECK_BOARD';
+const checkBoard = payload => ({
+  type: CHECK_BOARD, payload,
+});
 
 export const TAKE_TURN = 'TAKE_TURN';
 const takeTurn = (payload) => {
-  const { board, player } = payload;
-  const winner = checkWinner(board);
-  const done = (winner) ? true : isFull(board);
-  const turn = getOpponent(player);
-  return { type: TAKE_TURN, turn, winner, board, done };
+  const { board } = payload;
+  const turn = getOpponent(payload.turn);
+  return { type: TAKE_TURN, turn, board };
 };
 
 export function onSelectPlayer(player) {
   return dispatch => dispatch(setPlayer(player));
 }
 
-export function onTakeTurn(i) {
-  return (dispatch, getState) => {
-    const { player, board } = getState();
-    const arr = board.slice();
-    arr[i] = player;
-    dispatch(takeTurn({ board: arr, player }));
-  };
-}
-
 export function onResetGame() {
   return dispatch => dispatch(resetGame());
 }
 
-export function onAiMove() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const { ai, board } = state;
+export function onAiMove(arr, ai) {
+  return (dispatch) => {
+    const board = arr.slice();
     const move = minimax(board, ai);
-    const arr = board.slice();
-    arr[move] = ai;
-    dispatch(takeTurn({ board: arr, player: ai }));
+    board[move] = ai;
+    dispatch(takeTurn({ board, turn: ai }));
   };
+}
+
+export function onTakeTurn(board, player) {
+  return dispatch => dispatch(takeTurn({ board, turn: player }));
+}
+
+export function onCheckBoard(arr) {
+  const winner = checkWinner(arr);
+  const done = (winner) ? true : isFull(arr);
+  return dispatch => dispatch(checkBoard({ winner, done }));
 }

@@ -7,6 +7,7 @@ require('./src/styles/main.scss');
 
 const App = () => (
   <TicTacToe className="TicTacToe">
+    <h2>Add the check for win functions in</h2>
     <Header />
     <Board />
   </TicTacToe>
