@@ -9,7 +9,7 @@ import {
 
 const { _, O } = Constants.PLAYER;
 
-function getInitialState(dif = 3) {
+function getInitialState(dif = 6) {
   return {
     board: [...Array(9)].map(() => _),
     ai: Constants.PLAYER._,
@@ -19,6 +19,7 @@ function getInitialState(dif = 3) {
     turn: null,
     init: true,
     difficulty: dif,
+    timer_id: null,
   };
 }
 
@@ -26,10 +27,15 @@ function reducer(state = getInitialState(), action) {
   switch (action.type) {
     /* Automatic difficulty scaling */
     case RESET_GAME: {
-      if (state.winner === state.player) {
-        return getInitialState(state.difficulty + 1);
+      if (state.winner === state.ai) {
+        // Get easyeir when ai wins
+        return getInitialState(state.difficulty - 2);
+      } else if (state.winner === state.player) {
+        // Harder if player win
+        return getInitialState(state.difficulty + 3);
       }
-      return getInitialState(state.difficulty - 1);
+      // Just harder on a draw
+      return getInitialState(state.difficulty + 1);
     }
 
     case SET_PLAYER: return {
@@ -49,6 +55,7 @@ function reducer(state = getInitialState(), action) {
       ...state,
       done: action.payload.done,
       winner: action.payload.winner,
+      timer_id: action.payload.timer_id,
     };
 
     default: return state;

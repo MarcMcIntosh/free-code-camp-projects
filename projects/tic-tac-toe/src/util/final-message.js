@@ -1,5 +1,9 @@
-module.exports = function finalMessage(won, player, ai) {
-  if (won === ai) return 'This Round, you\'ve lost';
-  if (won === player) return 'Won, You Have';
-  return 'Draw it was';
+const Constants = require('../Constants');
+
+const { O, X } = Constants.PLAYER;
+
+module.exports = function finalMessage(won) {
+  if (won === O) return 'Blue Team Wins!';
+  if (won === X) return 'Red Team Wins!';
+  return 'Draw!';
 };

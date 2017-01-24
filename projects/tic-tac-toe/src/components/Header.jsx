@@ -13,7 +13,6 @@ const mapStateToProps = state => ({
   winner: state.winner,
   turn: state.turn,
   player: state.player,
-  ai: state.ai,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +23,6 @@ const mapDispatchToProps = dispatch => ({
 const Header = ({
   init,
   player,
-  ai,
   turn,
   done,
   winner,
@@ -37,8 +35,6 @@ const Header = ({
   return (<div {...props}>{
     (done) ? (<WinnerDisplay
       winner={winner}
-      player={player}
-      ai={ai}
       onClick={resetGame}
     />) : (<TurnDisplay
       player={player}
@@ -53,7 +49,6 @@ Header.propTypes = {
   done: PropTypes.bool.isRequired,
   turn: PropTypes.oneOf([_, O, X]),
   player: PropTypes.oneOf([_, O, X]),
-  ai: PropTypes.oneOf([_, O, X]),
   winner: PropTypes.oneOf([_, O, X]),
   resetGame: PropTypes.func.isRequired,
   selectPlayer: PropTypes.func.isRequired,

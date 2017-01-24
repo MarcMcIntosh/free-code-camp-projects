@@ -27,7 +27,10 @@ export function onSelectPlayer(player) {
 }
 
 export function onResetGame() {
-  return dispatch => dispatch(resetGame());
+  return (dispatch, getState) => {
+    clearTimeout(getState().timer_id);
+    dispatch(resetGame());
+  };
 }
 
 export function onAiMove(arr, ai) {
@@ -47,5 +50,12 @@ export function onTakeTurn(board, player) {
 export function onCheckBoard(arr) {
   const winner = checkWinner(arr);
   const done = (winner) ? true : isFull(arr);
-  return dispatch => dispatch(checkBoard({ winner, done }));
+  return (dispatch) => {
+    const t = (done) ? setTimeout(() => dispatch(resetGame()), 3000) : null;
+    dispatch(checkBoard({
+      winner,
+      done,
+      timer_id: t,
+    }));
+  };
 }
