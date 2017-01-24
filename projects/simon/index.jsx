@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+import { Provider } from 'react-redux';
+import store from './src/store';
+import KeyBoard from './src/components/KeyBoard';
 
-const App = () => (
-  <h1>Hello World</h1>
-);
+class Simon extends Component {
+  constructor(props) {
+    super(props);
+    this.store = store;
+  }
+  render() {
+    const { children, ...props } = this.props;
+    return (
+      <Provider store={this.store}>
+        <div {...props}>{children}</div>
+      </Provider>
+    );
+  }
+}
 
-export default App;
+Simon.propTypes = { children: PropTypes.node };
+
+export default Simon;
+export { KeyBoard };
