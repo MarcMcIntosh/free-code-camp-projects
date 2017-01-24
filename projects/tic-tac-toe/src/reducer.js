@@ -7,35 +7,39 @@ import {
   CHECK_BOARD,
 } from './actions';
 
-function getInitialState() {
+const { _, O } = Constants.PLAYER;
+
+function getInitialState(dif = 3) {
   return {
-    board: [...Array(9)].map(() => Constants.PLAYER._),
+    board: [...Array(9)].map(() => _),
     ai: Constants.PLAYER._,
     player: Constants.PLAYER._,
     winner: null,
     done: false,
     turn: null,
     init: true,
+    difficulty: dif,
   };
 }
 
 function reducer(state = getInitialState(), action) {
   switch (action.type) {
-
-    case RESET_GAME: return getInitialState();
+    /* Automatic difficulty scaling */
+    case RESET_GAME: {
+      if (state.winner === state.player) {
+        return getInitialState(state.difficulty + 1);
+      }
+      return getInitialState(state.difficulty - 1);
+    }
 
     case SET_PLAYER: return {
       ...state,
       player: action.payload,
       ai: getOpponent(action.payload),
-      turn: Constants.PLAYER.O,
+      turn: O,
       init: false,
     };
-    /*
-    case TAKE_TURN: {
-      const { turn, winner, done, board } = action;
-      return { ...state, turn, winner, done, board };
-    }*/
+
     case TAKE_TURN: {
       const { turn, board } = action;
       return { ...state, turn, board };

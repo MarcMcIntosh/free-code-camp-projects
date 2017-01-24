@@ -31,9 +31,10 @@ export function onResetGame() {
 }
 
 export function onAiMove(arr, ai) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const dif = getState().difficulty;
     const board = arr.slice();
-    const move = minimax(board, ai);
+    const move = minimax(board, ai, 0, ai, dif);
     board[move] = ai;
     dispatch(takeTurn({ board, turn: ai }));
   };
