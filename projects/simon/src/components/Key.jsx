@@ -32,7 +32,7 @@ class Key extends Component {
       onMouseDown={this.play}
       onMouseUp={this.stop}
       onMouseOut={this.stop}
-    >{frequency}</Button>);
+    />);
   }
 }
 const { SIN, SQU, SAW, TRI } = Constants.WAVES;

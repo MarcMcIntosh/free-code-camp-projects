@@ -4,7 +4,7 @@ import store from './src/store';
 import KeyBoard from './src/components/KeyBoard';
 import Wave from './src/components/WaveSwitch';
 import Mode from './src/components/ModeSwitch';
-
+import Display from './src/components/GameController';
 
 class Simon extends Component {
   constructor(props) {
@@ -28,4 +28,5 @@ export {
   KeyBoard,
   Wave,
   Mode,
+  Display,
 };

@@ -20,7 +20,7 @@ class KeyBoard extends Component {
   render() {
     this.aux.gain.value = (this.props.vol / 100);
     const { notes, wave } = this.props;
-    return (<div>{notes.map((d, i) => (
+    return (<div className="keys">{notes.map((d, i) => (
       <Key key={i} audio={this.audio} aux={this.aux} frequency={d} wave={wave} />
     ))}</div>);
   }
