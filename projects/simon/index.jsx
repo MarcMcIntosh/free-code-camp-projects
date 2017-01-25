@@ -2,6 +2,9 @@ import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import KeyBoard from './src/components/KeyBoard';
+import Wave from './src/components/WaveSwitch';
+import Mode from './src/components/ModeSwitch';
+
 
 class Simon extends Component {
   constructor(props) {
@@ -21,4 +24,8 @@ class Simon extends Component {
 Simon.propTypes = { children: PropTypes.node };
 
 export default Simon;
-export { KeyBoard };
+export {
+  KeyBoard,
+  Wave,
+  Mode,
+};
