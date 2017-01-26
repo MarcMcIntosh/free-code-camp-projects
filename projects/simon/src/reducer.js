@@ -6,10 +6,9 @@ import {
   TOGGLE_MODE,
   TOGGLE_WAVE,
   NEXT_ROUND,
-  AI_FINISH,
-  AI_START,
+  AI_PLAY,
+  AI_END,
   START_GAME,
-  PLAY_TONE,
 } from './actions';
 
 const { MAJOR } = Constants.SCALES.PYTHAGOREAN;
@@ -31,10 +30,9 @@ const DEFAULT_STATE = {
   mode: MODE.NORMAL,
   wave: WAVES.TRI,
   turn: true,
-  timer_id: null,
   inGame: false,
   error: '',
-  tone: null,
+  tone: -1,
 };
 
 function addRandomNote(arr, notes) {
@@ -50,15 +48,18 @@ function reducer(state = DEFAULT_STATE, action) {
       turn: false,
       challenge: addRandomNote(state.challenge, state.notes),
     };
-    case PLAY_TONE: return { ...state, tone: action.payload };
+    case AI_PLAY: return {
+      ...state,
+      turn: false,
+      tone: action.payload,
+    };
+    case AI_END: return { ...state, turn: true, tone: -1 };
     case NEXT_ROUND: return {
       ...state,
       round: state.round + 1,
       challenge: addRandomNote(state.challenge, state.notes),
       turn: false,
     };
-    case AI_START: return { ...state, turn: false };
-    case AI_FINISH: return { ...state, turn: true, tone: null };
     case TOGGLE_MODE: return {
       ...state,
       mode: (state.mode === MODE.NORMAL) ? (MODE.HARD) : MODE.NORMAL,
@@ -67,7 +68,16 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state,
       wave: nxtWave(state.wave),
     };
-    case RESET_GAME: return DEFAULT_STATE;
+    case RESET_GAME: return {
+      ...state,
+      round: 0,
+      count: 0,
+      error: action.payload || '',
+      inGame: false,
+      turn: true,
+      tone: -1,
+      challenge: [],
+    };
     case RESET_ROUND: return { ...state, count: 0 };
     default: return state;
   }

@@ -6,6 +6,8 @@ import { onStartGame, onResetGame } from '../actions';
 
 const mapStateToProps = state => ({
   playing: state.inGame,
+  error: state.error,
+  round: state.round,
 //  turn: state.turn,
 });
 

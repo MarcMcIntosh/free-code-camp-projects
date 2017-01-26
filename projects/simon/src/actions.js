@@ -30,34 +30,10 @@ export const onToggleWave = (event) => {
   }
 };
 
-export const AI_START = 'AI_START';
-const aiStart = () => ({ type: AI_START });
-export const AI_FINISH = 'AI_FINISH';
-const aiFinish = () => ({ type: AI_FINISH });
-export const PLAY_TONE = 'PLAY_TONE';
-const playTone = payload => ({ type: PLAY_TONE, payload });
+export const AI_PLAY = 'AI_PLAY';
+const aiPlay = payload => ({ type: AI_PLAY, payload });
+export const onAiPlay = payload => dispatch => dispatch(aiPlay(payload));
 
-export function onAiStart(audio, aux) {
-  return (dispatch, getState) => {
-    dispatch(aiStart());
-    const { challenge, bpm, wave } = getState();
-    /* interval between beets in milliseconds */
-    const t = (60 * 1000) / bpm;
-    for (let i = 0; i < challenge.length; i += 1) {
-      const osc = audio.createOscillator({
-        type: wave,
-        frequency: challenge[i],
-      });
-      osc.connect(aux);
-      dispatch(playTone(challenge[i]));
-      osc.start(audio.currentTime);
-      setTimeout(() => {
-        osc.stop(audio.currentTime);
-        osc.disconnect(aux);
-        if (i === challenge.length) {
-          dispatch(aiFinish());
-        }
-      }, t / 2);
-    }
-  };
-}
+export const AI_END = 'AI_END';
+const aiEnd = () => ({ type: AI_END });
+export const onAiEnd = () => dispatch => dispatch(aiEnd());

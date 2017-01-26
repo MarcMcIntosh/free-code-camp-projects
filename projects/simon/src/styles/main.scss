@@ -2,9 +2,9 @@
 
 // Cool buttons https://codepen.io/cliftwalker/pen/JoWyjy?editors=0110
 
-$colors: red, orange, yellow, green, blue, purple;
+$colors: red, orange, green, blue;
 .keys {
-  button {
+  .key {
     min-width: 64px;
     max-width: 100%;
     min-height: 36px;
@@ -14,10 +14,25 @@ $colors: red, orange, yellow, green, blue, purple;
     border-radius: 2px;
     outline: none;
     cursor: default;
-  }
-  @for $i from 1 through length($colors) {
-  	button:nth-child(#{length($colors)}n+#{$i}) {
-  		background: lighten(nth($colors, $i), 20%);
-  	}
+    &.red {
+      background-color: darken(red, 10);
+      &:active { background-color: lighten(red, 20)}
+      &--active { background-color: lighten(red, 20)}
+    }
+    &.orange {
+      background-color: darken(orange, 10);
+      &:active { background-color: lighten(orange, 20)}
+      &--active { background-color: lighten(orange, 20)}
+    }
+    &.green {
+      background-color: darken(green, 10);
+      &:active { background-color: lighten(green, 20)}
+      &--active { background-color: lighten(green, 20)}
+    }
+    &.blue {
+      background-color: darken(blue, 10);
+      &:active { background-color: lighten(blue, 20); }
+      &--active { background-color: lighten(blue, 20); }
+    }
   }
 }

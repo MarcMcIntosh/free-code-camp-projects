@@ -1,6 +1,13 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import Button from './Button';
 import Constants from '../Constants';
+
+const mapStateToProps = state => ({
+  tone: state.tone,
+  turn: state.turn,
+});
+
 
 class Key extends Component {
   constructor(props) {
@@ -24,11 +31,11 @@ class Key extends Component {
   }
 
   render() {
-    const { frequency, ...props } = this.props;
-    delete props.audio; delete props.aux; delete props.wave;
+    const { tone, frequency, className, turn } = this.props;
+    const cn = (tone === frequency) ? `${className}--active` : className;
     return (<Button
-      {...props}
-      value={frequency}
+      className={cn}
+      disabled={!turn}
       onMouseDown={this.play}
       onMouseUp={this.stop}
       onMouseOut={this.stop}
@@ -41,6 +48,9 @@ Key.propTypes = {
   audio: PropTypes.instanceOf(window.AudioContext),
   aux: PropTypes.instanceOf(window.GainNode),
   wave: PropTypes.oneOf([SIN, SQU, SAW, TRI]),
+  tone: PropTypes.number,
+  className: PropTypes.string,
+  turn: PropTypes.bool,
 };
 
-export default Key;
+export default connect(mapStateToProps, null)(Key);
