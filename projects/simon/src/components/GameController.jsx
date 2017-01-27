@@ -45,13 +45,13 @@ const GameController = ({
   const handleClick = () => ((playing) ? resetGame() : startGame());
 
   return (<div {...props}>
-    <span className="round">{round}</span>
+    <h2 className="round">{round}</h2>
     <Button className={playing ? 'reset' : 'play'} onClick={handleClick}>{(playing) ? (<StopIconSVG />) : (<PlayIconSVG />)}</Button>
     <Button className={`mode ${mode}`} disabled={playing} onClick={toggleMode}>{mode}</Button>
     <Button className="wave" onClick={toggleWave}>
       <WaveIcons wave={wave} />
     </Button>
-    {error ? (<span className="error">{error}</span>) : false}
+    {error ? (<h3 className="error">{error}</h3>) : false}
   </div>);
 };
 

@@ -4,6 +4,7 @@ import Key from './Key';
 import Constants from '../Constants';
 import { onAiEnd, onAiPlay } from '../actions';
 
+
 const mapStateToProps = state => ({
   vol: state.volume,
   notes: state.notes,
@@ -64,10 +65,11 @@ class KeyBoard extends Component {
     return this.props.onAiEnd();
   }
   render() {
-    const { notes, wave, colors, className } = this.props;
-    return (<div className={className} >{
+    const { notes, wave, colors, config, ...props } = this.props;
+    const { KEY } = config;
+    return (<div {...props}>{
       notes.map((d, i) => (<Key
-        className={`key ${colors[i]}`}
+        className={`${KEY} ${colors[i]}`}
         key={i}
         audio={this.audio}
         aux={this.aux}
@@ -90,8 +92,12 @@ KeyBoard.propTypes = {
   turn: PropTypes.bool,
   inGame: PropTypes.bool,
   className: PropTypes.string,
+  config: PropTypes.shape({
+    KEY: PropTypes.string,
+  }),
 };
 
-KeyBoard.defaultProps = { className: 'keys' };
+const { KEY } = Constants.CLASSNAMES;
+KeyBoard.defaultProps = { config: KEY };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyBoard);

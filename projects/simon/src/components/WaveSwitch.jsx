@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { onToggleWave } from '../actions';
 import Button from './Button';
+import WaveIcons from './WaveIcons';
 
 const mapStateToProps = state => ({
   wave: state.wave,
@@ -14,7 +15,9 @@ const mapDispatchToProps = dispatch => ({
 const ModeSwitch = ({
   wave,
   ...props
-}) => (<Button {...props}>{wave}</Button>);
+}) => (<Button {...props}>
+  <WaveIcons wave={wave} />
+</Button>);
 
 ModeSwitch.propTypes = {
   wave: PropTypes.string,

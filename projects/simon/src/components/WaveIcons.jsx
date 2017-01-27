@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Sine from './SineIconSVG';
-import Square from './SquareWaveIconSVG';
-import Triangle from './TriangleIconSVG';
-import Sawtooth from './SawtoothIconSVG';
+import Sine from './icons/SineIconSVG';
+import Square from './icons/SquareWaveIconSVG';
+import Triangle from './icons/TriangleIconSVG';
+import Sawtooth from './icons/SawtoothIconSVG';
 import Constants from '../Constants';
 
 const { SIN, TRI, SQU, SAW } = Constants.WAVES;

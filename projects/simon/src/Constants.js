@@ -16,4 +16,12 @@ module.exports = {
     NORMAL: ['red', 'orange', 'green', 'blue'],
     HARD: [...Array(6)].fill('white'),
   },
+  CLASSNAMES: {
+    BTN: {
+      PLAY: 'play',
+      STOP: 'reset',
+    },
+    KEY: 'key',
+    KEYBOARD: 'keys',
+  },
 };
