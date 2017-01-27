@@ -9,7 +9,7 @@ const App = () => (<Simon>
   <Mode />
   <StartStop />
   <Wave />
-  <KeyBoard />
+  <KeyBoard className="keys" />
 </Simon>);
 
 ReactDOM.render(

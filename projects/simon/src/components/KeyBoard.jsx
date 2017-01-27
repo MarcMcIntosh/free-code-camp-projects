@@ -66,6 +66,13 @@ class KeyBoard extends Component {
   }
   render() {
     const { notes, wave, colors, config, ...props } = this.props;
+    delete props.challenge;
+    delete props.vol;
+    delete props.bpm;
+    delete props.turn;
+    delete props.inGame;
+    delete props.onAiPlay;
+    delete props.onAiEnd;
     const { KEY } = config;
     return (<div {...props}>{
       notes.map((d, i) => (<Key
@@ -98,6 +105,6 @@ KeyBoard.propTypes = {
 };
 
 const { KEY } = Constants.CLASSNAMES;
-KeyBoard.defaultProps = { config: KEY };
+KeyBoard.defaultProps = { config: { KEY } };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyBoard);

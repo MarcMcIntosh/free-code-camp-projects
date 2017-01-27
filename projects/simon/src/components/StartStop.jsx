@@ -43,8 +43,8 @@ StartStop.propTypes = {
   }),
 };
 
-const { BTN } = Constants.CLASSNAMES;
+const { PLAY, STOP } = Constants.CLASSNAMES.BTN;
 
-StartStop.defaultProps = { config: BTN };
+StartStop.defaultProps = { config: { PLAY, STOP } };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartStop);

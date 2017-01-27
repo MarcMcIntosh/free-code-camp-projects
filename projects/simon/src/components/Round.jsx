@@ -2,11 +2,13 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  children: state.round,
+  round: state.round,
 });
 
-const Round = ({ children }) => React.Children.only(children);
+const mapDispatchToProps = () => ({});
 
-Round.propTypes = { children: PropTypes.node };
+const Round = ({ round, ...props }) => (<span {...props}>{round}</span>);
 
-export default connect(mapStateToProps)(Round);
+Round.propTypes = { round: PropTypes.number };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Round);

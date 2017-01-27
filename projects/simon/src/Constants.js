@@ -21,6 +21,7 @@ module.exports = {
       PLAY: 'play',
       STOP: 'reset',
     },
+    WAVE: 'wave',
     KEY: 'key',
     KEYBOARD: 'keys',
   },
