@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Simon, { KeyBoard, Wave, Mode, Round, StartStop } from './index';
+import Simon, {
+  KeyBoard,
+  Wave,
+  Mode,
+  Round,
+  StartStop,
+  Volume,
+} from './index';
 
 require('./src/styles/main.scss');
 
 const App = () => (<Simon>
-  <Round />
-  <Mode />
+  <h3>Round: <Round /></h3>
+  <h4>Difficulty: <Mode /></h4>
   <StartStop />
-  <Wave />
+  <b>Sound Wave: <Wave /></b>
+  <div>Vol: <Volume /></div>
   <KeyBoard className="keys" />
 </Simon>);
 

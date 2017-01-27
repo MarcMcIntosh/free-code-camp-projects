@@ -26,22 +26,28 @@ class KeyBoard extends Component {
     super(props);
     this.audio = new (window.AudioContext || window.webkitAudioContext)();
     this.aux = this.audio.createGain();
+    this.compressor = this.audio.createDynamicsCompressor();
+    this.compressor.threshold.value = -10;
+    this.compressor.ratio.value = 0.03;
+    this.compressor.attack.value = 0.5;
     this.aux.gain.value = (this.props.vol / 100);
-    this.aux.connect(this.audio.destination);
+    this.aux.connect(this.compressor);
+    this.compressor.connect(this.audio.destination);
     this.aiplay = this.aiplay.bind(this);
     this.auto = this.auto.bind(this);
   }
-  componentDidMount() {
-    if (this.props.inGame && !this.props.turn) {
-      this.auto.play();
-    }
-  }
   componentWillReceiveProps(nextProps) {
     if (this.props.challenge.length < nextProps.challenge.length) {
-      this.auto(nextProps.challenge);
+      setTimeout(() => {
+        this.auto(nextProps.challenge);
+      }, (60 * 1000) / this.props.bpm);
+    }
+    if (this.props.vol !== nextProps.vol) {
+      this.aux.gain.value = nextProps.vol / 100;
     }
   }
   componentWillUnmount() { this.audio.close(); }
+
   aiplay(n, t) {
     const osc = this.audio.createOscillator();
     osc.frequency.value = n;
@@ -60,12 +66,13 @@ class KeyBoard extends Component {
     const t = (60 * 1000) / this.props.bpm;
     if (i < arr.length) {
       this.aiplay(arr[i], t);
-      return setTimeout(() => this.auto(arr, i + 1), t * 2);
+      setTimeout(() => { this.auto(arr, i + 1); }, t * 2);
+    } else {
+      this.props.onAiEnd();
     }
-    return this.props.onAiEnd();
   }
   render() {
-    const { notes, wave, colors, config, ...props } = this.props;
+    const { notes, wave, colors, ...props } = this.props;
     delete props.challenge;
     delete props.vol;
     delete props.bpm;
@@ -73,11 +80,10 @@ class KeyBoard extends Component {
     delete props.inGame;
     delete props.onAiPlay;
     delete props.onAiEnd;
-    const { KEY } = config;
     return (<div {...props}>{
       notes.map((d, i) => (<Key
-        className={`${KEY} ${colors[i]}`}
         key={i}
+        color={colors[i]}
         audio={this.audio}
         aux={this.aux}
         frequency={d}
@@ -101,10 +107,8 @@ KeyBoard.propTypes = {
   className: PropTypes.string,
   config: PropTypes.shape({
     KEY: PropTypes.string,
+    KEY_ACTIVE: PropTypes.func,
   }),
 };
-
-const { KEY } = Constants.CLASSNAMES;
-KeyBoard.defaultProps = { config: { KEY } };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyBoard);

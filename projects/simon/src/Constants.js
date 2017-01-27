@@ -20,9 +20,12 @@ module.exports = {
     BTN: {
       PLAY: 'play',
       STOP: 'reset',
+      INC: 'up',
+      DEV: 'down',
     },
     WAVE: 'wave',
     KEY: 'key',
+    KEY_ACTIVE: (key, color, bool) => ((bool) ? `${key} ${color}--active` : `${key} ${color}`),
     KEYBOARD: 'keys',
   },
 };

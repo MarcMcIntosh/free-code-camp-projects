@@ -6,6 +6,7 @@ import Wave from './src/components/WaveSwitch';
 import Mode from './src/components/ModeSwitch';
 import StartStop from './src/components/StartStop';
 import Round from './src/components/Round';
+import Volume from './src/components/Volume';
 
 class Simon extends Component {
   constructor(props) {
@@ -31,4 +32,5 @@ export {
   Mode,
   StartStop,
   Round,
+  Volume,
 };

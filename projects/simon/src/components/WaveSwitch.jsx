@@ -10,14 +10,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClick: event => dispatch(onToggleWave(event)),
+  onClick: () => dispatch(onToggleWave()),
 });
 
 const ModeSwitch = ({
   wave,
   config,
   ...props
-}) => (<Button {...props}>
+}) => (<Button value={wave} {...props}>
   <WaveIcons className={config.WAVE} wave={wave} />
 </Button>);
 

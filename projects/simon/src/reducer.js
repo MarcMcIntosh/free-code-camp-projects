@@ -9,10 +9,13 @@ import {
   AI_PLAY,
   AI_END,
   START_GAME,
+  COUNT_UP,
+  SET_VOLUME,
 } from './actions';
 
 const { MAJOR } = Constants.SCALES.PYTHAGOREAN;
 const { MODE, WAVES, COLORS } = Constants;
+
 function nxtWave(cur) {
   if (cur === WAVES.SIN) return WAVES.SQU;
   if (cur === WAVES.SQU) return WAVES.SAW;
@@ -50,6 +53,10 @@ function reducer(state = DEFAULT_STATE, action) {
       turn: false,
       challenge: addRandomNote(state.challenge, state.notes),
     };
+    case COUNT_UP: return {
+      ...state,
+      count: state.count + 1,
+    };
     case AI_PLAY: return {
       ...state,
       turn: false,
@@ -58,18 +65,17 @@ function reducer(state = DEFAULT_STATE, action) {
     case AI_END: return { ...state, turn: true, tone: -1 };
     case NEXT_ROUND: return {
       ...state,
+      turn: false,
+      count: 0,
       round: state.round + 1,
       challenge: addRandomNote(state.challenge, state.notes),
-      turn: false,
     };
     case TOGGLE_MODE: return {
       ...state,
       mode: (state.mode === MODE.NORMAL) ? (MODE.HARD) : MODE.NORMAL,
     };
-    case TOGGLE_WAVE: return {
-      ...state,
-      wave: nxtWave(state.wave),
-    };
+    case TOGGLE_WAVE: return { ...state, wave: nxtWave(state.wave) };
+    case SET_VOLUME: return { ...state, volume: action.payload };
     case RESET_GAME: return {
       ...state,
       round: 0,
