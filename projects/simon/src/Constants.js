@@ -12,4 +12,8 @@ module.exports = {
     NORMAL: 'normal',
     HARD: 'hard',
   },
+  COLORS: {
+    NORMAL: ['red', 'orange', 'green', 'blue'],
+    HARD: [...Array(6)].fill('white'),
+  },
 };

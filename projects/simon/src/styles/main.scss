@@ -1,7 +1,43 @@
 @import '~normalize.css/normalize.css';
 
 // Cool buttons https://codepen.io/cliftwalker/pen/JoWyjy?editors=0110
-
+.display {
+  button {
+    outline: none;
+    border: none;
+    padding: 6px;
+    min-width: 32px;
+    svg { width: 1.6em;}
+    &.reset {
+      rect {
+        fill: #f43;
+        stroke: #f00;
+        stroke-width: 1;
+      }
+    }
+    &.play {
+    //  svg { width: 1.6em;}
+      polygon {
+        fill: #0f8;
+        stroke: #2a2;
+        stroke-width: 1;
+        stroke-linecap: round;
+      }
+    }
+    &.wave {
+      // svg { width: 1.6em; }
+      path {
+        fill: none;
+        stroke: black;
+        stroke-width: 2px;
+      }
+    }
+  }
+  .mode {
+    &.normal {}
+    &.hard {}
+  }
+}
 $colors: red, orange, green, blue;
 .keys {
   .key {
@@ -33,6 +69,11 @@ $colors: red, orange, green, blue;
       background-color: darken(blue, 10);
       &:active { background-color: lighten(blue, 20); }
       &--active { background-color: lighten(blue, 20); }
+    }
+    &.white {
+      background-color: darken(white, 10);
+      &:active { background-color: lighten(white, 20); }
+      &--active { background-color: lighten(white, 20); }
     }
   }
 }

@@ -12,7 +12,7 @@ import {
 } from './actions';
 
 const { MAJOR } = Constants.SCALES.PYTHAGOREAN;
-const { MODE, WAVES } = Constants;
+const { MODE, WAVES, COLORS } = Constants;
 function nxtWave(cur) {
   if (cur === WAVES.SIN) return WAVES.SQU;
   if (cur === WAVES.SQU) return WAVES.SAW;
@@ -20,6 +20,7 @@ function nxtWave(cur) {
   if (cur === WAVES.TRI) return WAVES.SIN;
   return cur;
 }
+
 const DEFAULT_STATE = {
   volume: 50,
   bpm: 126,
@@ -33,6 +34,7 @@ const DEFAULT_STATE = {
   inGame: false,
   error: '',
   tone: -1,
+  colors: COLORS.NORMAL,
 };
 
 function addRandomNote(arr, notes) {
