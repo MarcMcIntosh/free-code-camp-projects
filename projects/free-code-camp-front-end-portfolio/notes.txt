@@ -1,0 +1,9 @@
+## Handy commands for submodules
+## Add a repo
+git submodule add # <address> <dest> # url lib/name
+## Init the moduel(s)
+git submodule update --init --recursive
+
+## Commit changes if you make any and update them all with
+git push --recurse-submodules=on-demand
+
