@@ -13,7 +13,8 @@
     "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-tribute-page/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^6.6.0",
     "babel-core": "^6.21.0",
@@ -42,10 +43,10 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "react-dom": "^15.4.1"
   },
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
   }
 }
