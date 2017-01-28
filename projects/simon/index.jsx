@@ -7,6 +7,8 @@ import Mode from './src/components/ModeSwitch';
 import StartStop from './src/components/StartStop';
 import Round from './src/components/Round';
 import Volume from './src/components/Volume';
+import TASK from './task';
+import CONSTANTS from './src/Constants';
 
 class Simon extends Component {
   constructor(props) {
@@ -33,4 +35,6 @@ export {
   StartStop,
   Round,
   Volume,
+  TASK,
+  CONSTANTS,
 };

@@ -17,7 +17,7 @@ const ModeSwitch = ({
   wave,
   config,
   ...props
-}) => (<Button value={wave} {...props}>
+}) => (<Button {...props} value={wave} >
   <WaveIcons className={config.WAVE} wave={wave} />
 </Button>);
 

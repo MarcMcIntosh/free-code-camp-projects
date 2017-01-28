@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import ReactDOM from 'react-dom';
 import Simon, {
   KeyBoard,

@@ -104,7 +104,6 @@ KeyBoard.propTypes = {
   onAiPlay: PropTypes.func,
   turn: PropTypes.bool,
   inGame: PropTypes.bool,
-  className: PropTypes.string,
   config: PropTypes.shape({
     KEY: PropTypes.string,
     KEY_ACTIVE: PropTypes.func,
