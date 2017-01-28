@@ -6,7 +6,8 @@
     "build": "NODE_ENV=production webpack "
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
@@ -36,7 +37,6 @@
   },
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
