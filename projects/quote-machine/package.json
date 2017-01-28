@@ -13,7 +13,8 @@
     "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-quote-machine/"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
@@ -36,16 +37,15 @@
     "node-sass": "^4.1.1",
     "normalize.css": "^5.0.0",
     "postcss-loader": "^1.2.1",
+    "react-dom": "^15.4.1",
     "sass-loader": "^4.1.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "es6-promise": "^4.0.5",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
