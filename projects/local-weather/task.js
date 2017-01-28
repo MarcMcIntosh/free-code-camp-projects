@@ -2,7 +2,7 @@
 module.exports = {
   title: 'Show the Local Weather',
   challenge: 'https://www.freecodecamp.com/challenges/show-the-local-weather',
-  Objective: 'Build a CodePen.io app that is functionally similar to this:',
+  objective: 'Build a CodePen.io app that is functionally similar to this:',
   example: 'http://codepen.io/FreeCodeCamp/full/bELRjV',
   stroies: [
     'I can see the weather in my current location.',
