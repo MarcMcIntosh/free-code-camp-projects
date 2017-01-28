@@ -36,6 +36,7 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "free-code-camp-front-end-taskbar": "file:lib/taskbar",
     "react": "^15.4.1",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
