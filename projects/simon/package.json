@@ -6,7 +6,8 @@
     "build": "NODE_ENV=production webpack "
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
