@@ -4,7 +4,7 @@ const freeSpaces = require('./free-spaces');
 const getScore = require('./score');
 const getOpponent = require('./get-opponent');
 
-module.exports = function minimax(board, player, depth, cpu, maxDepth) {
+module.exports = function minimax(board, player, depth, cpu, maxDepth = 9) {
   const ai = (cpu !== undefined) ? cpu : player;
   const i = (depth !== undefined) ? depth : 0;
   /*  Exit Early and Return a Score */
@@ -15,9 +15,7 @@ module.exports = function minimax(board, player, depth, cpu, maxDepth) {
   const spaces = freeSpaces(board);
   if (spaces.length === board.length) return Math.floor(Math.random() * board.length);
   // Difficulty
-  if (i >= maxDepth) {
-    return spaces[Math.floor(Math.random() * spaces.length)];
-  }
+  if (i >= maxDepth) return 0;
   /* Calulcate free spaces and recurse in to potentual moves */
   const scores = spaces.map((space) => {
     const sim = board.slice();
