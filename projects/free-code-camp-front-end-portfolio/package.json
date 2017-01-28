@@ -37,5 +37,12 @@
   "dependencies": {
     "react": "^15.4.1",
     "react-dom": "^15.4.2"
+  },
+  "name": "free-code-camp-front-end-portfolio",
+  "description": "Template File for front end assignments from [FreeCodeCamp](https://www.freecodecamp.com)",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/free-code-camp-front-end-portfolio"
   }
 }
