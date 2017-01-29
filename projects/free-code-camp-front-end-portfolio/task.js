@@ -1,10 +1,3 @@
-/*
-User Story:
-User Story:
-User Story:
-User Story:
-*/
-
 module.exports = {
   title: 'Build a Personal Portfolio Webpage',
   challenge: 'https://www.freecodecamp.com/challenges/build-a-personal-portfolio-webpage',
