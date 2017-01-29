@@ -28,21 +28,12 @@ class IMG extends Component {
     }));
   }
   render() {
-    const {
-      children,
-      config,
-      ...props
-    } = this.props;
-    delete config.src; delete props.src;
+    const { children, config, ...props } = this.props;
     return (<img
-      role="presentation"
-      {...config} {...props}
-      src={(
-        this.state.img && window
-      ) ? (window.URL || window.webkitURL).createObjectUrl(this.state.img) : this.src}
-    >{(
-      this.state.loading
-    ) ? children || '...loading' : this.state.error}
+      role="presentation" {...config} {...props}
+      src={(this.state.img && window) ? (window.URL || window.webkitURL
+      ).createObjectUrl(this.state.img) : props.src || config.src}
+    > {(this.state.loading) ? children || '...loading' : this.state.error}
     </img>);
   }
 }
