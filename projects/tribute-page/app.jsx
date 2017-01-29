@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Most of the App should come from index.js */
-import Tribute, { Quotes } from './index';
+import Tribute from './index';
 const imageSrc = require('./src/assets/Season_6_hodor_main.jpg');
-
 require('./src/styles/main.scss');
 
 const CONFIG = {
