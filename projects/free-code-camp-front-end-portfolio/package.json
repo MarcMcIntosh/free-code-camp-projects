@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "free-code-camp-front-end-taskbar": "file:lib/taskbar",
+    "material-components-web": "^0.3.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",

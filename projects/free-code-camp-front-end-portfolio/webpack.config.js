@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -92,8 +93,14 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass'),
+        loader: ExtractTextPlugin.extract('css!postcss!sass'),
       },
     ],
   },
+  sassLoader: {
+    includePaths: [
+      path.resolve('node_modules'),
+    ]
+  },
+  postcss: () => [require('autoprefixer')],
 };

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-
+/* Check out MDC card demo */
 const Thumbnail = ({
   children,
   ...props

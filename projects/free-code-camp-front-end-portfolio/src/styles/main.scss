@@ -1,1 +1,30 @@
 @import '~normalize.css/normalize.css';
+
+// All materail components
+@import "~material-components-web/material-components-web";
+
+
+// Idividual items may require reading then depencies which  are listed ineach package.json and loading them before the component see _card.scss
+
+// List of all avaible packages
+//@import '@material/animation';
+//@import '@material/auto-init';
+//@import '@material/base'; JavaScript
+//@import '@material/button';
+//@import '@material/card';
+//@import '@material/checkbox';
+//@import '@material/drawer';
+//@import '@material/rtl';
+//@import '@material/elevation';
+//@import '@material/fab';
+//@import '@material/form-field';
+//@import '@material/icon-toggle';
+//@import '@material/list';
+//@import '@material/menu';
+//@import '@material/radio';
+//@import '@material/ripple';
+//@import '@material/select';
+//@import '@material/snackbar';
+//@import '@material/textfield';
+//@import '@material/theme';
+//@import '@material/typography';
