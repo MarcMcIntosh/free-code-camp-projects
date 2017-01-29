@@ -37,6 +37,8 @@
   },
   "dependencies": {
     "free-code-camp-front-end-taskbar": "file:lib/taskbar",
+    "free-code-camp-front-end-tribute-page": "file:lib/tribute-page",
+    "isomorphic-fetch": "^2.2.1",
     "material-components-web": "^0.3.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.2",
