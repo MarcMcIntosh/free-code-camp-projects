@@ -2,18 +2,21 @@ import React, { PropTypes } from 'react';
 import { QUOTES } from '../constants';
 
 const Quotes = ({
+  list,
   config,
   ...props
 }) => {
-  const { list, QUOTE, ...conf } = config;
+  const { QUOTE, ...conf } = config;
+  // const quotes = list || QUOTE.list;
   return (<ul {...conf} {...props}>{
-    list.map((d, i) => (
+    (list || QUOTE.list).map((d, i) => (
       <li key={i} {...QUOTE}>{d}</li>
     ))}
   </ul>);
 };
 
 Quotes.propTypes = {
+  list: PropTypes.array,
   config: PropTypes.shape({
     list: PropTypes.array,
     className: PropTypes.string,
