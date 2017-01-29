@@ -97,10 +97,11 @@ module.exports = {
       },
     ],
   },
+  /* This solved the issue loading sass files for material */
   sassLoader: {
     includePaths: [
       path.resolve('node_modules'),
-    ]
+    ],
   },
   postcss: () => [require('autoprefixer')],
 };
