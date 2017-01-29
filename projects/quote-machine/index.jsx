@@ -11,22 +11,17 @@ class QuoteMachine extends React.Component {
     this.store = store;
   }
   render() {
+    const { children, ...props } = this.props;
     return (
       <Provider store={this.store}>
-        <div className={this.props.classed}>
-          {this.props.children}
-        </div>
+        <div {...props}>{children}</div>
       </Provider>
     );
   }
 }
 
 QuoteMachine.propTypes = {
-  classed: React.PropTypes.string,
   children: React.PropTypes.node,
-};
-QuoteMachine.defaultProps = {
-  classed: 'app__container',
 };
 
 export default QuoteMachine;
