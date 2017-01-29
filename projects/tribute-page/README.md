@@ -29,15 +29,12 @@ Title.propTypes = {
 };
 ```
 ### Image
-Plain image tag, pass config and props as required.
+Plain image tag, pass config and props as required. Any children passed will be shown whilst loading only.
 ```jsx
-const Image = ({ config, ...props}) =>(<img {...config} {...props} />);
-
-Image.propTypes = {
-  config: PropTypes.shape({
-    className: PropTypes.string,
-    src: PropTypes.string,
-  }),
+IMG.propTypes = {
+  src: string,
+  children: node,
+  config: shape({ className: string, src: string }),
 };
 ```
 ### Quotes
