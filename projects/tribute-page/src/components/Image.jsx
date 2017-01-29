@@ -1,9 +1,7 @@
 import React from 'react';
 
-const SRC = require('./Season_6_hodor_main.jpg');
-
-const Image = () => (
-  <img className="tribute__image" src={SRC} alt="Hodor" />
+const Image = props => (
+  <img role="presentation" {...props} />
 );
 
 export default Image;

@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { QUOTES } from '../constants';
 
-const List = [
-  'And lowers it when he\'s going to dodge, m\'lady.',
-  'Hold the door....',
-  'holdthedoor...',
-  'holthdor...',
-  'holdor...',
-  'hodor...',
-  'hodor...',
-  'hodor.',
-];
+const Quotes = ({
+  list,
+  config,
+  ...props
+}) => {
+  const { QUOTE, ...conf } = config;
+  return (<ul {...conf} {...props}>{
+    list.map((d, i) => (
+      <li key={i} {...QUOTE}>{d}</li>
+    ))}
+  </ul>);
+};
 
-const Quotes = () => (
-  <div className="tribute__quotes">
-    <h3>Memorable Quotes</h3>
-    <ul>{List.map((d, i) => (
-      <li key={`quote:${i}`}><q>{d}</q></li>
-    ))}</ul>
-  </div>
-);
+Quotes.propTypes = {
+  list: PropTypes.array,
+  config: PropTypes.shape({
+    className: PropTypes.string,
+    QUOTE: PropTypes.shape({
+      className: PropTypes.string,
+    }),
+  }),
+};
+
+Quotes.defaultProps = { config: QUOTES };
 
 export default Quotes;

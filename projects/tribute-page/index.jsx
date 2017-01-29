@@ -1,17 +1,15 @@
 import React from 'react';
+import constants from './src/constants';
+import Quotes from './src/components/Quotes';
 import task from './task';
-import TaskBar from './src/Components/TaskBar/index';
-import Page from './src/Components/Page/Container';
 
 const App = () => (
-  <main className="app_container">
-    <TaskBar
-      title={task.title}
-      objective={task.objective}
-      story={task.story}
-    />
-    <Page />
-  </main>
+  <div>Hello</div>
 );
 
 export default App;
+export {
+  task,
+  constants,
+  Quotes,
+};
