@@ -2,37 +2,29 @@ import React, { PropTypes } from 'react';
 import { TITLE } from '../constants';
 
 const Title = ({
-  term,
-  desc,
-  src,
   config,
   ...props
 }) => {
-  const { TERM, DESC, SRC, ...conf } = config;
+  const { TERM, DESC, SRC, TEXT, ...conf } = config;
   return (<dl {...conf} {...props}>
-    <dt {...TERM}><q>{term}</q></dt>
-    <dd {...DESC}>{desc}<sup {...SRC}>
-      <a href={src} target="_blank" rel="noopener noreferrer">src</a>
+    <dt {...TERM}><q>{TEXT.TERM}</q></dt>
+    <dd {...DESC}>{TEXT.DESC}<sup {...SRC}>
+      <a href={TEXT.SRC} target="_blank" rel="noopener noreferrer">src</a>
     </sup></dd>
   </dl>);
 };
 
-Title.propTypes = {
-  term: PropTypes.string,
-  desc: PropTypes.string,
-  src: PropTypes.string,
-  config: PropTypes.shape({
-    TERM: PropTypes.shape({
-      className: PropTypes.string,
-    }),
-    DESC: PropTypes.shape({
-      className: PropTypes.string,
-    }),
-    SRC: PropTypes.shape({
-      className: PropTypes.string,
-    }),
+const { string, shape } = PropTypes;
+Title.propTypes = { config: shape({
+  TEXT: shape({
+    TERM: string,
+    DESC: string,
+    SRC: string,
   }),
-};
+  TERM: shape({ className: string }),
+  DESC: shape({ className: string }),
+  SRC: shape({ className: string }),
+}) };
 
 Title.defaultProps = { config: TITLE };
 

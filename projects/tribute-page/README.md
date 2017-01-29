@@ -4,42 +4,49 @@ Re-usable and configurable tribute page written in response to an assignment fro
 # Exports
 ## Non-Components
 + task *Description of and links to the original user story*
-+ Constants *This file is used to set default config props which are mostly used to pass classNames to children*
++ config *This file is used to set default config props which are mostly used to pass classNames to children*
 
 ## Components
+## Tribute
+Top level component, when used and passed a config object similar to the config object will reture a minimall implementation of the tribute.
+
+
 ### Title
-More of a detailed list with a term, description and superscript src link to the source of the info.
+More of a detailed list with a term, description and superscript "src" placeholder link to the source of the info.
 #### Props
 ```jsx
 Title.propTypes = {
-  term: PropTypes.string,
-  desc: PropTypes.string,
-  src: PropTypes.string,
-  config: PropTypes.shape({
-    TERM: PropTypes.shape({
-      className: PropTypes.string,
+  config: shape({
+    TEXT: shape({
+      TERM: string,
+      DESC: string,
+      SRC: string,
     }),
-    DESC: PropTypes.shape({
-      className: PropTypes.string,
-    }),
-    SRC: PropTypes.shape({
-      className: PropTypes.string,
-    }),
-  }),
+    TERM: shape({ className: string }),
+    DESC: shape({ className: string }),
+    SRC: shape({ className: string }),
+  })
 };
 ```
 ### Image
-Plain image tag, pass props as required.
+Plain image tag, pass config and props as required.
 ```jsx
-<img {...props} />
+const Image = ({ config, ...props}) =>(<img {...config} {...props} />);
+
+Image.propTypes = {
+  config: PropTypes.shape({
+    className: PropTypes.string,
+    src: PropTypes.string,
+  }),
+};
 ```
 ### Quotes
 Takes an array of strings (usually quotes) and returns a bullet point for each.
 ##### Props
 ```jsx
 Quotes.propTypes = {
-  list: PropTypes.array,
   config: PropTypes.shape({
+    list: PropTypes.array,
     className: PropTypes.string,
     QUOTE: PropTypes.shape({
       className: PropTypes.string,
