@@ -9,7 +9,7 @@ const Quotes = ({
   const { QUOTE, ...conf } = config;
   // const quotes = list || QUOTE.list;
   return (<ul {...conf} {...props}>{
-    (list || QUOTE.list).map((d, i) => (
+    (list || conf.list).map((d, i) => (
       <li key={i} {...QUOTE}>{d}</li>
     ))}
   </ul>);
