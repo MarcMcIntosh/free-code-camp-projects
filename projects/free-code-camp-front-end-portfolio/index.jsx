@@ -1,22 +1,22 @@
 import React from 'react';
+import { Router, Link, Route, browserHistory } from 'react-router';
+import Gallary from './src/components/Gallary/index';
+import Tribute from './src/apps/Tribute';
 
-const App = () => (<div className="mdc-typography">
-  <div className="mdc-card">
-    <section className="mdc-card__primary">
-      <h1 className="mdc-card__title mdc-card__title--large">Title goes here</h1>
-      <h2 className="mdc-card__subtitle">Subtitle here</h2>
-    </section>
-    <section className="mdc-card__supporting-text">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-    commodo consequat.
-    </section>
-    <section className="mdc-card__actions">
-      <button className="mdc-button mdc-button--compact mdc-card__action">Action 1</button>
-      <button className="mdc-button mdc-button--compact mdc-card__action">Action 2</button>
-    </section>
+const App = () => (
+  <div>
+    <Gallary><Tribute /></Gallary>
+    <Link to="tribute">Tribute</Link>
+    <Tribute />
   </div>
-</div>);
+);
 
-export default App;
+const Routes = () => (
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <Route path="tribute" component={Tribute} />
+    </Route>
+  </Router>
+);
+
+export default Routes;
