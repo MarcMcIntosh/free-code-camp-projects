@@ -29,34 +29,8 @@ class IMG extends Component {
       this.error = e;
     });
   }
-  componentDidMount() {
-    this.getImg();
-  }
-  getImg() {
-    this.setState({ loading: true });
-    fetch(this.src).then((res) => {
-      if (res.ok) return res.blob();
-      throw new Error(res.statusText);
-    }).then(img => this.setState({
-      loading: false, img,
-    })).catch(error => this.setState({
-      error, loading: false,
-    }));
-  }
   render() {
-    const { children, config, src, ...props } = this.props;
-    // delete props.src; delete config.src;
-  /*  if (!this.state.img && this.img) {
-      this.setState({ img: this.img });
-    } else if (!this.state.img) {
-      this.getImg();
-    } */
-    if (this.state.loading) {
-      return (<div {...props}>{children || '...loading'}</div>);
-    }
-    if (this.state.error || this.error) {
-      return (<div {...props}>{this.error}</div>);
-    }
+    const { config, src, ...props } = this.props;
     const obj = { ...config, ...props };
     delete obj.src;
     return (<img
