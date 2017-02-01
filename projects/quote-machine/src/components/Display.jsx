@@ -10,31 +10,33 @@ class Display extends Component {
   }
 
   render() {
-    const cn = this.props.classed;
-    if (this.props.isFetching) {
-      return (<div className={`${cn} loading`}>Loading</div>);
+    const {
+      className,
+      author,
+      quote,
+      error,
+      isFetching,
+    } = this.props;
+    if (isFetching) {
+      return (<div className={(className) ? `${className} loading` : 'loading'}>Loading</div>);
+    } else if (error) {
+      return (<div className={(className) ? `${className} error` : 'error'}>{error}</div>);
     }
-    if (this.props.error) {
-      return (<div className={`${cn} error`}>{this.props.error}</div>);
-    }
-    return (<div className={cn}>
-      <q>{this.props.quote}</q> -- <small>{this.props.author}</small>
+    return (<div className={className}>
+      <q>{quote}</q> -- <small>{author}</small>
     </div>);
   }
 }
 
+const { string, func, bool } = PropTypes;
 Display.propTypes = {
-  classed: PropTypes.string,
-  author: PropTypes.string,
-  quote: PropTypes.string,
-  fetchQuote: PropTypes.func,
-  error: PropTypes.string,
-  isFetching: PropTypes.bool,
-  done: PropTypes.bool,
-};
-
-Display.defaultProps = {
-  classed: 'qm__display',
+  className: string,
+  author: string,
+  quote: string,
+  fetchQuote: func,
+  error: string,
+  isFetching: bool,
+  done: bool,
 };
 
 const mapStateToProps = (state) => {

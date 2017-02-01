@@ -4,6 +4,7 @@ import TweetButton from './src/components/TweetButton';
 import NextButton from './src/components/NextButton';
 import Display from './src/components/Display';
 import store from './src/store';
+import task from './task';
 
 class QuoteMachine extends React.Component {
   constructor(props) {
@@ -25,4 +26,4 @@ QuoteMachine.propTypes = {
 };
 
 export default QuoteMachine;
-export { TweetButton, NextButton, Display };
+export { TweetButton, NextButton, Display, task };
