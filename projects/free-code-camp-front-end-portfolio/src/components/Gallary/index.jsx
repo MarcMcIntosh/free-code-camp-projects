@@ -21,6 +21,7 @@ const Gallary = ({ apps, ...props }) => (<div {...props}>{
 
 const { arrayOf, shape, string } = PropTypes;
 Gallary.propTypes = {
+  className: string,
   apps: arrayOf(shape({
     path: string,
     preview: string,
@@ -33,5 +34,5 @@ Gallary.propTypes = {
     }),
   })),
 };
-
+Gallary.defaultProps = { className: 'gallary' };
 export default Gallary;

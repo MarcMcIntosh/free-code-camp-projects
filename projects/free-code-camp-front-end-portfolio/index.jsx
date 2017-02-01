@@ -13,7 +13,7 @@ import Tribute, { task as TributeTask } from './src/apps/Tribute';
 import QuoteMachine, { task as QuoteMachineTask } from './src/apps/QuoteMachine';
 
 import TributePreview from './src/assets/tribute.png';
-import PlaceHolder from './src/assets/placeholder.png';
+import PlaceHolder from './src/assets/quote.png';
 
 const apps = [
   {

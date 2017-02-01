@@ -60,14 +60,14 @@ module.exports = {
   devServer: {
     inline: true,
     hot: true,
+    historyApiFallback: {
+      index: publicPathUrl(),
+    },
   },
   output: {
     filename: '[hash].js',
     path: path.resolve(__dirname, 'docs'),
     publicPath: publicPathUrl(),
-  },
-  historyApiFallback: {
-    index: publicPathUrl(),
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
