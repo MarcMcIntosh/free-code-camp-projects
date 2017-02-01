@@ -5,6 +5,7 @@ import Display from './src/components/Display';
 import Icon from './src/components/Icon';
 import TempControl from './src/components/TempControl';
 import Details from './src/components/Details';
+import task from './task';
 
 class Container extends Component {
   constructor(props) {
@@ -32,4 +33,4 @@ Container.defaultProps = {
 };
 
 export default Container;
-export { Display, Icon, TempControl, Details };
+export { Display, Icon, TempControl, Details, task };
