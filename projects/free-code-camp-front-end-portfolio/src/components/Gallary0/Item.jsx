@@ -28,21 +28,14 @@ class Item extends Component {
     } = this.props;
 
     return (<div className="mdc-card" {...props}>
-      <div className="mdc-card__horizontal-block">
-        <section className="mdc-card__primary">
-
-          <h1 className="mdc-card__title mdc-card__title--large">{name}</h1>
-
-          <h2 className="mdc-card__subtitle">{description}</h2>
-
-        </section>
-
-        <Link to={path}><Thumbnail
-          className="mdc-card__media-item mdc-card__media-item--2x"
-          src={preview}
-        /></Link>
-
-      </div>
+      <section className="mdc-card__primary">
+        <h1 className="mdc-card__title mdc-card__title--large">
+          {name}
+        </h1>
+        <h2 className="mdc-card__subtitle">
+          {description}
+        </h2>
+      </section>
       {this.state.displayInfo ? (<section className="mdc-card__supporting-text">
 
         <hr />
@@ -68,20 +61,31 @@ class Item extends Component {
         </section>
 
         <h2 className="mdc-card__subtitle">
-          <small><A text="Source" src={info.challenge} /></small>
+          <small>Source: </small>
+          <A text="source" src={info.challenge} />
         </h2>
 
-      </section>) : false
-    }
+        <hr />
+
+      </section>) : (<section className="mdc-card__media-item">
+        <h2 className="mdc-card__subtitle">Preview</h2>
+        {/* Link to the path */}
+        <Link to={path}>
+          <Thumbnail className="thumbnail">{preview}</Thumbnail>
+        </Link>
+      </section>)}
 
       <section className="mdc-card__actions">
-        <Link to={path}><Button
+        <Button
           className="mdc-button mdc-button--compact mdc-card__action"
-        >View</Button></Link>
+        ><Link to={path}>View</Link></Button>
+
         <Button
           className="mdc-button mdc-button--compact mdc-card__action"
           onClick={this.displayInfo}
         >Info</Button>
+
+
 
       </section>
     </div>);

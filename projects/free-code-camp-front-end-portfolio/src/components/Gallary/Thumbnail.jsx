@@ -1,15 +1,29 @@
-import React, { PropTypes } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import React, { PropTypes, Component } from 'react';
 
-const Thumbnail = ({
-  children,
-  ...props
-}) => {
-  const thumb = ReactDOMServer.renderToStaticMarkup(children);
-  return (<iframe {...props} sandbox="allow-same-origin" {...props} srcDoc={thumb} />);
+class Thumbnail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { loaded: false };
+    this.handleLoad = this.handleLoad.bind(this);
+  }
+  handleLoad() {
+    this.setState({ loaded: true });
+  }
+  render() {
+    const { src, className, ...props } = this.props;
+    return (<img
+      {...props}
+      role="presentation"
+      className={this.state.loaded ? className : `${className} loading`}
+      src={src}
+      onLoad={this.handleLoad}
+    />);
+  }
+}
+
+Thumbnail.propTypes = {
+  src: PropTypes.string,
+  className: PropTypes.string,
 };
-
-
-Thumbnail.propTypes = { children: PropTypes.node };
 
 export default Thumbnail;

@@ -19,11 +19,11 @@ const Gallary = ({ apps, ...props }) => (<div {...props}>{
   apps.map((app, index) => (<Item key={index} {...app} />))
 }</div>);
 
-const { arrayOf, shape, string } = PropTypes;
+const { arrayOf, shape, string, node } = PropTypes;
 Gallary.propTypes = {
   apps: arrayOf(shape({
     path: string,
-    preview: string,
+    preview: node,
     info: shape({
       title: string,
       challenge: string,

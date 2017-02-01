@@ -63,8 +63,11 @@ module.exports = {
   },
   output: {
     filename: '[hash].js',
-    path: './docs',
+    path: path.resolve(__dirname, 'docs'),
     publicPath: publicPathUrl(),
+  },
+  historyApiFallback: {
+    index: publicPathUrl(),
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
