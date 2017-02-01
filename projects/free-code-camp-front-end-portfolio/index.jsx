@@ -12,6 +12,14 @@ import Container from './src/pages/apps';
 import Tribute, { task as TributeTask } from './src/apps/Tribute';
 import QuoteMachine, { task as QuoteMachineTask } from './src/apps/QuoteMachine';
 
+// Local Weather
+// Wikipedia
+// Twitch
+// Calculator
+// Pomodoro
+// Tic-Tac-Toe
+// Simon
+
 import TributePreview from './src/assets/tribute.png';
 import PlaceHolder from './src/assets/quote.png';
 
