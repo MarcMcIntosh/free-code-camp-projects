@@ -1,22 +1,26 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-
 import UserList, { UserError } from './src/components/UserList';
 import Header from './src/components/Header';
+import task from './task';
 
-const App = (props) => {
-  const { children, ...args } = props;
-  return (
-    <Provider store={store}>
-      <div {...args}>{children}</div>
-    </Provider>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.store = store;
+  }
+  render() {
+    const { children, ...props } = this.props;
+    return (<Provider store={this.store}>
+      <div {...props}>{children}</div>
+    </Provider>);
+  }
+}
 
 App.propTypes = {
   children: PropTypes.node,
 };
 
 export default App;
-export { UserList, UserError, Header };
+export { UserList, UserError, Header, task };
