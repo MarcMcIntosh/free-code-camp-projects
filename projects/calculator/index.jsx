@@ -4,6 +4,7 @@ import store from './src/store';
 import Buttons from './src/components/CalculatorButtons';
 import Display from './src/components/Display';
 import ErrorMessage from './src/components/ErrorMessage';
+import task from './task';
 
 class Calculator extends Component {
   constructor(props) {
@@ -25,4 +26,4 @@ Calculator.propTypes = {
 };
 
 export default Calculator;
-export { Display, Buttons, ErrorMessage };
+export { Display, Buttons, ErrorMessage, task };
