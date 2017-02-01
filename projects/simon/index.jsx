@@ -7,7 +7,7 @@ import Mode from './src/components/ModeSwitch';
 import StartStop from './src/components/StartStop';
 import Round from './src/components/Round';
 import Volume from './src/components/Volume';
-import TASK from './task';
+import task from './task';
 import CONSTANTS from './src/Constants';
 
 class Simon extends Component {
@@ -35,6 +35,6 @@ export {
   StartStop,
   Round,
   Volume,
-  TASK,
+  task,
   CONSTANTS,
 };
