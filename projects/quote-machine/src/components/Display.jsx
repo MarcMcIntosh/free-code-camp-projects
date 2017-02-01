@@ -16,27 +16,42 @@ class Display extends Component {
       quote,
       error,
       isFetching,
+      classnames,
+      done,
     } = this.props;
-    if (isFetching) {
-      return (<div className={(className) ? `${className} loading` : 'loading'}>Loading</div>);
-    } else if (error) {
+
+    if (error) {
       return (<div className={(className) ? `${className} error` : 'error'}>{error}</div>);
     }
-    return (<div className={className}>
-      <q>{quote}</q> -- <small>{author}</small>
-    </div>);
+    return (<section className={className}>
+      {(error) ? (<div className="error">{error}</div>) : false }
+      {(isFetching) ? (<div className="loading" />) : false}
+      {(done && quote) ? (<h1 className={classnames.quote}><q>{quote}</q></h1>) : false}
+      {(done && author) ? (<h2 className={classnames.author}> -- {author}</h2>) : false}
+    </section>);
   }
 }
 
-const { string, func, bool } = PropTypes;
+const { string, func, bool, shape } = PropTypes;
 Display.propTypes = {
   className: string,
+  classnames: shape({
+    quote: string,
+    author: string,
+  }),
   author: string,
   quote: string,
   fetchQuote: func,
   error: string,
   isFetching: bool,
   done: bool,
+};
+
+Display.defaultProps = {
+  classnames: {
+    quote: 'quote',
+    author: 'author',
+  },
 };
 
 const mapStateToProps = (state) => {
