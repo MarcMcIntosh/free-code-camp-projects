@@ -8,16 +8,16 @@ class IMG extends Component {
     this.loading = false;
     this.error = null;
     this.img = null;
-    this.src = (props.src) ? props.src : props.config.src;
+    this.imgLoaded = this.imgLoaded.bind(this);
     this.state = {
-      loading: false,
+      loaded: false,
       error: false,
       img: '',
     };
   }
   componentWillMount() {
     this.loading = true;
-    fetch(this.src).then((res) => {
+    fetch(this.props.src).then((res) => {
       this.loading = false;
       if (res.ok) return res.blob();
       throw new Error(res.statusText);
@@ -29,26 +29,28 @@ class IMG extends Component {
       this.error = e;
     });
   }
+  imgLoaded() {
+    this.setState({ loaded: true });
+  }
   render() {
-    const { config, src, ...props } = this.props;
-    const obj = { ...config, ...props };
-    delete obj.src;
+    const { src, ...props } = this.props;
     return (<img
-      {...obj}
+      {...props}
       role="presentation"
       src={(this.img && typeof window !== 'undefined') ? (window.URL.createObjectURL || window.webkitURL.createObjectURL
       )(this.img) : (this.src || src)}
+      onLoad={this.imgLoaded}
     />);
   }
 }
 
-const { node, string, shape } = PropTypes;
+const { node, string } = PropTypes;
 IMG.propTypes = {
   src: string,
   children: node,
-  config: shape({ className: string, src: string }),
+  // config: shape({ className: string, src: string }),
 };
 
-IMG.defaultProps = { config: IMAGE };
+IMG.defaultProps = { ...IMAGE };
 
 export default IMG;

@@ -3,7 +3,7 @@ import CONF from './src/constants';
 import task from './task';
 import Quotes from './src/components/Quotes';
 import Image from './src/components/Image';
-import Title from './src/components/Title';
+import Quote from './src/components/Title';
 
 const Tribute = ({
   config,
@@ -11,7 +11,7 @@ const Tribute = ({
 }) => {
   const { TITLE, IMAGE, QUOTES } = config;
   return (<div {...props}>
-    <Title config={TITLE} />
+    <Quote {...TITLE} />
     <Image config={IMAGE} />
     <Quotes config={QUOTES} />
   </div>);
@@ -45,5 +45,5 @@ export {
   CONF as config,
   Quotes,
   Image,
-  Title,
+  Quote,
 };
