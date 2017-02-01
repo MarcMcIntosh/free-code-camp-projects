@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './src/store';
 import Header from './src/components/Header';
 import Board from './src/components/Board';
+import task from './task';
 
 class TicTacToe extends Component {
   constructor(props) {
@@ -23,4 +24,4 @@ TicTacToe.propTypes = {
 
 
 export default TicTacToe;
-export { Header, Board };
+export { Header, Board, task };
