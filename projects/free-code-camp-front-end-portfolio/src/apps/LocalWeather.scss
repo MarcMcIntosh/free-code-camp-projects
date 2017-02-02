@@ -1,0 +1,13 @@
+.local-weather {
+  text-align: center;
+  padding: 6px;
+  &__icon {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 16px auto auto;
+  }
+  &__buttons {
+    margin: auto;
+  }
+}

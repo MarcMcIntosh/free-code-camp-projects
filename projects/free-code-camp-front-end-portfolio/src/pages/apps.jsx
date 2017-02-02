@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Container = ({ children }) => (
-  <div className="app__container">
+  <div className="app-container">
     {children}
   </div>
 );

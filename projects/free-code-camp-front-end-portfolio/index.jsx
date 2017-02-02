@@ -9,10 +9,13 @@ import {
 import Main from './src/pages/Main';
 import Gallary from './src/components/Gallary/index';
 import Container from './src/pages/apps';
+// Tribute
 import Tribute, { task as TributeTask } from './src/apps/Tribute';
+// Quote Machine
 import QuoteMachine, { task as QuoteMachineTask } from './src/apps/QuoteMachine';
+// Weather
+import LocalWeather, { task as LocalWeatherTask } from './src/apps/LocalWeather';
 
-// Local Weather
 // Wikipedia
 // Twitch
 // Calculator
@@ -21,7 +24,9 @@ import QuoteMachine, { task as QuoteMachineTask } from './src/apps/QuoteMachine'
 // Simon
 
 import TributePreview from './src/assets/tribute.png';
-import PlaceHolder from './src/assets/quote.png';
+import QuoteMachinePreview from './src/assets/quote.png';
+import LocalWeatherPreview from './src/assets/local-weather.png';
+import PlaceHolder from './src/assets/placeholder.png';
 
 const apps = [
   {
@@ -35,8 +40,15 @@ const apps = [
     name: 'Random Quote Machine',
     description: 'Free Code Camp Project',
     path: '/apps/quote-machine',
-    preview: PlaceHolder,
+    preview: QuoteMachinePreview,
     info: QuoteMachineTask,
+  },
+  {
+    name: 'Local Weather',
+    description: 'Free Code Camp Propject',
+    path: '/apps/local-weather',
+    preview: LocalWeatherPreview,
+    info: LocalWeatherTask,
   },
 ];
 const Apps = () => (<Gallary apps={apps} />);
@@ -50,33 +62,10 @@ const Routes = () => (
         <Redirect from="apps" to="/" />
         <Route path="tribute" component={Tribute} />
         <Route path="quote-machine" component={QuoteMachine} />
+        <Route path="local-weather" component={LocalWeather} />
       </Route>
     </Route>
   </Router>
 );
-
-/*
-import { Router, Link, Route, browserHistory } from 'react-router';
-import Gallary from './src/components/Gallary/index';
-import Tribute from './src/apps/Tribute';
-import TestRoute from './src/components/TestRoute';
-
-const App = () => (
-  <div>
-    <Apps />
-    <Link to="/tribute">Tribute</Link>
-    <Link to="/test">Test Route</Link>
-    <Tribute />
-  </div>
-);
-
-const Routes = () => (
-  <Router history={browserHistory}>
-    <Route path="/" component={App} />
-    <Route path="/tribute" component={Tribute} />
-    <Route path="/test" component={TestRoute} />
-  </Router>
-);
-*/
 
 export default Routes;
