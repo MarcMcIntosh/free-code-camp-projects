@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleTemperature } from '../actions';
-
+import Button from './Button';
+/*
 const TempControl = (props) => {
   const { classed, degrees, celsius, fahrenheit } = props;
   const temp = (degrees === 'F') ? fahrenheit : celsius;
@@ -14,13 +15,23 @@ const TempControl = (props) => {
     }}
   >{temp}&deg;{degrees}</button>);
 };
+*/
+
+const TempControl = ({
+  degrees,
+  celsius,
+  fahrenheit,
+  ...props
+}) => (<Button value={degrees} {...props}>
+  {(degrees === 'F') ? fahrenheit : celsius}&deg;{degrees}
+</Button>);
 
 TempControl.propTypes = {
-  classed: PropTypes.string,
+  // classed: PropTypes.string,
   celsius: PropTypes.number,
   fahrenheit: PropTypes.number,
   degrees: PropTypes.string,
-  handleClick: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -29,7 +40,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: degrees => dispatch(toggleTemperature(degrees)),
+  onClick: event => dispatch(toggleTemperature(event.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TempControl);

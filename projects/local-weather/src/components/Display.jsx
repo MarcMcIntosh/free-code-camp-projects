@@ -9,45 +9,27 @@ class Display extends Component {
     }
   }
   render() {
-    const { error, classed, weather, isPermitting, isLoading } = this.props;
-    if (isPermitting || isLoading) {
-      return (<div className={`${classed} waiting`}>...Waiting</div>);
-    } else if (error) {
-      return (<div className={`${classed} error`}>Error: {error} :( </div>);
-    }
+    const { error, weather, className } = this.props;
     return (
-      <div className={classed}>{weather}</div>
+      <div className={className}>
+        {(error) ? (<div className="error">Error: {error} :( </div>) : null}
+        {weather}
+      </div>
     );
   }
 }
 
 Display.propTypes = {
-  isLoading: PropTypes.bool,
   hasCoords: PropTypes.bool,
-  classed: PropTypes.string,
+  className: PropTypes.string,
   error: PropTypes.string,
   weather: PropTypes.string,
   getWeather: PropTypes.func,
-  isPermitting: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
-  const {
-    isFetching,
-    isPermitting,
-    hasCoords,
-    error,
-    icon,
-    weather,
-  } = state;
-  return {
-    isFetching,
-    isPermitting,
-    hasCoords,
-    error,
-    icon,
-    weather,
-  };
+  const { hasCoords, error, weather } = state;
+  return { hasCoords, error, weather };
 };
 
 const mapDispatchToProps = dispatch => ({

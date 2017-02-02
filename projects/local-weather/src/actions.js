@@ -9,7 +9,10 @@ export const CLIENT_ERROR = 'CLIENT_ERROR';
 export const CLIENT_COORDS = 'CLIENT_COORDS';
 export const REQUEST_COORDS = 'REQUEST_COORDS';
 export const TOGGLE_TEMP = 'TOGGLE_TEMP';
-
+export const REQUEST_ICON = 'REQUEST_ICON';
+export const ICON_BLOB = 'ICON_BLOB';
+export const ICON_ERROR = 'ICON_ERROR';
+export const HAS_ICON = 'HAS_ICON';
 
 export function requestWeather() {
   return { type: REQUEST_WEATHER };
@@ -58,6 +61,7 @@ export function toggleTemperature(curr) {
   return dispatch => dispatch(setTempDisplay(nxt));
 }
 
+
 function getCoords(cb) {
   if ('geolocation' in navigator) {
     return navigator.geolocation.getCurrentPosition(
@@ -94,5 +98,21 @@ export function getWeather() {
         }).then(json => dispatch(receiveWeather(json)));
       }
     });
+  };
+}
+
+const requestIcon = () => ({ type: REQUEST_ICON });
+const iconBlob = payload => ({ type: ICON_BLOB, payload });
+const iconError = payload => ({ type: ICON_ERROR, payload });
+export const iconHasLoaded = () => dispatch => dispatch({ type: HAS_ICON });
+export function getIcon(addr) {
+  return (dispatch) => {
+    dispatch(requestIcon());
+    fetch(addr).then((res) => {
+      if (res.ok) return res.blob();
+      throw new Error(res.statusText);
+    })
+    .then(blob => dispatch(iconBlob(blob)))
+    .catch(error => dispatch(iconError(error)));
   };
 }
