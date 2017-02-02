@@ -13,24 +13,16 @@ class Container extends Component {
     this.store = store;
   }
   render() {
+    const { children, ...props } = this.props;
     return (
       <Provider store={this.store}>
-        <div className={this.props.classed}>
-          {this.props.children}
-        </div>
+        <div {...props}>{children}</div>
       </Provider>
     );
   }
 }
 
-Container.propTypes = {
-  classed: PropTypes.string,
-  children: PropTypes.node,
-};
-
-Container.defaultProps = {
-  classed: 'app__container',
-};
+Container.propTypes = { children: PropTypes.node };
 
 export default Container;
 export { Display, Icon, TempControl, Details, task };
