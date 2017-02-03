@@ -26,6 +26,7 @@ import WikipediaViewer, { task as WikipediaViewerTask } from './src/apps/Wikiped
 import TributePreview from './src/assets/tribute.png';
 import QuoteMachinePreview from './src/assets/quote.png';
 import LocalWeatherPreview from './src/assets/local-weather.png';
+import WikipediaViewerPreview from './src/assets/wikipedia.png';
 import PlaceHolder from './src/assets/placeholder.png';
 
 const apps = [
@@ -54,7 +55,7 @@ const apps = [
     name: 'Wikipedia Viewer',
     description: 'Free Code Camp Project',
     path: '/apps/wikipedia-viewer',
-    preview: PlaceHolder,
+    preview: WikipediaViewerPreview,
     info: WikipediaViewerTask,
   },
 ];
