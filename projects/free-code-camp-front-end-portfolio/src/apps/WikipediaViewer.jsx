@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+// import SearchIcon from 'material-design-icons/actions/svg/production/ic_search_24px.svg';
 import Container, {
   RandomWiki,
   List,
@@ -33,9 +34,17 @@ AltListItem.propTypes = {
 };
 
 const WikipediaViewer = () => (
-  <Container>
-    <SearchBar />
-    <RandomWiki />
+  <Container className="wikipedia-viewer">
+    <SearchBar
+      className="mdc-textfield wikipedia-viewer__search-bar"
+      label="Search"
+      classnames={{
+        input: 'mdc-textfield__input wikipedia-viewer__search-bar--input',
+        label: 'mdc-textfield__label wikipedia-viewer__search-bar--label',
+        button: 'wikipedia-viewer__search-bar--button material-icons',
+      }}
+    />
+    <div><RandomWiki /></div>
     <List>
       <AltListItem />
     </List>

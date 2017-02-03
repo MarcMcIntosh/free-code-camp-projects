@@ -96,7 +96,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!postcss!sass'),
+        loader: ExtractTextPlugin.extract('css!postcss!resolve-url-loader!sass'),
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

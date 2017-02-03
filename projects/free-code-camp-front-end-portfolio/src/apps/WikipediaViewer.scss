@@ -1,0 +1,15 @@
+.wikipedia-viewer {
+  &__search-bar {
+    &--input {
+      // padding: 0px !important;
+    }
+    &--label {
+      // bottom: 0 !important;
+    }
+    &--button {
+      padding: 1px;
+      background-color: none;
+      vertical-align: bottom;
+    }
+  }
+}
