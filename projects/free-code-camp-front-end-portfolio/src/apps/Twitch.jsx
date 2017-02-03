@@ -7,7 +7,7 @@ import Container, {
 } from '../../lib/twitch';
 
 const Twitch = () => (
-  <Container>
+  <Container className="twitch-tv">
     <Header />
     <UserList />
   </Container>

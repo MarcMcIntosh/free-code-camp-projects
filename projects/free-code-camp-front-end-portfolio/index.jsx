@@ -18,10 +18,15 @@ import LocalWeather, { task as LocalWeatherTask } from './src/apps/LocalWeather'
 // Wikipedia
 import WikipediaViewer, { task as WikipediaViewerTask } from './src/apps/WikipediaViewer';
 // Twitch
+import Twitch, { task as TwitchTask } from './src/apps/Twitch';
 // Calculator
+import Calculator, { task as CalculatorTask } from './src/apps/Calculator';
 // Pomodoro
+import Pomodoro, { task as PomodoroTask } from './src/apps/Pomodoro';
 // Tic-Tac-Toe
+import TicTacToe, { task as TicTacToeTask } from './src/apps/TicTacToe';
 // Simon
+import Simon, { task as SimonTask } from './src/apps/Simon';
 
 import TributePreview from './src/assets/tribute.png';
 import QuoteMachinePreview from './src/assets/quote.png';
@@ -58,6 +63,41 @@ const apps = [
     preview: WikipediaViewerPreview,
     info: WikipediaViewerTask,
   },
+  {
+    name: 'Twitch TV stream checker',
+    description: 'Free Code Camp Propject',
+    path: '/apps/twitch-tv',
+    preview: PlaceHolder,
+    info: TwitchTask,
+  },
+  {
+    name: 'Calculator',
+    description: 'Free Code Camp Project',
+    path: '/apps/calculator',
+    preview: PlaceHolder,
+    info: CalculatorTask,
+  },
+  {
+    name: 'Pomodoro Clock',
+    description: 'Free Code Camp Propject',
+    path: '/apps/pomodoro',
+    preview: PlaceHolder,
+    info: PomodoroTask,
+  },
+  {
+    name: 'Tic Tac Toe',
+    description: 'Free Code Camp Project',
+    path: '/apps/tic-tac-toe',
+    preview: PlaceHolder,
+    info: TicTacToeTask,
+  },
+  {
+    name: 'Simon Says',
+    description: 'Free Code Camp Project',
+    path: '/apps/simon',
+    preview: PlaceHolder,
+    info: SimonTask,
+  },
 ];
 const Apps = () => (<Gallary apps={apps} />);
 
@@ -72,6 +112,11 @@ const Routes = () => (
         <Route path="quote-machine" component={QuoteMachine} />
         <Route path="local-weather" component={LocalWeather} />
         <Route path="wikipedia-viewer" component={WikipediaViewer} />
+        <Route path="twitch-tv" component={Twitch} />
+        <Route path="calculator" component={Calculator} />
+        <Route path="pomodoro" component={Pomodoro} />
+        <Route path="tic-tac-toe" component={TicTacToe} />
+        <Route path="simon" component={Simon} />
       </Route>
     </Route>
   </Router>
