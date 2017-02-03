@@ -4,7 +4,7 @@ module.exports = {
   title: 'Use the Twitchtv JSON API',
   objective: 'Build a CodePen.io app that is functionally similar to this:',
   example: 'https://codepen.io/FreeCodeCamp/full/Myvqmo/.',
-  stroies: [
+  stories: [
     'I can see whether Free Code Camp is currently streaming on Twitch.tv.',
     'I can click the status output and be sent directly to the Free Code Camp\'s Twitch.tv channel.',
     'if a Twitch user is currently streaming, I can see additional details about what they are streaming.',
