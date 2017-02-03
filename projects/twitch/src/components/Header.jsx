@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'redux';
+import { connect } from 'react-redux';
 import { toggleDisplay } from '../actions';
 import { Filter } from './Filter';
 
