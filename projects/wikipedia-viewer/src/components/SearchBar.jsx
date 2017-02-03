@@ -2,17 +2,23 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { changeTerm, searchWikipedia } from '../actions';
 
-const SearchBar = (props) => {
-  const { term, handleChange, handleSubmit, ...args } = props;
-  return (<form
+const SearchBar = ({
+  label,
+  classnames,
+  term,
+  handleChange,
+  handleSubmit,
+  children,
+  ...props
+}) => (
+  <form
+    {...props}
     onSubmit={(event) => {
-      event.preventDefault();
-      return handleSubmit(term);
-    }} {...args}
+      event.preventDefault(); return handleSubmit(term);
+    }}
   >
-    <label htmlFor="SearchBar">Search</label>
-
     <input
+      className={classnames.input}
       name="SearchBar"
       type="text"
       tabIndex="0"
@@ -23,18 +29,44 @@ const SearchBar = (props) => {
       }}
     />
 
-    <input tabIndex="0" type="submit" value="Submit" />
+    {(label && !term) ? (
+      <label
+        className={classnames.label} htmlFor="SearchBar"
+      >{label}</label>) : null }
 
-  </form>);
-};
+    <button className={classnames.button} tabIndex="0" type="submit" disabled={!(term)} value="Submit">{children || 'search'}</button>
+
+  </form>
+);
+
+const {
+  string,
+  func,
+  number,
+  oneOfType,
+  shape,
+  node,
+} = PropTypes;
 
 SearchBar.propTypes = {
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  term: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  label: string,
+  children: node,
+  handleChange: func,
+  handleSubmit: func,
+  term: oneOfType([string, number]),
+  classnames: shape({
+    input: string,
+    button: string,
+    label: string,
+  }),
+};
+
+SearchBar.defaultProps = {
+  classnames: {
+    button: '',
+    label: '',
+    input: '',
+  },
 };
 
 const mapStateToProps = state => ({

@@ -41,7 +41,17 @@ export function searchWikipedia(term) {
     } return dispatch(receiveError(res.statusText));
   }).then((json) => {
     const pages = json.query.pages;
-    const results = Object.keys(pages).map(d => pages[d]);
+    const results = Object.keys(pages).map(d => pages[d]).sort((a, b) => {
+      const at = a.title.search(term);
+      const bt = b.title.search(term);
+      const ae = a.extract.search(term);
+      const be = b.extract.search(term);
+      if (at > bt) return -1;
+      if (at < bt) return 1;
+      if (ae > be) return -1;
+      if (ae < be) return 1;
+      return 0;
+    });
     return dispatch(receiveWikis(results));
   });
 }
