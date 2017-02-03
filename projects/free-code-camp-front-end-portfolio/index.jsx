@@ -15,8 +15,8 @@ import Tribute, { task as TributeTask } from './src/apps/Tribute';
 import QuoteMachine, { task as QuoteMachineTask } from './src/apps/QuoteMachine';
 // Weather
 import LocalWeather, { task as LocalWeatherTask } from './src/apps/LocalWeather';
-
 // Wikipedia
+import WikipediaViewer, { task as WikipediaViewerTask } from './src/apps/WikipediaViewer';
 // Twitch
 // Calculator
 // Pomodoro
@@ -50,6 +50,13 @@ const apps = [
     preview: LocalWeatherPreview,
     info: LocalWeatherTask,
   },
+  {
+    name: 'Wikipedia Viewer',
+    description: 'Free Code Camp Project',
+    path: '/apps/wikipedia-viewer',
+    preview: PlaceHolder,
+    info: WikipediaViewerTask,
+  },
 ];
 const Apps = () => (<Gallary apps={apps} />);
 
@@ -63,6 +70,7 @@ const Routes = () => (
         <Route path="tribute" component={Tribute} />
         <Route path="quote-machine" component={QuoteMachine} />
         <Route path="local-weather" component={LocalWeather} />
+        <Route path="wikipedia-viewer" component={WikipediaViewer} />
       </Route>
     </Route>
   </Router>
