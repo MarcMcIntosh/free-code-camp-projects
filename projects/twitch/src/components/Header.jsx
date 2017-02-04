@@ -13,41 +13,31 @@ class Header extends Component {
     this.props.setFilter(event.target.value);
   }
   render() {
-    const {
-      display,
-      filters,
-      children,
-      className,
-    } = this.props;
-    return (<div className={className}>
-      {children}
-      {filters.map((f, index) => (<Button
-        className={(f === display) ? 'active' : 'inactive'}
+    const { display, filters, className, classnames } = this.props;
+
+    return (<div className={className}>{
+      filters.map((f, index) => (<Button
+        className={classnames.button}
         key={index}
         value={f}
-        onClick={this.handleClick}
-      >{f}</Button>))}
-    </div>);
-    /*
-    return (<div {...rest}>{children}{
-      filters.map(d => (<Filter
-        key={d} display={d}
-        className={(d === display) ? 'active' : 'inactive'}
-        onClick={(event) => {
-          event.preventDefault();
-          return this.handleClick(d);
-        }}
-      />))
-    }</div>);*/
+        disabled={(display === f)} onClick={this.handleClick}
+      >{f}</Button>))
+    }</div>);
   }
 }
 
+const { array, func, string, shape, node } = PropTypes;
 Header.propTypes = {
-  filters: PropTypes.array,
-  setFilter: PropTypes.func,
-  display: PropTypes.string,
-  children: PropTypes.node,
-  className: PropTypes.string,
+  filters: array,
+  setFilter: func,
+  display: string,
+  children: node,
+  className: string,
+  classnames: shape({ button: string }),
+};
+
+Header.defaultProps = {
+  classnames: { button: 'btn' }
 };
 
 const mapStateToProps = state => ({
