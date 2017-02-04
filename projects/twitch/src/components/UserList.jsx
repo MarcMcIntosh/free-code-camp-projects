@@ -42,16 +42,19 @@ class UserList extends Component {
       this.applyFilter([].concat(list)).map((user) => {
         const { logo, name, game, error, message, status, url } = user;
         return (<div key={name} className={classnames.item}>
-          <section className={classnames.header}>
-            <h1 className={classnames.name}>{name}</h1>
-            <h2 className={classnames.game}>{game || error || 'Off-line'}</h2>
+          <section className={classnames.main}>
+            <section className={classnames.header}>
+              <h1 className={classnames.name}>{name}</h1>
+              <h2 className={classnames.game}>{game || error || 'Off-line'}</h2>
+            </section>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <img src={logo} role="presentation" className={classnames.image} />
+            </a>
           </section>
+
           <section className={classnames.status}>
             {status || message}
           </section>
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            <img src={logo} role="presentation" className={classnames.image} />
-          </a>
         </div>);
       })
     }</div>);
@@ -72,6 +75,7 @@ UserList.propTypes = {
     header: string,
     name: string,
     status: string,
+    main: string,
   }),
 };
 
@@ -82,6 +86,7 @@ UserList.defaultProps = { classnames: {
   header: '',
   name: '',
   status: '',
+  main: '',
 } };
 
 const mapStateToProps = state => ({
