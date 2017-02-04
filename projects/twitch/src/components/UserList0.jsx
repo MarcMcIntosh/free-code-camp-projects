@@ -40,19 +40,23 @@ class UserList extends Component {
     const list = [].concat(users);
     return (<div className={className}>{
       this.applyFilter([].concat(list)).map((user) => {
-        const { logo, name, game, error, message, status, url } = user;
-        return (<div key={name} className={classnames.item}>
-          <section className={classnames.header}>
-            <h1 className={classnames.name}>{name}</h1>
-            <h2 className={classnames.game}>{game || error || 'Off-line'}</h2>
-          </section>
-          <section className={classnames.status}>
-            {status || message}
-          </section>
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            <img src={logo} role="presentation" className={classnames.image} />
-          </a>
-        </div>);
+        const { logo, name, game, error, streaming, message, status, url } = user;
+        return (<div className={classnames.item}>{(
+          error
+        ) ? (
+          <UserError
+            key={name} name={name}
+            className={classnames.error}
+            logo={logo} message={message}
+          />
+        ) : (
+          <User
+            key={name} name={user.display_name}
+            logo={logo}
+            className={(streaming) ? (classnames.online) : (classnames.offline)}
+            game={game} url={url} status={status}
+          />
+       )}</div>);
       })
     }</div>);
   }
@@ -66,23 +70,14 @@ UserList.propTypes = {
   USER_NAMES: array,
   className: string,
   classnames: shape({
+    error: string,
+    online: string,
+    offline: string,
     image: string,
+    imageTitle: string,
     item: string,
-    game: string,
-    header: string,
-    name: string,
-    status: string,
   }),
 };
-
-UserList.defaultProps = { classnames: {
-  image: '',
-  item: '',
-  game: '',
-  header: '',
-  name: '',
-  status: '',
-} };
 
 const mapStateToProps = state => ({
   users: state.users,

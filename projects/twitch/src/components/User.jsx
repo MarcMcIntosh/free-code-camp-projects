@@ -1,21 +1,41 @@
 import React, { PropTypes } from 'react';
-import UserImg from './UserImg';
 
-const User = (props) => {
-  const { name, logo, game, status, url, ...rest } = props;
-  return (<div {...rest}>
-    <UserImg url={url} name={name} logo={logo} />
-    {(game) ? (<h3>{game}</h3>) : (<h4>offline</h4>)}
-    <p>{status}</p>
-  </div>);
-};
+const User = ({
+  name,
+  logo,
+  game,
+  status,
+  url,
+  className,
+  classnames,
+}) => (<div className={className} >
+  <section className={classnames.header}>
+    <h1 className={classnames.name}>{name}</h1>
+    <h2 className={classnames.game}>{game || 'Off-line'}</h2>
+  </section>
+  <section className={classnames.status}>
+    {status}
+  </section>
+  <a href={url} target="_blank" rel="noopener noreferrer">
+    <img src={logo} role="presentation" className={classnames.image} />
+  </a>
+</div>);
 
+const { string, shape } = PropTypes;
 User.propTypes = {
-  name: PropTypes.string,
-  logo: PropTypes.string,
-  game: PropTypes.string,
-  url: PropTypes.string,
-  status: PropTypes.string,
+  name: string,
+  logo: string,
+  game: string,
+  url: string,
+  status: string,
+  className: string,
+  classnames: shape({
+    image: string,
+    game: string,
+    header: string,
+    name: string,
+    status: string,
+  }),
 };
 
 
