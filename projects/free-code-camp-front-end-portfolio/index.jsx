@@ -113,10 +113,12 @@ const Routes = () => (
         <Route path="local-weather" component={LocalWeather} />
         <Route path="wikipedia-viewer" component={WikipediaViewer} />
         <Route path="twitch-tv" component={Twitch} />
+        {/*
         <Route path="calculator" component={Calculator} />
         <Route path="pomodoro" component={Pomodoro} />
         <Route path="tic-tac-toe" component={TicTacToe} />
         <Route path="simon" component={Simon} />
+        */}
       </Route>
     </Route>
   </Router>
