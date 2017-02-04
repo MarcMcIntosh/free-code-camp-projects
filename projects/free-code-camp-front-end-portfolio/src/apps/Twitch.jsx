@@ -25,7 +25,8 @@ const Twitch = () => (<Container className="twitch-tv">
   <UserList
     className="twitch-tv__users"
     classnames={{
-      item: 'mdc_card',
+      item: 'mdc-card twitch-tv__users--item',
+      main: 'mdc-card__horizontal-block',
       header: 'mdc-card__primary',
       name: 'mdc-card__title mdc-card__title--large',
       game: 'mdc-card__subtitle',

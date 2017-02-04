@@ -1,3 +1,18 @@
 .twitch-tv {
-  
+  &__users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    // flex-direction: row;
+    // align-content: flex-start;
+    align-content: space-around;
+
+    &--item {
+      max-width: 380px;
+      margin: 6px !important;
+      // flex-grow: 1;
+      // margin: 6px;
+    }
+  }
 }
