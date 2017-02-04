@@ -22,7 +22,17 @@ const Twitch = () => (<Container className="twitch-tv">
       />
     </div>
   </div>
-  <UserList />
+  <UserList
+    className="twitch-tv__users"
+    classnames={{
+      item: 'mdc_card',
+      header: 'mdc-card__primary',
+      name: 'mdc-card__title mdc-card__title--large',
+      game: 'mdc-card__subtitle',
+      status: 'mdc-card__supporting-text',
+      image: 'mdc-card__media-item',
+    }}
+  />
 </Container>);
 
 export default Twitch;
