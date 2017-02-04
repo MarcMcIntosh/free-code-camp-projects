@@ -1,34 +1,19 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleDisplay } from '../actions';
-import Button from './Button';
-
+import Filter from './Filter';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(event) {
-    this.props.setFilter(event.target.value);
+  handleClick(d) {
+    this.props.setFilter(d);
   }
   render() {
-    const {
-      display,
-      filters,
-      children,
-      className,
-    } = this.props;
-    return (<div className={className}>
-      {children}
-      {filters.map((f, index) => (<Button
-        className={(f === display) ? 'active' : 'inactive'}
-        key={index}
-        value={f}
-        onClick={this.handleClick}
-      >{f}</Button>))}
-    </div>);
-    /*
+    const { display, filters, children, ...rest } = this.props;
+    delete rest.setFilter;
     return (<div {...rest}>{children}{
       filters.map(d => (<Filter
         key={d} display={d}
@@ -38,7 +23,7 @@ class Header extends Component {
           return this.handleClick(d);
         }}
       />))
-    }</div>);*/
+    }</div>);
   }
 }
 
@@ -47,7 +32,6 @@ Header.propTypes = {
   setFilter: PropTypes.func,
   display: PropTypes.string,
   children: PropTypes.node,
-  className: PropTypes.string,
 };
 
 const mapStateToProps = state => ({

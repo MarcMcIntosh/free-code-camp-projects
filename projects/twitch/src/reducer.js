@@ -4,6 +4,7 @@ import {
   RECEIVE_ERROR,
   RECEIVE_USER,
   RECEIVE_STREAM,
+  TOGGLE_FILTER,
 } from './actions';
 
 export const DEFAULT_STATE = {
@@ -37,6 +38,9 @@ export default function reducer(state = DEFAULT_STATE, action) {
       });
       return { ...state, users };
     }
+
+    case TOGGLE_FILTER: return { ...state, display: action.payload };
+
     default: return state;
   }
 }

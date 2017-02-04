@@ -27,10 +27,11 @@ export function receiveStream(payload) {
 
 export function toggleDisplay(term) {
   return (dispatch) => {
-    if (term === ('all' || 'online' || 'offline')) {
-      dispatch(setDisplayTo(term));
-    } else {
-      dispatch(receiveError(`${term} is not a filter`));
+    switch (term) {
+      case 'all':
+      case 'online':
+      case 'offline': dispatch(setDisplayTo(term)); break;
+      default: dispatch(receiveError(`${term} is not a filter`));
     }
   };
 }
