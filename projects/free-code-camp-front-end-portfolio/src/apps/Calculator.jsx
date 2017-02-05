@@ -8,10 +8,10 @@ import Container, {
 import './Calculator.scss';
 
 const Calculator = () => (
-  <Container>
+  <Container className="calculator">
     <ErrorMessage />
-    <Display />
-    <Buttons />
+    <Display className="calculator__display" />
+    <Buttons className="calculator__buttons" />
   </Container>
 );
 
