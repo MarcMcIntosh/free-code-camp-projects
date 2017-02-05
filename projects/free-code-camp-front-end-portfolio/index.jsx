@@ -32,6 +32,8 @@ import TributePreview from './src/assets/tribute.png';
 import QuoteMachinePreview from './src/assets/quote.png';
 import LocalWeatherPreview from './src/assets/local-weather.png';
 import WikipediaViewerPreview from './src/assets/wikipedia.png';
+import TwitchPreview from './src/assets/twitch.png';
+import CalculatorPreview from './src/assets/calculator.png';
 import PlaceHolder from './src/assets/placeholder.png';
 
 const apps = [
@@ -67,14 +69,14 @@ const apps = [
     name: 'Twitch TV stream checker',
     description: 'Free Code Camp Propject',
     path: '/apps/twitch-tv',
-    preview: PlaceHolder,
+    preview: TwitchPreview,
     info: TwitchTask,
   },
   {
     name: 'Calculator',
     description: 'Free Code Camp Project',
     path: '/apps/calculator',
-    preview: PlaceHolder,
+    preview: CalculatorPreview,
     info: CalculatorTask,
   },
   {
