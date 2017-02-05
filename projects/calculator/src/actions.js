@@ -51,7 +51,9 @@ export function handleUserInput(d) {
     } else if (d === '-' && last !== '-') {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
-    } else if (d === 'ans' && /\d/.test(answer) && display !== answer) {
+    } else if (d === 'ans' && answer === null) {
+      return dispatch(setDisplay(display));
+    } else if (d === 'ans' && /\d/.test(answer)) {
       const nxt = append(display, answer);
       return dispatch(setDisplay(nxt));
     } else if (d !== answer && d !== last && /\d/.test(last)) {
