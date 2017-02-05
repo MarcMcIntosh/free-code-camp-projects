@@ -34,7 +34,7 @@ class Buttons extends Component {
         <Td><Button value="-" className="minus" onClick={this.handleClick}>&minus;</Button></Td>
       </Tr><Tr>
         <Td><Button value={3} className="number" onClick={this.handleClick}>3</Button></Td>
-        <Td><Button value={2} className="numner" onClick={this.handleClick}>2</Button></Td>
+        <Td><Button value={2} className="number" onClick={this.handleClick}>2</Button></Td>
         <Td><Button value={1} className="number" onClick={this.handleClick}>1</Button></Td>
         <Td><Button value="+" className="plus" onClick={this.handleClick}>&#43;</Button></Td>
       </Tr><Tr>
