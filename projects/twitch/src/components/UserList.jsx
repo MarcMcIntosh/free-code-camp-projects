@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getUserData } from '../actions';
-import UserError from './UserError';
-import User from './User';
 
 class UserList extends Component {
   constructor(props) {
@@ -100,8 +98,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);
-export {
-  UserError,
-  User as UserOnline,
-  User as UserOffLine,
-};

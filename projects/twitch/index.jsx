@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import UserList, { UserError } from './src/components/UserList';
+import UserList from './src/components/UserList';
 import Header from './src/components/Header';
 import task from './task';
 
@@ -23,4 +23,4 @@ App.propTypes = {
 };
 
 export default App;
-export { UserList, UserError, Header, task };
+export { UserList, Header, task };
