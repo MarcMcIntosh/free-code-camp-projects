@@ -26,18 +26,17 @@ class Header extends Component {
   }
 }
 
-const { array, func, string, shape, node } = PropTypes;
+const { array, func, string, shape } = PropTypes;
 Header.propTypes = {
   filters: array,
   setFilter: func,
   display: string,
-  children: node,
   className: string,
   classnames: shape({ button: string }),
 };
 
 Header.defaultProps = {
-  classnames: { button: 'btn' }
+  classnames: { button: 'btn' },
 };
 
 const mapStateToProps = state => ({
