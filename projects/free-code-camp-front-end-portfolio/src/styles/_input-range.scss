@@ -1,0 +1,44 @@
+//http://www.quirksmode.org/blog/archives/2015/11/styling_and_scr.html
+
+input[type=range] {
+  -webkit-appearance: none;
+  height: 35px; /* pick your own value */
+  padding: 0;
+	/* your slider styles */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    /* thumb styles */
+  }
+  &::-moz-range-thumb {
+    /* thumb styles */
+  }
+  &::-ms-thumb {
+	/* thumb styles */
+	/* may require different margins */
+  }
+
+  &::-webkit-slider-runnable-track {
+    /* track styles */
+  }
+
+  &::-moz-range-track {
+	/* track styles */
+  }
+
+  &::-ms-track {
+    border-color: transparent;
+    color: transparent;
+	/* track styles */
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
+  &::-ms-fill-lower {
+    /* lower track fill */
+  }
+  &::-ms-fill-upper {
+    /* upper track fill */
+  }
+}
