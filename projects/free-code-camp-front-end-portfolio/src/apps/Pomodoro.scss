@@ -1,4 +1,36 @@
-@import "../styles/_inputrange.scss";
+@import "../../lib/mdc-range-slider/mdc-range-slider.scss";
+
 .pomodoro {
-  
+  text-align: center;
+  max-width: 100%;
+  margin: auto;
+
+  .mdc-range-slider {
+    display: block;
+    margin: 6px auto;
+  }
+  &__clock {
+    text-align: center;
+  }
+  &__button {
+    background: none;
+    border-radius: 48px;
+    border: 1px solid transparent;
+    padding: 0;
+    margin: auto;
+    margin-bottom: 2px;
+    &:focus { outline: 0; }
+    &:disabled { display: none; }
+    &:active { border: 1px solid #fff; }
+  }
+  &__menu {
+    text-align: center;
+    margin: auto;
+    padding: 6px;
+  }
+  &__slider {
+    margin: auto;
+    margin-bottom: 6px;
+    padding: 4px;
+  }
 }
