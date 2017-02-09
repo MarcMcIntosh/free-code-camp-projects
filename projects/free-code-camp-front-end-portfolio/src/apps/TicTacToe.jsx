@@ -7,7 +7,7 @@ import Container, {
 import './TicTacToe.scss';
 
 const TicTacToe = () => (
-  <Container>
+  <Container className="tic-tac-toe">
     <Header className="header" />
     <Board />
   </Container>
