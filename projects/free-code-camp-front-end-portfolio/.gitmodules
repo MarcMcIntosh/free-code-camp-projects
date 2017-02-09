@@ -28,3 +28,6 @@
 [submodule "lib/wikipedia-viewer"]
 	path = lib/wikipedia-viewer
 	url = ssh://marcmcintosh.ninja:/srv/git/free-code-camp-front-end-wikipedia-viewer
+[submodule "mdc-range-slider"]
+	path = mdc-range-slider
+	url = https://github.com/MarcMcIntosh/mdc-range-slider.git

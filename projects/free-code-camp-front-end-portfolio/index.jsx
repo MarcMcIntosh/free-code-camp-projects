@@ -34,6 +34,7 @@ import LocalWeatherPreview from './src/assets/local-weather.png';
 import WikipediaViewerPreview from './src/assets/wikipedia.png';
 import TwitchPreview from './src/assets/twitch.png';
 import CalculatorPreview from './src/assets/calculator.png';
+import PomodoroPreview from './src/assets/pomodoro.png';
 import PlaceHolder from './src/assets/placeholder.png';
 
 const apps = [
@@ -83,7 +84,7 @@ const apps = [
     name: 'Pomodoro Clock',
     description: 'Free Code Camp Propject',
     path: '/apps/pomodoro',
-    preview: PlaceHolder,
+    preview: PomodoroPreview,
     info: PomodoroTask,
   },
   {
@@ -117,8 +118,8 @@ const Routes = () => (
         <Route path="twitch-tv" component={Twitch} />
         <Route path="calculator" component={Calculator} />
         <Route path="pomodoro" component={Pomodoro} />
-        {/*
         <Route path="tic-tac-toe" component={TicTacToe} />
+        {/*
         <Route path="simon" component={Simon} />
         */}
       </Route>
