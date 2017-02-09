@@ -1,0 +1,28 @@
+@import "@material/elevation/mixins";
+@import "./variables";
+
+@mixin mdc-range-slider-thumb() {
+  @include mdc-elevation(2);
+  width: $mdc-range-slider-thumb-width;
+  height: $mdc-range-slider-thumb-height;
+  border: transparent;
+  border-width: $mdc-range-slider-thumb-boarder-width;
+  border-radius: $mdc-range-slider-thumb-radius;
+}
+
+@mixin mdc-range-slider-thumb-focus() {
+  @include mdc-elevation(4);
+  width: $mdc-range-slider-thumb-focus-width;
+  height: $mdc-range-slider-thumb-focus-height;
+  border-width: $mdc-range-slider-thumb-focus-border-width;
+  border-style: solid;
+}
+
+@mixin mdc-range-slider-track() {
+  @include mdc-elevation-transition($mdc-range-slider-track-transition-time, ease);
+  width: $mdc-range-slider-track-width;
+  height: $mdc-range-slider-track-height;
+  border: transparent;
+  border-radius: $mdc-range-slider-track-border-radius;
+  cursor: pointer;
+}

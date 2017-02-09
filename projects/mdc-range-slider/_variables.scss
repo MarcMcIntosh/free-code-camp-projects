@@ -1,0 +1,22 @@
+/* Tracker */
+$mdc-range-slider-track-width: 100%;
+$mdc-range-slider-track-height: 4px;
+$mdc-range-slider-track-transition-time: 128ms;
+$mdc-range-slider-track-border-radius: $mdc-range-slider-track-height;
+
+/* Thumb */
+$mdc-range-slider-thumb-height: 16px;
+$mdc-range-slider-thumb-width: 16px;
+$mdc-range-slider-thumb-boarder-width: 1px;
+// Margin Top for webkit-slider-thumb
+$mdc-range-slider-thumb-margin-top: ($mdc-range-slider-track-height - $mdc-range-slider-thumb-height) / 2;
+
+/* Thumb focus */
+$mdc-range-slider-thumb-focus-height: $mdc-range-slider-thumb-height * 1.2;
+$mdc-range-slider-thumb-focus-width: $mdc-range-slider-thumb-width * 1.2;
+$mdc-range-slider-thumb-focus-border-width: ($mdc-range-slider-thumb-focus-height - $mdc-range-slider-thumb-height) * .5;
+$mdc-range-slider-thumb-focus-margin-top: ($mdc-range-slider-track-height - $mdc-range-slider-thumb-focus-height) / 2;
+
+$mdc-range-slider-thumb-radius: $mdc-range-slider-thumb-focus-height;
+
+$mdc-range-slider-input-height: $mdc-range-slider-thumb-focus-height;
