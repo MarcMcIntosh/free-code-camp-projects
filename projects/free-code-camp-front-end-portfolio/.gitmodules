@@ -31,3 +31,6 @@
 [submodule "mdc-range-slider"]
 	path = mdc-range-slider
 	url = https://github.com/MarcMcIntosh/mdc-range-slider.git
+[submodule "lib/mdc-range-slider"]
+	path = lib/mdc-range-slider
+	url = https://github.com/MarcMcIntosh/mdc-range-slider.git
