@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { onTakeTurn, onAiMove, onCheckBoard } from '../actions';
 import Constants from '../Constants';
-import Game from './Game';
+import Button from './Button';
 
 const { _, O, X } = Constants.PLAYER;
 
@@ -26,17 +26,15 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    // this.makeAiMove = this.makeAiMove.bind(this);
   }
 
-  /* Move this to did receive props  and check if board if full or if some-one have won*/
   componentWillReceiveProps(nextProps) {
-    const { turn, checkBoard, init, aiMove } = this.props;
+    const { turn, checkBoard, init, aiMove, ai } = this.props;
     if (!init && !nextProps.done && turn !== nextProps.turn) {
       checkBoard(nextProps.board);
     }
-    if (!nextProps.init && nextProps.ai === nextProps.turn) {
-      aiMove(nextProps.board, nextProps.ai);
+    if (!nextProps.init && ai === nextProps.turn) {
+      aiMove(nextProps.board, ai);
     }
   }
   handleClick(event) {
@@ -47,35 +45,46 @@ class Board extends Component {
   }
 
   render() {
-    const { board, player, done, turn, ...props } = this.props;
-    delete props.takeTurn;
-    delete props.ai;
-    delete props.init;
-    delete props.aiMove;
-    delete props.checkBoard;
-    return (<div {...props}>
-      <Game
-        className="board"
-        board={board}
-        player={player}
-        turn={turn}
-        done={done}
-        onClick={this.handleClick}
-      />
-    </div>);
+    const { className, board, player, done, turn, classnames } = this.props;
+    return (<div classNames={className}>{
+      board.map((d, i) => {
+        const cn = `${classnames.button} ${classnames[d]}`;
+        return (<Button
+          key={i}
+          value={d}
+          className={cn.trim()}
+          onClick={this.handleClick}
+          disabled={done || player !== turn || d === X || d === O}
+        />);
+      })
+    }</div>);
   }
 }
 
+const { string, array, oneOf, shape, func, bool } = PropTypes;
+
 Board.propTypes = {
-  board: PropTypes.array,
-  player: PropTypes.oneOf([_, O, X]),
-  ai: PropTypes.oneOf([_, O, X]),
-  turn: PropTypes.oneOf([_, O, X]),
-  takeTurn: PropTypes.func,
-  aiMove: PropTypes.func,
-  checkBoard: PropTypes.func,
-  init: PropTypes.bool,
-  done: PropTypes.bool,
+  className: string,
+  board: array,
+  player: oneOf([_, O, X]),
+  ai: oneOf([_, O, X]),
+  turn: oneOf([_, O, X]),
+  takeTurn: func,
+  aiMove: func,
+  checkBoard: func,
+  init: bool,
+  done: bool,
+  classnames: shape({
+    game: string,
+    button: string,
+    _: string,
+    X: string,
+    O: string,
+  }),
+};
+
+Board.defaultProps = {
+  classnames: { game: '', button: '', _, X, O },
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
