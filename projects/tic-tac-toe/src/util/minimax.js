@@ -11,6 +11,7 @@ module.exports = function minimax(board, player, depth, cpu, maxDepth = 9) {
   const winner = checkWinner(board);
   if (winner) return getScore(winner, ai, i);
   if (isFull(board)) return 0;
+
   /* If the board is empty */
   const spaces = freeSpaces(board);
   if (spaces.length === board.length) return Math.floor(Math.random() * board.length);

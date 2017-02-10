@@ -29,12 +29,12 @@ class Board extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { turn, checkBoard, init, aiMove, ai } = this.props;
+    const { turn, checkBoard, init, aiMove } = this.props;
     if (!init && !nextProps.done && turn !== nextProps.turn) {
       checkBoard(nextProps.board);
     }
-    if (!nextProps.init && ai === nextProps.turn) {
-      aiMove(nextProps.board, ai);
+    if (!nextProps.init && nextProps.ai === nextProps.turn) {
+      aiMove(nextProps.board, nextProps.ai);
     }
   }
   handleClick(event) {
@@ -46,13 +46,18 @@ class Board extends Component {
 
   render() {
     const { className, board, player, done, turn, classnames } = this.props;
-    return (<div classNames={className}>{
+    return (<div className={className}>{
       board.map((d, i) => {
-        const cn = `${classnames.button} ${classnames[d]}`;
+        let cn;
+        switch (d) {
+          case X : cn = `${classnames.button} ${classnames.X}`; break;
+          case O : cn = `${classnames.button} ${classnames.O}`; break;
+          default: cn = `${classnames.button} ${classnames._}`;
+        }
         return (<Button
           key={i}
-          value={d}
-          className={cn.trim()}
+          value={i}
+          className={cn}
           onClick={this.handleClick}
           disabled={done || player !== turn || d === X || d === O}
         />);
@@ -67,7 +72,6 @@ Board.propTypes = {
   className: string,
   board: array,
   player: oneOf([_, O, X]),
-  ai: oneOf([_, O, X]),
   turn: oneOf([_, O, X]),
   takeTurn: func,
   aiMove: func,
