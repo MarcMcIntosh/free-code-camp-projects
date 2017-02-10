@@ -36,6 +36,7 @@ import TwitchPreview from './src/assets/twitch.png';
 import CalculatorPreview from './src/assets/calculator.png';
 import PomodoroPreview from './src/assets/pomodoro.png';
 import PlaceHolder from './src/assets/placeholder.png';
+import TicTacToePreview from './src/assets/tic-tac-toe.png';
 
 const apps = [
   {
@@ -91,7 +92,7 @@ const apps = [
     name: 'Tic Tac Toe',
     description: 'Free Code Camp Project',
     path: '/apps/tic-tac-toe',
-    preview: PlaceHolder,
+    preview: TicTacToePreview,
     info: TicTacToeTask,
   },
   {

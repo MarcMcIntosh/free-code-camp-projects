@@ -8,8 +8,16 @@ import './TicTacToe.scss';
 
 const TicTacToe = () => (
   <Container className="tic-tac-toe">
-    <Header className="header" />
-    <Board />
+    <Header className="tic-tac-toe__header" />
+    <Board
+      className="tic-tac-toe__board"
+      classnames={{
+        button: 'cell',
+        _: '_',
+        X: 'X',
+        O: 'O',
+      }}
+    />
   </Container>
 );
 
