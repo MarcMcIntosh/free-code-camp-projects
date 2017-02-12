@@ -46,10 +46,10 @@ class Key extends Component {
   }
 
   render() {
-    const { color, frequency, tone, turn, playing } = this.props;
-    const { KEY, KEY_ACTIVE } = this.props.config;
+    const { color, frequency, tone, turn, playing, className } = this.props;
     return (<Button
-      className={KEY_ACTIVE(KEY, color, (frequency === tone && turn))}
+      className={((frequency === tone) && turn) ? `${className} ${color}--active` : `${className} ${color}`
+      }
       disabled={playing && !turn}
       onMouseDown={this.play}
       onMouseUp={this.stop}
@@ -60,6 +60,7 @@ class Key extends Component {
 const { SIN, SQU, SAW, TRI } = Constants.WAVES;
 
 Key.propTypes = {
+  className: PropTypes.string,
   frequency: PropTypes.number.isRequired,
   audio: PropTypes.instanceOf(window.AudioContext),
   aux: PropTypes.instanceOf(window.GainNode),
@@ -70,12 +71,6 @@ Key.propTypes = {
   playing: PropTypes.bool,
   color: PropTypes.string,
   playerInput: PropTypes.func,
-  config: PropTypes.shape({
-    KEY: PropTypes.string,
-    KEY_ACTIVE: PropTypes.func,
-  }),
 };
-const { KEY, KEY_ACTIVE } = Constants.CLASSNAMES;
-Key.defaultProps = { config: { KEY, KEY_ACTIVE } };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Key);

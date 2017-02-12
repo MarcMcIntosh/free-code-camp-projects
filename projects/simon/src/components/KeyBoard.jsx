@@ -11,8 +11,6 @@ const mapStateToProps = state => ({
   wave: state.wave,
   challenge: state.challenge,
   bpm: state.bpm,
-  inGame: state.inGame,
-  turn: state.turn,
   colors: state.colors,
 });
 
@@ -72,16 +70,10 @@ class KeyBoard extends Component {
     }
   }
   render() {
-    const { notes, wave, colors, ...props } = this.props;
-    delete props.challenge;
-    delete props.vol;
-    delete props.bpm;
-    delete props.turn;
-    delete props.inGame;
-    delete props.onAiPlay;
-    delete props.onAiEnd;
-    return (<div {...props}>{
+    const { className, notes, wave, colors, classnames } = this.props;
+    return (<div className={className}>{
       notes.map((d, i) => (<Key
+        className={classnames.key}
         key={i}
         color={colors[i]}
         audio={this.audio}
@@ -102,12 +94,8 @@ KeyBoard.propTypes = {
   bpm: PropTypes.number,
   onAiEnd: PropTypes.func,
   onAiPlay: PropTypes.func,
-  turn: PropTypes.bool,
-  inGame: PropTypes.bool,
-  config: PropTypes.shape({
-    KEY: PropTypes.string,
-    KEY_ACTIVE: PropTypes.func,
-  }),
+  className: PropTypes.string,
+  classnames: PropTypes.shape({ key: PropTypes.string }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyBoard);
