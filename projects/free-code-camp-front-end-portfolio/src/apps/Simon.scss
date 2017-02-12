@@ -1,0 +1,23 @@
+.simon {
+  &__start,
+  &__reset {
+    &:disabled { display: none; }
+  }
+  &__round {}
+  &__mode {}
+  svg {
+    width: 1.6em;
+    &.reset {
+      rect { fill: #f43; stroke: #f00; stroke-width: 1; }
+    }
+    &.play {
+      polygon {
+        fill: #0f8; stroke: #2a2;
+        stroke-width: 1; stroke-linecap: round;
+      }
+    }
+    &.wave {
+      path { fill: none; stroke: black; stroke-width: 2; }
+    }
+  }
+}
