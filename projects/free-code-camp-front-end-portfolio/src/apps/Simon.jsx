@@ -16,14 +16,11 @@ const Simon = () => (<Container className="simon" >
 
   <Mode className="simon__mode" />
 
-  <StartButton className="material-icons simon__start">play_circle_outline</StartButton>
+  <StartButton className="material-icons md-24 simon__start">play_circle_outline</StartButton>
 
-  <ResetButton className="material-icons simon__reset">replay</ResetButton>
+  <ResetButton className="material-icons md-24 simon__reset">replay</ResetButton>
 
-  <Wave
-    className="simon__wave-select"
-    classnames={{ waveShape: 'simon__wave-shape' }}
-  />
+  <Wave className="simon__wave" />
 
   <Volume className="mdc-range-slider simon__volume" />
   <KeyBoard className="keys" />
