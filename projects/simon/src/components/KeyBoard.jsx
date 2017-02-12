@@ -28,7 +28,7 @@ class KeyBoard extends Component {
     this.aux = this.audio.createGain();
     this.compressor = this.audio.createDynamicsCompressor();
     this.compressor.threshold.value = -10;
-    this.compressor.ratio.value = 0.03;
+    // this.compressor.ratio.value = 0.03;
     this.compressor.attack.value = 0.5;
     this.aux.gain.value = (this.props.vol / 100);
     this.aux.connect(this.compressor);
@@ -40,7 +40,7 @@ class KeyBoard extends Component {
     if (this.props.challenge.length < nextProps.challenge.length) {
       setTimeout(() => {
         this.auto(nextProps.challenge);
-      }, (60 * 1000) / this.props.bpm);
+      }, 60000 / this.props.bpm);
     }
     if (this.props.vol !== nextProps.vol) {
       this.aux.gain.value = nextProps.vol / 100;

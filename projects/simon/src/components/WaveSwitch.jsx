@@ -1,35 +1,28 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Constants from '../Constants';
 import { onToggleWave } from '../actions';
 import Button from './Button';
-import WaveIcons from './WaveIcons';
 
 const mapStateToProps = state => ({
-  wave: state.wave,
+  value: state.wave,
 });
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(onToggleWave()),
 });
 
-const ModeSwitch = ({
-  wave,
-  classnames,
-  ...props
-}) => (<Button {...props} value={wave} >
-  <WaveIcons className={classnames.waveShape} wave={wave} />
-</Button>);
+const ModeSwitch = props => (<Button {...props} />);
+
+const { string, func } = PropTypes;
 
 ModeSwitch.propTypes = {
-  wave: PropTypes.string,
-  classnames: PropTypes.shape({
-    waveShape: PropTypes.string,
-  }),
+  className: string,
+  onClick: func,
+  value: string,
 };
 
-const { WAVE } = Constants.CLASSNAMES;
-
-ModeSwitch.defaultProps = { classnames: { waveShape: WAVE } };
+ModeSwitch.defaultProps = {
+  className: 'wave',
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModeSwitch);

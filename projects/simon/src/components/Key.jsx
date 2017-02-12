@@ -35,10 +35,11 @@ class Key extends Component {
     this.oscillator.frequency.value = this.props.frequency;
     this.oscillator.connect(this.props.aux);
     this.oscillator.start(this.props.audio.currentTime);
-    if (this.props.playing) this.props.playerInput(this.props.frequency);
+    // if (this.props.playing) this.props.playerInput(this.props.frequency);
   }
   stop() {
     if (!this.oscillator) return;
+    if (this.props.playing) this.props.playerInput(this.props.frequency);
     this.oscillator.disconnect(this.props.aux);
     this.oscillator.stop(this.props.audio.currentTime);
     this.oscillator = null;

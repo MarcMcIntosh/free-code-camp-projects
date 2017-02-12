@@ -1,0 +1,22 @@
+.wave {
+  width: 36px;
+  height: 24px;
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  // background-color: #bccd95;
+  &[value*='sine'] {
+    background-image:  url('../assets/sine.svg');
+  }
+  &[value*="triangle"] {
+    background-image: url('../assets/triangle.svg');
+    background-size: 18px;
+  }
+  &[value*="square"] {
+    background-image: url('../assets/square.svg');
+  }
+  &[value*="sawtooth"] {
+    background-image: url('../assets/saw-tooth.svg');
+    background-size: 18px;
+  }
+}
