@@ -6,7 +6,8 @@ import Simon, {
   Wave,
   Mode,
   Round,
-  StartStop,
+  StartButton,
+  ResetButton,
   Volume,
 } from './index';
 
@@ -15,7 +16,8 @@ require('./src/styles/main.scss');
 const App = () => (<Simon>
   <h3>Round: <Round /></h3>
   <h4>Difficulty: <Mode /></h4>
-  <StartStop />
+  <StartButton />
+  <ResetButton />
   <b>Sound Wave: <Wave /></b>
   <div>Vol: <Volume /></div>
   <KeyBoard className="keys" />

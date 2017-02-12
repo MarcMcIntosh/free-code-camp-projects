@@ -15,21 +15,21 @@ const mapDispatchToProps = dispatch => ({
 
 const ModeSwitch = ({
   wave,
-  config,
+  classnames,
   ...props
 }) => (<Button {...props} value={wave} >
-  <WaveIcons className={config.WAVE} wave={wave} />
+  <WaveIcons className={classnames.waveShape} wave={wave} />
 </Button>);
 
 ModeSwitch.propTypes = {
   wave: PropTypes.string,
-  config: PropTypes.shape({
-    WAVE: PropTypes.string,
+  classnames: PropTypes.shape({
+    waveShape: PropTypes.string,
   }),
 };
 
 const { WAVE } = Constants.CLASSNAMES;
 
-ModeSwitch.defaultProps = { config: { WAVE } };
+ModeSwitch.defaultProps = { classnames: { waveShape: WAVE } };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModeSwitch);

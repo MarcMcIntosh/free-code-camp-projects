@@ -7,8 +7,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = () => ({});
 
-const Round = ({ round, ...props }) => (<span {...props}>{round}</span>);
+const Round = ({
+  round,
+  className,
+}) => (<span className={className} >{round}</span>);
 
-Round.propTypes = { round: PropTypes.number };
+const { string, number } = PropTypes;
+Round.propTypes = { className: string, round: number };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Round);

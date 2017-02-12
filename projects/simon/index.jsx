@@ -4,7 +4,8 @@ import store from './src/store';
 import KeyBoard from './src/components/KeyBoard';
 import Wave from './src/components/WaveSwitch';
 import Mode from './src/components/ModeSwitch';
-import StartStop from './src/components/StartStop';
+import StartButton from './src/components/StartButton';
+import ResetButton from './src/components/ResetButton';
 import Round from './src/components/Round';
 import Volume from './src/components/Volume';
 import task from './task';
@@ -32,7 +33,8 @@ export {
   KeyBoard,
   Wave,
   Mode,
-  StartStop,
+  StartButton,
+  ResetButton,
   Round,
   Volume,
   task,
