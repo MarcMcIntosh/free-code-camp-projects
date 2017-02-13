@@ -70,7 +70,7 @@ class KeyBoard extends Component {
     }
   }
   render() {
-    const { className, notes, wave, colors, classnames } = this.props;
+    const { ctKeys, className, notes, wave, colors, classnames } = this.props;
     return (<div className={className}>{
       notes.map((d, i) => (<Key
         className={classnames.key}
@@ -80,6 +80,7 @@ class KeyBoard extends Component {
         aux={this.aux}
         frequency={d}
         wave={wave}
+        ctKey={ctKeys[i]}
       />))
     }</div>);
   }
@@ -96,6 +97,9 @@ KeyBoard.propTypes = {
   onAiPlay: PropTypes.func,
   className: PropTypes.string,
   classnames: PropTypes.shape({ key: PropTypes.string }),
+  ctKeys: PropTypes.arrayOf(PropTypes.string),
 };
+
+KeyBoard.defaultProps = { ctKeys: ['h', 'j', 'k', 'l'] };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyBoard);

@@ -22,10 +22,36 @@ class Key extends Component {
     this.oscillator = null;
     this.play = this.play.bind(this);
     this.stop = this.stop.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.state = { keyHeld: false };
+  }
+  componentDidMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('keyup', this.onKeyUp);
   }
   componentWillReceiveProps() {
     if (this.oscillator !== null && !this.props.turn) {
       this.oscillator.stop(60 / (this.props.bpm * 2));
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('keyup', this.onKeyUp);
+  }
+  onKeyDown(event) {
+    if (event.key === this.props.ctKey) {
+      this.setState({ keyHeld: true }, this.play);
+    }
+  }
+  onKeyUp(event) {
+    if (event.key === this.props.ctKey) {
+      this.setState({ keyHeld: false });
+      this.stop();
+    }
+    if (this.oscillator !== null) {
+      this.oscillator.stop();
+      this.ocsillator = null;
     }
   }
   play() {
@@ -44,11 +70,13 @@ class Key extends Component {
     this.oscillator.stop(this.props.audio.currentTime);
     this.oscillator = null;
   }
-
   render() {
     const { color, frequency, tone, turn, playing, className } = this.props;
     return (<Button
-      className={((frequency === tone) && turn) ? `${className} ${color}--active` : `${className} ${color}`
+      className={(
+        (frequency === tone && !turn)
+        || this.state.keyHeld
+      ) ? `${className} ${color}--active` : `${className} ${color}`
       }
       disabled={playing && !turn}
       onMouseDown={this.play}
@@ -71,6 +99,7 @@ Key.propTypes = {
   playing: PropTypes.bool,
   color: PropTypes.string,
   playerInput: PropTypes.func,
+  ctKey: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Key);
