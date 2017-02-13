@@ -41,6 +41,13 @@ const rules = [
       },
     }],
   },
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: 'css-loader',
+    }),
+  },
 ];
 
 module.exports = {
@@ -75,5 +82,6 @@ module.exports = {
         css: ['/styles.css'],
       },
     }),
+    new ExtractTextPlugin('styles.css'),
   ],
 };
