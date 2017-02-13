@@ -4,12 +4,39 @@
   "description": "Skeleton Project for free code camp data visulisation projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development webpack-dev-server --progress --colors ",
+    "build": "NODE_ENV=production webpack",
+    "build:dev": "NODE_ENV=development webpack",
+    "build:all": "npm run build:dev && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "https://git.marcmcintosh.ninja/FCC-DV-skeleton"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel-preset-env": "^1.1.8",
+    "clean-webpack-plugin": "^0.1.15",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "html-webpack-plugin": "^2.28.0",
+    "react-dom": "^15.4.2",
+    "stylelint": "^7.8.0",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-order": "^0.2.2",
+    "stylelint-scss": "^1.4.1",
+    "stylelint-selector-bem-pattern": "^1.0.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
+  }
 }
