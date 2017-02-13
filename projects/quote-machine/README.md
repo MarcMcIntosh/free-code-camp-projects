@@ -13,4 +13,4 @@ Button that requests a new quote.
 Optional props are className and children
 # Display
 Displays the quote,
-Optional props are className which will have 'loading' or error appended to it depending on the apps state. if no className is propvided 'error' will be the only classNames used
+Optional props are className which will have 'loading' or error appended to it depending on the apps state. if no className is provided 'error' will be the only classNames used
