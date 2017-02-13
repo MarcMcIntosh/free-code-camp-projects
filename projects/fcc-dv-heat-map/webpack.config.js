@@ -25,8 +25,8 @@ const CSS_LOADER_CONFIG = [{
     includePaths: [path.resolve(__dirname, 'node_modules')],
     sourceMap: IS_DEV,
   },
-  // options: { sourceMap: true },
 }];
+
 
 const rules = [
   {
@@ -83,13 +83,51 @@ const rules = [
   },
 ];
 
+const pluginConf = () => {
+  const {
+    DedupePlugin,
+    AggressiveMergingPlugin,
+    UglifyJsPlugin,
+  } = webpack.optimize;
+
+  const DEFAULT_PLUGINS = [
+    new AggressiveMergingPlugin(),
+    new CleanWebpackPlugin([OUT_PATH]),
+    new HtmlWebpackPlugin({
+      inject: true,
+      filename: 'index.html',
+      template: 'src/index.ejs',
+      files: {
+        css: ['/styles.css'],
+      },
+    }),
+    new ExtractTextPlugin('styles.css'),
+  ];
+  if (IS_PROD) {
+    return DEFAULT_PLUGINS.concat([
+      new webpack.DefinePlugin({ 'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      } }),
+      new UglifyJsPlugin({
+        minimize: true,
+        comments: false,
+      }),
+      new DedupePlugin(),
+    ]);
+  }
+  /* Development Plugins */
+  return DEFAULT_PLUGINS.concat([
+    new webpack.HotModuleReplacementPlugin(),
+  ]);
+};
+
 module.exports = {
   entry: './app.jsx',
   target: 'web',
   devtool: IS_DEV ? 'cheap-source-map' : false,
   devServer: {
-    // inline: true,
-    // hot: true,
+    inline: true,
+    hot: true,
     historyApiFallback: {
       index: '/',
     },
@@ -106,15 +144,5 @@ module.exports = {
   module: {
     rules,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      filename: 'index.html',
-      template: 'src/index.ejs',
-      files: {
-        css: ['/styles.css'],
-      },
-    }),
-    new ExtractTextPlugin('styles.css'),
-  ],
+  plugins: pluginConf(),
 };
