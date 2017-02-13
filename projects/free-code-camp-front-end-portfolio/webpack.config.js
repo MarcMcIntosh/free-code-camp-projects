@@ -4,13 +4,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const name = require('./package.json').name;
-
-const publicPathUrl = () => {
+const buildDir = () => {
   if (process.env.NODE_ENV === 'production') {
-    return `/${name}/`;
+    return 'build';
   }
-  return '/';
+  return 'dev';
 };
 
 const pluginConf = () => {
@@ -24,7 +22,7 @@ const pluginConf = () => {
   const DEFAULT_PLUGINS = [
     new OccurenceOrderPlugin(),
     new AggressiveMergingPlugin(),
-    new CleanWebpackPlugin(['docs']),
+    new CleanWebpackPlugin([buildDir()]),
     new ExtractTextPlugin('styles.css', { allChunks: true }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -61,13 +59,13 @@ module.exports = {
     inline: true,
     hot: true,
     historyApiFallback: {
-      index: publicPathUrl(),
+      index: '/',
     },
   },
   output: {
     filename: '[hash].js',
-    path: path.resolve(__dirname, 'docs'),
-    publicPath: publicPathUrl(),
+    path: path.resolve(__dirname, buildDir()),
+    publicPath: '/',
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
