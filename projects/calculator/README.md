@@ -11,6 +11,7 @@ i.e:
 ```
 
 ## Elements and classNames added to the top element in the component this.following structure can be used to access the children elements.
+
 ```scss
 // Display
 div > input,
