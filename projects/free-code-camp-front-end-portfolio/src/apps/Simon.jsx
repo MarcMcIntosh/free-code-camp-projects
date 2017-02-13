@@ -24,7 +24,7 @@ class Simon extends Component {
   render() {
     const cn2 = 'mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone';
 
-    return (<Container className="simon" >
+    return (<Container className="simon simon--theme-dark" >
 
       <h1 className="simon__header">Simon says <small className="simon__round">Round: </small>
         <Round className="simon__round--number" />
@@ -44,6 +44,9 @@ class Simon extends Component {
         Volume <Volume className="mdc-range-slider simon__volume" /></h2>
 
         <Wave className="mdc-button mdc-button--accent mdc-button--raised simon__wave" />
+
+        <p className="mdc-typography--body1">
+          <span className="mdc-typography--body2"> Contol Keys</span> h j k l </p>
 
       </section>) : null }
 

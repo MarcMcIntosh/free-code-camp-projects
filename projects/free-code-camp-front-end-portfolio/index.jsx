@@ -37,6 +37,7 @@ import CalculatorPreview from './src/assets/calculator.png';
 import PomodoroPreview from './src/assets/pomodoro.png';
 import PlaceHolder from './src/assets/placeholder.png';
 import TicTacToePreview from './src/assets/tic-tac-toe.png';
+import SimonPreview from './src/assets/simon.png';
 
 const apps = [
   {
@@ -99,10 +100,11 @@ const apps = [
     name: 'Simon Says',
     description: 'Free Code Camp Project',
     path: '/apps/simon',
-    preview: PlaceHolder,
+    preview: SimonPreview,
     info: SimonTask,
   },
-];
+].reverse();
+
 const Apps = () => (<Gallary apps={apps} />);
 
 

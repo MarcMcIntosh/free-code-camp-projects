@@ -1,5 +1,6 @@
 @import '@material/typography/mixins';
 @import "@material/elevation/mixins";
+@import "@material/theme/mixins";
 
 .simon {
   @include mdc-elevation(2);
@@ -38,6 +39,7 @@
        @include mdc-typography(subheading2);
      }
   }
+  &__controls {}
   &__difficulty {
     @include mdc-typography(subheading1);
     &--mode {
