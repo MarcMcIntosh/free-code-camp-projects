@@ -22,7 +22,6 @@ class Simon extends Component {
   showSettings() { this.setState({ showSettings: !this.state.showSettings }); }
 
   render() {
-    // const cn1 = 'mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone';
     const cn2 = 'mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone';
 
     return (<Container className="simon" >
@@ -52,7 +51,7 @@ class Simon extends Component {
 
       <ResetButton className="material-icons md-24 simon__reset">replay</ResetButton>
 
-      <KeyBoard className="mdc-layout-grid simon__keys" classnames={{ key: `${cn2} key` }} />
+      <KeyBoard ctKeys={['h', 'j', 'k', 'l']} className="mdc-layout-grid simon__keys" classnames={{ key: `${cn2} key` }} />
 
     </Container>);
   }
