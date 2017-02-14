@@ -1,12 +1,9 @@
 
-Template File for front end assignments from [FreeCodeCamp](https://www.freecodecamp.com)
+Collectin of front end assignments from [FreeCodeCamp](https://www.freecodecamp.com) writen in react.
 
 # Usage
 ```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/free-code-camp-front-end-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
+git clone --recursive  https://git.marcmcintosh.ninja/free-code-camp-front-end-portfolio
 npm install
 npm start
 ```
