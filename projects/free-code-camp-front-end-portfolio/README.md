@@ -13,4 +13,4 @@ for d in lib/* ; do npm install $d; done
 ## run webpack dev server
 npm start
 ```
-Open browser at <localhost:8080>
+Open browser at http://localhost:8080
