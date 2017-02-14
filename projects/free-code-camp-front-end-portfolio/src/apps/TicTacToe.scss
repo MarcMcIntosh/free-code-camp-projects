@@ -23,7 +23,10 @@
         padding-bottom: 100%;
       }
       &.reset {
-        width: 30%; text-align: center;
+        width: auto; text-align: center;
+        &:after {
+          padding-bottom: 0;
+        }
       }
     }
   }
