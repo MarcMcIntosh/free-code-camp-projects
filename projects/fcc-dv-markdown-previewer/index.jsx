@@ -22,3 +22,5 @@ Container.propTypes = {
 };
 
 export default Container;
+export { default as UserInput } from './src/components/UserInput';
+export { default as Output } from './src/components/Output';
