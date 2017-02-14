@@ -35,7 +35,6 @@ import WikipediaViewerPreview from './src/assets/wikipedia.png';
 import TwitchPreview from './src/assets/twitch.png';
 import CalculatorPreview from './src/assets/calculator.png';
 import PomodoroPreview from './src/assets/pomodoro.png';
-import PlaceHolder from './src/assets/placeholder.png';
 import TicTacToePreview from './src/assets/tic-tac-toe.png';
 import SimonPreview from './src/assets/simon.png';
 
