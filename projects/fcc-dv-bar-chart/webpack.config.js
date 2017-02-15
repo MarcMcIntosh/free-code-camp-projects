@@ -52,11 +52,14 @@ const rules = [
       loader: 'babel-loader',
       options: {
         presets: [
-          ['env', { modules: false }],
+          'env',
           'react',
-          ['es2015', { modules: false }],
+          'es2015',
         ],
-        plugins: ['transform-object-rest-spread'],
+        plugins: [
+          'transform-runtime',
+          'transform-object-rest-spread',
+        ],
       },
     }],
   },
@@ -122,7 +125,10 @@ const pluginConf = () => {
 };
 
 module.exports = {
-  entry: './app.jsx',
+  entry: [
+    'babel-polyfill',
+    './app.jsx',
+  ],
   target: 'web',
   devtool: IS_DEV ? 'cheap-source-map' : false,
   devServer: {
