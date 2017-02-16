@@ -1,12 +1,21 @@
 import React from 'react';
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import { render } from 'react-dom';
-import App from './index';
-import './src/styles/main.scss';
-// import './src/styles/test.css';
+import Container, {
+  UserList,
+  ListItem,
+  Constants,
+  SortBy,
+} from './index';
+import './styles/test.scss';
 
-const Test = () => (
-  <App className="foo-bar">Hello World</App>
-);
+const cats = Constants.SORT.map(d => d.value);
+
+const Test = () => (<Container>
+  {cats.map(d => (<SortBy key={d} value={d} />))}
+  <UserList>
+    <ListItem />
+  </UserList>
+</Container>);
 
 render(<Test />, document.getElementById('App'));
