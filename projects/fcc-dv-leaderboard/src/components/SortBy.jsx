@@ -1,26 +1,33 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { SORT } from '../Constants';
-import { toggleDisplay } from '../actions';
+import Constants from '../Constants';
+import { setSort } from '../actions';
 import Button from './Button';
-
 
 const mapStateToProps = state => ({
   isSelected: state.display,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClick: event => dispatch(toggleDisplay(event.target.value)),
+  onClick: event => dispatch(setSort(event.target.value)),
 });
 
-const SortBy = ({ value, isSelected, ...props }) => (
-  <Button disabled={(isSelected) === value} {...props}>{SORT[value].text}</Button>
+const SortBy = ({
+  children,
+  value,
+  isSelected,
+  ...props
+}) => (
+  <Button value={value} disabled={(isSelected) === value} {...props} >{children}</Button>
 );
 
-const vals = SORT.map(d => d.value);
+const vals = Constants.SORT.map(d => d.value);
 SortBy.propTypes = {
   value: PropTypes.oneOf(vals).isRequired,
   isSelected: PropTypes.oneOf(vals).isRequired,
+  children: PropTypes.node,
 };
+
+SortBy.defaultProps = { children: false };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortBy);

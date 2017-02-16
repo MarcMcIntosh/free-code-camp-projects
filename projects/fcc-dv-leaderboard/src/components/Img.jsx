@@ -8,32 +8,26 @@ class Img extends PureComponent {
       error: false,
       status: 'loading',
     };
+    this.handleLoad = this.handleLoad.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
   handleLoad() { this.setState({ loaded: true }); }
   handleError() { this.setState({ error: true, status: 'error' }); }
   render() {
-    const { className, alt, children, ...props } = this.props;
+    const { className, alt, ...props } = this.props;
     const { loaded, error, status } = this.state;
     return (<img
       alt={alt}
       role="presentation"
-      className={(loaded || error) ? `${className} ${status}` : className}
+      className={(loaded || !error) ? className : `${className} ${status}`}
       onLoad={this.handleLoad}
       {...props}
-    >{children}</img>);
+    />);
   }
 }
 
-const { node, string } = PropTypes;
-Img.propTypes = {
-  className: string,
-  children: node,
-  alt: string,
-};
-Img.defaultProps = {
-  className: '',
-  children: false,
-  alt: '',
-};
+const { string } = PropTypes;
+Img.propTypes = { className: string, alt: string };
+Img.defaultProps = { className: '', alt: '' };
 
 export default Img;

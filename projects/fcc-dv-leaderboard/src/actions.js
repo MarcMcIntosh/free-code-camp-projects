@@ -16,18 +16,15 @@ export const RECEIVE_ALLTIME = 'RECEIVE_ALLTIME';
 const requestAllTime = () => ({ type: REQUEST_ALLTIME });
 const receiveAllTime = payload => ({ type: RECEIVE_ALLTIME, payload });
 
-export const TOGGLE_DISPLAY = 'TOGGLE_DISPLAY';
-export const toggleDisplay = () => (dispatch, getState) => ({
-  type: TOGGLE_DISPLAY,
-  payload: {
-    display: (getState().display === 'recent') ? 'alltime' : 'recent',
-  },
+export const TOGGLE_ORDER = 'TOGGLE_ORDER';
+export const toggleOrder = () => ({
+  type: TOGGLE_ORDER,
 });
 
-export const TOGGLE_SORT = 'TOGGLE_SORT';
-export const toggleSort = () => (dispatch, getState) => ({
-  type: TOGGLE_SORT,
-  payload: { ascending: !getState().ascending },
+export const SET_SORT = 'SET_SORT';
+export const setSort = payload => ({
+  type: SET_SORT,
+  payload,
 });
 
 const addr = str => `https://fcctop100.herokuapp.com/api/fccusers/top/${str}`;

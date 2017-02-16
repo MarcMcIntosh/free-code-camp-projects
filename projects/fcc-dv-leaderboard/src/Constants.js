@@ -1,8 +1,8 @@
-module.exports = {
+const Constants = {
   SORT: [
     { value: 'recent', text: 'Recent' },
     { value: 'alltime', text: 'All Time' },
-    { value: 'username', text: 'Name' },
-    { value: 'lastUpdate', text: 'Date' },
   ],
 };
+
+export default Constants;

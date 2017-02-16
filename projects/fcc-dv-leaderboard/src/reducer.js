@@ -4,11 +4,13 @@ import {
   RECEIVE_ERROR,
   RECEIVE_ALLTIME,
   RECEIVE_RECENT,
+  SET_SORT,
 } from './actions';
 
 const DEFAULT_STATE = {
   recent: [],
   alltime: [],
+  data: [],
   errorRecent: '',
   errorAllTime: '',
   isFetchingRecent: false,
@@ -26,6 +28,7 @@ function reducer(state = DEFAULT_STATE, action) {
     case RECEIVE_ERROR: return {
       ...state, ...action.payload,
     };
+    case SET_SORT: return { ...state, display: action.payload };
     default: return state;
   }
 }
