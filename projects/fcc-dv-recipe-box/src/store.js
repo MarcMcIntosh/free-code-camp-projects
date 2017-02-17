@@ -10,8 +10,8 @@ const enhancers = (
   applyMiddleware(thunk),
   autoRehydrate(),
 ) : compose(applyMiddleware(thunk), autoRehydrate());
-const store = createStore(reducer, undefined, enhancers);
 
-export default persistStore(store, {
-  keyPrefix: '_recipes',
-});
+const store = createStore(reducer, undefined, enhancers);
+persistStore(store, { keyPrefix: '_recipes' });
+
+export default store;

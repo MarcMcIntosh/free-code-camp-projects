@@ -1,8 +1,8 @@
-@import "bourbon";
+@import "bourbon/bourbon";
 @import "base/base";
-@import "base/layout";
-@import "neat";
+@import "neat/neat";
+@import "icons";
 
 .recipe-box {
-  @include outer-container;
+  @include fill-parent;
 }

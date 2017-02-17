@@ -24,8 +24,6 @@ const CSS_LOADER_CONFIG = [{
     modules: true,
     includePaths: [
       path.resolve(__dirname, 'node_modules'),
-      require('bourbon').includePaths,
-      require('bourbon-neat').includePaths,
     ],
     sourceMap: IS_DEV,
   },
