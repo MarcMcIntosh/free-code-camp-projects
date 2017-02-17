@@ -21,4 +21,6 @@ Container.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+Container.defaultProps = { className: 'recipe-box' };
+
 export default Container;

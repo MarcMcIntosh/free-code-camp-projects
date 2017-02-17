@@ -1,0 +1,8 @@
+@import "bourbon";
+@import "base/base";
+@import "base/layout";
+@import "neat";
+
+.recipe-box {
+  @include outer-container;
+}

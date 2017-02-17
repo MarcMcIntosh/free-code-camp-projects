@@ -1,12 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 
-const store = (
+const enhancers = (
   process.env.NODE_ENV !== 'production'
-) ? createStore(reducer, compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()),
+) ? compose(
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(thunk),
-) : createStore(reducer, applyMiddleware(thunk));
+  autoRehydrate(),
+) : compose(applyMiddleware(thunk), autoRehydrate());
+const store = createStore(reducer, undefined, enhancers);
 
-export default store;
+export default persistStore(store, {
+  keyPrefix: '_recipes',
+});

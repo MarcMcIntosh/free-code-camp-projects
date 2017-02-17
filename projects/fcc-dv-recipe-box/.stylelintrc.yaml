@@ -220,28 +220,10 @@ rules:
     - true
     - ignoreTypes:
         - fieldset
-  # Styles for components should never need the universal selector.
   selector-no-universal: true
-  # Ensure any defined symbols are prefixed with "mdc-"
-  # TODO: Remove "md-" pattern.
-  custom-media-pattern: ^mdc?-.+
-  custom-property-pattern: ^mdc?-.+
-  selector-class-pattern:
-    - ^mdc?-.+
-    - resolveNestedSelectors: true
-  selector-id-pattern: ^mdc?-.+
-  # Names are more semantic than numbers
   font-weight-notation: named-where-possible
   # http://www.paulirish.com/2010/the-protocol-relative-url/
   function-url-no-scheme-relative: true
-  # TODO: and FIXME: warnings are super useful because they remind us that we should address these
-  # within our codebase
-  comment-word-blacklist:
-    -
-      - /^TODO:/
-      - /^FIXME:/
-    - severity: warning
-  # Part of google's style guide
   number-leading-zero: never
 
   # We use Harry Roberts' BEM dialect as our preferred way to format classes.
@@ -255,14 +237,6 @@ rules:
       - ^fieldset
       - ^\[aria\-disabled=(?:.+)\]
 
-  # SCSS naming patterns, just like our CSS conventions above.
-  # (note for $-vars we use a leading underscore for "private" variables)
-  scss/dollar-variable-pattern:
-    - ^_?mdc-.+
-    -
-      ignore: local
-  scss/at-function-pattern: ^mdc-.+
-  scss/at-mixin-pattern: ^mdc-.+
   # Prevents unneeded nesting selectors
   scss/selector-no-redundant-nesting-selector: true
   # Since leading underscores are not needed, they can be omitted
