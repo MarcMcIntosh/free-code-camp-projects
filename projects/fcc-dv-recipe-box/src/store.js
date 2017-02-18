@@ -1,4 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+ } from 'redux';
+import reduceReducers from 'reduce-reducers';
+import { reducer as formReducer } from 'redux-form';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
@@ -11,7 +17,9 @@ const enhancers = (
   autoRehydrate(),
 ) : compose(applyMiddleware(thunk), autoRehydrate());
 
-const store = createStore(reducer, undefined, enhancers);
+const reducers = reduceReducers(reducer, formReducer);
+
+const store = createStore(reducers, undefined, enhancers);
 persistStore(store, { keyPrefix: '_recipes' });
 
 export default store;
