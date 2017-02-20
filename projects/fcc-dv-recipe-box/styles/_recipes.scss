@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 .vertical-tabs-container {
   $base-border-color: gainsboro !default;
   $base-border-radius: 3px !default;
@@ -28,10 +30,11 @@
     list-style: none;
   }
 
-  a {
+  a, button {
     color: $action-color;
     text-decoration: none;
   }
+
 
   .vertical-tabs {
     display: none;

@@ -1,0 +1,6 @@
+@import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
+@import "container.scss";
+
+@mixin vertical-tabs() {
+  @include container;
+}

@@ -1,6 +1,9 @@
 @import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
 @import "icons";
+@import "mixins";
 
 .recipe-box {
   @include fill-parent;
+
+  @import "recipes.scss";
 }

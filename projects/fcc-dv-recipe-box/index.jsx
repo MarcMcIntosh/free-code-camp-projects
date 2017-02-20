@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import Recipes from './src/components/Recipes/Main';
 
 class Container extends Component {
   constructor(props) {
@@ -24,3 +25,4 @@ Container.propTypes = {
 Container.defaultProps = { className: 'recipe-box' };
 
 export default Container;
+export { Recipes };
