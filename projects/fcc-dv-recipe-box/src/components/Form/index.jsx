@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Add, Close, Cancel, Done } from '../Buttons';
+import Button, { Add, Close } from '../Buttons';
 import { recipeEdit, recipeAdd } from '../../actions';
 
 const mapStateToProps = state => ({
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onReset: () => dispatch(recipeEdit()),
+  onCancel: d => dispatch(recipeEdit(d)),
   onSubmit: (obj, n) => dispatch(recipeAdd(obj, n)),
 });
 
@@ -16,32 +16,29 @@ const mapDispatchToProps = dispatch => ({
 class RecipeForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: props.name,
-      ingredients: props.ingredients,
-      notes: props.notes,
-    };
+
+    const { name, ingredients, notes } = props;
+    this.state = { name, ingredients, notes };
+
     this.handleSumbit = this.handleSumbit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+
     this.addIngredient = this.addIngredient.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.editIngredient = this.editIngredient.bind(this);
+  }
+  componentWillUnmount() {
+    this.props.onCancel(false);
   }
   handleSumbit(event) {
     event.preventDefault();
     const { name, ingredients, notes } = this.state;
     const recipe = { name, ingredients, notes };
+    this.props.onSubmit(recipe, this.props.active + 1);
   }
   handleReset() {
-    const { state, props } = this;
-    if (state.name === props.name
-      && state.ingredients.length === props.ingredients.length
-      && state.notes === props.notes
-    ) {
-      this.props.onCancel();
-    } else {
-      this.setState({ name, ingredients, notes });
-    }
+    const { name, ingredients, notes } = this.props;
+    this.setState({ name, ingredients, notes });
   }
   addIngredient() {
     const ingredients = this.state.ingredients.concat({ name: '', quantity: '' });
@@ -60,8 +57,11 @@ class RecipeForm extends Component {
   }
   render() {
     const { name, ingredients, notes } = this.state;
-    const { className } = this.props;
+    const { className, onCancel } = this.props;
     return (<form onSubmit={this.handleSumbit} className={className}>
+      <header>
+        <h1>Recipe Editor <Close onClick={onCancel} /></h1>
+      </header>
       <section>
         <label htmlFor="name">Recipe</label>
         <input
@@ -101,20 +101,20 @@ class RecipeForm extends Component {
         Notes
         <textarea name="notes" defaultValue={notes} />
       </section>
-      <Done type="submit" />
-      <Cancel type="reset" onClick={this.handleReset} />
+      <Button type="submit">Submit</Button>
+      <Button type="reset" onClick={this.handleReset}>Reset</Button>
     </form>);
   }
 }
 
-const { string, array, number } = PropTypes;
+const { string, array, number, func } = PropTypes;
 RecipeForm.propTypes = {
   name: string,
   ingredients: array,
   notes: string,
   className: string,
   active: number.isRequired,
-  onReset: func.isRequired,
+  onCancel: func.isRequired,
   onSubmit: func.isRequired,
 };
 

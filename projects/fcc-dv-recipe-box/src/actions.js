@@ -12,8 +12,8 @@ export function recipeAdd(recipe, index) {
 }
 
 export const RECIPE_EDIT = 'RECIPE_EDIT';
-export const recipeEdit = () => ({
-  type: RECIPE_EDIT,
+export const recipeEdit = payload => ({
+  type: RECIPE_EDIT, payload,
 });
 
 export const RECIPE_VIEW = 'RECIPE_VIEW';

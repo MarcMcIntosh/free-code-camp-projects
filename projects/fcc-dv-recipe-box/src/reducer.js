@@ -26,7 +26,8 @@ function reducer(state = DEFAULT_STATE, action) {
       };
     }
     case RECIPE_EDIT: return {
-      ...state, edit: !state.edit,
+      ...state,
+      edit: (payload !== undefined) ? payload : !state.edit,
     };
     case ACKNOWLEDGE_COOKIES: return {
       ...state,
