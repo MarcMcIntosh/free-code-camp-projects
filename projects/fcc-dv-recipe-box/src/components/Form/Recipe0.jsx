@@ -10,7 +10,7 @@ const Recipe = ({
   submitting,
   pristine,
   reset,
-}) => (<form>
+}) => (<form action="" method="" >
   <div>
     <label htmlFor="name">Recipe Name</label>
     <Field name="name" component="input" type="text" placeholder="Recipe Name" />

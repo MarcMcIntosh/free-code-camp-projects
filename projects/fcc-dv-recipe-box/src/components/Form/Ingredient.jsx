@@ -24,7 +24,7 @@ const Ingredient = ({
   {error && <li className="error">{error}</li>}
 </ul>);
 
-const { func, shape, any } = PropTypes;
+const { func, shape, any, bool } = PropTypes;
 Ingredient.propTypes = {
   fields: shape({
     push: func.isRequired,
@@ -32,7 +32,7 @@ Ingredient.propTypes = {
     map: func.isRequired,
   }).isRequired,
   meta: shape({
-    touch: func.isRequired,
+    touched: bool.isRequired,
     error: any,
   }).isRequired,
 };

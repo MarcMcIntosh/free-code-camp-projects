@@ -1,8 +1,11 @@
 import React from 'react';
 import Button from './Button';
 
-const Menu = props => (<Button title="menu" {...props}>menu</Button>);
+const Menu = props => (<Button {...props}>menu</Button>);
 
-Menu.defaultProps = { className: 'material-icons' };
+Menu.defaultProps = {
+  className: 'material-icons',
+  title: 'Menu',
+};
 
 export default Menu;

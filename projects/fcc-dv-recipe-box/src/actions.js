@@ -3,9 +3,13 @@ export const acknowledgeCokkies = () => ({
   type: ACKNOWLEDGE_COOKIES,
 });
 export const RECIPE_ADD = 'RECIPE_ADD';
-export const recipeAdd = payload => ({
+export const recipes = payload => ({
   type: RECIPE_ADD, payload,
 });
+
+export function recipeAdd(recipe, index) {
+  return dispatch => dispatch(recipes({ recipe, index }));
+}
 
 export const RECIPE_EDIT = 'RECIPE_EDIT';
 export const recipeEdit = () => ({

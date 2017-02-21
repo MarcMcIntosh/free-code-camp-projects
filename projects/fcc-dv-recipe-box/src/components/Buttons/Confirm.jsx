@@ -3,6 +3,9 @@ import Button from './Button';
 
 const Confirm = props => (<Button {...props}>check</Button>);
 
-Confirm.defaultProps = { className: 'material-icons' };
+Confirm.defaultProps = {
+  title: 'Confirm',
+  className: 'material-icons',
+};
 
 export default Confirm;

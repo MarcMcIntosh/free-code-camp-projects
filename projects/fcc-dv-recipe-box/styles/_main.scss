@@ -1,9 +1,24 @@
 @import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
+// @import "mixins";
+@import "recipes.scss";
 @import "icons";
-@import "mixins";
 
 .recipe-box {
-  @include fill-parent;
+  // @include fill-parent;
+  button {
+    &.material-icons {
+      padding: 4px 6px;
+    }
 
-  @import "recipes.scss";
+    &.delete,
+    &[type="reset"] {
+      padding: 8px 12px;
+      background-color: red;
+    }
+
+    &[type="submit"] {
+      padding: 8px 12px;
+      background-color: green;
+    }
+  }
 }

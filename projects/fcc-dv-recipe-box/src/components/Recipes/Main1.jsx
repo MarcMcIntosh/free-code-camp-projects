@@ -5,6 +5,7 @@ import { recipeView, recipeEdit, recipeAdd, recipeDelete } from '../../actions';
 import RecipeForm from '../Form/index';
 import Recipe from './Recipe';
 import Front from './Front';
+import Isolated from '../Form/Isolated';
 
 const mapStateToProps = state => ({
   edit: state.edit,
@@ -30,7 +31,6 @@ class Main extends Component {
     this.editRecipe = this.editRecipe.bind(this);
   }
   handleSumbit(event) {
-    event.preventDefault();
     this.props.onSave(event);
   }
   handleDelete(n) {
@@ -80,6 +80,7 @@ class Main extends Component {
           onEdit={this.handleEdit}
         />) : (<Front isEmpty={recipes.length === 0} onAdd={this.handleEdit} />)}
       </section>
+      <h1>Isolated</h1>
     </div>);
   }
 }

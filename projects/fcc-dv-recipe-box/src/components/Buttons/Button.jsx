@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 const Button = ({
   children,
   ...props
-}) => (<Button {...props} >{children}</Button>);
+}) => (<button {...props} >{children}</button>);
 
 Button.propTypes = { children: PropTypes.node };
 
