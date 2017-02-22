@@ -7,8 +7,16 @@ export const recipes = payload => ({
   type: RECIPE_ADD, payload,
 });
 
+export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const toggleMenu = () => ({ type: TOGGLE_MENU });
+
+export const ADD_NEW = 'ADD_NEW';
+export const addNew = () => ({
+  type: ADD_NEW,
+});
+
 export function recipeAdd(recipe, index) {
-  return dispatch => dispatch(recipes({ recipe, index }));
+  return recipes({ recipe, index });
 }
 
 export const RECIPE_EDIT = 'RECIPE_EDIT';

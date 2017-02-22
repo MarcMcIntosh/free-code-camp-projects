@@ -34,7 +34,7 @@ class RecipeForm extends Component {
     event.preventDefault();
     const { name, ingredients, notes } = this.state;
     const recipe = { name, ingredients, notes };
-    this.props.onSubmit(recipe, this.props.active + 1);
+    this.props.onSubmit(recipe, this.props.active);
   }
   handleReset() {
     const { name, ingredients, notes } = this.props;
@@ -69,6 +69,7 @@ class RecipeForm extends Component {
           type="text"
           placeholder="Title"
           defaultValue={name}
+          required
         />
       </section>
       <section>
@@ -107,15 +108,15 @@ class RecipeForm extends Component {
   }
 }
 
-const { string, array, number, func } = PropTypes;
+const { string, array, func, bool } = PropTypes;
 RecipeForm.propTypes = {
   name: string,
   ingredients: array,
   notes: string,
   className: string,
-  active: number.isRequired,
   onCancel: func.isRequired,
   onSubmit: func.isRequired,
+  active: bool.isRequired,
 };
 
 RecipeForm.defaultProps = {
