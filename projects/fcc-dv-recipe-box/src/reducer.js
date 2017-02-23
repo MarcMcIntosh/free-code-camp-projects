@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 const DEFAULT_STATE = {
-  active: -1,
+  active: 0,
   recipes: [{
     name: 'Baked Tattie',
     ingredients: [{

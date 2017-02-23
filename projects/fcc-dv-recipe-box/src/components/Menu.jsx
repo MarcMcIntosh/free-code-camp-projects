@@ -48,7 +48,10 @@ const Menu = ({
           onViewRecipe(i);
           return false;
         };
-        return (<li className={classNames('menu__item', { 'menu__item--active': (i === recipe) })}>
+        const k = `${d.name}:${i}`;
+        const cn = classNames('menu__item', { 'menu__item--active': (i === recipe) });
+
+        return (<li key={k} className={cn}>
           <a tabIndex="0" onClick={handleClick}>{d.name}</a>
         </li>);
       })}
