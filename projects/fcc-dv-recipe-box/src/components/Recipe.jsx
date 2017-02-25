@@ -34,7 +34,7 @@ class Recipe extends Component {
     return false;
   }
   render() {
-    const { name, ingredients, picture } = this.props;
+    const { name, ingredients, picture, notes } = this.props;
     const { options, enlarge } = this.state;
     const imgCN = (enlarge) ? 'recipe__image--enlarge' : 'recipe__image';
     return (<article className="recipe">
@@ -45,8 +45,13 @@ class Recipe extends Component {
         </a>) : false }
       </header>
 
-      <ul>{ingredients.map((d, i) => (<li key={i}><bold>{d.name}</bold>{d.quantity}</li>))}
-      </ul>
+      <section className="recipe__ingredients">
+        <ul>{ingredients.map((d, i) => (
+          <li key={i}>{d}</li>
+        ))}</ul>
+      </section>
+
+      {(notes.length > 0) ? (<p className="recipe__notes">{notes}</p>) : false }
 
       <footer className="recipe__options">
         {(!options) ? false : (<span>
@@ -69,14 +74,17 @@ class Recipe extends Component {
   }
 }
 
-const { func, string, arrayOf, shape } = PropTypes;
+const { func, string, arrayOf } = PropTypes;
 Recipe.propTypes = {
   onEdit: func.isRequired,
   onDelete: func.isRequired,
   name: string.isRequired,
-  ingredients: arrayOf(shape({ name: string, quantity: string })).isRequired,
+  ingredients: arrayOf(string).isRequired,
   notes: string,
   picture: string,
 };
+
+Recipe.defaultProps = { notes: '', picture: '' };
+
 
 export default Recipe;

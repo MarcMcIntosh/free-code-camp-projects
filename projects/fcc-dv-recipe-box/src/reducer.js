@@ -7,22 +7,8 @@ import {
 } from './actions';
 
 const DEFAULT_STATE = {
-  active: 0,
-  recipes: [{
-    name: 'Baked Tattie',
-    ingredients: [{
-      name: 'Tattie',
-      quantity: '1',
-    }],
-    notes: '',
-  }, {
-    name: 'Soup',
-    ingredients: [{
-      name: 'any thing',
-      quantity: 'loads',
-    }],
-    notes: '',
-  }],
+  active: -1,
+  recipes: [],
   cookies: false,
   edit: false,
   menu: true,

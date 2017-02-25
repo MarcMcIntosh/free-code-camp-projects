@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { recipeEdit } from '../actions';
 import WelcomeMessage from './WelcomeMessage';
 import Recipe from './Recipe';
+import RecipeForm from './RecipeForm';
 
 const mapStateToProps = state => ({
   active: state.active,
@@ -28,10 +29,18 @@ class Display extends Component {
     ) {
       return (<WelcomeMessage />);
     } else if (edit) {
-      return (<section className="recipe"> Recipe form</section>);
+      return (<RecipeForm />);
     }
     return (<Recipe {...recipes[active]} onEdit={() => {}} onDelete={() => {}} />);
   }
 }
+
+const { number, bool, array, func } = PropTypes;
+Display.propTypes = {
+  active: number.isRequired,
+  edit: bool.isRequired,
+  recipes: array.isRequired,
+  onEdit: func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display);
