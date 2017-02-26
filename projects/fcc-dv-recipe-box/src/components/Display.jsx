@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { recipeEdit } from '../actions';
 import WelcomeMessage from './WelcomeMessage';
 import Recipe from './Recipe';
-import RecipeForm from './RecipeForm';
+import RecipeForm from './Form/Recipe';
 
 const mapStateToProps = state => ({
   active: state.active,

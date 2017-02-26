@@ -1,40 +1,68 @@
 import React, { PropTypes } from 'react';
-import { Field } from 'redux-form';
-import { Add, Delete } from '../Buttons';
 
 const Ingredient = ({
-  fields,
-  meta: { touched, error },
-}) => (<ul>
-  <li>
-    <Add title="Add Ingredient" onClick={() => fields.push({})} />
-    {touched && error && <span>{error}</span>}
-  </li>
-  {fields.map((item, index) => {
-    const name = `${item}.name`;
-    const quantity = `${item}.quantity`;
-    return (<li>
-      <Delete title="Remove Ingredient" onClick={() => fields.remove(index)} />
-      <label htmlFor={name}>Ingredient</label>
-      <Field name={name} type="text" component="input" />
-      <label htmlFor={quantity}>Quantity</label>
-      <Field name={quantity} type="number" component="input" />
+  editing,
+  value,
+  onCancel,
+  onSave,
+  onDelete,
+  onEdit,
+  onChange,
+  ...props
+}) => {
+  const handleKeyPress = (event) => {
+    event.preventDefault();
+    switch (event.key) {
+      case 'Escape' : return onCancel();
+      case 'Enter' : return onSave();
+      default: return undefined;
+    }
+  };
+  if (editing) {
+    return (<li {...props}>
+      <label htmlFor="ingredient">
+        Ingredient
+        <a className="material-icons done" tabIndex="0" onClick={onSave} title="save" >check</a>
+        <a className="material-icons close" tabIndex="0" onClick={onCancel} title="cancel">close</a>
+      </label>
+      <input
+        name="ingredient"
+        type="text"
+        value={value}
+        onChange={onChange}
+        onKeyPress={handleKeyPress}
+        required
+      />
     </li>);
-  })}
-  {error && <li className="error">{error}</li>}
-</ul>);
-
-const { func, shape, any, bool } = PropTypes;
-Ingredient.propTypes = {
-  fields: shape({
-    push: func.isRequired,
-    remove: func.isRequired,
-    map: func.isRequired,
-  }).isRequired,
-  meta: shape({
-    touched: bool.isRequired,
-    error: any,
-  }).isRequired,
+  }
+  return (<li {...props}>
+    <a
+      className="material-icons edit"
+      tabIndex="0"
+      onClick={onEdit}
+      title="edit ingredient"
+    >mode_edit</a>
+    <a
+      className="material-icons delete"
+      tabIndex="0"
+      onClick={onDelete}
+      title="remove ingredient"
+    >delete</a>
+    <p>{value}</p>
+  </li>);
 };
+
+const { func, bool, string } = PropTypes;
+Ingredient.propTypes = {
+  value: string,
+  editing: bool.isRequired,
+  onCancel: func.isRequired,
+  onDelete: func.isRequired,
+  onEdit: func.isRequired,
+  onSave: func.isRequired,
+  onChange: func.isRequired,
+};
+
+Ingredient.defaultProps = { value: '' };
 
 export default Ingredient;
