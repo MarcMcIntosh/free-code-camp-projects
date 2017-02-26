@@ -3,7 +3,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Button, { Add } from './Buttons';
 import { recipeEdit, recipeAdd } from '../actions';
-import Ingredient from './Ingredient';
 
 const mapStateToProps = state => ({
   active: state.active,
@@ -20,19 +19,20 @@ class RecipeForm extends Component {
     super(props);
 
     const { name, ingredients, notes, picture } = props;
-    this.state = { name, ingredients, notes, picture, editing: -1, edit: '' };
-    this.handleChange = this.handleChange.bind(this);
+    this.state = { name, ingredients, notes, picture };
+
     this.handleSumbit = this.handleSumbit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+
+    this.addIngredient = this.addIngredient.bind(this);
+    this.removeIngredient = this.removeIngredient.bind(this);
+    this.editIngredient = this.editIngredient.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
     this.drawImage = this.drawImage.bind(this);
   }
   componentWillUnmount() {
     this.props.onCancel(false);
-  }
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
   }
   handleSumbit(event) {
     event.preventDefault();
@@ -42,10 +42,25 @@ class RecipeForm extends Component {
     this.props.onSubmit(recipe, this.props.active);
   }
   handleReset() {
-    const { name, ingredients, notes, picture } = this.props;
-    this.setState({ name, ingredients, notes, picture });
+    const { name, ingredients, notes } = this.props;
+    this.setState({ name, ingredients, notes });
   }
-
+  addIngredient() {
+    const ingredients = this.state.ingredients.concat('');
+    this.setState({ ingredients });
+  }
+  removeIngredient(n) {
+    const { ingredients } = this.state;
+    const next = [...ingredients];
+    next.splice(n, 1);
+    this.setState({ ingredients: next });
+  }
+  editIngredient(event, index) {
+    // event.preventDefault();
+    const ingredients = this.state.ingredients.slice();
+    ingredients[index] = event.target.value;
+    this.setState({ ingredients });
+  }
   handleImage(event) {
     event.preventDefault();
     const f = this.file.files[0];
@@ -103,8 +118,7 @@ class RecipeForm extends Component {
           name="name"
           type="text"
           placeholder="Title"
-          value={name}
-          onChange={this.handleChange}
+          defaultValue={name}
           required
         />
       </section>
@@ -140,51 +154,30 @@ class RecipeForm extends Component {
       </section>
 
       <section className="ingredients">
-        <legend>Ingredients <Add
-          title="Add Ingredient"
-          onClick={() => this.setState({
-            edit: '',
-            editing: ingredients.length,
-            ingredients: ingredients.concat(''),
-          })}
-        /></legend>
-        <ul className="ingredients__list">
-          {ingredients.map((d, i) => {
-            const k = i;
-            const e = this.state.editing;
-            const v = this.state.edit;
-            return (<Ingredient
-              key={k}
-              value={(i === e) ? v : d}
-              editing={e === i}
-              onEdit={() => this.setState({
-                editing: i,
-                edit: d,
-              })}
-              onDelete={() => this.setState({
-                ingredients: [
-                  ...ingredients,
-                ].splice(i, 1),
-              })}
-              onSave={() => this.setState({
-                ingredients: [
-                  ...ingredients,
-                ].splice(i, 1, v),
-                edit: '',
-                editing: -1,
-              })}
-              onCancel={() => this.setState({
-                editing: -1,
-                edit: '',
-              })}
-              onChange={event => this.setState({ edit: event.target.value })}
-            />);
-          })}
-        </ul>
+        <legend>Ingredients <Add title="Add Ingredient" onClick={this.addIngredient} /> </legend>
+        {ingredients.map((d, i) => (<div key={i}>
+          <label htmlFor="name">
+            Ingredient
+            <a
+              className="material-icons delete"
+              tabIndex="0"
+              onClick={() => this.removeIngredient(i)}
+              title="remove ingredient"
+            >delete</a>
+          </label>
+          <input
+            name="name"
+            type="text"
+            placeholder="ingredient"
+            value={d}
+            onChange={event => this.editIngredient(event, i)}
+            required
+          />
+        </div>))}
       </section>
       <section>
         <label htmlFor="notes">Preperation Notes</label>
-        <textarea name="notes" value={notes} onChange={this.handleChange} />
+        <textarea name="notes" defaultValue={notes} />
       </section>
       <Button type="submit">Submit</Button>
       <Button type="reset" onClick={this.handleReset}>Reset</Button>
