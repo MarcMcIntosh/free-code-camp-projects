@@ -1,7 +1,11 @@
+import { REHYDRATE } from 'redux-persist/constants';
+
 import {
   ACKNOWLEDGE_COOKIES,
   RECIPE_ADD,
   RECIPE_EDIT,
+  RECIPE_DELETE,
+  RECIPE_VIEW,
   TOGGLE_MENU,
   ADD_NEW,
 } from './actions';
@@ -9,7 +13,6 @@ import {
 const DEFAULT_STATE = {
   active: -1,
   recipes: [],
-  cookies: false,
   edit: false,
   menu: true,
 };
@@ -18,15 +21,18 @@ function reducer(state = DEFAULT_STATE, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case REHYDRATE: return { ...state, ...payload };
+    case RECIPE_VIEW: return { ...state, active: payload };
     case RECIPE_ADD: {
-      const recipes = [...state.recipes];
-      recipes.splice(state.active + 1, 0, payload.recipe);
-      return {
-        ...state,
-        recipes,
-        edit: false,
-        active: payload.index,
-      };
+      if (state.active === -1) {
+        /* adding a fresh one */
+        const recipes = [].concat(payload, state.recipes);
+        return { ...state, recipes, edit: false, active: 0 };
+      }
+      /* editing */
+      const recipes = state.recipes.slice();
+      recipes.splice(state.active, 1, payload.recipe);
+      return { ...state, recipes, edit: false };
     }
     case ADD_NEW: return {
       ...state,
@@ -42,6 +48,11 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state,
       edit: (payload !== undefined) ? payload : !state.edit,
     };
+    case RECIPE_DELETE: {
+      const recipes = state.recipes.slice();
+      recipes.splice(payload, 1);
+      return { ...state, recipes };
+    }
     case ACKNOWLEDGE_COOKIES: return {
       ...state,
       cookies: true,

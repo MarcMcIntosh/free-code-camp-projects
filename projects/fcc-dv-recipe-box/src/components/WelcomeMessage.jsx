@@ -9,4 +9,8 @@ const WelcomeMessage = props => (<article {...props}>
   <footer>To add and view recipes click the <i className="material-icons">menu</i> button to diplay a side menu</footer>
 </article>);
 
+WelcomeMessage.defaultProps = {
+  className: 'content',
+};
+
 export default WelcomeMessage;

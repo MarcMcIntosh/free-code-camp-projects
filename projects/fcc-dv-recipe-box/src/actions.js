@@ -15,8 +15,8 @@ export const addNew = () => ({
   type: ADD_NEW,
 });
 
-export function recipeAdd(recipe, index) {
-  return recipes({ recipe, index });
+export function recipeAdd(recipe) {
+  return recipes(recipe);
 }
 
 export const RECIPE_EDIT = 'RECIPE_EDIT';
@@ -30,6 +30,4 @@ export const recipeView = payload => ({
 });
 
 export const RECIPE_DELETE = 'RECIPE_DELETE';
-export const recipeDelete = payload => ({
-  type: RECIPE_DELETE, payload,
-});
+export const recipeDelete = payload => ({ type: RECIPE_DELETE, payload });

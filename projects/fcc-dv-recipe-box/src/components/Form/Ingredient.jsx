@@ -11,7 +11,6 @@ const Ingredient = ({
   ...props
 }) => {
   const handleKeyPress = (event) => {
-    event.preventDefault();
     switch (event.key) {
       case 'Escape' : return onCancel();
       case 'Enter' : return onSave();

@@ -34,10 +34,11 @@ class Recipe extends Component {
     return false;
   }
   render() {
-    const { name, ingredients, picture, notes } = this.props;
+    const { name, ingredients, picture, notes, onClose } = this.props;
     const { options, enlarge } = this.state;
     const imgCN = (enlarge) ? 'recipe__image--enlarge' : 'recipe__image';
     return (<article className="recipe">
+      <a className="material-icons close" tabIndex="0" onClick={onClose}>close</a>
       <header className="recipe__header">
         <h1>{name}</h1>
         {(picture) ? (<a tabIndex="0" className={imgCN} onClick={this.handleImage}>
@@ -80,6 +81,7 @@ Recipe.propTypes = {
   onDelete: func.isRequired,
   name: string.isRequired,
   ingredients: arrayOf(string).isRequired,
+  onClose: func.isRequired,
   notes: string,
   picture: string,
 };

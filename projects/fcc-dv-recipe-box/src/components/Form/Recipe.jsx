@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCancel: () => dispatch(recipeEdit(false)),
-  onSubmit: (obj, n) => dispatch(recipeAdd(obj, n)),
+  onSubmit: obj => dispatch(recipeAdd(obj)),
 });
 
 
@@ -38,6 +38,9 @@ class RecipeForm extends Component {
     event.preventDefault();
     const { name, notes, ingredients, picture } = this.state;
     const recipe = { name, notes, ingredients, picture };
+    if (this.state.editing !== -1 && this.state.edit.length > 0) {
+      recipe.ingredients[this.state.editing] = this.state.edit;
+    }
     this.props.onSubmit(recipe, this.props.active);
   }
   handleReset() {

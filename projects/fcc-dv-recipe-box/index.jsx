@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import Recipes from './src/components/Recipes/Main';
+// import Recipes from './src/components/Recipes/Main';
 import Menu from './src/components/Menu';
 import Display from './src/components/Display';
 
@@ -28,7 +28,7 @@ Container.defaultProps = { className: 'recipe-box' };
 
 export default Container;
 export {
-  Recipes,
+//  Recipes,
   Menu,
   Display,
 };
