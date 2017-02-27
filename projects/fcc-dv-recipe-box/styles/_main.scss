@@ -1,4 +1,5 @@
 @import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
+@import "~@material/typography/mixins.scss";
 // @import "mixins";
 // @import "recipes.scss";
 @import "icons";
@@ -11,7 +12,11 @@ $medium-screen: 600px;
 $large-screen: 900px;
 
 .recipe-box {
-  // @include fill-parent;
+  $white: #fff;
+  $background-color: #f1f1f1;
+  $gray: #a1a1a1;
+  $medium-screen: 600px;
+  $large-screen: 900px;
   $menu-open-min-width: 10em;
   $menu-open-max-width: 50%;
 
@@ -25,12 +30,13 @@ $large-screen: 900px;
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  margin: 0;
   background-color: $background-color;
   // justify-content: flex-start;
   .content {
     flex-basis: auto;
     padding: 6px;
-    background: transpatent;
+    background: $white;
   }
 
   .menu {
@@ -112,6 +118,23 @@ $large-screen: 900px;
     padding: 6px;
     transition: all .25s linear;
     background-color: $white;
+
+    a.material-icons {
+      margin: 6px;
+      color: $gray;
+      cursor: pointer;
+
+      &.close {
+        float: right;
+        clear: both;
+      }
+    }
+
+    &__header {
+      h1 {
+        @include mdc-typography(display4);
+      }
+    }
 
     &__form {
       background-color: $white;

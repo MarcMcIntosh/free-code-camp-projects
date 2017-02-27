@@ -38,7 +38,12 @@ class Recipe extends Component {
     const { options, enlarge } = this.state;
     const imgCN = (enlarge) ? 'recipe__image--enlarge' : 'recipe__image';
     return (<article className="recipe">
-      <a className="material-icons close" tabIndex="0" onClick={onClose}>close</a>
+      <a
+        className="material-icons close"
+        tabIndex="0"
+        onClick={onClose}
+        title="close recipe"
+      >close</a>
       <header className="recipe__header">
         <h1>{name}</h1>
         {(picture) ? (<a tabIndex="0" className={imgCN} onClick={this.handleImage}>
