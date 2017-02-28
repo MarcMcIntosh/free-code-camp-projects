@@ -1,15 +1,6 @@
 @import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
-@import "~@material/typography/mixins.scss";
-// @import "mixins";
-// @import "recipes.scss";
+@import "~@material/typography/mixins";
 @import "icons";
-// @import "cards";
-
-$white: #fff;
-$background-color: #f1f1f1;
-$gray: #a1a1a1;
-$medium-screen: 600px;
-$large-screen: 900px;
 
 .recipe-box {
   $white: #fff;
@@ -33,6 +24,9 @@ $large-screen: 900px;
   margin: 0;
   background-color: $background-color;
   // justify-content: flex-start;
+
+  p { @include mdc-typography(body2); }
+
   .content {
     flex-basis: auto;
     padding: 6px;
@@ -132,27 +126,53 @@ $large-screen: 900px;
 
     &__header {
       h1 {
-        @include mdc-typography(display4);
+        @include mdc-typography(headline);
       }
+
+      img {
+        margin-bottom: 12px;
+      }
+    }
+
+    &__ingredients {
+      // clear: both;
+      margin-bottom: 6px;
+      i { @include mdc-typography(caption); }
+      li { @include mdc-typography(body2); }
+    }
+
+    &__notes {
+      // margin-top: 6px;
+      i { @include mdc-typography(caption); }
+      p { @include mdc-typography(body2); }
+    }
+
+    &__image {
+      max-width: 100%;
+      height: auto;
+      margin: auto;
+      margin-top: 6px;
+      float: right;
+      border-radius: 20px;
     }
 
     &__form {
       background-color: $white;
 
-      .close,
-      .delete {
+      .controls {
         float: right;
-        color: $gray;
-        cursor: pointer;
+        clear: both;
+      }
+      li { @include mdc-typography(subheading2); }
+
+      .ingredients {
+        margin-bottom: 24px;
       }
     }
 
     &__options {
       position: relative;
-      float: right;
-      // border: 1px solid #a1a1a1;
-      // background-color: $white;
-      // border: none;
+      clear: both;
       border-bottom: none;
       color: #a1a1a1;
       text-align: center;
@@ -163,6 +183,7 @@ $large-screen: 900px;
 
       a {
         margin: 6px;
+        float: right;
         color: inherit;
         cursor: pointer;
       }

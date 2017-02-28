@@ -147,7 +147,7 @@ class RecipeForm extends Component {
           onClick={() => this.setState({
             edit: '',
             editing: ingredients.length,
-            ingredients: ingredients.concat(''),
+            ingredients: ingredients.filter(ing => ing.length > 0).concat(''),
           })}
         /></legend>
         <ul className="ingredients__list">
@@ -169,15 +169,20 @@ class RecipeForm extends Component {
                 this.setState({ ingredients: arr });
               }}
               onSave={() => {
-                const arr = ingredients.slice();
-                arr.splice(i, 1, v);
-                this.setState({
-                  ingredients: arr,
-                  edit: '',
-                  editing: -1,
-                });
+                if (v.length > 0) {
+                  const arr = ingredients.slice();
+                  arr.splice(i, 1, v);
+                  return this.setState({
+                    ingredients: arr,
+                    edit: '',
+                    editing: -1,
+                  });
+                }
+                const arr = ingredients.filter(ing => ing.length > 0);
+                return this.setState({ ingredients: arr, edit: '', editing: -1 });
               }}
               onCancel={() => this.setState({
+                ingredients: ingredients.filter(ing => ing.length > 0),
                 editing: -1,
                 edit: '',
               })}

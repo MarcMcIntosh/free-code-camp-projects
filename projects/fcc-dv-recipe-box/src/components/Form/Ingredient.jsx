@@ -19,10 +19,12 @@ const Ingredient = ({
   };
   if (editing) {
     return (<li {...props}>
-      <label htmlFor="ingredient">
-        Ingredient
+      <span className="controls">
         <a className="material-icons done" tabIndex="0" onClick={onSave} title="save" >check</a>
         <a className="material-icons close" tabIndex="0" onClick={onCancel} title="cancel">close</a>
+      </span>
+      <label htmlFor="ingredient">
+        Ingredient
       </label>
       <input
         name="ingredient"
@@ -35,19 +37,21 @@ const Ingredient = ({
     </li>);
   }
   return (<li {...props}>
-    <a
-      className="material-icons edit"
-      tabIndex="0"
-      onClick={onEdit}
-      title="edit ingredient"
-    >mode_edit</a>
-    <a
-      className="material-icons delete"
-      tabIndex="0"
-      onClick={onDelete}
-      title="remove ingredient"
-    >delete</a>
-    <p>{value}</p>
+    <span className="controls">
+      <a
+        className="material-icons edit"
+        tabIndex="0"
+        onClick={onEdit}
+        title="edit ingredient"
+      >mode_edit</a>
+      <a
+        className="material-icons delete"
+        tabIndex="0"
+        onClick={onDelete}
+        title="remove ingredient"
+      >delete</a>
+    </span>
+    {value}
   </li>);
 };
 

@@ -35,8 +35,7 @@ class Recipe extends Component {
   }
   render() {
     const { name, ingredients, picture, notes, onClose } = this.props;
-    const { options, enlarge } = this.state;
-    const imgCN = (enlarge) ? 'recipe__image--enlarge' : 'recipe__image';
+    const { options } = this.state;
     return (<article className="recipe">
       <a
         className="material-icons close"
@@ -45,19 +44,25 @@ class Recipe extends Component {
         title="close recipe"
       >close</a>
       <header className="recipe__header">
-        <h1>{name}</h1>
-        {(picture) ? (<a tabIndex="0" className={imgCN} onClick={this.handleImage}>
-          <img alt={name} src={picture} />
-        </a>) : false }
+        <h1>{name}
+          {(picture) ? (<img className="recipe__image" alt={name} src={picture} />) : false }
+        </h1>
       </header>
 
       <section className="recipe__ingredients">
+        <i>Ingredients</i>
         <ul>{ingredients.map((d, i) => (
           <li key={i}>{d}</li>
-        ))}</ul>
+        ))}
+        </ul>
       </section>
 
-      {(notes.length > 0) ? (<p className="recipe__notes">{notes}</p>) : false }
+      {(notes.length > 0) ? (
+        <section className="recipe__notes">
+          <i>Preperation Notes</i>
+          <p>{notes}</p>
+        </section>
+      ) : false }
 
       <footer className="recipe__options">
         {(!options) ? false : (<span>
