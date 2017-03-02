@@ -1,5 +1,5 @@
 {
-  "name": "fcc-dv-skeleton",
+  "name": "fcc-dv-game-of-life",
   "version": "0.0.1",
   "description": "Skeleton Project for free code camp data visulisation projects",
   "main": "index.js",
