@@ -1,8 +1,26 @@
 
 .game-of-life {
+  $blue: #6a5acd;
+  $gray: 	#708090;
+  $black: #000;
 
-  .game {
+  .board {
     width: 100%;
-    height: auto;
+    height: 100%;
+    margin: auto;
+  }
+
+  .cell {
+    stroke-width: 1px;
+    stroke-opacity: .5;
+    stroke: $black;
+
+    &--alive {
+      fill: $blue;
+    }
+
+    &--dead {
+      fill: $gray;
+    }
   }
 }

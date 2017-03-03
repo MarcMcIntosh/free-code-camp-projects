@@ -222,14 +222,7 @@ rules:
         - fieldset
   # Styles for components should never need the universal selector.
   selector-no-universal: true
-  # Ensure any defined symbols are prefixed with "mdc-"
-  # TODO: Remove "md-" pattern.
-  custom-media-pattern: ^mdc?-.+
-  custom-property-pattern: ^mdc?-.+
-  selector-class-pattern:
-    - ^mdc?-.+
-    - resolveNestedSelectors: true
-  selector-id-pattern: ^mdc?-.+
+
   # Names are more semantic than numbers
   font-weight-notation: named-where-possible
   # http://www.paulirish.com/2010/the-protocol-relative-url/
