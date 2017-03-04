@@ -1,4 +1,4 @@
-import { zeroGame, randomGame } from './utils/game';
+import { nextGame, zeroGame, randomGame } from './utils/game';
 
 import {
   RESET_GAME,
@@ -8,6 +8,7 @@ import {
   NEXT_GEN,
   SET_GAME,
   SET_RANDOM,
+  UPDATE_GEN,
 } from './actions';
 
 const DEFAULT_STATE = {
@@ -40,9 +41,17 @@ function reducer(state = DEFAULT_STATE, action) {
     case TOGGLE_PLAY: return {
       ...state,
       running: !state.running,
-      timer: action.payload || null,
+      timer: action.payload || -1,
     };
-    case NEXT_GEN: return { ...state, ...action.payload };
+    case NEXT_GEN: return {
+      ...state,
+      timer: action.payload,
+    };
+    case UPDATE_GEN: return {
+      ...state,
+      game: nextGame(state.game),
+      gen: state.gen + 1,
+    };
     case SET_GAME: return { ...state, ...action.payload };
     default: return state;
   }

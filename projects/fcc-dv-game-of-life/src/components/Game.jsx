@@ -1,16 +1,17 @@
 /* eslint jsx-a11y/no-static-element-interactions: off */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { togglePlay, setGame } from '../actions';
+import { setGame, nextGen, updateGen } from '../actions';
 
 const mapStateToProps = (state) => {
-  const { game, speed, running, timer, width, height } = state;
-  return { game, speed, running, timer, width, height };
+  const { game, speed, running, timer, width, height, gen } = state;
+  return { game, speed, running, timer, width, height, gen };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onTogglePlay: payload => dispatch(togglePlay(payload)),
   onSetGame: payload => dispatch(setGame(payload)),
+  onNextGen: timer => dispatch(nextGen(timer)),
+  onUpdateGen: () => dispatch(updateGen()),
 });
 
 class Game extends Component {
@@ -18,6 +19,15 @@ class Game extends Component {
     super(props);
     this.state = { display: 'svg' };
     this.handleClickSVG = this.handleClickSVG.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    const { running, gen, speed, timer, onUpdateGen, onNextGen } = this.props;
+    if (!running) {
+      clearTimeout(timer);
+    } else if (timer === prevProps.timer && gen === prevProps.gen) {
+      clearTimeout(timer);
+      onNextGen(setTimeout(onUpdateGen, speed));
+    }
   }
   handleClickSVG(event) {
     const arr = this.props.game.slice();
@@ -38,10 +48,14 @@ const { func, number, array, bool } = PropTypes;
 Game.propTypes = {
   game: array.isRequired,
   running: bool.isRequired,
-  onTogglePlay: func.isRequired,
   onSetGame: func.isRequired,
+  onNextGen: func.isRequired,
+  onUpdateGen: func.isRequired,
   width: number.isRequired,
   height: number.isRequired,
+  gen: number.isRequired,
+  timer: number.isRequired,
+  speed: number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

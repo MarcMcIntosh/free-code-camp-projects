@@ -10,11 +10,17 @@ export const setSpeed = payload => ({ type: SET_SPEED, payload });
 export const SET_SIZE = 'SET_SIZE';
 export const setSize = payload => ({ type: SET_SIZE, payload });
 
-export const NEXT_GEN = 'NEXT_GEN';
-export const nextGen = () => ({ type: NEXT_GEN });
-
 export const SET_GAME = 'SET_GAME';
 export const setGame = payload => ({ type: SET_GAME, payload });
 
 export const SET_RANDOM = 'SET_RANDOM';
 export const setRandom = () => ({ type: SET_RANDOM });
+
+export const NEXT_GEN = 'NEXT_GEN';
+export const nextGen = payload => dispatch => dispatch({
+  type: NEXT_GEN,
+  payload,
+});
+
+export const UPDATE_GEN = 'UPDATE_GEN';
+export const updateGen = () => dispatch => dispatch({ type: UPDATE_GEN });

@@ -1,3 +1,9 @@
-export { zeroGame } from './zeroGame';
-export { randomGame } from './randomGame';
-export { nextGame } from './nextGame';
+import zeroGame from './zeroGame';
+import randomGame from './randomGame';
+import nextGame from './nextGame';
+
+export {
+  zeroGame,
+  randomGame,
+  nextGame,
+};
