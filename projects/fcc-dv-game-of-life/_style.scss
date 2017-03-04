@@ -1,8 +1,37 @@
+@import "~mdc-range-slider/mdc-range-slider.scss";
 
 .game-of-life {
   $blue: #6a5acd;
   $gray: 	#708090;
   $black: #000;
+
+  button {
+    &.material-icons {
+      padding: 0;
+    }
+
+    &.reset {
+      background-color: red;
+    }
+
+    &.play {
+      background-color: $blue;
+    }
+
+    &.pause {
+      background-color: $gray;
+    }
+  }
+
+  .cells {
+    button {
+      background-color: $blue;
+
+      &:disabled {
+        background-color: $gray;
+      }
+    }
+  }
 
   .board {
     width: 100%;
