@@ -3,7 +3,7 @@ function randomGame(w, h) {
     ...Array(h),
   ].fill([
     ...Array(w),
-  ].fill(Math.round(Math.random())));
+  ].map(() => Math.round(Math.random())));
 }
 
 module.exports = randomGame;

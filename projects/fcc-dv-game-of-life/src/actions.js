@@ -11,7 +11,7 @@ export const SET_SIZE = 'SET_SIZE';
 export const setSize = payload => ({ type: SET_SIZE, payload });
 
 export const SET_GAME = 'SET_GAME';
-export const setGame = payload => ({ type: SET_GAME, payload });
+export const setGame = payload => dispatch => dispatch({ type: SET_GAME, payload });
 
 export const SET_RANDOM = 'SET_RANDOM';
 export const setRandom = () => ({ type: SET_RANDOM });

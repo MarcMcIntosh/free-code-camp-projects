@@ -35,12 +35,12 @@
   }
 
   .board {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: auto;
     margin: auto;
   }
 
-  .cell {
+  rect.cell {
     stroke-width: 1px;
     stroke-opacity: .5;
     stroke: $black;

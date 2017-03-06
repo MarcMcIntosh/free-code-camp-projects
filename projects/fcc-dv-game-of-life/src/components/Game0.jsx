@@ -2,11 +2,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setGame, nextGen, updateGen } from '../actions';
-import Table from './Table';
 
 const mapStateToProps = (state) => {
-  const { game, speed, running, timer, gen } = state;
-  return { game, speed, running, timer, gen };
+  const { game, speed, running, timer, width, height, gen } = state;
+  return { game, speed, running, timer, width, height, gen };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -18,7 +17,8 @@ const mapDispatchToProps = dispatch => ({
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { display: 'svg' };
+    this.handleClickSVG = this.handleClickSVG.bind(this);
   }
   componentDidUpdate(prevProps) {
     const { running, gen, speed, timer, onUpdateGen, onNextGen } = this.props;
@@ -30,18 +30,19 @@ class Game extends Component {
       onNextGen(t);
     }
   }
-  handleClick(event) {
-    const nm = event.target.name.split('.');
-    const y = nm[0];
-    const x = nm[1];
-    const v = event.target.value;
+  handleClickSVG(event) {
     const arr = this.props.game.slice();
-    arr[y][x] = v ? 0 : 1;
+    const y = event.target.y.animVal.value;
+    const x = event.target.x.animVal.value;
+    arr[y][x] = (arr[y][x]) ? 0 : 1;
     this.props.onSetGame(arr);
   }
   render() {
-    const { game } = this.props;
-    return (<Table data={game} onClick={this.handleClick} />);
+    const { width, height, game } = this.props;
+    return (<svg className="board" viewBox={`0 0 ${width} ${height}`}>{game.map((y, i) => y.map((x, ii) => (
+      <rect onClick={this.handleClickSVG} y={i} x={ii} width="1" height="1" className={(x) ? 'cell--alive' : 'cell--dead'} />
+    )))
+    }</svg>);
   }
 }
 
@@ -52,6 +53,8 @@ Game.propTypes = {
   onSetGame: func.isRequired,
   onNextGen: func.isRequired,
   onUpdateGen: func.isRequired,
+  width: number.isRequired,
+  height: number.isRequired,
   gen: number.isRequired,
   timer: number.isRequired,
   speed: number.isRequired,
