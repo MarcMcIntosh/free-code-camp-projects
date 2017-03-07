@@ -24,3 +24,6 @@ export const nextGen = payload => dispatch => dispatch({
 
 export const UPDATE_GEN = 'UPDATE_GEN';
 export const updateGen = () => dispatch => dispatch({ type: UPDATE_GEN });
+
+export const TOGGLE_SQUARE = 'TOGGLE_SQUARE';
+export const toggleSquare = payload => dispatch => dispatch({ type: TOGGLE_SQUARE, payload });

@@ -23,6 +23,10 @@ Container.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+Container.defaultProps = {
+  className: 'game-of-life',
+};
+
 export default Container;
 export {
   Settings,

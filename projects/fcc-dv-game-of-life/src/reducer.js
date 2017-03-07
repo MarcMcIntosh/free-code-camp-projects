@@ -9,6 +9,7 @@ import {
   SET_GAME,
   SET_RANDOM,
   UPDATE_GEN,
+  TOGGLE_SQUARE,
 } from './actions';
 
 const DEFAULT_STATE = {
@@ -43,6 +44,15 @@ function reducer(state = DEFAULT_STATE, action) {
       running: !state.running,
       timer: action.payload || -1,
     };
+    case TOGGLE_SQUARE: {
+      const { x, y } = action.payload;
+      const game = [...state.game];
+      const row = [...game[y]];
+      row[x] = row[x] ? 0 : 1;
+      // row.splice(x, 1, row[x] ? 0 : 1);
+      game.splice(y, 1, row);
+      return { ...state, game };
+    }
     case NEXT_GEN: return {
       ...state,
       timer: action.payload,
@@ -52,7 +62,7 @@ function reducer(state = DEFAULT_STATE, action) {
       game: nextGame(state.game),
       gen: state.gen + 1,
     };
-    case SET_GAME: return { ...state, ...action.payload };
+    case SET_GAME: return { ...state, game: action.payload };
     default: return state;
   }
 }

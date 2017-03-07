@@ -5,6 +5,21 @@
   $blue: #6a5acd;
   $gray: 	#708090;
   $black: #000;
+  $cell-size: 18px;
+
+  table,
+  tr,
+  td {
+    // margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    // border: 0;
+    line-height: 0;
+    border-collapse: collapse;
+    // border-spacing: 0;
+    // padding: 0;
+    // table-layout: fixed;
+  }
 
   button {
     &.material-icons {
@@ -22,35 +37,25 @@
     &.pause {
       background-color: $gray;
     }
-  }
 
-  .cells {
-    button {
-      background-color: $blue;
+    &.cell {
+      width: $cell-size;
+      height: $cell-size;
+      border-width: 0;
 
-      &:disabled {
+      &--alive {
+        background-color: $blue;
+      }
+
+      &--dead {
         background-color: $gray;
       }
     }
   }
 
-  .board {
-    width: 50%;
-    height: auto;
+  &__board {
+    // width: 50%;
+    // height: auto;
     margin: auto;
-  }
-
-  rect.cell {
-    stroke-width: 1px;
-    stroke-opacity: .5;
-    stroke: $black;
-
-    &--alive {
-      fill: $blue;
-    }
-
-    &--dead {
-      fill: $gray;
-    }
   }
 }

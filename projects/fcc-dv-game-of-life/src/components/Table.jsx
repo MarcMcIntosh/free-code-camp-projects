@@ -6,13 +6,13 @@ const Table = ({
   data,
   onClick,
   ...props
-}) => (
-  <table {...props}>{data.map((y, i) => (<tr key={i}>{
+}) => (<table {...props}><tbody>{
+  data.map((y, i) => (<tr key={i}>{
     y.map((x, ii) => (<td className="cell" key={ii}>
       <Button value={x} onClick={onClick} name={`${i}.${ii}`} />
     </td>))}</tr>
-  ))}</table>
-);
+  ))
+}</tbody></table>);
 
 const { array, func } = PropTypes;
 Table.propTypes = {
