@@ -24,7 +24,17 @@ const DEFAULT_STATE = {
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case SET_SIZE: return { ...state, ...action.payload };
+    case SET_SIZE: {
+      const { width, height } = action.payload;
+      if (width > state.width || height > state.height) {
+        const game = state.game.map(d => d.concat(
+          Array.from(new Array(width - state.width), () => 0),
+        )).concat(zeroGame(width, height - state.height));
+        return { ...state, width, height, game };
+      }
+      const game = state.game.slice(0, height).map(d => d.slice(0, width));
+      return { ...state, width, height, game };
+    }
     case SET_SPEED: return { ...state, speed: action.payload };
     case SET_RANDOM: return {
       ...state,

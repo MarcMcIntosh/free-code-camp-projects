@@ -26,21 +26,17 @@ const BottomMenu = ({
   <div className="size" >Board size:
     <span className="button__group">
       <Button
+        disabled={width === 9}
+        onClick={() => onSetSize({ width: 9, height: 9 })}
+      >9x9</Button>
+      <Button
         disabled={width === 16}
         onClick={() => onSetSize({ width: 16, height: 16 })}
       >16x16</Button>
       <Button
-        disabled={width === 50}
-        onClick={() => onSetSize({ width: 50, height: 30 })}
-      >50X30</Button>
-      <Button
-        disabled={width === 70}
-        onClick={() => onSetSize({ width: 70, height: 50 })}
-      >70X50</Button>
-      <Button
-        disabled={width === 100}
-        onClick={() => onSetSize({ width: 100, height: 80 })}
-      >100X80</Button>
+        disabled={width === 28}
+        onClick={() => onSetSize({ width: 28, height: 28 })}
+      >28X28</Button>
     </span>
   </div>
   <div className="speed">
