@@ -23,16 +23,28 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.run = this.run.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.running) this.run();
   }
   componentDidUpdate(prevProps) {
-    const { running, gen, speed, timer, onUpdateGen, onNextGen } = this.props;
-    if (!running) {
-      clearTimeout(timer);
-    } else if (timer === prevProps.timer && gen === prevProps.gen) {
-      clearTimeout(timer);
-      const t = setTimeout(() => onUpdateGen(), speed);
-      onNextGen(t);
+    if (!this.props.running) {
+      clearTimeout(this.props.timer);
+    } else if (
+      this.props.gen !== prevProps.gen || (
+        this.props.timer === prevProps.timer
+        && this.props.gen === prevProps.gen
+      ) || (
+        this.props.running && !prevProps.running
+      )
+    ) {
+      this.run();
     }
+  }
+  run() {
+    clearTimeout(this.props.timer);
+    this.props.onNextGen(setTimeout(() => this.props.onUpdateGen(), this.props.speed));
   }
   /* handleClick(event) {
     const nm = event.target.name.split('.');
@@ -48,14 +60,15 @@ class Game extends Component {
     this.props.onToggleSquare({ y, x });
   }
   render() {
-    const { game } = this.props;
-    return (<table className="game-of-life__board"><tbody>{game.map((y, i) => (<tr key={i}>{
-      y.map((x, ii) => (<td key={ii}><Button
-        value={`${i}.${ii}`}
-        onClick={this.handleClick}
-        className={x ? 'cell cell--alive' : 'cell cell--dead'}
-      /></td>))
-    }</tr>))}</tbody></table>);
+    return (<table className="game-of-life__board">
+      <tbody>{this.props.game.map((y, i) => (<tr key={i}>{
+        y.map((x, ii) => (<td key={ii}><Button
+          value={`${i}.${ii}`}
+          onClick={this.handleClick}
+          className={x ? 'cell cell--alive' : 'cell cell--dead'}
+        /></td>))
+      }</tr>))}</tbody>
+    </table>);
   }
 }
 

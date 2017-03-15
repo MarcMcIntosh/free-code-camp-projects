@@ -23,8 +23,9 @@ const BottomMenu = ({
   width,
   speed,
 }) => (<div className="bottom-menu">
-  <div className="size" >Board size:
-    <span className="button__group">
+  <div className="control__size">
+    <h3 className="subtitle">Board size</h3>
+    <div className="button__group">
       <Button
         disabled={width === 9}
         onClick={() => onSetSize({ width: 9, height: 9 })}
@@ -36,17 +37,17 @@ const BottomMenu = ({
       <Button
         disabled={width === 28}
         onClick={() => onSetSize({ width: 28, height: 28 })}
-      >28X28</Button>
-    </span>
+      >28x28</Button>
+    </div>
   </div>
-  <div className="speed">
-  Delay:
-  <input
-    type="range"
-    step={100} min={0} max={1000} value={speed}
-    onChange={onSetSpeed}
-    className="mdc-range-slider mdc-range-slider--primary"
-  />
+  <div className="control__speed">
+    <h3 className="subtitle">Delay</h3>
+    <input
+      type="range"
+      step={100} min={0} max={1000} value={speed}
+      onChange={onSetSpeed}
+      className="mdc-range-slider mdc-range-slider--primary"
+    />
   </div>
 </div>);
 

@@ -29,18 +29,26 @@ const TopMenu = ({
   gen,
   timer,
 }) => (<div className="top-menu">
-  <div className="controls">
-    <Button className="play" onClick={onTogglePlay} disabled={running}>Run</Button>
-    <Button
-      className="pause"
-      onClick={() => { clearTimeout(timer); return onTogglePlay(); }}
-      disabled={!running}
-    >Pause</Button>
-    <Button
-      className="reset"
-      onClick={() => { clearTimeout(timer); return onResetGame(); }}
-    >Reset</Button>
-    <Button className="random" onClick={onSetRandom}>Random</Button>
+  <h2 className="title">{'Conway\'s Game of Life'}</h2>
+  <div className="controls__game">
+    <div className="button__group">
+      <Button className="play" onClick={onTogglePlay} disabled={running}>Run</Button>
+      <Button
+        className="pause"
+        onClick={() => { clearTimeout(timer); return onTogglePlay(); }}
+        disabled={!running}
+      >Pause</Button>
+    </div>
+  </div>
+  <div className="controls__board">
+    <h3 className="subtitle">Set Board</h3>
+    <div className="button__group">
+      <Button
+        className="reset"
+        onClick={() => { clearTimeout(timer); return onResetGame(); }}
+      >Reset</Button>
+      <Button className="random" onClick={onSetRandom}>Random</Button>
+    </div>
   </div>
   <div className="generation">Generation: {gen}</div>
 </div>);

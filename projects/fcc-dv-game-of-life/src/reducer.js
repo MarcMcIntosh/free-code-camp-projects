@@ -1,4 +1,4 @@
-import { nextGame, zeroGame, randomGame } from './utils/game';
+import { nextGame, zeroGame, randomGame, isOver } from './utils/game';
 
 import {
   RESET_GAME,
@@ -16,7 +16,7 @@ const DEFAULT_STATE = {
   width: 16,
   height: 16,
   running: true,
-  speed: 1000,
+  speed: 500,
   game: randomGame(16, 16),
   gen: 0,
   timer: -1,
@@ -67,11 +67,16 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state,
       timer: action.payload,
     };
-    case UPDATE_GEN: return {
-      ...state,
-      game: nextGame(state.game),
-      gen: state.gen + 1,
-    };
+    case UPDATE_GEN: {
+      const game = nextGame(state.game);
+      const done = isOver(state.game, game);
+      return {
+        ...state,
+        game,
+        gen: state.gen + 1,
+        running: done,
+      };
+    }
     case SET_GAME: return { ...state, game: action.payload };
     default: return state;
   }

@@ -12,10 +12,9 @@ class Container extends Component {
     this.store = store;
   }
   render() {
-    const { children, ...props } = this.props;
     return (
       <Provider store={this.store}>
-        <div {...props}>{children}</div>
+        <div className="game-of-life">{this.props.children}</div>
       </Provider>
     );
   }
@@ -23,10 +22,6 @@ class Container extends Component {
 
 Container.propTypes = {
   children: PropTypes.node.isRequired,
-};
-
-Container.defaultProps = {
-  className: 'game-of-life',
 };
 
 export default Container;
