@@ -1,3 +1,4 @@
+
 function nextGame(arr) {
   return arr.map((col, i) => {
     const above = (i === 0) ? arr[arr.length - 1] : arr[i - 1];
