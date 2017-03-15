@@ -29,7 +29,7 @@ const TopMenu = ({
   gen,
   timer,
 }) => (<div className="top-menu">
-  <div className="button__group">
+  <div className="controls">
     <Button className="play" onClick={onTogglePlay} disabled={running}>Run</Button>
     <Button
       className="pause"

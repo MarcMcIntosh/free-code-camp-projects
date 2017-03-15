@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetSpeed: event => dispatch(setSpeed(event.target.value)),
+  onSetSpeed: event => dispatch(setSpeed(+event.target.value)),
   onSetSize: obj => dispatch(setSize(obj)),
 });
 

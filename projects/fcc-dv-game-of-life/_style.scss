@@ -57,16 +57,13 @@
     }
   }
 
-  .top-menu {
-    margin: auto;
+  .top-menu,
+  .bottom-menu {
+    text-align: center;
   }
 
   .generation {
     /* * */
-  }
-
-  .bottom-menu {
-    margin: auto;
   }
 
   &__board {
