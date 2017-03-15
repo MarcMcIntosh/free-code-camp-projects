@@ -53,11 +53,11 @@ class Settings extends Component {
         <h1 className="game-of-life__title">
           {'Conway\'s Game of Life'}
         </h1>
-        <Button
-          title={expanded ? 'close settings' : 'open settings'}
-          className="material-icons settings" onClick={this.expand}
-        >{expanded ? 'close' : 'settings'}</Button>
       </header>
+      <Button
+        title={expanded ? 'close settings' : 'open settings'}
+        className="material-icons settings" onClick={this.expand}
+      >{expanded ? 'close' : 'settings'}</Button>
       <PlayPause
         running={running}
         onClick={() => {
@@ -75,7 +75,7 @@ class Settings extends Component {
         }}
       >Randomize</Button>
 
-      <section className={`settings__advanced--${(expanded) ? 'expanded' : 'colapsed'}`}>
+      <section className={`settings__advanced--${(expanded) ? 'open' : 'closed'}`}>
         <div className="speed">
         Game Speed
         <input

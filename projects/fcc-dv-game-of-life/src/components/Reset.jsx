@@ -2,8 +2,8 @@ import React from 'react';
 import Button from './Button';
 
 const Reset = props => (<Button
-  className="material-icons reset"
+  className="reset"
   title="reset" {...props}
->remove_circle_outline</Button>);
+>Reset</Button>);
 
 export default Reset;

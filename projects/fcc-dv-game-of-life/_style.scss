@@ -38,6 +38,10 @@
       background-color: $gray;
     }
 
+    &.settings {
+      float: right;
+    }
+
     &.cell {
       width: $cell-size;
       height: $cell-size;
@@ -53,9 +57,33 @@
     }
   }
 
+  .top-menu {
+    margin: auto;
+  }
+
+  .generation {
+    /* * */
+  }
+
+  .bottom-menu {
+    margin: auto;
+  }
+
   &__board {
     // width: 50%;
     // height: auto;
     margin: auto;
+  }
+
+  .settings__advanced {
+    &--closed {
+      /* * */
+      display: none;
+    }
+
+    &--open {
+      /* * */
+      display: block;
+    }
   }
 }
