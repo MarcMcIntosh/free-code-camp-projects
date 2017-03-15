@@ -1,5 +1,4 @@
 {
-  "name": "fcc-dv-skeleton",
   "version": "0.0.1",
   "description": "Skeleton Project for free code camp data visulisation projects",
   "main": "index.js",
@@ -9,10 +8,6 @@
     "build": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack",
     "build:all": "npm run build:dev && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.marcmcintosh.ninja/FCC-DV-skeleton"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",
@@ -61,5 +56,10 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
+  },
+  "name": "fcc-dv-dungeon-crawler",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/fcc-dv-dungeon-crawler"
   }
 }
