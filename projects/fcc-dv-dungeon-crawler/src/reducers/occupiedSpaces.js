@@ -89,30 +89,3 @@ export default function (state, action) {
     default: return state;
   }
 }
-/*
-export default function (state, action) {
-  switch (action.type) {
-    case ADD_BOSS: return {
-      ...state,
-      occupiedSpaces: {
-        ...state.occupiedSpaces,
-        [`${action.location.x}x${action.location.y}`]: 'boss',
-        [`${action.location.x + 1}x${action.location.y}`]: 'boss',
-        [`${action.location.x}x${action.location.y + 1}`]: 'boss',
-        [`${action.location.x + 1}x${action.location.y + 1}`]: 'boss',
-      },
-      entities: {
-        ...state.entities,
-        boss: {
-          entityType: 'enemy',
-          health: action.health,
-          attack: action.attack,
-          x: action.location.x,
-          y: action.location.y,
-        },
-      },
-    };
-    default: return state;
-  }
-}
-*/

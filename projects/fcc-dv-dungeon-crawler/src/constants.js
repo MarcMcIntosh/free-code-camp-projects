@@ -1,21 +1,21 @@
-export const ATTACK_VARIANCE = 7;
-export const tileType = {
+const ATTACK_VARIANCE = 7;
+const tileType = {
   WALL: 0,
   FLOOR: 1,
 };
-export const reverseLookup = ['WALL', 'FLOOR'];
-export const PLAYER = {
+const reverseLookup = ['WALL', 'FLOOR'];
+const PLAYER = {
   baseHealth: 100,
   health: 20,
   attack: 12,
   toNextLevel: 60,
 };
-export const ENEMY = {
+const ENEMY = {
   health: 20,
   attack: 12,
   xp: 10,
 };
-export const weaponTypes = [{
+const weaponTypes = [{
   entityName: 'brass knuckles',
   entityType: 'weapon',
   health: 0,
@@ -41,3 +41,12 @@ export const weaponTypes = [{
   health: 0,
   attack: 30,
 }];
+
+module.exports = {
+  ATTACK_VARIANCE,
+  tileType,
+  reverseLookup,
+  PLAYER,
+  ENEMY,
+  weaponTypes,
+};
