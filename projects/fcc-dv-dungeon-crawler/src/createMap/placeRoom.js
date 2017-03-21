@@ -7,25 +7,17 @@ const tileType = require('../constants');
 const { WALL, FLOOR } = tileType;
 
 function placeRoom(arr, max, min) {
-  // let numClear = 0;
   const wall = findWall(arr);
-  const width = Math.floor((Math.random() * (max - min)) + min);
-  const height = Math.floor((Math.random() * (max - min)) + min);
+  const w = Math.floor((Math.random() * (max - min)) + min);
+  const h = Math.floor((Math.random() * (max - min)) + min);
 
-  const { x, y } = startFrom(wall.openDir, wall.coords.x, wall.coords.y, width, height);
+  const { x, y } = startFrom(wall.openDir, wall.coords.x, wall.coords.y, w, h);
 
-  // Exit if room would be outside matrix
-  if (
-    x < 0 || y < 0 || x + width >= arr.length || y + height >= arr[0].length
-  ) {
-    return placeRoom(arr, max, min);
-  }
-  // check if all spaces are clear
+  const isClear = allClear(arr, x, y, w, h, WALL);
+  const isOut = (x < 0 || y < 0 || x + w >= arr.length || y + h >= arr[0].length);
 
-  const isClear = allClear(arr, x, y, width, height, WALL);
-  if (isClear) {
-    const arr2 = fillRect(arr, FLOOR, { x, y }, { x: width, y: height });
-
+  if (!isOut && isClear) {
+    const arr2 = fillRect(arr, x, y, w, h, FLOOR);
     arr2[wall.coords.x][wall.coords.y] = 1;
     return arr2;
   }

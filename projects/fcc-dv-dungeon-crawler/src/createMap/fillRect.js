@@ -1,6 +1,3 @@
-
-module.exports = function fillRect(arr, val, coords, size) {
-  return arr.map((d, i) => ((
-    i >= coords.x && i < coords.x + size.x
-  ) ? d.fill(val, coords.y, coords.y + size.y) : d));
+module.exports = function fillRect(arr, x, y, w, h, val) {
+  return arr.map((d, i) => ((i >= x && i < x + w) ? d.fill(val, y, y + h) : d));
 };
