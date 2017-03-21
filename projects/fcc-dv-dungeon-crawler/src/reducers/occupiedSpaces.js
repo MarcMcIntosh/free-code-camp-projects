@@ -5,7 +5,7 @@ import {
   ADD_BOSS,
   ADD_ENTITY,
   REMOVE_ENTITY,
-} from '../actions/occupiedSpaces';
+} from '../actions/OccupiedSpaces';
 
 import {
   upDateOccupiedSpaces,

@@ -1,13 +1,17 @@
 const isWall = require('./isWall');
 
 module.exports = function findWall(arr) {
-  const coords = { x: 0, y: 0 };
+  let x = 0;
+  let y = 0;
   let openDir = false;
   do {
-    coords.x = Math.floor(Math.random() * arr.length);
-    coords.y = Math.floor(Math.random() * arr[0].length);
-    openDir = isWall(arr, coords);
+    x = Math.floor(Math.random() * arr.length);
+    y = Math.floor(Math.random() * arr[0].length);
+    openDir = isWall(arr, x, y);
   } while (!openDir);
 
-  return { coords, openDir };
+  return {
+    coords: { x, y },
+    openDir,
+  };
 };

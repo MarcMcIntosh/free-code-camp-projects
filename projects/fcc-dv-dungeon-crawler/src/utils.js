@@ -5,6 +5,9 @@ export function upDateOccupiedSpaces(obj, x, y, name, arg = { x: 0, y: 0 }) {
   });
 }
 
-export function upDateEntities() {
-  return false;
+export function addVector(coords, vector) {
+  return {
+    x: coords.x + vector.x,
+    y: coords.y + vector.y,
+  };
 }

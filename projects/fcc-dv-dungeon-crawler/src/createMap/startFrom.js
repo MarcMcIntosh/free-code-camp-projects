@@ -18,7 +18,7 @@ function startFrom(str, w, h, x, y) {
       x: (x - Math.floor(w / 2)) + doorOffset(w),
       y: y - h,
     };
-    default: return { x, y };
+    default: return undefined;
   }
 }
 

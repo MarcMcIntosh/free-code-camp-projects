@@ -11,12 +11,14 @@ function placeRoom(arr, max, min) {
   const w = Math.floor((Math.random() * (max - min)) + min);
   const h = Math.floor((Math.random() * (max - min)) + min);
 
-  const { x, y } = startFrom(wall.openDir, wall.coords.x, wall.coords.y, w, h);
+  const start = startFrom(wall.openDir, wall.coords.x, wall.coords.y, w, h);
+  const { x, y } = start;
 
-  const isClear = allClear(arr, x, y, w, h, WALL);
-  const isOut = (x < 0 || y < 0 || x + w >= arr.length || y + h >= arr[0].length);
+  if (x < 0 || y < 0 || x + w >= arr.length || y + h >= arr[0].length) {
+    return placeRoom(arr, max, min);
+  }
 
-  if (!isOut && isClear) {
+  if (allClear(arr, x, y, w, h, WALL)) {
     const arr2 = fillRect(arr, x, y, w, h, FLOOR);
     arr2[wall.coords.x][wall.coords.y] = 1;
     return arr2;
