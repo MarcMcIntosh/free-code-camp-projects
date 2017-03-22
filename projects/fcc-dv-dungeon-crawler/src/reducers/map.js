@@ -2,7 +2,7 @@ import {
   SET_MAP,
   RESET_MAP,
 } from '../actions/Map';
-import createMap from '../createMap/index';
+import { createMap } from '../utils';
 
 export const DEFAULT = createMap();
 
