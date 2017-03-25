@@ -3,18 +3,41 @@ import { connect } from 'react-redux';
 import Touch from './Touch';
 import setWindowSize from '../actions/Window';
 import { resetMap, fillMap } from '../actions/Map';
-import { reverseLookup, PLAYER } from '../utility/GameConstants';
 import { levelUp } from '../actions/Entities';
 import onMove from '../actions/Move';
+// import DungeonLevel from './DungeonLevel';
+import { PLAYER, tileSize, tileColors, SIGHT, reverseLookup } from '../utility/GameConstants';
+
+function startOffset(pos, size) {
+  const offset = Math.floor(pos - (size / 2));
+  return (offset < 0) ? 0 : offset;
+}
+
+function sameArray(arr1, arr2) {
+  if (!arr1 || !arr2) {
+    return false;
+  } else if (arr1 instanceof Array === false || arr2 instanceof Array === false) {
+    return false;
+  } else if (arr1.length !== arr2.length) {
+    return false;
+  }
+  for (let i = 0; i < arr1.length; i += 1) {
+    if (arr1[i] instanceof Array && arr2[i] instanceof Array) {
+      return sameArray(arr1[i], arr2[i]);
+    } else if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 const mapStateToProps = state => ({
-  player: state.entities.player,
-  // entities: state.entities,
-  // map: state.map,
-  // occupiedSpaces: state.occupiedSpaces,
+  entities: state.entities,
+  game: state.map,
+  occupiedSpaces: state.occupiedSpaces,
   level: state.level,
-  // windowHeight: state.windowHeight,
-  // windowWidth: state.windowWidth,
+  windowHeight: state.windowHeight,
+  windowWidth: state.windowWidth,
   darkness: state.darkness,
 });
 
@@ -32,25 +55,49 @@ class Board extends Component {
   constructor() {
     super();
     this._handleKeypress = this._handleKeypress.bind(this);
-    this._handleSwipe = this._handleSwipe.bind(this);
+    // this._handleSwipe = this._handleSwipe.bind(this);
+    this.resize = () => {
+      this.canvas.width = this.canvas.clientWidth;
+      this.canvas.height = this.canvas.clientHeight;
+      this.clearAndDraw();
+    };
   }
   componentDidMount() {
     this.props.resetMap();
     this.props.onFill();
-    if (this.props.player.toNextLevel <= 0) {
+    if (this.props.entities.player.toNextLevel <= 0) {
       this._playerLeveledUp();
     }
-    this.props.setWindowSize();
     window.addEventListener('keydown', this._handleKeypress);
-    window.addEventListener('resize', this.props.setWindowSize);
+    window.addEventListener('resize', this.resize);
+    this.canvas.width = this.canvas.clientWidth;
+    this.canvas.height = this.canvas.clientHeight;
+    this.clearAndDraw();
+  }
+  componentDidUpdate(prevProps) {
+    const arr1 = Object.entries(prevProps.occupiedSpaces);
+    const arr2 = Object.entries(this.props.occupiedSpaces);
+    if (prevProps.darkness !== this.props.darkness) {
+      this.clearAndDraw();
+    } else if (sameArray(arr1, arr2) === false) {
+      this.clearAndDraw();
+      console.log('occupiedSpaces ar diffrent');
+    }
   }
   componentWillUnmount() {
-      // this.unsubscribe();
     window.removeEventListener('keydown', this._handleKeypress);
-    window.removeEventListener('resize', setWindowSize);
+    window.removeEventListener('resize', this.resize);
   }
+  clearAndDraw() {
+    const ctx = this.canvas.getContext('2d');
+    if (ctx) {
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.draw();
+    }
+  }
+
   _playerLeveledUp() {
-    const currLevel = this.props.player.level + 1;
+    const currLevel = this.props.entities.player.level + 1;
     const attack = currLevel * PLAYER.attack;
     const health = currLevel * PLAYER.health;
     const toNext = (currLevel + 1) * PLAYER.toNextLevel;
@@ -65,91 +112,98 @@ class Board extends Component {
       default: event.preventDefault();
     }
   }
+  draw() {
+    // const { width, height } = this.canvas;
+    const cols = Math.floor(this.canvas.width / tileSize);
+    const rows = Math.floor(this.canvas.height / tileSize);
 
-  render() {
-    const {
-      map,
-      entities,
-      occupiedSpaces,
-      entities: { player },
-      windowHeight,
-      windowWidth,
-      darkness,
-    } = this.props;
-    const SIGHT = 7;
-    // This should match the css height and width in pixels
-    const tileSize = document.getElementsByClassName('tile').item(0) ? document.getElementsByClassName('tile').item(0).clientHeight : 10;
-
-    // Get start coords for current viewport
-    const numCols = Math.floor((windowWidth / tileSize) - 5);
-    const numRows = Math.floor((windowHeight / tileSize) - 17);
-    let startX = Math.floor(player.x - (numCols / 2));
-    let startY = Math.floor(player.y - (numRows / 2));
-    // Make sure start isn't less than 0
-    if (startX < 0) startX = 0;
-    if (startY < 0) startY = 0;
-    // Set end coords
-    let endX = startX + numCols;
-    let endY = startY + numRows;
-    // Final validation of start and end coords
-    if (endX > map.length) {
-      startX = numCols > map.length ? 0 : startX - (endX - map.length);
-      endX = map.length;
-    }
-    if (endY > map[0].length) {
-      startY = numRows > map[0].length ? 0 : startY - (endY - map[0].length);
-      endY = map[0].length;
+    /* Calculate X offsets */
+    let x = startOffset(this.props.entities.player.x, cols);
+    let x1 = x + cols;
+    if (x1 > this.props.game.length) {
+      x = (cols > this.props.game.length) ? 0 : x - (x1 - this.props.game.length);
+      x1 = this.props.game.length;
     }
 
-    // Create visible gameboard
-    const rows = [];
-    let tileClass;
-    let row;
-    for (let y = startY; y < endY; y += 1) {
-      row = [];
-      for (let x = startX; x < endX; x += 1) {
-        const entity = occupiedSpaces[`${x}x${y}`];
-        if (!entity) {
-          tileClass = reverseLookup[map[x][y]];
-        } else {
-          tileClass = entities[entity].entityType;
+    /* Calculate Y offsets */
+    let y = startOffset(this.props.entities.player.y, rows);
+    let y1 = y + rows;
+    if (y1 > this.props.game[0].length) {
+      y = (rows > this.props.game[0].length) ? 0 : y - (y1 - this.props.game[0].length);
+      y1 = this.props.game[0].length;
+    }
+
+    const ctx = this.canvas.getContext('2d');
+    if (this.props.darkness) {
+      /* Darken Every thing */
+      ctx.fillStyle = tileColors.dark;
+      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      const ldx = (
+        this.props.entities.player.x - SIGHT < x
+      ) ? x - this.props.entities.player.x : this.props.entities.player.x - SIGHT;
+
+      const ldx1 = (
+        this.props.entities.player.x + SIGHT > x1
+      ) ? x1 - this.props.entities.player.x : this.props.entities.player.x + SIGHT;
+
+      const ldy = (
+        this.props.entities.player.y - SIGHT < y
+      ) ? y - this.props.entities.player.y : this.props.entities.player.y - SIGHT;
+
+      const ldy1 = (
+        this.props.entities.player.y + SIGHT > y1
+      ) ? y1 - this.props.entities.player.y : this.props.entities.player.y + SIGHT;
+
+      for (let i = ldx; i < ldx1; i += 1) {
+        for (let ii = ldy; ii < ldy1; ii += 1) {
+          const e = this.props.occupiedSpaces[`${i}x${ii}`];
+          const n = this.props.game[i][ii];
+          const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
+          const c = tileColors[t];
+          ctx.fillStyle = c;
+          ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
         }
-        if (darkness) {
-          // check if it should be dark
-          const xDiff = player.x - x;
-          const yDiff = player.y - y;
-          if (Math.abs(xDiff) > SIGHT || Math.abs(yDiff) > SIGHT) {
-            tileClass += ' dark';
-          } else if (Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2)) >= SIGHT) {
-            tileClass += ' dark';
-          }
-        }
-        /* row.push(React.createElement('span', {
-          className: `tile ${tileClass}`,
-          key: `${x}x${y}`,
-        }, ' '));*/
-        row.push(<span
-          key={`${x}x${y}`}
-          className={`tile ${tileClass}`}
-        />);
       }
-      /* rows.push(React.createElement('div', {className: 'boardRow', key: 'row' + y}, row)) */
-      rows.push(<div key={`row${y}`} className="boardRow">{row}</div>);
+    } else {
+      for (let i = x; i < x1; i += 1) {
+        for (let ii = y; ii < y1; ii += 1) {
+          const e = this.props.occupiedSpaces[`${i}x${ii}`];
+          const n = this.props.game[i][ii];
+          const t = (!e) ? reverseLookup[n] : this.props.entities[e];
+          const c = tileColors[t];
+          ctx.fillStyle = c;
+          ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
+        }
+      }
     }
-    return (<Touch onTouch={this.props.onMove}>
-      <div id="board">{rows}</div>
-    </Touch>);
+  }
+  render() {
+    /* You'll need to react to prop changes */
+    return (<div className="dungeon__container">
+      <Touch onTouch={this.props.onMove}>
+        <canvas
+          className="dungeon__floor"
+          ref={(canvas) => { this.canvas = canvas; }}
+        />
+      </Touch>
+    </div>);
   }
 }
 
-const { func, object, number } = PropTypes;
+const { func, object, number, array, bool } = PropTypes;
 Board.propTypes = {
   // getState: React.PropTypes.func.isRequired,
-  setWindowSize: func.isRequired,
+  // player: object.isRequired,
+  entities: object.isRequired,
+  game: array.isRequired,
+  occupiedSpaces: object.isRequired,
+  level: number.isRequired,
+//  windowHeight: number.isRequired,
+//  windowWidth: number.isRequired,
+  darkness: bool.isRequired,
+//  setWindowSize: func.isRequired,
   resetMap: func.isRequired,
   levelUp: func.isRequired,
-  player: object.isRequired,
-  level: number.isRequired,
   onMove: func.isRequired,
   onFill: func.isRequired,
 };

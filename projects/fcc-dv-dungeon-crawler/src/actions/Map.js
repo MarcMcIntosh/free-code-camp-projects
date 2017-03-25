@@ -1,7 +1,7 @@
 import {
   emptyCoords,
-  GameConstants,
 } from '../utils';
+import { weaponTypes, ENEMY } from '../utility/GameConstants';
 import {
   setLocation,
   addEntity,
@@ -24,11 +24,11 @@ export function fillMap() {
     // const entities = { player };
 
     // An array of unique empty places //
-    const weapon = GameConstants.weaponTypes[level];
+    const weapon = weaponTypes[level];
     const l = level + 1;
     const e = new Set();
 
-    while (e.size < 13) { e.add(emptyCoords(map, occupiedSpaces)); }
+    while (e.size < 14) { e.add(emptyCoords(map, occupiedSpaces)); }
 
     const empties = Array.from(e);
 
@@ -37,7 +37,7 @@ export function fillMap() {
     });
 
     empties.slice(5, 10).forEach((d, i) => {
-      dispatch(addEntity(`enemy${i}`, 'enemy', l * GameConstants.ENEMY.health, l * GameConstants.ENEMY.attack));
+      dispatch(addEntity(`enemy${i}`, 'enemy', l * ENEMY.health, l * ENEMY.attack, d));
     });
     dispatch(addEntity(weapon.entityName, 'weapon', weapon.health, weapon.attack, empties[10]));
     dispatch(setLocation('player', empties[11]));

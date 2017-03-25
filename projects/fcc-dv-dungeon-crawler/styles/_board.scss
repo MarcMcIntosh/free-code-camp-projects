@@ -1,0 +1,15 @@
+.dungeon {
+  &__container {
+    /* large-ish display */
+    width: 640px;
+    height: 320px;
+    margin: auto;
+  }
+  
+  &__floor {
+    /* largeish display */
+    width: 100%;
+    height: 100%;
+    margin: auto;
+  }
+}

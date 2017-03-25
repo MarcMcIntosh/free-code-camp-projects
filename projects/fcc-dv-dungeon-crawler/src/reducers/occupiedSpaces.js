@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "off" */
+
 import {
   MOVE,
   SET_LOCATION,
@@ -8,12 +10,11 @@ import {
 } from '../actions/OccupiedSpaces';
 
 import {
-  upDateOccupiedSpaces,
   rmOccupiedSpace,
 } from '../utils';
 
 export const DEFAULT = { '0x0': 'player' };
-
+// export const DEFAULT = {};
 export default function (state, action) {
   switch (action.type) {
     case ADD_ENTITY: {
@@ -43,14 +44,21 @@ export default function (state, action) {
         ...state.entities,
         [entityName]: {
           ...state.entities[entityName],
-          x: ex + vector.x,
-          y: ey + vector.y,
+          x: vector.x,
+          y: vector.y,
         },
       };
-      const occupiedSpaces = upDateOccupiedSpaces(state.occupiedSpaces, ex, ey, vector);
+      /* Error with upDateOccupiedSpaces, */
+      // const occupiedSpaces = upDateOccupiedSpaces(state.occupiedSpaces, ex, ey, vector);
+      const o = rmOccupiedSpace(state.occupiedSpaces, ex, ey);
+      const occupiedSpaces = {
+        ...o,
+        [`${vector.x}x${vector.y}`]: entityName,
+      };
       return { ...state, occupiedSpaces, entities };
     }
     case SET_LOCATION: {
+      /* There's an error here with placing the player */
       const { entityName, location } = action.payload;
       const { x, y } = location;
       const ex = state.entities[entityName].x;
@@ -59,9 +67,11 @@ export default function (state, action) {
         ...state.entities,
         [entityName]: { ...state.entities[entityName], x, y },
       };
-      const occupiedSpaces = Object.assign({}, rmOccupiedSpace(state.occupiedSpaces, ex, ey), {
+      const o = rmOccupiedSpace(state.occupiedSpaces, ex, ey);
+      const occupiedSpaces = {
+        ...o,
         [`${x}x${y}`]: entityName,
-      });
+      };
       return { ...state, occupiedSpaces, entities };
     }
     case RESET_BOARD: {

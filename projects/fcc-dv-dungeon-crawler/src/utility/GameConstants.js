@@ -3,6 +3,19 @@ export const tileType = {
   WALL: 0,
   FLOOR: 1,
 };
+export const SIGHT = 7;
+export const tileSize = 10;
+export const tileColors = {
+  player: 'blue',
+  FLOOR: 'white',
+  WALL: 'gray',
+  enemy: 'red',
+  health: 'green',
+  weapon: 'orange',
+  exit: 'yellow',
+  dark: 'black',
+};
+
 export const reverseLookup = ['WALL', 'FLOOR'];
 export const PLAYER = {
   baseHealth: 100,

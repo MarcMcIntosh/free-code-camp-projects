@@ -1,4 +1,5 @@
-import { addVector, GameConstants } from '../utils';
+import { addVector } from '../utils';
+import { tileType, ATTACK_VARIANCE, ENEMY } from '../utility/GameConstants';
 import { onWin, onLose } from './Message';
 import { setMap, fillMap } from './Map';
 import { increaseLevel } from './Level';
@@ -13,12 +14,12 @@ export default function onMove(vector) {
       y: entities.player.y,
     }, vector);
     const entityName = occupiedSpaces[`${v.x}x${v.y}`];
-    if (map[v.x][v.y] === GameConstants.tileType.FLOOR && !entityName) {
+    if (map[v.x][v.y] === tileType.FLOOR && !entityName) {
       return dispatch(move('player', v));
     } else if (
-      map[v.x] === undefined
-      || map[v.x][v.y] === undefined
-      || map[v.x][v.y] === GameConstants.tileType.WALL
+    //  map[v.x] === undefined
+    //  || map[v.x][v.y] === undefined
+      map[v.x][v.y] !== tileType.FLOOR
     ) {
       return dispatch(move('player', {
         x: entities.player.x,
@@ -44,7 +45,7 @@ export default function onMove(vector) {
       }
       case 'boss':
       case 'enemy': {
-        const a = GameConstants.ATTACK_VARIANCE;
+        const a = ATTACK_VARIANCE;
         const p = Math.floor((Math.random() * a) + (entities.player.attack - a));
         const e = Math.floor((Math.random() * a) + (entity.attack - a));
         if (entity.health > a && entities.player.health < e) {
@@ -56,7 +57,7 @@ export default function onMove(vector) {
         } else if (entity.entityName === 'boss') {
           return dispatch(onWin());
         }
-        dispatch(gainXp((level + 1) * GameConstants.ENEMY.xp));
+        dispatch(gainXp((level + 1) * ENEMY.xp));
         return dispatch(removeEntity(entity.entityName));
       }
       default: return dispatch(move('player', {

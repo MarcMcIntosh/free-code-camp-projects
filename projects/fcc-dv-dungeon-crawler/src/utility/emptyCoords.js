@@ -1,4 +1,4 @@
-import tileType from './GameConstants';
+import { tileType } from './GameConstants';
 
 export default function emptyCoords(game, occupiedSpaces) {
   let coords;
@@ -6,7 +6,7 @@ export default function emptyCoords(game, occupiedSpaces) {
   let y;
   do {
     x = Math.floor(Math.random() * game.length);
-    y = Math.floor(Math.random() * game.map[0].length);
+    y = Math.floor(Math.random() * game[x].length);
     if (game[x][y] === tileType.FLOOR && !occupiedSpaces[`${x}x${y}`]) {
       coords = { x, y };
     }

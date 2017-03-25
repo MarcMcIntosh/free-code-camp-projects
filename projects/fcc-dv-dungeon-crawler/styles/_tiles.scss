@@ -1,0 +1,7 @@
+.dungeon__tile {
+  width: 12px;
+  height: 12px;
+  &.floor { background-color: white; }
+  &.dark { background-color: black; }
+  &.wall { background-color: grey; }
+}

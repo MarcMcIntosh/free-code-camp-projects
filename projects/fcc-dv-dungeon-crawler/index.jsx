@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import Board from './src/components/Board';
 
 class Container extends Component {
   constructor(props) {
@@ -22,3 +23,6 @@ Container.propTypes = {
 };
 
 export default Container;
+export {
+  Board,
+};
