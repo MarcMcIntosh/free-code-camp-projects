@@ -4,7 +4,7 @@ export const tileType = {
   FLOOR: 1,
 };
 export const SIGHT = 7;
-export const tileSize = 10;
+export const tileSize = 12;
 export const tileColors = {
   player: 'blue',
   FLOOR: 'white',

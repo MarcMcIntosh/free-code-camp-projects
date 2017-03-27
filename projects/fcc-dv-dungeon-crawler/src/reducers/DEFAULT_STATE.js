@@ -9,7 +9,7 @@ import {
 } from './window';
 
 const DEFAULT_STATE = {
-  darkness: true,
+  darkness: false,
   level,
   map,
   entities,

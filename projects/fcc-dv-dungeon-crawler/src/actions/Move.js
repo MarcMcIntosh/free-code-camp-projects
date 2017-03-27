@@ -35,7 +35,7 @@ export default function onMove(vector) {
       case 'health': {
         dispatch(heal('player', entity.health));
         dispatch(removeEntity(entityName));
-        return dispatch(move('player', vector));
+        return dispatch(move('player', v));
       }
       case 'exit': {
         dispatch(resetBoard());
@@ -52,13 +52,13 @@ export default function onMove(vector) {
           return dispatch(onLose());
         } else if (entity.health > a &&
         entities.player.health > e) {
-          dispatch(damage(entity.entityName, p));
+          dispatch(damage(entityName, p));
           return dispatch(damage('player', e));
-        } else if (entity.entityName === 'boss') {
+        } else if (entityName === 'boss') {
           return dispatch(onWin());
         }
         dispatch(gainXp((level + 1) * ENEMY.xp));
-        return dispatch(removeEntity(entity.entityName));
+        return dispatch(removeEntity(entityName));
       }
       default: return dispatch(move('player', {
         x: entities.player.x,

@@ -1,0 +1,4 @@
+Some errors in utility function.
+Remove lodash dep
+
+It is posible to place an exit in a hall that connects and blocks two rooms

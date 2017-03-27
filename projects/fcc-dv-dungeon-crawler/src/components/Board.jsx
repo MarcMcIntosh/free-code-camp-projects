@@ -9,7 +9,7 @@ import onMove from '../actions/Move';
 import { PLAYER, tileSize, tileColors, SIGHT, reverseLookup } from '../utility/GameConstants';
 
 function startOffset(pos, size) {
-  const offset = Math.floor(pos - (size / 2));
+  const offset = Math.floor(pos - size);
   return (offset < 0) ? 0 : offset;
 }
 
@@ -57,8 +57,8 @@ class Board extends Component {
     this._handleKeypress = this._handleKeypress.bind(this);
     // this._handleSwipe = this._handleSwipe.bind(this);
     this.resize = () => {
-      this.canvas.width = this.canvas.clientWidth;
-      this.canvas.height = this.canvas.clientHeight;
+      this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
+      this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
       this.clearAndDraw();
     };
   }
@@ -72,12 +72,20 @@ class Board extends Component {
     window.addEventListener('resize', this.resize);
     this.canvas.width = this.canvas.clientWidth;
     this.canvas.height = this.canvas.clientHeight;
+    /* Might not be needed */
+    /* Check offsets */
     this.clearAndDraw();
   }
   componentDidUpdate(prevProps) {
     const arr1 = Object.entries(prevProps.occupiedSpaces);
     const arr2 = Object.entries(this.props.occupiedSpaces);
     if (prevProps.darkness !== this.props.darkness) {
+      this.clearAndDraw();
+    } else if (
+      prevProps.entities.player.x !== this.props.entities.player.x ||
+      prevProps.entities.player.y !== this.props.entities.player.y
+    ) {
+      // console.log('player moved');
       this.clearAndDraw();
     } else if (sameArray(arr1, arr2) === false) {
       this.clearAndDraw();
@@ -105,18 +113,30 @@ class Board extends Component {
   }
   _handleKeypress(event) {
     switch (event.keyCode) {
-      case 37: this.props.onMove({ x: -1, y: 0 }); break;
-      case 38: this.props.onMove({ x: 0, y: -1 }); break;
-      case 39: this.props.onMove({ x: 1, y: 0 }); break;
-      case 40: this.props.onMove({ x: 0, y: 1 }); break;
-      default: event.preventDefault();
+      case 65:
+      case 37: event.preventDefault(); this.props.onMove({ x: -1, y: 0 }); break;
+      case 87:
+      case 38: event.preventDefault(); this.props.onMove({ x: 0, y: -1 }); break;
+      case 68:
+      case 39: event.preventDefault(); this.props.onMove({ x: 1, y: 0 }); break;
+      case 83:
+      case 40: event.preventDefault(); this.props.onMove({ x: 0, y: 1 }); break;
+      // no default
     }
   }
   draw() {
     // const { width, height } = this.canvas;
-    const cols = Math.floor(this.canvas.width / tileSize);
-    const rows = Math.floor(this.canvas.height / tileSize);
-
+    // const maxTilesX = Math.floor(this.canvas.width / tileSize);
+    // const maxTilesY = Math.floor(this.canvas.height / tileSize);
+    const cols = this.canvas.width / tileSize;
+    const rows = this.canvas.height / tileSize;
+    /*
+    const maxGameX = this.props.game.length * tileSize;
+    const maxGameY = this.props.game[0].length * tileSize;
+    const screenAdjustX = (cols > this.props.game.length) ? cols - this.props.game.length : 0;
+    const screenAdjustY = (rows > this.props.game[0].length) ? rows - this.props.game[0].length : 0;
+    */
+    /* These offset calculations need imporvment as the game occasionaly renders of screen */
     /* Calculate X offsets */
     let x = startOffset(this.props.entities.player.x, cols);
     let x1 = x + cols;
@@ -134,9 +154,11 @@ class Board extends Component {
     }
 
     const ctx = this.canvas.getContext('2d');
+    /* Replace this */
     if (this.props.darkness) {
       /* Darken Every thing */
       ctx.fillStyle = tileColors.dark;
+
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       const ldx = (
         this.props.entities.player.x - SIGHT < x
@@ -159,19 +181,21 @@ class Board extends Component {
           const e = this.props.occupiedSpaces[`${i}x${ii}`];
           const n = this.props.game[i][ii];
           const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
-          const c = tileColors[t];
-          ctx.fillStyle = c;
-          ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
+          const xr = i * tileSize;
+          const yr = ii * tileSize;
+          ctx.clearRect(xr, yr, tileSize, tileSize);
+          ctx.fillStyle = tileColors[t];
+          ctx.fillRect(xr, yr, tileSize, tileSize);
         }
       }
     } else {
       for (let i = x; i < x1; i += 1) {
+        // console.log(x);
         for (let ii = y; ii < y1; ii += 1) {
           const e = this.props.occupiedSpaces[`${i}x${ii}`];
           const n = this.props.game[i][ii];
-          const t = (!e) ? reverseLookup[n] : this.props.entities[e];
-          const c = tileColors[t];
-          ctx.fillStyle = c;
+          const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
+          ctx.fillStyle = tileColors[t];
           ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
         }
       }
