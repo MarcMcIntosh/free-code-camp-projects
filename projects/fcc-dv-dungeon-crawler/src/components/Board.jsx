@@ -8,11 +8,6 @@ import onMove from '../actions/Move';
 // import DungeonLevel from './DungeonLevel';
 import { PLAYER, tileSize, tileColors, SIGHT, reverseLookup } from '../utility/GameConstants';
 
-function startOffset(pos, size) {
-  const offset = Math.floor(pos - size);
-  return (offset < 0) ? 0 : offset;
-}
-
 function sameArray(arr1, arr2) {
   if (!arr1 || !arr2) {
     return false;
@@ -89,7 +84,7 @@ class Board extends Component {
       this.clearAndDraw();
     } else if (sameArray(arr1, arr2) === false) {
       this.clearAndDraw();
-      console.log('occupiedSpaces ar diffrent');
+      // console.log('occupiedSpaces ar diffrent');
     }
   }
   componentWillUnmount() {
@@ -125,27 +120,71 @@ class Board extends Component {
     }
   }
   draw() {
-    // const { width, height } = this.canvas;
-    // const maxTilesX = Math.floor(this.canvas.width / tileSize);
-    // const maxTilesY = Math.floor(this.canvas.height / tileSize);
-    const cols = this.canvas.width / tileSize;
-    const rows = this.canvas.height / tileSize;
+    const cols = (this.canvas.width / tileSize);
+    const rows = (this.canvas.height / tileSize);
+
+    let startX = Math.floor(this.props.entities.player.x - (cols / 2));
+    if (startX < 0) startX = 0;
+    let endX = startX + cols;
+    if (endX > this.props.game.length) {
+      startX = (cols > this.props.game.length) ? 0 : startX - (endX - this.props.game.length);
+      endX = this.props.game.length;
+    }
+    // console.log(startX, endX);
+    let startY = Math.floor(this.props.entities.player.y - (rows / 2));
+    if (startY < 0) startY = 0;
+    let endY = startY + rows;
+    if (endY > this.props.game[0].length) {
+      startY = (rows > this.props.game[0].length) ? 0 : startY - (endY - this.props.game[0].length);
+      endY = this.props.game[0].length;
+    }
+    // console.log(startY, endY);
+    const gd = this.props.game.slice(startX, endX).map(d => d.slice(startY, endY));
+    const ctx = this.canvas.getContext('2d');
+    gd.forEach((x, i) => {
+      x.forEach((y, ii) => {
+        const str = `${i}x${ii}`;
+        if (
+          Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
+        ) {
+          const entityName = this.props.occupiedSpaces[str];
+          const { entityType } = this.props.entities[entityName];
+          ctx.fillStyle = tileColors[entityType];
+        } else {
+          const n = reverseLookup[y];
+          ctx.fillStyle = tileColors[n];
+        }
+        ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
+      });
+    });
     /*
-    const maxGameX = this.props.game.length * tileSize;
-    const maxGameY = this.props.game[0].length * tileSize;
-    const screenAdjustX = (cols > this.props.game.length) ? cols - this.props.game.length : 0;
-    const screenAdjustY = (rows > this.props.game[0].length) ? rows - this.props.game[0].length : 0;
-    */
-    /* These offset calculations need imporvment as the game occasionaly renders of screen */
-    /* Calculate X offsets */
+    for (
+      let i = startX, x = 0;
+      i < endX;
+      i += 1, x += tileSize
+    ) {
+      for (
+        let ii = startY, y = 0;
+        i < endY;
+        i += 1, y += tileSize
+      ) {
+        const e = this.props.occupiedSpaces[`${i}x${ii}`];
+        const n = this.props.game[i][ii];
+        const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
+        ctx.fillStyle = tileColors[t];
+        ctx.fillRect(x, y, tileSize, tileSize);
+      }
+    } */
+    /*
     let x = startOffset(this.props.entities.player.x, cols);
+
     let x1 = x + cols;
     if (x1 > this.props.game.length) {
       x = (cols > this.props.game.length) ? 0 : x - (x1 - this.props.game.length);
       x1 = this.props.game.length;
     }
 
-    /* Calculate Y offsets */
+    // Calculate Y offsets
     let y = startOffset(this.props.entities.player.y, rows);
     let y1 = y + rows;
     if (y1 > this.props.game[0].length) {
@@ -154,9 +193,9 @@ class Board extends Component {
     }
 
     const ctx = this.canvas.getContext('2d');
-    /* Replace this */
+    // Replace this
     if (this.props.darkness) {
-      /* Darken Every thing */
+      // Darken Every thing
       ctx.fillStyle = tileColors.dark;
 
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -199,7 +238,7 @@ class Board extends Component {
           ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
         }
       }
-    }
+    } */
   }
   render() {
     /* You'll need to react to prop changes */
@@ -208,6 +247,7 @@ class Board extends Component {
         <canvas
           className="dungeon__floor"
           ref={(canvas) => { this.canvas = canvas; }}
+          autoFocus
         />
       </Touch>
     </div>);
