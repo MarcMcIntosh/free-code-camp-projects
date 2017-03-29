@@ -65,8 +65,8 @@ class Board extends Component {
     }
     window.addEventListener('keydown', this._handleKeypress);
     window.addEventListener('resize', this.resize);
-    this.canvas.width = this.canvas.clientWidth;
-    this.canvas.height = this.canvas.clientHeight;
+    this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
+    this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
     /* Might not be needed */
     /* Check offsets */
     this.clearAndDraw();
@@ -139,106 +139,67 @@ class Board extends Component {
       endY = this.props.game[0].length;
     }
     // console.log(startY, endY);
+    // console.log(endX - startX);
+    // console.log(endY - startY);
+
+    const gd = [];
+    for (let i = startX, x = 0; i < endX; i += 1, x += 1) {
+      const xd = Math.abs(this.props.entities.player.x - i);
+      gd[x] = [];
+      for (let ii = startY, y = 0; ii < endY; ii += 1, y += 1) {
+        const str = `${i}x${ii}`;
+        const yd = Math.abs(this.props.entities.player.y - ii);
+        const xdyd = Math.sqrt((xd * xd) + (yd + yd));
+        if (this.props.darkness && (xd > SIGHT || yd > SIGHT || xdyd >= SIGHT)) {
+          gd[x][y] = tileColors.dark;
+        } else if (
+          Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
+        ) {
+          const entityName = this.props.occupiedSpaces[str];
+          const { entityType } = this.props.entities[entityName];
+          gd[x][y] = tileColors[entityType];
+        } else {
+          const n = this.props.game[i][ii];
+          const t = reverseLookup[n];
+          gd[x][y] = tileColors[t];
+        }
+      }
+    }
+    const ctx = this.canvas.getContext('2d');
+    gd.forEach((x, i) => x.forEach((y, ii) => {
+      ctx.fillStyle = y;
+      ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
+    }));
+    /*
     const gd = this.props.game.slice(startX, endX).map(d => d.slice(startY, endY));
+
     const ctx = this.canvas.getContext('2d');
     gd.forEach((x, i) => {
+      const xd = Math.abs(this.props.entities.player.x - i);
       x.forEach((y, ii) => {
         const str = `${i}x${ii}`;
-        if (
+        const yd = Math.abs(this.props.entities.player.y - ii);
+        if (this.props.darkness
+          && (xd > SIGHT
+            || yd > SIGHT
+            || Math.sqrt((xd * xd) + (yd * yd)) >= SIGHT
+          )
+        ) {
+          ctx.fillStyle = tileColors.dark;
+        } else if (
           Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
         ) {
           const entityName = this.props.occupiedSpaces[str];
           const { entityType } = this.props.entities[entityName];
           ctx.fillStyle = tileColors[entityType];
         } else {
+          // console.log(`floor: ${i}x${ii}`);
           const n = reverseLookup[y];
           ctx.fillStyle = tileColors[n];
         }
         ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
       });
-    });
-    /*
-    for (
-      let i = startX, x = 0;
-      i < endX;
-      i += 1, x += tileSize
-    ) {
-      for (
-        let ii = startY, y = 0;
-        i < endY;
-        i += 1, y += tileSize
-      ) {
-        const e = this.props.occupiedSpaces[`${i}x${ii}`];
-        const n = this.props.game[i][ii];
-        const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
-        ctx.fillStyle = tileColors[t];
-        ctx.fillRect(x, y, tileSize, tileSize);
-      }
-    } */
-    /*
-    let x = startOffset(this.props.entities.player.x, cols);
-
-    let x1 = x + cols;
-    if (x1 > this.props.game.length) {
-      x = (cols > this.props.game.length) ? 0 : x - (x1 - this.props.game.length);
-      x1 = this.props.game.length;
-    }
-
-    // Calculate Y offsets
-    let y = startOffset(this.props.entities.player.y, rows);
-    let y1 = y + rows;
-    if (y1 > this.props.game[0].length) {
-      y = (rows > this.props.game[0].length) ? 0 : y - (y1 - this.props.game[0].length);
-      y1 = this.props.game[0].length;
-    }
-
-    const ctx = this.canvas.getContext('2d');
-    // Replace this
-    if (this.props.darkness) {
-      // Darken Every thing
-      ctx.fillStyle = tileColors.dark;
-
-      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      const ldx = (
-        this.props.entities.player.x - SIGHT < x
-      ) ? x - this.props.entities.player.x : this.props.entities.player.x - SIGHT;
-
-      const ldx1 = (
-        this.props.entities.player.x + SIGHT > x1
-      ) ? x1 - this.props.entities.player.x : this.props.entities.player.x + SIGHT;
-
-      const ldy = (
-        this.props.entities.player.y - SIGHT < y
-      ) ? y - this.props.entities.player.y : this.props.entities.player.y - SIGHT;
-
-      const ldy1 = (
-        this.props.entities.player.y + SIGHT > y1
-      ) ? y1 - this.props.entities.player.y : this.props.entities.player.y + SIGHT;
-
-      for (let i = ldx; i < ldx1; i += 1) {
-        for (let ii = ldy; ii < ldy1; ii += 1) {
-          const e = this.props.occupiedSpaces[`${i}x${ii}`];
-          const n = this.props.game[i][ii];
-          const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
-          const xr = i * tileSize;
-          const yr = ii * tileSize;
-          ctx.clearRect(xr, yr, tileSize, tileSize);
-          ctx.fillStyle = tileColors[t];
-          ctx.fillRect(xr, yr, tileSize, tileSize);
-        }
-      }
-    } else {
-      for (let i = x; i < x1; i += 1) {
-        // console.log(x);
-        for (let ii = y; ii < y1; ii += 1) {
-          const e = this.props.occupiedSpaces[`${i}x${ii}`];
-          const n = this.props.game[i][ii];
-          const t = (!e) ? reverseLookup[n] : this.props.entities[e].entityType;
-          ctx.fillStyle = tileColors[t];
-          ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
-        }
-      }
-    } */
+    }); */
   }
   render() {
     /* You'll need to react to prop changes */
