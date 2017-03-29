@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development webpack-dev-server --progress --colors ",
+    "start": "NODE_ENV=development webpack-dev-server -d --colors ",
     "build": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack",
     "build:all": "npm run build:dev && npm run build"

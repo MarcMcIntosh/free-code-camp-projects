@@ -3,7 +3,7 @@ export const tileType = {
   WALL: 0,
   FLOOR: 1,
 };
-export const SIGHT = 7;
+export const SIGHT = 9;
 export const tileSize = 12;
 export const tileColors = {
   player: 'blue',

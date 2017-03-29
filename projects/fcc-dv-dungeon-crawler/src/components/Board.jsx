@@ -130,7 +130,7 @@ class Board extends Component {
       startX = (cols > this.props.game.length) ? 0 : startX - (endX - this.props.game.length);
       endX = this.props.game.length;
     }
-    // console.log(startX, endX);
+
     let startY = Math.floor(this.props.entities.player.y - (rows / 2));
     if (startY < 0) startY = 0;
     let endY = startY + rows;
@@ -138,19 +138,16 @@ class Board extends Component {
       startY = (rows > this.props.game[0].length) ? 0 : startY - (endY - this.props.game[0].length);
       endY = this.props.game[0].length;
     }
-    // console.log(startY, endY);
-    // console.log(endX - startX);
-    // console.log(endY - startY);
 
     const gd = [];
     for (let i = startX, x = 0; i < endX; i += 1, x += 1) {
-      const xd = Math.abs(this.props.entities.player.x - i);
       gd[x] = [];
       for (let ii = startY, y = 0; ii < endY; ii += 1, y += 1) {
         const str = `${i}x${ii}`;
+        const xd = Math.abs(this.props.entities.player.x - i);
         const yd = Math.abs(this.props.entities.player.y - ii);
-        const xdyd = Math.sqrt((xd * xd) + (yd + yd));
-        if (this.props.darkness && (xd > SIGHT || yd > SIGHT || xdyd >= SIGHT)) {
+        const xdyd = Math.sqrt((xd * xd) + (yd * yd));
+        if (this.props.darkness && xdyd >= SIGHT) {
           gd[x][y] = tileColors.dark;
         } else if (
           Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
@@ -170,36 +167,6 @@ class Board extends Component {
       ctx.fillStyle = y;
       ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
     }));
-    /*
-    const gd = this.props.game.slice(startX, endX).map(d => d.slice(startY, endY));
-
-    const ctx = this.canvas.getContext('2d');
-    gd.forEach((x, i) => {
-      const xd = Math.abs(this.props.entities.player.x - i);
-      x.forEach((y, ii) => {
-        const str = `${i}x${ii}`;
-        const yd = Math.abs(this.props.entities.player.y - ii);
-        if (this.props.darkness
-          && (xd > SIGHT
-            || yd > SIGHT
-            || Math.sqrt((xd * xd) + (yd * yd)) >= SIGHT
-          )
-        ) {
-          ctx.fillStyle = tileColors.dark;
-        } else if (
-          Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
-        ) {
-          const entityName = this.props.occupiedSpaces[str];
-          const { entityType } = this.props.entities[entityName];
-          ctx.fillStyle = tileColors[entityType];
-        } else {
-          // console.log(`floor: ${i}x${ii}`);
-          const n = reverseLookup[y];
-          ctx.fillStyle = tileColors[n];
-        }
-        ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
-      });
-    }); */
   }
   render() {
     /* You'll need to react to prop changes */
