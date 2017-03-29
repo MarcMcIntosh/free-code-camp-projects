@@ -115,7 +115,6 @@ const pluginConf = () => {
         minimize: true,
         comments: false,
       }),
-      new DedupePlugin(),
     ]);
   }
   /* Development Plugins */

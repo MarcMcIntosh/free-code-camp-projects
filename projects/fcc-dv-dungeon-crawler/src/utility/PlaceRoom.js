@@ -49,11 +49,8 @@ export default function placeRoom(map, maxRoomSize, minRoomSize) {
   }
 
   if (numClear === width) {
-    map2 = fillRect(map2, {
-      x: startX, y: startY,
-    }, {
-      x: width, y: height,
-    }, tileType.FLOOR);
+    map2 = fillRect(map2, startX, startY, width, height, tileType.FLOOR);
+    // Create a door
     map2[coords.x][coords.y] = 1;
 
     return map2;
