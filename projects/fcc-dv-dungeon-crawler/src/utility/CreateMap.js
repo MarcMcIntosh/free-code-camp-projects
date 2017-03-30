@@ -7,8 +7,6 @@ import placeRoom from './PlaceRoom';
 export default function createMap(w = 100, h = 100, maxRS = 20, minRS = 6, maxHL = 5, n = 20) {
   // init grid of walls
   const grid = createGrid(w, h, tileType.WALL);
-  // create first room
-  // let map = fillRect(grid, { x: 45, y: 45 }, { x: 10, y: 10 }, tileType.FLOOR);
   let map = fillRect(grid, 45, 45, 10, 10, tileType.FLOOR);
   // create rooms
   for (let i = 0; i < n; i += 1) {

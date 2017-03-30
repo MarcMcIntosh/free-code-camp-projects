@@ -88,7 +88,6 @@ const rules = [
 
 const pluginConf = () => {
   const {
-    DedupePlugin,
     AggressiveMergingPlugin,
     UglifyJsPlugin,
   } = webpack.optimize;

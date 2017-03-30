@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import Board from './src/components/Board';
+/* Move this into the board */
+import Torch from './src/components/Torch/Toggle';
 
 class Container extends Component {
   constructor(props) {
@@ -25,4 +27,5 @@ Container.propTypes = {
 export default Container;
 export {
   Board,
+  Torch,
 };
