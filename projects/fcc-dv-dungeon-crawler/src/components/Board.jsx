@@ -6,6 +6,8 @@ import { resetMap, fillMap } from '../actions/Map';
 import { levelUp } from '../actions/Entities';
 import onMove from '../actions/Move';
 // import DungeonLevel from './DungeonLevel';
+import HealthBar from './HealthBar';
+
 import { PLAYER, tileSize, tileColors, SIGHT, reverseLookup } from '../utility/GameConstants';
 
 function sameArray(arr1, arr2) {
@@ -171,6 +173,7 @@ class Board extends Component {
   render() {
     /* You'll need to react to prop changes */
     return (<div className="dungeon__container">
+      <HealthBar health={this.props.entities.player.health} heartValue={20} />
       <Touch onTouch={this.props.onMove}>
         <canvas
           className="dungeon__floor"

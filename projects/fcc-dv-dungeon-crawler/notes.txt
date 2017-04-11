@@ -2,3 +2,6 @@ Some errors in utility function.
 Remove lodash dep
 
 It is posible to place an exit in a hall that connects and blocks two rooms
+
+some tiles taken from
+http://opengameart.org/art-search-advanced?keys=&field_art_type_tid%2525255B%2525255D=9&sort_by=count&sort_order=DESC
