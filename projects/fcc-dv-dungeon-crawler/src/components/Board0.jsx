@@ -14,7 +14,7 @@ import floorTile from '../../styles/sprites/floor.png';
 // see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 // for info about resizing and drawing tiles
 const tileData = {
-  FLOOR: [
+  floor: [
     // could be an array and used with concat and apply
     { sx: 0, sy: 0, sw: 32, sh: 32 },
     { sx: 32, sy: 0, sw: 32, sh: 32 },
@@ -184,29 +184,16 @@ class Board extends Component {
           const { entityType } = this.props.entities[entityName];
           gd[x][y] = tileColors[entityType];
         } else {
-          /* WALLS AND FLOORS */
           const n = this.props.game[i][ii];
           const t = reverseLookup[n];
-          // gd[x][y] = tileColors[t];
-
-          /* tempfix to tesk fllor tiles */
-          gd[x][y] = (t === 'FLOOR') ? t : tileColors[t];
+          gd[x][y] = tileColors[t];
         }
       }
     }
     const ctx = this.canvas.getContext('2d');
     gd.forEach((x, i) => x.forEach((y, ii) => {
-      /* tempfix */
-      const dx = i * tileSize;
-      const dy = ii * tileSize;
-      if (y === 'FLOOR') {
-        const t = randomTile(tileData[y]);
-        const { sx, sy, sw, sh } = t;
-        ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
-      } else {
-        ctx.fillStyle = y;
-        ctx.fillRect(dx, dy, tileSize, tileSize);
-      }
+      ctx.fillStyle = y;
+      ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
     }));
   }
   render() {
