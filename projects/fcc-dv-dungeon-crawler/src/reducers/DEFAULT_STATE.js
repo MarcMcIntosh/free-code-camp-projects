@@ -11,7 +11,7 @@ import {
 const DEFAULT_STATE = {
   darkness: true,
   level,
-  map,
+  ...map,
   entities,
   occupiedSpaces,
   windowWidth,

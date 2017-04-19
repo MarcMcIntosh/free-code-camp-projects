@@ -10,28 +10,6 @@ import HealthBar from './HealthBar';
 
 import { PLAYER, tileSize, tileColors, SIGHT, reverseLookup } from '../utility/GameConstants';
 
-import floorTile from '../../styles/sprites/floor.png';
-// see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-// for info about resizing and drawing tiles
-const tileData = {
-  FLOOR: [
-    // could be an array and used with concat and apply
-    { sx: 0, sy: 0, sw: 32, sh: 32 },
-    { sx: 32, sy: 0, sw: 32, sh: 32 },
-    { sx: 64, sy: 0, sw: 32, sh: 32 },
-    { sx: 96, sy: 0, sw: 32, sh: 32 },
-    { sx: 0, sy: 32, sw: 32, sh: 32 },
-    { sx: 0, sy: 64, sw: 32, sh: 32 },
-    { sx: 0, sy: 96, sw: 32, sh: 32 },
-  ],
-};
-
-function randomTile(arr) {
-  const n = Math.floor(Math.random() * (arr.length + 1));
-  return arr[n];
-}
-
-
 function sameArray(arr1, arr2) {
   if (!arr1 || !arr2) {
     return false;
@@ -93,11 +71,7 @@ class Board extends Component {
     this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
     /* Might not be needed */
     /* Check offsets */
-    this.img = new Image();
-    this.img.src = floorTile;
-    this.img.onload = () => {
-      this.clearAndDraw();
-    };
+    this.clearAndDraw();
   }
   componentDidUpdate(prevProps) {
     const arr1 = Object.entries(prevProps.occupiedSpaces);
@@ -184,29 +158,16 @@ class Board extends Component {
           const { entityType } = this.props.entities[entityName];
           gd[x][y] = tileColors[entityType];
         } else {
-          /* WALLS AND FLOORS */
           const n = this.props.game[i][ii];
           const t = reverseLookup[n];
-          // gd[x][y] = tileColors[t];
-
-          /* tempfix to tesk fllor tiles */
-          gd[x][y] = (t === 'FLOOR') ? t : tileColors[t];
+          gd[x][y] = tileColors[t];
         }
       }
     }
     const ctx = this.canvas.getContext('2d');
     gd.forEach((x, i) => x.forEach((y, ii) => {
-      /* tempfix */
-      const dx = i * tileSize;
-      const dy = ii * tileSize;
-      if (y === 'FLOOR') {
-        const t = randomTile(tileData[y]);
-        const { sx, sy, sw, sh } = t;
-        ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
-      } else {
-        ctx.fillStyle = y;
-        ctx.fillRect(dx, dy, tileSize, tileSize);
-      }
+      ctx.fillStyle = y;
+      ctx.fillRect(i * tileSize, ii * tileSize, tileSize, tileSize);
     }));
   }
   render() {

@@ -18,7 +18,8 @@ const Heart = ({ size, percent, ...props }) => {
   const rad = (Math.PI * 2) * (percent / 100);
   const ax = hcx - (hr * Math.sin(rad));
   const ay = hcy - (hr * Math.cos(rad));
-  const fp = `M ${hcx} ${hcy} v ${0 - hr} A ${hr} ${hr} 0 1 1 ${ax} ${ay} Z`;
+  const fp = `M ${hcx} ${hcy} v ${0 - hr} A ${hr} ${hr} 0 1 0 ${ax} ${ay} Z`;
+
   return (<svg {...props} viewBox={vb}>
     <defs>
       {/* Create the heart Shape */}

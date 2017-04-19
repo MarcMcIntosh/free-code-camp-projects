@@ -1,5 +1,16 @@
 
 .dungeon {
+  &__health-bar {
+    position: absolute;
+    margin: 2px;
+  }
+
+  &__heart {
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+  }
+
   &__container {
     width: 300px;
     height: 300px / 4 * 3;
