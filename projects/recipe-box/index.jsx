@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import Cakes from './src/Cakes';
 
 class Container extends Component {
   constructor(props) {
@@ -22,3 +24,6 @@ Container.propTypes = {
 };
 
 export default Container;
+export {
+  Cakes,
+};

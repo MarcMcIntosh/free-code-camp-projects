@@ -1,11 +1,8 @@
-Template File for data visualisation assignments from [FreeCodeCamp](https://www.freecodecamp.com)
+# React based Cake display application
+Wrote in response to [this spec sheet](https://github.com/chris-waracle/react-test)
 
 # Usage
 ```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/FCC-DV-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
 npm install
 npm start
 ```
