@@ -1,0 +1,90 @@
+.bpc__cake {
+  max-width: 21.875rem;
+  height: 21.875rem;
+  margin-bottom: 48px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+
+  background: #ddd;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .bpc__content {
+    background: rgba(0, 0, 0, .4);
+  }
+
+  .bpc__buttons {
+    padding: 0 0 8px;
+  }
+}
+
+/*
+.bpc__cake {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 21.875rem;
+  height: 21.875rem;
+  padding: 0;
+  background: #ddd;
+  color: white;
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+
+  .bpc__content {
+    padding: 16px;
+    background: rgba(0, 0, 0, .4);
+  }
+
+  .bpc__title {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    line-height: 2rem;
+  }
+
+  .bpc__subtitle {
+    margin: -.063rem 0;
+    font-size: .875rem;
+    letter-spacing: .04em;
+    line-height: 1.25rem;
+  }
+
+  .bpc__actions {
+    margin: 0 8px 0 0;
+    padding: 8px;
+  }
+
+  .bpc__button {
+    display: inline-block;
+    min-width: 64px;
+    height: 36px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    line-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+
+    &:active,
+    &:hover,
+    &:focus {
+
+    }
+  }
+}
+*/

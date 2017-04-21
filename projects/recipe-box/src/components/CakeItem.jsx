@@ -5,15 +5,23 @@ const CakeItem = ({
   cake,
   onEdit,
   onRemove,
-  ...props
-}) => (<div {...props}>
-  <div className="bpc__buttons">
-    <button onClick={onEdit}>edit</button>
-    <button onClick={onRemove}>rm</button>
-  </div>
-  <h1>{cake.title}</h1>
-  <h2>{cake.desc}</h2>
-  <img src={cake.image} alt={cake.title} />
+}) => (<div
+  className="mdc-card mdc-card--theme-dark bpc__cake"
+  style={{ backgroundImage: `url(${cake.image})` }}
+>
+  <section className="mdc-card__primary bpc__content">
+    <h1 className="mdc-card__title mdc-card__title--large">{cake.title}</h1>
+    <h2 className="mdc-card__subtitle">{cake.desc}</h2>
+  </section>
+  <section className="mdc-card__actions bpc__content bpc__buttons">
+    <button
+      className="mdc-button mdc-button--theme-dark mdc-card__action"
+      onClick={onEdit}
+    >Edit</button>
+    <button
+      className="mdc-button mdc-button--theme-dark mdc-card__action" onClick={onRemove}
+    >Delete</button>
+  </section>
 </div>);
 
 const { string, func, shape } = PropTypes;

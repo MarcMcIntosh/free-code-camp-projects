@@ -1,4 +1,4 @@
-import cakes from './data/cake.json';
+import cakeJson from './data/cake.json';
 import {
   EDIT_CAKE,
   CANCEL_EDIT,
@@ -12,7 +12,7 @@ import {
 const DEFAULT_STATE = {
   edit: -1,
   cookies: false,
-  cakes,
+  cakes: cakeJson,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -22,7 +22,10 @@ function reducer(state = DEFAULT_STATE, action) {
     case UPDATE_CAKE:
     case ADD_CAKE:
     case SAVE_CAKE:
-    case REMOVE_CAKE:
+    case REMOVE_CAKE: {
+      const cakes = state.cakes.filter((d, i) => i !== action.payload);
+      return { ...state, cakes };
+    }
     case ACCEPT_COOKIE: return {
       ...state,
       cookies: true,

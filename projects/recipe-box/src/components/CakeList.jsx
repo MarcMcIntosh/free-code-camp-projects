@@ -14,8 +14,8 @@ const CakeList = ({
     return (<CakeItem
       key={str}
       cake={d}
-      onEdit={() => this.onEdit(i)}
-      onRemove={() => this.onRemove(i)}
+      onEdit={() => onEdit(i)}
+      onRemove={() => onRemove(i)}
     />);
   })}
 </div>);

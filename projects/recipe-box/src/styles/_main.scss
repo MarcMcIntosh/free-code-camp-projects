@@ -1,0 +1,10 @@
+@import "~normalize.css/normalize.css";
+@import "~@material/typography/mdc-typography";
+@import "~@material/theme/mdc-theme";
+@import "~@material/card/mdc-card";
+@import "~@material/button/mdc-button";
+@import "./cake";
+
+body {
+  margin: 8px;
+}
