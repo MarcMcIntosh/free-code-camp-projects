@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import CakeItem from './CakeItem';
 
 const CakeList = ({
@@ -20,11 +19,12 @@ const CakeList = ({
   })}
 </div>);
 
-const { array, func } = PropTypes;
+const { array, func, number } = PropTypes;
 CakeList.propTypes = {
   cakes: array.isRequired,
   onEdit: func.isRequired,
   onRemove: func.isRequired,
+  editting: number.isRequired,
 };
 
 export default CakeList;
