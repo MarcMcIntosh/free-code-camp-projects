@@ -19,12 +19,11 @@ const CakeList = ({
   })}
 </div>);
 
-const { array, func, number } = PropTypes;
+const { array, func } = PropTypes;
 CakeList.propTypes = {
   cakes: array.isRequired,
   onEdit: func.isRequired,
   onRemove: func.isRequired,
-  editting: number.isRequired,
 };
 
 export default CakeList;

@@ -13,8 +13,7 @@ const DEFAULT_STATE = {
   edit: -1,
   cookies: false,
   cakes: cakeJson,
-  searchedFor: '',
-  results: [],
+  view: -1,
   adding: false,
 };
 

@@ -34,6 +34,12 @@ const mapDispatchToProps = dispatch => ({
   onAccept: () => dispatch(acceptCookie()),
 });
 
+/*
+* implent a search function using fuse.js
+* add a top bar
+* then felx box the list
+ */
+
 class Cakes extends Component {
   constructor(props) {
     super(props);
@@ -55,22 +61,25 @@ class Cakes extends Component {
     }
   }
   render() {
-    return (<div className="bpc__container">
-      <ReactModal
-        isOpen={this.props.edit >= 0 || this.props.adding}
-        onRequestClose={this.props.onCancelEdit}
-        contentLabel="Cake Form"
-      >
-        <CakeForm
-          onSubmit={this.handleSubmit}
-          onCancel={this.props.onCancelEdit}
-        />
-      </ReactModal>
-      <button onClick={this.props.onAddCake}>new cake</button>
+    return (<div>
+      <header className="mdc-toolbar">
+        <div className="mdc-toolbar__row">
+          <section className="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <span className="mdc-toolbar__title">Bright Purple Cakes</span>
+          </section>
+          {/* <section class="mdc-toolbar__section">
+  Section aligns to center. </section> */}
+          <section className="mdc-toolbar__section mdc-toolbar__section--align-end">
+            <input type="search" />
+            <button onClick={this.props.onAddCake}>new cake</button>
+          </section>
+        </div>
+      </header>
 
       <main className="bpc__container">
         <CakeList
-          cakes={this.props.cakes} onEdit={this.props.onEditCake}
+          cakes={this.props.cakes}
+          onEdit={this.props.onEditCake}
           onRemove={this.props.onRemoveCake}
         />
         {(this.props.cookies) ? false : (<div className="bpc__cookie-banner">
@@ -78,6 +87,20 @@ class Cakes extends Component {
           <button onClick={this.props.onAccept}>Yes</button>
         </div>)}
       </main>
+      <ReactModal
+        isOpen={this.props.edit >= 0 || this.props.adding}
+        onRequestClose={this.props.onCancelEdit}
+        contentLabel="Cake Form"
+      >
+        {(this.props.edit >= 0 && this.props.edit < this.props.cakes.length) ? (<CakeForm
+          {...this.props.cakes[this.props.edit]}
+          onSubmit={this.handleSubmit}
+          onCancel={this.props.onCancelEdit}
+        />) : (<CakeForm
+          onSubmit={this.handleSubmit}
+          onCancel={this.props.onCancelEdit}
+        />)}
+      </ReactModal>
     </div>);
   }
 }

@@ -3,9 +3,23 @@
 @import "~@material/theme/mdc-theme";
 @import "~@material/card/mdc-card";
 @import "~@material/button/mdc-button";
+@import "~@material/toolbar/mdc-toolbar";
 @import "./cake";
 @import "./form";
 
-.bcp__container {
+.bpc__container {
   margin: 8px;
+}
+
+.bpc__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(26, 26, 26, .75);
+}
+
+.bpc__file-input {
+  opacity: 0;
 }
