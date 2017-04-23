@@ -23,7 +23,12 @@ class CakeForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    if (!this.state.image) {
+      this.setState({ err: 'Image Required' });
+    } else {
+      const { title, desc, image } = this.state;
+      this.props.onSubmit({ title, desc, image });
+    }
   }
   handleReset() {
     const { title, desc, image } = this.props;
