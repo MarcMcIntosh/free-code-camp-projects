@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack",
     "build:all": "npm run build:dev && npm run build",
-    "deploy": "NODE_ENV=production webpack && gh-pages -d dist"
+    "deploy": "NODE_ENV=production webpack && gh-pages -d dist -o github"
   },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",

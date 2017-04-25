@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer');
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 const IS_PROD = process.env.NODE_ENV === 'production';
-const buildDir = IS_PROD ? 'build' : 'dev';
+const buildDir = IS_PROD ? 'dist' : 'dev';
 const OUT_PATH = path.resolve(__dirname, buildDir);
 
 const CSS_LOADER_CONFIG = [{
