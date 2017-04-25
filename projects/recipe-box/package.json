@@ -58,8 +58,6 @@
     "@material/theme": "^0.1.4",
     "@material/toolbar": "^0.2.2",
     "@material/typography": "^0.2.1",
-    "fuse.js": "^2.6.2",
-    "material-design-icons": "^3.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dropzone": "^3.13.0",
@@ -73,6 +71,6 @@
   "description": "Wrote in response to [this spec sheet](https://github.com/chris-waracle/react-test)",
   "repository": {
     "type": "git",
-    "url": "https://git.marcmcintosh.ninja/brightpurple-cakes"
+    "url": "https://github.com/MarcMcintosh/brightpurple-cakes"
   }
 }
