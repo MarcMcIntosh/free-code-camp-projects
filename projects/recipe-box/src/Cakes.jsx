@@ -53,7 +53,6 @@ class Cakes extends Component {
   }
   handleSubmit(event, data) {
     event.preventDefault();
-    console.log(data);
     if (this.props.adding) {
       this.props.onSaveCake(data);
     } else if (this.props.edit >= 0) {
@@ -67,11 +66,13 @@ class Cakes extends Component {
           <section className="mdc-toolbar__section mdc-toolbar__section--align-start">
             <span className="mdc-toolbar__title">Bright Purple Cakes</span>
           </section>
-          {/* <section class="mdc-toolbar__section">
-  Section aligns to center. </section> */}
+
           <section className="mdc-toolbar__section mdc-toolbar__section--align-end">
-            <input type="search" />
-            <button onClick={this.props.onAddCake}>new cake</button>
+            <button
+              className="material-icons md-24 md-light toolbar__button"
+              title="Add Cake"
+              onClick={this.props.onAddCake}
+            >playlist_add</button>
           </section>
         </div>
       </header>

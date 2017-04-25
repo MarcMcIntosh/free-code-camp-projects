@@ -6,6 +6,7 @@
 @import "~@material/toolbar/mdc-toolbar";
 @import "./cake";
 @import "./form";
+@import "./icons";
 
 .bpc__container {
   margin: 8px;
@@ -20,6 +21,17 @@
   background-color: rgba(26, 26, 26, .75);
 }
 
-.bpc__file-input {
-  opacity: 0;
+.bpc__form {
+  margin: auto;
+}
+
+.toolbar__button {
+  // width: 24px;
+  // height: 24px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
 }

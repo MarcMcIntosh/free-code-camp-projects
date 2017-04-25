@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 class CakeForm extends Component {
   constructor(props) {
@@ -73,55 +73,60 @@ class CakeForm extends Component {
   }
   render() {
     return (<form
-      className="mdc-card mdc-card--theme-dark bpc__cake"
+      className="mdc-card mdc-card--theme-dark bpc__cake bpc__form"
       style={(this.state.image) ? ({
         backgroundImage: `url(${this.state.image})`,
       }) : {}}
       onSubmit={this.handleSubmit}
     >
-    <Dropzone
-      name="image"
-      style={{}}
-      ref={(drop) => { this.dropzone = drop; }}
-      onDrop={(accepted, rejected) => {
-        if (rejected) {
-          this.setState({ err: 'Not a picture' });
-        } else {
-          this.handleImage(accepted);
-        }
-      }}
-      accept="image/*"
-      multiple={false}
-    >{(!this.state.err) ? false : this.state.err}</Dropzone>
-    <button
-      type="button"
-      title="Add A picture"
-      className="mdc-button mdc-button--raised mdc-button--accent"
-      onClick={() => this.dropzone.open()}
-    >Upload Image</button>
 
-      <section className="mdc-card__primary bpc__content">
-        <input
-          name="title"
-          type="text"
-          placeholder="cake"
-          value={this.state.title}
-          onChange={this.handleChange}
-          required
-        />
-        <textarea
-          value={this.state.desc}
-          name="desc"
-          onChange={this.handleChange}
-        />
+      <section className="bpc__file-input">
+        <Dropzone
+          style={{}}
+          ref={(drop) => { this.dropzone = drop; }}
+          onDrop={(accepted, rejected) => {
+            if (rejected) {
+              this.setState({ err: 'Not a picture' });
+            } else {
+              this.handleImage(accepted);
+            }
+          }}
+          accept="image/*"
+          multiple={false}
+        >{(!this.state.err) ? false : this.state.err}</Dropzone>
+
+        <button
+          type="button" title="Add A picture"
+          className="mdc-button mdc-button--raised mdc-button--accent"
+          onClick={() => this.dropzone.open()}
+        >Upload Image</button>
+
       </section>
-
-      {/* <button
-        className="mdc-button mdc-button--raised mdc-button--accent"
-        onClick={() => this.setState({ image: '' })}
-        title="Delete Image"
-        disabled={(this.state.image) === ''}
-      >Delete Image</button> */}
+      <section className="mdc-card__primary bpc__content">
+        <div>
+          <label htmlFor="title" className="mdc-card__title">Title</label>
+        </div>
+        <div>
+          <input
+            name="title"
+            type="text"
+            placeholder="cake"
+            value={this.state.title}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label className="mdc-card__subtitle" htmlFor="desc">Description</label>
+        </div>
+        <div>
+          <textarea
+            value={this.state.desc}
+            name="desc"
+            onChange={this.handleChange}
+          />
+        </div>
+      </section>
 
       <section className="mdc-card__actions bpc__content bpc__buttons">
         <input
