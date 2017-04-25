@@ -142,7 +142,7 @@ module.exports = {
   output: {
     filename: '[hash].js',
     path: OUT_PATH,
-    publicPath: '/',
+    publicPath: PUBLIC_PATH,
   },
   resolve: {
     extensions: ['.js', '.jsx'],
