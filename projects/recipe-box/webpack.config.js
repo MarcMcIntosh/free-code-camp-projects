@@ -9,6 +9,7 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 const IS_PROD = process.env.NODE_ENV === 'production';
 const buildDir = IS_PROD ? 'dist' : 'dev';
 const OUT_PATH = path.resolve(__dirname, buildDir);
+const PUBLIC_PATH = IS_PROD ? '/brigthpurple-cakes' : '/';
 
 const CSS_LOADER_CONFIG = [{
   loader: 'css-loader',
