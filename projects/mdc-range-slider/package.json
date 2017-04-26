@@ -1,18 +1,30 @@
 {
-  "name": "@material/range-slider",
-  "description": "The Material Components for the web list component",
+  "name": "mdc-range-slider",
+  "description": "The Material Components for the web range-slider component",
   "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/material-components/material-components-web.git"
-  },
   "dependencies": {
     "@material/elevation": "^0.1.2",
     "@material/theme": "^0.1.1"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcMcIntosh/mdc-range-slider.git"
+  },
+  "keywords": [
+    "material",
+    "components",
+    "range",
+    "slider",
+    "scss"
+  ],
+  "bugs": {
+    "url": "https://github.com/MarcMcIntosh/mdc-range-slider/issues"
+  },
+  "homepage": "https://github.com/MarcMcIntosh/mdc-range-slider#readme"
 }
