@@ -9,11 +9,11 @@ import { tileData, weaponTypes } from '../utility/GameConstants';
 
 export const DEFAULT = {
   player: {
+    entityName: 'player',
     entityType: 'player',
     x: 0,
     y: 0,
     health: 100,
-    inventory: {},
     weapon: weaponTypes[0],
     attack: 7,
     level: 0,
