@@ -8,6 +8,15 @@
 #  styles/sprites/torch.png
 #
 
+convert \
+  styles/images/player/Hero.png[128x32+0+0] \
+  +repage \
+  -crop 16x16 \
+  -resize 32x32 \
+  styles/images/player/player.png;
+
+PLAYER_TILES=$(ls styles/images/player/player*.png | sort -t '-' -n -k 2 | tr '\n' ' ');
+
 montage \
   styles/images/floor/cobble_blood{1,2,3,4,5,6,7,8,9,10,11,12}.png \
   styles/images/wall/stone_brick{1,2,3,4,5,6,7,8,9,10,11,12}.png \
@@ -16,10 +25,7 @@ montage \
   styles/images/exit.png \
   styles/images/boss.png \
   styles/images/enemies/*.png \
-  styles/images/player/up/{0,1,2,3}.png \
-  styles/images/player/right/{0,1,2,3}.png \
-  styles/images/player/down/{0,1,2,3}.png \
-  styles/images/player/left/{0,1,2,3}.png \
+  $PLAYER_TILES \
   styles/images/weapons/stick.png \
   styles/images/weapons/knife.png \
   styles/images/weapons/axe.png \

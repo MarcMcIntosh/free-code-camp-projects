@@ -78,19 +78,19 @@ export const tileData = {
       { next_step: 3, sx: 64, sy: 320, sw: 32, sh: 32 },
       { next_step: 0, sx: 96, sy: 320, sw: 32, sh: 32 },
     ],
-    right: [
+    down: [
       { next_step: 1, sx: 0, sy: 352, sw: 32, sh: 32 },
       { next_step: 2, sx: 32, sy: 352, sw: 32, sh: 32 },
       { next_step: 3, sx: 64, sy: 352, sw: 32, sh: 32 },
       { next_step: 0, sx: 96, sy: 352, sw: 32, sh: 32 },
     ],
-    down: [
+    left: [
       { next_step: 1, sx: 0, sy: 384, sw: 32, sh: 32 },
       { next_step: 2, sx: 32, sy: 384, sw: 32, sh: 32 },
       { next_step: 3, sx: 64, sy: 384, sw: 32, sh: 32 },
       { next_step: 0, sx: 96, sy: 384, sw: 32, sh: 32 },
     ],
-    left: [
+    right: [
       { next_step: 1, sx: 0, sy: 426, sw: 32, sh: 32 },
       { next_step: 2, sx: 32, sy: 426, sw: 32, sh: 32 },
       { next_step: 3, sx: 64, sy: 426, sw: 32, sh: 32 },
