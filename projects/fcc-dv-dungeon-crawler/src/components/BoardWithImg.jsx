@@ -4,7 +4,7 @@ import Touch from './Touch';
 // import setWindowSize from '../actions/Window';
 import {
   // resetMap,
-  fillMap,
+  // fillMap,
 } from '../actions/Map';
 import { levelUp } from '../actions/Entities';
 import onMove from '../actions/Move';
@@ -58,7 +58,7 @@ const mapDispatchToProps = dispatch => ({
   ),
   onMove: vector => dispatch(onMove(vector)),
   onToggleDarkness: () => dispatch(toggleDarkness()),
-  onFill: () => dispatch(fillMap()),
+  // onFill: () => dispatch(fillMap()),
 });
 
 class BoardWithFloor extends Component {
@@ -74,7 +74,7 @@ class BoardWithFloor extends Component {
   }
   componentDidMount() {
     // this.props.resetMap();
-    this.props.onFill();
+    // this.props.onFill();
     if (this.props.entities.player.toNextLevel <= 0) {
       this._playerLeveledUp();
     }
@@ -226,7 +226,7 @@ BoardWithFloor.propTypes = {
   levelUp: func.isRequired,
   onMove: func.isRequired,
   onToggleDarkness: func.isRequired,
-  onFill: func.isRequired,
+//  onFill: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardWithFloor);

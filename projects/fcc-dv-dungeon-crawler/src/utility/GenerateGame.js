@@ -23,7 +23,16 @@ const DEFAULT_PLAYER = {
   tile: tileData.PLAYER.up[0],
 };
 
-export default function GenerateGame(level = 1, player = DEFAULT_PLAYER, w = 100, h = 100, maxRS = 20, minRS = 6, maxHL = 5, n = 20) {
+export default function GenerateGame(
+  level = 1,
+  player = DEFAULT_PLAYER,
+  w = 100,
+  h = 100,
+  maxRS = 20,
+  minRS = 6,
+  maxHL = 5,
+  n = 20,
+) {
   // init grid of walls
   const arr = [];
   for (let i = 0; i < w; i += 1) {
@@ -33,8 +42,8 @@ export default function GenerateGame(level = 1, player = DEFAULT_PLAYER, w = 100
     }
   }
   // Place a random floor tile
-  const rx = Math.FLOOR(Math.random() * w);
-  const ry = Math.FLOOR(Math.random() * w);
+  const rx = Math.floor(Math.random() * w);
+  const ry = Math.floor(Math.random() * w);
   arr[rx][ry] = tileType.FLOOR;
   // create rooms
 
@@ -219,6 +228,6 @@ export default function GenerateGame(level = 1, player = DEFAULT_PLAYER, w = 100
     level,
     occupiedSpaces,
     entities,
-    dungeonFloor: dungeonFloor(arr),
+    dungeon: dungeonFloor(arr),
   };
 }
