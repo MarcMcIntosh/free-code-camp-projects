@@ -1,38 +1,4 @@
-import { tileType } from './GameConstants';
-
-const tileData = {
-  FLOOR: [
-    { type: 'FLOOR', sx: 0, sy: 0, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 32, sy: 0, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 64, sy: 0, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 96, sy: 0, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 0, sy: 32, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 32, sy: 32, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 64, sy: 32, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 96, sy: 32, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 0, sy: 64, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 32, sy: 64, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 64, sy: 64, sw: 32, sh: 32 },
-    { type: 'FLOOR', sx: 96, sy: 64, sw: 32, sh: 32 },
-  ],
-  WALL: [
-    { type: 'WALL', sx: 0, sy: 96, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 32, sy: 96, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 64, sy: 96, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 96, sy: 96, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 0, sy: 128, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 32, sy: 128, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 64, sy: 128, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 96, sy: 128, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 0, sy: 160, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 32, sy: 160, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 64, sy: 160, sw: 32, sh: 32 },
-    { type: 'WALL', sx: 96, sy: 160, sw: 32, sh: 32 },
-  ],
-  DARK: [
-    { type: 'DARK', sx: 0, sy: 192, sw: 32, sh: 32 },
-  ],
-};
+import { tileType, tileData } from './GameConstants';
 
 function tileAtRandom(arr) {
   const n = Math.floor(Math.random() * arr.length);
