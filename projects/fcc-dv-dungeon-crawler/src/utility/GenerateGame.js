@@ -87,6 +87,8 @@ export default function GenerateGame(
     for (let ri = startX; ri < startX + roomWidth; ri += 1) {
       if (arr[ri].slice(startY, startY + roomHeight).every(tile => tile === tileType.WALL)) {
         numClear += 1;
+        /* Add the door */
+        arr[wall.coords.x][wall.coords.y] = tileType.FLOOR;
       }
     }
     /* Exit is not all spaces are clear */
@@ -124,14 +126,14 @@ export default function GenerateGame(
 
   /* see actions/Map.js for an overview */
   const empties = [].concat(getEmptyCoords());
-  while (empties.length < 12) {
+  while (empties.length < 22) {
     const ec = getEmptyCoords();
     const isUnique = empties.every(d => (d.x !== ec.x && d.y !== ec.y));
     if (isUnique) { empties.push(ec); }
   }
 
   /* Add health */
-  empties.slice(0, 5).forEach((d, i) => {
+  empties.slice(0, 10).forEach((d, i) => {
     const obj = {
       entityName: `health${i}`,
       entityType: 'health',
@@ -146,7 +148,7 @@ export default function GenerateGame(
     occupiedSpaces[str] = obj.entityName;
   });
   /* Add enemies */
-  empties.slice(5, 10).forEach((d, i) => {
+  empties.slice(10, 20).forEach((d, i) => {
     const obj = {
       entityName: `enemy${i}`,
       entityType: 'enemy',
@@ -164,14 +166,14 @@ export default function GenerateGame(
   // add weapon
   const wpn = {
     ...weaponTypes[level],
-    x: empties[10].x,
-    y: empties[10].y,
+    x: empties[20].x,
+    y: empties[20].y,
   };
   entities[wpn.entityName] = wpn;
   occupiedSpaces[`${wpn.x}x${wpn.y}`] = wpn.entityName;
 
   // add player
-  const plyr = { ...player, x: empties[11].x, y: empties[11].y };
+  const plyr = { ...player, x: empties[21].x, y: empties[21].y };
   entities[plyr.entityName] = plyr;
   occupiedSpaces[`${plyr.x}x${plyr.y}`] = plyr.entityName;
 
@@ -180,12 +182,21 @@ export default function GenerateGame(
     const emp1 = { x: emp0.x + 1, y: emp0.y };
     const emp2 = { x: emp0.x, y: emp0.y + 1 };
     const emp3 = { x: emp0.x + 1, y: emp0.y + 1 };
+    const str0 = `${emp0.x}x${emp0.y}`;
+    const str1 = `${emp1.x}x${emp1.y}`;
+    const str2 = `${emp2.x}x${emp2.y}`;
+    const str3 = `${emp3.x}x${emp3.y}`;
+    const chkOcc = s => Object.prototype.hasOwnProperty.call(occupiedSpaces, s);
     if (emp3.x >= w || emp3.y >= h) {
       return findLargeSpace();
     } else if (
       arr[emp0.x][emp0.y] !== tileType.FLOOR ||
       arr[emp1.x][emp1.y] !== tileType.FLOOR ||
-      arr[emp2.x][emp2.y] !== tileType.FLOOR || arr[emp3.x][emp3.y] !== tileType.FLOOR
+      arr[emp2.x][emp2.y] !== tileType.FLOOR || arr[emp3.x][emp3.y] !== tileType.FLOOR ||
+      chkOcc(str0) ||
+      chkOcc(str1) ||
+      chkOcc(str2) ||
+      chkOcc(str3)
     ) {
       return findLargeSpace();
     }
