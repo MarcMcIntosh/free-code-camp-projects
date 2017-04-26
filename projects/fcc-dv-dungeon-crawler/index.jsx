@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import store from './src/store';
 import Board from './src/components/Board';
 /* Move this into the board */
-import Torch from './src/components/ToggleTorch';
 import BoardWithFloor from './src/components/BoardWithImg';
 
 class Container extends Component {
@@ -28,6 +27,5 @@ Container.propTypes = {
 export default Container;
 export {
   Board,
-  Torch,
   BoardWithFloor,
 };

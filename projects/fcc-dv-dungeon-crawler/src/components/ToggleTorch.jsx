@@ -1,12 +1,4 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { connect } from 'react-redux';
-import toggleDarkness from '../actions/Darkness';
-
-const mapStateToProps = state => ({ darkness: state.darkness });
-
-const mapDispatchToProps = dispatch => ({
-  onToggle: () => dispatch(toggleDarkness()),
-});
 
 class ToggleTourch extends PureComponent {
   constructor() {
@@ -33,4 +25,4 @@ ToggleTourch.propTypes = {
   onToggle: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ToggleTourch);
+export default ToggleTourch;

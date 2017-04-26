@@ -7,6 +7,9 @@ import { levelUp } from '../actions/Entities';
 import onMove from '../actions/Move';
 // import DungeonLevel from './DungeonLevel';
 import HealthBar from './HealthBar';
+import ToggleTorch from './ToggleTorch';
+import toggleDarkness from '../actions/Darkness';
+
 
 import {
   PLAYER,
@@ -52,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(levelUp(attack, health, toNextLevel))
   ),
   onMove: vector => dispatch(onMove(vector)),
+  onToggleDarkness: () => dispatch(toggleDarkness()),
 });
 
 class BoardWithFloor extends Component {
@@ -177,54 +181,17 @@ class BoardWithFloor extends Component {
         }
       }
     }
-    /*
-    const gd = [];
-    for (let i = startX, x = 0; i < endX; i += 1, x += 1) {
-      gd[x] = [];
-      for (let ii = startY, y = 0; ii < endY; ii += 1, y += 1) {
-        const str = `${i}x${ii}`;
-        const xd = Math.abs(this.props.entities.player.x - i);
-        const yd = Math.abs(this.props.entities.player.y - ii);
-        const xdyd = Math.sqrt((xd * xd) + (yd * yd));
-        if (this.props.darkness && xdyd >= SIGHT) {
-          gd[x][y] = tileColors.dark;
-        } else if (
-          Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str)
-        ) {
-          const entityName = this.props.occupiedSpaces[str];
-          const { entityType } = this.props.entities[entityName];
-          gd[x][y] = tileColors[entityType];
-        } else {
-          // WALLS AND FLOORS
-          const n = this.props.game[i][ii];
-          const t = reverseLookup[n];
-          // gd[x][y] = tileColors[t];
-
-          // tempfix to tesk fllor tiles
-          gd[x][y] = (t === 'FLOOR') ? t : tileColors[t];
-        }
-      }
-    }
-    const ctx = this.canvas.getContext('2d');
-    gd.forEach((x, i) => x.forEach((y, ii) => {
-      // tempfix
-      const dx = i * tileSize;
-      const dy = ii * tileSize;
-      if (y === 'FLOOR') {
-        const t = randomTile(tileData[y]);
-        const { sx, sy, sw, sh } = t;
-        ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
-      } else {
-        ctx.fillStyle = y;
-        ctx.fillRect(dx, dy, tileSize, tileSize);
-      }
-    }));
-    */
   }
   render() {
     /* You'll need to react to prop changes */
     return (<div className="dungeon__container">
-      <HealthBar health={this.props.entities.player.health} heartValue={20} />
+      <div className="dungeon__hud">
+        <HealthBar health={this.props.entities.player.health} heartValue={20} />
+        <ToggleTorch
+          onToggle={this.props.onToggleDarkness}
+          darkness={this.props.darkness}
+        />
+      </div>
       <Touch onTouch={this.props.onMove}>
         <canvas
           className="dungeon__floor"
@@ -245,6 +212,7 @@ BoardWithFloor.propTypes = {
   darkness: bool.isRequired,
   levelUp: func.isRequired,
   onMove: func.isRequired,
+  onToggleDarkness: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardWithFloor);

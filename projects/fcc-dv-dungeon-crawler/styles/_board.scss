@@ -1,9 +1,13 @@
 
 .dungeon {
-  &__health-bar {
+  &__hud {
     position: absolute;
     margin: 2px;
   }
+  // &__health-bar {
+  //  position: absolute;
+  //  margin: 2px;
+  // }
 
   &__heart {
     width: 24px;
