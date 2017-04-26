@@ -39,10 +39,12 @@ export default function onMove(vector) {
         return dispatch(move('player', v));
       }
       case 'exit': {
-        dispatch(resetBoard());
-        dispatch(setMap());
+        // dispatch(resetBoard());
+        // dispatch(setMap());
+        // dispatch(increaseLevel());
+        // return dispatch(fillMap());
         dispatch(increaseLevel());
-        return dispatch(fillMap());
+        return dispatch(setMap());
       }
       case 'boss':
       case 'enemy': {
