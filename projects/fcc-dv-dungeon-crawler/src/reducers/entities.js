@@ -5,6 +5,7 @@ import {
   SWITCH_WEAPON,
   LEVEL_UP,
 } from '../actions/Entities';
+import { tileData } from '../utility/GameConstants';
 
 export const DEFAULT = {
   player: {
@@ -17,6 +18,7 @@ export const DEFAULT = {
     attack: 7,
     level: 0,
     toNextLevel: 60,
+    tile: tileData.PLAYER.up[0],
   },
 };
 // entities exclusive Action Types

@@ -1,9 +1,11 @@
-import { tileType, tileData } from './GameConstants';
+import { tileType, tileData, tileAtRandom } from './GameConstants';
 
+/*
 function tileAtRandom(arr) {
   const n = Math.floor(Math.random() * arr.length);
   return arr[n];
 }
+*/
 /* Takes a 2d array from createMap */
 function dungeonFloor(arr) {
   const data = [];

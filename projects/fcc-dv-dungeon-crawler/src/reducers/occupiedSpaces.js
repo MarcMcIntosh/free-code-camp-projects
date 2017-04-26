@@ -13,16 +13,31 @@ import {
   rmOccupiedSpace,
 } from '../utils';
 
+import {
+  tileData,
+  trajectory,
+} from '../utility/GameConstants';
+
 export const DEFAULT = { '0x0': 'player' };
 // export const DEFAULT = {};
 export default function (state, action) {
   switch (action.type) {
     case ADD_ENTITY: {
-      const { entityName, entityType, health, attack } = action.payload;
+      const { entityName, entityType, health, attack, tile } = action.payload;
       const { x, y } = action.payload.location;
       const occupiedSpaces = { ...state.occupiedSpaces,
         [`${x}x${y}`]: entityName };
-      const entities = { ...state.entities, [entityName]: { entityType, health, attack, x, y } };
+      const entities = {
+        ...state.entities,
+        [entityName]: {
+          entityType,
+          health,
+          attack,
+          x,
+          y,
+          tile,
+        },
+      };
       return { ...state, occupiedSpaces, entities };
     }
     case REMOVE_ENTITY: {
@@ -40,12 +55,20 @@ export default function (state, action) {
       const { entityName, vector } = action.payload;
       const ex = state.entities[entityName].x;
       const ey = state.entities[entityName].y;
+      // const { next_step } = state.entities[entityName].tile;
+      const direction = trajectory(ex, ey, vector.x, vector.y);
+      /* Only player moves */
+      const curr = state.entities[entityName].tile;
+      const str = state.entities[entityName].entityType.toUpperCase();
+      const nextStep = (curr.direction !== direction) ? 0 : curr.next_step;
+      const tile = tileData[str][direction][nextStep];
       const entities = {
         ...state.entities,
         [entityName]: {
           ...state.entities[entityName],
           x: vector.x,
           y: vector.y,
+          tile,
         },
       };
       /* Error with upDateOccupiedSpaces, */
@@ -81,7 +104,7 @@ export default function (state, action) {
       return { ...state, entities, occupiedSpaces };
     }
     case ADD_BOSS: {
-      const { health, attack } = action.payload;
+      const { health, attack, tile } = action.payload;
       const { x, y } = action.payload.location;
       const occupiedSpaces = {
         ...state.occupiedSpaces,
@@ -92,7 +115,7 @@ export default function (state, action) {
       };
       const entities = {
         ...state.entities,
-        boss: { entityType: 'enemy', health, attack, x, y },
+        boss: { entityType: 'enemy', health, attack, x, y, tile },
       };
       return { ...state, occupiedSpaces, entities };
     }

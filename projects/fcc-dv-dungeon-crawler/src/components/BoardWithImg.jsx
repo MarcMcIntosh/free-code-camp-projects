@@ -154,7 +154,8 @@ class BoardWithFloor extends Component {
     const ctx = this.canvas.getContext('2d');
     for (let i = startX, dx = 0; i < endX; i += 1, dx += tileSize) {
       for (let ii = startY, dy = 0; ii < endY; ii += 1, dy += tileSize) {
-        // const str = `${i}x${ii}`;
+        const str = `${i}x${ii}`;
+        const isOccupied = Object.prototype.hasOwnProperty.call(this.props.occupiedSpaces, str);
         const darkX = Math.abs(this.props.entities.player.x - i);
         const darkY = Math.abs(this.props.entities.player.y - ii);
         const darkArea = Math.hypot(darkX, darkY);
@@ -163,6 +164,15 @@ class BoardWithFloor extends Component {
           ctx.fillRect(dx, dy, tileSize, tileSize);
         } else {
           const { sx, sy, sw, sh } = this.props.game[i][ii];
+          ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
+        }
+        if ((
+          isOccupied && this.props.darkness && darkArea < SIGHT
+        ) || (
+          isOccupied && !this.props.darkness
+        )) {
+          const en = this.props.occupiedSpaces[str];
+          const { sx, sy, sw, sh } = this.props.entities[en].tile;
           ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
         }
       }

@@ -1,8 +1,8 @@
 export const ADD_BOSS = 'ADD_BOSS';
-export function addBoss(attack, health, location) {
+export function addBoss(attack, health, location, tile) {
   return {
     type: ADD_BOSS,
-    payload: { attack, health, location },
+    payload: { attack, health, location, tile },
   };
 }
 
@@ -36,7 +36,7 @@ export function resetBoard() {
 }
 
 export const ADD_ENTITY = 'ADD_ENTITY';
-export function addEntity(entityName, entityType, health, attack, location) {
+export function addEntity(entityName, entityType, health, attack, location, tile) {
   return {
     type: ADD_ENTITY,
     payload: {
@@ -45,6 +45,7 @@ export function addEntity(entityName, entityType, health, attack, location) {
       health,
       attack,
       location,
+      tile,
     },
   };
 }

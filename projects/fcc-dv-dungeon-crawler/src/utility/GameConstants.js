@@ -3,8 +3,8 @@ export const tileType = {
   WALL: 0,
   FLOOR: 1,
 };
-export const SIGHT = 12;
-export const tileSize = 12;
+export const SIGHT = 7;
+export const tileSize = 24;
 export const tileColors = {
   player: 'blue',
   FLOOR: 'white',
@@ -73,37 +73,55 @@ export const tileData = {
   ],
   PLAYER: {
     up: [
-      { next_step: 1, sx: 0, sy: 320, sw: 32, sh: 32 },
-      { next_step: 2, sx: 32, sy: 320, sw: 32, sh: 32 },
-      { next_step: 3, sx: 64, sy: 320, sw: 32, sh: 32 },
-      { next_step: 0, sx: 96, sy: 320, sw: 32, sh: 32 },
+      { direction: 'up', next_step: 1, sx: 0, sy: 320, sw: 32, sh: 32 },
+      { direction: 'up', next_step: 2, sx: 32, sy: 320, sw: 32, sh: 32 },
+      { direction: 'up', next_step: 3, sx: 64, sy: 320, sw: 32, sh: 32 },
+      { direction: 'up', next_step: 0, sx: 96, sy: 320, sw: 32, sh: 32 },
     ],
     down: [
-      { next_step: 1, sx: 0, sy: 352, sw: 32, sh: 32 },
-      { next_step: 2, sx: 32, sy: 352, sw: 32, sh: 32 },
-      { next_step: 3, sx: 64, sy: 352, sw: 32, sh: 32 },
-      { next_step: 0, sx: 96, sy: 352, sw: 32, sh: 32 },
+      { direction: 'down', next_step: 1, sx: 0, sy: 352, sw: 32, sh: 32 },
+      { direction: 'down', next_step: 2, sx: 32, sy: 352, sw: 32, sh: 32 },
+      { direction: 'down', next_step: 3, sx: 64, sy: 352, sw: 32, sh: 32 },
+      { direction: 'down', next_step: 0, sx: 96, sy: 352, sw: 32, sh: 32 },
     ],
     left: [
-      { next_step: 1, sx: 0, sy: 384, sw: 32, sh: 32 },
-      { next_step: 2, sx: 32, sy: 384, sw: 32, sh: 32 },
-      { next_step: 3, sx: 64, sy: 384, sw: 32, sh: 32 },
-      { next_step: 0, sx: 96, sy: 384, sw: 32, sh: 32 },
+      { direction: 'left', next_step: 1, sx: 0, sy: 384, sw: 32, sh: 32 },
+      { direction: 'left', next_step: 2, sx: 32, sy: 384, sw: 32, sh: 32 },
+      { direction: 'left', next_step: 3, sx: 64, sy: 384, sw: 32, sh: 32 },
+      { direction: 'left', next_step: 0, sx: 96, sy: 384, sw: 32, sh: 32 },
     ],
     right: [
-      { next_step: 1, sx: 0, sy: 426, sw: 32, sh: 32 },
-      { next_step: 2, sx: 32, sy: 426, sw: 32, sh: 32 },
-      { next_step: 3, sx: 64, sy: 426, sw: 32, sh: 32 },
-      { next_step: 0, sx: 96, sy: 426, sw: 32, sh: 32 },
+      { direction: 'right', next_step: 1, sx: 0, sy: 416, sw: 32, sh: 32 },
+      { direction: 'right', next_step: 2, sx: 32, sy: 416, sw: 32, sh: 32 },
+      { direction: 'right', next_step: 3, sx: 64, sy: 416, sw: 32, sh: 32 },
+      { direction: 'right', next_step: 0, sx: 96, sy: 416, sw: 32, sh: 32 },
     ],
   },
   WEAPON: {
-    stick: { sx: 0, sy: 458, sw: 32, sh: 32 },
-    knife: { sx: 32, sy: 458, sw: 32, sh: 32 },
-    axe: { sx: 64, sy: 458, sw: 32, sh: 32 },
-    katana: { sx: 96, sy: 458, sw: 32, sh: 32 },
-    scythe: { sx: 0, sy: 490, sw: 32, sh: 32 },
+    stick: { sx: 0, sy: 448, sw: 32, sh: 32 },
+    knife: { sx: 32, sy: 448, sw: 32, sh: 32 },
+    axe: { sx: 64, sy: 448, sw: 32, sh: 32 },
+    katana: { sx: 96, sy: 448, sw: 32, sh: 32 },
+    scythe: { sx: 0, sy: 480, sw: 32, sh: 32 },
   },
+};
+
+export const tileAtRandom = (arr) => {
+  const n = Math.floor(Math.random() * arr.length);
+  return arr[n];
+};
+
+export const trajectory = (x0, y0, x1, y1) => {
+  if (y1 > y0) {
+    return 'down';
+  } else if (y1 < y0) {
+    return 'up';
+  } else if (x1 > x0) {
+    return 'right';
+  } else if (x1 < x0) {
+    return 'left';
+  }
+  return 'up';
 };
 
 export const reverseLookup = ['WALL', 'FLOOR'];

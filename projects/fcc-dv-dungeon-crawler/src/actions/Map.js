@@ -1,7 +1,7 @@
 import {
   emptyCoords,
 } from '../utils';
-import { weaponTypes, ENEMY } from '../utility/GameConstants';
+import { weaponTypes, ENEMY, tileData, tileAtRandom } from '../utility/GameConstants';
 import {
   setLocation,
   addEntity,
@@ -32,19 +32,21 @@ export function fillMap() {
 
     const empties = Array.from(e);
 
+
     empties.slice(0, 5).forEach((d, i) => {
-      dispatch(addEntity(`health${i}`, 'health', 20, 0, d));
+      dispatch(addEntity(`health${i}`, 'health', 20, 0, d, tileData.HEALTH));
     });
 
     empties.slice(5, 10).forEach((d, i) => {
-      dispatch(addEntity(`enemy${i}`, 'enemy', l * ENEMY.health, l * ENEMY.attack, d));
+      const tile = tileAtRandom(tileData.ENEMY);
+      dispatch(addEntity(`enemy${i}`, 'enemy', l * ENEMY.health, l * ENEMY.attack, d, tile));
     });
-    dispatch(addEntity(weapon.entityName, 'weapon', weapon.health, weapon.attack, empties[10]));
+    dispatch(addEntity(weapon.entityName, 'weapon', weapon.health, weapon.attack, empties[10], weapon.tile));
     dispatch(setLocation('player', empties[11]));
     if (level < 4) {
-      dispatch(addEntity('exit', 'exit', 0, 0, empties[12]));
+      dispatch(addEntity('exit', 'exit', 0, 0, empties[12], tileData.EXIT));
     } else if (level === 4) {
-      dispatch(addBoss(125, 500, empties[12]));
+      dispatch(addBoss(125, 500, empties[12], tileData.BOSS));
     }
   };
 }
