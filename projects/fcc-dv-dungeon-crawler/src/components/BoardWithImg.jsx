@@ -2,14 +2,16 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Touch from './Touch';
 // import setWindowSize from '../actions/Window';
-// import { resetMap, fillMap } from '../actions/Map';
+import {
+  // resetMap,
+  fillMap,
+} from '../actions/Map';
 import { levelUp } from '../actions/Entities';
 import onMove from '../actions/Move';
 // import DungeonLevel from './DungeonLevel';
 import HealthBar from './HealthBar';
 import ToggleTorch from './ToggleTorch';
 import toggleDarkness from '../actions/Darkness';
-
 
 import {
   PLAYER,
@@ -56,6 +58,7 @@ const mapDispatchToProps = dispatch => ({
   ),
   onMove: vector => dispatch(onMove(vector)),
   onToggleDarkness: () => dispatch(toggleDarkness()),
+  onFill: () => dispatch(fillMap()),
 });
 
 class BoardWithFloor extends Component {
@@ -71,11 +74,10 @@ class BoardWithFloor extends Component {
   }
   componentDidMount() {
     // this.props.resetMap();
-    // this.props.onFill();
+    this.props.onFill();
     if (this.props.entities.player.toNextLevel <= 0) {
       this._playerLeveledUp();
     }
-    // window.addEventListener('keydown', this._handleKeypress);
     this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
     this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
     /* Might not be needed */
@@ -83,6 +85,7 @@ class BoardWithFloor extends Component {
     this.img = new Image();
     this.img.src = floorTile;
     this.img.onload = () => {
+      window.addEventListener('keydown', this._handleKeypress);
       window.addEventListener('resize', this.resize);
       this.clearAndDraw();
     };
@@ -181,12 +184,22 @@ class BoardWithFloor extends Component {
         }
       }
     }
+    const wpn = this.hudWeapon.getContext('2d');
+    const { sx, sy, sw, sh } = this.props.entities.player.weapon.tile;
+    wpn.drawImage(this.img, sx, sy, sw, sh, 0, 0, this.hudWeapon.width, this.hudWeapon.height);
   }
+
   render() {
     /* You'll need to react to prop changes */
     return (<div className="dungeon__container">
       <div className="dungeon__hud">
         <HealthBar health={this.props.entities.player.health} heartValue={20} />
+        <canvas
+          className="dungeon__weapon"
+          ref={(c) => { this.hudWeapon = c; }}
+          width="28px"
+          height="28px"
+        />
         <ToggleTorch
           onToggle={this.props.onToggleDarkness}
           darkness={this.props.darkness}
@@ -213,6 +226,7 @@ BoardWithFloor.propTypes = {
   levelUp: func.isRequired,
   onMove: func.isRequired,
   onToggleDarkness: func.isRequired,
+  onFill: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardWithFloor);

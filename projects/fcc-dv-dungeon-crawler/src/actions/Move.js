@@ -30,6 +30,7 @@ export default function onMove(vector) {
     switch (entity.entityType) {
       case 'weapon': {
         dispatch(switchWeapon(entityName, entity.attack));
+        dispatch(removeEntity(entityName));
         return dispatch(move('player', v));
       }
       case 'health': {

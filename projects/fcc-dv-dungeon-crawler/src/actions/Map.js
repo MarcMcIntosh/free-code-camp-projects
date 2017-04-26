@@ -24,8 +24,8 @@ export function fillMap() {
     // const entities = { player };
 
     // An array of unique empty places //
-    const weapon = weaponTypes[level];
     const l = level + 1;
+    const weapon = weaponTypes[l];
     const e = new Set();
 
     while (e.size < 14) { e.add(emptyCoords(map, occupiedSpaces)); }

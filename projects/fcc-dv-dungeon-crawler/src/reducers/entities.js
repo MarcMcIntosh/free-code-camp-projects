@@ -5,7 +5,7 @@ import {
   SWITCH_WEAPON,
   LEVEL_UP,
 } from '../actions/Entities';
-import { tileData } from '../utility/GameConstants';
+import { tileData, weaponTypes } from '../utility/GameConstants';
 
 export const DEFAULT = {
   player: {
@@ -14,7 +14,7 @@ export const DEFAULT = {
     y: 0,
     health: 100,
     inventory: {},
-    weapon: 'stick',
+    weapon: weaponTypes[0],
     attack: 7,
     level: 0,
     toNextLevel: 60,
@@ -44,17 +44,20 @@ export default function (state, action) {
         },
       },
     };
-    case SWITCH_WEAPON: return {
-      ...state,
-      entities: {
-        ...state.entities,
-        player: {
-          ...state.entities.player,
-          weapon: action.weapon,
-          attack: state.entities.player.attack + action.attack,
+    case SWITCH_WEAPON: {
+      const weapons = weaponTypes.filter(d => d.entityName === action.weapon);
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          player: {
+            ...state.entities.player,
+            weapon: weapons[0],
+            attack: state.entities.player.attack + action.attack,
+          },
         },
-      },
-    };
+      };
+    }
     case GAIN_XP: return {
       ...state,
       entities: {
