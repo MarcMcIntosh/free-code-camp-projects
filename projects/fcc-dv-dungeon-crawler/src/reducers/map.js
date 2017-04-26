@@ -2,26 +2,22 @@ import {
   SET_MAP,
   RESET_MAP,
 } from '../actions/Map';
-import { createMap } from '../utils';
-import dungeonFloor from '../utility/dungeonFloor';
+// import { createMap } from '../utils';
+// import dungeonFloor from '../utility/dungeonFloor';
 
-function mkMap() {
-  const m = createMap();
-  const d = dungeonFloor(m);
-  return { map: m, dungeon: d };
-}
-
-export const DEFAULT = mkMap();
+import generateGame from '../utility/GenerateGame';
 
 export default function (state, action) {
   switch (action.type) {
-    case SET_MAP: return {
-      ...state,
-      ...mkMap(),
-    };
+    case SET_MAP: {
+      return {
+        ...state,
+        ...generateGame(state.level, state.entities.player),
+      };
+    }
     case RESET_MAP: return {
       ...state,
-      ...mkMap(),
+      ...generateGame(),
     };
     default: return state;
   }

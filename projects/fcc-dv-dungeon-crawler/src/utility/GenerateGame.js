@@ -212,10 +212,11 @@ export default function GenerateGame(
       health: 0,
       x: bigSpace[0].x,
       y: bigSpace[0].y,
+      location: bigSpace,
       tile: tileData.EXIT,
     };
     bigSpace.forEach((d) => {
-      const osStr = `${d.x}x${d.x}`;
+      const osStr = `${d.x}x${d.y}`;
       occupiedSpaces[osStr] = 'exit';
     });
   } else if (level === 4) {
@@ -224,12 +225,13 @@ export default function GenerateGame(
       entityType: 'enemy',
       attack: 125,
       health: 500,
+      location: bigSpace,
       x: bigSpace[0].x,
       y: bigSpace[0].y,
       tile: tileData.BOSS,
     };
     bigSpace.forEach((d) => {
-      const osStr = `${d.x}x${d.x}`;
+      const osStr = `${d.x}x${d.y}`;
       occupiedSpaces[osStr] = 'boss';
     });
   }
