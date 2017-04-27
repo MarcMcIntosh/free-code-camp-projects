@@ -18,20 +18,20 @@
 
   &__container {
     position: relative;
-    // max-width: 100%;
+    width: 100%;
 
-    @include vw-height(250px, 800px, 1000px);
+    @include vw-height(250px, 600px, 800px);
 
     margin: auto;
-    padding: 8px;
+    padding: 6px;
   }
 
   &__floor {
     /* largeish display */
-    width: 100%;
+    position: relative;
+    width: 90%;
     height: 100%;
-    //
-    // margin: auto;
+    margin: auto;
     border-width: medium;
     border-style: solid;
     border-color: black;

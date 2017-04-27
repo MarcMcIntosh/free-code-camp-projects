@@ -17,8 +17,10 @@ convert \
 
 PLAYER_TILES=$(ls styles/images/player/player*.png | sort -t '-' -n -k 2 | tr '\n' ' ');
 
+FLOOR_TILES=$(ls styles/images/floor/cobble*.png | sort -t '-' -n -k 2 | tr '\n' ' ');
+
 montage \
-  styles/images/floor/cobble_blood{1,2,3,4,5,6,7,8,9,10,11,12}.png \
+  $FLOOR_TILES \
   styles/images/wall/stone_brick{1,2,3,4,5,6,7,8,9,10,11,12}.png \
   styles/images/dark/dngn_unseen.png \
   styles/images/apple.png \
