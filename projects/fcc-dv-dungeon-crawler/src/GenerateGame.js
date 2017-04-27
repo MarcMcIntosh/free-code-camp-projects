@@ -1,6 +1,6 @@
-import { getDoorOffset, findWall, dungeonFloor } from './utils';
+import { tileType, tileData, ENEMY, weaponTypes } from './GameConstants';
+import { getDoorOffset, findWall, dungeonFloor, tileAtRandom } from './utils';
 
-import { tileType, tileData, tileAtRandom, ENEMY, weaponTypes } from './GameConstants';
 
 const DEFAULT_PLAYER = {
   entityName: 'player',
