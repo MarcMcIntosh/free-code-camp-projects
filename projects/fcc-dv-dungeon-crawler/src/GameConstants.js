@@ -106,24 +106,6 @@ export const tileData = {
   },
 };
 
-export const tileAtRandom = (arr) => {
-  const n = Math.floor(Math.random() * arr.length);
-  return arr[n];
-};
-
-export const trajectory = (x0, y0, x1, y1) => {
-  if (y1 > y0) {
-    return 'down';
-  } else if (y1 < y0) {
-    return 'up';
-  } else if (x1 > x0) {
-    return 'right';
-  } else if (x1 < x0) {
-    return 'left';
-  }
-  return 'up';
-};
-
 export const reverseLookup = ['WALL', 'FLOOR'];
 export const PLAYER = {
   baseHealth: 100,

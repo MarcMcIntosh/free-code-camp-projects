@@ -1,14 +1,6 @@
-// import placeRoom from './PlaceRoom';
-import getDoorOffset from './GetDoorOffset';
-import findWall from './FindWall';
-import dungeonFloor from './dungeonFloor';
-import {
-  tileType,
-  tileData,
-  tileAtRandom,
-  ENEMY,
-  weaponTypes,
-} from './GameConstants';
+import { getDoorOffset, findWall, dungeonFloor } from './utils';
+
+import { tileType, tileData, tileAtRandom, ENEMY, weaponTypes } from './GameConstants';
 
 const DEFAULT_PLAYER = {
   entityName: 'player',
