@@ -171,8 +171,8 @@ export default function GenerateGame(
 
   function findLargeSpace() {
     const emp0 = getEmptyCoords();
-    const emp1 = { x: emp0.x + 1, y: emp0.y };
-    const emp2 = { x: emp0.x, y: emp0.y + 1 };
+    const emp1 = { x: emp0.x, y: emp0.y + 1 };
+    const emp2 = { x: emp0.x + 1, y: emp0.y };
     const emp3 = { x: emp0.x + 1, y: emp0.y + 1 };
     const str0 = `${emp0.x}x${emp0.y}`;
     const str1 = `${emp1.x}x${emp1.y}`;
@@ -197,34 +197,35 @@ export default function GenerateGame(
   // add exit or boss
   const bigSpace = findLargeSpace();
   if (level < 4) {
-    entities.exit = {
-      entityName: 'exit',
-      entityType: 'exit',
-      attack: 0,
-      health: 0,
-      x: bigSpace[0].x,
-      y: bigSpace[0].y,
-      location: bigSpace,
-      tile: tileData.EXIT,
-    };
-    bigSpace.forEach((d) => {
-      const osStr = `${d.x}x${d.y}`;
-      occupiedSpaces[osStr] = 'exit';
+    bigSpace.forEach((d, i) => {
+      const obj = {
+        entityName: `exit${i}`,
+        entityType: 'exit',
+        attack: 0,
+        health: 0,
+        x: d.x,
+        y: d.y,
+        tile: tileData.EXIT[i],
+      };
+      const osStr = `${obj.x}x${obj.y}`;
+      entities[obj.entityName] = obj;
+      occupiedSpaces[osStr] = obj.entityName;
     });
   } else if (level === 4) {
-    entities.boss = {
-      entityName: 'boss',
-      entityType: 'enemy',
-      attack: 125,
-      health: 500,
-      location: bigSpace,
-      x: bigSpace[0].x,
-      y: bigSpace[0].y,
-      tile: tileData.BOSS,
-    };
-    bigSpace.forEach((d) => {
+    bigSpace.forEach((d, i) => {
+      const obj = {
+        entityName: `boss${i}`,
+        // entityType: 'enemy',
+        entityType: 'boss',
+        attack: 125,
+        health: 500,
+        x: d.x,
+        y: d.y,
+        tile: tileData.BOSS[i],
+      };
       const osStr = `${d.x}x${d.y}`;
-      occupiedSpaces[osStr] = 'boss';
+      entities[obj.entityName] = obj;
+      occupiedSpaces[osStr] = obj.entityName;
     });
   }
 

@@ -52,12 +52,20 @@ export const tileData = {
   HEALTH: {
     type: 'HEALTH', sx: 32, sy: 192, sw: 32, sh: 32,
   },
-  EXIT: {
-    type: 'EXIT', sx: 64, sy: 192, sw: 32, sh: 32,
-  },
-  BOSS: {
-    type: 'BOSS', sx: 96, sy: 192, sw: 32, sh: 32,
-  },
+  EXIT: [
+    // type: 'EXIT', sx: 64, sy: 192, sw: 32, sh: 32,
+    { type: 'EXIT', sx: 64, sy: 192, sw: 16, sh: 16 },
+    { type: 'EXIT', sx: 64, sy: 208, sw: 16, sh: 16 },
+    { type: 'EXIT', sx: 80, sy: 192, sw: 16, sh: 16 },
+    { type: 'EXIt', sx: 80, sy: 208, sw: 16, sh: 16 },
+  ],
+  BOSS: [
+    // type: 'BOSS', sx: 96, sy: 192, sw: 32, sh: 32,
+    { type: 'BOSS', sx: 96, sy: 192, sw: 16, sh: 16 },
+    { type: 'BOSS', sx: 96, sy: 208, sw: 16, sh: 16 },
+    { type: 'BOSS', sx: 112, sy: 192, sw: 16, sh: 16 },
+    { type: 'BOSS', sx: 112, sy: 208, sw: 16, sh: 16 },
+  ],
   ENEMY: [
     { type: 'ENEMY', sx: 0, sy: 224, sw: 32, sh: 32 },
     { type: 'ENEMY', sx: 32, sy: 224, sw: 32, sh: 32 },

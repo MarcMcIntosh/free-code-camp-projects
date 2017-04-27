@@ -188,6 +188,7 @@ class Board extends Component {
         )) {
           const en = this.props.occupiedSpaces[str];
           const { sx, sy, sw, sh } = this.props.entities[en].tile;
+
           ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
         }
       }
