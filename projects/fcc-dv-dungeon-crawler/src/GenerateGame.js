@@ -68,10 +68,10 @@ export default function GenerateGame(
         break;
     }
     // Re-try if room would be outside matrix
-    if (startX < 0
-      || startY < 0
-      || startX + roomWidth >= arr.length
-      || startY + roomHeight >= arr[0].length
+    if (startX <= 0
+      || startY <= 0
+      || startX + roomWidth >= arr.length - 1
+      || startY + roomHeight >= arr[0].length - 1
     ) { return placeRoom(); }
 
     // Check all spaces are clear

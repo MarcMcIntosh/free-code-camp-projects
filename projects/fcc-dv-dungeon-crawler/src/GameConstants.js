@@ -5,6 +5,7 @@ export const tileType = {
 };
 export const SIGHT = 7;
 export const tileSize = 24;
+export const moveSpeed = 300;
 export const tileColors = {
   player: 'blue',
   FLOOR: 'white',

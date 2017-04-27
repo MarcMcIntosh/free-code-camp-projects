@@ -46,7 +46,7 @@ export default function (state = DEFAULT_STATE, action) {
       ...state,
       ...generateGame(state.level, state.entities.player),
     };
-    case RESET_MAP: return { ...state, ...generateGame() };
+    case RESET_MAP: return { ...state, message: '', ...generateGame() };
     case WIN: return { ...state, message: 'WINNER!' };
     case LOSE: return { ...state, message: 'GAME OVER' };
     case RESET_MESSAGE: return { ...state, message: '' };

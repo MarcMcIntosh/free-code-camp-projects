@@ -16,7 +16,7 @@ export const move = (entityName, vector) => ({
 });
 
 export const TOGGLE_DARKNESS = 'TOGGLE_DARKNESS';
-export const toggleDarknes = () => ({ type: TOGGLE_DARKNESS });
+export const toggleDarkness = () => ({ type: TOGGLE_DARKNESS });
 
 export const GAIN_XP = 'GAIN_XP';
 export const gainXp = xp => ({ type: GAIN_XP, xp });

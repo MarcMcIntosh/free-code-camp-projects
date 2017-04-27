@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Touch from './Touch';
 import HealthBar from './HealthBar';
 import ToggleTorch from './ToggleTorch';
-import { onMove, toggleDarkness } from '../actions';
+import { onMove, toggleDarkness, resetMap } from '../actions';
 import { tileSize, SIGHT } from '../GameConstants';
+import Message from './Message';
 import floorTile from '../../styles/sprites/floors.png';
 
 function sameArray(arr1, arr2) {
@@ -31,23 +32,24 @@ const mapStateToProps = state => ({
   occupiedSpaces: state.occupiedSpaces,
   level: state.level,
   darkness: state.darkness,
+  message: state.message,
 });
 
 const mapDispatchToProps = dispatch => ({
   onMove: vector => dispatch(onMove(vector)),
   onToggleDarkness: () => dispatch(toggleDarkness()),
+  onResetGame: () => dispatch(resetMap()),
 });
 
-class BoardWithFloor extends Component {
+class Board extends Component {
   constructor() {
     super();
-    this._handleKeypress = this._handleKeypress.bind(this);
-    // this._handleSwipe = this._handleSwipe.bind(this);
-    this.resize = () => {
-      this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
-      this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
-      this.clearAndDraw();
-    };
+    this.state = { timers: [] };
+    // this.handleKeyUp = this.handleKeyUp.bind(this);
+    // this.handleKeyDown = this.handleKeyDown.bind(this);
+    // this.movePlayer = this.movePlayer.bind(this);
+    this.handleKeypress = this.handleKeypress.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
   componentDidMount() {
     this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
@@ -56,8 +58,10 @@ class BoardWithFloor extends Component {
     this.img = new Image();
     this.img.src = floorTile;
     this.img.onload = () => {
-      window.addEventListener('keydown', this._handleKeypress);
-      window.addEventListener('resize', this.resize);
+      window.addEventListener('keydown', this.handleKeypress);
+      // window.addEventListener('keydown', this.handleKeyDown);
+      // window.addEventListener('keyup', this.handleKeyUp);
+      window.addEventListener('resize', this.handleResize);
       this.clearAndDraw();
     };
   }
@@ -76,17 +80,48 @@ class BoardWithFloor extends Component {
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('keydown', this._handleKeypress);
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('keydown', this.handleKeypress);
+    // window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener('resize', this.handleResize);
   }
-  clearAndDraw() {
-    const ctx = this.canvas.getContext('2d');
-    if (ctx) {
-      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.draw();
+  /*
+  clearTimers() {
+    this.state.timers.forEach(t => clearInterval(t));
+    this.setState({ timers: [] });
+  }
+  movePlayer(d) {
+    this.props.onMove(d);
+    const t = setInterval(() => this.props.onMove(d), moveSpeed);
+    const timers = this.state.timers.concat(t);
+    this.setState({ timers });
+  }
+  handleKeyUp(event) {
+    switch (event.keyCode) {
+      case 65:
+      case 37:
+      case 87:
+      case 38:
+      case 68:
+      case 39:
+      case 83:
+      case 40: event.preventDefault(); this.clearTimers();
+      // no default
     }
   }
-  _handleKeypress(event) {
+  handleKeyDown(event) {
+    switch (event.keyCode) {
+      case 65:
+      case 37: event.preventDefault(); this.movePlayer({ x: -1, y: 0 }); break;
+      case 87:
+      case 38: event.preventDefault(); this.movePlayer({ x: 0, y: -1 }); break;
+      case 68:
+      case 39: event.preventDefault(); this.movePlayer({ x: 1, y: 0 }); break;
+      case 83:
+      case 40: event.preventDefault(); this.movePlayer({ x: 0, y: 1 }); break;
+      // no default
+    }
+  } */
+  handleKeypress(event) {
     switch (event.keyCode) {
       case 65:
       case 37: event.preventDefault(); this.props.onMove({ x: -1, y: 0 }); break;
@@ -97,6 +132,18 @@ class BoardWithFloor extends Component {
       case 83:
       case 40: event.preventDefault(); this.props.onMove({ x: 0, y: 1 }); break;
       // no default
+    }
+  }
+  handleResize() {
+    this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
+    this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
+    this.clearAndDraw();
+  }
+  clearAndDraw() {
+    const ctx = this.canvas.getContext('2d');
+    if (ctx) {
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.draw();
     }
   }
   draw() {
@@ -166,6 +213,7 @@ class BoardWithFloor extends Component {
           darkness={this.props.darkness}
         />
       </div>
+
       <Touch onTouch={this.props.onMove}>
         <canvas
           className="dungeon__floor"
@@ -173,19 +221,22 @@ class BoardWithFloor extends Component {
           autoFocus
         />
       </Touch>
+      <Message text={this.props.message} onClose={this.props.onResetGame} />
     </div>);
   }
 }
 
-const { func, object, number, array, bool } = PropTypes;
-BoardWithFloor.propTypes = {
+const { func, object, number, array, bool, string } = PropTypes;
+Board.propTypes = {
   entities: object.isRequired,
   game: array.isRequired,
   occupiedSpaces: object.isRequired,
   level: number.isRequired,
   darkness: bool.isRequired,
   onMove: func.isRequired,
+  message: string.isRequired,
+  onResetGame: func.isRequired,
   onToggleDarkness: func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardWithFloor);
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

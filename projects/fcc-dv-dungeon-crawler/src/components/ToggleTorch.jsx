@@ -14,6 +14,7 @@ class ToggleTourch extends PureComponent {
     return (<button
       className={cn}
       onClick={this.props.onToggle}
+      title={(this.props.darkness) ? 'Turn on Light' : 'Turn Off Light'}
       ref={(button) => { this.button = button; }}
       onFocus={this.handleFocus}
     />);
