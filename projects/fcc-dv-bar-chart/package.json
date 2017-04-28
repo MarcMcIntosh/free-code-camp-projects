@@ -7,10 +7,6 @@
     "build:dev": "NODE_ENV=development webpack",
     "build:all": "npm run build:dev && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://git.marcmcintosh.ninja/FCC-DV-skeleton"
-  },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",
   "private": true,
@@ -59,5 +55,11 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
+  },
+  "name": "fcc-dv-bar-chart",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/fcc-dv-bar-chart"
   }
 }
