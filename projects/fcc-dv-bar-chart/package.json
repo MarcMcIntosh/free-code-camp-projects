@@ -1,7 +1,4 @@
 {
-  "name": "fcc-dv-skeleton",
-  "version": "0.0.1",
-  "description": "Skeleton Project for free code camp data visulisation projects",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
