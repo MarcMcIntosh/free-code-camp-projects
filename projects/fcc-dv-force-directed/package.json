@@ -7,10 +7,6 @@
     "build:dev": "NODE_ENV=development webpack",
     "build:all": "npm run build:dev && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://git.marcmcintosh.ninja/FCC-DV-skeleton"
-  },
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",
   "private": true,
