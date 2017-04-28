@@ -88,7 +88,6 @@ export const onMove = vector => (dispatch, getState) => {
       dispatch(increaseLevel());
       return dispatch(setMap());
     }
-    // console.log('Bosses share entites, all off which need to be damaged');
     case 'boss':
     case 'enemy': {
       const a = ATTACK_VARIANCE;
