@@ -1,4 +1,4 @@
-export const SRC_DATA = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/cyclist-data.json';
+export const DATA_URL = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/cyclist-data.json';
 
 export const MAIN_TITLE = 'Doping in Professional Bicycle Racing';
 

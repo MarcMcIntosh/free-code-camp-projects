@@ -1,0 +1,36 @@
+
+.scatterplot {
+  &__container {
+    display: block;
+    padding: 8px;
+    text-align: center;
+  }
+
+  &__chart {
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  &__axis {
+    path,
+    line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 3px 5px;
+    border: 0;
+    border-radius: 5px;
+    background-color: lightsteelblue;
+    font: 1em sans-serif;
+    text-align: left;
+    pointer-events: none;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .2);
+  }
+}
