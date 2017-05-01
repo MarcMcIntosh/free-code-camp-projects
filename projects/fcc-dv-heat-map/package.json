@@ -55,5 +55,12 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
+  },
+  "name": "fcc-dv-heat-map",
+  "description": "Template File for data visualisation assignments from [FreeCodeCamp](https://www.freecodecamp.com)",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/fcc-dv-heat-map"
   }
 }
