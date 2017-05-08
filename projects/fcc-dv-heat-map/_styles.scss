@@ -1,0 +1,21 @@
+.heat-map {
+  &__container {
+    width: 100%;
+    margin: auto;
+    padding: 8px;
+  }
+
+  &__chart {
+    /* style */
+  }
+
+  &__tooltip {
+    position: absolute;
+  }
+
+  &__axis,
+  &__label,
+  &__month {
+    /* classNames used */
+  }
+}

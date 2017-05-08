@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import HeatMap from './src/components/Page';
 
 class Container extends Component {
   constructor(props) {
@@ -22,3 +23,4 @@ Container.propTypes = {
 };
 
 export default Container;
+export { HeatMap };
