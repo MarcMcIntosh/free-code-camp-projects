@@ -2,20 +2,13 @@ import React, { PureComponent } from 'react';
 import { number, shape, array } from 'prop-types';
 import { select, event } from 'd3-selection';
 import { timeFormat } from 'd3-time-format';
-import { format } from 'd3-format';
-import { axisBottom, axisLeft } from 'd3-axis';
-import { timeYear } from 'd3-time';
-import {
-  scaleSequential,
-  // scaleTime,
-  scaleBand,
-  scaleLinear,
-} from 'd3-scale';
-import { interpolateSpectral } from 'd3-scale-chromatic';
 import { extent } from 'd3-array';
-// import { timeYear } from 'd3-time';
+import { format } from 'd3-format';
+import { interpolateSpectral } from 'd3-scale-chromatic';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { timeYear, timeMonth } from 'd3-time';
+import { scaleSequential, scaleTime, scaleBand } from 'd3-scale';
 import 'd3-transition';
-import { MONTHS } from '../constants';
 
 class HeatMap extends PureComponent {
   constructor(props) {
@@ -29,31 +22,44 @@ class HeatMap extends PureComponent {
     this.draw();
   }
   draw() {
-
     const width = this.props.width - this.props.margin.left - this.props.margin.right;
     const height = this.props.height - this.props.margin.top - this.props.margin.bottom;
+
+    const formatMonth = timeFormat('%B');
+    const formatYear = timeFormat('%Y');
+    const formatDate = timeFormat('%B %Y');
+    const formatTemprature = format('.4r');
+    const data = this.props.data.monthlyVariance.map((d) => {
+      const time = new Date(d.year, d.month - 1);
+      const variance = d.variance;
+      return {
+        temperature: this.props.data.baseTemperature + variance,
+        time,
+      };
+    });
+
+    const justNow = new Date();
+    const months = timeMonth.every(1)
+    .range(timeYear.floor(justNow), timeYear.ceil(justNow))
+    .map(formatMonth);
 
     const svg = select(this.root).append('svg');
     svg.attr('viewBox', `0 0 ${this.props.width} ${this.props.height}`);
     svg.attr('preserveAspectRatio', 'xMidYMid meet');
     svg.classed('heat-map__chart', true);
 
-    const formatMonth = timeFormat('%B');
-
-    const months = [...Array(12)].map((d, i) => {
-      const date = new Date();
-      date.setMonth(i);
-      return formatMonth(date);
-    });
-
     const colorScale = scaleSequential(interpolateSpectral)
-    .domain(extent(this.props.data.monthlyVariance, d => d.variance).reverse());
+    .domain(extent(data, d => d.temperature).reverse());
 
-    const xScale = scaleLinear()
-    .rangeRound([0, width])
-    .domain(extent(this.props.data.monthlyVariance, d => d.year));
+    const xScale = scaleTime()
+    .range([1, width])
+    .domain(extent(data, d => d.time))
+    .nice(timeYear, 1);
 
-    const xAxis = axisBottom().scale(xScale).tickFormat(format('d'));
+    const xAxis = axisBottom()
+    .scale(xScale)
+    .tickFormat(formatYear);
+
     svg.append('g')
     .attr('class', 'heat-map__axis axis__x')
     .attr('transform', `translate(${this.props.margin.left},${height + this.props.margin.top})`)
@@ -62,7 +68,8 @@ class HeatMap extends PureComponent {
     const yScale = scaleBand()
     .domain(months)
     .range([0, height])
-    .padding([0.1])
+    .paddingOuter([0])
+    .paddingInner([0.05])
     .align([0]);
 
     const yAxis = axisLeft().scale(yScale);
@@ -71,90 +78,53 @@ class HeatMap extends PureComponent {
     .attr('transform', `translate(${this.props.margin.left}, ${this.props.margin.top})`)
     .call(yAxis);
 
-    svg.append('g')
-    .attr('transform', `translate(${this.props.margin.left}, ${this.props.margin.top})`)
-    .selectAll('heat-map__bucket')
-    .data(this.props.data.monthlyVariance)
-    .enter()
-    .append('rect')
-    .classed('heat-map__bucket', true)
-    .attr('x', d => xScale(d.year))
-    .attr('width', d => xScale(d.year + 1) - xScale(d.year))
-    .attr('y', d => yScale(months[d.month]))
-    .attr('height', yScale.bandwidth())
-    .style('fill', d => colorScale(d.variance));
-
-/*
-    const data = this.props.data.monthlyVariance;
-    const baseTemp = this.props.data.baseTemperature;
-    const yearData = data.map(d => d.year).reduce((a, b) => {
-      if (a.indexOf(b) > 0) { return a; }
-      return a.concat(b);
-    }, []);
-    const yearMinMax = extent(yearData);
-
-    const axisYLabel = { x: 65, y: this.props.height / 2 };
-    const axisXLabel = { x: this.props.width / 2, y: height + (this.props.margin.bottom / 1.5) };
-    const legendWidth = 35;
-    const grid = {
-      height: height / MONTHS.length,
-      width: width / yearData.length,
-    };
-
-    const colorScale = scaleSequential(interpolateSpectral)
-    .domain(extent(data, d => d.variance).reverse());
-
-    const xScale = scaleLinear()
-    .range([0, width])
-    .domain(extent(data, d => d.year))
-    .nice()
-    ;
-
-    const xAxis = axisBottom().scale(xScale).tickFormat(format('d'));
-
-    svg.append('g')
-    .attr('class', 'heat-map__axis axis__x')
-    .attr('transform', `translate(${this.props.margin.left},${height + this.props.margin.top})`)
-    .call(xAxis);
-
-    const yScale = scaleBand().domain(MONTHS).range([0, height]).padding([0.1])
-    .align([0]);
-
-    const yAxis = axisLeft().scale(yScale);
-
-    svg.append('g').attr('class', 'heat-map__axis axis__y')
-    .attr('transform', `translate(${this.props.margin.left}, ${this.props.margin.top})`)
-    .call(yAxis);
-
-    const temps = svg.append('g')
+    const tiles = svg.append('g')
     .attr('transform', `translate(${this.props.margin.left}, ${this.props.margin.top})`)
     .selectAll('heat-map__bucket')
     .data(data)
     .enter()
     .append('rect')
     .classed('heat-map__bucket', true)
-    .attr('x', d => xScale(d.year))
-    .attr('width', d => xScale(d.year + 1) - xScale(d.year))
-    .attr('y', d => yScale(MONTHS[d.month]))
+    .attr('x', d => xScale(timeYear.floor(d.time)))
+    .attr('width', (d) => {
+      const startOfYear = timeYear.floor(d.time);
+      const nextYear = timeYear.offset(startOfYear, 1);
+      const xStart = xScale(startOfYear);
+      const xNext = xScale(nextYear);
+      return xNext - xStart;
+    })
+    .attr('y', d => yScale(formatMonth(d.time)))
     .attr('height', yScale.bandwidth())
-    .style('fill', d => colorScale(d.variance));
+    .style('fill', d => colorScale(d.temperature));
 
     const tooltip = select(this.root).append('div')
-    .attr('class', 'heat-map__tooltip')
-    .style('opacity', 0);
+    .classed('heat-map__tooltip', true)
+    .style('opacity', 0)
+    .style('position', 'absolute')
+    .style('display', 'none');
 
-    temps.on('mouseover', (d) => {
-      let str = `<span>${MONTHS[d.month]} - ${d.year}</span><br />`;
-      str += `<span>${Math.floor((d.variance + baseTemp) * 1000) / 1000} &#8451</span><br />`;
-      str += `<span>${d.variance} &#8451</span>`;
+    tiles.on('mouseover', (d) => {
+      const str = `<span>
+      <p><time datetime=${d.time}></time>${formatDate(d.time)}<p>
+      <p>Temperature: ${formatTemprature(d.temperature)}\u2103</p>
+      </span>`;
 
-      tooltip.transition().duration(100)
-      .style('opacity', 0.8);
-      tooltip.html(str)
+      tooltip
       .style('left', `${event.pageX}px`)
-      .style('top', `${event.pageY}px`);
+      .style('top', `${event.pageY}px`)
+      .html(str)
+      .transition()
+      .duration(100)
+      .style('display', 'inherit')
+      .style('opacity', 0.8);
+    })
+    .on('mouseout', () => {
+      tooltip.transition()
+      .duration(100)
+      .style('opacity', 0)
+      .style('display', 'none');
     });
-    */
+
   }
   render() {
     return (<div
