@@ -1,0 +1,28 @@
+
+.force {
+  &__container {
+    margin-right: 1%;
+    margin-left: 1%;
+    background-color: #fff;
+  }
+
+  &__links { /* style */ }
+  &__nodes { /* style */ }
+
+  &__graph {
+    width: 100%;
+    height: auto;
+  }
+
+  &__flag {
+    width: 16px;
+    height: 11px;
+  }
+
+  &__link {
+    stroke: #999;
+    stroke-opacity: .6;
+    stroke-width: 1px;
+  }
+
+}
