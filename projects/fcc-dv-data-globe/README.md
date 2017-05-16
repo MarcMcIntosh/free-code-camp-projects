@@ -1,12 +1,8 @@
-Template File for data visualisation assignments from [FreeCodeCamp](https://www.freecodecamp.com)
+Set up auto-fetch for multiple data sources before rendering;
 
-# Usage
-```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/FCC-DV-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
-npm install
-npm start
-```
-Open browser at <localhost:8080>
+
+check out  world-atlas on npm for a data source
+https://github.com/topojson/world-atlas
+
+to install
+topojson-client world-atlas d3-selection d3-geo

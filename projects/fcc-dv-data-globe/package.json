@@ -50,10 +50,22 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "d3-geo": "^1.6.4",
+    "d3-selection": "^1.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "topojson-client": "^3.0.0",
+    "world-atlas": "^1.1.4"
+  },
+  "name": "fcc-dv-data-globe",
+  "description": "Template File for data visualisation assignments from [FreeCodeCamp](https://www.freecodecamp.com)",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/fcc-dv-data-globe"
   }
 }
