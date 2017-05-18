@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { node } from 'prop-types';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import DataGlobe from './src/components/Page';
 
 class Container extends Component {
   constructor(props) {
@@ -17,8 +19,7 @@ class Container extends Component {
   }
 }
 
-Container.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+Container.propTypes = { children: node.isRequired };
 
 export default Container;
+export { DataGlobe };
