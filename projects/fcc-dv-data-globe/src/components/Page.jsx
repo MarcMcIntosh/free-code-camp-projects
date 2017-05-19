@@ -5,6 +5,7 @@ import dataGlobe from '../data-globe';
 
 const mapStateToProps = state => ({
   topology: state.topology,
+  meteorites: state.meteorites,
 });
 
 const mapDispatchToProps = () => ({});
@@ -18,14 +19,14 @@ class GraphContainer extends Component {
     this.draw();
   }
   draw() {
-    dataGlobe(this.root, this.props.topology);
+    dataGlobe(this.root, this.props.topology, this.props.meteorites);
   }
   render() {
     return (<div ref={(c) => { this.root = c; }} className="data-globe__container" />);
   }
 }
 
-GraphContainer.propTypes = { topology: any.isRequired };
+GraphContainer.propTypes = { topology: any.isRequired, meteorites: any.isRequired };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);
