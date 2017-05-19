@@ -1,6 +1,6 @@
 import { select } from 'd3-selection';
 import { feature } from 'topojson-client';
-import { extent, deviation } from 'd3-array';
+import { extent } from 'd3-array';
 import {
   scaleSequential,
   interpolateRainbow,
