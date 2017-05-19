@@ -1,10 +1,10 @@
 import { select } from 'd3-selection';
 import { feature } from 'topojson-client';
-import { extent, mean } from 'd3-array';
+import { extent, deviation } from 'd3-array';
 import {
   scaleSequential,
   interpolateRainbow,
-  scalePow,
+  scaleLinear,
 } from 'd3-scale';
 import {
   geoPath,
@@ -16,26 +16,20 @@ export default function (elem, topology, meteorites) {
   const h = topology.bbox.slice(2, 4).reduce((a, b) => a + Math.abs(b), 0);
   const countries = feature(topology, topology.objects.countries); // .features;
   const projection = geoMercator().fitSize([w, h], countries);
-
-  const minMaxYear = extent(meteorites.features, d => Date.parse(d.properties.year));
-  const colorScale = scaleSequential(interpolateRainbow)
-  .domain(minMaxYear);
-
-  const averageMass = mean(meteorites.features, d => +d.properties.mass);
+  const colorScale = scaleSequential(interpolateRainbow);
   const minMaxMass = extent(meteorites.features, d => +d.properties.mass);
-  const sizeScale = scalePow().domain(minMaxMass)
-  .range(h * 0.01, h * 0.05)
-  .exponent(1)
-  .nice(718750 / 2 / 2);
+  const sizeScale = scaleLinear().domain(minMaxMass)
+  .rangeRound([h / 150, h / 15]).nice();
+  const fillScale = scaleLinear()
+  .domain(minMaxMass)
+  .range([0.7, 0.4])
+  .nice(500);
 
   const svg = select(elem).append('svg')
   .attr('class', 'data-globe')
   .attr('viewBox', `0, 0, ${w}, ${h}`)
   .attr('preserveAspectRatio', 'xMidYMid meet');
-/*
-  const path = svg.append('path');
-  path.datum(countries).attr('d', geoPath().projection(projection));
-*/
+
   const path = geoPath().projection(projection); svg.append('g').attr('class', 'data-globe__map')
   .selectAll('path')
   .data(countries.features)
@@ -44,13 +38,20 @@ export default function (elem, topology, meteorites) {
   .attr('class', 'data-globe__country')
   .attr('d', path);
 
-  svg.append('g').attr('class', 'data-globe__strikes')
-  .selectAll('circle')
+  const meteor = svg.append('g').attr('class', 'data-globe__strikes')
+  .selectAll('g')
   .data(meteorites.features)
-  .append('circle')
-  .attr('cx', d => projection([d.properties.reclong, d.properties.reclat])[0])
-  .attr('cy', d => projection([d.properties.reclong, d.properties.reclat])[1])
-  .attr('r', d => sizeScale(d.properties.mass))
-  .attr('fill', d => colorScale(Date.parse(d.properties.year)))
-  .attr('fill-opacity', d => ((d.properties.mass <= averageMass) ? 1 : 0.5));
+  .enter()
+  .append('g')
+  .attr('class', 'data-globe__meteorite')
+  .attr('transform', (d) => {
+    const coords = [d.properties.reclong, d.properties.reclat];
+    return `translate(${projection(coords)})`;
+  });
+
+  meteor.append('title').text(d => d.properties.name);
+  meteor.append('circle')
+  .attr('r', d => sizeScale(+d.properties.mass))
+  .attr('fill', () => colorScale(Math.random()))
+  .attr('fill-opacity', d => fillScale(+d.properties.mass));
 }
