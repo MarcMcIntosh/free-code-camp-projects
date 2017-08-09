@@ -9,7 +9,7 @@
 8 silly statSync /home/marc/Projects/FCC/done/fcc-api-projects
 9 silly existsSync /home/marc/Projects/FCC/free-code-camp-projects/projects/fcc-api-projects
 10 silly getCurrentSHA
-11 verbose getCurrentSHA 09f1574c24022f8f1613dd364bfa70fe0d91ea33
+11 verbose getCurrentSHA 04f514665af7dcc08f4a4ed9f7d3af4fcaf32646
 12 error initialize Error: Local repository has un-committed changes
 12 error initialize     at ImportCommand.initialize (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:139:25)
 12 error initialize     at ImportCommand._attempt (/usr/lib/node_modules/lerna/lib/Command.js:289:21)
