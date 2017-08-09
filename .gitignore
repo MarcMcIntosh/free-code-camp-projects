@@ -2,4 +2,3 @@ node_modules
 .tmp
 lerna-debug.log
 notes.txt
-imports.txt
