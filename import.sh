@@ -31,7 +31,7 @@ do
   if [ -f .gitignore ]; then
     mv .gitignore $DST_DIR/$repo;
   fi
-  git commit -m "Prepairing to merge $repo";
+  git commit -am "Prepairing to merge $repo";
   pushd +1 2>&1 1>/dev/null;
   echo $( dirs -l );
 done
