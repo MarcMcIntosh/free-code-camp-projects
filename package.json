@@ -1,5 +1,19 @@
 {
+  "name": "free-code-camp-projects",
+  "version": "0.0.0",
+  "description": "monorepo of free-code-camp projects",
+  "main": "index.js",
+  "dependencies": {},
   "devDependencies": {
     "lerna": "2.0.0-beta.30"
-  }
+  }, 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/free-code-camp-projects"
+  },
+  "author": "Marc McIntosh <email@marcmcintosh.ninja>",
+  "license": "UNLICENSED"
 }
