@@ -1,0 +1,9 @@
+{
+  "lerna": "2.0.0-beta.30",
+  "version": "0.0.0",
+  "commands": {
+    "publish": {
+      "skip-npm": true
+    }
+  }
+}
