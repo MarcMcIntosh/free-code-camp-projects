@@ -1,6 +1,19 @@
 #!/usr/bin/bash
 
-SRC_PKGS=('fcc-api-projects' 'fcc-dv-data-globe' 'fcc-dv-force-directed' 'fcc-dv-heat-map' 'fcc-dv-scatterplot-graph' 'fcc-dv-bar-chart' 'fcc-dv-dungeon-crawler' 'fcc-dv-game-of-life' 'mdc-range-slider' 'fcc-dv-recipe-box' 'fcc-dv-leaderboard' 'fcc-dv-markdown-previewer')
+SRC_PKGS=(
+'fcc-api-projects'
+'fcc-dv-data-globe'
+'fcc-dv-force-directed'
+'fcc-dv-heat-map'
+'fcc-dv-scatterplot-graph'
+'fcc-dv-bar-chart'
+'fcc-dv-dungeon-crawler'
+'fcc-dv-game-of-life'
+'mdc-range-slider'
+'fcc-dv-recipe-box'
+'fcc-dv-leaderboard'
+#'fcc-dv-markdown-previewer'
+)
 SRC_URL="https://git.marcmcintosh.ninja/";
 TMP_DIR='.tmp';
 DST_DIR='projects';
