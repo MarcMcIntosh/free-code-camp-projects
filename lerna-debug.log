@@ -1,0 +1,36 @@
+0 silly input [ '../done/fcc-api-projects/' ]
+1 silly flags { _: [ 'import' ], pathToRepo: '../done/fcc-api-projects/' }
+2 verbose rootPath /home/marc/Projects/FCC/free-code-camp-projects
+3 info version 2.0.0
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /home/marc/Projects/FCC/free-code-camp-projects/VERSION
+7 silly initialize attempt
+8 silly statSync /home/marc/Projects/FCC/done/fcc-api-projects
+9 silly existsSync /home/marc/Projects/FCC/free-code-camp-projects/projects/fcc-api-projects
+10 silly getCurrentSHA
+11 verbose getCurrentSHA 09f1574c24022f8f1613dd364bfa70fe0d91ea33
+12 error initialize Error: Local repository has un-committed changes
+12 error initialize     at ImportCommand.initialize (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:139:25)
+12 error initialize     at ImportCommand._attempt (/usr/lib/node_modules/lerna/lib/Command.js:289:21)
+12 error initialize     at ImportCommand.runCommand (/usr/lib/node_modules/lerna/lib/Command.js:275:12)
+12 error initialize     at ImportCommand.run (/usr/lib/node_modules/lerna/lib/Command.js:160:12)
+12 error initialize     at Object.handler (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:53:53)
+12 error initialize     at Object.self.runCommand (/usr/lib/node_modules/lerna/node_modules/yargs/lib/command.js:233:22)
+12 error initialize     at Object.Yargs.self._parseArgs (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:990:30)
+12 error initialize     at Object.Yargs.self.parse (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:532:23)
+12 error initialize     at Object.<anonymous> (/usr/lib/node_modules/lerna/bin/lerna.js:4:25)
+12 error initialize     at Module._compile (module.js:569:30)
+12 error initialize  callback with error
+12 error initialize  { Error: Local repository has un-committed changes
+12 error initialize     at ImportCommand.initialize (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:139:25)
+12 error initialize     at ImportCommand._attempt (/usr/lib/node_modules/lerna/lib/Command.js:289:21)
+12 error initialize     at ImportCommand.runCommand (/usr/lib/node_modules/lerna/lib/Command.js:275:12)
+12 error initialize     at ImportCommand.run (/usr/lib/node_modules/lerna/lib/Command.js:160:12)
+12 error initialize     at Object.handler (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:53:53)
+12 error initialize     at Object.self.runCommand (/usr/lib/node_modules/lerna/node_modules/yargs/lib/command.js:233:22)
+12 error initialize     at Object.Yargs.self._parseArgs (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:990:30)
+12 error initialize     at Object.Yargs.self.parse (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:532:23)
+12 error initialize     at Object.<anonymous> (/usr/lib/node_modules/lerna/bin/lerna.js:4:25)
+12 error initialize     at Module._compile (module.js:569:30)
+12 error initialize   stack: 'Error: Local repository has un-committed changes\n    at ImportCommand.initialize (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:139:25)\n    at ImportCommand._attempt (/usr/lib/node_modules/lerna/lib/Command.js:289:21)\n    at ImportCommand.runCommand (/usr/lib/node_modules/lerna/lib/Command.js:275:12)\n    at ImportCommand.run (/usr/lib/node_modules/lerna/lib/Command.js:160:12)\n    at Object.handler (/usr/lib/node_modules/lerna/lib/commands/ImportCommand.js:53:53)\n    at Object.self.runCommand (/usr/lib/node_modules/lerna/node_modules/yargs/lib/command.js:233:22)\n    at Object.Yargs.self._parseArgs (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:990:30)\n    at Object.Yargs.self.parse (/usr/lib/node_modules/lerna/node_modules/yargs/yargs.js:532:23)\n    at Object.<anonymous> (/usr/lib/node_modules/lerna/bin/lerna.js:4:25)\n    at Module._compile (module.js:569:30)' }
