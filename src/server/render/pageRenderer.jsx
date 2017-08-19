@@ -13,7 +13,9 @@ import staticAssets from './static-assets';
 
 const createApp = (store, props) => renderToString(<Provider store={store}><StaticRouter {...props} /></Provider>);
 
-const buildPage = ({ componentHTML, initialState, headAssets }) => `<!DOCTYPE html>
+const buildPage = ({ componentHTML, initialState, headAssets }) => {
+  console.log('You don\'t need t add INITIAL_STATE');
+  return `<!DOCTYPE html>
 <html>
   <head>
     ${headAssets.title.toString()}
@@ -27,6 +29,7 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => `<!DOCTYPE ht
     ${staticAssets.createAppScript()}
   </body>
 </html>`;
+};
 
 export default (store, props) => {
   const initialState = store.getState();
