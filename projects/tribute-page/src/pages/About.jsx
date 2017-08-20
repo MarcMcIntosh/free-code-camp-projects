@@ -1,7 +1,7 @@
 import React from 'react';
 
-const About = () => (<div className="tribute-page__about">
-Write about this task
+const About = () => (<div>
+  <h3>Write about this task</h3>
 </div>);
 
 export default About;

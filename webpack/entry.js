@@ -14,7 +14,6 @@ const AppDir = path.resolve(PATHS.src.client, 'client.jsx');
 function client(production = false) {
   const base = {
     app: [AppDir],
-    'tribute-page': [PATHS.projects.tribute],
   };
   return (production) ? base : Object.keys(base).reduce((a, b) => {
     a[b].push(hotMiddlewareScript);

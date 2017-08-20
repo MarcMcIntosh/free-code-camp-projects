@@ -6,8 +6,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { ENV } from '../common/env';
 import renderMiddleware from './render/middleware';
-// import apps from './apps';
-import tribute from './apps/tribute';
 
 const app = express();
 
@@ -26,8 +24,7 @@ if (ENV === 'development') {
 }
 
 app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
-app.get('/tribute-page', tribute);
 
-app.get('/', renderMiddleware);
+app.get('/*', renderMiddleware);
 
 app.listen(process.env.PORT || 8080);
