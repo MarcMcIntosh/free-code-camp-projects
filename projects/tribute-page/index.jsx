@@ -1,49 +1,18 @@
-import React, { PropTypes } from 'react';
-import CONF from './src/constants';
-import task from './task';
-import Quotes from './src/components/Quotes';
-import Image from './src/components/Image';
-import Quote from './src/components/Title';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+import configureStore from './configureStore';
+// import { ConnectedRouter } from 'react-router-redux';
+import createRoutes from './routes';
 
-const Tribute = ({
-  config,
-  ...props
-}) => {
-  const { TITLE, IMAGE, QUOTES } = config;
-  return (<div {...props}>
-    <Quote {...TITLE} />
-    <Image config={IMAGE} />
-    <Quotes config={QUOTES} />
-  </div>);
-};
+const initialState = window.__INITIAL_STATE__;
 
-const { shape, string, array } = PropTypes;
-Tribute.propTypes = {
-  config: shape({
-    TITLE: shape({
-      TERM: shape({ className: string }),
-      DESC: shape({ className: string }),
-      SRC: shape({ className: string }),
-    }),
-    IMAGE: shape({
-      className: string,
-      src: string,
-    }),
-    QUOTES: shape({
-      list: array,
-      className: string,
-      QUOTE: shape({ className: string }),
-    }),
-  }),
-};
+const browserHistory = createHistory();
+const store = configureStore(initialState);
+const routes = createRoutes(store);
 
-Tribute.defaultProps = { config: CONF };
-
-export default Tribute;
-export {
-  task,
-  CONF as config,
-  Quotes,
-  Image,
-  Quote,
-};
+render(<Provider store={store}>
+  <Router basename="/tribute-page" history={browserHistory}>{routes}</Router>
+</Provider>, document.getElementById('app'));

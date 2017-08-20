@@ -3,27 +3,29 @@
  *
  * webpack --env.browser - used to determine whether to generate a browser or server bundle
  */
-const path = require('path');
+// const path = require('path');
 const rules = require('./rules/index');
 const externals = require('./externals');
 const PATHS = require('./paths');
 const plugins = require('./plugins');
 const resolve = require('./resolve');
+const entry = require('./entry');
 
-const SRV_ENTRY = path.resolve(PATHS.src.server, 'index.js');
+// const SRV_ENTRY = path.resolve(PATHS.src.server, 'index.js');
 
 module.exports = (env = {}) => {
   const isProduction = process.env.NODE_ENV === 'production';
   const isBrowser = env.browser;
   console.log(`Running webpack in ${process.env.NODE_ENV} mode on ${isBrowser ? 'browser' : 'server'}`);
 
-  const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+  // const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
   const node = { __dirname: true, __filename: true };
 
   const prodServerRender = {
     devtool: 'source-map',
     // context: PATHS.app,
-    entry: { server: SRV_ENTRY },
+    // entry: { server: SRV_ENTRY },
+    entry: entry({ production: true, browser: false }),
     target: 'node',
     node,
     externals,
@@ -43,7 +45,8 @@ module.exports = (env = {}) => {
   const prodBrowserRender = {
     devtool: 'cheap-module-source-map',
     // context: PATHS.app,
-    entry: { app: ['./Client'] },
+    // entry: { app: ['./Client'] },
+    entry: entry({ production: true, browser: true }),
     node,
     output: {
       path: PATHS.dist.public,
@@ -61,9 +64,10 @@ module.exports = (env = {}) => {
   const devBrowserRender = {
     devtool: 'eval',
     context: PATHS.src.client,
-    entry: {
+    /* entry: {
       app: ['./client.jsx', hotMiddlewareScript],
-    },
+    }, */
+    entry: entry({ production: false, browser: true }),
     node,
     output: {
       path: PATHS.dist.public,
@@ -80,7 +84,8 @@ module.exports = (env = {}) => {
   const devServerRender = {
     devtool: 'sourcemap',
     // context: PATHS.app,
-    entry: { server: SRV_ENTRY },
+    // entry: { server: SRV_ENTRY },
+    entry: entry({ production: false, browser: false }),
     target: 'node',
     node,
     externals,

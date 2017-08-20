@@ -12,11 +12,12 @@ const SRC_APP = resolve(SRC_DIR, 'app');
 
 const PROJECT_DIR = resolve(ROOT_DIR, 'projects');
 const NODE_MODULES_DIR = resolve(ROOT_DIR, 'node_modules');
+const tribute = resolve(PROJECT_DIR, 'tribute-page', 'index.jsx');
 
 module.exports = {
   root: ROOT_DIR,
   dist: { public: DIST_PUB, server: DIST_SRV },
   src: { client: SRC_APP, server: SRC_SRV },
-  projects: PROJECT_DIR,
+  projects: { tribute },
   modules: NODE_MODULES_DIR,
 };

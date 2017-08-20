@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { ENV } from '../common/env';
 import renderMiddleware from './render/middleware';
+import apps from './apps';
 
 const app = express();
 
@@ -24,7 +25,7 @@ if (ENV === 'development') {
 }
 
 app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
-
+app.use(apps);
 app.get('/*', renderMiddleware);
 
 app.listen(process.env.PORT || 8080);
