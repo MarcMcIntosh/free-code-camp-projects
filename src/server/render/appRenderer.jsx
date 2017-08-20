@@ -10,7 +10,7 @@ import staticAssets from './static-assets';
 
 const createApp = (store, props) => renderToString(<Provider store={store}><StaticRouter {...props} /></Provider>);
 
-const buildPage = ({ componentHTML, initialState, headAssets, src }) => `<!DOCTYPE html><html><head>
+const buildPage = ({ componentHTML, initialState, headAssets, basename }) => `<!DOCTYPE html><html><head>
   ${headAssets.title.toString()}
   ${headAssets.meta.toString()}
   ${headAssets.link.toString()}
@@ -18,7 +18,7 @@ const buildPage = ({ componentHTML, initialState, headAssets, src }) => `<!DOCTY
 </head><body>
   <div id="app">${componentHTML}</div>
   <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
-  ${staticAssets.createAppScript(src)}
+  ${staticAssets.createAppScript(basename)}
 </body></html>`;
 
 /* usage

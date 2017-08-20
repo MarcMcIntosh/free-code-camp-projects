@@ -9,6 +9,7 @@ const {
 } = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = ({ production = false, browser = false } = {}) => {
   const bannerOptions = { raw: true, banner: 'require("source-map-support").install();' };
@@ -28,6 +29,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new DefinePlugin(compileTimeConstantForMinification),
       new HotModuleReplacementPlugin(),
       new NoEmitOnErrorsPlugin(),
+      // new FaviconsWebpackPlugin('./logo.png'),
     ];
   }
   if (production && !browser) {
@@ -48,6 +50,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       }),
       new UglifyJsPlugin({ compress }),
       new ManifestPlugin({ fileName: 'manifest.json' }),
+      // new FaviconsWebpackPlugin('./logo.png'),
     ];
   }
   return [];

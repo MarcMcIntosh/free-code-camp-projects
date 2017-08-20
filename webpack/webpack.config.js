@@ -62,8 +62,8 @@ module.exports = (env = {}) => {
   };
 
   const devBrowserRender = {
-    devtool: 'eval',
-    context: PATHS.src.client,
+    devtool: 'inline-source-map',
+    // context: PATHS.src.client,
     /* entry: {
       app: ['./client.jsx', hotMiddlewareScript],
     }, */

@@ -9,7 +9,7 @@ import favicon from '../images/favicon.png';
 const metaAssets = () => ([
   { charset: 'utf-8' },
   // Meta descriptions are commonly used on search engine result pages to display preview snippets for a given page.
-  { name: 'description', content: 'Free-code-camp projects' },
+  { name: 'description', content: 'Tribute Pages' },
   // Setting IE=edge tells Internet Explorer to use the latest engine to render the page and execute Javascript
   { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
   // Using the viewport tag allows you to control the width and scaling of the browser's viewport:
@@ -43,6 +43,6 @@ const linkAssets = () => {
   return links;
 };
 
-export const title = 'Marc\'s projects';
+export const title = 'Tribute Page';
 export const meta = metaAssets();
 export const link = linkAssets();

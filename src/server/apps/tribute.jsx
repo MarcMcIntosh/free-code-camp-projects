@@ -5,8 +5,10 @@ import configureRoutes from '../../../projects/tribute-page/routes';
 function tributePage(req, res) {
   const store = configureStore();
   const routes = configureRoutes(store);
+  const context = {};
   const html = appRenderer(store, {
-    basename: req.baseUrl,
+    context,
+    basename: '/tribute-page',
     location: req.url,
     children: routes,
   });

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Home, About } from './src/pages';
-import App from './src/containers/App';
+import { App, Home, About } from './src/pages';
 
 export default () => (<App>
   <Switch>
