@@ -7,7 +7,7 @@ import staticAssets from './static-assets';
 const createApp = props => renderToString(<StaticRouter {...props} />);
 
 const buildPage = ({ componentHTML, headAssets }) => `<!DOCTYPE html>
-  <html>
+  <html class="mdc-typography">
     <head>
       ${headAssets.title.toString()}    ${headAssets.meta.toString()}    ${headAssets.link.toString()}    ${staticAssets.createStylesheets()}
     </head>
