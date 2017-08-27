@@ -1,21 +1,42 @@
-import React from 'react';
-import {
-  Route,
-  // IndexRoute,
-  Switch,
-} from 'react-router';
+// import React from 'react';
 import { App, About, Gallary } from '../app/pages';
-import { Routes as Tribute } from '../../projects/tribute-page';
+import {
+  Main as Tribute,
+  About as AboutTribute,
+} from '../projects/tribute-page';
+//
+// const Tribute = () => (<h1>Hodor</h1>);
+//
+// const Tribute1 = () => (<h1>Hodor</h1>);
+// const AboutTribute1 = () => (<h2>About</h2>);
 /*
 export default () => (<Route path="/" component={App}>
   <IndexRoute component={Gallary} />
   <Route path="about" component={About} />
 </Route>);
 */
-export default () => (<App>
-  <Switch>
-    <Route exact path="/" component={Gallary} />
-    <Route path="/about" component={About} />
-    <Route path="/tribute-page" component={Tribute} />
-  </Switch>
-</App>);
+const routes = [
+  {
+    component: App,
+    routes: [
+      {
+        path: '/',
+        exact: true,
+        component: Gallary,
+      },
+      { path: '/about', component: About },
+      {
+        path: '/tribute-page',
+        component: Tribute,
+        routes: [
+          {
+            path: '/tribute-page/about',
+            component: AboutTribute,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export default routes;

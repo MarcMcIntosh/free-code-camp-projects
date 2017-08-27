@@ -9,7 +9,7 @@ function server() {
   return { server: SRV_ENTRY };
 }
 
-const AppDir = path.resolve(PATHS.src.client, 'client.jsx');
+const AppDir = path.resolve(PATHS.src.client, 'index.jsx');
 
 function client(production = false) {
   const base = {
