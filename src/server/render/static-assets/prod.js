@@ -7,9 +7,10 @@ const createAppScript = (src = 'app') => {
   return '<script type="text/javascript" charset="utf-8" src="' + url + '"></script>';
 };
 
-const createStylesheets = () => `
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />
-<link rel="stylesheet" href="/assets/${assets['app.css']}" />
-`;
+const createStylesheets = (src = 'app') => {
+  const app = `${src}.css`;
+  const url = `/assets/${assets[app]}`;
+  return `<link rel="stylesheet" href="${url}" />`;
+};
 
 export { createAppScript, createStylesheets };

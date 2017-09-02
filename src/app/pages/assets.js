@@ -23,23 +23,13 @@ const metaAssets = () => ([
   { name: 'apple-mobile-web-app-capable', content: 'yes' },
   { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
   { name: 'apple-mobile-web-app-title', content: 'Marc' },
-  // Tile icon for Win8 (144x144 + tile color)
-  // { name: 'msapplication-TileImage', content: msFavicon },
-  // { name: 'msapplication-TileColor', content: '#3372DF' }
+
 ]);
 
 const linkAssets = () => {
   const links = [
-    // Add to homescreen for Chrome on Android
     { rel: 'icon', href: favicon },
-    // { rel: 'icon', sizes: '192x192', href: chromeFavicon },
-    // Add to homescreen for Safari on IOS
-    // { rel: 'apple-touch-icon', sizes: '152x152', href: appleFavicon }
-    // SEO: If your mobile URL is different from the desktop URL,
-    // add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones
-    // { 'rel': 'canonical', 'href': 'http://www.example.com/' }
   ];
-
   return links;
 };
 

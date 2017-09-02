@@ -5,7 +5,6 @@
   "description": "monorepo of free-code-camp projects",
   "main": "index.js",
   "devDependencies": {
-    "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -58,6 +57,7 @@
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",
   "dependencies": {
+    "classnames": "^2.2.5",
     "compression": "^1.7.0",
     "express": "^4.15.4",
     "helmet": "^3.8.1",
@@ -75,7 +75,6 @@
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "typeface-roboto": "0.0.35"
+    "redux-thunk": "^2.2.0"
   }
 }

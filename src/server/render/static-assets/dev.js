@@ -2,6 +2,6 @@ function createAppScript(src = '/app') {
   return '<script type="text/javascript" charset="utf-8" src="' + src + '.js"></script>';
 }
 
-const createStylesheets = () => '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />';
+const createStylesheets = () => '';
 
 export { createAppScript, createStylesheets };

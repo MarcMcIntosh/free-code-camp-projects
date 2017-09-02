@@ -1,5 +1,4 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const PATHS = require('../paths');
 const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
@@ -42,7 +41,6 @@ const createLoaders = client => ([
         // postcssCssnext({ browsers: ['> 1%', 'last 2 versions'] }),
         postcssCssnext(),
         postcssReporter({ clearMessages: true }),
-        autoprefixer(),
       ]),
     },
   }, {

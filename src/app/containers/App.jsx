@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
+import '../styles/index.scss';
 // const App = ({ children }) => (<div>{children}</div>);
 
 const App = ({ route }) => (<div>
