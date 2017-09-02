@@ -1,0 +1,10 @@
+@import "@material/card/mdc-card.scss";
+
+
+.card {
+  composes: mdc-card;
+  max-width: 345px;
+}
+.media {
+  compoese: mdc-card__media;
+}

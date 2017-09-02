@@ -4,6 +4,7 @@ import {
   Main as Tribute,
   About as AboutTribute,
 } from '../projects/tribute-page';
+import appUrls from './app-urls';
 //
 // const Tribute = () => (<h1>Hodor</h1>);
 //
@@ -26,11 +27,11 @@ const routes = [
       },
       { path: '/about', component: About },
       {
-        path: '/tribute-page',
+        path: appUrls.tribute.url,
         component: Tribute,
         routes: [
           {
-            path: '/tribute-page/about',
+            path: appUrls.tribute.about,
             component: AboutTribute,
           },
         ],

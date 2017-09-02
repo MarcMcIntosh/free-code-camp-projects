@@ -57,6 +57,7 @@
   "author": "Marc McIntosh <email@marcmcintosh.ninja>",
   "license": "UNLICENSED",
   "dependencies": {
+    "@material/card": "^0.2.7",
     "classnames": "^2.2.5",
     "compression": "^1.7.0",
     "express": "^4.15.4",
