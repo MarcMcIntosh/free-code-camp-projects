@@ -6,5 +6,7 @@
   max-width: 345px;
 }
 .media {
-  compoese: mdc-card__media;
+  composes: mdc-card__media;
+  max-height: 200px;
+
 }
