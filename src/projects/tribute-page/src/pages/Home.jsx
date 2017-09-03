@@ -2,7 +2,6 @@ import React from 'react';
 import HodorImg from '../components/HodorImg';
 
 const Home = () => (<div>
-  <h1>Hodor</h1>
   <figure>
     <HodorImg />
     <figcaption>
