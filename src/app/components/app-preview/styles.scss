@@ -1,21 +1,24 @@
 @import "@material/card/mdc-card.scss";
 
-
 .card {
   composes: mdc-card;
   max-width: 345px;
 }
+
 .media {
   composes: mdc-card__media;
   max-height: 200px;
 }
+
 .actions {
-  composes: mdc-card__actions
+  composes: mdc-card__actions;
 }
+
 .primary {
   composes: mdc-card__primary;
 }
+
 .title {
   composes: mdc-card__title;
-  composes: "mdc-card__title--large";
+  composes: mdc-card__title--large;
 }

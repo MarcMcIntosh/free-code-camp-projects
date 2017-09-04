@@ -11,7 +11,8 @@
     "function-url-quotes": "never",
     "selector-attribute-quotes": "always",
     "string-quotes": "double",
-    "order/declaration-block-properties-specified-order": [
+    "order/properties-order": [
+      "composes",
       "display",
       "position",
       "top",
@@ -151,7 +152,7 @@
     "value-no-vendor-prefix": true,
     "max-nesting-depth": 3,
     "selector-max-compound-selectors": 4,
-    "selector-max-specificity": 33,
+    "selector-max-specificity": "0,4,1",
     "at-rule-blacklist": [
       "extend"
     ],
@@ -159,21 +160,22 @@
       true,
       {
         "ignoreProperties": [
-          "contain"
+          "contain",
+          "composes",
         ]
       }
     ],
-    "selector-no-id": true,
+    "selector-max-id": 0,
     "selector-no-qualifying-type": true,
-    "selector-no-type": [
-      true,
+    "selector-max-type": [
+      0,
       {
         "ignoreTypes": [
           "fieldset"
         ]
       }
     ],
-    "selector-no-universal": true,
+    "selector-max-universal": 0,
     "font-weight-notation": "named-where-possible",
     "function-url-no-scheme-relative": true,
     "comment-word-blacklist": [
@@ -191,6 +193,6 @@
     },
     "scss/selector-no-redundant-nesting-selector": true,
     "scss/at-import-no-partial-leading-underscore": true,
-    "scss/at-mixin-no-argumentless-call-parentheses": true
+    "scss/at-mixin-argumentless-call-parentheses": "never"
   }
 }
