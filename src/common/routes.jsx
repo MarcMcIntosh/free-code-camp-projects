@@ -1,9 +1,6 @@
 // import React from 'react';
 import { App, About, Gallary } from '../app/pages';
-import {
-  TributePage,
-  AboutTributePage,
-} from '../projects/tribute-page';
+import { TributePage, AboutTributePage } from '../projects/tribute-page';
 import appUrls from './app-urls';
 
 const routes = [
