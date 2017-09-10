@@ -1,6 +1,6 @@
 // import HodorImg from './src/components/HodorImg';
-export { Home as Main, About } from './src/pages';
-
+export { default as TributePage } from './src/pages/Home';
+export { default as AboutTribute } from './src/pages/About';
 // export const Tribute = (<Home />);
 // export const AboutTribute = (<About />);
 /*

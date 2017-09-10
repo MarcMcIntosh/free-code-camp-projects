@@ -1,8 +1,8 @@
 // import React from 'react';
 import { App, About, Gallary } from '../app/pages';
 import {
-  Main as Tribute,
-  About as AboutTribute,
+  TributePage,
+  AboutTributePage,
 } from '../projects/tribute-page';
 import appUrls from './app-urls';
 //
@@ -28,11 +28,11 @@ const routes = [
       { path: '/about', component: About },
       {
         path: appUrls.tribute.url,
-        component: Tribute,
+        component: TributePage,
         routes: [
           {
             path: appUrls.tribute.about,
-            component: AboutTribute,
+            component: AboutTributePage,
           },
         ],
       },
