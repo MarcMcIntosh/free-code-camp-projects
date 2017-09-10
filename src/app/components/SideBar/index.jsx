@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
-import Button from 'material-ui/Button';
+// import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 // import List from 'material-ui/List';
 import { Link } from 'react-router-dom';
+import Button from './BurgerButton';
 
 class SideBar extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class SideBar extends Component {
   }
   render() {
     return (<div>
-      <Button onClick={this.handleClick}>O</Button>
+      <Button onClick={this.handleClick} />
       <Drawer
         open={this.state.open}
         onRequestClose={this.handleClick}
