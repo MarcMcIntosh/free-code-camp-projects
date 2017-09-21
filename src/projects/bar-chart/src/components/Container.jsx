@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { node } from 'prop-types';
 import { Provider } from 'react-redux';
 import store from '../store';
 
@@ -16,8 +17,6 @@ class Container extends Component {
   }
 }
 
-Container.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+Container.propTypes = { children: node.isRequired };
 
 export default Container;

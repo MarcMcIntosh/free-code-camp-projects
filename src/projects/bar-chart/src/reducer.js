@@ -7,14 +7,14 @@ import {
 const DEFAULT_STATE = {
   error: '',
   fetching: false,
-  data: null,
+  data: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case REQUEST_DATA: return {
       ...state,
-      data: null,
+      data: false,
       error: '',
       fetching: true,
     };
@@ -26,7 +26,6 @@ function reducer(state = DEFAULT_STATE, action) {
     };
     case RECIEVE_ERROR: return {
       ...state,
-      data: null,
       error: action.payload,
       fetching: false,
     };
