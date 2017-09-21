@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
   array,
   arrayOf,
+  func,
 } from 'prop-types';
 import { format } from 'd3-format';
 import { scaleLinear, scaleTime } from 'd3-scale';
@@ -22,6 +23,7 @@ class Chart extends PureComponent {
     this.draw();
   }
   draw() {
+    const cx = this.props.classnames;
     const parseTime = timeParse('%Y-%m-%d');
     const data = this.props.data.slice().map(d => [
       parseTime(d[0]),
@@ -33,16 +35,10 @@ class Chart extends PureComponent {
     const margins = { top: 10, right: 30, bottom: 30, left: 75 };
     const width = w - margins.left - margins.right;
     const height = h - margins.top - margins.bottom;
-    const svg = select(this.chart).append('svg');
+    const svg = select(this.chart);
     svg.attr('viewBox', `0 0 ${w} ${h}`);
     svg.attr('preserveAspectRatio', 'xMidYMid meet');
-    svg.classed('bar-chart__graph', true);
 
-  /*  const xScale = scaleTime().rangeRound([
-      0,
-      width,
-    ]).domain(extent(data, d => d[0]));
-*/
     const xScale = scaleTime().range([
       0,
       width,
@@ -59,11 +55,11 @@ class Chart extends PureComponent {
 
     const g = svg.append('g').attr('transform', `translate(${margins.left},${margins.top})`);
 
-    g.append('g').attr('class', 'bar-chart__axis')
+    g.append('g').attr('class', cx('bar-chart__axis'))
       .attr('transform', `translate(0, ${height})`)
       .call(xAxis);
 
-    g.append('g').attr('class', 'bar-chart__axis')
+    g.append('g').attr('class', cx('bar-chart__axis'))
       .call(yAxis)
       .append('text')
       .attr('transform', 'rotate(-90)')
@@ -73,18 +69,18 @@ class Chart extends PureComponent {
       .text('Gross Domestic Product, USA');
 
     const barWidth = (width / data.length) / 2;
-
-    g.selectAll('.bar').data(data)
+    const barCx = cx('bar-chart__bar');
+    g.selectAll(barCx).data(data)
       .enter().append('rect')
-      .attr('class', 'bar-chart__bar')
+      .attr('class', barCx)
       .attr('x', d => xScale(d[0]))
       .attr('y', d => yScale(d[1]))
       .attr('width', barWidth)
       .attr('height', d => height - yScale(d[1]));
   }
   render() {
-    return (<div
-      className="bar-chart__container"
+    return (<svg
+      className={this.props.classnames('bar-chart__graph')}
       ref={(chart) => { this.chart = chart; }}
     />);
   }
@@ -92,6 +88,7 @@ class Chart extends PureComponent {
 
 Chart.propTypes = {
   data: arrayOf(array).isRequired,
+  classnames: func.isRequired,
 };
 
 
