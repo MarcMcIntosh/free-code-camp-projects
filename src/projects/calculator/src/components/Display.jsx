@@ -44,8 +44,8 @@ Display.propTypes = {
   display: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ]),
-  onKey: PropTypes.func,
+  ]).isRequired,
+  onKey: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

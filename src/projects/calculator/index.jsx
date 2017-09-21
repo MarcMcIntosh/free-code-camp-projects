@@ -1,29 +1,14 @@
-import React, { Component, PropTypes } from 'react';
-import { Provider } from 'react-redux';
-import store from './src/store';
+import React from 'react';
+import Container from './src/Container';
 import Buttons from './src/components/CalculatorButtons';
 import Display from './src/components/Display';
 import ErrorMessage from './src/components/ErrorMessage';
-import task from './task';
 
-class Calculator extends Component {
-  constructor(props) {
-    super(props);
-    this.store = store;
-  }
-  render() {
-    const { children, ...rest } = this.props;
-    return (
-      <Provider store={this.store}>
-        <div {...rest}>{children}</div>
-      </Provider>
-    );
-  }
-}
+const Calculator = () => (<Container>
+  <ErrorMessage />
+  <Display />
+  <Buttons />
+</Container>);
 
-Calculator.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Calculator;
-export { Display, Buttons, ErrorMessage, task };

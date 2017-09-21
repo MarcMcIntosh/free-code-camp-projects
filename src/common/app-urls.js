@@ -3,13 +3,13 @@ const apps = {
     title: 'Tribute Page',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-tribute-page',
     url: '/tribute-page',
-    about: '/tribute-page/about',
+    about: '/about/tribute-page',
   },
   barChart: {
     title: 'Visualize Data with a Bar Chart',
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-bar-chart',
     url: '/bar-chart',
-    about: '/bar-chart/about',
+    about: '/about/bar-chart',
   },
 };
 

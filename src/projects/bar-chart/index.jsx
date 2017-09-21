@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { Provider } from 'react-redux';
+import React from 'react';
 import Container from './src/components/Container';
-import BarChart from './src/BarChart';
+import App from './src/BarChart';
 
-const barChart = () => (<Container><BarChart /></Container>);
+const BarChart = () => (<Container><App /></Container>);
 
 
-export default barChart;
+export default BarChart;

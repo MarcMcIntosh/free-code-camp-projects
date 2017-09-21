@@ -5,12 +5,18 @@ import placeholder from '../images/4-3.jpg';
 
 const Gallary = () => (<div className="gallary">
   <h2>Gallary</h2>
-  {/* <iframe title="Tribute Pages" src="/tribute-page" /> */}
   <Preview
     title={appUrls.tribute.title}
     url={appUrls.tribute.url}
     about={appUrls.tribute.about}
-    challenge="https://www.freecodecamp.com/challenges/build-a-tribute-page"
+    challenge={appUrls.tribute.challenge}
+    img={placeholder}
+  />
+  <Preview
+    title={appUrls.barChart.title}
+    url={appUrls.barChart.url}
+    about={appUrls.barChart.about}
+    challenge={appUrls.barChart.challenge}
     img={placeholder}
   />
 </div>);

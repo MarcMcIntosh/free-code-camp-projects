@@ -22,7 +22,7 @@ export function handleUserError(err) {
     if (last) { clearTimeout(last); }
     const errorId = setTimeout(() => dispatch(calcError({
       error: null,
-      errorOd: null,
+      errorId: null,
     })), 5000);
     dispatch(calcError({ error: err, errorId }));
   };
