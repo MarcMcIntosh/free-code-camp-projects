@@ -19,6 +19,13 @@ const Gallary = () => (<div className="gallary">
     challenge={appUrls.barChart.challenge}
     img={placeholder}
   />
+  <Preview
+    title={appUrls.calculator.title}
+    url={appUrls.calculator.url}
+    about={appUrls.calculator.about}
+    challenge={appUrls.calculator.challenge}
+    img={placeholder}
+  />
 </div>);
 
 export default Gallary;

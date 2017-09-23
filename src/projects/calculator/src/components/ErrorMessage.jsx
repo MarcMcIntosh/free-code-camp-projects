@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { clearError } from '../actions';
 
@@ -20,10 +21,8 @@ class ErrorMessage extends Component {
   }
 }
 
-ErrorMessage.propTypes = {
-  message: PropTypes.string,
-  clear: PropTypes.func,
-};
+ErrorMessage.propTypes = { message: string.isRequired,
+  clear: func.isRequired };
 
 const mapStateToProps = state => ({ message: state.error });
 

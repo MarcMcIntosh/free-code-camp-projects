@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { oneOfType, number, string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { handleUserInput } from '../actions';
 
@@ -8,7 +9,7 @@ class Display extends Component {
     super(props);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener('keydown', this.handleKeyPress);
   }
   componentWillUnmount() {
@@ -41,11 +42,8 @@ class Display extends Component {
 }
 
 Display.propTypes = {
-  display: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
-  onKey: PropTypes.func.isRequired,
+  display: oneOfType([string, number]).isRequired,
+  onKey: func.isRequired,
 };
 
 const mapStateToProps = state => ({

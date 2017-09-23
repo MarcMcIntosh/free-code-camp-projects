@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { func } from 'prop-types';
 import { connect } from 'react-redux';
 import Tr from './Tr';
 import Td from './Td';
@@ -48,7 +49,7 @@ class Buttons extends Component {
 }
 
 Buttons.propTypes = {
-  onUserInput: PropTypes.func.isRequired,
+  onUserInput: func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

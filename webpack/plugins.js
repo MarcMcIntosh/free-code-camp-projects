@@ -28,6 +28,10 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new DefinePlugin(compileTimeConstantForMinification),
       new HotModuleReplacementPlugin(),
       new NoEmitOnErrorsPlugin(),
+      new ExtractTextPlugin({
+        filename: '[contenthash].css',
+        allChunks: true,
+      }),
       // new FaviconsWebpackPlugin('./logo.png'),
     ];
   }

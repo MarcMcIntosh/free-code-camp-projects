@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
-// import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-// import List from 'material-ui/List';
 import { Link } from 'react-router-dom';
 import Button from './BurgerButton';
 

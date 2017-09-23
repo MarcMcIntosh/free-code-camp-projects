@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { node } from 'prop-types';
 
 const Tr = ({ children }) => (<tr>{children}</tr>);
 
-Tr.propTypes = { children: PropTypes.node };
+Tr.propTypes = { children: node.isRequired };
 
 export default Tr;

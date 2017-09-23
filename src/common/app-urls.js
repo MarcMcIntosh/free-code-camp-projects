@@ -11,6 +11,12 @@ const apps = {
     url: '/bar-chart',
     about: '/about/bar-chart',
   },
+  calculator: {
+    title: 'Build a JavaScript Calculator',
+    challenge: 'https://www.freecodecamp.com/challenges/build-a-javascript-calculator',
+    url: '/calculator',
+    about: '/about/calculator',
+  },
 };
 
 export default apps;

@@ -10,5 +10,4 @@ const Calculator = () => (<Container>
   <Buttons />
 </Container>);
 
-
 export default Calculator;

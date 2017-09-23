@@ -1,3 +1,9 @@
 @import "normalize-css/normalize.css";
-@import '@material/typography/mdc-typography.scss';
+// @import '@material/typography/mdc-typography.scss';
 // @import "typeface-roboto/index.css";
+@import "material-ui-with-sass/src/sass/scaffolding";
+
+// Define a custom sass file to override any variables defined in scaffolding.scss
+// @import "my-custom-overrides.scss";
+
+@import "material-ui-with-sass/src/sass/components";

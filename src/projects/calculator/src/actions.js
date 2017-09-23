@@ -1,8 +1,11 @@
-export const CALC_ERROR = 'CALC_ERROR';
+
+const prefix = str => (`CALCULATOR_${str}`);
+
+export const CALC_ERROR = prefix('ERROR');
 const calcError = payload => ({ type: CALC_ERROR, payload });
-export const SET_ANSWER = 'SET_ANSWER';
+export const SET_ANSWER = prefix('SET_ANSWER');
 const setAnswer = payload => ({ type: SET_ANSWER, payload });
-export const SET_DISPLAY = 'SET_DISPLAY';
+export const SET_DISPLAY = prefix('SET_DISPLAY');
 const setDisplay = payload => ({ type: SET_DISPLAY, payload });
 // export const SET_ERROR = 'SET_ERROR';
 
