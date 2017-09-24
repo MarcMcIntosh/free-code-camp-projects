@@ -1,25 +1,7 @@
-import React, { Component } from 'react';
-import { node } from 'prop-types';
-import { Provider } from 'react-redux';
-import store from './src/store';
-import DataGlobe from './src/components/Page';
+import React from 'react';
+import Container from './src/Container';
+import App from './src/App';
 
-class Container extends Component {
-  constructor(props) {
-    super(props);
-    this.store = store;
-  }
-  render() {
-    const { children, ...props } = this.props;
-    return (
-      <Provider store={this.store}>
-        <div {...props}>{children}</div>
-      </Provider>
-    );
-  }
-}
+const DataGlobe = () => (<Container><App /></Container>);
 
-Container.propTypes = { children: node.isRequired };
-
-export default Container;
-export { DataGlobe };
+export default DataGlobe;

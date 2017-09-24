@@ -36,13 +36,8 @@ export const recieveGeoError = payload => ({
 export const fetchMtrData = (address = meteorStringData) => (dispatch) => {
   dispatch(requestMtrData());
   return fetch(address).then((res) => {
-    if (!res.ok) {
-      const error = new Error(res.statusText);
-      error.response = res;
-      throw error;
-    } else {
-      return res.json();
-    }
+    if (!res.ok) throw res.statusText;
+    return res.json();
   }).then((json) => {
     dispatch(recieveMtrData(json));
   }).catch((error) => {
@@ -53,13 +48,8 @@ export const fetchMtrData = (address = meteorStringData) => (dispatch) => {
 export const fetchGeoData = (address = worldAtlasData) => (dispatch) => {
   dispatch(requestGeoData());
   return fetch(address).then((res) => {
-    if (!res.ok) {
-      const error = new Error(res.statusText);
-      error.response = res;
-      throw error;
-    } else {
-      return res.json();
-    }
+    if (!res.ok) throw res.statusText;
+    return res.json();
   }).then((json) => {
     dispatch(recieveGeoData(json));
   }).catch((error) => {

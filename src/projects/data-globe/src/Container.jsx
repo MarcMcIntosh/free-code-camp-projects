@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { node } from 'prop-types';
 import { Provider } from 'react-redux';
 import store from './store';
-import cx from './styles';
 
 class Container extends Component {
   constructor(props) {
@@ -11,9 +10,7 @@ class Container extends Component {
   }
   render() {
     const { children, ...props } = this.props;
-    return (<Provider store={this.store}>
-      <div className={cx('data-globe__container')}{...props}>{children}</div>
-    </Provider>);
+    return (<Provider store={this.store} {...props}>{children}</Provider>);
   }
 }
 

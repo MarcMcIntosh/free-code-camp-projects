@@ -8,12 +8,12 @@ import {
 } from './actions';
 
 const DEFAULT_STATE = {
-  error_meteorites: false,
-  fetching_meteories: false,
-  error_topology: false,
+  error_meteorites: '',
+  fetching_meteorites: false,
+  error_topology: '',
   fetching_topology: false,
-  meteorites: false,
-  topology: false,
+  meteorites: {},
+  topology: {},
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -21,31 +21,31 @@ function reducer(state = DEFAULT_STATE, action) {
     case REQUEST_MTR_DATA: return {
       ...state,
       meteorites: false,
-      error_meteorites: false,
-      fetching_meteories: true,
+      error_meteorites: '',
+      fetching_meteorites: true,
     };
     case RECIEVE_MTR_DATA: return {
       ...state,
       meteorites: action.payload,
-      error_meteorites: null,
-      fetching_meteories: false,
+      error_meteorites: '',
+      fetching_meteorites: false,
     };
     case RECIEVE_MTR_ERROR: return {
       ...state,
       topology: false,
       error_meteorites: action.payload,
-      fetching_meteories: false,
+      fetching_meteorites: false,
     };
     case REQUEST_GEO_DATA: return {
       ...state,
       topology: false,
-      error_topology: false,
+      error_topology: '',
       fetching_topology: true,
     };
     case RECIEVE_GEO_DATA: return {
       ...state,
-      meteorites: action.payload,
-      error_topology: null,
+      topology: action.payload,
+      error_topology: '',
       fetching_topology: false,
     };
     case RECIEVE_GEO_ERROR: return {
