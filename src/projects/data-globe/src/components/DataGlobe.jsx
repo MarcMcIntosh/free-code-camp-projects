@@ -2,16 +2,14 @@ import React, { PureComponent } from 'react';
 import { number, shape, arrayOf, string } from 'prop-types';
 import { feature } from 'topojson-client';
 import { select } from 'd3-selection';
-import { scaleSequential, interpolateRainbow } from 'd3-scale';
-import {
-  geoMercator,
-  geoPath,
-} from 'd3-geo';
+// import { scaleSequential, interpolateRainbow } from 'd3-scale';
+import { geoMercator, geoPath } from 'd3-geo';
+import cx from '../../styles';
 
 const projection = (x, y) => geoMercator()
-.scale((x - 3) / (2 * Math.PI))
-.translate([x / 2, y / 2])
-.precision(0.1);
+  .scale((x - 3) / (2 * Math.PI))
+  .translate([x / 2, y / 2])
+  .precision(0.1);
 
 const path = d => geoPath().projection(d);
 
@@ -33,17 +31,17 @@ class DataGlobe extends PureComponent {
   }
   draw() {
     const svg = select(this.root).append('svg')
-    .attr('class', 'data-globe__graph')
-    .attr('viewBox', `0, 0, ${this.props.width}, ${this.props.height}`)
-    .attr('preserveAspectRatio', 'xMidYMid meet');
+      .attr('class', cx('data-globe__graph'))
+      .attr('viewBox', `0, 0, ${this.props.width}, ${this.props.height}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
     svg.selectAll('path').data(this.countries).enter()
-    .append('path')
-    .attr('class', 'data-globe__country')
-    .attr('d', this.path);
+      .append('path')
+      .attr('class', cx('data-globe__country'))
+      .attr('d', this.path);
   }
   render() {
-    return (<div className="data-globe__container" ref={(c) => { this.root = c; }} />);
+    return (<div className={cx('data-globe__container')} ref={(c) => { this.root = c; }} />);
   }
 }
 

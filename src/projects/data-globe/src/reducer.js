@@ -7,19 +7,13 @@ import {
   REQUEST_GEO_DATA,
 } from './actions';
 
-// import countries from './data/countries.json';
-import {
-  GEO_DATA,
-  MTR_DATA,
-} from './constants';
-
 const DEFAULT_STATE = {
   error_meteorites: false,
   fetching_meteories: false,
   error_topology: false,
   fetching_topology: false,
-  meteorites: MTR_DATA,
-  topology: GEO_DATA,
+  meteorites: false,
+  topology: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {

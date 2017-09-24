@@ -17,6 +17,12 @@ const apps = {
     url: '/calculator',
     about: '/about/calculator',
   },
+  dataGlobe: {
+    url: '/data-globe',
+    about: '/about/data-globe',
+    challenge: 'https://www.freecodecamp.com/challenges/map-data-across-the-globe',
+    title: 'Map Data Across the Globe',
+  },
 };
 
 export default apps;
