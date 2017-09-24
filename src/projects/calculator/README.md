@@ -1,34 +1,8 @@
-
-## Use
-replace index with the name and/or location pf this project.
-```jsx
-import Calculator, { Display, ErrorMessage, Buttons } from './index';
-```
-All components can handle a className and standard attributes.
-i.e:
-```jsx
-<Display tabIndex="0" />
-```
-
-## Elements and classNames added to the top element in the component this.following structure can be used to access the children elements.
-
-```scss
-// Display
-div > input,
-// ErrorMessage
-div > button,
-// Buttons
-table > tbody > tr > td > button {
-  .number,
- .ans,
- .equals,
- .minus,
- .plus,
- .point,
- .times,
- .divide,
- .ac,
- .cd,
- .mod,
-}
-```
+# Title: Build a JavaScript Calculator
+https://www.freecodecamp.com/challenges/build-a-javascript-calculator
+## Objective
+Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/rLJZrA/
+## User stories
++ I can add, subtract, multiply and divide two numbers.
++ I can clear the input field with a clear button.
++ I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.

@@ -1,8 +1,8 @@
-Set up auto-fetch for multiple data sources before rendering;
-
-
-check out  world-atlas on npm for a data source
-https://github.com/topojson/world-atlas
-
-to install
-topojson-client world-atlas d3-selection d3-geo
+# Map Data Across the Globe
+https://www.freecodecamp.com/challenges/map-data-across-the-globe
+## Objective
+Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/mVEJag
+## User Stories
++ I can see where all Meteorites landed on a world map.
++ I can tell the relative size of the meteorite, just by looking at the way it's represented on the map.
++ I can mouse over the meteorite's data point for additional data.
