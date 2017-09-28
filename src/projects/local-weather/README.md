@@ -1,13 +1,8 @@
-
-Template File for front end assignments from [FreeCodeCamp](https://www.freecodecamp.com)
-
-# Usage
-```bash
-git pull --rebase=interactive
-#--rebase[true|interactive]
-npm init
-# edit package.json
-npm install
-npm start
-```
-Open browser at <localhost:8080>
+# Show the Local Weather
+challenge: https://www.freecodecamp.com/challenges/show-the-local-weather
+## Objective
+Build a CodePen.io app that is functionally similar to this example: http://codepen.io/FreeCodeCamp/full/bELRjV
+## User stories
++ I can see the weather in my current location.
++ I can see a different icon or background image (e.g. snowy mountain, hot desert) depending on the weather.
++ I can push a button to toggle between Fahrenheit and Celsius.

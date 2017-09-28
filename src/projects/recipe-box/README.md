@@ -1,12 +1,11 @@
-Template File for data visualisation assignments from [FreeCodeCamp](https://www.freecodecamp.com)
-
-# Usage
-```bash
-git pull --rebase=interactive https://git.marcmcintosh.ninja/FCC-DV-skeleton
-#--rebase[true|interactive]
-npm init
-# edit package.json
-npm install
-npm start
-```
-Open browser at <localhost:8080>
+# Build a Recipe Box
+challenge: https://www.freecodecamp.com/challenges/build-a-recipe-box
+## Objective
+Build a CodePen.io app that is functionally similar to this example https://codepen.io/FreeCodeCamp/full/xVXWag/
+## User stories
++ I can create recipes that have names and ingredients.
++ I can see an index view where the names of all the recipes are visible.
++ I can click into any of those recipes to view it.
++ I can edit these recipes.
++ I can delete these recipes.
++ All new recipes I add are saved in my browser's local storage. If I refresh the page, these recipes will still be there.

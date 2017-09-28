@@ -1,16 +1,7 @@
-# Quote Machine
-A [FreeCodeCamp](https://www.freecodecamp.com) project <https://www.freecodecamp.com/challenges/build-a-random-quote-machine>
-
-# Usage
-
-# Default Export
-Is a redux container, props are passed to the rendered div element.
-# TweetButton
-Button to Tweet the quote
-Additional props are className and children.
-# NextButton
-Button that requests a new quote.
-Optional props are className and children
-# Display
-Displays the quote,
-Optional props are className which will have 'loading' or error appended to it depending on the apps state. if no className is provided 'error' will be the only classNames used
+# Build a Random Quote Machine
+challenge: https://www.freecodecamp.com/challenges/build-a-random-quote-machine
+## Objective
+Build a CodePen.io app that is functionally similar to this example: https://codepen.io/FreeCodeCamp/full/ONjoLe/
+## User stories
++ I can click a button to show me a new random quote.
++ I can press a button to tweet out a quote.
