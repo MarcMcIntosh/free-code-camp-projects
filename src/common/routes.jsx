@@ -1,6 +1,6 @@
 // import React from 'react';
 import { App, About, Gallary } from '../app/pages';
-import { TributePage } from '../projects/tribute-page';
+import TributePage from '../projects/tribute-page';
 import appUrls from './app-urls';
 
 import BarChart from '../projects/bar-chart';

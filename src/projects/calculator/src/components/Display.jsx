@@ -3,7 +3,6 @@ import { oneOfType, number, string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { handleUserInput } from '../actions';
 
-
 class Display extends Component {
   constructor(props) {
     super(props);
@@ -33,10 +32,8 @@ class Display extends Component {
     return undefined;
   }
   render() {
-    const { display, ...rest } = this.props;
-    delete rest.onKey;
-    return (<div {...rest}>
-      <input type="text" readOnly="true" value={display} />
+    return (<div className={this.props.cx('calculator__display')}>
+      <input className={this.props.cx('calculator__input')} type="text" readOnly="true" value={this.props.display} />
     </div>);
   }
 }
@@ -44,6 +41,7 @@ class Display extends Component {
 Display.propTypes = {
   display: oneOfType([string, number]).isRequired,
   onKey: func.isRequired,
+  cx: func.isRequired,
 };
 
 const mapStateToProps = state => ({

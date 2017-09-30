@@ -3,7 +3,7 @@ const apps = {
     title: 'Tribute Page',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-tribute-page',
     url: '/tribute-page',
-    about: '/about/tribute-page',
+    about: '/about/tribute-page', // change to github
   },
   barChart: {
     title: 'Visualize Data with a Bar Chart',
