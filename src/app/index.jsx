@@ -6,7 +6,7 @@ import { renderRoutes } from 'react-router-config';
 // import { MuiThemeProvider } from 'material-ui/styles';
 import routes from '../common/routes';
 // import theme from '../common/theme';
-import './styles/index.scss';
+import './styles';
 
 const history = createHistory();
 

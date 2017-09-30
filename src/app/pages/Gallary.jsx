@@ -1,5 +1,5 @@
 import React from 'react';
-import Preview from '../components/app-preview';
+import Preview from '../components/Preview';
 import appUrls from '../../common/app-urls';
 import placeholder from '../images/4-3.jpg';
 
@@ -8,23 +8,20 @@ const Gallary = () => (<div className="gallary">
   <Preview
     title={appUrls.tribute.title}
     url={appUrls.tribute.url}
-    about={appUrls.tribute.about}
     challenge={appUrls.tribute.challenge}
-    img={placeholder}
+    media={placeholder}
   />
   <Preview
     title={appUrls.barChart.title}
     url={appUrls.barChart.url}
-    about={appUrls.barChart.about}
     challenge={appUrls.barChart.challenge}
-    img={placeholder}
+    media={placeholder}
   />
   <Preview
     title={appUrls.calculator.title}
     url={appUrls.calculator.url}
-    about={appUrls.calculator.about}
     challenge={appUrls.calculator.challenge}
-    img={placeholder}
+    media={placeholder}
   />
 </div>);
 

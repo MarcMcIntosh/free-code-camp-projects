@@ -1,9 +1,16 @@
 @import "normalize-css/normalize.css";
-// @import '@material/typography/mdc-typography.scss';
-// @import "typeface-roboto/index.css";
-@import "material-ui-with-sass/src/sass/scaffolding";
+@import "@material/typography/mdc-typography.scss";
+@import "@material/card/mdc-card.scss";
+@import "@material/button/mdc-button.scss";
 
-// Define a custom sass file to override any variables defined in scaffolding.scss
-// @import "my-custom-overrides.scss";
+.preview {
+  max-width: 21.875rem;
+  margin: 24px;
+  margin-bottom: 48px;
+}
 
-@import "material-ui-with-sass/src/sass/components";
+@media (min-width: 768px) {
+  .preview {
+    margin-bottom: 24px;
+  }
+}

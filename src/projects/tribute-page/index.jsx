@@ -10,7 +10,7 @@ const TributePage = () => (<div className={cx('tribute-page')}>
 
   <div className={cx('tribute-page__content')}>
 
-    <img className={cx('tribute-page__image')} scr={HodorImg} role="presentation" alt="Hodor" />
+    <img className={cx('tribute-page__image')} src={HodorImg} role="presentation" alt="Hodor" />
 
     <div className={cx('tribute__caption')}>
 
