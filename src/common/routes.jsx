@@ -5,6 +5,7 @@ import appUrls from './app-urls';
 
 import BarChart from '../projects/bar-chart';
 import Calculator from '../projects/calculator';
+import DataGlobe from '../projects/data-globe';
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
       {
         path: appUrls.calculator.url,
         component: Calculator,
+      },
+      {
+        path: appUrls.dataGlobe.url,
+        component: DataGlobe,
       },
     ],
   },

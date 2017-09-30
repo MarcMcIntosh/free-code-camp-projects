@@ -20,7 +20,7 @@ function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case REQUEST_MTR_DATA: return {
       ...state,
-      meteorites: false,
+      meteorites: {},
       error_meteorites: '',
       fetching_meteorites: true,
     };
@@ -32,13 +32,13 @@ function reducer(state = DEFAULT_STATE, action) {
     };
     case RECIEVE_MTR_ERROR: return {
       ...state,
-      topology: false,
+      meteorites: {},
       error_meteorites: action.payload,
       fetching_meteorites: false,
     };
     case REQUEST_GEO_DATA: return {
       ...state,
-      topology: false,
+      topology: {},
       error_topology: '',
       fetching_topology: true,
     };
@@ -50,7 +50,7 @@ function reducer(state = DEFAULT_STATE, action) {
     };
     case RECIEVE_GEO_ERROR: return {
       ...state,
-      topology: false,
+      topology: {},
       error_topology: action.payload,
       fetching_topology: false,
     };

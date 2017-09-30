@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { meteorStringData, worldAtlasData } from './data';
+import { meteorStrikeData, worldAtlasData } from './data';
 
 const prefix = str => `DATA-GLOBE_${str}`;
 
@@ -33,7 +33,7 @@ export const recieveGeoError = payload => ({
   payload,
 });
 
-export const fetchMtrData = (address = meteorStringData) => (dispatch) => {
+export const fetchMtrData = (address = meteorStrikeData) => (dispatch) => {
   dispatch(requestMtrData());
   return fetch(address).then((res) => {
     if (!res.ok) throw res.statusText;
