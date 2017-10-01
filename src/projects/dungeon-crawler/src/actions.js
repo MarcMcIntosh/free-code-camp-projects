@@ -1,54 +1,55 @@
 import { addVector } from './utils';
 import { tileType, ATTACK_VARIANCE, ENEMY, PLAYER } from './GameConstants';
 
+const prefix = str => (`ROUGE-LIKE_${str}`);
 /* To Do */
-export const WIN = 'WIN';
+export const WIN = prefix('WIN');
 export const onWin = () => ({ type: WIN });
-export const LOSE = 'LOSE';
+export const LOSE = prefix('LOSE');
 export const onLose = () => ({ type: LOSE });
-export const RESET_MESSAGE = 'RESET_MESSAGE';
+export const RESET_MESSAGE = prefix('RESET_MESSAGE');
 export const onResetMessage = () => ({ type: RESET_MESSAGE });
 
-export const MOVE = 'MOVE';
+export const MOVE = prefix('MOVE');
 export const move = (entityName, vector) => ({
   type: MOVE,
   payload: { entityName, vector },
 });
 
-export const TOGGLE_DARKNESS = 'TOGGLE_DARKNESS';
+export const TOGGLE_DARKNESS = prefix('TOGGLE_DARKNESS');
 export const toggleDarkness = () => ({ type: TOGGLE_DARKNESS });
 
-export const GAIN_XP = 'GAIN_XP';
+export const GAIN_XP = prefix('GAIN_XP');
 export const gainXp = xp => ({ type: GAIN_XP, xp });
 
-export const DAMAGE = 'DAMAGE';
+export const DAMAGE = prefix('DAMAGE');
 export const damage = (entityName, value) => ({ type: DAMAGE, entityName, value });
 
-export const HEAL = 'HEAL';
+export const HEAL = prefix('HEAL');
 export const heal = (entityName, value) => ({
   type: HEAL, entityName, value });
 
-export const SWITCH_WEAPON = 'SWITCH_WEAPON';
+export const SWITCH_WEAPON = prefix('SWITCH_WEAPON');
 export const switchWeapon = (weapon, attack) => ({
   type: SWITCH_WEAPON, weapon, attack });
 
-export const LEVEL_UP = 'LEVEL_UP';
+export const LEVEL_UP = prefix('LEVEL_UP');
 export const levelUp = (attack, health, toNextLevel) => ({
   type: LEVEL_UP, attack, health, toNextLevel });
 
-export const RESET_LEVEL = 'RESET_LEVEL';
+export const RESET_LEVEL = prefix('RESET_LEVEL');
 export const resetLevel = () => ({ type: RESET_LEVEL });
 
-export const INCREASE_LEVEL = 'INCREASE_LEVEL';
+export const INCREASE_LEVEL = prefix('INCREASE_LEVEL');
 export const increaseLevel = () => ({ type: INCREASE_LEVEL });
 
-export const RESET_MAP = 'RESET_MAP';
+export const RESET_MAP = prefix('RESET_MAP');
 export const resetMap = () => ({ type: RESET_MAP });
 
-export const SET_MAP = 'SET_MAP';
+export const SET_MAP = prefix('SET_MAP');
 export const setMap = () => ({ type: SET_MAP });
 
-export const REMOVE_ENTITY = 'REMOVE_ENTITY';
+export const REMOVE_ENTITY = prefix('REMOVE_ENTITY');
 export const removeEntity = entityName => ({
   type: REMOVE_ENTITY, payload: { entityName } });
 
