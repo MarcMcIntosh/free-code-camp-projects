@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import Board from './src/components/Board';
+import './src/styles';
 
-class Container extends Component {
+class DungeonCrawler extends Component {
   constructor(props) {
     super(props);
     this.store = store;
@@ -17,4 +18,4 @@ class Container extends Component {
   }
 }
 
-export default Container;
+export default DungeonCrawler;

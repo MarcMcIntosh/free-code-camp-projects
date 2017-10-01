@@ -6,7 +6,7 @@ import ToggleTorch from './ToggleTorch';
 import { onMove, toggleDarkness, resetMap } from '../actions';
 import { tileSize, SIGHT } from '../GameConstants';
 import Message from './Message';
-import floorTile from '../../styles/sprites/floors.png';
+import floorTile from '../styles/sprites/floors.png';
 
 function sameArray(arr1, arr2) {
   if (!arr1 || !arr2) {
@@ -45,22 +45,16 @@ class Board extends Component {
   constructor() {
     super();
     this.state = { timers: [] };
-    // this.handleKeyUp = this.handleKeyUp.bind(this);
-    // this.handleKeyDown = this.handleKeyDown.bind(this);
-    // this.movePlayer = this.movePlayer.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
   componentDidMount() {
     this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
     this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
-
     this.img = new Image();
     this.img.src = floorTile;
     this.img.onload = () => {
       window.addEventListener('keydown', this.handleKeypress);
-      // window.addEventListener('keydown', this.handleKeyDown);
-      // window.addEventListener('keyup', this.handleKeyUp);
       window.addEventListener('resize', this.handleResize);
       this.clearAndDraw();
     };
@@ -81,46 +75,9 @@ class Board extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeypress);
-    // window.removeEventListener('keyup', this.handleKeyUp);
     window.removeEventListener('resize', this.handleResize);
   }
-  /*
-  clearTimers() {
-    this.state.timers.forEach(t => clearInterval(t));
-    this.setState({ timers: [] });
-  }
-  movePlayer(d) {
-    this.props.onMove(d);
-    const t = setInterval(() => this.props.onMove(d), moveSpeed);
-    const timers = this.state.timers.concat(t);
-    this.setState({ timers });
-  }
-  handleKeyUp(event) {
-    switch (event.keyCode) {
-      case 65:
-      case 37:
-      case 87:
-      case 38:
-      case 68:
-      case 39:
-      case 83:
-      case 40: event.preventDefault(); this.clearTimers();
-      // no default
-    }
-  }
-  handleKeyDown(event) {
-    switch (event.keyCode) {
-      case 65:
-      case 37: event.preventDefault(); this.movePlayer({ x: -1, y: 0 }); break;
-      case 87:
-      case 38: event.preventDefault(); this.movePlayer({ x: 0, y: -1 }); break;
-      case 68:
-      case 39: event.preventDefault(); this.movePlayer({ x: 1, y: 0 }); break;
-      case 83:
-      case 40: event.preventDefault(); this.movePlayer({ x: 0, y: 1 }); break;
-      // no default
-    }
-  } */
+
   handleKeypress(event) {
     switch (event.keyCode) {
       case 65:
@@ -181,11 +138,7 @@ class Board extends Component {
           const { sx, sy, sw, sh } = this.props.game[i][ii];
           ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
         }
-        if ((
-          isOccupied && this.props.darkness && darkArea < SIGHT
-        ) || (
-          isOccupied && !this.props.darkness
-        )) {
+        if ((isOccupied && this.props.darkness && darkArea < SIGHT) || (isOccupied && !this.props.darkness)) {
           const en = this.props.occupiedSpaces[str];
           const { sx, sy, sw, sh } = this.props.entities[en].tile;
 
@@ -219,7 +172,6 @@ class Board extends Component {
         <canvas
           className="dungeon__floor"
           ref={(canvas) => { this.canvas = canvas; }}
-          autoFocus
         />
       </Touch>
       <Message text={this.props.message} onClose={this.props.onResetGame} />

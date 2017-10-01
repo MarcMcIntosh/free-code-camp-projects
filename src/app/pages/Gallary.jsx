@@ -23,6 +23,12 @@ const Gallary = () => (<div className="gallary">
     challenge={appUrls.calculator.challenge}
     media={placeholder}
   />
+  <Preview
+    title={appUrls.dungeonCrawler.title}
+    url={appUrls.dungeonCrawler.url}
+    challenge={appUrls.dungeonCrawler.challenge}
+    media={placeholder}
+  />
 </div>);
 
 export default Gallary;

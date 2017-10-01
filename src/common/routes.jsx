@@ -6,6 +6,7 @@ import appUrls from './app-urls';
 import BarChart from '../projects/bar-chart';
 import Calculator from '../projects/calculator';
 import DataGlobe from '../projects/data-globe';
+import DungeonCrawler from '../projects/dungeon-crawler';
 
 const routes = [
   {
@@ -32,6 +33,10 @@ const routes = [
       {
         path: appUrls.dataGlobe.url,
         component: DataGlobe,
+      },
+      {
+        path: appUrls.dungeonCrawler.url,
+        component: DungeonCrawler,
       },
     ],
   },

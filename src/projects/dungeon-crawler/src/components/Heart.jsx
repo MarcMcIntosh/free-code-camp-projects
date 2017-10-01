@@ -27,23 +27,13 @@ const Heart = ({ size, percent, ...props }) => {
         <path d={heartShapedPath} />
       </clipPath>
     </defs>
-    {/* fill and clip*/}
+    {/* fill and clip */}
     <g clipPath="url(#heart)">
-      <rect
-        x="0" y="0"
-        width="100%"
-        height="100%"
-        fill={(percent < 100) ? '#666' : 'red'}
-      />
+      <rect x="0" y="0" width="100%" height="100%" fill={(percent < 100) ? '#666' : 'red'} />
       <path fill="red" d={fp} />
     </g>
     {/* Out line */}
-    <path
-      d={heartShapedPath}
-      fill="none"
-      stroke="#999"
-      strokeWidth="1"
-    />
+    <path d={heartShapedPath} fill="none" stroke="#999" strokeWidth="1" />
   </svg>);
 };
 

@@ -22,7 +22,6 @@ export default function GenerateGame(
   h = 100,
   maxRS = 20,
   minRS = 6,
-  maxHL = 5,
   n = 20,
 ) {
   // init grid of walls

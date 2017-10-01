@@ -1,70 +1,61 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  func,
-  string,
-  instanceOf,
-  bool,
-  oneOfType,
-  shape,
-  arrayOf,
-  number,
-} from 'prop-types';
-import { fetchData } from '../actions';
-import { CN_DATA_SRC } from '../constants';
+import { object, func, instanceOf, bool, oneOfType, array } from 'prop-types';
+import { fetchData, fetchFlags } from '../actions';
 import TheForce from './TheForce';
+import ErrorMessage from './ErrorMessage';
+import Loader from './Loader';
 
 const mapStateToProps = state => ({
   data: state.data,
   error: state.error,
-  fetching: state.fetching,
+  fetching_data: state.fetching_data,
+  fetching_flags: state.fetching_flags,
+  flags: state.flags,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFetchData: address => dispatch(fetchData(address)),
+  onFetchData: () => dispatch(fetchData()),
+  onFetchFlags: () => dispatch(fetchFlags()),
 });
 
 class GraphContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.getJson = this.getJson.bind(this);
   }
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.onFetchData(this.props.url);
+  componentDidMount() { this.getJson(); }
+  getJson() {
+    if (!this.props.fetching_flags && this.props.flags.length === 0) {
+      this.props.onFetchFlags();
+    }
+    if (!this.props.fetching_data && !Object.hasOwnProperty.call(this.props.data, 'nodes')) {
+      this.props.onFetchData();
     }
   }
-  handleClick() {
-    this.props.onFetchData(this.props.url);
-  }
   render() {
+    const isLoading = this.props.fetching_data || this.props.fetching_flags;
+    const hasData = Object.hasOwnProperty.call(this.props.data, 'nodes') && this.props.flags.length > 0;
+    const Err = (this.props.error && !hasData);
     return (<div className="force">
-      {(this.props.error) ? 'There Has Been an Error' : this.props.error}
-      {(this.props.fetching) ? 'Loading' : this.props.fetching}
-      {(this.props.data) ? (<TheForce data={this.props.data} />) : false}
+
+      <ErrorMessage onClick={this.getJson} err={Err} />
+
+      <Loader loading={!hasData && isLoading} />
+
+      {(hasData && <TheForce data={this.props.data} flags={this.props.flags} />)}
     </div>);
   }
 }
 
 GraphContainer.propTypes = {
   onFetchData: func.isRequired,
-  url: string.isRequired,
-  error: oneOfType([
-    bool,
-    instanceOf(Error),
-  ]).isRequired,
-  fetching: bool.isRequired,
-  data: oneOfType([
-    bool,
-    shape({
-      nodes: arrayOf(shape({ country: string, code: string })),
-      links: arrayOf(shape({ target: number, source: number })),
-    }),
-  ]).isRequired,
-};
-
-GraphContainer.defaultProps = {
-  url: CN_DATA_SRC,
+  onFetchFlags: func.isRequired,
+  error: oneOfType([bool, instanceOf(Error)]).isRequired,
+  fetching_data: bool.isRequired,
+  fetching_flags: bool.isRequired,
+  data: object.isRequired,
+  flags: array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);
