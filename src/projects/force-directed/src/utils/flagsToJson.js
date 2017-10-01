@@ -24,7 +24,7 @@ fs.readFile('./flags.css', 'utf8', (err, file) => {
     const y = +pos[1];
     return { cn, width, height, x, y };
   });
-  return fs.writeFile('./flags.json', JSON.stringify(countrys), 'utf8', (e) => {
+  return fs.writeFile('../data/flags.json', JSON.stringify(countrys), 'utf8', (e) => {
     if (e) return process.stderr.write(e);
     return process.stdout.write('done');
   });

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   func,
-  string,
   instanceOf,
   bool,
   oneOfType,
@@ -10,9 +9,11 @@ import {
   array,
   arrayOf,
 } from 'prop-types';
-import { fetchData } from '../actions';
-import { DATA_SOURCE } from '../constants';
-import HeatMap from './HeatMap';
+
+import { fetchData } from './actions';
+import HeatMap from './components/HeatMap';
+import Loader from './components/Loader';
+import ErrorMessage from './components/ErrorMessage';
 
 const mapStateToProps = state => ({
   data: state.data,
@@ -21,26 +22,21 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFetchData: address => dispatch(fetchData(address)),
+  onFetchData: () => dispatch(fetchData()),
 });
 
 class GraphContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
   componentDidMount() {
-    if (!this.props.data) {
-      this.props.onFetchData(this.props.url);
-    }
-  }
-  handleClick() {
-    this.props.onFetchData(this.props.url);
+    if (!this.props.data) { this.props.onFetchData(); }
   }
   render() {
+    const hasData = this.props.data && this.props.data.length > 0;
+
+    const Err = (!hasData && this.props.error);
+
     return (<div className="heat-map">
-      {(this.props.error) ? 'There Has Been an Error' : this.props.error}
-      {(this.props.fetching) ? 'Loading' : this.props.fetching}
+      <ErrorMessage err={Err} onClick={this.props.onFetchData} />
+      <Loader loading={this.props.fetching} />
       {(this.props.data) ? (<HeatMap data={this.props.data} />) : false}
     </div>);
   }
@@ -48,7 +44,6 @@ class GraphContainer extends Component {
 
 GraphContainer.propTypes = {
   onFetchData: func.isRequired,
-  url: string.isRequired,
   error: oneOfType([
     bool,
     instanceOf(Error),
@@ -62,8 +57,5 @@ GraphContainer.propTypes = {
   ]).isRequired,
 };
 
-GraphContainer.defaultProps = {
-  url: DATA_SOURCE,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);

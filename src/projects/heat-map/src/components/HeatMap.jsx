@@ -22,6 +22,9 @@ class HeatMap extends PureComponent {
     this.draw();
   }
   draw() {
+    if (Object.keys(this.props.data).length !== 0) {
+      /* do func */
+    }
     const width = this.props.width - this.props.margin.left - this.props.margin.right;
     const height = this.props.height - this.props.margin.top - this.props.margin.bottom;
 

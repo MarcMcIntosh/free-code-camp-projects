@@ -7,6 +7,7 @@ import BarChart from '../projects/bar-chart';
 import Calculator from '../projects/calculator';
 import DataGlobe from '../projects/data-globe';
 import DungeonCrawler from '../projects/dungeon-crawler';
+import ForceDirected from '../projects/force-directed';
 
 const routes = [
   {
@@ -37,6 +38,10 @@ const routes = [
       {
         path: appUrls.dungeonCrawler.url,
         component: DungeonCrawler,
+      },
+      {
+        path: appUrls.forceDirected.url,
+        component: ForceDirected,
       },
     ],
   },

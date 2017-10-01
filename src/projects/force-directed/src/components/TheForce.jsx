@@ -15,7 +15,7 @@ class TheForce extends PureComponent {
     }
   }
   render() {
-    return (<div className="force__container" ref={(c) => { this.root = c; }} />);
+    return (<div className="force-directed__container" ref={(c) => { this.root = c; }} />);
   }
 }
 

@@ -4,8 +4,9 @@ import store from './src/store';
 import Game from './src/components/Game';
 import TopMenu from './src/components/TopMenu';
 import BottomMenu from './src/components/BottomMenu';
+import './src/styles/game-of-life.scss';
 
-class Container extends Component {
+class GameOfLife extends Component {
   constructor(props) {
     super(props);
     this.store = store;
@@ -23,4 +24,4 @@ class Container extends Component {
   }
 }
 
-export default Container;
+export default GameOfLife;
