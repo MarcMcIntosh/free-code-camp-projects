@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   func,
   instanceOf,
   bool,
   oneOfType,
-  shape,
-  array,
-  arrayOf,
+  object,
 } from 'prop-types';
 
 import { fetchData } from './actions';
-import HeatMap from './components/HeatMap';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
+import heatMap from './heat-map';
 
 const mapStateToProps = state => ({
   data: state.data,
@@ -25,37 +23,36 @@ const mapDispatchToProps = dispatch => ({
   onFetchData: () => dispatch(fetchData()),
 });
 
-class GraphContainer extends Component {
+class HeatMap extends PureComponent {
   componentDidMount() {
     if (!this.props.data) { this.props.onFetchData(); }
   }
+  componentDidUpdate(prevProps) {
+    if (Object.keys(prevProps.data).length === 0 && Object.keys(this.props.data) > 0) {
+      heatMap(this.container, this.props.data);
+    }
+  }
   render() {
-    const hasData = this.props.data && this.props.data.length > 0;
-
+    const hasData = Object.keys(this.props.data) > 0;
     const Err = (!hasData && this.props.error);
 
     return (<div className="heat-map">
       <ErrorMessage err={Err} onClick={this.props.onFetchData} />
-      <Loader loading={this.props.fetching} />
-      {(this.props.data) ? (<HeatMap data={this.props.data} />) : false}
+      <Loader loading={!hasData && this.props.fetching} />
+      <div className="heat-map__container" ref={(c) => { this.container = c; }} />
     </div>);
   }
 }
 
-GraphContainer.propTypes = {
+HeatMap.propTypes = {
   onFetchData: func.isRequired,
   error: oneOfType([
     bool,
     instanceOf(Error),
   ]).isRequired,
   fetching: bool.isRequired,
-  data: oneOfType([
-    bool,
-    shape({
-      data: arrayOf(array),
-    }),
-  ]).isRequired,
+  data: object.isRequired,
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeatMap);
