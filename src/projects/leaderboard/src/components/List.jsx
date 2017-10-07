@@ -1,6 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '@material/card/mdc-card.scss';
+import { array, string, func } from 'prop-types';
 import { getData } from '../actions';
 import Img from './Img';
 
@@ -20,8 +20,8 @@ class UserList extends Component {
     }
   }
   render() {
-    const { data, className, display } = this.props;
-    return (<div className={className}>{data.map((d, i) => (
+    const { data, display } = this.props;
+    return (<div className="users">{data.map((d, i) => (
       <div key={d.username} className="mdc-card mdc-card__horizontal-block">
         <section className="mdc-card__media">
           <Img src={d.img} className="mdc-card__media-item image" />
@@ -36,18 +36,10 @@ class UserList extends Component {
   }
 }
 
-
-const { array, string, func } = PropTypes;
-
 UserList.propTypes = {
   data: array.isRequired,
-  className: string,
   fetchData: func.isRequired,
   display: string.isRequired,
-};
-
-UserList.defaultProps = {
-  className: 'mdc-list mdc-list--avatar-list',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

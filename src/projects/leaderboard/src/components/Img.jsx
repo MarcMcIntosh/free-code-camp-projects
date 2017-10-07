@@ -1,6 +1,7 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component } from 'react';
+import { string } from 'prop-types';
 
-class Img extends PureComponent {
+class Img extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +27,6 @@ class Img extends PureComponent {
   }
 }
 
-const { string } = PropTypes;
 Img.propTypes = { className: string, alt: string };
 Img.defaultProps = { className: '', alt: '' };
 

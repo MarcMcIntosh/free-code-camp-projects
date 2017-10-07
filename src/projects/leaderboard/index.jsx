@@ -1,27 +1,27 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import List from './src/components/List';
-import Sort from './src/components/SortBy';
+import SortBy from './src/components/SortBy';
 
-class Container extends Component {
+import './src/styles';
+
+class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.store = store;
   }
   render() {
-    const { children, ...props } = this.props;
     return (
       <Provider store={this.store}>
-        <div {...props}>{children}</div>
+        <div className="leaderboard">
+          <SortBy value="recent">Recent</SortBy>
+          <SortBy value="alltime">All Time</SortBy>
+          <List className="users" />
+        </div>
       </Provider>
     );
   }
 }
 
-Container.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Container;
-export { List, Sort };
+export default Leaderboard;

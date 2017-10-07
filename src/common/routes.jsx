@@ -10,6 +10,7 @@ import DungeonCrawler from '../projects/dungeon-crawler';
 import ForceDirected from '../projects/force-directed';
 import GameOfLife from '../projects/game-of-life';
 import HeatMap from '../projects/heat-map';
+import Leaderboard from '../projects/leaderboard';
 
 const routes = [
   {
@@ -50,7 +51,10 @@ const routes = [
       }, {
         path: appUrls.heatMap.url,
         component: HeatMap,
-      }, /* {
+      }, {
+        path: appUrls.leaderboard.url,
+        component: Leaderboard,
+      }, {
         path: appUrls.localWeather.url,
       }, {
         path: appUrls.markdownPreviewer.url,

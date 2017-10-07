@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { oneOf, node } from 'prop-types';
 import Constants from '../Constants';
 import { setSort } from '../actions';
 import Button from './Button';
@@ -23,9 +24,9 @@ const SortBy = ({
 
 const vals = Constants.SORT.map(d => d.value);
 SortBy.propTypes = {
-  value: PropTypes.oneOf(vals).isRequired,
-  isSelected: PropTypes.oneOf(vals).isRequired,
-  children: PropTypes.node,
+  value: oneOf(vals).isRequired,
+  isSelected: oneOf(vals).isRequired,
+  children: node.isRequired,
 };
 
 SortBy.defaultProps = { children: false };
