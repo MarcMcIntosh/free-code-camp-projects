@@ -2,17 +2,19 @@ import fetch from 'isomorphic-fetch';
 
 const API_KEY = '8098f170d355d6b8099e49533b084a65';
 
-export const REQUEST_WEATHER = 'REQUEST_WEATHER';
-export const RECEIVE_WEATHER = 'RECEIVE_WEATHER';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-export const CLIENT_ERROR = 'CLIENT_ERROR';
-export const CLIENT_COORDS = 'CLIENT_COORDS';
-export const REQUEST_COORDS = 'REQUEST_COORDS';
-export const TOGGLE_TEMP = 'TOGGLE_TEMP';
-export const REQUEST_ICON = 'REQUEST_ICON';
-export const ICON_BLOB = 'ICON_BLOB';
-export const ICON_ERROR = 'ICON_ERROR';
-export const HAS_ICON = 'HAS_ICON';
+const prefix = str => `LOCAL_WEATHER_${str}`;
+
+export const REQUEST_WEATHER = prefix('REQUEST_WEATHER');
+export const RECEIVE_WEATHER = prefix('RECEIVE_WEATHER');
+export const RECEIVE_ERROR = prefix('RECEIVE_ERROR');
+export const CLIENT_ERROR = prefix('CLIENT_ERROR');
+export const CLIENT_COORDS = prefix('CLIENT_COORDS');
+export const REQUEST_COORDS = prefix('REQUEST_COORDS');
+export const TOGGLE_TEMP = prefix('TOGGLE_TEMP');
+export const REQUEST_ICON = prefix('REQUEST_ICON');
+export const ICON_BLOB = prefix('ICON_BLOB');
+export const ICON_ERROR = prefix('ICON_ERROR');
+export const HAS_ICON = prefix('HAS_ICON');
 
 export function requestWeather() {
   return { type: REQUEST_WEATHER };
@@ -111,8 +113,6 @@ export function getIcon(addr) {
     fetch(addr).then((res) => {
       if (res.ok) return res.blob();
       throw new Error(res.statusText);
-    })
-    .then(blob => dispatch(iconBlob(blob)))
-    .catch(error => dispatch(iconError(error)));
+    }).then(blob => dispatch(iconBlob(blob))).catch(error => dispatch(iconError(error)));
   };
 }

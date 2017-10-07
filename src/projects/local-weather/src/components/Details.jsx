@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { string } from 'prop-types';
 import { connect } from 'react-redux';
 
 const Details = ({
@@ -7,8 +8,8 @@ const Details = ({
 }) => (<div className={className}>{description}</div>);
 
 Details.propTypes = {
-  description: PropTypes.string,
-  className: PropTypes.string,
+  description: string.isRequired,
+  className: string.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -1,33 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { string, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { iconHasLoaded } from '../actions';
-
-const Icon = ({
-  className,
-  icon,
-  iconLoaded,
-  description,
-  isLoading,
-  ...props
-}) => {
-  if (isLoading || !icon) return (<img className={`${className} loading`} role="presentation" />);
-  return (<img
-    {...props}
-    className={iconLoaded ? className : `${className} loading`}
-    alt={description}
-    src={`http://openweathermap.org/img/w/${icon}.png`}
-  />);
-};
-
-const { string, func, bool } = PropTypes;
-Icon.propTypes = {
-  className: string,
-  icon: string,
-  description: string,
-  iconLoaded: bool,
-  isLoading: bool,
-  onLoad: func,
-};
 
 const mapStateToProps = (state) => {
   const { icon, description, iconLoaded } = state;
@@ -37,5 +11,31 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(iconHasLoaded()),
 });
+
+const Icon = ({
+  className,
+  icon,
+  iconLoaded,
+  description,
+  isLoading,
+  ...props
+}) => {
+  if (isLoading || !icon) return (<img alt={icon} className={`${className} loading`} role="presentation" />);
+  return (<img
+    {...props}
+    className={iconLoaded ? className : `${className} loading`}
+    alt={description}
+    src={`http://openweathermap.org/img/w/${icon}.png`}
+  />);
+};
+
+Icon.propTypes = {
+  className: string.isRequired,
+  icon: string.isRequired,
+  description: string.isRequired,
+  iconLoaded: bool.isRequired,
+  isLoading: bool.isRequired,
+  onLoad: func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Icon);
