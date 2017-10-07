@@ -8,6 +8,8 @@ import Calculator from '../projects/calculator';
 import DataGlobe from '../projects/data-globe';
 import DungeonCrawler from '../projects/dungeon-crawler';
 import ForceDirected from '../projects/force-directed';
+import GameOfLife from '../projects/game-of-life';
+import HeatMap from '../projects/heat-map';
 
 const routes = [
   {
@@ -42,7 +44,31 @@ const routes = [
       {
         path: appUrls.forceDirected.url,
         component: ForceDirected,
-      },
+      }, {
+        path: appUrls.gameOfLife.url,
+        component: GameOfLife,
+      }, {
+        path: appUrls.heatMap.url,
+        component: HeatMap,
+      }, /* {
+        path: appUrls.localWeather.url,
+      }, {
+        path: appUrls.markdownPreviewer.url,
+      }, {
+        path: appUrls.quoteMachine.url,
+      }, {
+        path: appUrls.recipeBox.url,
+      }, {
+        path: appUrls.scatterplotGraph.url,
+      }, {
+        path: appUrls.simon.url,
+      }, {
+        path: appUrls.ticTacToe.url,
+      }, {
+        path: appUrls.twitch.url,
+      }, {
+        path: appUrls.wikipediaViewer.url,
+      }, */
     ],
   },
 ];
