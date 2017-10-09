@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { node, func } from 'prop-types';
 import Hammer from 'react-hammerjs';
 
 
@@ -30,8 +31,8 @@ class Touch extends Component {
 }
 
 Touch.propTypes = {
-  children: PropTypes.node.isRequired,
-  onTouch: PropTypes.func.isRequired,
+  children: node.isRequired,
+  onTouch: func.isRequired,
 };
 
 export default Touch;

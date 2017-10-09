@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { string, func } from 'prop-types';
 import ReactModal from 'react-modal';
 
 const Message = ({
@@ -18,8 +19,8 @@ const Message = ({
 </ReactModal>);
 
 Message.propTypes = {
-  text: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  text: string.isRequired,
+  onClose: func.isRequired,
 };
 
 export default Message;

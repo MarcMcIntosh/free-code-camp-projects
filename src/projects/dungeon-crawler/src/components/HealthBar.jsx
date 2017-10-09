@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { number } from 'prop-types';
 import Heart from './Heart';
 
 const HealthBar = ({
@@ -18,8 +19,8 @@ const HealthBar = ({
 };
 
 HealthBar.propTypes = {
-  health: PropTypes.number.isRequired,
-  heartValue: PropTypes.number,
+  health: number.isRequired,
+  heartValue: number,
 };
 
 HealthBar.defaultProps = { heartValue: 20 };

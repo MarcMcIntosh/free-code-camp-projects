@@ -1,4 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import { bool, func } from 'prop-types';
 
 class ToggleTourch extends PureComponent {
   constructor() {
@@ -22,8 +23,8 @@ class ToggleTourch extends PureComponent {
 }
 
 ToggleTourch.propTypes = {
-  darkness: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
+  darkness: bool.isRequired,
+  onToggle: func.isRequired,
 };
 
 export default ToggleTourch;

@@ -208,13 +208,13 @@
     }
   }
 
-  &--accent {
+  &--secondary {
     &::-webkit-slider-runnable-track {
-      @include mdc-theme-prop(background-color, accent);
+      @include mdc-theme-prop(background-color, secondary);
     }
 
     &::-webkit-slider-thumb {
-      @include mdc-theme-prop(border-color, accent);
+      @include mdc-theme-prop(border-color, secondary);
 
       @include mdc-theme-dark {
         background-color: darken($mdc-theme-background, 10%);
@@ -222,7 +222,7 @@
     }
 
     &::-moz-range-progress {
-      @include mdc-theme-prop(background-color, accent);
+      @include mdc-theme-prop(background-color, secondary);
     }
 
     &::-moz-range-track {
@@ -234,11 +234,11 @@
     }
 
     &::-moz-range-thumb {
-      @include mdc-theme-prop(background-color, accent);
+      @include mdc-theme-prop(background-color, secondary);
     }
 
     &::-ms-fill-lower {
-      @include mdc-theme-prop(background-color, accent);
+      @include mdc-theme-prop(background-color, secondary);
     }
 
     &::-ms-fill-upper {
@@ -248,20 +248,20 @@
     }
 
     &::-ms-thumb {
-      @include mdc-theme-prop(background-color, accent);
+      @include mdc-theme-prop(background-color, secondary);
     }
 
     &:active {
       &::-webkit-slider-thumb {
-        border-color: rgba($mdc-theme-accent, .6);
+        border-color: rgba($mdc-theme-secondary, .6);
       }
 
       &::-moz-range-thumb {
-        @include mdc-theme-prop(border-color, text-disabled-on-accent);
+        @include mdc-theme-prop(border-color, text-disabled-on-secondary);
       }
 
       &::-ms-thumb {
-        @include mdc-theme-prop(border-color, text-disabled-on-accent);
+        @include mdc-theme-prop(border-color, text-disabled-on-secondary);
       }
     }
 

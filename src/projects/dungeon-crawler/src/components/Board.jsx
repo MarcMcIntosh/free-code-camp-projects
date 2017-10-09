@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { func, object, number, array, bool, string } from 'prop-types';
 import { connect } from 'react-redux';
 import Touch from './Touch';
 import HealthBar from './HealthBar';
@@ -179,7 +180,6 @@ class Board extends Component {
   }
 }
 
-const { func, object, number, array, bool, string } = PropTypes;
 Board.propTypes = {
   entities: object.isRequired,
   game: array.isRequired,

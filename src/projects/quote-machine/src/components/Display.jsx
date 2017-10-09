@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { string, func, bool, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchQuote } from '../actions';
 
@@ -32,22 +33,22 @@ class Display extends Component {
   }
 }
 
-const { string, func, bool, shape } = PropTypes;
 Display.propTypes = {
   className: string,
   classnames: shape({
     quote: string,
     author: string,
   }),
-  author: string,
-  quote: string,
-  fetchQuote: func,
-  error: string,
-  isFetching: bool,
-  done: bool,
+  author: string.isRequired,
+  quote: string.isRequired,
+  fetchQuote: func.isRequired,
+  error: string.isRequired,
+  isFetching: bool.isRequired,
+  done: bool.isRequired,
 };
 
 Display.defaultProps = {
+  className: '',
   classnames: {
     quote: 'quote',
     author: 'author',

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { number } from 'prop-types';
 
 const Heart = ({ size, percent, ...props }) => {
   /* Heart Shape */
@@ -37,10 +38,7 @@ const Heart = ({ size, percent, ...props }) => {
   </svg>);
 };
 
-Heart.propTypes = {
-  size: PropTypes.number,
-  percent: PropTypes.number,
-};
+Heart.propTypes = { size: number, percent: number };
 
 Heart.defaultProps = {
   size: 32,
