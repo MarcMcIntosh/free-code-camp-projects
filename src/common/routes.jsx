@@ -15,7 +15,7 @@ import LocalWeather from '../projects/local-weather';
 import MarkdownPreviewer from '../projects/markdown-previewer';
 import QuoteMachine from '../projects/quote-machine';
 import RecipeBox from '../projects/recipe-box';
-// import ScatterplotGraph from '../projects/scatterplot-graph';
+import ScatterplotGraph from '../projects/scatterplot-graph';
 // import Simon from '../projects/simon';
 // import TicTacToe from '../projects/tic-tac-toe';
 // import Twitch from '../projects/twitch';
@@ -58,9 +58,9 @@ const routes = [
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
         path: appUrls.recipeBox.url, component: RecipeBox,
-      }, /* {
-        path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
+        path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
+      }, /* {
         path: appUrls.simon.url, component: Simon,
       }, {
         path: appUrls.ticTacToe.url, component: TicTacToe,

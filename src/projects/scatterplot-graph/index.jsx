@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import Page from './src/components/Page';
+import App from './src/App';
+import './src/styles';
 
 class Container extends Component {
   constructor(props) {
@@ -9,11 +10,7 @@ class Container extends Component {
     this.store = store;
   }
   render() {
-    return (
-      <Provider store={this.store}>
-        <Page {...this.props} />
-      </Provider>
-    );
+    return (<Provider store={this.store}><App /></Provider>);
   }
 }
 
