@@ -8,7 +8,7 @@ import Calculator from '../projects/calculator';
 import DataGlobe from '../projects/data-globe';
 import DungeonCrawler from '../projects/dungeon-crawler';
 import ForceDirected from '../projects/force-directed';
-// import GameOfLife from '../projects/game-of-life';
+import GameOfLife from '../projects/game-of-life';
 import HeatMap from '../projects/heat-map';
 import Leaderboard from '../projects/leaderboard';
 import LocalWeather from '../projects/local-weather';
@@ -45,9 +45,9 @@ const routes = [
         path: appUrls.dungeonCrawler.url, component: DungeonCrawler,
       }, {
         path: appUrls.forceDirected.url, component: ForceDirected,
-      }, /* {
+      }, {
         path: appUrls.gameOfLife.url, component: GameOfLife,
-      }, */ {
+      }, {
         path: appUrls.heatMap.url, component: HeatMap,
       }, {
         path: appUrls.leaderboard.url, component: Leaderboard,

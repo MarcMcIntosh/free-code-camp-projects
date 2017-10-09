@@ -156,6 +156,13 @@
     "at-rule-blacklist": [
       "extend"
     ],
+    "at-rule-no-unknown": [ true, {
+      "ignoreAtRules": [
+        "extends",
+        "ignores",
+        "include"
+      ]
+    }],
     "property-no-unknown": [
       true,
       {
