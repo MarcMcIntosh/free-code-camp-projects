@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import cyclistData from './data';
 
 export const REQUEST_DATA = 'REQUEST_DATA';
 export const requestData = () => ({ type: REQUEST_DATA });
@@ -15,7 +16,7 @@ export const recieveError = payload => ({
   payload,
 });
 
-export const fetchData = address => (dispatch) => {
+export const fetchData = (address = cyclistData) => (dispatch) => {
   dispatch(requestData());
   return fetch(address).then((res) => {
     if (!res.ok) {
