@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { func, number } from 'prop-types';
 import { connect } from 'react-redux';
 import Button from './Button';
 import {
@@ -44,14 +45,16 @@ const BottomMenu = ({
     <h3 className="subtitle">Delay</h3>
     <input
       type="range"
-      step={100} min={0} max={1000} value={speed}
+      step={100}
+      min={0}
+      max={1000}
+      value={speed}
       onChange={onSetSpeed}
       className="mdc-range-slider mdc-range-slider--primary"
     />
   </div>
 </div>);
 
-const { func, number } = PropTypes;
 BottomMenu.propTypes = {
   onSetSize: func.isRequired,
   width: number.isRequired,

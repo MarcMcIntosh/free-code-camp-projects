@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { func, bool, number } from 'prop-types';
 import { connect } from 'react-redux';
 import Button from './Button';
 
@@ -53,7 +54,6 @@ const TopMenu = ({
   <div className="generation">Generation: {gen}</div>
 </div>);
 
-const { func, bool, number } = PropTypes;
 TopMenu.propTypes = {
   onTogglePlay: func.isRequired,
   onResetGame: func.isRequired,

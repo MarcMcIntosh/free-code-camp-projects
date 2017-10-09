@@ -1,7 +1,8 @@
 /* eslint jsx-a11y/no-static-element-interactions: off */
 /* eslint react/no-array-index-key: off */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { func, number, array, bool } from 'prop-types';
 import { setGame, nextGen, updateGen, toggleSquare } from '../actions';
 // import Table from './Table';
 import Button from './Button';
@@ -72,7 +73,6 @@ class Game extends Component {
   }
 }
 
-const { func, number, array, bool } = PropTypes;
 Game.propTypes = {
   game: array.isRequired,
   running: bool.isRequired,
