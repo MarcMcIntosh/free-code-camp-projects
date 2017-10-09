@@ -5,7 +5,7 @@ const Add = props => (<Button {...props}>playlist_add</Button>);
 
 Add.defaultProps = {
   title: 'Add',
-  className: 'material-icons',
+  className: 'recipe-box__button material-icons',
 };
 
 export default Add;

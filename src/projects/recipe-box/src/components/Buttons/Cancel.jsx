@@ -5,7 +5,7 @@ const Cancel = props => (<Button {...props}>cancel</Button>);
 
 Cancel.defaultProps = {
   title: 'Cancel',
-  className: 'material-icons',
+  className: 'recipe-box__button material-icons',
 };
 
 export default Cancel;

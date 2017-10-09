@@ -1,6 +1,6 @@
-@import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
+/* tylelint-disable selector-no-qualifying-type */
 @import "~@material/typography/mixins";
-@import "icons";
+// @import "icons";
 
 .recipe-box {
   $white: #fff;
@@ -13,8 +13,7 @@
 
   display: flex;
   position: relative;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   align-content: stretch;
   align-items: stretch;
   // justify-content: flex-start;
@@ -84,7 +83,7 @@
     }
   }
 
-  button {
+  &__button {
     &.material-icons {
       padding: 4px 6px;
     }
@@ -113,10 +112,12 @@
     transition: all .25s linear;
     background-color: $white;
 
-    a.material-icons {
-      margin: 6px;
-      color: $gray;
-      cursor: pointer;
+    &__a {
+      &.material-icons {
+        margin: 6px;
+        color: $gray;
+        cursor: pointer;
+      }
 
       &.close {
         float: right;

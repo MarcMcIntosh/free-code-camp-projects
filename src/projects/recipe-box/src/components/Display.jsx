@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { number, bool, array, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { recipeEdit, recipeView, recipeDelete } from '../actions';
 import WelcomeMessage from './WelcomeMessage';
@@ -48,7 +49,6 @@ class Display extends Component {
   }
 }
 
-const { number, bool, array, func } = PropTypes;
 Display.propTypes = {
   active: number.isRequired,
   edit: bool.isRequired,

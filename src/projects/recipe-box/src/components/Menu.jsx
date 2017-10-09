@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { func, bool, array, number } from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { toggleMenu, addNew, recipeView } from '../actions';
@@ -38,7 +39,7 @@ const Menu = ({
 
     {(!isActive) ? false : (<ul className="menu__content">
       <li className="menu__item">
-        <a tabIndex="0" onClick={onAddNew} >
+        <a role="button" tabIndex="0" onClick={onAddNew} >
           <i className="material-icons">playlist_add</i>New Recipe
         </a>
       </li>
@@ -52,14 +53,13 @@ const Menu = ({
         const cn = classNames('menu__item', { 'menu__item--active': (i === recipe) });
 
         return (<li key={k} className={cn}>
-          <a tabIndex="0" onClick={handleClick}>{d.name}</a>
+          <a role="button" tabIndex="0" onClick={handleClick}>{d.name}</a>
         </li>);
       })}
     </ul>)}
   </nav>);
 };
 
-const { func, bool, array, number } = PropTypes;
 Menu.propTypes = {
   isActive: bool.isRequired,
   onToggleMenu: func.isRequired,

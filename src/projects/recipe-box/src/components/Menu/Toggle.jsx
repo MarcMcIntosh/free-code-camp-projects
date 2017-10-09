@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../actions';
 import Button from '../Buttons';
@@ -17,7 +18,7 @@ const Toggle = ({ isActive, ...props }) => (
 );
 
 Toggle.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isActive: bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toggle);

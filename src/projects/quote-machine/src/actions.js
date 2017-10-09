@@ -1,9 +1,11 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_QUOTE = 'REQUEST_QUOTE';
-export const RECEIVE_QUOTE = 'RECEIVE_QUOTE';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-export const TWEET_QUOTE = 'TWEET_QUOTE';
+const prefix = str => `QUOTE_MACHINE_${str}`;
+
+export const REQUEST_QUOTE = prefix('REQUEST_QUOTE');
+export const RECEIVE_QUOTE = prefix('RECEIVE_QUOTE');
+export const RECEIVE_ERROR = prefix('RECEIVE_ERROR');
+export const TWEET_QUOTE = prefix('TWEET_QUOTE');
 
 export function requestQuote() {
   return { type: REQUEST_QUOTE };

@@ -1,5 +1,6 @@
 /* eslint react/no-array-index-key: off */
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { func, string, arrayOf } from 'prop-types';
 
 class Recipe extends Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class Recipe extends Component {
     const { options } = this.state;
     return (<article className="recipe">
       <a
-        className="material-icons close"
+        role="button"
+        className="recipe__a material-icons close"
         tabIndex="0"
         onClick={onClose}
         title="close recipe"
@@ -67,17 +69,25 @@ class Recipe extends Component {
       <footer className="recipe__options">
         {(!options) ? false : (<span>
           <a
-            tabIndex="0" onClick={this.handleEdit} className="material-icons"
+            role="button"
+            tabIndex="0"
+            onClick={this.handleEdit}
+            className="recipe__a material-icons"
             title="edit recipe"
           >mode_edit</a>
           <a
-            tabIndex="0" onClick={this.handleDelete} className="material-icons"
+            role="button"
+            tabIndex="0"
+            onClick={this.handleDelete}
+            className="recipe__a material-icons"
             title="remove recipe"
           >delete_forever</a>
         </span>)}
         <a
+          role="button"
           tabIndex="0"
-          onClick={this.handleOptions} className="material-icons"
+          onClick={this.handleOptions}
+          className="recipe__a material-icons"
           title={(options) ? 'close options' : 'open options'}
         >{(options) ? 'close' : 'settings_applications'}</a>
       </footer>
@@ -85,7 +95,6 @@ class Recipe extends Component {
   }
 }
 
-const { func, string, arrayOf } = PropTypes;
 Recipe.propTypes = {
   onEdit: func.isRequired,
   onDelete: func.isRequired,

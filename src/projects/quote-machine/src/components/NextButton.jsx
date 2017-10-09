@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { func, bool, node } from 'prop-types';
 import { fetchQuote } from '../actions';
 import Button from './Button';
 
@@ -8,10 +9,9 @@ const NextButton = ({
   ...props
 }) => (<Button {...props} >{children}</Button>);
 
-const { func, bool, node } = PropTypes;
 NextButton.propTypes = {
-  onClick: func,
-  disabled: bool,
+  onClick: func.isRequired,
+  disabled: bool.isRequired,
   children: node,
 };
 

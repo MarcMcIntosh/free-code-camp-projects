@@ -1,6 +1,7 @@
 /* eslint react/self-closing-comp: off */
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { string, array, func, number } from 'prop-types';
 import Button, { Add } from '../Buttons';
 import { recipeEdit, recipeAdd } from '../../actions';
 import Ingredient from './Ingredient';
@@ -96,7 +97,7 @@ class RecipeForm extends Component {
     return (<form onSubmit={this.handleSumbit} className={className}>
       <header>
         <h1>Recipe Editor
-          <a tabIndex="0" className="material-icons close" onClick={onCancel} title="Exit">close</a>
+          <a role="button" tabIndex="0" className="material-icons close" onClick={onCancel} title="Exit">close</a>
         </h1>
       </header>
       <section>
@@ -113,12 +114,13 @@ class RecipeForm extends Component {
       <section className="image">
         <label htmlFor="picture">
           Image
-        {(picture) ? (<a
-          tabIndex="0"
-          className="material-icons delete"
-          title="remove picture"
-          onClick={this.deleteImage}
-        >close</a>) : false}
+          {(picture) ? (<a
+            role="button"
+            tabIndex="0"
+            className="material-icons delete"
+            title="remove picture"
+            onClick={this.deleteImage}
+          >close</a>) : false}
         </label>
         <input
           name="picture"
@@ -128,17 +130,11 @@ class RecipeForm extends Component {
           ref={(file) => { this.file = file; }}
           disabled={(picture)}
         />
-        <section className="preview">{(
-          picture.length > 0 && this.state.picture === this.props.picture
-        ) ? (
-          <img alt="preview" src={picture} />
-        ) : (
-          <canvas
-            width="0"
-            height="0"
-            ref={(canvas) => { this.canvas = canvas; }}
-          ></canvas>
-        )}</section>
+        <section className="preview">
+
+          {(picture.length > 0 && this.state.picture === this.props.picture) ? (<img alt="preview" src={picture} />) : (<canvas width="0" height="0" ref={(canvas) => { this.canvas = canvas; }}></canvas>)}
+
+        </section>
       </section>
 
       <section className="ingredients">
@@ -201,7 +197,6 @@ class RecipeForm extends Component {
   }
 }
 
-const { string, array, func, number } = PropTypes;
 RecipeForm.propTypes = {
   name: string,
   ingredients: array,

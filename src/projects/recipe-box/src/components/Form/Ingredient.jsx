@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { bool, func, string } from 'prop-types';
 
 const Ingredient = ({
   editing,
@@ -20,8 +21,8 @@ const Ingredient = ({
   if (editing) {
     return (<li {...props}>
       <span className="controls">
-        <a className="material-icons done" tabIndex="0" onClick={onSave} title="save" >check</a>
-        <a className="material-icons close" tabIndex="0" onClick={onCancel} title="cancel">close</a>
+        <a role="button" className="material-icons done" tabIndex="0" onClick={onSave} title="save" >check</a>
+        <a role="button" className="material-icons close" tabIndex="0" onClick={onCancel} title="cancel">close</a>
       </span>
       <label htmlFor="ingredient">
         Ingredient
@@ -39,12 +40,14 @@ const Ingredient = ({
   return (<li {...props}>
     <span className="controls">
       <a
+        role="button"
         className="material-icons edit"
         tabIndex="0"
         onClick={onEdit}
         title="edit ingredient"
       >mode_edit</a>
       <a
+        role="button"
         className="material-icons delete"
         tabIndex="0"
         onClick={onDelete}
@@ -55,7 +58,6 @@ const Ingredient = ({
   </li>);
 };
 
-const { func, bool, string } = PropTypes;
 Ingredient.propTypes = {
   value: string,
   editing: bool.isRequired,

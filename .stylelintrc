@@ -176,7 +176,7 @@
     "selector-max-id": 0,
     "selector-no-qualifying-type": true,
     "selector-max-type": [
-      0,
+      1,
       {
         "ignoreTypes": [
           "fieldset"

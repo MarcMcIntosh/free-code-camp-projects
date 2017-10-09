@@ -1,34 +1,28 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-// import Recipes from './src/components/Recipes/Main';
 import Menu from './src/components/Menu';
 import Display from './src/components/Display';
 
-class Container extends Component {
+import './src/styles';
+
+class RecipeBox extends Component {
   constructor(props) {
     super(props);
     this.store = store;
   }
   render() {
-    const { children, ...props } = this.props;
     return (
       <Provider store={this.store}>
-        <div {...props}>{children}</div>
+        <div {...this.props}>
+          <Menu />
+          <Display />
+        </div>
       </Provider>
     );
   }
 }
 
-Container.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+RecipeBox.defaultProps = { className: 'recipe-box' };
 
-Container.defaultProps = { className: 'recipe-box' };
-
-export default Container;
-export {
-//  Recipes,
-  Menu,
-  Display,
-};
+export default RecipeBox;

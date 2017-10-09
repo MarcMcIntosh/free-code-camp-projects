@@ -5,7 +5,7 @@ const Confirm = props => (<Button {...props}>check</Button>);
 
 Confirm.defaultProps = {
   title: 'Confirm',
-  className: 'material-icons',
+  className: 'recipe-box__button material-icons',
 };
 
 export default Confirm;

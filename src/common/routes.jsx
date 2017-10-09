@@ -13,9 +13,8 @@ import HeatMap from '../projects/heat-map';
 import Leaderboard from '../projects/leaderboard';
 import LocalWeather from '../projects/local-weather';
 import MarkdownPreviewer from '../projects/markdown-previewer';
-
-// import QuoteMachine from '../projects/quote-machine';
-// import RecipeBox from '../projects/recipe-box';
+import QuoteMachine from '../projects/quote-machine';
+import RecipeBox from '../projects/recipe-box';
 // import ScatterplotGraph from '../projects/scatterplot-graph';
 // import Simon from '../projects/simon';
 // import TicTacToe from '../projects/tic-tac-toe';
@@ -55,11 +54,11 @@ const routes = [
         path: appUrls.localWeather.url, component: LocalWeather,
       }, {
         path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
-      }, /* {
+      }, {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
         path: appUrls.recipeBox.url, component: RecipeBox,
-      }, {
+      }, /* {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
         path: appUrls.simon.url, component: Simon,

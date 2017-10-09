@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { bool, node, func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { tweetQuote } from '../actions';
 import Button from './Button';
@@ -21,11 +22,11 @@ const TwitterButton = ({
 /* Use this method in a action */
 /* http://stackoverflow.com/questions/34676092/redux-how-to-open-a-new-window-after-ajax-complete */
 TwitterButton.propTypes = {
-  disabled: PropTypes.bool,
-  children: PropTypes.node,
-  onClick: PropTypes.func,
-  quote: PropTypes.string,
-  author: PropTypes.string,
+  disabled: bool.isRequired,
+  children: node,
+  onClick: func.isRequired,
+  quote: string.isRequired,
+  author: string.isRequired,
 };
 
 TwitterButton.defaultProps = {

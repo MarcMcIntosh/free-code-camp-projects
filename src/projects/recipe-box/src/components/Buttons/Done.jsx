@@ -8,7 +8,7 @@ const Done = ({
 
 Done.propTypes = { children: PropTypes.node };
 Done.defaultProps = {
-  children: 'done', className: 'material-icons',
+  children: 'done', className: 'recipe-box__button material-icons',
 };
 
 export default Done;
