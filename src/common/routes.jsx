@@ -11,17 +11,17 @@ import ForceDirected from '../projects/force-directed';
 import GameOfLife from '../projects/game-of-life';
 import HeatMap from '../projects/heat-map';
 import Leaderboard from '../projects/leaderboard';
-/*
 import LocalWeather from '../projects/local-weather';
 import MarkdownPreviewer from '../projects/markdown-previewer';
-import QuoteMachine from '../projects/quote-machine';
-import RecipeBox from '../projects/recipe-box';
-import ScatterplotGraph from '../projects/scatterplot-graph';
-import Simon from '../projects/simon';
-import TicTacToe from '../projects/tic-tac-toe';
-import Twitch from '../projects/twitch';
-import WikipediaViewer from '../projects/wikipedia-viewer';
-*/
+
+// import QuoteMachine from '../projects/quote-machine';
+// import RecipeBox from '../projects/recipe-box';
+// import ScatterplotGraph from '../projects/scatterplot-graph';
+// import Simon from '../projects/simon';
+// import TicTacToe from '../projects/tic-tac-toe';
+// import Twitch from '../projects/twitch';
+// import WikipediaViewer from '../projects/wikipedia-viewer';
+
 
 const routes = [
   {
@@ -51,11 +51,11 @@ const routes = [
         path: appUrls.heatMap.url, component: HeatMap,
       }, {
         path: appUrls.leaderboard.url, component: Leaderboard,
-      }, /* {
+      }, {
         path: appUrls.localWeather.url, component: LocalWeather,
       }, {
         path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
-      }, {
+      }, /* {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
         path: appUrls.recipeBox.url, component: RecipeBox,
