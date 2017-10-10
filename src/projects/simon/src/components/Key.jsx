@@ -1,6 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from './Button';
+import { string, number, instanceOf, oneOf, bool, func } from 'prop-types';
 import Constants from '../Constants';
 import { onPlayerInput } from '../actions';
 
@@ -71,14 +71,17 @@ class Key extends Component {
     this.oscillator = null;
   }
   render() {
-    const { color, frequency, tone, turn, playing, className } = this.props;
-    return (<Button
+    const { frequency, tone, turn, className, disabled } = this.props;
+    return (<button
+      type="button"
+      tabIndex="0"
+      title={`${frequency} Hertz Tone`}
       className={(
         (frequency === tone && !turn)
         || this.state.keyHeld
-      ) ? `${className} ${color}--active` : `${className} ${color}`
+      ) ? `${className}--active` : className
       }
-      disabled={playing && !turn}
+      disabled={disabled}
       onMouseDown={this.play}
       onMouseUp={this.stop}
       onMouseOut={this.stop}
@@ -88,18 +91,21 @@ class Key extends Component {
 const { SIN, SQU, SAW, TRI } = Constants.WAVES;
 
 Key.propTypes = {
-  className: PropTypes.string,
-  frequency: PropTypes.number.isRequired,
-  audio: PropTypes.instanceOf(window.AudioContext),
-  aux: PropTypes.instanceOf(window.GainNode),
-  wave: PropTypes.oneOf([SIN, SQU, SAW, TRI]),
-  bpm: PropTypes.number,
-  tone: PropTypes.number,
-  turn: PropTypes.bool,
-  playing: PropTypes.bool,
-  color: PropTypes.string,
-  playerInput: PropTypes.func,
-  ctKey: PropTypes.string,
+  className: string.isRequired,
+  frequency: number.isRequired,
+  audio: instanceOf(window.AudioContext).isRequired,
+  aux: instanceOf(window.GainNode).isRequired,
+  wave: oneOf([SIN, SQU, SAW, TRI]).isRequired,
+  bpm: number.isRequired,
+  tone: number.isRequired,
+  turn: bool.isRequired,
+  playing: bool.isRequired,
+  // color: string.isRequired,
+  playerInput: func.isRequired,
+  disabled: bool,
+  ctKey: string.isRequired,
 };
+
+Key.defaultProps = { disabled: false };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Key);
