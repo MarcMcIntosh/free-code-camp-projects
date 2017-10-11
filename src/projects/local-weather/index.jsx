@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import Display from './src/components/Display';
-import Icon from './src/components/Icon';
-import TempControl from './src/components/TempControl';
-import Details from './src/components/Details';
+import App from './src/LocalWeather';
+import './src/styles';
 
-class Container extends Component {
+class LocalWeather extends Component {
   constructor(props) {
     super(props);
     this.store = store;
   }
   render() {
     return (
-      <Provider store={this.store}>
-        <div {...this.props}>
-          <Display />
-          <Icon />
-          <Details />
-          <TempControl />
-        </div>
-      </Provider>
+      <Provider store={this.store}><App /></Provider>
     );
   }
 }
 
-
-export default Container;
+export default LocalWeather;

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { string, func, bool, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchQuote } from '../actions';
 
-class Display extends Component {
+class Display extends PureComponent {
   componentWillMount() {
     if (!this.props.done) {
       this.props.fetchQuote();

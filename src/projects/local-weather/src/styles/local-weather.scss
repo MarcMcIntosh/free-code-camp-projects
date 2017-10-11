@@ -1,0 +1,16 @@
+@import "@material/card/mdc-card.scss";
+@import "@materail/button/mdc-button.scss";
+
+.local-weather {
+  padding: 6px;
+  text-align: center;
+
+  &__icon {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 16px auto auto;
+  }
+
+  &__buttons { margin: auto; }
+}

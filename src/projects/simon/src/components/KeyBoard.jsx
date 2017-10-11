@@ -99,10 +99,11 @@ class KeyBoard extends Component {
       </div>);
     }
     const { ctKeys, notes, wave, colors, turn, playing } = this.props;
-    return (<div className="simon__keys">{
+    return (<div className="mdc-layout-grid simon__keys">{
       notes.map((d, i) => {
         const k = colors[i];
-        const cn = `key__${k}`;
+        const cn = `mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone simon__key--${k}`;
+
         return (<Key
           disabled={playing && !turn}
           className={cn}

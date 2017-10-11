@@ -1,0 +1,20 @@
+@import "@material/card/mdc-card.scss";
+@import "@materail/button/mdc-button.scss";
+
+.quote-machine {
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+
+    button {
+      // padding: inherit !important;
+      margin: auto;
+      text-align: center;
+    }
+  }
+}
