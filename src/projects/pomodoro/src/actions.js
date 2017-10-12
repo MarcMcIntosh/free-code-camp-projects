@@ -1,34 +1,36 @@
-export const RESET_POMODORO = 'RESET_POMODORO';
-export const START_POMODORO = 'START_POMODORO';
-export const STOP_POMODORO = 'STOP_POMODORO';
+const prefix = str => `POMODORO_CLOCK_${str}`;
+
+export const RESET_POMODORO = prefix('RESET_POMODORO');
+export const START_POMODORO = prefix('START_POMODORO');
+export const STOP_POMODORO = prefix('STOP_POMODORO');
 const resetPomodoro = () => ({ type: RESET_POMODORO });
 const startPomodoro = () => ({ type: START_POMODORO });
 const stopPomodoro = () => ({ type: STOP_POMODORO });
 
-export const SET_SESSION = 'SET_SESSION';
-export const BEGIN_SESSION = 'BEGIN_SESSION';
+export const SET_SESSION = prefix('SET_SESSION');
+export const BEGIN_SESSION = prefix('BEGIN_SESSION');
 const setSession = payload => ({ type: SET_SESSION, payload });
 const beginSession = () => ({ type: BEGIN_SESSION });
 
-export const SET_SHORT_BREAK = 'SET_SHORT_BREAK';
-export const BEGIN_SHORT_BREAK = 'BEGIN_SHORT_BREAK';
+export const SET_SHORT_BREAK = prefix('SET_SHORT_BREAK');
+export const BEGIN_SHORT_BREAK = prefix('BEGIN_SHORT_BREAK');
 export const setShortBreak = payload => ({ type: SET_SHORT_BREAK, payload });
 export const beginShortBreak = () => ({ type: BEGIN_SHORT_BREAK });
 
-export const SET_LONG_BREAK = 'SET_LONG_BREAK';
-export const BEGIN_LONG_BREAK = 'BEGIN_LONG_BREAK';
+export const SET_LONG_BREAK = prefix('SET_LONG_BREAK');
+export const BEGIN_LONG_BREAK = prefix('BEGIN_LONG_BREAK');
 export const setLongBreak = payload => ({ type: SET_LONG_BREAK, payload });
 export const beginLongBreak = () => ({ type: BEGIN_LONG_BREAK });
 
-export const COUNTER_TICK = 'COUNTER_TICK';
+export const COUNTER_TICK = prefix('COUNTER_TICK');
 export const counterTick = payload => ({ type: COUNTER_TICK, payload });
 
-export const SET_MAX_ROUNDS = 'SET_MAX_ROUNDS';
+export const SET_MAX_ROUNDS = prefix('SET_MAX_ROUNDS');
 export const setMaxRounds = payload => ({
   type: SET_MAX_ROUNDS,
   payload,
 });
-export const START_TIMER = 'START_TIMER';
+export const START_TIMER = prefix('START_TIMER');
 const startTimer = payload => ({
   type: START_TIMER, payload,
 });

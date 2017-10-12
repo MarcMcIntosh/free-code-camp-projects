@@ -1,24 +1,6 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { onResetGame, onSelectPlayer } from '../actions';
-import TurnDisplay from './TurnDisplay';
-import WinnerDisplay from './WinnerDisplay';
-import PlayerSelect from './PlayerSelect';
+import React from 'react';
+import { bool, func, oneOf } from 'prop-types';
 import Constants from '../Constants';
-
-
-const mapStateToProps = state => ({
-  init: state.init,
-  done: state.done,
-  winner: state.winner,
-  turn: state.turn,
-  player: state.player,
-});
-
-const mapDispatchToProps = dispatch => ({
-  resetGame: () => dispatch(onResetGame()),
-  selectPlayer: player => dispatch(onSelectPlayer(player)),
-});
 
 const Header = ({
   init,
@@ -28,30 +10,30 @@ const Header = ({
   winner,
   selectPlayer,
   resetGame,
-  ...props
 }) => {
-  if (init) return (<PlayerSelect onClick={selectPlayer} {...props} />);
-
-  return (<div {...props}>{
-    (done) ? (<WinnerDisplay
-      winner={winner}
-      onClick={resetGame}
-    />) : (<TurnDisplay
-      player={player}
-      turn={turn}
-    />)
-  }</div>);
+  if (init) {
+    return (<div className="tic-tac-toe__header"><h2>Select Player</h2>
+      <button type="button" tabIndex="0" value={Constants.PLAYER.O} className="tic-tac-toe__select tic-tac-toe__select--O" onClick={selectPlayer} />
+      <button type="button" tabIndex="0" value={Constants.PLAYER.X} className="tic-tac-toe__select tic-tac-toe__select--X" onClick={selectPlayer} />
+    </div>);
+  } else if (done) {
+    return (<div className="tic-tac-toe__header">
+      <h2>{(winner) ? `${winner} Won` : 'Draw'}</h2>
+      <button type="button" title="Reset" tabIndex="0" className="tic-tac-toe__select tic-tac-toe__select--reset" onClick={resetGame}>Reset</button>
+    </div>);
+  }
+  return (<h2 className="tic-tac-toe__header">{(turn === player) ? 'Player\'s Turn' : 'Computer\'s Turn'}</h2>);
 };
 
 const { _, O, X } = Constants.PLAYER;
 Header.propTypes = {
-  init: PropTypes.bool.isRequired,
-  done: PropTypes.bool.isRequired,
-  turn: PropTypes.oneOf([_, O, X]),
-  player: PropTypes.oneOf([_, O, X]),
-  winner: PropTypes.oneOf([_, O, X]),
-  resetGame: PropTypes.func.isRequired,
-  selectPlayer: PropTypes.func.isRequired,
+  init: bool.isRequired,
+  done: bool.isRequired,
+  turn: oneOf([_, O, X]).isRequired,
+  player: oneOf([_, O, X]).isRequired,
+  winner: oneOf([_, O, X]).isRequired,
+  resetGame: func.isRequired,
+  selectPlayer: func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
