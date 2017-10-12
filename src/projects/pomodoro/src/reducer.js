@@ -15,11 +15,11 @@ import {
 
 const DEFAULT_STATE = {
   time: 0,
-  short_break: 0,
-  long_break: 0,
+  short_break: 5,
+  long_break: 15,
   round: 0,
-  max_rounds: 0,
-  session: 0,
+  max_rounds: 5,
+  session: 25,
   rest: false,
   paused: false,
   running: false,
