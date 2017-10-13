@@ -1,0 +1,18 @@
+@import "@material/card/mdc-card.scss";
+@import "@material/textfield/mdc-textfield.scss";
+@import "@material/button/mdc-button.scss";
+@import "../../../../app/styles/icons.scss";
+
+.wikipedia-viewer {
+  &__search-bar { /* Stuff */ }
+
+  &__input { /* padding: 0px !important; */ }
+
+  &__label { /* bottom: 0 !important; */ }
+
+  &__button {
+    padding: 1px;
+    background-color: none;
+    vertical-align: bottom;
+  }
+}

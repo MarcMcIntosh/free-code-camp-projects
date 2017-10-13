@@ -1,28 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
-import RandomWiki from './src/components/RandomWiki';
-import List from './src/components/List';
-import ListItem from './src/components/ListItem';
-import SearchBar from './src/components/SearchBar';
-import task from './task';
+import App from './src/WikipediaViewer';
 
-class Container extends Component {
+class WikipediaViewer extends Component {
   constructor(props) {
     super(props);
     this.store = store;
   }
   render() {
-    const { children, ...props } = this.props;
-    return (<Provider store={store}>
-      <div {...props}>{children}</div>
-    </Provider>);
+    return (<Provider store={store}><App /></Provider>);
   }
 }
 
-Container.propTypes = {
-  children: PropTypes.node,
-};
 
-export default Container;
-export { RandomWiki, List, ListItem, SearchBar, task };
+export default WikipediaViewer;

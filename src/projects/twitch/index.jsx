@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import UserList from './src/components/UserList';

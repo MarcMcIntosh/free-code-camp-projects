@@ -17,7 +17,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
 
   if (!production && !browser) {
     return [
-      new EnvironmentPlugin(['NODE_ENV']),
+      new EnvironmentPlugin(['NODE_ENV', 'REACT_SPINKIT_NO_STYLES']),
       new DefinePlugin(compileTimeConstantForMinification),
       new BannerPlugin(bannerOptions),
     ];
@@ -37,7 +37,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
   }
   if (production && !browser) {
     return [
-      new EnvironmentPlugin(['NODE_ENV']),
+      new EnvironmentPlugin(['NODE_ENV', 'REACT_SPINKIT_NO_STYLES']),
       new DefinePlugin(compileTimeConstantForMinification),
       new BannerPlugin(bannerOptions),
       new UglifyJsPlugin({ compress }),

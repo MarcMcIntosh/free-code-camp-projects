@@ -1,23 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_WIKIS = 'REQUEST_WIKI';
-export const RECEIVE_WIKIS = 'RECEIVE_WIKIS';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-export const CHANGE_TERM = 'CHANGE_TERM';
-
-export function request() {
-  return { type: REQUEST_WIKIS };
-}
-export function receiveWikis(payload) {
-  return { type: RECEIVE_WIKIS, payload };
-}
-export function receiveError(payload) {
-  return { type: RECEIVE_ERROR, payload };
-}
-export function changeTerm(payload) {
-  return { type: CHANGE_TERM, payload };
-}
-
+const prefix = str => `WIKIPEDIA-VIEWER_${str}`;
 const wikiUrl = str => [
   'https://en.wikipedia.org/w/api.php?format=json',
   'action=query',
@@ -31,6 +14,17 @@ const wikiUrl = str => [
   'exlimit=max',
   `gsrsearch=${str}`,
 ].join('&');
+
+export const REQUEST_WIKIS = prefix('REQUEST_WIKI');
+export const RECEIVE_WIKIS = prefix('RECEIVE_WIKIS');
+export const RECEIVE_ERROR = prefix('RECEIVE_ERROR');
+// export const CHANGE_TERM = prefix('CHANGE_TERM');
+
+export const request = () => ({ type: REQUEST_WIKIS });
+
+export const receiveWikis = payload => ({ type: RECEIVE_WIKIS, payload });
+
+export const receiveError = payload => ({ type: RECEIVE_ERROR, payload });
 
 export function searchWikipedia(term) {
   return dispatch => fetch(

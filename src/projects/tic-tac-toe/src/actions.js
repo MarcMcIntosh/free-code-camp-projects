@@ -3,19 +3,21 @@ import checkWinner from './util/check-winner';
 import isFull from './util/is-full';
 import getOpponent from './util/get-opponent';
 
-export const RESET_GAME = 'RESET_GAME';
+const prefix = str => `TIC-TAC-TOE_${str}`;
+
+export const RESET_GAME = prefix('RESET_GAME');
 const resetGame = () => ({ type: RESET_GAME });
-export const SET_PLAYER = 'SELECT_MARK';
+export const SET_PLAYER = prefix('SELECT_MARK');
 const setPlayer = payload => ({
   type: SET_PLAYER, payload,
 });
 
-export const CHECK_BOARD = 'CHECK_BOARD';
+export const CHECK_BOARD = prefix('CHECK_BOARD');
 const checkBoard = payload => ({
   type: CHECK_BOARD, payload,
 });
 
-export const TAKE_TURN = 'TAKE_TURN';
+export const TAKE_TURN = prefix('TAKE_TURN');
 const takeTurn = (payload) => {
   const { board } = payload;
   const turn = getOpponent(payload.turn);
