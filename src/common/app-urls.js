@@ -89,6 +89,11 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-wikipedia-viewer',
     title: 'Build a Wikipedia Viewer',
   },
+  pomodoro: {
+    url: './pomodoro',
+    title: 'Build a Pomodoro Clock',
+    challenge: 'https://www.freecodecamp.com/challenges/build-a-pomodoro-clock',
+  },
 };
 
 export default apps;

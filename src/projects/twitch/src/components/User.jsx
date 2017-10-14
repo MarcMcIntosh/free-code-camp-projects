@@ -1,41 +1,34 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { string } from 'prop-types';
 
-const User = ({
-  name,
-  logo,
-  game,
-  status,
-  url,
-  className,
-  classnames,
-}) => (<div className={className} >
-  <section className={classnames.header}>
-    <h1 className={classnames.name}>{name}</h1>
-    <h2 className={classnames.game}>{game || 'Off-line'}</h2>
+const User = ({ name, game, error, url, logo, status, message }) => (<div key={name} className="mdc-card twitch-tv__user">
+
+  <section className="mdc-card__horizontal-block">
+
+    <section className="mdc-card__primary">
+      <h1 className="mdc-card__title mdc-card__title--large">{name}</h1>
+      <h2 className="mdc-card__subtitle">{game || error || 'Off-line'}</h2>
+    </section>
+
+    <a href={url} title="View Twitch User" target="_blank" rel="noopener noreferrer">
+      <img src={logo} alt={name} role="presentation" className="mdc-card__media-item" /></a>
   </section>
-  <section className={classnames.status}>
-    {status}
-  </section>
-  <a href={url} target="_blank" rel="noopener noreferrer">
-    <img src={logo} role="presentation" className={classnames.image} />
-  </a>
+
+  <section className="mdc-card__supporting-text">{status || message || 'unavailable'}</section>
 </div>);
 
-const { string, shape } = PropTypes;
 User.propTypes = {
-  name: string,
-  logo: string,
+  name: string.isRequired,
   game: string,
-  url: string,
+  error: string,
+  url: string.isRequired,
+  logo: string.isRequired,
   status: string,
-  className: string,
-  classnames: shape({
-    image: string,
-    game: string,
-    header: string,
-    name: string,
-    status: string,
-  }),
+  message: string,
+};
+
+User.defaultProps = {
+  game: '', error: '', status: '', message: '',
 };
 
 

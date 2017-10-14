@@ -9,7 +9,7 @@ import {
 
 export const DEFAULT_STATE = {
   error: '',
-  users: [],
+  users: {},
   display: 'all',
   USER_NAMES,
   filters: ['all', 'online', 'offline'],
@@ -17,26 +17,22 @@ export const DEFAULT_STATE = {
 
 export default function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-
-    case RECEIVE_ERROR: return {
-      ...state,
-      error: action.payload,
-    };
+    case RECEIVE_ERROR: return { ...state, error: action.payload };
 
     case RECEIVE_USER: {
-      return {
-        ...state,
-        users: [...state.users, action.payload],
+      const name = action.payload.name;
+      const user = Object.assign({}, state.users[name], {
+        [name]: action.payload,
+      });
+      return { ...state, users: { ...state.users, ...user },
       };
     }
     case RECEIVE_STREAM: {
-      const { name, game } = action.payload;
-      const users = state.users.map((d) => {
-        if (d.name === name) {
-          return { ...d, game, streaming: true };
-        } return d;
+      const name = action.payload.name;
+      const user = Object.assign({}, state.users[name], {
+        [name]: action.payload,
       });
-      return { ...state, users };
+      return { ...state, users: { ...state.users, ...user } };
     }
 
     case TOGGLE_FILTER: return { ...state, display: action.payload };
