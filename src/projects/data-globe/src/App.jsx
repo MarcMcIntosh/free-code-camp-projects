@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bool, string, object, func } from 'prop-types';
 import dataGlobe from './data-globe';
 import { fetchMtrData, fetchGeoData } from './actions';
-import cx from './styles';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
 
@@ -55,10 +54,10 @@ class GraphContainer extends Component {
   render() {
     const error = (this.props.error_meteorites && this.props.error_topology) ? 'Failed to fetch data sets' : this.props.error_meteorites || this.props.error_topology;
     const isLoading = (!error || this.props.fetching_topology || this.props.fetching_meteorites);
-    return (<div className={cx('data-globe__container')}>
-      <Loader className={cx('data-globe__loading')} loading={isLoading} />
-      <ErrorMessage className={(cx('data-globe__error'))} onClick={this.fetchData} text={error} />
-      <div className={cx('data-globe__graph')} ref={(c) => { this.root = c; }} />
+    return (<div className="data-globe__container">
+      <Loader className="data-globe__loading" loading={isLoading} />
+      <ErrorMessage className="data-globe__error" onClick={this.fetchData} text={error} />
+      <div className="data-globe__graph" ref={(c) => { this.root = c; }} />
     </div>);
   }
 }
