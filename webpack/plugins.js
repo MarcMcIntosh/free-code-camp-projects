@@ -13,11 +13,15 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 module.exports = ({ production = false, browser = false } = {}) => {
   const bannerOptions = { raw: true, banner: 'require("source-map-support").install();' };
   const compress = { warnings: false };
-  const compileTimeConstantForMinification = { __PRODUCTION__: JSON.stringify(production) };
+
+  /* Probally outbated */
+  const compileTimeConstantForMinification = {
+    __PRODUCTION__: JSON.stringify(production),
+  };
 
   if (!production && !browser) {
     return [
-      new EnvironmentPlugin(['NODE_ENV', 'REACT_SPINKIT_NO_STYLES']),
+      new EnvironmentPlugin(['NODE_ENV']),
       new DefinePlugin(compileTimeConstantForMinification),
       new BannerPlugin(bannerOptions),
     ];
@@ -37,7 +41,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
   }
   if (production && !browser) {
     return [
-      new EnvironmentPlugin(['NODE_ENV', 'REACT_SPINKIT_NO_STYLES']),
+      new EnvironmentPlugin(['NODE_ENV']),
       new DefinePlugin(compileTimeConstantForMinification),
       new BannerPlugin(bannerOptions),
       new UglifyJsPlugin({ compress }),

@@ -14,7 +14,6 @@ export const DEFAULT_STATE = {
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-
     case REQUEST_QUOTE: return {
       ...state,
       error: null,

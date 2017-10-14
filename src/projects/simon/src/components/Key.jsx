@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { string, number, instanceOf, oneOf, bool, func } from 'prop-types';
+import { string, number, oneOf, bool, func, any } from 'prop-types';
 import Constants from '../Constants';
 import { onPlayerInput } from '../actions';
 
@@ -93,8 +93,10 @@ const { SIN, SQU, SAW, TRI } = Constants.WAVES;
 Key.propTypes = {
   className: string.isRequired,
   frequency: number.isRequired,
-  audio: instanceOf(window.AudioContext).isRequired,
-  aux: instanceOf(window.GainNode).isRequired,
+  // audio: instanceOf(window.AudioContext).isRequired,
+  // aux: instanceOf(window.GainNode).isRequired,
+  audio: any.isRequired,
+  aux: any.isRequired,
   wave: oneOf([SIN, SQU, SAW, TRI]).isRequired,
   bpm: number.isRequired,
   tone: number.isRequired,
