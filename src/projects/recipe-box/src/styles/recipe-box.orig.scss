@@ -1,6 +1,9 @@
 /* tylelint-disable selector-no-qualifying-type */
-@import "~@material/typography/mixins";
-// @import "icons";
+@import "@material/typography/mixins";
+@import "@material/list/mdc-list.scss";
+
+@import "../../../../app/styles/icons";
+
 
 .recipe-box {
   $white: #fff;
@@ -24,6 +27,46 @@
   background-color: $background-color;
   // justify-content: flex-start;
 
+  &__menu {
+    // width: $menu-width;
+    flex-basis: auto;
+    height: 100%;
+    margin-right: 12px;
+    transition: all .25s linear;
+    border: solid 1px darken($background-color, 10%);
+    background: $white;
+
+    // @include position(absolute, 0 auto 0 0);
+    // &__header { width: 100%; }
+    // a { cursor: pointer; }
+    &--closed {
+      // width: auto;
+      // transform: translateX(-$menu-width);
+    }
+
+    &--open {
+      min-width: $menu-open-min-width;
+      max-width: $menu-open-max-width;
+      // transform: translateX(0);
+    }
+
+  }
+
+  &__list {
+    composes: mdc-list;
+    composes: mdc-list--avatar-list;
+  }
+
+  &__list-item {
+    composes: mdc-list-item;
+
+    // border-bottom: solid 2px;
+
+    background-color: darken($background-color, 10%);
+
+    &--active { background-color: $background-color; }
+  }
+
   p { @include mdc-typography(body2); }
 
   .content {
@@ -32,55 +75,13 @@
     background: $white;
   }
 
-  .menu {
-    // width: $menu-width;
-    flex-basis: auto;
-    height: 100%;
-    margin-right: 12px;
-    transition: all .25s linear;
-    border: solid 1px darken($background-color, 10%);
-    background: $white;
-    // z-index: 999999;
 
-    // @include position(absolute, 0 auto 0 0);
-    &__header { width: 100%; }
-    a { cursor: pointer; }
-
-    &--closed {
-      // width: auto;
-      // transform: translateX(-$menu-width);
-
-      .menu__control {
-        // right: 0;
-        // float: left;
-        // transform: translateX($menu-width);
-        // transform: translateX(36px);
-      }
-    }
-
-    &--open {
-      /* k */
-      min-width: $menu-open-min-width;
-      max-width: $menu-open-max-width;
-      // transform: translateX(0);
-
-      .menu__control {
-        /* * */
-      }
-    }
 
     &__control {
       /* k */
       float: right;
     }
 
-    &__item {
-      border-bottom: solid 2px darken($background-color, 10%);
-
-      &--active {
-        background-color: darken($background-color, 10%);
-      }
-    }
   }
 
   &__button {

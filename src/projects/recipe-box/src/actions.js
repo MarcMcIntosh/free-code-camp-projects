@@ -1,36 +1,30 @@
+import db from './db';
 
 const prefix = str => `RECIPE_BOX_${str}`;
 
-export const ACKNOWLEDGE_COOKIES = prefix('ACKNOWLEDGE_COOKIES');
-export const acknowledgeCokkies = () => ({
-  type: ACKNOWLEDGE_COOKIES,
-});
-export const RECIPE_ADD = prefix('RECIPE_ADD');
-export const recipes = payload => ({
-  type: RECIPE_ADD, payload,
-});
+export const ADD = prefix('ADD');
+export const REFRESH = prefix('REFRESH');
+export const ERROR = prefix('ERROR');
+export const UPDATE = prefix('UPDATE');
+export const REMOVE = prefix('REMOVE');
+export const EDIT = prefix('EDIT');
 
-export const TOGGLE_MENU = prefix('TOGGLE_MENU');
-export const toggleMenu = () => ({ type: TOGGLE_MENU });
+const refresh = payload => ({ type: REFRESH, payload });
 
-export const ADD_NEW = prefix('ADD_NEW');
-export const addNew = () => ({
-  type: ADD_NEW,
-});
+const error = payload => ({ type: ERROR, payload });
 
-export function recipeAdd(recipe) {
-  return recipes(recipe);
-}
+export const getRecipes = () => dispatch => db.allDocs({
+  startkey: 'recipe:',
+  endkey: 'recipe:\ufff0',
+  include_docs: true,
+  attachments: true,
+}).then(payload => dispatch(refresh(payload.rows))).catch(e => dispatch(error(e)));
 
-export const RECIPE_EDIT = prefix('RECIPE_EDIT');
-export const recipeEdit = payload => ({
-  type: RECIPE_EDIT, payload,
-});
+/* add a dovument to the data base and then to the recipes obj */
+export const add = payload => ({ type: ADD, payload });
 
-export const RECIPE_VIEW = prefix('RECIPE_VIEW');
-export const recipeView = payload => ({
-  type: RECIPE_VIEW, payload,
-});
+/* Update a documet then propergate the change */
+export const update = payload => ({ type: UPDATE, payload });
 
-export const RECIPE_DELETE = prefix('RECIPE_DELETE');
-export const recipeDelete = payload => ({ type: RECIPE_DELETE, payload });
+/* Remove a document */
+export const remove = payload => ({ type: REMOVE, payload });

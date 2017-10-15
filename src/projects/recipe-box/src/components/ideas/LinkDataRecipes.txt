@@ -1,3 +1,0 @@
-http://data.lirmm.fr/ontologies/food#Recipe
-https://www.w3.org/2009/Talks/0615-qbe/
-http://schema.org/Recipe
