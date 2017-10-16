@@ -1,10 +1,10 @@
 import React from 'react';
 // import { func } from 'prop-types';
 import { Field, FieldArray, reduxForm, propTypes } from 'redux-form';
-import { warn, validate } from './validate';
-import renderIngredients from './Ingredients';
-import renderInstructions from './Instructions';
-import renderPicture from './Picture';
+import { warn, validate } from './Form/validate';
+import renderIngredients from './Form/Ingredients';
+import renderInstructions from './Form/Instructions';
+import renderPicture from './Form/Picture';
 
 const RecipeForm = ({ handleSubmit, pristine, reset, submitting }) => (<form onSubmit={handleSubmit}>
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
+import Editor from './Components/Editor';
 import {
   // toggleMenu,
   addNew,
@@ -30,14 +32,21 @@ class RecipeBox extends Component {
     this.state = {};
   }
   render() {
-    const { menu, onToggleMenu, onAddNew, onView, recipes, active } = this.props;
+    const { menu, onToggleMenu, onAddNew, onView, recipes, active, onClick, edit } = this.props;
     return (<div className="recipe-box">
+      {/* Modal */}
+      <Modal isOpen={active}>{active && edit ? <Editor {...recipes[active]} /> : <div>Recipe</div>}</Modal>
       {/* List of recipes */}
-      <ul role="menu" className="recipe-box__menu">{recipes.map((d, i) => {
-        const cn = (active === i) ? 'recipe-box__menu-item recipe-box__menu-item--active' : 'recipe-box__menu-item';
-        return (<li role="menuitem" value={i} className={cn} onClick={onView}>
-          <img alt="" className="recipe-box__menu-item__image" />
-          <span className="recipe-box__menu-item__text" />
+      <ul role="menu" className="recipe-box__menu">{recipes.map((recipe) => {
+        const { _id, name, picture } = recipe;
+        return (<li
+          key={_id}
+          value={_id}
+          role="menuitem"
+          className="recipe-box__menuitem"
+          onClick={onClick}
+          style={picture ? { backgroundImage: `url(${picture})` } : {}}
+        ><span className="recipe-box__title">{name}</span>
         </li>);
       })}
       </ul>

@@ -13,12 +13,7 @@ const refresh = payload => ({ type: REFRESH, payload });
 
 const error = payload => ({ type: ERROR, payload });
 
-export const getRecipes = () => dispatch => db.allDocs({
-  startkey: 'recipe:',
-  endkey: 'recipe:\ufff0',
-  include_docs: true,
-  attachments: true,
-}).then(payload => dispatch(refresh(payload.rows))).catch(e => dispatch(error(e)));
+export const getRecipes = () => dispatch => db.allDocs({ include_docs: true }).then(payload => dispatch(refresh(payload.rows))).catch(e => dispatch(error(e)));
 
 /* add a dovument to the data base and then to the recipes obj */
 export const add = payload => ({ type: ADD, payload });
