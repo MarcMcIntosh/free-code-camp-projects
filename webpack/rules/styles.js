@@ -4,17 +4,18 @@ const sassLoader = ({ production = false, browser = false }) => ({
   test: /\.scss$/,
   exclude: /node_modules/,
   use: ExtractTextPlugin.extract({
-    disable: !production,
     fallback: 'style-loader',
     use: [{
       loader: browser ? 'css-loader' : 'css-loader/locals',
       query: {
         modules: true,
-        sourceMap: true,
+        sourceMap: !production,
         importLoaders: 2,
         localIdentName: '[name]__[local]___[hash:base64:5]',
       },
-    }, 'resolve-url-loader?debug', 'sass-loader?sourceMap'],
+    }, 'postcss-loader?sourceMap',
+    'resolve-url-loader',
+    'sass-loader?sourceMap'],
   }),
 });
 
@@ -22,13 +23,14 @@ const cssLoader = ({ production = false, browser = false }) => ({
   test: /\.css$/,
   exclude: /node_modules/,
   use: ExtractTextPlugin.extract({
-    disable: !production,
     fallback: 'style-loader',
     use: [{
       loader: browser ? 'css-loader' : 'css-loader/locals',
       query: {
+        sourceMap: !production,
         modules: true,
         localIdentName: '[name]__[local]___[hash:base64:5]',
+        importLoaders: 1,
       },
     }, 'postcss-loader', 'resolve-url-loader?debug'],
   }),

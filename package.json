@@ -5,6 +5,7 @@
   "description": "monorepo of free-code-camp projects",
   "main": "index.js",
   "devDependencies": {
+    "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
