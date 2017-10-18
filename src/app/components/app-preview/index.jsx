@@ -1,12 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 import Button from 'material-ui/Button';
-import Actions from './Actions';
-import Card from './Card';
-import Media from './Media';
-import Primary from './Primary';
-import SubTitle from './SubTitle';
-import Title from './Title';
+import './styles.scss';
 
 const Preview = ({
   title,
@@ -14,17 +9,17 @@ const Preview = ({
   about,
   url,
   img,
-}) => (<Card>
-  <Primary>
-    <Title>{title}</Title>
-    <SubTitle><a href={challenge} target="_blank" rel="noopener noreferrer">Spec Sheet</a></SubTitle>
-  </Primary>
-  <Media title={title} src={img} />
-  <Actions>
+}) => (<div className="gallery__card" style={img ? { backgroundImage: `url(${img})` } : {}} >
+  <section className="gallery__header">
+    <h1 className="gallery__title">{title}</h1>
+    <h2 className="gallery__link"><a href={challenge} target="_blank" rel="noopener noreferrer">Spec Sheet</a></h2>
+  </section>
+
+  <section className="gallery__actions">
     <Button href={url}>View</Button>
     <Button href={about}>About</Button>
-  </Actions>
-</Card>);
+  </section>
+</div>);
 
 
 Preview.propTypes = {

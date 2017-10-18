@@ -14,13 +14,14 @@ import Leaderboard from '../projects/leaderboard';
 import LocalWeather from '../projects/local-weather';
 import MarkdownPreviewer from '../projects/markdown-previewer';
 import QuoteMachine from '../projects/quote-machine';
-import RecipeBox from '../projects/recipe-box';
 import ScatterplotGraph from '../projects/scatterplot-graph';
 import Simon from '../projects/simon';
 import TicTacToe from '../projects/tic-tac-toe';
 import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import Pomodoro from '../projects/pomodoro';
+
+// import RecipeBox from '../projects/recipe-box';
 
 const routes = [
   {
@@ -57,8 +58,6 @@ const routes = [
       }, {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
-        path: appUrls.recipeBox.url, component: RecipeBox,
-      }, {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
         path: appUrls.simon.url, component: Simon,
@@ -71,6 +70,9 @@ const routes = [
       }, {
         path: appUrls.pomodoro.url, component: Pomodoro,
       },
+      /* {
+        path: appUrls.recipeBox.url, component: RecipeBox,
+      }, */
     ],
   },
 ];

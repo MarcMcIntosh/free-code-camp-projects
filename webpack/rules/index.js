@@ -7,4 +7,5 @@ module.exports = ({ production = false, browser = false } = {}) => {
   const css = styles({ production, browser });
   const imgs = images();
   return [].concat(js, css, imgs);
+  // return [].concat(js, css);
 };

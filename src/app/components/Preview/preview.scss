@@ -1,3 +1,12 @@
-.card {
-  composes: mdc-card from "@material/card/mdc-card.scss";
+@import "@material/card/mdc-card.scss";
+@import "@material/button/mdc-button.scss";
+
+.preview {
+  &__card {
+    max-width: 345px;
+    height: 12.313rem;
+    max-height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }

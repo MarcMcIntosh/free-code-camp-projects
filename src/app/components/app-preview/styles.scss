@@ -1,24 +1,29 @@
 @import "@material/card/mdc-card.scss";
 
-.card {
-  composes: mdc-card;
-  max-width: 345px;
-}
+.gallery {
+  &__card {
+    composes: mdc-card;
+    composes: mdc-card__media;
+    max-width: 345px;
+    max-height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-.media {
-  composes: mdc-card__media;
-  max-height: 200px;
-}
+  &__actions {
+    composes: mdc-card__actions;
+  }
 
-.actions {
-  composes: mdc-card__actions;
-}
+  &__header {
+    composes: mdc-card__primary;
+  }
 
-.primary {
-  composes: mdc-card__primary;
-}
+  &__title {
+    composes: mdc-card__title;
+    composes: mdc-card__title--large;
+  }
 
-.title {
-  composes: mdc-card__title;
-  composes: mdc-card__title--large;
+  &__link {
+    composes: mdc-card__subtitle;
+  }
 }
