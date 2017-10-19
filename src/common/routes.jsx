@@ -1,10 +1,12 @@
 // import React from 'react';
+/* eslint-disable */
 import { App, About, Gallary } from '../app/pages';
 import TributePage from '../projects/tribute-page';
 import appUrls from './app-urls';
 
-import BarChart from '../projects/bar-chart';
 import Calculator from '../projects/calculator';
+/*
+import BarChart from '../projects/bar-chart';
 import DataGlobe from '../projects/data-globe';
 import DungeonCrawler from '../projects/dungeon-crawler';
 import ForceDirected from '../projects/force-directed';
@@ -20,7 +22,7 @@ import TicTacToe from '../projects/tic-tac-toe';
 import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import Pomodoro from '../projects/pomodoro';
-
+*/
 // import RecipeBox from '../projects/recipe-box';
 
 const routes = [
@@ -34,11 +36,11 @@ const routes = [
       }, {
         path: '/about', component: About,
       }, {
+        path: appUrls.calculator.url, component: Calculator,
+      }, /* {
         path: appUrls.tribute.url, component: TributePage,
       }, {
         path: appUrls.barChart.url, component: BarChart,
-      }, {
-        path: appUrls.calculator.url, component: Calculator,
       }, {
         path: appUrls.dataGlobe.url, component: DataGlobe,
       }, {
@@ -69,7 +71,7 @@ const routes = [
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
       }, {
         path: appUrls.pomodoro.url, component: Pomodoro,
-      },
+      },*/
       /* {
         path: appUrls.recipeBox.url, component: RecipeBox,
       }, */

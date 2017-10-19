@@ -32,8 +32,8 @@ class Display extends Component {
     return undefined;
   }
   render() {
-    return (<div className="calculator__display">
-      <input className="calculator__input" type="text" readOnly="true" value={this.props.display} />
+    return (<div className={this.props.classnames('calculator__display')}>
+      <input className={this.props.classnames('calculator__input')} type="text" readOnly="true" value={this.props.display} />
     </div>);
   }
 }
@@ -41,6 +41,7 @@ class Display extends Component {
 Display.propTypes = {
   display: oneOfType([string, number]).isRequired,
   onKey: func.isRequired,
+  classnames: func.isRequired,
 };
 
 const mapStateToProps = state => ({

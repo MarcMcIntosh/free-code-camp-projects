@@ -34,7 +34,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new NoEmitOnErrorsPlugin(),
       new ExtractTextPlugin({
         filename: '[contenthash].css',
-        // allChunks: true,
+        allChunks: true,
       }),
       // new FaviconsWebpackPlugin('./logo.png'),
     ];

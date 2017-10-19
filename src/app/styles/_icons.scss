@@ -1,5 +1,6 @@
-/* stylelint-disable */
-@font-face {
+@import "material-design-icons/iconfont/material-icons.css";
+
+/* @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
@@ -20,8 +21,7 @@
   direction: ltr;
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
-}
-
+} */
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
