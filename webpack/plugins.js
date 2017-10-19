@@ -19,46 +19,38 @@ module.exports = ({ production = false, browser = false } = {}) => {
     __PRODUCTION__: JSON.stringify(production),
   };
 
+  const defaultPlugins = [
+    new EnvironmentPlugin('NODE_ENV'),
+    new DefinePlugin(compileTimeConstantForMinification),
+    new ExtractTextPlugin({
+      filename: '[contenthash].css',
+      allChunks: true,
+      disable: !production,
+      ignoreOrder: true,
+    }),
+  ];
   if (!production && !browser) {
-    return [
-      new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin(compileTimeConstantForMinification),
+    return defaultPlugins.concat([
       new BannerPlugin(bannerOptions),
-    ];
+    ]);
   }
   if (!production && browser) {
-    return [
-      new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin(compileTimeConstantForMinification),
+    return defaultPlugins.concat([
       new HotModuleReplacementPlugin(),
       new NoEmitOnErrorsPlugin(),
-      new ExtractTextPlugin({
-        filename: '[contenthash].css',
-        allChunks: true,
-      }),
-      // new FaviconsWebpackPlugin('./logo.png'),
-    ];
+    ]);
   }
   if (production && !browser) {
-    return [
-      new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin(compileTimeConstantForMinification),
+    return defaultPlugins.concat([
       new BannerPlugin(bannerOptions),
       new UglifyJsPlugin({ compress }),
-    ];
+    ]);
   }
   if (production && browser) {
-    return [
-      new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin(compileTimeConstantForMinification),
-      new ExtractTextPlugin({
-        filename: '[contenthash].css',
-        allChunks: true,
-      }),
+    return defaultPlugins.concat([
       new UglifyJsPlugin({ compress }),
       new ManifestPlugin({ fileName: 'manifest.json' }),
-      // new FaviconsWebpackPlugin('./logo.png'),
-    ];
+    ]);
   }
-  return [];
+  return defaultPlugins;
 };

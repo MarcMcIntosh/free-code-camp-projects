@@ -1,38 +1,55 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PATHS = require('../paths');
 
-const sassLoader = ({ production = false, browser = false }) => ({
+const localIdentName = '[name]__[local]___[hash:base64:5]';
+
+const sassLoader = ({
+  // production = false,
+  browser = false,
+}) => ({
   test: /\.scss$/,
-  exclude: /node_modules/,
+  // exclude: /node_modules/,
   use: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
+    fallback: browser ? 'style-loader' : '',
     use: [{
       loader: browser ? 'css-loader' : 'css-loader/locals',
       query: {
         modules: true,
-        sourceMap: !production,
-        importLoaders: 2,
-        localIdentName: '[name]__[local]___[hash:base64:5]',
+        sourceMap: true,
+        importLoaders: 3,
+        localIdentName,
       },
     }, 'postcss-loader?sourceMap',
     'resolve-url-loader',
-    'sass-loader?sourceMap'],
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+        includePaths: [PATHS.modules],
+      },
+    }],
   }),
 });
 
-const cssLoader = ({ production = false, browser = false }) => ({
+const cssLoader = ({
+  // production = false,
+  browser = false,
+}) => ({
   test: /\.css$/,
-  exclude: /node_modules/,
+  // exclude: /node_modules/,
   use: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
+    fallback: browser ? 'style-loader' : '',
     use: [{
       loader: browser ? 'css-loader' : 'css-loader/locals',
       query: {
-        sourceMap: !production,
+        sourceMap: true,
         modules: true,
-        localIdentName: '[name]__[local]___[hash:base64:5]',
+        localIdentName,
         importLoaders: 1,
       },
-    }, 'postcss-loader', 'resolve-url-loader?debug'],
+    }, 'postcss-loader?sourceMap',
+    // 'resolve-url-loader?debug',
+    ],
   }),
 });
 
