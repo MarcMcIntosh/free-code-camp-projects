@@ -32,8 +32,8 @@ class Display extends Component {
     return undefined;
   }
   render() {
-    return (<div className={this.props.classnames('calculator__display')}>
-      <input className={this.props.classnames('calculator__input')} type="text" readOnly="true" value={this.props.display} />
+    return (<div className={this.props.classnames('display')}>
+      <input className={this.props.classnames('screen')} type="text" readOnly="true" value={this.props.display} />
     </div>);
   }
 }

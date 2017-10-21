@@ -25,7 +25,8 @@ module.exports = ({ production = false, browser = false } = {}) => {
     new ExtractTextPlugin({
       filename: '[contenthash].css',
       allChunks: true,
-      disable: !production,
+      // disable: !production,
+      disable: !browser,
       ignoreOrder: true,
     }),
   ];

@@ -2,7 +2,7 @@
 import React from 'react';
 import Preview from '../components/Preview';
 import appUrls from '../../common/app-urls';
-import placeholder from 'file-loader!../images/4-3.jpg';
+import placeholder from '../images/4-3.jpg';
 /* import calculator from 'file-loader!../images/calculator.png';
 import localWeather from 'file-loader!../images/local-weather.png';
 import tribute from 'file-loader!../images/tribute.png';

@@ -1,78 +1,82 @@
 .calculator {
-  box-sizing: border-box;
-  background-color: #3d4543;
-  height: 300px;
   width: 250px;
-  border-radius: 10px;
-  padding-top: 24px;
+  height: 300px;
   margin: auto;
+  padding-top: 24px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #3d4543;
+}
 
-  &__display {
-     width: 216px;
-     margin: auto;
-     border: #222 2px solid;
-   }
+.display {
+  width: 216px;
+  margin: auto;
+  border: #222 2px solid;
+}
 
-  &__input {
-    padding: 0px;
-    height: 32px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-    width: 212px;
-    margin: auto;
-    color: black;
-    background-color: #bccd95;
-    text-align: right;
-  }
+.screen {
+  width: 212px;
+  height: 32px;
+  margin: auto;
+  padding: 0;
+  background-color: #bccd95;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: right;
+}
 
-  &__buttons {
-    width: 220px;
-    // margin-top: 10px;
-    padding-top: 12px;
-    margin: auto;
-    text-align: center;
-    // display: flex;
-    // justify-content: space-around;
-    // align-items: center;
-    // align-content: space-around;
-    td { padding: 4px; }
-    button {
-      outline: none;
-      width:40px;
-      height:30px;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-      border-top:2px solid transparent;
-      border-bottom:black 2px solid;
+.buttons {
+  width: 220px;
+  margin: 20px auto;
+  padding-top: 12px;
+  text-align: center;
 
-      &:active {
-        border-top: black 1px solid;
-        border-width: 1px;
-      }
+  button {
+    width: 40px;
+    height: 30px;
+    border: none;
+    border-top: 2px solid transparent;
+    border-bottom: black 2px solid;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
 
-      &.ac, &.ce, &.mod {
-        color:white;
-        background-color:#6f6f6f;
-        font-size:12px;
-      }
-
-      &.divide, &.times, &.minus, &.plus {
-        color:black;
-        background-color:#ff4561;
-      }
-
-      &.number, &.equals, &.point {
-        color: black;
-        background-color: #f0f0f0;
-      }
-
-      &.ans {
-        color: black;
-        font-size: 12px;
-        background-color: #ff8c55;
-      }
+    &:active {
+      border-top: black 1px solid;
+      border-width: 1px;
     }
   }
+}
+
+.cell { padding: 4px; }
+
+.ac,
+.ce,
+.mod {
+  background-color: #6f6f6f;
+  color: white;
+  font-size: 12px;
+}
+
+.divide,
+.times,
+.minus,
+.plus {
+  background-color: #ff4561;
+  color: black;
+}
+
+.number,
+.equals,
+.point {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.ans {
+  background-color: #ff8c55;
+  color: black;
+  font-size: 12px;
 }

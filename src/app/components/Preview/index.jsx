@@ -1,21 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
-import './preview.scss';
+import classnames from 'classnames/bind';
+import styles from './preview.scss';
+
+const cx = classnames.bind(styles);
 
 const Preview = ({
   title,
   challenge,
   url,
   media,
-}) => (<div className="mdc-card__horizontal-block">
-  <div className="mdc-card__primary">
-    <h1 className="mdc-card__title mdc-card__title--large">{title}</h1>
+}) => (<div className={cx('card')}>
+
+  <div className={cx('primary')}>
+    <h1 className={cx('title')}>{title}</h1>
   </div>
-  <img src={media} alt="" className="mdc-card__media-item mdc-card__media-item--3x" />
-  <div className="mdc-card__actions">
-    <Link className="mdc-button mdc-card__action" to={url}>View</Link>
-    <a className="mdc-button mdc-card__action" href={challenge}>About</a>
+
+  <div className={cx('picture')} style={{ backgroundImage: `url(${media})` }} />
+
+  <div className={cx('mdc-card__actions')}>
+    <Link className={cx('mdc-button mdc-card__action')} to={url}>View</Link>
+    <a className={cx('mdc-button mdc-card__action')} href={challenge}>About</a>
   </div>
 </div>);
 

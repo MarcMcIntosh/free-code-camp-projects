@@ -10,3 +10,30 @@
     background-size: cover;
   }
 }
+
+.card {
+  composes: mdc-card from "@material/card/mdc-card.scss";
+  max-width: 21.875rem;
+  margin-bottom: 48px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+}
+
+.picture {
+  composes: mdc-card__media from "@material/card/mdc-card.scss";
+
+  /* 197sp, for 16:9 ratio with 350sp demo card width */
+  height: 12.313rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.primary {
+  composes: mdc-card__primary from "@material/card/mdc-card.scss";
+}
+
+.title {
+  composes: mdc-card__title mdc-card__title--large from "@material/card/mdc-card.scss";
+}
