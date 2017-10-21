@@ -1,30 +1,54 @@
-@import "@material/card/mdc-card.scss";
-@import "@material/button/mdc-button.scss";
+$mdc-card: "@material/card/mdc-card.scss";
+$mdc-button: "@material/button/mdc-button.scss";
 
-.preview {
-  &__card {
-    max-width: 345px;
-    height: 12.313rem;
-    max-height: 200px;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-}
-
-.card {
-  composes: mdc-card from "@material/card/mdc-card.scss";
+.container {
+  min-width: 320px;
   max-width: 21.875rem;
-  margin-bottom: 48px;
+  // margin-bottom: 48px;
+  margin: 24px;
 
   @media (min-width: 768px) {
     margin-bottom: 24px;
   }
 }
 
+.card {
+  composes: mdc-card from $mdc-card;
+  composes: container;
+}
+
+.horizontal-block {
+  composes: mdc-card__horizontal-block from $mdc-card;
+}
+
+.primary {
+  composes: mdc-card__primary from $mdc-card;
+}
+
+.title {
+  composes: mdc-card__title mdc-card__title--large from $mdc-card;
+}
+
+.subtitle {
+  composes: mdc-card__subtitle from $mdc-card;
+}
+
+.media-item {
+  composes: mdc-card__media-item from $mdc-card;
+}
+
+.actions {
+  composes: mdc-card__actions from $mdc-card;
+}
+
+.action {
+  composes: mdc-button mdc-button--compact from $mdc-button;
+  composes: mdc-card__action from $mdc-card;
+}
+
+/*
 .picture {
   composes: mdc-card__media from "@material/card/mdc-card.scss";
-
-  /* 197sp, for 16:9 ratio with 350sp demo card width */
   height: 12.313rem;
   background-repeat: no-repeat;
   background-size: cover;
@@ -37,3 +61,4 @@
 .title {
   composes: mdc-card__title mdc-card__title--large from "@material/card/mdc-card.scss";
 }
+*/

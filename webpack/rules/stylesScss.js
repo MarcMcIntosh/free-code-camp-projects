@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PATHS = require('../paths');
 const localIdentName = require('./localIdentName');
 
-const createLoader = browser => ([
+const createLoader = ({ production, browser }) => ([
   {
     loader: browser ? 'css-loader' : 'css-loader/locals',
     options: {
@@ -12,7 +12,7 @@ const createLoader = browser => ([
       importLoaders: 3,
       localIdentName,
     },
-  }, {
+  }, /* {
     loader: 'postcss-loader',
     options: {
       indent: 'postcss',
@@ -26,6 +26,16 @@ const createLoader = browser => ([
           clearReportedMessages: true,
         }),
       ],
+    },
+  }, */
+  {
+    loader: 'postcss-loader',
+    options: {
+      indent: 'postcss',
+      sourceMap: true, // production && browser,
+      config: {
+        ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} },
+      },
     },
   },
   'resolve-url-loader',
@@ -42,7 +52,7 @@ module.exports = ({
   production = false,
   browser = false,
 } = {}) => {
-  const loaders = createLoader(browser);
+  const loaders = createLoader({ production, browser });
   const client = production ? ExtractTextPlugin.extract({ fallback: 'style-loader', use: loaders }) : [].concat({
     loader: 'style-loader',
     options: { hmr: production },

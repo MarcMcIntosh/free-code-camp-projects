@@ -11,7 +11,8 @@ const createLoaders = browser => ([
       localIdentName,
       importLoaders: 1,
     },
-  }, {
+  },
+  /*{
     loader: 'postcss-loader',
     options: {
       indent: 'postcss',
@@ -26,7 +27,18 @@ const createLoaders = browser => ([
         }),
       ],
     },
+  },*/
+/* precss works prety well */
+{
+  loader: 'postcss-loader',
+  options: {
+    indent: 'postcss',
+    sourceMap: true,
+    config: {
+      ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} },
+    },
   },
+},
   'resolve-url-loader',
 ]);
 

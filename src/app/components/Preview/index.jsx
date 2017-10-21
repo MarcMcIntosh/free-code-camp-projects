@@ -13,15 +13,16 @@ const Preview = ({
   media,
 }) => (<div className={cx('card')}>
 
-  <div className={cx('primary')}>
-    <h1 className={cx('title')}>{title}</h1>
+  <div className={cx('horizontal-block')}>
+    <section className={cx('primary')}>
+      <h1 className={cx('title')}>{title}</h1>
+    </section>
+    <img className={cx('media-item')} src={media} alt="" />
   </div>
 
-  <div className={cx('picture')} style={{ backgroundImage: `url(${media})` }} />
-
-  <div className={cx('mdc-card__actions')}>
-    <Link className={cx('mdc-button mdc-card__action')} to={url}>View</Link>
-    <a className={cx('mdc-button mdc-card__action')} href={challenge}>About</a>
+  <div className={cx('actions')}>
+    <Link className={cx('action')} to={url}>View</Link>
+    <a className={cx('action')} href={challenge}>About</a>
   </div>
 </div>);
 

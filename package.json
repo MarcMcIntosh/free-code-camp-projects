@@ -65,6 +65,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@material/card": "^0.2.10",
+    "@material/typography": "^0.3.0",
     "classnames": "^2.2.5",
     "compression": "^1.7.1",
     "d3-array": "^1.2.1",

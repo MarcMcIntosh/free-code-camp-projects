@@ -4,15 +4,3 @@
 // @import "@material/button/mdc-button.scss";
 // @import "./mdc-range-slider/mdc-range-slider.scss";
 // @import "./icons.scss";
-
-.preview {
-  max-width: 21.875rem;
-  margin: 24px;
-  margin-bottom: 48px;
-}
-
-@media (min-width: 768px) {
-  .preview {
-    margin-bottom: 24px;
-  }
-}
