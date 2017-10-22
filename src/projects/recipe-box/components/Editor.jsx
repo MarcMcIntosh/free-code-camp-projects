@@ -20,11 +20,11 @@ const RecipeForm = ({ handleSubmit, pristine, reset, submitting }, { classnames 
 
   <Field name="instructions" component={renderInstructions} />
 
-  <button type="submit" disabled={submitting}>
+  <button tabIndex="0" className={classnames('recipe-box-button')} type="submit" disabled={submitting}>
     Submit
   </button>
 
-  <button type="button" disabled={pristine || submitting} onClick={reset}>
+  <button classNames={classnames('recipe-box-button')} type="button" disabled={pristine || submitting} onClick={reset}>
     Clear Values
   </button>
 

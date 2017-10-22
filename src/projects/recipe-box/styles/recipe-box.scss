@@ -4,6 +4,7 @@ $mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $mdc-form-field: "@material/form-field/mdc-form-field.scss";
 $mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $mdc-button: "@material/button/mdc-button.scss";
+$mdc-icons: "material-design-icons/iconfont/mdc-icons.css";
 
 /* classnames exported
 .recipe-box
@@ -26,6 +27,26 @@ $mdc-button: "@material/button/mdc-button.scss";
 .recipe-box-form-textfield__label--float-above,
 .recipe-box-form-textfield-helpertext,
 */
+
+.recipe-box-button {
+  composes: mdc-button mdc-button--stroked from $mdc-button;
+
+  /*
+  &--stroked {
+    composes: mdc-button--stroked from $mdc-button;
+  }
+  mdc-button--raised
+  mdc-button--unelevated
+  mdc-button--stroked
+  mdc-button--dense
+  mdc-button--compact
+  */
+
+  &__icon {
+    /// composes: material-icons from $mdc-icons;
+    composes: mdc-button__icon from $mdc-button;
+  }
+}
 
 .recipe-box-menu {
   composes: mdc-grid-list from $mdc-grid-list;

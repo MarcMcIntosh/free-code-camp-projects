@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Editor from './components/Editor';
 import Recipe from './components/Recipe';
+import AddButton from './components/Buttons/AddButton';
 
 import {
   recipeView,
@@ -51,10 +52,12 @@ const RecipeBox = ({
     />)
   }</Modal>
 
-  {/* Add button */}
-  <button onClick={onEdit}>Add one</button>
   {/* List of recipes */}
   <div className={classnames('recipe-box-menu')}>
+
+    {/* Add button */}
+    <AddButton onClick={onEdit} />
+
     <ul role="menu" className={classnames('recipe-box-menu__tiles')}>{
       Object.keys(recipes).map((recipe) => {
         const { _id, name, picture } = recipes[recipe];

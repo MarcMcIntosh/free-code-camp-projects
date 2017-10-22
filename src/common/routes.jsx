@@ -23,7 +23,7 @@ import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import Pomodoro from '../projects/pomodoro';
 */
-// import RecipeBox from '../projects/recipe-box';
+import RecipeBox from '../projects/recipe-box';
 
 const routes = [
   {
@@ -72,9 +72,9 @@ const routes = [
       }, {
         path: appUrls.pomodoro.url, component: Pomodoro,
       },*/
-      /* {
+      {
         path: appUrls.recipeBox.url, component: RecipeBox,
-      }, */
+      },
     ],
   },
 ];
