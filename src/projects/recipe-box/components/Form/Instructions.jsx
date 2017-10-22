@@ -1,11 +1,22 @@
 import React from 'react';
+import { func } from 'prop-types';
+import { propTypes } from 'redux-form';
 
-const renderInstructions = (field, { classnames }) => (<div className={classnames('recipe-box__instructions')}>
+const renderInstructions = ({
+  cx,
+  input,
+  meta: { touched, warning },
+}) => (<div className={cx('recipe-box__instructions')}>
 
-  {field.meta.touched && field.meta.warning && <span className={classnames('recipe-box__error')}>{field.meta.error}</span>}
+  {touched && warning && <span className={cx('recipe-box__error')}>{warning}</span>}
 
-  <textarea className={classnames('recipe-box__textarea')} {...field.input} />
+  <textarea className={cx('recipe-box__textarea')} {...input} />
 
 </div>);
+
+renderInstructions.propTypes = {
+  cx: func.isRequired,
+  ...propTypes,
+};
 
 export default renderInstructions;

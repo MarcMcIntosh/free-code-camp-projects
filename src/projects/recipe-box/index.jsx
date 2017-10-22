@@ -9,12 +9,9 @@ class RecipeBox extends Component {
     super(props);
     this.store = store;
   }
-  getChildContext() {
-    return { classnames };
-  }
   render() {
     return (
-      <Provider store={this.store}><App /></Provider>
+      <Provider store={this.store}><App cx={classnames} /></Provider>
     );
   }
 }

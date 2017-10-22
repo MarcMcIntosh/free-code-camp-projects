@@ -1,90 +1,64 @@
 import React from 'react';
 import { bool, func, string, object } from 'prop-types';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
-import Editor from './components/Editor';
-import Recipe from './components/Recipe';
+
+// import Modal from 'react-modal';
+// import Editor from './components/Editor';
+// import Recipe from './components/Recipe';
 import AddButton from './components/Buttons/AddButton';
+import Menu from './components/Menu';
 
 import {
-  recipeView,
-  recipeDelete,
+  // createRecipe,
+  readRecipe,
+  updateRecipe,
+  deleteRecipe,
   toggleEdit,
 } from './actions';
 
+/* <Modal isOpen={active || edit}>{(edit) ? (<Editor cx={cx} initialValues={active ? recipes[active] : {}} onSubmit={onSubmit} />) : (<Recipe cx={cx} name={recipes[active].name} picture={recipes[active].picture} ingredients={recipes[active].ingredients} onEdit={onEdit} onDelete={onDelete} />)}</Modal> */
 
-const mapStateToProps = state => ({
-  recipes: state.recipes,
-  active: state.active,
-  edit: state.edit,
+
+const mapStateToProps = ({ recipeBox }) => ({
+  recipes: recipeBox.recipes,
+  active: recipeBox.active,
+  edit: recipeBox.edit,
 });
 
 const mapDispatchToProps = dispatch => ({
-  // onToggleMenu: () => dispatch(toggleMenu()),
-  onView: event => dispatch(recipeView(event.target.value)),
-  // onEdit: values => dispatch(recipeEdit(values)),
+  onRead: event => dispatch(readRecipe(event.target.value)),
   onEdit: () => dispatch(toggleEdit()),
-  onDelete: event => dispatch(recipeDelete(event.target.value)),
+  onDelete: event => dispatch(deleteRecipe(event.target.value)),
+  onSubmit: values => dispatch(updateRecipe(values)),
 });
 
 const RecipeBox = ({
-  onView,
   recipes,
   active,
   edit,
+  cx,
   onEdit,
+  onRead,
   onDelete,
   onSubmit,
-}, {
-  classnames,
-}) => (<div className={classnames('recipe-box')}>
-  {/* Modal */}
-  <Modal isOpen={active || edit}>{
-    (edit) ? (<Editor
-      initialValues={active ? recipes[active] : {}}
-      onSubmit={onSubmit}
-    />) : (<Recipe
-      name={recipes[active].name}
-      picture={recipes[active].picture}
-      ingredients={recipes[active].ingredients}
-      onEdit={onEdit}
-      onDelete={onDelete}
-    />)
-  }</Modal>
-
+}) => (<div className={cx('recipe-box')}>
+  <AddButton cx={cx} onClick={onEdit} />
+  <button onClick={onDelete}>remove</button>
+  {/* add some header here */}
+  
   {/* List of recipes */}
-  <div className={classnames('recipe-box-menu')}>
-
-    {/* Add button */}
-    <AddButton onClick={onEdit} />
-
-    <ul role="menu" className={classnames('recipe-box-menu__tiles')}>{
-      Object.keys(recipes).map((recipe) => {
-        const { _id, name, picture } = recipes[recipe];
-        return (<li key={_id} value={_id} role="menuitem" className={classnames('recipe-box-tile')} onClick={onView}>
-          <div className={classnames('recipe-box-tile__primary')}>
-            <img className={classnames('recipe-box-tile__primary-content')} src={picture} alt="" />
-          </div>
-
-          <span className={classnames('recipe-box-tile__secondary')}>
-            <span className={classnames('recipe-box-tile__title')}>
-              {name}
-            </span>
-          </span>
-        </li>);
-      })
-    }</ul>
-  </div>
+  <Menu recipes={recipes} onClick={onRead} cx={cx} />
 </div>);
 
 RecipeBox.propTypes = {
-  onSubmit: func.isRequired,
-  onView: func.isRequired,
-  onEdit: func.isRequired,
-  onDelete: func.isRequired,
   recipes: object.isRequired,
   active: string.isRequired,
   edit: bool.isRequired,
+  cx: func.isRequired,
+  onSubmit: func.isRequired,
+  onEdit: func.isRequired,
+  onDelete: func.isRequired,
+  onRead: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeBox);

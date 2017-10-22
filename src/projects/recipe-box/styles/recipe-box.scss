@@ -1,10 +1,10 @@
 $mdc-grid-list: "@material/list/mdc-list.scss";
-$mcd-card: "@material/card/mdc-card.scss";
+$mdc-card: "@material/card/mdc-card.scss";
 $mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $mdc-form-field: "@material/form-field/mdc-form-field.scss";
 $mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $mdc-button: "@material/button/mdc-button.scss";
-$mdc-icons: "material-design-icons/iconfont/mdc-icons.css";
+$mdc-icons: "material-design-icons/iconfont/material-icons.css";
 
 /* classnames exported
 .recipe-box
@@ -29,7 +29,7 @@ $mdc-icons: "material-design-icons/iconfont/mdc-icons.css";
 */
 
 .recipe-box-button {
-  composes: mdc-button mdc-button--stroked from $mdc-button;
+  composes: mdc-button mdc-button--compact from $mdc-button;
 
   /*
   &--stroked {
@@ -43,7 +43,7 @@ $mdc-icons: "material-design-icons/iconfont/mdc-icons.css";
   */
 
   &__icon {
-    /// composes: material-icons from $mdc-icons;
+    composes: material-icons from $mdc-icons;
     composes: mdc-button__icon from $mdc-button;
   }
 }
@@ -68,7 +68,7 @@ $mdc-icons: "material-design-icons/iconfont/mdc-icons.css";
   }
 
   &__secondary {
-    composes: mdc-grid-tile__secondary form $mdc-grid-list;
+    composes: mdc-grid-tile__secondary from $mdc-grid-list;
   }
 
   &__title {

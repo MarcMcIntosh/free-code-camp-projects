@@ -5,7 +5,7 @@ module.exports = ({
   return [{
     test: /\.(gif|svg|woff(2)?|ttf|eot)$/,
     loader: 'url-loader',
-    options: { limit, name },
+    options: { limit, name, emitFile: browser },
   }, {
     test: /\.(png|jpg|jpeg)$/,
     loader: 'file-loader',
