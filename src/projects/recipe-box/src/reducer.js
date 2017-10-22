@@ -1,29 +1,13 @@
-import {
-  ADD,
-  EDIT,
-  ERROR,
-  REFRESH,
-  REMOVE,
-  UPDATE,
-} from './actions';
+import { SET_VIEW, TOGGLE_EDIT, REFRESH, ERROR } from './actions';
 
-
-const DEFAULT_STATE = {
-  active: -1,
-  recipes: {},
-  edit: '',
-};
+const DEFAULT_STATE = { active: '', recipes: {}, edit: false, error: '' };
 
 function reducer(state = DEFAULT_STATE, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case REFRESH:
-    case ADD:
-    case EDIT:
-    case ERROR:
-    case REMOVE:
-    case UPDATE: return { ...state, ...payload };
+  switch (action.type) {
+    case REFRESH: return { ...state, recipes: action.payload };
+    case SET_VIEW: return { ...state, active: action.payload };
+    case TOGGLE_EDIT: return { ...state, edit: !state.edit };
+    case ERROR: return { ...state, error: action.payload };
     default: return state;
   }
 }

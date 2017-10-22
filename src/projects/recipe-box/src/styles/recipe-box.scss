@@ -1,27 +1,175 @@
-/* tylelint-disable selector-no-qualifying-type */
-@import "@material/list/mdc-list.scss";
+$mdc-grid-list: "@material/list/mdc-list.scss";
+$mcd-card: "@material/card/mdc-card.scss";
+$mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
+$mdc-form-field: "@material/form-field/mdc-form-field.scss";
+$mdc-textfield: "@material/textfield/mdc-textfield.scss";
+$mdc-button: "@material/button/mdc-button.scss";
 
-@import "../../../../app/styles/icons";
+/* classnames exported
+.recipe-box
+.recipe-box-menu
+.recipe-box-menu__tiles
+.recipe-box-tile
+.recipe-box-tile__primary
+.recipe-box-tile__primary-content
+.recipe-box-tile__secondary
+.recipe-box-tile__title
+.recipe-box-form
+.recipe-box-form-field
+.recipe-box-form-textfield
+.recipe-box-form-textfield--upgraded,
+.recipe-box-form-textfield--invalid,
+.recipe-box-form-textfield__input,
+.recipe-box-form-textfield__bottom-line,
+.recipe-box-form-textfield__label,
+.recipe-box-form-textfield__label--shake,
+.recipe-box-form-textfield__label--float-above,
+.recipe-box-form-textfield-helpertext,
+*/
 
-.recipe-box {
-  &__menu {
-    composes: mdc-list;
-    composes: mdc-list--avatar-list;
+.recipe-box-menu {
+  composes: mdc-grid-list from $mdc-grid-list;
 
-    &-item {
-      composes: mdc-list-item;
+  &__tiles {
+    composes: mdc-grid-list__tiles from $mdc-grid-list;
+  }
+}
 
-      &--active {
-        background-color: darken($background-color, 10%);
+.recipe-box-tile {
+  composes: mdc-grid-tile from $mdc-grid-list;
+
+  &__primary {
+    composes: mdc-grid-tile__primary from $mdc-grid-list;
+
+    &-content {
+      composes: mdc-grid-tile__primary-content from $mdc-grid-list;
+    }
+  }
+
+  &__secondary {
+    composes: mdc-grid-tile__secondary form $mdc-grid-list;
+  }
+
+  &__title {
+    composes: mdc-grid-tile__title from $mdc-grid-list;
+  }
+}
+
+.recipe-box-form {
+  /* stuff */
+  &-field {
+    composes: mdc-form-field mdc-form-field--align-end from $mdc-form-field;
+  }
+
+  &-textfield {
+    composes: mdc-textfield from $mdc-textfield;
+
+    &-helptext {
+      composes: mdc-textfield-helptext mdc-textfield-helptext--validation-msg from $mdc-textfield;
+    }
+
+    &--upgraded {
+      composes: mdc-textfield--upgraded from $mdc-textfield;
+    }
+
+    &--invalid {
+      composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+
+    &__input {
+      composes: mdc-textfield__input from $mdc-textfield;
+    }
+
+    &__bottom-line {
+      composes: mdc-textfield__bottom-line from $mdc-textfield;
+    }
+
+    &__label {
+      composes: mdc-textfield__label from $mdc-textfield;
+
+      &--shake {
+        composes: mdc-textfield__label--shake from $mdc-textfield;
       }
 
-      &__image {
-        composes: mdc-list-item__start-detail;
-      }
-
-      &__text {
-        composes: mdc-list-item__text;
+      &--float-above {
+        composes: mdc-textfield__label--float-above from $mdc-textfield;
       }
     }
   }
 }
+
+.recipe-box-recipe {
+  composes: mdc-card from $mdc-card;
+
+  &__content {
+    composes: mdc-card__horizontal-block from $mdc-card;
+  }
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
+
+  &__media-item {
+    composes: mdc-card__media-item from $mdc-card;
+  }
+
+  &__instructions {
+    /* add list */
+    composes: mdc-card__supporting-text from $mdc-card;
+  }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
+  &__action {
+    composes: mdc-button mdc-button--compact from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+}
+
+/*
+  &__form,
+  &__picture,
+  &__title,
+  &__input,
+  &__instrcutions,
+  &__error,
+  &__textarea,
+  &__file-input,
+  &__ingredients,
+  &__button,
+  &__submit,
+  &__close,
+  &__reset {}
+} */
+
+/*
+.menu {
+  composes: mdc-list mdc-list--avatar-list from $mdc-list;
+}
+
+.menu-item {
+  composes: mdc-list-item from $mdc-list;
+
+  &--active {
+    background-color: darken($background-color, 10%);
+  }
+
+  &__start-detail {
+    composes: mdc-list-item__start-detail;
+  }
+
+  &__text {
+    composes: mdc-list-item__text;
+  }
+}
+*/

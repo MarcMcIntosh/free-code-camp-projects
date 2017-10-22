@@ -1,12 +1,13 @@
 import React from 'react';
 
 const renderPicture = field => (<div
-  className="recipe-box__picture"
+  style={field.input.value ? {
+    backgroundImage: `url(${field.input.value})`,
+  } : {}}
 >
-  <img className="recipe-box__picture--preview" src={field.input.value} alt="" />
+  {/* <img className={classnames('recipe-box__image-preview')} src={field.input.value} alt="" /> */}
 
   <input
-    className="recipe-box__picture--input"
     type="file"
     accept="image/*"
     onChange={(event) => {

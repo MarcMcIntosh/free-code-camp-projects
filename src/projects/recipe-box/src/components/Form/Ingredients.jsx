@@ -1,13 +1,15 @@
 import React from 'react';
 import { Field, propTypes } from 'redux-form';
+import renderField from './InputField';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (<div className="recipe-box__ingredient">
+/* const renderField = ({ input, label, type, meta: { touched, error } }) => (<div className="recipe-box__ingredient">
   <label htmlFor={input.name}>{label}</label>
   <div>
     <input {...input} type={type} placeholder={label} />
     {touched && error && <span>{error}</span>}
   </div>
 </div>);
+*/
 
 const renderIngredients = ({ fields, meta: { error } }) => (<ul className="recipe-box__ingredients">
   <li>
@@ -22,7 +24,6 @@ const renderIngredients = ({ fields, meta: { error } }) => (<ul className="recip
   {error && <li className="error">{error}</li>}
 </ul>);
 
-renderField.propTypes = { ...propTypes };
 renderIngredients.propTypes = { ...propTypes };
 
 export default renderIngredients;

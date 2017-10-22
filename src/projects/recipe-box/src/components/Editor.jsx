@@ -5,10 +5,14 @@ import { warn, validate } from './Form/validate';
 import renderIngredients from './Form/Ingredients';
 import renderInstructions from './Form/Instructions';
 import renderPicture from './Form/Picture';
+import InputRequired from './Form/InputRequired';
 
-const RecipeForm = ({ handleSubmit, pristine, reset, submitting }) => (<form onSubmit={handleSubmit}>
+const RecipeForm = ({ handleSubmit, pristine, reset, submitting }, { classnames }) => (<form
+  className={classnames('recipe-box-form')}
+  onSubmit={handleSubmit}
+>
 
-  <Field name="name" component="input" type="text" />
+  <Field label="Name of Recipe" name="name" component={InputRequired} type="text" />
 
   <Field name="picture" type="text" component={renderPicture} />
 
