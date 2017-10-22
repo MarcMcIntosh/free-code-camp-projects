@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import store from './src/store';
-import App from './src/RecipeBox';
-import classnames from './src/styles';
+import store from './store';
+import App from './RecipeBox';
+import classnames from './styles';
 
 class RecipeBox extends Component {
   constructor(props) {
