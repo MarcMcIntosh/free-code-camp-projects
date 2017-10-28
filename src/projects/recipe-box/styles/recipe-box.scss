@@ -1,9 +1,114 @@
 $mdc-typography: "@material/typography/mdc-typography";
-$mdc-theme: "@material/theme/mdc-theme";
 $mdc-card: "@material/card/mdc-card";
 $mdc-button: "@material/button/mdc-button";
 $mdc-toolbar: "@material/toolbar/mdc-toolbar";
+$mdc-elevation: "@material/elevation/mdc-elevation.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
+$content_background: rgba(0, 0, 0, .4);
+
+.recipe-box-modal {
+  &__content {
+    composes: mdc-card from $mdc-card;
+    composes: mdc-elevation--z6 from $mdc-elevation;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    bottom: 40px;
+    left: 40px;
+    // background-color: papayawhip;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $content_background;
+  }
+
+  &__recipe {
+    composes: mdc-card__horizontal-block from $mdc-card;
+  }
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title from $mdc-card;
+    composes: mdc-typography--headline from $mdc-typography;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
+    composes: mdc-typography--subheading2 from $mdc-typography;
+  }
+
+  &__image {
+    composes: mdc-card__media-item mdc-card__media-item--2x from $mdc-card;
+  }
+
+  &__ingredients {
+    composes: mdc-list from $mdc-list;
+  }
+
+  &__ingredient {
+    composes: mdc-list-item from $mdc-list;
+  }
+
+  &__preparation { composes: mdc-card__supporting-text from $mdc-card; }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
+  &__action {
+    composes: mdc-button from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+}
+
+.recipes { margin: 8px; }
+
+.recipe {
+  composes: mdc-card mdc-card--theme-dark from $mdc-card;
+  max-width: 21.875rem;
+  height: 21.875rem;
+  margin-bottom: 48px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+
+  background: #ddd;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__content {
+    composes: mdc-card__primary from $mdc-card;
+    background: $content_background;
+  }
+
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+  }
+
+  &__desc {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+    padding: 0 0 8px;
+    background: $content_background;
+  }
+
+  &__action {
+    composes: mdc-button mdc-button--theme-dark from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+}
 
 .recipe-box-header {
   composes: mdc-toolbar from $mdc-toolbar;

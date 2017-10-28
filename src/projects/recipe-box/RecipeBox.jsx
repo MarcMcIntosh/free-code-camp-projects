@@ -4,6 +4,9 @@ import { func, bool, number, array } from 'prop-types';
 import ReactModal from 'react-modal';
 import Header from './components/Header';
 import RecipeForm from './components/form';
+import Menu from './components/menu';
+import Recipe from './components/recipe';
+
 import {
   createRecipe,
   updateRecipe,
@@ -19,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   onCreate: payload => dispatch(createRecipe(payload)),
   onUpdate: payload => dispatch(updateRecipe(payload)),
   onRead: event => dispatch(readRecipe(+event.target.value)),
-  onDelete: event => dispatch(deleteRecipe(+event.target.value)),
+  onDelete: n => dispatch(deleteRecipe(+n)),
 });
 
 const RecipeBox = ({
@@ -28,22 +31,20 @@ const RecipeBox = ({
   onCreate,
   recipes,
   onUpdate,
+  onRead,
+  onDelete,
 }, {
   classnames,
 }) => (<div className={classnames('recipe-box')}>
 
   <Header onClick={() => onCreate(true)} />
 
-  <main className="bpc__container">
-    {/* <CakeList
-      cakes={this.props.cakes}
-      onEdit={this.props.onEditCake}
-      onRemove={this.props.onRemoveCake}
-    /> */}
-  </main>
+  <Menu className={classnames('recipes')} recipes={recipes} onClick={onRead} />
 
   <ReactModal
     isOpen={editting || reading >= 0}
+    className={classnames('recipe-box-modal__content')}
+    overlayClassName={classnames('recipe-box-modal__overlay')}
     onRequestClose={() => onCreate(false)}
     contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
   >
@@ -51,14 +52,20 @@ const RecipeBox = ({
       initialValues={recipes[reading]}
       onSubmit={values => onUpdate({ index: reading, values })}
       onCancel={() => onCreate(false)}
-    />) : (<div>Recipe content goes here</div>)}
+    />) : (<Recipe
+      {...recipes[reading]}
+      onEdit={() => onCreate(true)}
+      onDelete={() => onDelete(reading)}
+    />)}
 
   </ReactModal>
 </div>);
 
 RecipeBox.propTypes = {
   onCreate: func.isRequired,
+  onRead: func.isRequired,
   onUpdate: func.isRequired,
+  onDelete: func.isRequired,
   editting: bool.isRequired,
   reading: number.isRequired,
   recipes: array.isRequired,
