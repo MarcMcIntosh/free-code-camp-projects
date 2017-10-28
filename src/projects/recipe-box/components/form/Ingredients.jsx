@@ -1,24 +1,30 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { any, bool, string, shape, func, number } from 'prop-types';
+import renderIngredient from './renderIngredient';
 
 const Ingredients = ({
   fields,
   meta: { error },
-}) => (<ul>
-  <li>
-    <button type="button" onClick={() => fields.push()}>Add Ingredient</button>
-  </li>
-  {fields.map((ingredient, index) => {
-    const k = `ingredient:${index}`;
-    return (<li key={k}>
-      <button type="button" title="Remove ingredient" onClick={() => fields.remove(index)} />
+}, {
+  classnames,
+}) => (<div>
+  <section>
+    <h4>Ingredients</h4><button
+      className={classnames('recipe-box-form__button--icon')}
+      title="Add Ingredient"
+      type="button"
+      tabIndex="0"
+      onClick={() => fields.push()}
+    >playlist_add</button>
+  </section>
 
-      <Field name={ingredient} type="text" component="input" />
-    </li>);
+  {fields.map((ingredient, index) => {
+    const k = `ingredients[${index}]`;
+    return (<Field key={k} name={k} type="text" component={renderIngredient} onClick={() => fields.remove(index)} />);
   })}
-  {error && <li className="error">{error}</li>}
-</ul>);
+  {error && <span className="error">{error}</span>}
+</div>);
 
 Ingredients.propTypes = {
   fields: shape({
@@ -52,5 +58,8 @@ Ingredients.propTypes = {
   }).isRequired,
 };
 
+Ingredients.contextTypes = {
+  classnames: func.isRequired,
+};
 
 export default Ingredients;

@@ -6,7 +6,68 @@ $mdc-toolbar: "@material/toolbar/mdc-toolbar.scss";
 $mdc-list: "@material/list/mdc-list.scss";
 $mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
+$mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $content_background: rgba(0, 0, 0, .4);
+
+.recipe-box-form {
+  &__button {
+    composes: mdc-button mdc-button--raised from $mdc-button;
+
+    &--icon {
+      composes: material-icons from $material-design-icons;
+      composes: mdc-button mdc-button__icon from $mdc-button;
+      // margin: 0;
+      //padding: 0;
+      // border: none;
+      // outline: none;
+      // background: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    composes: material-icons from $material-design-icons;
+    composes: mdc-textfield__icon from $mdc-textfield;
+    cursor: pointer;
+  }
+
+  &__ingredient {
+    composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
+
+    &--upgraded {
+      composes: mdc-textfield--upgraded from $mdc-textfield;
+    }
+
+    &--invalid {
+      composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+  }
+
+  &__line {
+    composes: mdc-textfield__bottom-line from $mdc-textfield;
+  }
+
+  &__help {
+    composes: mdc-textfield-helptext from $mdc-textfield;
+  }
+
+  &__textfield {
+    composes: mdc-textfield mdc-textfield--box from $mdc-textfield;
+
+    &--upgraded {
+      composes: mdc-textfield--upgraded from $mdc-textfield;
+    }
+
+    &--invalid {
+      composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+  }
+
+  &__input {
+    composes: mdc-textfield__input from $mdc-textfield;
+  }
+}
 
 .recipe-box-modal {
   &__recipe {

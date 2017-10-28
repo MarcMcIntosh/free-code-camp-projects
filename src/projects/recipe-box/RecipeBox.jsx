@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { func, bool, number, array } from 'prop-types';
 import ReactModal from 'react-modal';
-import Header from './components/Header';
 import RecipeForm from './components/form';
 import Menu from './components/menu';
 // import Recipe from './components/recipe';
@@ -37,9 +36,7 @@ const RecipeBox = ({
   classnames,
 }) => (<div className={classnames('recipe-box')}>
 
-  <Header onClick={() => onCreate(true)} />
-
-  <Menu recipes={recipes} onClick={onRead} />
+  <Menu recipes={recipes} onRead={onRead} onCreate={() => onCreate(true)} />
 
   <ReactModal
     isOpen={editting || reading >= 0}

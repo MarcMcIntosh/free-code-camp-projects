@@ -20,23 +20,20 @@ const RecipeForm = ({
   classnames,
 }) => (<form onSubmit={handleSubmit} className={classnames('recipe-box-form')}>
 
-  <label htmlFor="title">Recipe</label>
-  <Field name="title" type="text" component="input" placeholder="Name for recipe" />
+  <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
 
-  <label htmlFor="desc">Description</label>
-  <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" />
+  <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
 
   <label htmlFor="ingredients">Ingredients</label>
   <FieldArray name="ingredients" component={Ingredients} />
 
-  <label htmlFor="preparation">Instructions</label>
-  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" />
+  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
 
-  <button type="submit" disabled={pristine || submitting}>
+  <button tabIndex="0" className={classnames('recipe-box-form__button')} type="submit" disabled={pristine || submitting}>
     Submit
   </button>
 
-  <button type="button" disabled={pristine || submitting} onClick={reset}>
+  <button tabIndex="0" className={classnames('recipe-box-form__button')} disabled={pristine || submitting} onClick={reset}>
     Clear Values
   </button>
 </form>);
