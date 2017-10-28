@@ -1,6 +1,7 @@
 node_modules
 .env
 .tmp
+dist
 lerna-debug.log
 notes.txt
 backup
