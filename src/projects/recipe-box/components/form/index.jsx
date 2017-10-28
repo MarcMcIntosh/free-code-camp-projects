@@ -30,7 +30,7 @@ const RecipeForm = ({
   <FieldArray name="ingredients" component={Ingredients} />
 
   <label htmlFor="preparation">Instructions</label>
-  <Field name="preparation" component="textarea" tpe="text" placeholder="Instructions for recipe" />
+  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" />
 
   <button type="submit" disabled={pristine || submitting}>
     Submit

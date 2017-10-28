@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { Provider } from 'react-redux';
-import store from './src/store';
+import store from './store';
 import App from './RecipeBox';
 import cx from './styles';
 

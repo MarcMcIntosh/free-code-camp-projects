@@ -62,17 +62,11 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -96,57 +90,74 @@ module.exports = {
 };
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var Button = function Button(_ref) {
-  var children = _ref.children,
-      props = _objectWithoutProperties(_ref, ['children']);
-
-  return _react2.default.createElement(
-    'button',
-    props,
-    children
-  );
-};
-
-Button.defaultProps = {
-  children: null,
-  type: 'button',
-  tabIndex: 0
-};
-
-exports.default = Button;
-
-/***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-redux");
+module.exports = require("react");
 
 /***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"mdc-toolbar": "mdc-toolbar__mdc-toolbar___2nZCe",
+	"mdc-toolbar__row": "mdc-toolbar__mdc-toolbar__row___278mV",
+	"mdc-toolbar__section": "mdc-toolbar__mdc-toolbar__section___27jfm",
+	"mdc-toolbar__section--align-start": "mdc-toolbar__mdc-toolbar__section--align-start___Gy-Zd",
+	"mdc-toolbar__section--align-end": "mdc-toolbar__mdc-toolbar__section--align-end___2MZpj",
+	"mdc-toolbar__title": "mdc-toolbar__mdc-toolbar__title___1VZ2X",
+	"mdc-toolbar__icon": "mdc-toolbar__mdc-toolbar__icon___3cjsX",
+	"mdc-toolbar__icon--menu": "mdc-toolbar__mdc-toolbar__icon--menu___1oghk",
+	"mdc-toolbar--fixed": "mdc-toolbar__mdc-toolbar--fixed___3253Z",
+	"mdc-toolbar--flexible": "mdc-toolbar__mdc-toolbar--flexible___3fAjL",
+	"mdc-toolbar--flexible-default-behavior": "mdc-toolbar__mdc-toolbar--flexible-default-behavior___3gHmd",
+	"mdc-toolbar--flexible-space-minimized": "mdc-toolbar__mdc-toolbar--flexible-space-minimized___22Yrb",
+	"mdc-toolbar--waterfall": "mdc-toolbar__mdc-toolbar--waterfall___1Y2T7",
+	"mdc-toolbar--fixed-lastrow-only": "mdc-toolbar__mdc-toolbar--fixed-lastrow-only___1duNZ",
+	"mdc-toolbar--fixed-at-last-row": "mdc-toolbar__mdc-toolbar--fixed-at-last-row___sJuyP",
+	"mdc-toolbar-fixed-adjust": "mdc-toolbar__mdc-toolbar-fixed-adjust___2iy-g",
+	"mdc-toolbar__section--shrink-to-fit": "mdc-toolbar__mdc-toolbar__section--shrink-to-fit___2I9Co"
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"mdc-button": "mdc-button__mdc-button___7nMmh",
+	"mdc-ripple-upgraded": "mdc-button__mdc-ripple-upgraded___333RP",
+	"mdc-ripple-upgraded--background-focused": "mdc-button__mdc-ripple-upgraded--background-focused___zVna-",
+	"mdc-ripple-upgraded--background-active-fill": "mdc-button__mdc-ripple-upgraded--background-active-fill___38wjL",
+	"mdc-ripple-upgraded--unbounded": "mdc-button__mdc-ripple-upgraded--unbounded___23UaN",
+	"mdc-ripple-upgraded--foreground-activation": "mdc-button__mdc-ripple-upgraded--foreground-activation___yqSqd",
+	"mdc-ripple-upgraded--foreground-deactivation": "mdc-button__mdc-ripple-upgraded--foreground-deactivation___3LTxp",
+	"mdc-button--theme-dark": "mdc-button__mdc-button--theme-dark___3FSmD",
+	"mdc-theme--dark": "mdc-button__mdc-theme--dark___1mH5n",
+	"mdc-button--raised": "mdc-button__mdc-button--raised___2VSbj",
+	"mdc-button--unelevated": "mdc-button__mdc-button--unelevated___3G-6x",
+	"mdc-button--compact": "mdc-button__mdc-button--compact___3UMtY",
+	"mdc-button--dense": "mdc-button__mdc-button--dense___2Xjpe",
+	"mdc-button--primary": "mdc-button__mdc-button--primary___3Rfsr",
+	"mdc-button--accent": "mdc-button__mdc-button--accent___1zr-c",
+	"mdc-ripple-fg-radius-in": "mdc-button__mdc-ripple-fg-radius-in___3plFO",
+	"mdc-ripple-fg-opacity-in": "mdc-button__mdc-ripple-fg-opacity-in___3y-qo",
+	"mdc-ripple-fg-opacity-out": "mdc-button__mdc-ripple-fg-opacity-out___3OGrr"
+};
+
+/***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176,65 +187,6 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.recipeAdd = recipeAdd;
-var ACKNOWLEDGE_COOKIES = exports.ACKNOWLEDGE_COOKIES = 'ACKNOWLEDGE_COOKIES';
-var acknowledgeCokkies = exports.acknowledgeCokkies = function acknowledgeCokkies() {
-  return {
-    type: ACKNOWLEDGE_COOKIES
-  };
-};
-var RECIPE_ADD = exports.RECIPE_ADD = 'RECIPE_ADD';
-var recipes = exports.recipes = function recipes(payload) {
-  return {
-    type: RECIPE_ADD, payload: payload
-  };
-};
-
-var TOGGLE_MENU = exports.TOGGLE_MENU = 'TOGGLE_MENU';
-var toggleMenu = exports.toggleMenu = function toggleMenu() {
-  return { type: TOGGLE_MENU };
-};
-
-var ADD_NEW = exports.ADD_NEW = 'ADD_NEW';
-var addNew = exports.addNew = function addNew() {
-  return {
-    type: ADD_NEW
-  };
-};
-
-function recipeAdd(recipe) {
-  return recipes(recipe);
-}
-
-var RECIPE_EDIT = exports.RECIPE_EDIT = 'RECIPE_EDIT';
-var recipeEdit = exports.recipeEdit = function recipeEdit(payload) {
-  return {
-    type: RECIPE_EDIT, payload: payload
-  };
-};
-
-var RECIPE_VIEW = exports.RECIPE_VIEW = 'RECIPE_VIEW';
-var recipeView = exports.recipeView = function recipeView(payload) {
-  return {
-    type: RECIPE_VIEW, payload: payload
-  };
-};
-
-var RECIPE_DELETE = exports.RECIPE_DELETE = 'RECIPE_DELETE';
-var recipeDelete = exports.recipeDelete = function recipeDelete(payload) {
-  return { type: RECIPE_DELETE, payload: payload };
-};
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -242,6 +194,12 @@ module.exports = require("path");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("classnames/bind");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -346,59 +304,34 @@ function handleUserInput(d) {
 }
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("extract-text-webpack-plugin");
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = require("webpack");
+module.exports = require("redux-form");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-config");
+module.exports = require("extract-text-webpack-plugin");
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-helmet");
+module.exports = require("webpack");
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("classnames/bind");
+module.exports = require("react-router-config");
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"mdc-button": "mdc-button__mdc-button___7nMmh",
-	"mdc-ripple-upgraded": "mdc-button__mdc-ripple-upgraded___333RP",
-	"mdc-ripple-upgraded--background-focused": "mdc-button__mdc-ripple-upgraded--background-focused___zVna-",
-	"mdc-ripple-upgraded--background-active-fill": "mdc-button__mdc-ripple-upgraded--background-active-fill___38wjL",
-	"mdc-ripple-upgraded--unbounded": "mdc-button__mdc-ripple-upgraded--unbounded___23UaN",
-	"mdc-ripple-upgraded--foreground-activation": "mdc-button__mdc-ripple-upgraded--foreground-activation___yqSqd",
-	"mdc-ripple-upgraded--foreground-deactivation": "mdc-button__mdc-ripple-upgraded--foreground-deactivation___3LTxp",
-	"mdc-button--theme-dark": "mdc-button__mdc-button--theme-dark___3FSmD",
-	"mdc-theme--dark": "mdc-button__mdc-theme--dark___1mH5n",
-	"mdc-button--raised": "mdc-button__mdc-button--raised___2VSbj",
-	"mdc-button--unelevated": "mdc-button__mdc-button--unelevated___3G-6x",
-	"mdc-button--compact": "mdc-button__mdc-button--compact___3UMtY",
-	"mdc-button--dense": "mdc-button__mdc-button--dense___2Xjpe",
-	"mdc-button--primary": "mdc-button__mdc-button--primary___3Rfsr",
-	"mdc-button--accent": "mdc-button__mdc-button--accent___1zr-c",
-	"mdc-ripple-fg-radius-in": "mdc-button__mdc-ripple-fg-radius-in___3plFO",
-	"mdc-ripple-fg-opacity-in": "mdc-button__mdc-ripple-fg-opacity-in___3y-qo",
-	"mdc-ripple-fg-opacity-out": "mdc-button__mdc-ripple-fg-opacity-out___3OGrr"
-};
+module.exports = require("react-helmet");
 
 /***/ }),
 /* 15 */
@@ -532,58 +465,93 @@ module.exports = require("redux-thunk");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Done = exports.Menu = exports.Edit = exports.Delete = exports.Confrim = exports.Close = exports.Cancel = exports.Add = undefined;
+var prefix = function prefix(str) {
+  return 'RECIPE-BOX_' + str;
+};
 
-var _Button = __webpack_require__(2);
+var CREATE = exports.CREATE = prefix('CREATE');
+var READ = exports.READ = prefix('READ');
+var UPDATE = exports.UPDATE = prefix('UPDATE');
+var DELETE = exports.DELETE = prefix('DELETE');
 
-var _Button2 = _interopRequireDefault(_Button);
+var createRecipe = exports.createRecipe = function createRecipe() {
+  var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  return { type: CREATE, payload: payload };
+};
 
-var _Add = __webpack_require__(68);
+var readRecipe = exports.readRecipe = function readRecipe() {
+  var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+  return { type: READ, payload: payload };
+};
 
-var _Add2 = _interopRequireDefault(_Add);
+var updateRecipe = exports.updateRecipe = function updateRecipe(payload) {
+  return {
+    type: UPDATE, payload: payload
+  };
+};
 
-var _Cancel = __webpack_require__(69);
-
-var _Cancel2 = _interopRequireDefault(_Cancel);
-
-var _Close = __webpack_require__(70);
-
-var _Close2 = _interopRequireDefault(_Close);
-
-var _Confirm = __webpack_require__(71);
-
-var _Confirm2 = _interopRequireDefault(_Confirm);
-
-var _Delete = __webpack_require__(72);
-
-var _Delete2 = _interopRequireDefault(_Delete);
-
-var _Edit = __webpack_require__(73);
-
-var _Edit2 = _interopRequireDefault(_Edit);
-
-var _Menu = __webpack_require__(74);
-
-var _Menu2 = _interopRequireDefault(_Menu);
-
-var _Done = __webpack_require__(75);
-
-var _Done2 = _interopRequireDefault(_Done);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _Button2.default;
-exports.Add = _Add2.default;
-exports.Cancel = _Cancel2.default;
-exports.Close = _Close2.default;
-exports.Confrim = _Confirm2.default;
-exports.Delete = _Delete2.default;
-exports.Edit = _Edit2.default;
-exports.Menu = _Menu2.default;
-exports.Done = _Done2.default;
+var deleteRecipe = exports.deleteRecipe = function deleteRecipe(payload) {
+  return { type: DELETE, payload: payload };
+};
 
 /***/ }),
 /* 19 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"mdc-typography": "mdc-typography__mdc-typography___4C-Wd",
+	"mdc-typography--display4": "mdc-typography__mdc-typography--display4___1j5as",
+	"mdc-typography--adjust-margin": "mdc-typography__mdc-typography--adjust-margin___3_jNF",
+	"mdc-typography--display3": "mdc-typography__mdc-typography--display3___1sJY_",
+	"mdc-typography--display2": "mdc-typography__mdc-typography--display2___2m8yW",
+	"mdc-typography--display1": "mdc-typography__mdc-typography--display1___3Dbj-",
+	"mdc-typography--headline": "mdc-typography__mdc-typography--headline___2R8aA",
+	"mdc-typography--title": "mdc-typography__mdc-typography--title___2KcJ_",
+	"mdc-typography--subheading2": "mdc-typography__mdc-typography--subheading2___3w8L6",
+	"mdc-typography--subheading1": "mdc-typography__mdc-typography--subheading1___3l2D1",
+	"mdc-typography--body2": "mdc-typography__mdc-typography--body2___2L8S7",
+	"mdc-typography--body1": "mdc-typography__mdc-typography--body1___2Xn3g",
+	"mdc-typography--caption": "mdc-typography__mdc-typography--caption___d4Kl_",
+	"mdc-typography--button": "mdc-typography__mdc-typography--button___3FpY-"
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"mdc-list": "mdc-list__mdc-list___2jlYn",
+	"mdc-list--theme-dark": "mdc-list__mdc-list--theme-dark___1RxN1",
+	"mdc-theme--dark": "mdc-list__mdc-theme--dark___3e9xP",
+	"mdc-list--dense": "mdc-list__mdc-list--dense___2T9Pw",
+	"mdc-list-item": "mdc-list__mdc-list-item___vxok-",
+	"mdc-list-item__start-detail": "mdc-list__mdc-list-item__start-detail___15QzY",
+	"mdc-list-item__end-detail": "mdc-list__mdc-list-item__end-detail___1aIYk",
+	"mdc-list-item__text": "mdc-list__mdc-list-item__text___rtD8i",
+	"mdc-list-item__text__secondary": "mdc-list__mdc-list-item__text__secondary___3UeW8",
+	"mdc-list-item__text__secondary--theme-dark": "mdc-list__mdc-list-item__text__secondary--theme-dark___1Ter-",
+	"mdc-list--avatar-list": "mdc-list__mdc-list--avatar-list___1C1RF",
+	"mdc-list__item": "mdc-list__mdc-list__item___VUC4r",
+	"mdc-list__item__start-detail": "mdc-list__mdc-list__item__start-detail___3PM4q",
+	"mdc-list--two-line": "mdc-list__mdc-list--two-line___1i9Mu",
+	"mdc-ripple-upgraded": "mdc-list__mdc-ripple-upgraded___1hdDA",
+	"mdc-ripple-upgraded--background-focused": "mdc-list__mdc-ripple-upgraded--background-focused___35uWX",
+	"mdc-ripple-upgraded--background-active-fill": "mdc-list__mdc-ripple-upgraded--background-active-fill___27sop",
+	"mdc-ripple-upgraded--unbounded": "mdc-list__mdc-ripple-upgraded--unbounded___1_XUU",
+	"mdc-ripple-upgraded--foreground-activation": "mdc-list__mdc-ripple-upgraded--foreground-activation___3cH9g",
+	"mdc-ripple-upgraded--foreground-deactivation": "mdc-list__mdc-ripple-upgraded--foreground-deactivation___9Jtc3",
+	"mdc-list-divider": "mdc-list__mdc-list-divider___2FezB",
+	"mdc-list-divider--inset": "mdc-list__mdc-list-divider--inset___3oUGR",
+	"mdc-list-group": "mdc-list__mdc-list-group___1NN2Y",
+	"mdc-list-group__subheader": "mdc-list__mdc-list-group__subheader___2ziH7",
+	"mdc-list-group__subheader--theme-dark": "mdc-list__mdc-list-group__subheader--theme-dark___3onfj",
+	"mdc-ripple-fg-radius-in": "mdc-list__mdc-ripple-fg-radius-in___1wfS3",
+	"mdc-ripple-fg-opacity-in": "mdc-list__mdc-ripple-fg-opacity-in___11XTx",
+	"mdc-ripple-fg-opacity-out": "mdc-list__mdc-ripple-fg-opacity-out___3l9Oa"
+};
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -594,7 +562,7 @@ var localIdentName = '[name]__[local]___[hash:base64:5]';
 module.exports = localIdentName;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -604,25 +572,25 @@ var _path = __webpack_require__(7);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _express = __webpack_require__(21);
+var _express = __webpack_require__(23);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _webpack = __webpack_require__(10);
+var _webpack = __webpack_require__(12);
 
 var _webpack2 = _interopRequireDefault(_webpack);
 
-var _helmet = __webpack_require__(22);
+var _helmet = __webpack_require__(24);
 
 var _helmet2 = _interopRequireDefault(_helmet);
 
-var _compression = __webpack_require__(23);
+var _compression = __webpack_require__(25);
 
 var _compression2 = _interopRequireDefault(_compression);
 
-var _env = __webpack_require__(24);
+var _env = __webpack_require__(26);
 
-var _middleware = __webpack_require__(25);
+var _middleware = __webpack_require__(27);
 
 var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -633,9 +601,9 @@ var app = (0, _express2.default)(); /* eslint global-require: 0 */
 
 if (_env.ENV === 'development') {
   // enable webpack hot module replacement
-  var webpackDevMiddleware = __webpack_require__(86);
-  var webpackHotMiddleware = __webpack_require__(87);
-  var webpackConfig = __webpack_require__(88);
+  var webpackDevMiddleware = __webpack_require__(84);
+  var webpackHotMiddleware = __webpack_require__(85);
+  var webpackConfig = __webpack_require__(86);
   var devBrowserConfig = webpackConfig({ browser: true });
   var compiler = (0, _webpack2.default)(devBrowserConfig);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: devBrowserConfig.output.publicPath }));
@@ -652,25 +620,25 @@ app.get('/*', _middleware2.default);
 app.listen(process.env.PORT || 8080);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("helmet");
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("compression");
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -686,7 +654,7 @@ var isDebug = exports.isDebug = ENV === 'development';
 var isClient = exports.isClient = typeof window !== 'undefined';
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -697,13 +665,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = render;
 
-var _reactRouterConfig = __webpack_require__(11);
+var _reactRouterConfig = __webpack_require__(13);
 
-var _routes = __webpack_require__(26);
+var _routes = __webpack_require__(28);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _pageRenderer = __webpack_require__(81);
+var _pageRenderer = __webpack_require__(79);
 
 var _pageRenderer2 = _interopRequireDefault(_pageRenderer);
 
@@ -725,7 +693,7 @@ function render(req, res) {
 // import createMemoryHistory from 'history/createMemoryHistory';
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -735,9 +703,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _pages = __webpack_require__(27);
+var _pages = __webpack_require__(29);
 
-var _tributePage = __webpack_require__(49);
+var _tributePage = __webpack_require__(51);
 
 var _tributePage2 = _interopRequireDefault(_tributePage);
 
@@ -745,11 +713,11 @@ var _appUrls = __webpack_require__(15);
 
 var _appUrls2 = _interopRequireDefault(_appUrls);
 
-var _calculator = __webpack_require__(53);
+var _calculator = __webpack_require__(55);
 
 var _calculator2 = _interopRequireDefault(_calculator);
 
-var _recipeBox = __webpack_require__(61);
+var _recipeBox = __webpack_require__(63);
 
 var _recipeBox2 = _interopRequireDefault(_recipeBox);
 
@@ -827,7 +795,7 @@ import Pomodoro from '../projects/pomodoro';
 exports.default = routes;
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -837,7 +805,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _App = __webpack_require__(28);
+var _App = __webpack_require__(30);
 
 Object.defineProperty(exports, 'App', {
   enumerable: true,
@@ -846,7 +814,7 @@ Object.defineProperty(exports, 'App', {
   }
 });
 
-var _About = __webpack_require__(34);
+var _About = __webpack_require__(36);
 
 Object.defineProperty(exports, 'About', {
   enumerable: true,
@@ -855,7 +823,7 @@ Object.defineProperty(exports, 'About', {
   }
 });
 
-var _Gallary = __webpack_require__(35);
+var _Gallary = __webpack_require__(37);
 
 Object.defineProperty(exports, 'Gallary', {
   enumerable: true,
@@ -867,7 +835,7 @@ Object.defineProperty(exports, 'Gallary', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -879,19 +847,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Page = __webpack_require__(29);
+var _Page = __webpack_require__(31);
 
 var _Page2 = _interopRequireDefault(_Page);
 
-var _App = __webpack_require__(30);
+var _App = __webpack_require__(32);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _assets = __webpack_require__(32);
+var _assets = __webpack_require__(34);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -906,7 +874,7 @@ var App = function App(props) {
 exports.default = App;
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -918,15 +886,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactHelmet = __webpack_require__(12);
+var _reactHelmet = __webpack_require__(14);
 
 var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -949,7 +917,7 @@ Page.defaultProps = { title: '', link: [], meta: [] };
 exports.default = Page;
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -961,17 +929,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterConfig = __webpack_require__(11);
+var _reactRouterConfig = __webpack_require__(13);
 
-__webpack_require__(31);
+__webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -988,13 +956,13 @@ var App = function App(_ref) {
 exports.default = App;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1005,7 +973,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.link = exports.meta = exports.title = undefined;
 
-var _favicon = __webpack_require__(33);
+var _favicon = __webpack_require__(35);
 
 var _favicon2 = _interopRequireDefault(_favicon);
 
@@ -1044,13 +1012,13 @@ var meta = exports.meta = metaAssets();
 var link = exports.link = linkAssets();
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "src/app/images/-favicon.png";
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1062,7 +1030,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1077,7 +1045,7 @@ var About = function About() {
 exports.default = About;
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1100,11 +1068,11 @@ import twitch from 'file-loader!../images/twitch.png';
 import wikipedia from 'file-loader!../images/wikipedia.png'; */
 
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Preview = __webpack_require__(36);
+var _Preview = __webpack_require__(38);
 
 var _Preview2 = _interopRequireDefault(_Preview);
 
@@ -1112,43 +1080,43 @@ var _appUrls = __webpack_require__(15);
 
 var _appUrls2 = _interopRequireDefault(_appUrls);
 
-var _ = __webpack_require__(39);
+var _ = __webpack_require__(41);
 
 var _2 = _interopRequireDefault(_);
 
-var _calculator = __webpack_require__(40);
+var _calculator = __webpack_require__(42);
 
 var _calculator2 = _interopRequireDefault(_calculator);
 
-var _localWeather = __webpack_require__(41);
+var _localWeather = __webpack_require__(43);
 
 var _localWeather2 = _interopRequireDefault(_localWeather);
 
-var _tribute = __webpack_require__(42);
+var _tribute = __webpack_require__(44);
 
 var _tribute2 = _interopRequireDefault(_tribute);
 
-var _pomodoro = __webpack_require__(43);
+var _pomodoro = __webpack_require__(45);
 
 var _pomodoro2 = _interopRequireDefault(_pomodoro);
 
-var _quote = __webpack_require__(44);
+var _quote = __webpack_require__(46);
 
 var _quote2 = _interopRequireDefault(_quote);
 
-var _simon = __webpack_require__(45);
+var _simon = __webpack_require__(47);
 
 var _simon2 = _interopRequireDefault(_simon);
 
-var _ticTacToe = __webpack_require__(46);
+var _ticTacToe = __webpack_require__(48);
 
 var _ticTacToe2 = _interopRequireDefault(_ticTacToe);
 
-var _twitch = __webpack_require__(47);
+var _twitch = __webpack_require__(49);
 
 var _twitch2 = _interopRequireDefault(_twitch);
 
-var _wikipedia = __webpack_require__(48);
+var _wikipedia = __webpack_require__(50);
 
 var _wikipedia2 = _interopRequireDefault(_wikipedia);
 
@@ -1281,7 +1249,7 @@ var Gallary = function Gallary() {
 exports.default = Gallary;
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1293,19 +1261,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(37);
+var _reactRouterDom = __webpack_require__(39);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
-var _bind = __webpack_require__(13);
+var _bind = __webpack_require__(8);
 
 var _bind2 = _interopRequireDefault(_bind);
 
-var _preview = __webpack_require__(38);
+var _preview = __webpack_require__(40);
 
 var _preview2 = _interopRequireDefault(_preview);
 
@@ -1344,89 +1312,89 @@ var Preview = function Preview(_ref) {
 exports.default = Preview;
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
 	"container": "preview__container___1VsL1",
-	"card": "preview__card___33VYj " + __webpack_require__(1)["mdc-card"] + " preview__container___1VsL1",
-	"horizontal-block": "preview__horizontal-block___PrDkA " + __webpack_require__(1)["mdc-card__horizontal-block"] + "",
-	"primary": "preview__primary___1TGKq " + __webpack_require__(1)["mdc-card__primary"] + "",
-	"title": "preview__title___15Qr- " + __webpack_require__(1)["mdc-card__title"] + " " + __webpack_require__(1)["mdc-card__title--large"] + "",
-	"subtitle": "preview__subtitle___1WgDR " + __webpack_require__(1)["mdc-card__subtitle"] + "",
-	"media-item": "preview__media-item___1gR1E " + __webpack_require__(1)["mdc-card__media-item"] + "",
-	"actions": "preview__actions___kFUX9 " + __webpack_require__(1)["mdc-card__actions"] + "",
-	"action": "preview__action___278GE " + __webpack_require__(14)["mdc-button"] + " " + __webpack_require__(14)["mdc-button--compact"] + " " + __webpack_require__(1)["mdc-card__action"] + ""
+	"card": "preview__card___33VYj " + __webpack_require__(0)["mdc-card"] + " preview__container___1VsL1",
+	"horizontal-block": "preview__horizontal-block___PrDkA " + __webpack_require__(0)["mdc-card__horizontal-block"] + "",
+	"primary": "preview__primary___1TGKq " + __webpack_require__(0)["mdc-card__primary"] + "",
+	"title": "preview__title___15Qr- " + __webpack_require__(0)["mdc-card__title"] + " " + __webpack_require__(0)["mdc-card__title--large"] + "",
+	"subtitle": "preview__subtitle___1WgDR " + __webpack_require__(0)["mdc-card__subtitle"] + "",
+	"media-item": "preview__media-item___1gR1E " + __webpack_require__(0)["mdc-card__media-item"] + "",
+	"actions": "preview__actions___kFUX9 " + __webpack_require__(0)["mdc-card__actions"] + "",
+	"action": "preview__action___278GE " + __webpack_require__(4)["mdc-button"] + " " + __webpack_require__(4)["mdc-button--compact"] + " " + __webpack_require__(0)["mdc-card__action"] + ""
 };
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "src/app/images/-4-3.jpg";
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "src/app/images/-calculator.png";
 
 /***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-local-weather.png";
+module.exports = __webpack_require__.p + "src/app/images/-4-3.jpg";
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-tribute.png";
+module.exports = __webpack_require__.p + "src/app/images/-calculator.png";
 
 /***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-pomodoro.png";
+module.exports = __webpack_require__.p + "src/app/images/-local-weather.png";
 
 /***/ }),
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-quote.png";
+module.exports = __webpack_require__.p + "src/app/images/-tribute.png";
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-simon.png";
+module.exports = __webpack_require__.p + "src/app/images/-pomodoro.png";
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-tic-tac-toe.png";
+module.exports = __webpack_require__.p + "src/app/images/-quote.png";
 
 /***/ }),
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-twitch.png";
+module.exports = __webpack_require__.p + "src/app/images/-simon.png";
 
 /***/ }),
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/images/-wikipedia.png";
+module.exports = __webpack_require__.p + "src/app/images/-tic-tac-toe.png";
 
 /***/ }),
 /* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "src/app/images/-twitch.png";
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "src/app/images/-wikipedia.png";
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1438,15 +1406,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(50);
+__webpack_require__(52);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HodorImg = __webpack_require__(52);
+var HodorImg = __webpack_require__(54);
 
 var _ref = _jsx('div', {
   className: 'tribute-page'
@@ -1475,16 +1443,16 @@ var TributePage = function TributePage() {
 exports.default = TributePage;
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(51);
+__webpack_require__(53);
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -1496,13 +1464,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "src/projects/tribute-page/src/images/-Season_6_hodor_main.jpg";
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1516,25 +1484,25 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(5);
 
-var _store = __webpack_require__(54);
+var _store = __webpack_require__(56);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _CalculatorButtons = __webpack_require__(56);
+var _CalculatorButtons = __webpack_require__(58);
 
 var _CalculatorButtons2 = _interopRequireDefault(_CalculatorButtons);
 
-var _Display = __webpack_require__(58);
+var _Display = __webpack_require__(60);
 
 var _Display2 = _interopRequireDefault(_Display);
 
-var _styles = __webpack_require__(59);
+var _styles = __webpack_require__(61);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -1583,7 +1551,7 @@ var Calculator = function (_Component) {
 exports.default = Calculator;
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1599,7 +1567,7 @@ var _reduxThunk = __webpack_require__(17);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducer = __webpack_require__(55);
+var _reducer = __webpack_require__(57);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
@@ -1610,7 +1578,7 @@ var store = typeof window !== 'undefined' && "development" !== 'production' ? (0
 exports.default = store;
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1622,7 +1590,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _actions = __webpack_require__(8);
+var _actions = __webpack_require__(9);
 
 var DEFAULT_STATE = {
   display: '',
@@ -1656,7 +1624,7 @@ function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1670,19 +1638,19 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(5);
 
-var _Button = __webpack_require__(57);
+var _Button = __webpack_require__(59);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _actions = __webpack_require__(8);
+var _actions = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1854,7 +1822,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Buttons);
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1866,11 +1834,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1890,7 +1858,7 @@ var Button = function Button(_ref) {
 exports.default = Button;
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1904,15 +1872,15 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(4);
+var _propTypes = __webpack_require__(2);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(5);
 
-var _actions = __webpack_require__(8);
+var _actions = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1997,7 +1965,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Display);
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2007,11 +1975,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _bind = __webpack_require__(13);
+var _bind = __webpack_require__(8);
 
 var _bind2 = _interopRequireDefault(_bind);
 
-var _calculator = __webpack_require__(60);
+var _calculator = __webpack_require__(62);
 
 var _calculator2 = _interopRequireDefault(_calculator);
 
@@ -2020,7 +1988,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _bind2.default.bind(_calculator2.default);
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -2043,7 +2011,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2057,23 +2025,25 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
-var _store = __webpack_require__(62);
+var _reactRedux = __webpack_require__(5);
+
+var _store = __webpack_require__(64);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _Menu = __webpack_require__(66);
+var _RecipeBox = __webpack_require__(69);
 
-var _Menu2 = _interopRequireDefault(_Menu);
+var _RecipeBox2 = _interopRequireDefault(_RecipeBox);
 
-var _Display = __webpack_require__(76);
+var _styles = __webpack_require__(76);
 
-var _Display2 = _interopRequireDefault(_Display);
+var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2082,12 +2052,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import Recipes from './src/components/Recipes/Main';
 
-
-var _ref = _jsx('div', {
-  className: 'recipe-box'
-}, void 0, _jsx(_Menu2.default, {}), _jsx(_Display2.default, {}));
+var _ref = _jsx(_RecipeBox2.default, {});
 
 var RecipeBox = function (_Component) {
   _inherits(RecipeBox, _Component);
@@ -2098,10 +2064,16 @@ var RecipeBox = function (_Component) {
     var _this = _possibleConstructorReturn(this, (RecipeBox.__proto__ || Object.getPrototypeOf(RecipeBox)).call(this, props));
 
     _this.store = _store2.default;
+    _this.classnames = _styles2.default;
     return _this;
   }
 
   _createClass(RecipeBox, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return { classnames: this.classnames };
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _jsx(_reactRedux.Provider, {
@@ -2113,47 +2085,9 @@ var RecipeBox = function (_Component) {
   return RecipeBox;
 }(_react.Component);
 
+RecipeBox.childContextTypes = { classnames: _propTypes.func };
+
 exports.default = RecipeBox;
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(16);
-
-var _reduxPersist = __webpack_require__(63);
-
-var _reduxThunk = __webpack_require__(17);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _reducer = __webpack_require__(64);
-
-var _reducer2 = _interopRequireDefault(_reducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var store = typeof window !== 'undefined' && "development" !== 'production' ? (0, _redux.compose)(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk2.default), (0, _reduxPersist.autoRehydrate)())(_redux.createStore)(_reducer2.default) : (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (0, _reduxPersist.autoRehydrate)())(_redux.createStore)(_reducer2.default);
-
-(0, _reduxPersist.persistStore)(store, {
-  blacklist: ['edit'],
-  keyPrefix: '_recipes'
-});
-
-exports.default = store;
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-persist");
 
 /***/ }),
 /* 64 */
@@ -2166,79 +2100,41 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _redux = __webpack_require__(16);
 
-var _constants = __webpack_require__(65);
+var _reduxPersist = __webpack_require__(65);
 
-var _actions = __webpack_require__(6);
+var _reduxForm = __webpack_require__(10);
 
-var DEFAULT_STATE = {
-  active: -1,
-  recipes: [],
-  edit: false,
-  menu: true
-};
+var _reduxThunk = __webpack_require__(17);
 
-function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
-  var action = arguments[1];
-  var type = action.type,
-      payload = action.payload;
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _reducer = __webpack_require__(66);
 
-  switch (type) {
-    case _constants.REHYDRATE:
-      return _extends({}, state, payload);
-    case _actions.RECIPE_VIEW:
-      return _extends({}, state, { active: payload });
-    case _actions.RECIPE_ADD:
-      {
-        if (state.active === -1) {
-          /* adding a fresh one */
-          var _recipes = [].concat(payload, state.recipes);
-          return _extends({}, state, { recipes: _recipes, edit: false, active: 0 });
-        }
-        /* editing */
-        var recipes = state.recipes.slice();
-        recipes.splice(state.active, 1, payload.recipe);
-        return _extends({}, state, { recipes: recipes, edit: false });
-      }
-    case _actions.ADD_NEW:
-      return _extends({}, state, {
-        active: -1,
-        edit: true,
-        menu: false
-      });
-    case _actions.TOGGLE_MENU:
-      return _extends({}, state, {
-        menu: !state.menu
-      });
-    case _actions.RECIPE_EDIT:
-      return _extends({}, state, {
-        edit: payload !== undefined ? payload : !state.edit
-      });
-    case _actions.RECIPE_DELETE:
-      {
-        var _recipes2 = state.recipes.slice();
-        _recipes2.splice(payload, 1);
-        return _extends({}, state, { recipes: _recipes2 });
-      }
-    case _actions.ACKNOWLEDGE_COOKIES:
-      return _extends({}, state, {
-        cookies: true
-      });
-    default:
-      return state;
-  }
-}
+var _reducer2 = _interopRequireDefault(_reducer);
 
-exports.default = reducer;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var r = (0, _redux.combineReducers)({
+  recipeBox: _reducer2.default,
+  form: _reduxForm.reducer
+});
+
+var store = typeof window !== 'undefined' && "development" !== 'production' ? (0, _redux.compose)((0, _reduxPersist.autoRehydrate)(), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk2.default))(_redux.createStore)(r) : (0, _redux.compose)((0, _reduxPersist.autoRehydrate)(), (0, _redux.applyMiddleware)(_reduxThunk2.default))(_redux.createStore)(r);
+
+(0, _reduxPersist.persistStore)(store, {
+  whitelist: ['recipeBox'],
+  keyPrefix: '_recipe-box'
+});
+
+exports.default = store;
 
 /***/ }),
 /* 65 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux-persist/constants");
+module.exports = require("redux-persist");
 
 /***/ }),
 /* 66 */
@@ -2251,149 +2147,83 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(0);
+var _constants = __webpack_require__(67);
 
-var _react2 = _interopRequireDefault(_react);
+var _recipes3 = __webpack_require__(68);
 
-var _reactRedux = __webpack_require__(3);
+var _recipes4 = _interopRequireDefault(_recipes3);
 
-var _classnames = __webpack_require__(67);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _actions = __webpack_require__(6);
-
-var _Buttons = __webpack_require__(18);
-
-var _Buttons2 = _interopRequireDefault(_Buttons);
+var _actions = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    isActive: state.menu,
-    recipes: state.recipes,
-    recipe: state.active
-  };
+var DEFAULT_STATE = {
+  recipes: _recipes4.default,
+  reading: -1,
+  editting: false
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onToggleMenu: function onToggleMenu(event) {
-      event.preventDefault();
-      dispatch((0, _actions.toggleMenu)());
-      return false;
-    },
-    onAddNew: function onAddNew(event) {
-      event.preventDefault();
-      dispatch((0, _actions.addNew)());
-      return false;
-    },
-    onViewRecipe: function onViewRecipe(n) {
-      return dispatch((0, _actions.recipeView)(n));
-    }
-  };
-};
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
+  var action = arguments[1];
 
-var _ref2 = _jsx('i', {
-  className: 'material-icons'
-}, void 0, 'playlist_add');
+  switch (action.type) {
+    case _constants.REHYDRATE:
+      {
+        var _ref = action.payload.recipeBox || state,
+            recipes = _ref.recipes;
 
-var Menu = function Menu(_ref) {
-  var isActive = _ref.isActive,
-      onToggleMenu = _ref.onToggleMenu,
-      onAddNew = _ref.onAddNew,
-      onViewRecipe = _ref.onViewRecipe,
-      recipes = _ref.recipes,
-      recipe = _ref.recipe;
+        return _extends({}, state, { recipes: recipes });
+      }
+    case _actions.READ:
+      return _extends({}, state, {
+        reading: action.payload
+      });
+    case _actions.CREATE:
+      return _extends({}, state, {
+        editting: action.payload
+      });
+    case _actions.UPDATE:
+      {
+        /* use this as onSubmit */
+        var _recipes = state.recipes.slice(0);
+        _recipes[action.payload.index] = action.payload.values;
+        return _extends({}, state, {
+          recipes: _recipes,
+          editting: false
+        });
+      }
+    case _actions.DELETE:
+      {
+        var _recipes2 = state.recipes.filter(function (d, i) {
+          return i !== action.payload;
+        });
+        return _extends({}, state, {
+          recipes: _recipes2,
+          reading: state.reading - 1,
+          editting: false
+        });
+      }
+    default:
+      return state;
+  }
+}
 
-  var mo = isActive ? 'menu--open' : 'menu--closed';
-  return _jsx('nav', {
-    className: (0, _classnames2.default)('menu', mo)
-  }, void 0, _jsx(_Buttons2.default, {
-    tabIndex: '0',
-    className: 'material-icons menu__control',
-    onClick: onToggleMenu
-  }, void 0, isActive ? 'close' : 'menu'), !isActive ? false : _jsx('ul', {
-    className: 'menu__content'
-  }, void 0, _jsx('li', {
-    className: 'menu__item'
-  }, void 0, _jsx('a', {
-    role: 'button',
-    tabIndex: '0',
-    onClick: onAddNew
-  }, void 0, _ref2, 'New Recipe')), recipes.map(function (d, i) {
-    var handleClick = function handleClick(event) {
-      event.preventDefault();
-      onViewRecipe(i);
-      return false;
-    };
-    var k = d.name + ':' + i;
-    var cn = (0, _classnames2.default)('menu__item', { 'menu__item--active': i === recipe });
-
-    return _jsx('li', {
-      className: cn
-    }, k, _jsx('a', {
-      role: 'button',
-      tabIndex: '0',
-      onClick: handleClick
-    }, void 0, d.name));
-  })));
-};
-
-var func = _react.PropTypes.func,
-    bool = _react.PropTypes.bool,
-    array = _react.PropTypes.array,
-    number = _react.PropTypes.number;
-
-
-Menu.defaultProps = { className: 'menu' };
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Menu);
+exports.default = reducer;
 
 /***/ }),
 /* 67 */
 /***/ (function(module, exports) {
 
-module.exports = require("classnames");
+module.exports = require("redux-persist/constants");
 
 /***/ }),
 /* 68 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Add = function Add(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'playlist_add'
-  );
-};
-
-Add.defaultProps = {
-  title: 'Add',
-  className: 'material-icons'
-};
-
-exports.default = Add;
+module.exports = [{"title":"victoria sponge","created_at":"2017-10-27T22:44:40.226Z","updated_at":"2017-10-27T22:44:40.226Z","desc":"sponge with jam","image":"http://www.bbcgoodfood.com/sites/bbcgoodfood.com/files/recipe_images/recipe-image-legacy-id--1001468_10.jpg","ingredients":["200g unsalted butter, softened, plus extra for greasing","200g caster sugar","1 tsp vanilla extract","4 medium eggs","200g self-raising flour, plus extra for dusting","about 6 tbsp raspberry jam","250ml double cream, whipped","icing sugar, for dusting"],"preparation":"Heat oven to 190C/170C fan/gas 5. Grease and flour 2 x 20cm sandwich tins. Place the butter, sugar and vanilla extract into a bowl and beat well to a creamy consistency. Slowly beat in the eggs, one by one, then fold in the flour and mix well.\nDivide the mix between the cake tins, place into the oven and bake for about 20 mins until risen and golden brown. The cakes should spring back when gently pushed in the middle. When ready, remove from the oven and allow to cool for 5 mins in the tin, before turning out onto a wire rack and cooling completely.\nSpread the jam onto one cake and top with the cream. Sandwich the cakes together and dust with icing sugar."},{"title":"Neeps and tatties soup","created_at":"2017-10-27T22:47:02.297Z","updated_at":"2017-10-27T22:47:02.297Z","desc":"Enjoy a taste of Scotland in our warming soup with swede, potato and haggis topping. It's Burns Night in a bowl","image":"https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/01/neeps-and-tatties-soup.jpg","ingredients":["25g butter","1/4 tsp ground coriander","1 onion, chopped","1/2 medium-sized swede (about 200g), peeled and chopped into small pieces","1 carrot, sliced","1 celery stick, sliced into small pieces","140g potatoes, chopped into small pieces","good grating of nutmeg","400ml milk","140g cooked haggis or black pudding, chopped or crumbled into pieces","2 tbsp double cream","a few celery leaves, torn"]}]
 
 /***/ }),
 /* 69 */
@@ -2406,63 +2236,108 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+// import Recipe from './components/recipe';
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
+var _reactRedux = __webpack_require__(5);
 
-var _Button2 = _interopRequireDefault(_Button);
+var _propTypes = __webpack_require__(2);
+
+var _reactModal = __webpack_require__(70);
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
+var _Header = __webpack_require__(71);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _form = __webpack_require__(72);
+
+var _form2 = _interopRequireDefault(_form);
+
+var _menu = __webpack_require__(74);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _actions = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Cancel = function Cancel(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'cancel'
-  );
+var mapStateToProps = function mapStateToProps(_ref) {
+  var _ref$recipeBox = _ref.recipeBox,
+      recipes = _ref$recipeBox.recipes,
+      reading = _ref$recipeBox.reading,
+      editting = _ref$recipeBox.editting;
+  return { recipes: recipes, reading: reading, editting: editting };
 };
 
-Cancel.defaultProps = {
-  title: 'Cancel',
-  className: 'material-icons'
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onCreate: function onCreate(payload) {
+      return dispatch((0, _actions.createRecipe)(payload));
+    },
+    onUpdate: function onUpdate(payload) {
+      return dispatch((0, _actions.updateRecipe)(payload));
+    },
+    onRead: function onRead(event) {
+      return dispatch((0, _actions.readRecipe)(+event.target.value));
+    },
+    onDelete: function onDelete(n) {
+      return dispatch((0, _actions.deleteRecipe)(+n));
+    }
+  };
 };
 
-exports.default = Cancel;
+var RecipeBox = function RecipeBox(_ref2, _ref3) {
+  var editting = _ref2.editting,
+      reading = _ref2.reading,
+      onCreate = _ref2.onCreate,
+      recipes = _ref2.recipes,
+      onUpdate = _ref2.onUpdate,
+      onRead = _ref2.onRead;
+  var classnames = _ref3.classnames;
+  return _jsx('div', {
+    className: classnames('recipe-box')
+  }, void 0, _jsx(_Header2.default, {
+    onClick: function onClick() {
+      return onCreate(true);
+    }
+  }), _jsx(_menu2.default, {
+    className: classnames('recipes'),
+    recipes: recipes,
+    onClick: onRead
+  }), _jsx(_reactModal2.default, {
+    isOpen: editting || reading >= 0,
+    onRequestClose: function onRequestClose() {
+      return onCreate(false);
+    },
+    contentLabel: editting ? 'Recipe Form' : 'Recipe'
+  }, void 0, editting ? _jsx(_form2.default, {
+    initialValues: reading >= 0 ? recipes[reading] : {},
+    onSubmit: function onSubmit(values) {
+      return onUpdate({ index: reading, values: values });
+    },
+    onCancel: function onCancel() {
+      return onCreate(false);
+    }
+  }) : _jsx('div', {}, void 0, 'recipe')));
+};
+
+RecipeBox.contextTypes = {
+  classnames: _propTypes.func.isRequired
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(RecipeBox);
 
 /***/ }),
 /* 70 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Close = function Close(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'close'
-  );
-};
-
-Close.defaultProps = { className: 'material-icons' };
-
-exports.default = Close;
+module.exports = require("react-modal");
 
 /***/ }),
 /* 71 */
@@ -2475,30 +2350,41 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
+var _propTypes = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Confirm = function Confirm(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'check'
-  );
+/* On Button Click this should alow the user to create a new cake */
+var Header = function Header(_ref, _ref2) {
+  var onClick = _ref.onClick;
+  var classnames = _ref2.classnames;
+  return _jsx('header', {
+    className: classnames('recipe-box-header')
+  }, void 0, _jsx('div', {
+    className: classnames('recipe-box-header__row')
+  }, void 0, _jsx('section', {
+    className: classnames('recipe-box-header__start')
+  }, void 0, _jsx('span', {
+    className: classnames('recipe-box-header__title')
+  }, void 0, 'Recipe Box')), _jsx('section', {
+    className: classnames('recipe-box-header__end')
+  }, void 0, _jsx('button', {
+    className: classnames('recipe-box-header__button'),
+    tabIndex: '0',
+    title: 'Add Cake',
+    onClick: onClick
+  }, void 0, 'playlist_add'))));
 };
 
-Confirm.defaultProps = {
-  title: 'Confirm',
-  className: 'material-icons'
-};
+Header.contextTypes = { classnames: _propTypes.func.isRequired };
 
-exports.default = Confirm;
+exports.default = Header;
 
 /***/ }),
 /* 72 */
@@ -2511,30 +2397,96 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
+var _propTypes = __webpack_require__(2);
 
-var _Button2 = _interopRequireDefault(_Button);
+var _reduxForm = __webpack_require__(10);
+
+var _Ingredients = __webpack_require__(73);
+
+var _Ingredients2 = _interopRequireDefault(_Ingredients);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Delete = function Delete(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'delete_forever'
-  );
+/* form fields
+* title: string
+* desc: string
+* image: string
+* ingredients: array [ strngs ];
+* preparation: string
+*/
+
+var _ref3 = _jsx('label', {
+  htmlFor: 'title'
+}, void 0, 'Recipe');
+
+var _ref4 = _jsx(_reduxForm.Field, {
+  name: 'title',
+  type: 'text',
+  component: 'input',
+  placeholder: 'Name for recipe'
+});
+
+var _ref5 = _jsx('label', {
+  htmlFor: 'desc'
+}, void 0, 'Description');
+
+var _ref6 = _jsx(_reduxForm.Field, {
+  name: 'desc',
+  component: 'textarea',
+  type: 'text',
+  placeholder: 'Description of the recipe'
+});
+
+var _ref7 = _jsx('label', {
+  htmlFor: 'ingredients'
+}, void 0, 'Ingredients');
+
+var _ref8 = _jsx(_reduxForm.FieldArray, {
+  name: 'ingredients',
+  component: _Ingredients2.default
+});
+
+var _ref9 = _jsx('label', {
+  htmlFor: 'preparation'
+}, void 0, 'Instructions');
+
+var _ref10 = _jsx(_reduxForm.Field, {
+  name: 'preparation',
+  component: 'textarea',
+  tpe: 'text',
+  placeholder: 'Instructions for recipe'
+});
+
+var RecipeForm = function RecipeForm(_ref, _ref2) {
+  var handleSubmit = _ref.handleSubmit,
+      pristine = _ref.pristine,
+      reset = _ref.reset,
+      submitting = _ref.submitting;
+  var classnames = _ref2.classnames;
+  return _jsx('form', {
+    onSubmit: handleSubmit,
+    className: classnames('recipe-box-form')
+  }, void 0, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _jsx('button', {
+    type: 'submit',
+    disabled: pristine || submitting
+  }, void 0, 'Submit'), _jsx('button', {
+    type: 'button',
+    disabled: pristine || submitting,
+    onClick: reset
+  }, void 0, 'Clear Values'));
 };
 
-Delete.defaultProps = {
-  className: 'material-icons',
-  title: 'Delete'
-};
+RecipeForm.contextTypes = { classnames: _propTypes.func.isRequired };
 
-exports.default = Delete;
+exports.default = (0, _reduxForm.reduxForm)({
+  form: 'recipe-form'
+})(RecipeForm);
 
 /***/ }),
 /* 73 */
@@ -2547,30 +2499,43 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
+var _reduxForm = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Edit = function Edit(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'mode_edit'
-  );
+var Ingredients = function Ingredients(_ref) {
+  var fields = _ref.fields,
+      error = _ref.meta.error;
+  return _jsx('ul', {}, void 0, _jsx('li', {}, void 0, _jsx('button', {
+    type: 'button',
+    onClick: function onClick() {
+      return fields.push();
+    }
+  }, void 0, 'Add Ingredient')), fields.map(function (ingredient, index) {
+    var k = 'ingredient:' + index;
+    return _jsx('li', {}, k, _jsx('button', {
+      type: 'button',
+      title: 'Remove ingredient',
+      onClick: function onClick() {
+        return fields.remove(index);
+      }
+    }), _jsx(_reduxForm.Field, {
+      name: ingredient,
+      type: 'text',
+      component: 'input'
+    }));
+  }), error && _jsx('li', {
+    className: 'error'
+  }, void 0, error));
 };
 
-Edit.defaultProps = {
-  className: 'material-icons',
-  title: 'Edit'
-};
-
-exports.default = Edit;
+exports.default = Ingredients;
 
 /***/ }),
 /* 74 */
@@ -2583,27 +2548,45 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
+var _propTypes = __webpack_require__(2);
 
-var _Button2 = _interopRequireDefault(_Button);
+var _Item = __webpack_require__(75);
+
+var _Item2 = _interopRequireDefault(_Item);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Menu = function Menu(props) {
-  return _react2.default.createElement(
-    _Button2.default,
-    props,
-    'menu'
-  );
-};
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-Menu.defaultProps = {
-  className: 'material-icons',
-  title: 'Menu'
+var Menu = function Menu(_ref) {
+  var recipes = _ref.recipes,
+      onClick = _ref.onClick,
+      props = _objectWithoutProperties(_ref, ['recipes', 'onClick']);
+
+  return _react2.default.createElement(
+    'div',
+    props,
+    recipes.map(function (_ref2, i) {
+      var title = _ref2.title,
+          desc = _ref2.desc,
+          image = _ref2.image;
+
+      var k = 'recipe:' + i;
+      return _jsx(_Item2.default, {
+        onClick: onClick,
+        value: i,
+        title: title,
+        desc: desc,
+        image: image
+      }, k);
+    })
+  );
 };
 
 exports.default = Menu;
@@ -2619,34 +2602,60 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
+var _propTypes = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var Done = function Done(_ref) {
-  var children = _ref.children,
-      props = _objectWithoutProperties(_ref, ['children']);
+var Item = function Item(_ref, _ref2) {
+  var classnames = _ref2.classnames;
+
+  var value = _ref.value,
+      title = _ref.title,
+      desc = _ref.desc,
+      image = _ref.image,
+      onClick = _ref.onClick,
+      props = _objectWithoutProperties(_ref, ['value', 'title', 'desc', 'image', 'onClick']);
 
   return _react2.default.createElement(
-    _Button2.default,
-    props,
-    children
+    'div',
+    _extends({
+      className: classnames('recipe'),
+      style: image ? { backgroundImage: 'url(' + image + ')' } : {}
+    }, props),
+    _jsx('section', {
+      className: classnames('recipe__content')
+    }, void 0, _jsx('h1', {
+      className: classnames('recipe__title')
+    }, void 0, title), _jsx('h2', {
+      className: classnames('recipe__subtitle')
+    }, void 0, desc)),
+    _jsx('section', {
+      className: classnames('recipe__actions')
+    }, void 0, _jsx('button', {
+      tabIndex: '0',
+      className: classnames('recipe__action'),
+      onClick: onClick,
+      value: value,
+      title: 'View this Recipe'
+    }, void 0, 'View'))
   );
 };
 
-Done.defaultProps = {
-  children: 'done', className: 'material-icons'
-};
+Item.defaultProps = { image: '' };
 
-exports.default = Done;
+Item.contextTypes = { classnames: _propTypes.func.isRequired };
+
+exports.default = Item;
 
 /***/ }),
 /* 76 */
@@ -2659,309 +2668,55 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+var _bind = __webpack_require__(8);
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _bind2 = _interopRequireDefault(_bind);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _recipeBox = __webpack_require__(77);
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(3);
-
-var _actions = __webpack_require__(6);
-
-var _WelcomeMessage = __webpack_require__(77);
-
-var _WelcomeMessage2 = _interopRequireDefault(_WelcomeMessage);
-
-var _Recipe = __webpack_require__(78);
-
-var _Recipe2 = _interopRequireDefault(_Recipe);
-
-var _Recipe3 = __webpack_require__(79);
-
-var _Recipe4 = _interopRequireDefault(_Recipe3);
+var _recipeBox2 = _interopRequireDefault(_recipeBox);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    active: state.active,
-    edit: state.edit,
-    recipes: state.recipes
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onDelete: function onDelete(n) {
-      return dispatch((0, _actions.recipeDelete)(n));
-    },
-    onEdit: function onEdit() {
-      return dispatch((0, _actions.recipeEdit)());
-    },
-    onSetView: function onSetView(n) {
-      return dispatch((0, _actions.recipeView)(n));
-    }
-  };
-};
-
-var _ref = _jsx(_WelcomeMessage2.default, {});
-
-var Display = function (_Component) {
-  _inherits(Display, _Component);
-
-  function Display(props) {
-    _classCallCheck(this, Display);
-
-    var _this = _possibleConstructorReturn(this, (Display.__proto__ || Object.getPrototypeOf(Display)).call(this, props));
-
-    _this.handleEdit = _this.handleEdit.bind(_this);
-    _this.handleDelete = _this.handleDelete.bind(_this);
-    return _this;
-  }
-
-  _createClass(Display, [{
-    key: 'handleEdit',
-    value: function handleEdit() {
-      this.props.onEdit(!this.props.edit);
-    }
-  }, {
-    key: 'handleDelete',
-    value: function handleDelete() {
-      this.props.onDelete(this.props.active);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          active = _props.active,
-          edit = _props.edit,
-          recipes = _props.recipes,
-          onSetView = _props.onSetView;
-
-      if (!edit && (active === -1 || active >= recipes.length)) {
-        return _ref;
-      } else if (edit) {
-        return _react2.default.createElement(_Recipe4.default, recipes[active]);
-      }
-      return _react2.default.createElement(_Recipe2.default, _extends({}, recipes[active], {
-        onEdit: this.handleEdit,
-        onClose: function onClose() {
-          return onSetView(-1);
-        },
-        onDelete: this.handleDelete
-      }));
-    }
-  }]);
-
-  return Display;
-}(_react.Component);
-
-var number = _react.PropTypes.number,
-    bool = _react.PropTypes.bool,
-    array = _react.PropTypes.array,
-    func = _react.PropTypes.func;
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Display);
+exports.default = _bind2.default.bind(_recipeBox2.default);
 
 /***/ }),
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }(); /* eslint max-len: off */
-
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _ref = _jsx('header', {}, void 0, _jsx('h1', {}, void 0, 'Weclome'));
-
-var _ref2 = _jsx('p', {}, void 0, 'This appliction stores your recipes in your browsers storage, these will be deleted along with any cookies.');
-
-var _ref3 = _jsx('footer', {}, void 0, 'To add and view recipes click the ', _jsx('i', {
-  className: 'material-icons'
-}, void 0, 'menu'), ' button to diplay a side menu');
-
-var WelcomeMessage = function WelcomeMessage(props) {
-  return _react2.default.createElement(
-    'article',
-    props,
-    _ref,
-    _ref2,
-    _ref3
-  );
+module.exports = {
+	"recipe-box-modal__recipe": "recipe-box__recipe-box-modal__recipe___a3Stz " + __webpack_require__(0)["mdc-card__horizontal-block"] + "",
+	"recipe-box-modal__primary": "recipe-box__recipe-box-modal__primary___3goQ4 " + __webpack_require__(0)["mdc-card__primary"] + "",
+	"recipe-box-modal__title": "recipe-box__recipe-box-modal__title___3SVW9 " + __webpack_require__(0)["mdc-card__title"] + " " + __webpack_require__(19)["mdc-typography--headline"] + "",
+	"recipe-box-modal__subtitle": "recipe-box__recipe-box-modal__subtitle___2_hLl " + __webpack_require__(0)["mdc-card__subtitle"] + " " + __webpack_require__(19)["mdc-typography--subheading2"] + "",
+	"recipe-box-modal__image": "recipe-box__recipe-box-modal__image___30L1c " + __webpack_require__(0)["mdc-card__media-item"] + " " + __webpack_require__(0)["mdc-card__media-item--2x"] + "",
+	"recipe-box-modal__ingredients": "recipe-box__recipe-box-modal__ingredients___AhhCL " + __webpack_require__(20)["mdc-list"] + "",
+	"recipe-box-modal__ingredient": "recipe-box__recipe-box-modal__ingredient___tx9yf " + __webpack_require__(20)["mdc-list-item"] + "",
+	"recipe-box-modal__preparation": "recipe-box__recipe-box-modal__preparation___aBdJ- " + __webpack_require__(0)["mdc-card__supporting-text"] + "",
+	"recipe-box-modal__actions": "recipe-box__recipe-box-modal__actions___3nA3F " + __webpack_require__(0)["mdc-card__actions"] + "",
+	"recipe-box-modal__action": "recipe-box__recipe-box-modal__action___paVa0 " + __webpack_require__(4)["mdc-button"] + " " + __webpack_require__(0)["mdc-card__action"] + "",
+	"recipes": "recipe-box__recipes___2aGh3",
+	"recipe": "recipe-box__recipe___2nsOx " + __webpack_require__(0)["mdc-card"] + " " + __webpack_require__(0)["mdc-card--theme-dark"] + "",
+	"recipe__content": "recipe-box__recipe__content___3gNjg " + __webpack_require__(0)["mdc-card__primary"] + "",
+	"recipe__title": "recipe-box__recipe__title___1rIS6 " + __webpack_require__(0)["mdc-card__title"] + " " + __webpack_require__(0)["mdc-card__title--large"] + "",
+	"recipe__desc": "recipe-box__recipe__desc___3Kt5A " + __webpack_require__(0)["mdc-card__subtitle"] + "",
+	"recipe__actions": "recipe-box__recipe__actions___2PMbx " + __webpack_require__(0)["mdc-card__actions"] + "",
+	"recipe__action": "recipe-box__recipe__action___1bfAu " + __webpack_require__(4)["mdc-button"] + " " + __webpack_require__(4)["mdc-button--theme-dark"] + " " + __webpack_require__(0)["mdc-card__action"] + "",
+	"recipe-box-header": "recipe-box__recipe-box-header___37M2E " + __webpack_require__(3)["mdc-toolbar"] + "",
+	"recipe-box-header__row": "recipe-box__recipe-box-header__row___vJdYG " + __webpack_require__(3)["mdc-toolbar__row"] + "",
+	"recipe-box-header__title": "recipe-box__recipe-box-header__title___2ceKK " + __webpack_require__(3)["mdc-toolbar__title"] + "",
+	"recipe-box-header__start": "recipe-box__recipe-box-header__start___1IDYj " + __webpack_require__(3)["mdc-toolbar__section"] + " " + __webpack_require__(3)["mdc-toolbar__section--align-start"] + "",
+	"recipe-box-header__end": "recipe-box__recipe-box-header__end___TPob1 " + __webpack_require__(3)["mdc-toolbar__section"] + " " + __webpack_require__(3)["mdc-toolbar__section--align-end"] + "",
+	"recipe-box-header__button": "recipe-box__recipe-box-header__button___2VXU6 " + __webpack_require__(78)["material-icons"] + ""
 };
-
-WelcomeMessage.defaultProps = {
-  className: 'content'
-};
-
-exports.default = WelcomeMessage;
 
 /***/ }),
 /* 78 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint react/no-array-index-key: off */
-
-
-var _ref = _jsx("i", {}, void 0, "Ingredients");
-
-var _ref2 = _jsx("i", {}, void 0, "Preperation Notes");
-
-var Recipe = function (_Component) {
-  _inherits(Recipe, _Component);
-
-  function Recipe(props) {
-    _classCallCheck(this, Recipe);
-
-    var _this = _possibleConstructorReturn(this, (Recipe.__proto__ || Object.getPrototypeOf(Recipe)).call(this, props));
-
-    _this.state = {
-      options: false,
-      enlarge: false
-    };
-    _this.handleOptions = _this.handleOptions.bind(_this);
-    _this.handleImage = _this.handleImage.bind(_this);
-    _this.handleEdit = _this.handleEdit.bind(_this);
-    _this.handleDelete = _this.handleDelete.bind(_this);
-    return _this;
-  }
-
-  _createClass(Recipe, [{
-    key: "handleEdit",
-    value: function handleEdit(event) {
-      event.preventDefault();
-      this.props.onEdit();
-      return false;
-    }
-  }, {
-    key: "handleDelete",
-    value: function handleDelete(event) {
-      event.preventDefault();
-      this.props.onDelete();
-      return false;
-    }
-  }, {
-    key: "handleImage",
-    value: function handleImage(event) {
-      event.preventDefault();
-      this.setState({ enlarge: !this.state.enlarge });
-      return false;
-    }
-  }, {
-    key: "handleOptions",
-    value: function handleOptions(event) {
-      event.preventDefault();
-      this.setState({ options: !this.state.options });
-      return false;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          name = _props.name,
-          ingredients = _props.ingredients,
-          picture = _props.picture,
-          notes = _props.notes,
-          onClose = _props.onClose;
-      var options = this.state.options;
-
-      return _jsx("article", {
-        className: "recipe"
-      }, void 0, _jsx("a", {
-        role: "button",
-        className: "material-icons close",
-        tabIndex: "0",
-        onClick: onClose,
-        title: "close recipe"
-      }, void 0, "close"), _jsx("header", {
-        className: "recipe__header"
-      }, void 0, _jsx("h1", {}, void 0, name, picture ? _jsx("img", {
-        className: "recipe__image",
-        alt: name,
-        src: picture
-      }) : false)), _jsx("section", {
-        className: "recipe__ingredients"
-      }, void 0, _ref, _jsx("ul", {}, void 0, ingredients.map(function (d, i) {
-        return _jsx("li", {}, i, d);
-      }))), notes.length > 0 ? _jsx("section", {
-        className: "recipe__notes"
-      }, void 0, _ref2, _jsx("p", {}, void 0, notes)) : false, _jsx("footer", {
-        className: "recipe__options"
-      }, void 0, !options ? false : _jsx("span", {}, void 0, _jsx("a", {
-        role: "button",
-        tabIndex: "0",
-        onClick: this.handleEdit,
-        className: "material-icons",
-        title: "edit recipe"
-      }, void 0, "mode_edit"), _jsx("a", {
-        role: "button",
-        tabIndex: "0",
-        onClick: this.handleDelete,
-        className: "material-icons",
-        title: "remove recipe"
-      }, void 0, "delete_forever")), _jsx("a", {
-        role: "button",
-        tabIndex: "0",
-        onClick: this.handleOptions,
-        className: "material-icons",
-        title: options ? 'close options' : 'open options'
-      }, void 0, options ? 'close' : 'settings_applications')));
-    }
-  }]);
-
-  return Recipe;
-}(_react.Component);
-
-var func = _react.PropTypes.func,
-    string = _react.PropTypes.string,
-    arrayOf = _react.PropTypes.arrayOf;
-
-
-Recipe.defaultProps = { notes: '', picture: '' };
-
-exports.default = Recipe;
+module.exports = {
+	"material-icons": "material-icons__material-icons___1Hh7W"
+};
 
 /***/ }),
 /* 79 */
@@ -2974,453 +2729,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _server = __webpack_require__(80);
 
-var _Buttons = __webpack_require__(18);
+var _reactRouter = __webpack_require__(81);
 
-var _Buttons2 = _interopRequireDefault(_Buttons);
-
-var _actions = __webpack_require__(6);
-
-var _Ingredient = __webpack_require__(80);
-
-var _Ingredient2 = _interopRequireDefault(_Ingredient);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable */
-/* eslint react/self-closing-comp: off */
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    active: state.active
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onCancel: function onCancel() {
-      return dispatch((0, _actions.recipeEdit)(false));
-    },
-    onSubmit: function onSubmit(obj) {
-      return dispatch((0, _actions.recipeAdd)(obj));
-    }
-  };
-};
-
-var _ref = _jsx('label', {
-  htmlFor: 'name'
-}, void 0, 'Recipe');
-
-var _ref2 = _jsx('label', {
-  htmlFor: 'notes'
-}, void 0, 'Preperation Notes');
-
-var _ref3 = _jsx(_Buttons2.default, {
-  type: 'submit'
-}, void 0, 'Submit');
-
-var RecipeForm = function (_Component) {
-  _inherits(RecipeForm, _Component);
-
-  function RecipeForm(props) {
-    _classCallCheck(this, RecipeForm);
-
-    var _this = _possibleConstructorReturn(this, (RecipeForm.__proto__ || Object.getPrototypeOf(RecipeForm)).call(this, props));
-
-    var name = props.name,
-        ingredients = props.ingredients,
-        notes = props.notes,
-        picture = props.picture;
-
-    _this.state = { name: name, ingredients: ingredients, notes: notes, picture: picture, editing: -1, edit: '' };
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSumbit = _this.handleSumbit.bind(_this);
-    _this.handleReset = _this.handleReset.bind(_this);
-    _this.handleImage = _this.handleImage.bind(_this);
-    _this.deleteImage = _this.deleteImage.bind(_this);
-    _this.drawImage = _this.drawImage.bind(_this);
-    return _this;
-  }
-
-  _createClass(RecipeForm, [{
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.props.onCancel(false);
-    }
-  }, {
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: 'handleSumbit',
-    value: function handleSumbit(event) {
-      event.preventDefault();
-      var _state = this.state,
-          name = _state.name,
-          notes = _state.notes,
-          ingredients = _state.ingredients,
-          picture = _state.picture;
-
-      var recipe = { name: name, notes: notes, ingredients: ingredients, picture: picture };
-      if (this.state.editing !== -1 && this.state.edit.length > 0) {
-        recipe.ingredients[this.state.editing] = this.state.edit;
-      }
-      this.props.onSubmit(recipe, this.props.active);
-    }
-  }, {
-    key: 'handleReset',
-    value: function handleReset() {
-      var _props = this.props,
-          name = _props.name,
-          ingredients = _props.ingredients,
-          notes = _props.notes,
-          picture = _props.picture;
-
-      this.setState({ name: name, ingredients: ingredients, notes: notes, picture: picture });
-    }
-  }, {
-    key: 'handleImage',
-    value: function handleImage(event) {
-      var _this2 = this;
-
-      event.preventDefault();
-      var f = this.file.files[0];
-      var reader = new FileReader();
-      reader.onloadend = function () {
-        _this2.setState({ picture: reader.result }, _this2.drawImage);
-      };
-      reader.readAsDataURL(f);
-    }
-  }, {
-    key: 'deleteImage',
-    value: function deleteImage() {
-      this.file.value = '';
-      this.file.type = '';
-      this.file.type = 'file';
-      if (this.canvas) {
-        var ctx = this.canvas.getContext('2d');
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.canvas.width = 0;
-        this.canvas.height = 0;
-      }
-      this.setState({ picture: '' });
-    }
-  }, {
-    key: 'drawImage',
-    value: function drawImage() {
-      var mH = 400;
-      var mW = 300;
-      var img = new Image();
-      img.src = this.state.picture;
-      var w = img.width;
-      var h = img.height;
-      if (w > h && w > mW) {
-        h *= mW / w;
-        w = mW;
-      } else if (h > mH) {
-        w *= mH / h;
-        h = mH;
-      }
-      this.canvas.width = w;
-      this.canvas.height = h;
-      var ctx = this.canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
-      this.setState({ picture: this.canvas.toDataURL() });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      var _state2 = this.state,
-          name = _state2.name,
-          ingredients = _state2.ingredients,
-          notes = _state2.notes,
-          picture = _state2.picture;
-      var _props2 = this.props,
-          className = _props2.className,
-          onCancel = _props2.onCancel;
-
-      return _jsx('form', {
-        onSubmit: this.handleSumbit,
-        className: className
-      }, void 0, _jsx('header', {}, void 0, _jsx('h1', {}, void 0, 'Recipe Editor', _jsx('a', {
-        role: 'button',
-        tabIndex: '0',
-        className: 'material-icons close',
-        onClick: onCancel,
-        title: 'Exit'
-      }, void 0, 'close'))), _jsx('section', {}, void 0, _ref, _jsx('input', {
-        name: 'name',
-        type: 'text',
-        placeholder: 'Title',
-        value: name,
-        onChange: this.handleChange,
-        required: true
-      })), _jsx('section', {
-        className: 'image'
-      }, void 0, _jsx('label', {
-        htmlFor: 'picture'
-      }, void 0, 'Image', picture && _jsx('a', {
-        role: 'button',
-        tabIndex: '0',
-        className: 'material-icons delete',
-        title: 'remove picture',
-        onClick: this.deleteImage
-      }, void 0, 'close')), _react2.default.createElement('input', {
-        name: 'picture',
-        type: 'file',
-        accept: 'image/*',
-        onChange: this.handleImage,
-        ref: function ref(file) {
-          _this3.file = file;
-        },
-        disabled: picture
-      }), _jsx('section', {
-        className: 'preview'
-      }, void 0, picture.length > 0 && this.state.picture === this.props.picture ? _jsx('img', {
-        alt: 'preview',
-        src: picture
-      }) : _react2.default.createElement('canvas', { width: '0', height: '0', ref: function ref(canvas) {
-          _this3.canvas = canvas;
-        } }))), _jsx('section', {
-        className: 'ingredients'
-      }, void 0, _jsx('legend', {}, void 0, 'Ingredients ', _jsx(_Buttons.Add, {
-        title: 'Add Ingredient',
-        onClick: function onClick() {
-          return _this3.setState({
-            edit: '',
-            editing: ingredients.length,
-            ingredients: ingredients.filter(function (ing) {
-              return ing.length > 0;
-            }).concat('')
-          });
-        }
-      })), _jsx('ul', {
-        className: 'ingredients__list'
-      }, void 0, ingredients.map(function (d, i) {
-        var k = i;
-        var e = _this3.state.editing;
-        var v = _this3.state.edit;
-        return _jsx(_Ingredient2.default, {
-          value: i === e ? v : d,
-          editing: e === i,
-          onEdit: function onEdit() {
-            return _this3.setState({
-              editing: i,
-              edit: d
-            });
-          },
-          onDelete: function onDelete() {
-            var arr = ingredients.slice();
-            arr.splice(i, 1);
-            _this3.setState({ ingredients: arr });
-          },
-          onSave: function onSave() {
-            if (v.length > 0) {
-              var _arr = ingredients.slice();
-              _arr.splice(i, 1, v);
-              return _this3.setState({
-                ingredients: _arr,
-                edit: '',
-                editing: -1
-              });
-            }
-            var arr = ingredients.filter(function (ing) {
-              return ing.length > 0;
-            });
-            return _this3.setState({ ingredients: arr, edit: '', editing: -1 });
-          },
-          onCancel: function onCancel() {
-            return _this3.setState({
-              ingredients: ingredients.filter(function (ing) {
-                return ing.length > 0;
-              }),
-              editing: -1,
-              edit: ''
-            });
-          },
-          onChange: function onChange(event) {
-            return _this3.setState({ edit: event.target.value });
-          }
-        }, k);
-      }))), _jsx('section', {}, void 0, _ref2, _jsx('textarea', {
-        name: 'notes',
-        value: notes,
-        onChange: this.handleChange
-      })), _ref3, _jsx(_Buttons2.default, {
-        type: 'reset',
-        onClick: this.handleReset
-      }, void 0, 'Reset'));
-    }
-  }]);
-
-  return RecipeForm;
-}(_react.Component);
-
-var string = _react.PropTypes.string,
-    array = _react.PropTypes.array,
-    func = _react.PropTypes.func,
-    number = _react.PropTypes.number;
-
-
-RecipeForm.defaultProps = {
-  name: '',
-  ingredients: [],
-  notes: '',
-  picture: '',
-  className: 'recipe recipe__form'
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(RecipeForm);
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var _ref2 = _jsx('label', {
-  htmlFor: 'ingredient'
-}, void 0, 'Ingredient');
-
-var Ingredient = function Ingredient(_ref) {
-  var editing = _ref.editing,
-      value = _ref.value,
-      onCancel = _ref.onCancel,
-      onSave = _ref.onSave,
-      onDelete = _ref.onDelete,
-      onEdit = _ref.onEdit,
-      onChange = _ref.onChange,
-      props = _objectWithoutProperties(_ref, ['editing', 'value', 'onCancel', 'onSave', 'onDelete', 'onEdit', 'onChange']);
-
-  var handleKeyPress = function handleKeyPress(event) {
-    switch (event.key) {
-      case 'Escape':
-        return onCancel();
-      case 'Enter':
-        return onSave();
-      default:
-        return undefined;
-    }
-  };
-  if (editing) {
-    return _react2.default.createElement(
-      'li',
-      props,
-      _jsx('span', {
-        className: 'controls'
-      }, void 0, _jsx('a', {
-        role: 'button',
-        className: 'material-icons done',
-        tabIndex: '0',
-        onClick: onSave,
-        title: 'save'
-      }, void 0, 'check'), _jsx('a', {
-        role: 'button',
-        className: 'material-icons close',
-        tabIndex: '0',
-        onClick: onCancel,
-        title: 'cancel'
-      }, void 0, 'close')),
-      _ref2,
-      _jsx('input', {
-        name: 'ingredient',
-        type: 'text',
-        value: value,
-        onChange: onChange,
-        onKeyPress: handleKeyPress,
-        required: true
-      })
-    );
-  }
-  return _react2.default.createElement(
-    'li',
-    props,
-    _jsx('span', {
-      className: 'controls'
-    }, void 0, _jsx('a', {
-      role: 'button',
-      className: 'material-icons edit',
-      tabIndex: '0',
-      onClick: onEdit,
-      title: 'edit ingredient'
-    }, void 0, 'mode_edit'), _jsx('a', {
-      role: 'button',
-      className: 'material-icons delete',
-      tabIndex: '0',
-      onClick: onDelete,
-      title: 'remove ingredient'
-    }, void 0, 'delete')),
-    value
-  );
-};
-
-var func = _react.PropTypes.func,
-    bool = _react.PropTypes.bool,
-    string = _react.PropTypes.string;
-
-
-Ingredient.defaultProps = { value: '' };
-
-exports.default = Ingredient;
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(82);
-
-var _reactRouter = __webpack_require__(83);
-
-var _reactHelmet = __webpack_require__(12);
+var _reactHelmet = __webpack_require__(14);
 
 var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-var _staticAssets = __webpack_require__(84);
+var _staticAssets = __webpack_require__(82);
 
 var _staticAssets2 = _interopRequireDefault(_staticAssets);
 
@@ -3443,19 +2764,19 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 83 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router");
 
 /***/ }),
-/* 84 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3465,12 +2786,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /* eslint no-undef: 0 */
-var createStaticAssets =  false ? require('./prod') : __webpack_require__(85);
+var createStaticAssets =  false ? require('./prod') : __webpack_require__(83);
 
 exports.default = createStaticAssets;
 
 /***/ }),
-/* 85 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3493,19 +2814,19 @@ exports.createAppScript = createAppScript;
 exports.createStylesheets = createStylesheets;
 
 /***/ }),
-/* 86 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = require("webpack-dev-middleware");
 
 /***/ }),
-/* 87 */
+/* 85 */
 /***/ (function(module, exports) {
 
 module.exports = require("webpack-hot-middleware");
 
 /***/ }),
-/* 88 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3517,12 +2838,12 @@ module.exports = require("webpack-hot-middleware");
  * webpack --env.browser - used to determine whether to generate a browser or server bundle
  */
 // const path = require('path');
-var rules = __webpack_require__(89);
-var externals = __webpack_require__(95);
-var PATHS = __webpack_require__(5);
-var plugins = __webpack_require__(97);
-var resolve = __webpack_require__(99);
-var entry = __webpack_require__(100);
+var rules = __webpack_require__(87);
+var externals = __webpack_require__(93);
+var PATHS = __webpack_require__(6);
+var plugins = __webpack_require__(95);
+var resolve = __webpack_require__(97);
+var entry = __webpack_require__(98);
 
 // const SRV_ENTRY = path.resolve(PATHS.src.server, 'index.js');
 
@@ -3625,15 +2946,15 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 89 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var images = __webpack_require__(90);
-var scripts = __webpack_require__(91);
-var styles = __webpack_require__(92);
+var images = __webpack_require__(88);
+var scripts = __webpack_require__(89);
+var styles = __webpack_require__(90);
 
 module.exports = function () {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3651,7 +2972,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 90 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3696,13 +3017,13 @@ module.exports = ({
 */
 
 /***/ }),
-/* 91 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var PATHS = __webpack_require__(5);
+var PATHS = __webpack_require__(6);
 
 var createPresets = function createPresets(bool) {
   var presets = ['react', 'env', 'stage-0'];
@@ -3724,14 +3045,14 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 92 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var stylesCss = __webpack_require__(93);
-var stylesScss = __webpack_require__(94);
+var stylesCss = __webpack_require__(91);
+var stylesScss = __webpack_require__(92);
 
 module.exports = function () {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3746,15 +3067,15 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 93 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /* eslint-disable */
-var ExtractTextPlugin = __webpack_require__(9);
-var localIdentName = __webpack_require__(19);
+var ExtractTextPlugin = __webpack_require__(11);
+var localIdentName = __webpack_require__(21);
 
 var createLoaders = function createLoaders(browser) {
   return [{
@@ -3813,16 +3134,16 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 94 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /* eslint-disable */
-var ExtractTextPlugin = __webpack_require__(9);
-var PATHS = __webpack_require__(5);
-var localIdentName = __webpack_require__(19);
+var ExtractTextPlugin = __webpack_require__(11);
+var PATHS = __webpack_require__(6);
+var localIdentName = __webpack_require__(21);
 
 var createLoader = function createLoader(_ref) {
   var production = _ref.production,
@@ -3888,30 +3209,30 @@ module.exports = function () {
 };
 
 /***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var nodeExternals = __webpack_require__(94);
+
+module.exports = [nodeExternals()];
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports) {
+
+module.exports = require("webpack-node-externals");
+
+/***/ }),
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var nodeExternals = __webpack_require__(96);
-
-module.exports = [nodeExternals()];
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports) {
-
-module.exports = require("webpack-node-externals");
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _require = __webpack_require__(10),
+var _require = __webpack_require__(12),
     EnvironmentPlugin = _require.EnvironmentPlugin,
     DefinePlugin = _require.DefinePlugin,
     BannerPlugin = _require.BannerPlugin,
@@ -3919,8 +3240,8 @@ var _require = __webpack_require__(10),
     NoEmitOnErrorsPlugin = _require.NoEmitOnErrorsPlugin,
     UglifyJsPlugin = _require.optimize.UglifyJsPlugin;
 
-var ExtractTextPlugin = __webpack_require__(9);
-var ManifestPlugin = __webpack_require__(98);
+var ExtractTextPlugin = __webpack_require__(11);
+var ManifestPlugin = __webpack_require__(96);
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = function () {
@@ -3961,19 +3282,19 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 98 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = require("webpack-manifest-plugin");
 
 /***/ }),
-/* 99 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var PATHS = __webpack_require__(5);
+var PATHS = __webpack_require__(6);
 
 module.exports = {
   modules: [PATHS.modules],
@@ -3981,14 +3302,14 @@ module.exports = {
 };
 
 /***/ }),
-/* 100 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var path = __webpack_require__(7);
-var PATHS = __webpack_require__(5);
+var PATHS = __webpack_require__(6);
 
 var SRV_ENTRY = path.resolve(PATHS.src.server, 'index.js');
 

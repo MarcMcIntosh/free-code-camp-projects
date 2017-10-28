@@ -1,32 +1,13 @@
-$mdc-typography: "@material/typography/mdc-typography";
-$mdc-card: "@material/card/mdc-card";
-$mdc-button: "@material/button/mdc-button";
-$mdc-toolbar: "@material/toolbar/mdc-toolbar";
+$mdc-typography: "@material/typography/mdc-typography.scss";
 $mdc-elevation: "@material/elevation/mdc-elevation.scss";
+$mdc-card: "@material/card/mdc-card.scss";
+$mdc-button: "@material/button/mdc-button.scss";
+$mdc-toolbar: "@material/toolbar/mdc-toolbar.scss";
+$mdc-list: "@material/list/mdc-list.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
 $content_background: rgba(0, 0, 0, .4);
 
 .recipe-box-modal {
-  &__content {
-    composes: mdc-card from $mdc-card;
-    composes: mdc-elevation--z6 from $mdc-elevation;
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    bottom: 40px;
-    left: 40px;
-    // background-color: papayawhip;
-  }
-
-  &__overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: $content_background;
-  }
-
   &__recipe {
     composes: mdc-card__horizontal-block from $mdc-card;
   }

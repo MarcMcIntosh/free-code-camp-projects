@@ -22,7 +22,7 @@ const store = (typeof window !== 'undefined' &&
 ) ? compose(autoRehydrate(), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk))(createStore)(r) : compose(autoRehydrate(), applyMiddleware(thunk))(createStore)(r);
 
 persistStore(store, {
-  whitelist: 'recipeBox.recipes',
+  whitelist: ['recipeBox'],
   keyPrefix: '_recipe-box',
 });
 

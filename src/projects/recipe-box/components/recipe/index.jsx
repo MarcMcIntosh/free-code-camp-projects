@@ -1,11 +1,8 @@
 import React from 'react';
-import { func, string, array } from 'prop-types';
+import { func, string, array, shape } from 'prop-types';
 
 const Recipe = ({
-  title,
-  image,
-  ingredients,
-  preparation,
+  recipe: { title, image, ingredients, preparation },
   onEdit,
   onDelete,
 }, {
@@ -33,15 +30,24 @@ const Recipe = ({
 </div>);
 
 Recipe.propTypes = {
-  title: string,
-  image: string,
-  ingredients: array,
-  preparation: string,
+  recipe: shape({
+    title: string,
+    image: string,
+    ingredients: array,
+    preparation: string,
+  }),
   onEdit: func.isRequired,
   onDelete: func.isRequired,
 };
 
-Recipe.defaultProps = { title: '', image: '', ingredients: [], preparation: '' };
+Recipe.defaultProps = {
+  recipe: {
+    title: '',
+    image: '',
+    ingredients: [],
+    preparation: '',
+  },
+};
 
 Recipe.contextTypes = { classnames: func.isRequired };
 

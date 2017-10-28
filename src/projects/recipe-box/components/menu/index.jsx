@@ -9,7 +9,7 @@ const Menu = ({
   ...props
 }) => (<div {...props}>
   {recipes.map(({ title, desc, image }, i) => {
-    const k = `recipe:${1}`;
+    const k = `recipe:${i}`;
     return (<Item
       key={k}
       onClick={onClick}

@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import Header from './components/Header';
 import RecipeForm from './components/form';
 import Menu from './components/menu';
-import Recipe from './components/recipe';
+// import Recipe from './components/recipe';
 
 import {
   createRecipe,
@@ -21,7 +21,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
   onCreate: payload => dispatch(createRecipe(payload)),
   onUpdate: payload => dispatch(updateRecipe(payload)),
-  onRead: event => dispatch(readRecipe(+event.target.value)),
+  onRead: n => dispatch(readRecipe(+n)),
   onDelete: n => dispatch(deleteRecipe(+n)),
 });
 
@@ -32,31 +32,36 @@ const RecipeBox = ({
   recipes,
   onUpdate,
   onRead,
-  onDelete,
+  // onDelete,
 }, {
   classnames,
 }) => (<div className={classnames('recipe-box')}>
 
   <Header onClick={() => onCreate(true)} />
 
-  <Menu className={classnames('recipes')} recipes={recipes} onClick={onRead} />
+  <Menu className={classnames('recipes')} recipes={recipes} onClick={event => onRead(event.target.value)} />
 
   <ReactModal
     isOpen={editting || reading >= 0}
-    className={classnames('recipe-box-modal__content')}
-    overlayClassName={classnames('recipe-box-modal__overlay')}
-    onRequestClose={() => onCreate(false)}
+    onRequestClose={(event) => {
+      event.preventDefault();
+      onCreate(false);
+      onRead(-1);
+    }}
     contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
   >
     {(editting) ? (<RecipeForm
-      initialValues={recipes[reading]}
+      initialValues={(reading >= 0) ? recipes[reading] : {}}
       onSubmit={values => onUpdate({ index: reading, values })}
       onCancel={() => onCreate(false)}
-    />) : (<Recipe
-      {...recipes[reading]}
-      onEdit={() => onCreate(true)}
-      onDelete={() => onDelete(reading)}
-    />)}
+    />) : (<div>
+      recipe
+      {/* <Recipe
+        recipe={reading >= 0 ? recipes[reading] : {}}
+        onEdit={() => onCreate(true)}
+        onDelete={() => onDelete(reading)}
+      /> */}
+    </div>)}
 
   </ReactModal>
 </div>);
@@ -65,7 +70,7 @@ RecipeBox.propTypes = {
   onCreate: func.isRequired,
   onRead: func.isRequired,
   onUpdate: func.isRequired,
-  onDelete: func.isRequired,
+  //  onDelete: func.isRequired,
   editting: bool.isRequired,
   reading: number.isRequired,
   recipes: array.isRequired,

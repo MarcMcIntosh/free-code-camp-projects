@@ -15,14 +15,14 @@ const DEFAULT_STATE = {
 };
 
 function reducer(state = DEFAULT_STATE, action) {
-  switch (action.payload) {
-    case REHYDRATE: return {
-      ...state,
-      recipes: action.payload.recipes,
-    };
+  switch (action.type) {
+    case REHYDRATE: {
+      const { recipes } = action.payload.recipeBox || state;
+      return { ...state, recipes };
+    }
     case READ: return {
       ...state,
-      reading: +action.payload,
+      reading: action.payload,
     };
     case CREATE: return {
       ...state,
