@@ -4,6 +4,7 @@ $mdc-card: "@material/card/mdc-card.scss";
 $mdc-button: "@material/button/mdc-button.scss";
 $mdc-toolbar: "@material/toolbar/mdc-toolbar.scss";
 $mdc-list: "@material/list/mdc-list.scss";
+$mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
 $content_background: rgba(0, 0, 0, .4);
 
@@ -47,6 +48,41 @@ $content_background: rgba(0, 0, 0, .4);
   &__action {
     composes: mdc-button from $mdc-button;
     composes: mdc-card__action from $mdc-card;
+  }
+}
+
+.recipe-box-menu {
+  composes: mdc-grid-list from $mdc-grid-list;
+
+  &__tiles {
+    composes: mdc-grid-list__tiles from $mdc-grid-list;
+  }
+
+  &-item {
+    composes: mdc-grid-tile from $mdc-grid-list;
+    // width: 300px;
+
+    &__primary {
+      composes: mdc-grid-tile__primary from $mdc-grid-list;
+    }
+
+    &__image {
+      // composes: mdc-grid-tile__primary mdc-grid-tile__primary-content from $mdc-grid-list;
+      composes: mdc-grid-tile__primary-content from $mdc-grid-list;
+    }
+
+    &__text {
+      composes: mdc-grid-tile__secondary from $mdc-grid-list;
+      height: auto;
+    }
+
+    &__title {
+      composes: mdc-grid-tile__title from $mdc-grid-list;
+    }
+
+    &__desc {
+      composes: mdc-grid-tile__support-text from $mdc-grid-list;
+    }
   }
 }
 

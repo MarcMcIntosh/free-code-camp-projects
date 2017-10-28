@@ -39,7 +39,7 @@ const RecipeBox = ({
 
   <Header onClick={() => onCreate(true)} />
 
-  <Menu className={classnames('recipes')} recipes={recipes} onClick={event => onRead(event.target.value)} />
+  <Menu recipes={recipes} onClick={onRead} />
 
   <ReactModal
     isOpen={editting || reading >= 0}
