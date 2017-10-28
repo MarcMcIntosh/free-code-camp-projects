@@ -34,14 +34,6 @@ $content_background: rgba(0, 0, 0, .4);
 
   &__ingredient {
     composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
-
-    &--upgraded {
-      composes: mdc-textfield--upgraded from $mdc-textfield;
-    }
-
-    &--invalid {
-      composes: mdc-textfield--invalid from $mdc-textfield;
-    }
   }
 
   &__line {
@@ -53,7 +45,15 @@ $content_background: rgba(0, 0, 0, .4);
   }
 
   &__textfield {
-    composes: mdc-textfield mdc-textfield--box from $mdc-textfield;
+    composes: mdc-textfield from $mdc-textfield;
+
+    &--box {
+      composes: mdc-textfield--box from $mdc-textfield;
+    }
+
+    &--with-trailing-icon {
+      composes: mdc-textfield--with-trailing-icon from $mdc-textfield;
+    }
 
     &--upgraded {
       composes: mdc-textfield--upgraded from $mdc-textfield;
@@ -61,6 +61,14 @@ $content_background: rgba(0, 0, 0, .4);
 
     &--invalid {
       composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+  }
+
+  &__label {
+    composes: mdc-textfield__label from $mdc-textfield;
+
+    &--float-above {
+      composes: mdc-textfield__label--float-above from $mdc-textfield;
     }
   }
 

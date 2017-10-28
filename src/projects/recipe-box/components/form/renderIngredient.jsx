@@ -5,21 +5,20 @@ import { func, string } from 'prop-types';
 const renderIngrdient = ({
   input,
   type,
+  label,
   meta: { touched, error },
   onClick,
 }, {
   classnames,
 }) => (<div
-  className={classnames('recipe-box-form__ingredient')}
+  className={classnames({
+    'recipe-box-form__textfield': true,
+    'recipe-box-form__textfield--box': true,
+    'recipe-box-form__textfield--with-trailing-icon': true,
+    'recipe-box-form__textfield--invalid': error || false,
+  })}
 >
-  {/* <label
-    htmlFor={input.name}
-    className={classnames('recipe-box-form__label')}
-  >
-    {label}
-  </label> */}
-
-  <input {...input} type={type} className={classnames('recipe-box-form__input')} />
+  <input {...input} type={type} placeholder={label} className={classnames('recipe-box-form__input')} />
   <i
     className={classnames('recipe-box-form__icon')}
     tabIndex="0"

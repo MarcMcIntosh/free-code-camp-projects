@@ -21,7 +21,7 @@ const Ingredients = ({
 
   {fields.map((ingredient, index) => {
     const k = `ingredients[${index}]`;
-    return (<Field key={k} name={k} type="text" component={renderIngredient} onClick={() => fields.remove(index)} />);
+    return (<Field key={k} name={k} type="text" component={renderIngredient} label="Ingredient" onClick={() => fields.remove(index)} />);
   })}
   {error && <span className="error">{error}</span>}
 </div>);
