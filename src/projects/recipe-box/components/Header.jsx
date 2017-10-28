@@ -14,7 +14,6 @@ const Header = ({ onClick }, { classnames }) => (
           className={classnames('recipe-box-header__button')}
           tabIndex="0"
           title="Add Cake"
-          value
           onClick={onClick}
         >playlist_add</button>
       </section>
