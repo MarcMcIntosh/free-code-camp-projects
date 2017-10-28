@@ -1,35 +1,32 @@
-const prefix = str = `RECIPE-BOX_${str}`;
 
-export const ACKNOWLEDGE_COOKIES = 'ACKNOWLEDGE_COOKIES';
-export const acknowledgeCokkies = () => ({
-  type: ACKNOWLEDGE_COOKIES,
-});
-export const RECIPE_ADD = 'RECIPE_ADD';
-export const recipes = payload => ({
-  type: RECIPE_ADD, payload,
+export const EDIT_CAKE = 'EDIT_CAKE';
+export const editCake = payload => ({
+  type: EDIT_CAKE,
+  payload,
 });
 
-export const TOGGLE_MENU = 'TOGGLE_MENU';
-export const toggleMenu = () => ({ type: TOGGLE_MENU });
-
-export const ADD_NEW = 'ADD_NEW';
-export const addNew = () => ({
-  type: ADD_NEW,
+export const CANCEL_EDIT = 'CANCEL_EDIT';
+export const cancelEdit = () => ({
+  type: CANCEL_EDIT,
 });
 
-export function recipeAdd(recipe) {
-  return recipes(recipe);
-}
-
-export const RECIPE_EDIT = 'RECIPE_EDIT';
-export const recipeEdit = payload => ({
-  type: RECIPE_EDIT, payload,
+export const UPDATE_CAKE = 'UPDATE_CAKE';
+export const updateCake = payload => ({
+  type: UPDATE_CAKE,
+  payload,
 });
 
-export const RECIPE_VIEW = 'RECIPE_VIEW';
-export const recipeView = payload => ({
-  type: RECIPE_VIEW, payload,
+export const ADD_CAKE = 'ADD_CAKE';
+export const addCake = () => ({ type: ADD_CAKE });
+
+export const SAVE_CAKE = 'SAVE_CAKE';
+export const saveCake = payload => ({ type: SAVE_CAKE, payload });
+
+export const REMOVE_CAKE = 'REMOVE_CAKE';
+export const rmCake = payload => ({
+  type: REMOVE_CAKE,
+  payload,
 });
 
-export const RECIPE_DELETE = 'RECIPE_DELETE';
-export const recipeDelete = payload => ({ type: RECIPE_DELETE, payload });
+export const ACCEPT_COOKIE = 'ACCEPT_COOKIE';
+export const acceptCookie = () => ({ type: ACCEPT_COOKIE });

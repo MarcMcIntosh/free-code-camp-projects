@@ -1,196 +1,38 @@
-@import "~bourbon-bitters-neat/bourbon-bitters-neat.scss";
-@import "~@material/typography/mixins";
-@import "icons";
+$mdc-typography: "@material/typography/mdc-typography";
+$mdc-theme: "@material/theme/mdc-theme";
+$mdc-card: "@material/card/mdc-card";
+$mdc-button: "@material/button/mdc-button";
+$mdc-toolbar: "@material/toolbar/mdc-toolbar";
+$material-design-icons: "material-design-icons/iconfont/material-icons.css";
 
-.recipe-box {
-  $white: #fff;
-  $background-color: #f1f1f1;
-  $gray: #a1a1a1;
-  $medium-screen: 600px;
-  $large-screen: 900px;
-  $menu-open-min-width: 10em;
-  $menu-open-max-width: 50%;
+.recipe-box-header {
+  composes: mdc-toolbar from $mdc-toolbar;
 
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: stretch;
-  align-items: stretch;
-  // justify-content: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: $background-color;
-  // justify-content: flex-start;
-
-  p { @include mdc-typography(body2); }
-
-  .content {
-    flex-basis: auto;
-    padding: 6px;
-    background: $white;
+  &__row {
+    composes: mdc-toolbar__row from $mdc-toolbar;
   }
 
-  .menu {
-    // width: $menu-width;
-    flex-basis: auto;
-    height: 100%;
-    margin-right: 12px;
-    transition: all .25s linear;
-    border: solid 1px darken($background-color, 10%);
-    background: $white;
-    // z-index: 999999;
-
-    // @include position(absolute, 0 auto 0 0);
-    &__header { width: 100%; }
-    a { cursor: pointer; }
-
-    &--closed {
-      // width: auto;
-      // transform: translateX(-$menu-width);
-
-      .menu__control {
-        // right: 0;
-        // float: left;
-        // transform: translateX($menu-width);
-        // transform: translateX(36px);
-      }
-    }
-
-    &--open {
-      /* k */
-      min-width: $menu-open-min-width;
-      max-width: $menu-open-max-width;
-      // transform: translateX(0);
-
-      .menu__control {
-        /* * */
-      }
-    }
-
-    &__control {
-      /* k */
-      float: right;
-    }
-
-    &__item {
-      border-bottom: solid 2px darken($background-color, 10%);
-
-      &--active {
-        background-color: darken($background-color, 10%);
-      }
-    }
+  &__title {
+    composes: mdc-toolbar__title from $mdc-toolbar;
   }
 
-  button {
-    &.material-icons {
-      padding: 4px 6px;
-    }
-
-    &.delete,
-    &[type="reset"] {
-      padding: 8px 12px;
-      background-color: red;
-    }
-
-    &[type="submit"] {
-      padding: 8px 12px;
-      background-color: green;
-    }
+  &__start {
+    composes: mdc-toolbar__section mdc-toolbar__section--align-start from $mdc-toolbar;
   }
 
-  .recipe {
-    /* * */
-    // flex-basis: 20em;
-    flex-basis: auto;
-    flex-grow: 1;
-    max-width: $medium-screen;
-    margin: 32px auto;
-    // margin: auto;
-    padding: 6px;
-    transition: all .25s linear;
-    background-color: $white;
+  &__end {
+    composes: mdc-toolbar__section mdc-toolbar__section--align-end from $mdc-toolbar;
+  }
 
-    a.material-icons {
-      margin: 6px;
-      color: $gray;
-      cursor: pointer;
-
-      &.close {
-        float: right;
-        clear: both;
-      }
-    }
-
-    &__header {
-      h1 {
-        @include mdc-typography(headline);
-      }
-
-      img {
-        margin-bottom: 12px;
-      }
-    }
-
-    &__ingredients {
-      // clear: both;
-      margin-bottom: 6px;
-      i { @include mdc-typography(caption); }
-      li { @include mdc-typography(body2); }
-    }
-
-    &__notes {
-      // margin-top: 6px;
-      i { @include mdc-typography(caption); }
-      p { @include mdc-typography(body2); }
-    }
-
-    &__image {
-      max-width: 100%;
-      height: auto;
-      margin: auto;
-      margin-top: 6px;
-      float: right;
-      border-radius: 20px;
-    }
-
-    &__form {
-      background-color: $white;
-
-      .controls {
-        float: right;
-        clear: both;
-      }
-      li { @include mdc-typography(subheading2); }
-
-      .ingredients {
-        margin-bottom: 24px;
-      }
-    }
-
-    &__options {
-      position: relative;
-      clear: both;
-      border-bottom: none;
-      color: #a1a1a1;
-      text-align: center;
-
-      li {
-        background-color: $white;
-      }
-
-      a {
-        margin: 6px;
-        float: right;
-        color: inherit;
-        cursor: pointer;
-      }
-
-      &--open {
-        position: absolute;
-      }
-    }
+  &__button {
+    composes: material-icons from $material-design-icons;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    color: rgba(255, 255, 255, 1);
+    font-size: 24px;
+    cursor: pointer;
   }
 }
