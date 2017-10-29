@@ -11,13 +11,17 @@ class renderIngrdient extends Component {
   render() {
     const { input, onClick, type, label, meta: { touched, error } } = this.props;
     const { classnames } = this.context;
-    const cn = classnames({
+    /* const cn = classnames({
       'recipe-box-form__textfield': true,
       'recipe-box-form__textfield--upgraded': true,
       'recipe-box-form__textfield--box': true,
       'recipe-box-form__textfield--with-trailing-icon': true,
       'recipe-box-form__textfield--invalid': error || false,
       'recipe-box-form__textfield--focused': this.state.active,
+    }); */
+    const cn = classnames({
+      'recipe-box-form__ingredient': true,
+      'recipe-box-form__ingredient--focused': this.state.active,
     });
     const ln = classnames('recipe-box-form__line', {
       'recipe-box-form__line--active': this.state.active,

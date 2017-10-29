@@ -34,7 +34,18 @@ $content_background: rgba(0, 0, 0, .4);
   }
 
   &__ingredient {
-    composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
+    // composes: mdc-textfield mdc-textfield--upgraded mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
+    composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
+
+    &--focused {
+      composes: mdc-textfield--focused from $mdc-textfield;
+    }
+
+    &:hover,
+    &::before,
+    &::after {
+      border-radius: 1%;
+    }
   }
 
   &__line {
