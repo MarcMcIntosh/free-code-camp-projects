@@ -2,6 +2,7 @@ import React from 'react';
 import { func } from 'prop-types';
 import { Field, FieldArray, reduxForm, propTypes } from 'redux-form';
 import Ingredients from './Ingredients';
+import FileInput from './FileInput';
 
 /* form fields
 * title: string
@@ -19,23 +20,34 @@ const RecipeForm = ({
 }, {
   classnames,
 }) => (<form onSubmit={handleSubmit} className={classnames('recipe-box-form')}>
+  <div>
+    <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
+  </div>
 
-  <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
+  <div>
+    <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
+  </div>
 
-  <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
+  <div>
+    <Field name="image" label="Upload Picture" component={FileInput} />
+  </div>
 
-  <label htmlFor="ingredients">Ingredients</label>
-  <FieldArray name="ingredients" component={Ingredients} />
+  <div>
+    <label htmlFor="ingredients">Ingredients</label>
+    <FieldArray name="ingredients" component={Ingredients} />
+  </div>
 
-  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+  <div>
+    <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+  </div>
 
-  <button tabIndex="0" className={classnames('recipe-box-form__button')} type="submit" disabled={pristine || submitting}>
-    Submit
-  </button>
+  <div>
+    <button tabIndex="0" className={classnames('recipe-box-form__button')} type="submit" disabled={pristine || submitting}>Submit</button>
+  </div>
 
-  <button tabIndex="0" className={classnames('recipe-box-form__button')} disabled={pristine || submitting} onClick={reset}>
-    Clear Values
-  </button>
+  <div>
+    <button tabIndex="0" className={classnames('recipe-box-form__button')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+  </div>
 </form>);
 
 RecipeForm.propTypes = { ...propTypes };

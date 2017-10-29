@@ -11,6 +11,29 @@ $mdc-ripple: "@material/ripple/mdc-ripple.scss";
 $content_background: rgba(0, 0, 0, .4);
 
 .recipe-box-form {
+  &-file {
+    // composes: mdc-card from $mdc-card;
+    // max-width: 210px;
+    width: fit-content;
+    padding: 6px;
+    border-style: dashed;
+    text-align: center;
+
+    &__label {
+      composes: mdc-card__title from $mdc-card;
+    }
+
+    &__preview {
+      // composes: mdc-card__media-item from $mdc-card;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      background-image: url(./menu/ic_note_add_black_48px.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
   &__button {
     composes: mdc-button mdc-button--raised from $mdc-button;
 
