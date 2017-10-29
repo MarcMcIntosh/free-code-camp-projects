@@ -7,6 +7,7 @@ $mdc-list: "@material/list/mdc-list.scss";
 $mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
 $mdc-textfield: "@material/textfield/mdc-textfield.scss";
+$mdc-ripple: "@material/ripple/mdc-ripple.scss";
 $content_background: rgba(0, 0, 0, .4);
 
 .recipe-box-form {
@@ -38,6 +39,10 @@ $content_background: rgba(0, 0, 0, .4);
 
   &__line {
     composes: mdc-textfield__bottom-line from $mdc-textfield;
+
+    &--active {
+      composes: mdc-textfield__bottom-line--active from $mdc-textfield;
+    }
   }
 
   &__help {
@@ -49,6 +54,12 @@ $content_background: rgba(0, 0, 0, .4);
 
     &--box {
       composes: mdc-textfield--box from $mdc-textfield;
+
+      &:hover,
+      &::before,
+      &::after {
+        border-radius: 1%;
+      }
     }
 
     &--with-trailing-icon {
@@ -57,10 +68,15 @@ $content_background: rgba(0, 0, 0, .4);
 
     &--upgraded {
       composes: mdc-textfield--upgraded from $mdc-textfield;
+      // composes: mdc-ripple-surface from $mdc-ripple;
     }
 
     &--invalid {
       composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+
+    &--focused {
+      composes: mdc-textfield--focused from $mdc-textfield;
     }
   }
 
