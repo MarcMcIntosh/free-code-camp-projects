@@ -20,33 +20,30 @@ const RecipeForm = ({
 }, {
   classnames,
 }) => (<form onSubmit={handleSubmit} className={classnames('recipe-box-form')}>
-  <div>
-    <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
-  </div>
+  <div className={classnames('recipe-box-form__horizontal-block')}>
+    <div className={classnames('recipe-box-form__primary')}>
+      <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
 
-  <div>
-    <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
-  </div>
+      <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
 
-  <div>
+      <div>
+        <FieldArray name="ingredients" component={Ingredients} />
+      </div>
+      
+    </div>
+
     <Field name="image" label="Upload Picture" component={FileInput} />
-  </div>
 
-  <div>
-    <label htmlFor="ingredients">Ingredients</label>
-    <FieldArray name="ingredients" component={Ingredients} />
-  </div>
 
-  <div>
-    <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
-  </div>
+    <div>
+      <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+    </div>
 
-  <div>
-    <button tabIndex="0" className={classnames('recipe-box-form__button')} type="submit" disabled={pristine || submitting}>Submit</button>
-  </div>
+    <div className={classnames('recipe-box-form__actions')}>
+      <button tabIndex="0" className={classnames('recipe-box-form__action')} type="submit" disabled={pristine || submitting}>Submit</button>
 
-  <div>
-    <button tabIndex="0" className={classnames('recipe-box-form__button')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+      <button tabIndex="0" className={classnames('recipe-box-form__action')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+    </div>
   </div>
 </form>);
 
