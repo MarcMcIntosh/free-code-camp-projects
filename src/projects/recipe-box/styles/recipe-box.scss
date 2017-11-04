@@ -1,4 +1,5 @@
 $mdc-typography: "@material/typography/mdc-typography.scss";
+$mdc-layout-grid: "@material/layout-grid/mdc-layout-grid";
 $mdc-elevation: "@material/elevation/mdc-elevation.scss";
 $mdc-card: "@material/card/mdc-card.scss";
 $mdc-button: "@material/button/mdc-button.scss";
@@ -10,15 +11,176 @@ $mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $mdc-ripple: "@material/ripple/mdc-ripple.scss";
 $content_background: rgba(0, 0, 0, .4);
 
-.recipe-box-form {
-  // composes: mdc-card from $mdc-card;
+/*
+.recipe-box-modal {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  transform: translate(-50%);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-  &__horizontal-block {
-    composes: mdc-card__horizontal-block from $mdc-card;
+.recipe-box-modal {
+  // portalClassName
+
+  &__overlay {
+    // composes: mdc-layout-grid__inner from $mdc-layout-grid;
+    composes: mdc-layout-grid from $mdc-layout-grid;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    // margin: auto;
+  }
+
+  &__content {
+    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-8 from $mdc-layout-grid;
+    composes: mdc-layout-grid__inner from $mdc-layout-grid;
+    // position: absolute;
+    // top: 40px;
+    // bottom: 40px;
+    // left: 50%;
+    // margin: 0 auto;
+    padding: 20px;
+    // transform: translate(-50%);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+*/
+.recipe-box-modal {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  &__container {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    bottom: 40px;
+    // left: 50%;
+    left: 40px;
+    margin: 0 auto;
+    //padding: 20px;
+    // transform: translate(-50%);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.recipe-box-form {
+  composes: mdc-layout-grid from $mdc-layout-grid;
+
+  &__inner {
+    composes: mdc-layout-grid__inner from $mdc-layout-grid;
   }
 
   &__primary {
-    composes: mdc-card__primary from $mdc-card;
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-6 from $mdc-layout-grid;
+  }
+
+  &__title {
+    /* title text settings */
+  }
+
+  &__cell {
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-4 from $mdc-layout-grid;
+  }
+
+  &__media {
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-4-tablet from $mdc-layout-grid;
+    margin: auto 0;
+
+    // disable float on mobile and activate on anthing bigger
+  }
+
+  &__field {
+    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-5 from $mdc-layout-grid;
+    composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
+    width: 100%;
+
+    &--focused {
+      composes: mdc-textfield--focused from $mdc-textfield;
+    }
+
+    &--invalid {
+      composes: mdc-textfield--invalid from $mdc-textfield;
+    }
+
+    &:hover,
+    &::before,
+    &::after {
+      border-radius: 1%;
+    }
+  }
+
+  &__label {
+    composes: mdc-textfield__label from $mdc-textfield;
+
+    &--float-above {
+      composes: mdc-textfield__label--float-above from $mdc-textfield;
+    }
+  }
+
+  &__input {
+    composes: mdc-textfield__input from $mdc-textfield;
+  }
+
+  &__helptext {
+    composes: mdc-textfield-helptext from $mdc-textfield;
+
+    &--validation-msg {
+      composes: mdc-textfield-helptext--validation-msg from $mdc-textfield;
+    }
+  }
+
+  &__secondary {
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet from $mdc-layout-grid;
+  }
+
+  &-file {
+    // width: fit-content;
+    margin: auto;
+    padding: 6px;
+    float: right;
+    border-style: dashed;
+    text-align: center;
+
+    &__label {
+      composes: mdc-card__title from $mdc-card;
+    }
+
+    &__preview {
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      background-image: url(./menu/ic_note_add_black_48px.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 
   &__actions {
@@ -28,27 +190,6 @@ $content_background: rgba(0, 0, 0, .4);
   &__action {
     composes: mdc-button from $mdc-button;
     composes: mdc-card__action from $mdc-card;
-  }
-
-  &-file {
-    width: fit-content;
-    padding: 6px;
-    border-style: dashed;
-    text-align: center;
-
-    &__label {
-      composes: mdc-card__title from $mdc-card;
-    }
-
-    &__preview {
-      // composes: mdc-card__media-item from $mdc-card;
-      width: 200px;
-      height: 200px;
-      margin: auto;
-      background-image: url(./menu/ic_note_add_black_48px.svg);
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
   }
 
   &__button {
@@ -129,18 +270,6 @@ $content_background: rgba(0, 0, 0, .4);
     &--focused {
       composes: mdc-textfield--focused from $mdc-textfield;
     }
-  }
-
-  &__label {
-    composes: mdc-textfield__label from $mdc-textfield;
-
-    &--float-above {
-      composes: mdc-textfield__label--float-above from $mdc-textfield;
-    }
-  }
-
-  &__input {
-    composes: mdc-textfield__input from $mdc-textfield;
   }
 }
 

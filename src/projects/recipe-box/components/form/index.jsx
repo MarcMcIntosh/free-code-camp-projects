@@ -3,7 +3,8 @@ import { func } from 'prop-types';
 import { Field, FieldArray, reduxForm, propTypes } from 'redux-form';
 import Ingredients from './Ingredients';
 import FileInput from './FileInput';
-
+import TextField from './TextField';
+import validate from './validate';
 /* form fields
 * title: string
 * desc: string
@@ -20,30 +21,32 @@ const RecipeForm = ({
 }, {
   classnames,
 }) => (<form onSubmit={handleSubmit} className={classnames('recipe-box-form')}>
-  <div className={classnames('recipe-box-form__horizontal-block')}>
+  {/* using mdc-layout grid could solve alot of these problems */}
+  {/* or apply a sutiable classname to the container and use unclassed elements */}
+  <div className={classnames('recipe-box-form__inner')}>
+
     <div className={classnames('recipe-box-form__primary')}>
-      <Field name="title" type="text" component="input" placeholder="Name for recipe" label="Recipe" />
+      <h1 className={classnames('recipe-box-form__title')}>New Recipe</h1>
 
-      <Field name="desc" component="textarea" type="text" placeholder="Description of the recipe" label="Description" />
+      <Field name="title" type="text" component={TextField} label="Title" />
 
-      <div>
-        <FieldArray name="ingredients" component={Ingredients} />
-      </div>
-      
+      <Field name="desc" component={TextField} type="text" placeholder="Description of the recipe" label="Description" />
+
     </div>
 
-    <Field name="image" label="Upload Picture" component={FileInput} />
-
-
-    <div>
-      <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+    <div className={classnames('recipe-box-form__media')}>
+      <Field name="image" label="Upload Picture" component={FileInput} />
     </div>
+  </div>
 
-    <div className={classnames('recipe-box-form__actions')}>
-      <button tabIndex="0" className={classnames('recipe-box-form__action')} type="submit" disabled={pristine || submitting}>Submit</button>
+  <FieldArray name="ingredients" component={Ingredients} />
 
-      <button tabIndex="0" className={classnames('recipe-box-form__action')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-    </div>
+  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+
+  <div className={classnames('recipe-box-form__actions')}>
+    <button tabIndex="0" className={classnames('recipe-box-form__action')} type="submit" disabled={pristine || submitting}>Submit</button>
+
+    <button tabIndex="0" className={classnames('recipe-box-form__action')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
   </div>
 </form>);
 
@@ -52,4 +55,5 @@ RecipeForm.contextTypes = { classnames: func.isRequired };
 
 export default reduxForm({
   form: 'recipe-form',
+  validate,
 })(RecipeForm);

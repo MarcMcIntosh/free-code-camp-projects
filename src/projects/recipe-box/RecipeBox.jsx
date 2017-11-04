@@ -46,19 +46,19 @@ const RecipeBox = ({
       onRead(-1);
     }}
     contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
+    className={classnames('recipe-box-modal__container')}
+    overlayClassName={classnames('recipe-box-modal__overlay')}
   >
-    {(editting) ? (<RecipeForm
+    <div>{(editting) ? (<RecipeForm
       initialValues={(reading >= 0) ? recipes[reading] : {}}
       onSubmit={values => onUpdate({ index: reading, values })}
       onCancel={() => onCreate(false)}
-    />) : (<div>
-      recipe
-      {/* <Recipe
-        recipe={reading >= 0 ? recipes[reading] : {}}
-        onEdit={() => onCreate(true)}
-        onDelete={() => onDelete(reading)}
-      /> */}
-    </div>)}
+    />) : (<div> recipe {/* <Recipe
+      recipe={reading >= 0 ? recipes[reading] : {}}
+      onEdit={() => onCreate(true)}
+      onDelete={() => onDelete(reading)}
+    /> */}</div>)
+    }</div>
 
   </ReactModal>
 </div>);
