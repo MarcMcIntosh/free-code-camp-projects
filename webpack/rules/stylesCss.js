@@ -2,13 +2,13 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const localIdentName = require('./localIdentName');
 
-const createLoaders = browser => ([
+const createLoaders = ({ production = false, browser = false }) => ([
   {
     loader: browser ? 'css-loader' : 'css-loader/locals',
     options: {
       sourceMap: true,
       modules: true,
-      localIdentName,
+      localIdentName: localIdentName({ production }),
       importLoaders: 1,
     },
   },
@@ -46,7 +46,7 @@ module.exports = ({
   production = false,
   browser = false,
 } = {}) => {
-  const loaders = createLoaders(browser);
+  const loaders = createLoaders({ production, browser });
   const client = production ? ExtractTextPlugin.extract({ fallback: 'style-loader', use: loaders }) : [].concat({
     loader: 'style-loader',
     options: { hmr: production },

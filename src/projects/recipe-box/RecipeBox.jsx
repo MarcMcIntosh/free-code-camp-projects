@@ -4,7 +4,7 @@ import { func, bool, number, array } from 'prop-types';
 import ReactModal from 'react-modal';
 import RecipeForm from './components/form';
 import Menu from './components/menu';
-// import Recipe from './components/recipe';
+import Recipe from './components/recipe';
 
 import {
   createRecipe,
@@ -31,7 +31,7 @@ const RecipeBox = ({
   recipes,
   onUpdate,
   onRead,
-  // onDelete,
+  onDelete,
 }, {
   classnames,
 }) => (<div className={classnames('recipe-box')}>
@@ -49,16 +49,11 @@ const RecipeBox = ({
     className={classnames('recipe-box-modal__container')}
     overlayClassName={classnames('recipe-box-modal__overlay')}
   >
-    <div>{(editting) ? (<RecipeForm
-      initialValues={(reading >= 0) ? recipes[reading] : {}}
-      onSubmit={values => onUpdate({ index: reading, values })}
-      onCancel={() => onCreate(false)}
-    />) : (<div> recipe {/* <Recipe
-      recipe={reading >= 0 ? recipes[reading] : {}}
-      onEdit={() => onCreate(true)}
-      onDelete={() => onDelete(reading)}
-    /> */}</div>)
-    }</div>
+    <div>
+      {editting && (<RecipeForm initialValues={(reading >= 0) ? recipes[reading] : { ingredients: [null] }} onSubmit={values => onUpdate({ index: reading, values })} onCancel={() => onCreate(false)} />)}
+
+      {!editting && reading >= 0 && (<Recipe recipe={recipes[reading]} onEdit={() => onCreate(true)} onDelete={() => onDelete(reading)} />)}
+    </div>
 
   </ReactModal>
 </div>);
@@ -67,7 +62,7 @@ RecipeBox.propTypes = {
   onCreate: func.isRequired,
   onRead: func.isRequired,
   onUpdate: func.isRequired,
-  //  onDelete: func.isRequired,
+  onDelete: func.isRequired,
   editting: bool.isRequired,
   reading: number.isRequired,
   recipes: array.isRequired,

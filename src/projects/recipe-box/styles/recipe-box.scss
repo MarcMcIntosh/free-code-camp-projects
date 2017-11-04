@@ -9,59 +9,9 @@ $mdc-grid-list: "@material/grid-list/mdc-grid-list.scss";
 $material-design-icons: "material-design-icons/iconfont/material-icons.css";
 $mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $mdc-ripple: "@material/ripple/mdc-ripple.scss";
-$content_background: rgba(0, 0, 0, .4);
+$modal_background: rgba(0, 0, 0, .5);
+$gray: rgba(0, 0, 0, .4);
 
-/*
-.recipe-box-modal {
-  position: absolute;
-  top: 40px;
-  bottom: 40px;
-  left: 50%;
-  margin: 0 auto;
-  padding: 20px;
-  transform: translate(-50%);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  background: #fff;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.recipe-box-modal {
-  // portalClassName
-
-  &__overlay {
-    // composes: mdc-layout-grid__inner from $mdc-layout-grid;
-    composes: mdc-layout-grid from $mdc-layout-grid;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, .5);
-    // margin: auto;
-  }
-
-  &__content {
-    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-8 from $mdc-layout-grid;
-    composes: mdc-layout-grid__inner from $mdc-layout-grid;
-    // position: absolute;
-    // top: 40px;
-    // bottom: 40px;
-    // left: 50%;
-    // margin: 0 auto;
-    padding: 20px;
-    // transform: translate(-50%);
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    background: #fff;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-*/
 .recipe-box-modal {
   &__overlay {
     position: fixed;
@@ -69,7 +19,7 @@ $content_background: rgba(0, 0, 0, .4);
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: $modal_background;
   }
 
   &__container {
@@ -77,11 +27,8 @@ $content_background: rgba(0, 0, 0, .4);
     top: 40px;
     right: 40px;
     bottom: 40px;
-    // left: 50%;
     left: 40px;
     margin: 0 auto;
-    //padding: 20px;
-    // transform: translate(-50%);
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
@@ -102,12 +49,54 @@ $content_background: rgba(0, 0, 0, .4);
     composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-6 from $mdc-layout-grid;
   }
 
+  &__secondary {
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-6 from $mdc-layout-grid;
+  }
+
   &__title {
-    /* title text settings */
+    composes: mdc-typography--headline mdc-typography--adjust-margin from $mdc-typography;
+  }
+
+  &__subtitle {
+    composes: mdc-typography--subheading2 mdc-typography--adjust-margin from $mdc-typography;
+  }
+
+  &__textarea {
+    composes: mdc-textfield__input from $mdc-textfield;
+    width: 100%;
+    border: 1px solid $modal_background;
+    border-radius: 4px;
+    outline: none;
+
+    &:active,
+    &:focus {
+      border-color: rgba(0, 0, 0, .73);
+    }
+  }
+
+  &__input {
+    composes: mdc-textfield__input from $mdc-textfield;
+  }
+
+  &__action {
+    composes: mdc-button from $mdc-button;
+    composes: mdc-textfield mdc-textfield--box from $mdc-textfield;
+
+    &-icon {
+      composes: material-icons from $material-design-icons;
+      // composes: mdc-button__icon from $mdc-button;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      font-size: 18px;
+      line-height: inherit;
+      vertical-align: top;
+    }
   }
 
   &__cell {
-    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-4 from $mdc-layout-grid;
+    composes: mdc-layout-grid__cell from $mdc-layout-grid;
   }
 
   &__media {
@@ -115,6 +104,10 @@ $content_background: rgba(0, 0, 0, .4);
     margin: auto 0;
 
     // disable float on mobile and activate on anthing bigger
+  }
+
+  &__ingredients {
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-12 from $mdc-layout-grid;
   }
 
   &__field {
@@ -145,10 +138,6 @@ $content_background: rgba(0, 0, 0, .4);
     }
   }
 
-  &__input {
-    composes: mdc-textfield__input from $mdc-textfield;
-  }
-
   &__helptext {
     composes: mdc-textfield-helptext from $mdc-textfield;
 
@@ -157,13 +146,9 @@ $content_background: rgba(0, 0, 0, .4);
     }
   }
 
-  &__secondary {
-    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet from $mdc-layout-grid;
-  }
-
   &-file {
     // width: fit-content;
-    margin: auto;
+    margin: 16px auto;
     padding: 6px;
     float: right;
     border-style: dashed;
@@ -187,11 +172,12 @@ $content_background: rgba(0, 0, 0, .4);
     composes: mdc-card__actions from $mdc-card;
   }
 
+  /*
   &__action {
     composes: mdc-button from $mdc-button;
     composes: mdc-card__action from $mdc-card;
   }
-
+  */
   &__button {
     composes: mdc-button mdc-button--raised from $mdc-button;
 
@@ -217,6 +203,7 @@ $content_background: rgba(0, 0, 0, .4);
   &__ingredient {
     // composes: mdc-textfield mdc-textfield--upgraded mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
     composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
+    width: 100%;
 
     &--focused {
       composes: mdc-textfield--focused from $mdc-textfield;
@@ -369,7 +356,7 @@ $content_background: rgba(0, 0, 0, .4);
 
   &__content {
     composes: mdc-card__primary from $mdc-card;
-    background: $content_background;
+    background: $modal_background;
   }
 
   &__title {
@@ -383,7 +370,7 @@ $content_background: rgba(0, 0, 0, .4);
   &__actions {
     composes: mdc-card__actions from $mdc-card;
     padding: 0 0 8px;
-    background: $content_background;
+    background: $modal_background;
   }
 
   &__action {

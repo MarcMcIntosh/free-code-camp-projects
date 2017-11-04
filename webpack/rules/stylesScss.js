@@ -10,7 +10,7 @@ const createLoader = ({ production, browser }) => ([
       modules: true,
       sourceMap: true,
       importLoaders: 3,
-      localIdentName,
+      localIdentName: localIdentName({ production }),
     },
   }, /* {
     loader: 'postcss-loader',

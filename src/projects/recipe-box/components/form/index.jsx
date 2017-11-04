@@ -5,13 +5,6 @@ import Ingredients from './Ingredients';
 import FileInput from './FileInput';
 import TextField from './TextField';
 import validate from './validate';
-/* form fields
-* title: string
-* desc: string
-* image: string
-* ingredients: array [ strngs ];
-* preparation: string
-*/
 
 const RecipeForm = ({
   handleSubmit,
@@ -37,11 +30,20 @@ const RecipeForm = ({
     <div className={classnames('recipe-box-form__media')}>
       <Field name="image" label="Upload Picture" component={FileInput} />
     </div>
+
+    <div className={classnames('recipe-box-form__primary')}>
+      <FieldArray name="ingredients" component={Ingredients} />
+    </div>
+
+    <div className={classnames('recipe-box-form__primary')}>
+      <h2 className={classnames('recipe-box-form__title')}>Instructions</h2>
+
+      <Field name="preparation" rows="8" cols="40" className={classnames('recipe-box-form__textarea')} component="textarea" placeholder="Instructions for cooking recipe" />
+
+    </div>
   </div>
 
-  <FieldArray name="ingredients" component={Ingredients} />
-
-  <Field name="preparation" component="textarea" type="text" placeholder="Instructions for recipe" label="Instructions" />
+  {/* <div className={classnames('recipe-box-form__inner')} /> */}
 
   <div className={classnames('recipe-box-form__actions')}>
     <button tabIndex="0" className={classnames('recipe-box-form__action')} type="submit" disabled={pristine || submitting}>Submit</button>
