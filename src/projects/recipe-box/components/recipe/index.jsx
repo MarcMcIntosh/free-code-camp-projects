@@ -8,12 +8,14 @@ const Recipe = ({
 }, {
   classnames,
 }) => (<div className={classnames('recipe-box-recipe')}>
-  <div className={classnames('recipe-box-recipe__horizontal-block')}>
+  <header className={classnames('recipe-box-recipe__header')}>
+    <h1 className={classnames('recipe-box-recipe__title')}>{title}</h1>
+    <h2 className={classnames('recipe-box-recipe__subtitle')}>{desc}</h2>
 
-    <div className={classnames('recipe-box-recipe__header')}>
-      <h1 className={classnames('recipe-box-recipe__title')}>{title}</h1>
-      <h2 className={classnames('recipe-box-recipe__subtitle')}>{desc}</h2>
-    </div>
+    <hr />
+
+  </header>
+  <div className={classnames('recipe-box-recipe__horizontal-block')}>
 
     <div className={classnames('recipe-box-recipe__media')}>
       <img src={image} alt="" className={classnames('recipe-box-recipe__image')} />
@@ -29,13 +31,15 @@ const Recipe = ({
   </div>
 
   <section className={classnames('recipe-box-recipe__supporting-text')}>
-    <p>{preparation}</p>
-
+    <hr />
+    <h2 className={classnames('recipe-box-recipe__heading')}>Preparation notes</h2>
+    {preparation}
+    <hr />
   </section>
 
   <section className={classnames('recipe-box-recipe__actions')}>
-    <button tabIndex="0" className={classnames('recipe-box-recipe__action')} onClick={onEdit} title="Edit this recipe">Edit</button>
-    <button tabIndex="0" className={classnames('recipe-box-recipe__action')} onClick={onDelete} title="Delete this recipe">Delete</button>
+    <button tabIndex="0" className={classnames('recipe-box-recipe__action', 'recipe-box-recipe__action--primary')} onClick={onEdit} title="Edit this recipe">Edit</button>
+    <button tabIndex="0" className={classnames('recipe-box-recipe__action', 'recipe-box-recipe__action--accent')} onClick={onDelete} title="Delete this recipe">Delete</button>
   </section>
 </div>);
 
