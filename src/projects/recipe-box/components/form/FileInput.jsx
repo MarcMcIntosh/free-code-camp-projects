@@ -24,29 +24,6 @@ const FileInput = ({
     }}
   />
 </div>);
-/*
-const FileInput = ({
-  input: { onChange, ...input },
-}, {
-  classnames,
-}) => (<div className={classnames('recipe-box-form-file')}>
-  <img className={classnames('recipe-box-form-file__preview')} src={input.value} alt="" />
-
-  <div className={classnames('recipe-box-form-file__actions')}>
-    <input
-      type="file"
-      accept="image/*"
-      className={classnames('recipe-box-form-file__action')}
-      onChange={(event) => {
-        const n = event.target.files.length - 1 || 0;
-        const r = new FileReader();
-        r.onloadend = (d) => { onChange(d.target.result); };
-        r.readAsDataURL(event.target.files[n]);
-      }}
-    />
-  </div>
-</div>);
-*/
 
 FileInput.propTypes = { ...fieldPropTypes };
 FileInput.contextTypes = { classnames: func.isRequired };

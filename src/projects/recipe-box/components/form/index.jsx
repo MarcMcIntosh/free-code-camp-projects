@@ -11,6 +11,8 @@ const RecipeForm = ({
   pristine,
   reset,
   submitting,
+  onCancel,
+  invalid,
 }, {
   classnames,
 }) => (<form onSubmit={handleSubmit} className={classnames('recipe-box-form')}>
@@ -43,16 +45,16 @@ const RecipeForm = ({
     </div>
   </div>
 
-  {/* <div className={classnames('recipe-box-form__inner')} /> */}
+  {/* Add and error message here */}
 
-  <div className={classnames('recipe-box-form__actions')}>
-    <button tabIndex="0" className={classnames('recipe-box-form__action')} type="submit" disabled={pristine || submitting}>Submit</button>
+  <div className={classnames('recipe-box__actions')}>
+    <button tabIndex="0" title="Save" className={classnames('recipe-box__action', 'recipe-box__action--primary')} type="submit" disabled={pristine || invalid || submitting}>Submit</button>
 
-    <button tabIndex="0" className={classnames('recipe-box-form__action')} disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+    <button tabIndex="0" className={classnames('recipe-box__action', 'recipe-box__action--accent')} disabled={submitting} onClick={pristine ? reset : onCancel}>{pristine ? 'Cancel' : 'Reset'}</button>
   </div>
 </form>);
 
-RecipeForm.propTypes = { ...propTypes };
+RecipeForm.propTypes = { ...propTypes, onCancel: func.isRequired };
 RecipeForm.contextTypes = { classnames: func.isRequired };
 
 export default reduxForm({

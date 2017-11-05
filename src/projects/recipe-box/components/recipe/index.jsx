@@ -37,9 +37,9 @@ const Recipe = ({
     <hr />
   </section>
 
-  <section className={classnames('recipe-box-recipe__actions')}>
-    <button tabIndex="0" className={classnames('recipe-box-recipe__action', 'recipe-box-recipe__action--primary')} onClick={onEdit} title="Edit this recipe">Edit</button>
-    <button tabIndex="0" className={classnames('recipe-box-recipe__action', 'recipe-box-recipe__action--accent')} onClick={onDelete} title="Delete this recipe">Delete</button>
+  <section className={classnames('recipe-box__actions')}>
+    <button tabIndex="0" className={classnames('recipe-box__action', 'recipe-box__action--primary')} onClick={onEdit} title="Edit this recipe">Edit</button>
+    <button tabIndex="0" className={classnames('recipe-box__action', 'recipe-box__action--accent')} onClick={onDelete} title="Delete this recipe">Delete</button>
   </section>
 </div>);
 

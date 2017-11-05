@@ -1,7 +1,7 @@
 import React from 'react';
 import { func, array } from 'prop-types';
 import Item from './Item';
-import AddImage from './ic_note_add_black_48px.svg';
+import AddImage from '../../styles/assets/ic_note_add_black_48px.svg';
 
 const Menu = ({
   recipes,
@@ -15,12 +15,11 @@ const Menu = ({
       title="Add Recipe"
       desc="Click here to add a recipe"
       image={AddImage}
-      role="menuitem"
       onClick={() => onCreate(true)}
     />
     {recipes.map(({ title, desc, image }, i) => {
       const k = `recipe:${i}`;
-      return (<Item title={title} desc={desc} image={image} key={k} role="menuitem" onClick={() => onRead(i)} />);
+      return (<Item title={title} desc={desc} image={image} key={k} onClick={() => onRead(i)} />);
     })}
   </ul>
 </div>);

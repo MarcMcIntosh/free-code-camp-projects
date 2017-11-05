@@ -1,15 +1,14 @@
 import React from 'react';
-import { number, string, func } from 'prop-types';
+import { string, func } from 'prop-types';
 
 const Item = ({
-  value,
   title,
   desc,
   image,
   ...props
 }, {
   classnames,
-}) => (<li className={classnames('recipe-box-menu-item')} {...props} >
+}) => (<li title={desc} role="menuitem" className={classnames('recipe-box-menu-item')} {...props} >
   <div className={classnames('recipe-box-menu-item__primary')} >
 
     <div className={classnames('recipe-box-menu-item__image')} style={image ? { backgroundImage: `url(${image})` } : {}} />
@@ -26,7 +25,6 @@ const Item = ({
 </li>);
 
 Item.propTypes = {
-  value: number.isRequired,
   title: string.isRequired,
   desc: string.isRequired,
   image: string,

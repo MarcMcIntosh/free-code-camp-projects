@@ -40,6 +40,36 @@ $gray: rgba(0, 0, 0, .4);
   }
 }
 
+.recipe-box {
+  /* shared styles */
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
+  &__action {
+    composes: mdc-button from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+    composes: mdc-ripple-surface from $mdc-ripple;
+    border-width: 1px;
+    border-style: solid;
+    line-height: 32px;
+
+    &--accent {
+      composes: mdc-ripple-surface--accent from $mdc-ripple;
+    }
+
+    &--primary {
+      composes: mdc-ripple-surface--primary from $mdc-ripple;
+    }
+
+    &--icon {
+      composes: material-icons from $material-design-icons;
+      composes: mdc-button__icon from $mdc-button;
+      vertical-align: inherit;
+    }
+  }
+}
+
 .recipe-box-form {
   composes: mdc-layout-grid from $mdc-layout-grid;
 
@@ -78,23 +108,6 @@ $gray: rgba(0, 0, 0, .4);
 
   &__input {
     composes: mdc-textfield__input from $mdc-textfield;
-  }
-
-  &__action {
-    composes: mdc-button from $mdc-button;
-    composes: mdc-textfield mdc-textfield--box from $mdc-textfield;
-
-    &-icon {
-      composes: material-icons from $material-design-icons;
-      // composes: mdc-button__icon from $mdc-button;
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      margin-right: 8px;
-      font-size: 18px;
-      line-height: inherit;
-      vertical-align: top;
-    }
   }
 
   &__cell {
@@ -161,7 +174,7 @@ $gray: rgba(0, 0, 0, .4);
       width: 200px;
       height: 200px;
       margin: auto;
-      background-image: url(./menu/ic_note_add_black_48px.svg);
+      background-image: url(./assets/ic_note_add_black_48px.svg);
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -211,10 +224,6 @@ $gray: rgba(0, 0, 0, .4);
 .recipe-box-recipe {
   composes: mdc-card from $mdc-card;
   composes: mdc-layout-grid from $mdc-layout-grid;
-
-  hr {
-    // border: 1px solid $gray;
-  }
 
   &__horizontal-block {
     composes: mdc-layout-grid__inner from $mdc-layout-grid;
@@ -267,31 +276,6 @@ $gray: rgba(0, 0, 0, .4);
   &__ingredient {
     composes: mdc-typography--caption mdc-typography--adjust-margin from $mdc-typography;
   }
-
-  &__preparation {
-    /* stuff */
-  }
-
-  &__actions {
-    composes: mdc-card__actions from $mdc-card;
-  }
-
-  &__action {
-    composes: mdc-button from $mdc-button;
-    composes: mdc-card__action from $mdc-card;
-    composes: mdc-ripple-surface from $mdc-ripple;
-    border-width: 1px;
-    border-style: solid;
-    line-height: 32px;
-
-    &--accent {
-      composes: mdc-ripple-surface--accent from $mdc-ripple;
-    }
-
-    &--primary {
-      composes: mdc-ripple-surface--primary from $mdc-ripple;
-    }
-  }
 }
 
 .recipe-box-menu {
@@ -311,8 +295,8 @@ $gray: rgba(0, 0, 0, .4);
     }
 
     &__image {
-      // composes: mdc-grid-tile__primary mdc-grid-tile__primary-content from $mdc-grid-list;
       composes: mdc-grid-tile__primary-content from $mdc-grid-list;
+      background-image: url(./assets/1-1.jpg);
     }
 
     &__text {

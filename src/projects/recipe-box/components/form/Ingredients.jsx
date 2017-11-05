@@ -18,14 +18,13 @@ const Ingredients = ({
   })}
   {error && <span className="error">{error}</span>}
   <button
-    className={classnames('recipe-box-form__action')}
+    className={classnames('recipe-box__action')}
     title="Add Ingredient"
     type="button"
     tabIndex="0"
     onClick={() => fields.push()}
-  >
-    Add Ingredient
-    <i className={classnames('recipe-box-form__action-icon')}>playlist_add</i>
+  >Add Ingredient
+    <i className={classnames('recipe-box__action--icon')}>playlist_add</i>
   </button>
 </div>);
 
