@@ -1,55 +1,11 @@
-import React, { Component } from 'react';
-import { oneOfType, number, string, func } from 'prop-types';
-import { connect } from 'react-redux';
-import { handleUserInput } from '../actions';
+import React from 'react';
+import { func } from 'prop-types';
 
-class Display extends Component {
-  constructor(props) {
-    super(props);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyPress);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyPress);
-  }
-  handleKeyPress(event) {
-    if (!isNaN(event.key) || /[0-9+-/.*%]/.test(event.key)) {
-      // return these values early
-      return this.props.onKey(event.key);
-      // augment the follwoing keyCodes
-    } else if (+event.keyCode === 13) {
-      return this.props.onKey('=');
-    } else if (+event.keyCode === 8) {
-      return this.props.onKey('del');
-    } else if (+event.keyCode === 46) {
-      return this.props.onKey('clear');
-    } else if (+event.keyCode === 32) {
-      // space bar
-      return this.props.onKey('ans');
-    }
-    return undefined;
-  }
-  render() {
-    return (<div className={this.props.classnames('display')}>
-      <input className={this.props.classnames('screen')} type="text" readOnly="true" value={this.props.display} />
-    </div>);
-  }
-}
+const Display = (props, { classnames }) => (<div className={classnames('calculator__display')}>
+  <input className={classnames('calculator__screen')} type="text" readOnly="true" {...props} />
+</div>);
 
-Display.propTypes = {
-  display: oneOfType([string, number]).isRequired,
-  onKey: func.isRequired,
-  classnames: func.isRequired,
-};
 
-const mapStateToProps = state => ({
-  display: state.display,
-});
+Display.contextTypes = { classnames: func.isRequired };
 
-const mapDispatchToProps = dispatch => ({
-  onKey: str => dispatch(handleUserInput(str)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Display);
+export default Display;

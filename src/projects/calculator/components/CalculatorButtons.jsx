@@ -1,57 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { func } from 'prop-types';
-import { connect } from 'react-redux';
-import Button from './Button';
-import { handleUserInput } from '../actions';
+import Cell from './Cell';
 
-class Buttons extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick(event) {
-    return this.props.onUserInput(event.target.value);
-  }
-  render() {
-    const { classnames } = this.props;
-    return (<table className={classnames('buttons')}><tbody>
-      <tr>
-        <td className={classnames('cell')}><Button value="clear" className={classnames('ac')} onClick={this.handleClick}>AC</Button></td>
-        <td className={classnames('cell')}><Button value="del" className={classnames('ce')} onClick={this.handleClick}>CE</Button></td>
-        <td className={classnames('cell')}><Button value="%" className={classnames('mod')} onClick={this.handleClick}>Mod</Button></td>
-        <td className={classnames('cell')}><Button value="/" className={classnames('divide')} onClick={this.handleClick}>&divide;</Button></td>
-      </tr><tr>
-        <td className={classnames('cell')}><Button value={7} className={classnames('number')} onClick={this.handleClick}>9</Button></td>
-        <td className={classnames('cell')}><Button value={8} className={classnames('number')} onClick={this.handleClick}>8</Button></td>
-        <td className={classnames('cell')}><Button value={9} className={classnames('number')} onClick={this.handleClick}>7</Button></td>
-        <td className={classnames('cell')}><Button value="*" className={classnames('times')} onClick={this.handleClick}>&times;</Button></td>
-      </tr><tr>
-        <td className={classnames('cell')}><Button value={4} className={classnames('number')} onClick={this.handleClick}>6</Button></td>
-        <td className={classnames('cell')}><Button value={5} className={classnames('number')} onClick={this.handleClick}>5</Button></td>
-        <td className={classnames('cell')}><Button value={6} className={classnames('number')} onClick={this.handleClick}>4</Button></td>
-        <td className={classnames('cell')}><Button value="-" className={classnames('minus')} onClick={this.handleClick}>&minus;</Button></td>
-      </tr><tr>
-        <td className={classnames('cell')}><Button value={3} className={classnames('number')} onClick={this.handleClick}>3</Button></td>
-        <td className={classnames('cell')}><Button value={2} className={classnames('number')} onClick={this.handleClick}>2</Button></td>
-        <td className={classnames('cell')}><Button value={1} className={classnames('number')} onClick={this.handleClick}>1</Button></td>
-        <td className={classnames('cell')}><Button value="+" className={classnames('plus')} onClick={this.handleClick}>&#43;</Button></td>
-      </tr><tr>
-        <td className={classnames('cell')}><Button value="." className={classnames('point')} onClick={this.handleClick}>&#46;</Button></td>
-        <td className={classnames('cell')}><Button value={0} className={classnames('number')} onClick={this.handleClick}>0</Button></td>
-        <td className={classnames('cell')}><Button value="ans" className={classnames('ans')} onClick={this.handleClick}>Ans</Button></td>
-        <td className={classnames('cell')}><Button value="=" className={classnames('equals')} onClick={this.handleClick}>&#61;</Button></td>
-      </tr>
-    </tbody></table>);
-  }
-}
+const Buttons = ({ onClick }, { classnames }) => (<table className={classnames('calculator__buttons')}>
+  <tbody>
+    <tr>
+      <Cell value="clear" className={classnames('calculator__button', 'calculator__button--ac')} onClick={onClick}>AC</Cell>
+      <Cell value="del" className={classnames('calculator__button', 'calculator__button--ce')} onClick={onClick}>CE</Cell>
+      <Cell value="%" className={classnames('calculator__button', 'calculator__button--mod')} onClick={onClick}>Mod</Cell>
+      <Cell value="/" className={classnames('calculator__button', 'calculator__button--divide')} onClick={onClick}>&divide;</Cell>
+    </tr><tr>
+      <Cell value={7} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>9</Cell>
+      <Cell value={8} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>8</Cell>
+      <Cell value={9} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>7</Cell>
+      <Cell value="*" className={classnames('calculator__button', 'calculator__button--times')} onClick={onClick}>&times;</Cell>
+    </tr><tr>
+      <Cell value={4} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>6</Cell>
+      <Cell value={5} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>5</Cell>
+      <Cell value={6} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>4</Cell>
+      <Cell value="-" className={classnames('calculator__button', 'calculator__button--minus')} onClick={onClick}>&minus;</Cell>
+    </tr><tr>
+      <Cell value={3} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>3</Cell>
+      <Cell value={2} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>2</Cell>
+      <Cell value={1} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>1</Cell>
+      <Cell value="+" className={classnames('calculator__button', 'calculator__button--plus')} onClick={onClick}>&#43;</Cell>
+    </tr><tr>
+      <Cell value="." className={classnames('calculator__button', 'calculator__button--point')} onClick={onClick}>&#46;</Cell>
+      <Cell value={0} className={classnames('calculator__button', 'calculator__button--number')} onClick={onClick}>0</Cell>
+      <Cell value="ans" className={classnames('calculator__button', 'calculator__button--ans')} onClick={onClick}>Ans</Cell>
+      <Cell value="=" className={classnames('calculator__button', 'calculator__button--equals')} onClick={onClick}>&#61;</Cell>
+    </tr>
+  </tbody>
+</table>);
 
-Buttons.propTypes = {
-  onUserInput: func.isRequired,
-  classnames: func.isRequired,
-};
+Buttons.propTypes = { onClick: func.isRequired };
 
-const mapDispatchToProps = dispatch => ({
-  onUserInput: val => dispatch(handleUserInput(val)),
-});
+Buttons.contextTypes = { classnames: func.isRequired };
 
-export default connect(null, mapDispatchToProps)(Buttons);
+export default Buttons;

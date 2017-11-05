@@ -21,6 +21,7 @@ import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
 import twitch from '../images/twitch.png';
 import wikipedia from '../images/wikipedia.png';
+import recipebox from '../images/localhost-8080-recipe-box.png';
 
 /*  apiUrls[keys]
 'tribute',
@@ -86,7 +87,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.markdownPreviewer.title} url={appUrls.markdownPreviewer.url} challenge={appUrls.markdownPreviewer.challenge} media={placeholder} />
 
-  <Preview title={appUrls.recipeBox.title} url={appUrls.recipeBox.url} challenge={appUrls.recipeBox.challenge} media={placeholder} />
+  <Preview title={appUrls.recipeBox.title} url={appUrls.recipeBox.url} challenge={appUrls.recipeBox.challenge} media={recipebox} />
 
   {/* api */}
   {/* full stack */}

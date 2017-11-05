@@ -1,3 +1,13 @@
+$calculator_bg: #3d4543;
+$screen_bg: #bccd95;
+$color_black: black;
+$color_dark: #222;
+$color_white: white;
+$button_dark: #6f6f6f;
+$button_light: #f0f0f0;
+$button_red: #ff4561;
+$button_orange: #ff8c55;
+
 .calculator {
   width: 250px;
   height: 300px;
@@ -5,40 +15,42 @@
   padding-top: 24px;
   box-sizing: border-box;
   border-radius: 10px;
-  background-color: #3d4543;
-}
+  background-color: $calculator_bg;
 
-.display {
-  width: 216px;
-  margin: auto;
-  border: #222 2px solid;
-}
+  &__cell { padding: 4px; }
 
-.screen {
-  width: 212px;
-  height: 32px;
-  margin: auto;
-  padding: 0;
-  background-color: #bccd95;
-  color: black;
-  font-family: Arial, sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: right;
-}
+  &__display {
+    width: 216px;
+    margin: auto;
+    border: #222 2px solid;
+  }
 
-.buttons {
-  width: 220px;
-  margin: 20px auto;
-  padding-top: 12px;
-  text-align: center;
+  &__screen {
+    width: 212px;
+    height: 32px;
+    margin: auto;
+    padding: 0;
+    background-color: $screen_bg;
+    color: $color_black;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+  }
 
-  button {
+  &__buttons {
+    width: 220px;
+    margin: 20px auto;
+    padding-top: 12px;
+    text-align: center;
+  }
+
+  &__button {
     width: 40px;
     height: 30px;
     border: none;
     border-top: 2px solid transparent;
-    border-bottom: black 2px solid;
+    border-bottom: $color_black 2px solid;
     border-radius: 8px;
     outline: none;
     cursor: pointer;
@@ -47,36 +59,34 @@
       border-top: black 1px solid;
       border-width: 1px;
     }
+
+    &--ac,
+    &--ce,
+    &--mod {
+      background-color: $button_dark;
+      color: $color_white;
+      font-size: 12px;
+    }
+
+    &--divide,
+    &--times,
+    &--minus,
+    &--plus {
+      background-color: $button_red;
+      color: $color_black;
+    }
+
+    &--number,
+    &--equals,
+    &--point {
+      background-color: $button_light;
+      color: $color_black;
+    }
+
+    &--ans {
+      background-color: $button_orange;
+      color: $color_black;
+      font-size: 12px;
+    }
   }
-}
-
-.cell { padding: 4px; }
-
-.ac,
-.ce,
-.mod {
-  background-color: #6f6f6f;
-  color: white;
-  font-size: 12px;
-}
-
-.divide,
-.times,
-.minus,
-.plus {
-  background-color: #ff4561;
-  color: black;
-}
-
-.number,
-.equals,
-.point {
-  background-color: #f0f0f0;
-  color: black;
-}
-
-.ans {
-  background-color: #ff8c55;
-  color: black;
-  font-size: 12px;
 }
