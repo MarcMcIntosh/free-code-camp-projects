@@ -208,22 +208,16 @@ $gray: rgba(0, 0, 0, .4);
 }
 
 .recipe-box-recipe {
-  // composes: mdc-card mdc-card__horizontal-block from $mdc-card;
   composes: mdc-card from $mdc-card;
   composes: mdc-layout-grid from $mdc-layout-grid;
 
   &__horizontal-block {
-    // composes: mdc-card__horizontal-block from $mdc-card;
     composes: mdc-layout-grid__inner from $mdc-layout-grid;
   }
 
-  &__primary {
+  &__header {
     composes: mdc-card__primary from $mdc-card;
-    composes: mdc-layout-grid__cell mdc-layout-grid--span-4-tablet mdc-layout-grid--span-8-desktop from $mdc-layout-grid;
-  }
-
-  &__supporting-text {
-    composes: mdc-card__supporting-text from $mdc-card;
+    composes: mdc-layout-grid mdc-layout-grid__cell--span-12 from $mdc-layout-grid;
   }
 
   &__title {
@@ -234,40 +228,28 @@ $gray: rgba(0, 0, 0, .4);
     composes: mdc-card__subtitle from $mdc-card;
   }
 
+  &__media {
+    composes: mdc-layout-grid__cell from $mdc-layout-grid;
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__supporting-text {
+    composes: mdc-card__supporting-text from $mdc-card;
+  }
+
+
+
   &__heading {
     composes: mdc-typography--subheading2 from $mdc-typography;
     text-align: left;
   }
 
-  &__media {
-    composes: mdc-layout-grid__cell from $mdc-layout-grid;
-    margin: auto 0;
-  }
-
-  &__image {
-    width: 300px;
-    height: 300px;
-    margin: 16px auto;
-    padding: 6px;
-    float: right;
-    background-image: url(./menu/ic_note_add_black_48px.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    // composes: mdc-layout-grid__cell from $mdc-layout-grid;
-    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-2-tablet from $mdc-layout-grid;
-    // margin: auto 0;
-    // composes: mdc-card__media-item from $mdc-card;
-    // width: 160px;
-    // height: 160px;
-    // float: right;
-  }
-
   &__ingredients {
-    // composes: mdc-list mdc-list--dense from $mdc-list;
-    // composes: mdc-layout-grid__cell from $mdc-layout-grid;
+    composes: mdc-layout-grid__cell from $mdc-layout-grid;
     composes: mdc-elevation--z1 from $mdc-elevation;
-    width: 100%;
-    // margin: auto;
     border: 1px solid #ddd;
     border-collapse: collapse;
 
@@ -277,7 +259,6 @@ $gray: rgba(0, 0, 0, .4);
   }
 
   &__ingredient {
-    // composes: mdc-list-item from $mdc-list;
     composes: mdc-typography--caption mdc-typography--adjust-margin from $mdc-typography;
   }
 

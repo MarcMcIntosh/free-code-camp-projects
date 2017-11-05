@@ -9,25 +9,24 @@ const Recipe = ({
   classnames,
 }) => (<div className={classnames('recipe-box-recipe')}>
   <div className={classnames('recipe-box-recipe__horizontal-block')}>
-    <section className={classnames('recipe-box-recipe__primary')}>
+
+    <div className={classnames('recipe-box-recipe__header')}>
       <h1 className={classnames('recipe-box-recipe__title')}>{title}</h1>
       <h2 className={classnames('recipe-box-recipe__subtitle')}>{desc}</h2>
-
-      {/* <img src={image} alt="" className={classnames('recipe-box-recipe__image')} /> */}
-    </section>
+    </div>
 
     <div className={classnames('recipe-box-recipe__media')}>
-      <div className={classnames('recipe-box-recipe__image')} style={image ? { backgroundImage: `url(${image})` } : {}} />
+      <img src={image} alt="" className={classnames('recipe-box-recipe__image')} />
     </div>
-  </div>
-  <table className={classnames('recipe-box-recipe__ingredients')}>
-    <tr><th className={classnames('recipe-box-recipe__heading')}>Ingredients</th></tr>
 
-    {ingredients.map((d, i) => {
-      const k = `ingredient:${i}`;
-      return (<tr key={k}><td className={classnames('recipe-box-recipe__ingredient')}>{d}</td></tr>);
-    })}
-  </table>
+    <table className={classnames('recipe-box-recipe__ingredients')}>
+      <tr><th className={classnames('recipe-box-recipe__heading')}>Ingredients</th></tr>
+      {ingredients.map((d, i) => {
+        const k = `ingredient:${i}`;
+        return (<tr key={k}><td className={classnames('recipe-box-recipe__ingredient')}>{d}</td></tr>);
+      })}
+    </table>
+  </div>
 
   <section className={classnames('recipe-box-recipe__supporting-text')}>
     <p>{preparation}</p>
