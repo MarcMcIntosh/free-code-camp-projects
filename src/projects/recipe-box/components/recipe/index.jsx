@@ -22,11 +22,11 @@ const Recipe = ({
     </div>
 
     <table className={classnames('recipe-box-recipe__ingredients')}>
-      <tr><th className={classnames('recipe-box-recipe__heading')}>Ingredients</th></tr>
-      {ingredients.map((d, i) => {
+      <thead><tr><th className={classnames('recipe-box-recipe__heading')}>Ingredients</th></tr></thead>
+      <tbody>{ingredients.map((d, i) => {
         const k = `ingredient:${i}`;
         return (<tr key={k}><td className={classnames('recipe-box-recipe__ingredient')}>{d}</td></tr>);
-      })}
+      })}</tbody>
     </table>
   </div>
 

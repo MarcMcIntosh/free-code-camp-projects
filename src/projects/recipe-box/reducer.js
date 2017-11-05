@@ -29,14 +29,16 @@ function reducer(state = DEFAULT_STATE, action) {
       editting: action.payload,
     };
     case UPDATE: {
-      /* use this as onSubmit */
+      if (action.payload.index === -1) {
+        return {
+          ...state,
+          recipes: [].concat(action.payload.values, state.recipes),
+          editting: false,
+        };
+      }
       const recipes = state.recipes.slice(0);
-      recipes[action.payload.index] = action.payload.values;
-      return {
-        ...state,
-        recipes,
-        editting: false,
-      };
+      recipes.splice(action.payload.index, 1, action.payload.values);
+      return { ...state, recipes, editting: false };
     }
     case DELETE: {
       const recipes = state.recipes.filter((d, i) => (i !== action.payload));
