@@ -1,3 +1,4 @@
+@import "@material/layout-grid/variables.scss";
 $mdc-typography: "@material/typography/mdc-typography.scss";
 $mdc-layout-grid: "@material/layout-grid/mdc-layout-grid";
 $mdc-elevation: "@material/elevation/mdc-elevation.scss";
@@ -102,8 +103,6 @@ $gray: rgba(0, 0, 0, .4);
   &__media {
     composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-4-tablet from $mdc-layout-grid;
     margin: auto 0;
-
-    // disable float on mobile and activate on anthing bigger
   }
 
   &__ingredients {
@@ -111,7 +110,6 @@ $gray: rgba(0, 0, 0, .4);
   }
 
   &__field {
-    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-5 from $mdc-layout-grid;
     composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
     width: 100%;
 
@@ -168,27 +166,12 @@ $gray: rgba(0, 0, 0, .4);
     }
   }
 
-  &__actions {
-    composes: mdc-card__actions from $mdc-card;
-  }
-
-  /*
-  &__action {
-    composes: mdc-button from $mdc-button;
-    composes: mdc-card__action from $mdc-card;
-  }
-  */
   &__button {
     composes: mdc-button mdc-button--raised from $mdc-button;
 
     &--icon {
       composes: material-icons from $material-design-icons;
       composes: mdc-button mdc-button__icon from $mdc-button;
-      // margin: 0;
-      //padding: 0;
-      // border: none;
-      // outline: none;
-      // background: none;
       font-size: 18px;
       cursor: pointer;
     }
@@ -201,7 +184,6 @@ $gray: rgba(0, 0, 0, .4);
   }
 
   &__ingredient {
-    // composes: mdc-textfield mdc-textfield--upgraded mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
     composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
     width: 100%;
 
@@ -223,75 +205,85 @@ $gray: rgba(0, 0, 0, .4);
       composes: mdc-textfield__bottom-line--active from $mdc-textfield;
     }
   }
-
-  &__help {
-    composes: mdc-textfield-helptext from $mdc-textfield;
-  }
-
-  &__textfield {
-    composes: mdc-textfield from $mdc-textfield;
-
-    &--box {
-      composes: mdc-textfield--box from $mdc-textfield;
-
-      &:hover,
-      &::before,
-      &::after {
-        border-radius: 1%;
-      }
-    }
-
-    &--with-trailing-icon {
-      composes: mdc-textfield--with-trailing-icon from $mdc-textfield;
-    }
-
-    &--upgraded {
-      composes: mdc-textfield--upgraded from $mdc-textfield;
-      // composes: mdc-ripple-surface from $mdc-ripple;
-    }
-
-    &--invalid {
-      composes: mdc-textfield--invalid from $mdc-textfield;
-    }
-
-    &--focused {
-      composes: mdc-textfield--focused from $mdc-textfield;
-    }
-  }
 }
 
-.recipe-box-modal {
-  &__recipe {
-    composes: mdc-card__horizontal-block from $mdc-card;
+.recipe-box-recipe {
+  // composes: mdc-card mdc-card__horizontal-block from $mdc-card;
+  composes: mdc-card from $mdc-card;
+  composes: mdc-layout-grid from $mdc-layout-grid;
+
+  &__horizontal-block {
+    // composes: mdc-card__horizontal-block from $mdc-card;
+    composes: mdc-layout-grid__inner from $mdc-layout-grid;
   }
 
   &__primary {
     composes: mdc-card__primary from $mdc-card;
+    composes: mdc-layout-grid__cell mdc-layout-grid--span-4-tablet mdc-layout-grid--span-8-desktop from $mdc-layout-grid;
+  }
+
+  &__supporting-text {
+    composes: mdc-card__supporting-text from $mdc-card;
   }
 
   &__title {
-    composes: mdc-card__title from $mdc-card;
-    composes: mdc-typography--headline from $mdc-typography;
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
   }
 
   &__subtitle {
     composes: mdc-card__subtitle from $mdc-card;
+  }
+
+  &__heading {
     composes: mdc-typography--subheading2 from $mdc-typography;
+    text-align: left;
+  }
+
+  &__media {
+    composes: mdc-layout-grid__cell from $mdc-layout-grid;
+    margin: auto 0;
   }
 
   &__image {
-    composes: mdc-card__media-item mdc-card__media-item--2x from $mdc-card;
+    width: 300px;
+    height: 300px;
+    margin: 16px auto;
+    padding: 6px;
+    float: right;
+    background-image: url(./menu/ic_note_add_black_48px.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    // composes: mdc-layout-grid__cell from $mdc-layout-grid;
+    // composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-2-tablet from $mdc-layout-grid;
+    // margin: auto 0;
+    // composes: mdc-card__media-item from $mdc-card;
+    // width: 160px;
+    // height: 160px;
+    // float: right;
   }
 
   &__ingredients {
-    composes: mdc-list from $mdc-list;
+    // composes: mdc-list mdc-list--dense from $mdc-list;
+    // composes: mdc-layout-grid__cell from $mdc-layout-grid;
+    composes: mdc-elevation--z1 from $mdc-elevation;
+    width: 100%;
+    // margin: auto;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+
+    :nth-child(even) {
+      background-color: #f2f2f2;
+    }
   }
 
   &__ingredient {
-    composes: mdc-list-item from $mdc-list;
+    // composes: mdc-list-item from $mdc-list;
+    composes: mdc-typography--caption mdc-typography--adjust-margin from $mdc-typography;
   }
 
-  &__preparation { composes: mdc-card__supporting-text from $mdc-card; }
+  &__preparation {
+    /* stuff */
+  }
 
   &__actions {
     composes: mdc-card__actions from $mdc-card;
@@ -312,6 +304,7 @@ $gray: rgba(0, 0, 0, .4);
 
   &-item {
     composes: mdc-grid-tile from $mdc-grid-list;
+    cursor: pointer;
     // width: 300px;
 
     &__primary {
@@ -335,78 +328,5 @@ $gray: rgba(0, 0, 0, .4);
     &__desc {
       composes: mdc-grid-tile__support-text from $mdc-grid-list;
     }
-  }
-}
-
-.recipes { margin: 8px; }
-
-.recipe {
-  composes: mdc-card mdc-card--theme-dark from $mdc-card;
-  max-width: 21.875rem;
-  height: 21.875rem;
-  margin-bottom: 48px;
-
-  @media (min-width: 768px) {
-    margin-bottom: 24px;
-  }
-
-  background: #ddd;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  &__content {
-    composes: mdc-card__primary from $mdc-card;
-    background: $modal_background;
-  }
-
-  &__title {
-    composes: mdc-card__title mdc-card__title--large from $mdc-card;
-  }
-
-  &__desc {
-    composes: mdc-card__subtitle from $mdc-card;
-  }
-
-  &__actions {
-    composes: mdc-card__actions from $mdc-card;
-    padding: 0 0 8px;
-    background: $modal_background;
-  }
-
-  &__action {
-    composes: mdc-button mdc-button--theme-dark from $mdc-button;
-    composes: mdc-card__action from $mdc-card;
-  }
-}
-
-.recipe-box-header {
-  composes: mdc-toolbar from $mdc-toolbar;
-
-  &__row {
-    composes: mdc-toolbar__row from $mdc-toolbar;
-  }
-
-  &__title {
-    composes: mdc-toolbar__title from $mdc-toolbar;
-  }
-
-  &__start {
-    composes: mdc-toolbar__section mdc-toolbar__section--align-start from $mdc-toolbar;
-  }
-
-  &__end {
-    composes: mdc-toolbar__section mdc-toolbar__section--align-end from $mdc-toolbar;
-  }
-
-  &__button {
-    composes: material-icons from $material-design-icons;
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    background: none;
-    color: rgba(255, 255, 255, 1);
-    font-size: 24px;
-    cursor: pointer;
   }
 }
