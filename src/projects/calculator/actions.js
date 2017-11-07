@@ -11,7 +11,7 @@ const setDisplay = payload => ({ type: SET_DISPLAY, payload });
 
 
 /* eslint no-new-func: "off" */
-const solve = calc => new Function(`return ${calc}`)();
+const solve = calc => '' + new Function(`return ${calc}`)();
 const append = (str, n) => str + n;
 
 export function clearError() {
@@ -20,21 +20,21 @@ export function clearError() {
 
 export function handleUserError(err) {
   return (dispatch, getState) => {
-    const last = getState().errorId;
+    // const last = getState().errorId;
+    const { calculator: { errorId } } = getState();
     /* Curently displaying an error */
-    if (last) { clearTimeout(last); }
-    const errorId = setTimeout(() => dispatch(calcError({
+    if (errorId) { clearTimeout(errorId); }
+    const nxt = setTimeout(() => dispatch(calcError({
       error: null,
       errorId: null,
     })), 5000);
-    dispatch(calcError({ error: err, errorId }));
+    dispatch(calcError({ error: err, errorId: nxt }));
   };
 }
 
 export function handleUserInput(d) {
   return (dispatch, getState) => {
-    const state = getState();
-    const { display, answer } = state;
+    const { calculator: { display, answer } } = getState();
     const n = display.length - 1;
     const last = display[n];
     if (d === 'clear') {
@@ -43,7 +43,7 @@ export function handleUserInput(d) {
       const nxt = append(display, d);
       return dispatch(setDisplay(nxt));
     } else if (d === 'del') {
-      const nxt = display.slice(0, n);
+      const nxt = display.substring(0, n);
       return dispatch(setDisplay(nxt));
     } else if (d === '.' && !isNaN(last)) {
       const nxt = append(display, d);

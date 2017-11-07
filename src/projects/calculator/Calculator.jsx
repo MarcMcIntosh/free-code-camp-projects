@@ -5,9 +5,7 @@ import { handleUserInput } from './actions';
 import Buttons from './components/CalculatorButtons';
 import Display from './components/Display';
 
-const mapStateToProps = state => ({
-  display: state.display,
-});
+const mapStateToProps = ({ calculator: { display } }) => ({ display });
 
 const mapDispatchToProps = dispatch => ({
   handleKeyPress: str => dispatch(handleUserInput(str)),
