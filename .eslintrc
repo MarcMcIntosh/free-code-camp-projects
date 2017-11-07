@@ -14,6 +14,7 @@
   "rules": {
     "no-underscore-dangle": "off",
     "react/forbid-prop-types": "off",
+    "no-void": 0,
     "max-len": 0,
     "prefer-template": 0,
     "import/no-extraneous-dependencies": [

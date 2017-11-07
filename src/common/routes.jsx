@@ -1,18 +1,16 @@
 // import React from 'react';
-/* eslint-disable */
 import { App, About, Gallary } from '../app/pages';
-
 import appUrls from './app-urls';
-/* Done */
-// with classnames context
-import RecipeBox from '../projects/recipe-box';
-// with out classnames context 
-import TributePage from '../projects/tribute-page';
+
+/* Done with classnames context */
+// import RecipeBox from '../projects/recipe-box';
+/* To check with classnames context */
 import Calculator from '../projects/calculator';
 
+/* Done with-out context */
+// import TributePage from '../projects/tribute-page';
 
-/* to do */
-/*
+/*  to do or check and with out classnames context 
 import BarChart from '../projects/bar-chart';
 import DataGlobe from '../projects/data-globe';
 import DungeonCrawler from '../projects/dungeon-crawler';
@@ -41,13 +39,12 @@ const routes = [
         component: Gallary,
       }, {
         path: '/about', component: About,
-      }, {
+      }, /* {
+        path: appUrls.barChart.url, component: BarChart,
+      }, */
+      {
         path: appUrls.calculator.url, component: Calculator,
       }, /* {
-        path: appUrls.tribute.url, component: TributePage,
-      }, {
-        path: appUrls.barChart.url, component: BarChart,
-      }, {
         path: appUrls.dataGlobe.url, component: DataGlobe,
       }, {
         path: appUrls.dungeonCrawler.url, component: DungeonCrawler,
@@ -66,21 +63,22 @@ const routes = [
       }, {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
+        path: appUrls.recipeBox.url, component: RecipeBox,
+      }, {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
         path: appUrls.simon.url, component: Simon,
       }, {
         path: appUrls.ticTacToe.url, component: TicTacToe,
       }, {
+        path: appUrls.tribute.url, component: TributePage,
+      }, {
         path: appUrls.twitch.url, component: Twitch,
       }, {
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
       }, {
         path: appUrls.pomodoro.url, component: Pomodoro,
-      },*/
-      {
-        path: appUrls.recipeBox.url, component: RecipeBox,
-      },
+      }, */
     ],
   },
 ];

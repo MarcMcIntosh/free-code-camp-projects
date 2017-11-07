@@ -40,7 +40,7 @@ class Calculator extends Component {
       // space bar
       return this.props.handleKeyPress('ans');
     }
-    return undefined;
+    return void 0;
   }
   render() {
     return (<div className={this.context.classnames('calculator')}>
