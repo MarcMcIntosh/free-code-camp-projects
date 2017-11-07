@@ -23,7 +23,7 @@ class Chart extends PureComponent {
     this.draw();
   }
   draw() {
-    const cx = this.props.classnames;
+    const cx = this.context.classnames;
     const parseTime = timeParse('%Y-%m-%d');
     const data = this.props.data.slice().map(d => [
       parseTime(d[0]),
