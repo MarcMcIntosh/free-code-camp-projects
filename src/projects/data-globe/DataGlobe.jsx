@@ -6,14 +6,7 @@ import { fetchMtrData, fetchGeoData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
 
-const mapStateToProps = state => ({
-  topology: state.topology,
-  meteorites: state.meteorites,
-  error_topology: state.error_topology,
-  error_meteorites: state.error_meteorites,
-  fetching_topology: state.fetching_topology,
-  fetching_meteorites: state.fetching_meteorites,
-});
+const mapStateToProps = ({ dataGlobe: { topology, meteorites, error_topology, error_meteorites, fetching_topology, fetching_meteorites } }) => ({ topology, meteorites, error_topology, error_meteorites, fetching_topology, fetching_meteorites });
 
 const mapDispatchToProps = dispatch => ({
   fetchMeteorites: () => dispatch(fetchMtrData()),

@@ -1,3 +1,7 @@
+@import "./variables";
+@import "./error";
+@import "./loader";
+
 .data-globe {
   &__container {
     width: 60%;
