@@ -1,26 +1,36 @@
 import React from 'react';
-import { string, func } from 'prop-types';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import { node, func } from 'prop-types';
 
 const ErrorMessage = ({
-  message,
+  children,
   onClick,
-}) => ((!message) ? false : (<Grid item xs={6}>
-  <Paper>
-    <Typography type="caption" gutterBottom align="center">Error</Typography>
-    <Typography gutterBottom noWrap>{message}</Typography>
-    <div>
-      <Button onClick={onClick}>Reload</Button>
-    </div>
-  </Paper>
-</Grid>));
+  ...props
+}, {
+  classnames,
+}) => (<aside
+  className={classnames('bar-chart-error', children && 'bar-chart-error--open')}
+  role="alertdialog"
+  aria-hidden={!(children)}
+  aria-labelledby="Error Message"
+  aria-describedby="There has been an error fetching data"
+  {...props}
+>
+  <div className={classnames('bar-chart-error__surface')}>
+    <header className={classnames('bar-chart-error__header')}>
+      <h2 className={classnames('bar-chart-error__header__title')}>Error fetching data.</h2>
+    </header>
+    <section className={classnames('bar-chart-error__body')}>{children}</section>
+    <footer className={classnames('bar-chart-error__footer')}>
+      <button type="button" tabIndex="0" onClick={onClick} title="Click to retry" className={classnames('bar-chart-error__button')}>Retry</button>
+    </footer>
+  </div>
+</aside>);
 
 ErrorMessage.propTypes = {
-  message: string.isRequired,
+  children: node.isRequired,
   onClick: func.isRequired,
 };
+
+ErrorMessage.contextTypes = { classnames: func.isRequired };
 
 export default ErrorMessage;

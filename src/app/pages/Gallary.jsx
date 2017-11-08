@@ -12,7 +12,10 @@ import simon from 'file-loader!../images/simon.png';
 import tictacttoe from 'file-loader!../images/tic-tac-toe.png';
 import twitch from 'file-loader!../images/twitch.png';
 import wikipedia from 'file-loader!../images/wikipedia.png'; */
-import calculator from '../images/calculator.png';
+import barchart from '../images/localhost-8080-bar-chart.png';
+import calculator from '../images/localhost-8080-calculator.png';
+import recipebox from '../images/localhost-8080-recipe-box.png';
+
 import localWeather from '../images/local-weather.png';
 import tribute from '../images/tribute.png';
 import pomodoro from '../images/pomodoro.png';
@@ -21,7 +24,7 @@ import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
 import twitch from '../images/twitch.png';
 import wikipedia from '../images/wikipedia.png';
-import recipebox from '../images/localhost-8080-recipe-box.png';
+
 
 /*  apiUrls[keys]
 'tribute',

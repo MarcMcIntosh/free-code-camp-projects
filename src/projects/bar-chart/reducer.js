@@ -4,17 +4,17 @@ import {
   REQUEST_DATA,
 } from './actions';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   error: '',
   fetching: false,
-  data: false,
+  data: [],
 };
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case REQUEST_DATA: return {
       ...state,
-      data: false,
+      data: [],
       error: '',
       fetching: true,
     };

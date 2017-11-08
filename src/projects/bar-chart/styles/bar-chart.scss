@@ -1,25 +1,34 @@
-/* stylelint-disable selector-max-type */
+@import "./variables";
+@import "./error";
+@import "./loader";
+
 .bar-chart {
-  &__header {
-    color: steelBlue;
-    text-align: center;
+  composes: mdc-card from $mdc-card;
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
   }
 
-  &__footer {
-    // font-size: .8em;
-    text-align: center;
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
   }
 
   &__container {
-    padding: 8px;
+    composes: mdc-card__media from $mdc-card;
   }
 
   &__graph {
-    margin-right: 1%;
-    margin-left: 1%;
+    // margin-right: 1%;
+    // margin-left: 1%;
   }
 
   &__axis {
+    composes: mdc-typography--caption from $mdc-typography;
+
     path,
     line {
       fill: none;
@@ -29,7 +38,7 @@
     }
 
     text {
-      font: 10px sans-serif;
+      // font: 10px sans-serif;
     }
   }
 

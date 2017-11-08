@@ -1,43 +1,64 @@
-import React, { Component } from 'react';
-import { string, bool, func, oneOfType, array } from 'prop-types';
+import React, { PureComponent } from 'react';
+import {
+  func,
+  array,
+  node,
+  bool,
+} from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
-import Chart from './components/Chart';
+// import Chart from './components/Chart';
 
-import cx from './styles';
+import draw from './bar-chart';
 
-const mapStateToProps = state => ({
-  data: state.data,
-  fetching: state.fetching,
-  error: state.error,
-});
+const mapStateToProps = ({ barChart: { data, fetching, error } }) => ({ data, fetching, error });
 
 const mapDispatchToProps = dispatch => ({
   getData: () => dispatch(fetchData()),
 });
 
-class BarChart extends Component {
+class BarChart extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.draw = draw;
+  }
   componentDidMount() { this.props.getData(); }
+  componentDidUpdate(prevProps) {
+    if (this.props.data.length && this.props.data.length !== prevProps.data.length) {
+      this.draw(this.chart, this.props.data, this.context.classnames);
+    }
+  }
   render() {
-    return (<div className={cx('bar-chart')}>
-      <h1 className={cx('bar-chart__heading')}>{'US Gross Domestic Product'}</h1>
+    const { classnames } = this.context;
+    const { fetching, error, getData } = this.props;
+    return (<div className={classnames('bar-chart')}>
+      {error && <ErrorMessage onClick={getData}>{error}</ErrorMessage>}
+      {fetching && <Loader /> }
+      <header className={classnames('bar-chart__primary')}>
+        <h1 className={classnames('bar-chart__title')}>
+          US Gross Domestic Product
+        </h1>
+        <h2 className={classnames('bar-chart__subtitle')}>Seasonally adjusted annual rates <cite><a href="http://www.bea.gov/national/pdf/nipaguid.pdf">A Guide to the National Income and Product Accounts of the United States (NIPA)</a></cite> Units: T = Trillions
+        </h2>
+      </header>
 
-      <div className={cx('bar-chart__container')} >
-        <Loader loading={this.props.fetching} />
-        <ErrorMessage message={this.props.error} onClick={this.props.getData} />
-        {this.props.data && <Chart classnames={cx} data={this.props.data} />}
-      </div>
+      <div
+        className={classnames('bar-chart__container')}
+        ref={(elem) => { this.chart = elem; }}
+      />
     </div>);
   }
 }
 
 BarChart.propTypes = {
-  error: string.isRequired,
+  error: node.isRequired,
   fetching: bool.isRequired,
   getData: func.isRequired,
-  data: oneOfType([bool, array]).isRequired,
+  data: array.isRequired,
 };
+
+BarChart.contextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BarChart);
