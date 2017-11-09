@@ -11,7 +11,7 @@ import {
   geoMercator,
 } from 'd3-geo';
 
-export default function (elem, topology, meteorites) {
+export default function (elem, topology, meteorites, classnames) {
   const w = topology.bbox.slice(0, 2).reduce((a, b) => a + Math.abs(b), 0);
   const h = topology.bbox.slice(2, 4).reduce((a, b) => a + Math.abs(b), 0);
   const countries = feature(topology, topology.objects.countries); // .features;
@@ -22,16 +22,16 @@ export default function (elem, topology, meteorites) {
   const fillScale = scaleLinear().domain(minMaxMass).range([0.7, 0.4]).nice(500);
 
   const svg = select(elem).append('svg')
-    .attr('class', 'data-globe')
+    .attr('class', 'data-globe__graph')
     .attr('viewBox', `0, 0, ${w}, ${h}`)
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
-  const path = geoPath().projection(projection); svg.append('g').attr('class', 'data-globe__map')
+  const path = geoPath().projection(projection); svg.append('g').attr('class', classnames('data-globe__map'))
     .selectAll('path')
     .data(countries.features)
     .enter()
     .append('path')
-    .attr('class', 'data-globe__country')
+    .attr('class', classnames('data-globe__country'))
     .attr('d', path);
 
   const meteor = svg.append('g').attr('class', 'data-globe__strikes')
@@ -39,7 +39,7 @@ export default function (elem, topology, meteorites) {
     .data(meteorites.features)
     .enter()
     .append('g')
-    .attr('class', 'data-globe__meteorite')
+    .attr('class', classnames('data-globe__meteorite'))
     .attr('transform', (d) => {
       const coords = [d.properties.reclong, d.properties.reclat];
       return `translate(${projection(coords)})`;

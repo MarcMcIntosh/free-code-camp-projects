@@ -3,17 +3,41 @@
 @import "./loader";
 
 .data-globe {
+  composes: mdc-card from $mdc-card;
+
+  &__header {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
+
   &__container {
-    width: 60%;
-    margin: auto;
-    padding: 8px;
+    composes: mdc-card__media from $mdc-card;
+  }
+
+  &__graph {
+    /* svg element */
+  }
+
+  &__map {
+    /* more stuff here */
   }
 
   &__country {
     /* some stuff here */
   }
 
-  &__graph {
+  &__meteorite {
+    /* more stuff here */
+  }
+
+  &__strikes {
     /* more stuff here */
   }
 }
