@@ -57,12 +57,7 @@ export const removeEntity = entityName => ({
 
 export const onMove = vector => (dispatch, getState) => {
   /* This could be reducer logic */
-  const {
-    occupiedSpaces,
-    map,
-    entities,
-    level,
-  } = getState();
+  const { dungeonCrawler: { occupiedSpaces, map, entities, level } } = getState();
 
   const v = addVector({ x: entities.player.x, y: entities.player.y }, vector);
 

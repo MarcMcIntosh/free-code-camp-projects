@@ -3,7 +3,9 @@
 .dungeon {
   &__hud {
     position: absolute;
+    // top: 0;
     margin: 2px;
+    z-index: 1;
   }
 
   &__heart {

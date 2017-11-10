@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { bool, func } from 'prop-types';
-
+/*
 class ToggleTourch extends PureComponent {
   constructor() {
     super();
@@ -21,10 +21,17 @@ class ToggleTourch extends PureComponent {
     />);
   }
 }
+*/
 
-ToggleTourch.propTypes = {
-  darkness: bool.isRequired,
-  onToggle: func.isRequired,
-};
+const ToggleTourch = ({ value, ...props }, { classnames }) => (<button
+  tabIndex="0"
+  title={value ? 'Turn Lights On' : 'Turn Light Off'}
+  className={classnames('dungeon__torch', value ? 'dungeon__torch--off' : 'dungeon__torch--on')}
+  {...props}
+/>);
+
+ToggleTourch.propTypes = { value: bool.isRequired };
+
+ToggleTourch.contextTypes = { classnames: func.isRequired };
 
 export default ToggleTourch;
