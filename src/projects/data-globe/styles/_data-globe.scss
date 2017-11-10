@@ -4,6 +4,8 @@
 
 .data-globe {
   composes: mdc-card from $mdc-card;
+  max-width: 560px;
+  margin: auto;
 
   &__header {
     composes: mdc-card__primary from $mdc-card;
@@ -21,12 +23,24 @@
     composes: mdc-card__media from $mdc-card;
   }
 
+  &__footer {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
   &__graph {
     /* svg element */
   }
 
   &__map {
     /* more stuff here */
+  }
+
+  &__graticule {
+    /* more stuff here */
+    fill: none;
+    stroke: #777;
+    stroke-width: .5px;
+    stroke-opacity: .5;
   }
 
   &__country {

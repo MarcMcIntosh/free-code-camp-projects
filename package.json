@@ -89,6 +89,7 @@
     "d3-time": "^1.0.7",
     "d3-time-format": "^2.1.0",
     "d3-transition": "^1.1.0",
+    "d3-zoom": "^1.7.1",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "highlight.js": "^9.12.0",
