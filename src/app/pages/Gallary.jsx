@@ -15,7 +15,7 @@ import wikipedia from 'file-loader!../images/wikipedia.png'; */
 import barchart from '../images/localhost-8080-bar-chart.png';
 import calculator from '../images/localhost-8080-calculator.png';
 import recipebox from '../images/localhost-8080-recipe-box.png';
-
+import dataglobe from '../images/localhost-8080-data-globe.png';
 import localWeather from '../images/local-weather.png';
 import tribute from '../images/tribute.png';
 import pomodoro from '../images/pomodoro.png';
@@ -71,9 +71,9 @@ const Gallary = () => (<div className="preview">
   <Preview title={appUrls.wikipediaViewer.title} url={appUrls.wikipediaViewer.url} challenge={appUrls.wikipediaViewer.challenge} media={wikipedia} />
 
   {/* d3 */}  {/* no images yet */}
-  <Preview title={appUrls.barChart.title} url={appUrls.barChart.url} challenge={appUrls.barChart.challenge} media={placeholder} />
+  <Preview title={appUrls.barChart.title} url={appUrls.barChart.url} challenge={appUrls.barChart.challenge} media={barchart} />
 
-  <Preview title={appUrls.dataGlobe.title} url={appUrls.dataGlobe.url} challenge={appUrls.dataGlobe.challenge} media={placeholder} />
+  <Preview title={appUrls.dataGlobe.title} url={appUrls.dataGlobe.url} challenge={appUrls.dataGlobe.challenge} media={dataglobe} />
 
   <Preview title={appUrls.forceDirected.title} url={appUrls.forceDirected.url} challenge={appUrls.forceDirected.challenge} media={placeholder} />
 
