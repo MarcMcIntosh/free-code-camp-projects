@@ -35,7 +35,7 @@ function trajectory(x0, y0, x1, y1) {
   return 'up';
 }
 
-const DEFAULT_STATE = { darkness: true, message: '', ...generateGame() };
+export const DEFAULT_STATE = { darkness: true, message: '', ...generateGame() };
 
 export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {

@@ -1,16 +1,99 @@
-@import "./board";
-// @import "./torch";
+@import "@material/elevation/mixins";
+@import "./variables";
+
+@mixin for-size($range) {
+  $tablet-boundary: 600px;
+  $desktop-boundary: 1000px;
+
+  @if $range == tablet {
+    @media (min-width: $tablet-boundary) {
+      @content;
+    }
+  } @else if $range == desktop {
+    @media (min-width: $desktop-boundary) {
+      @content;
+    }
+  }
+}
 
 .dungeon {
+
+  @include mdc-elevation(2);
+
+  // @include for-size(tablet) { width: 80%; }
+
+  @include for-size(desktop) { max-width: 80%; }
+
+  max-width: 100%;
+  margin: auto;
+  padding: 16px;
+  border-radius: 2px;
+
+  &__container {
+    margin: auto;
+  }
+
+  &__hud {
+    position: absolute;
+    margin: 2px;
+    padding: 4px;
+    z-index: 1;
+  }
+
+  &__heart {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+  }
+
+  &__health-bar {
+    margin: 6px;
+  }
+
+  &__weapon {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+
+  &__floor {
+    width: 100%;
+    height: auto;
+  }
+
+  &-message {
+    composes: mdc-dialog from $mdc-dialog;
+
+    &--open { composes: mdc-dialog--open from $mdc-dialog; }
+
+    &__surface { composes: mdc-dialog__surface from $mdc-dialog; }
+
+    &__header {
+      composes: mdc-dialog__header from $mdc-dialog;
+
+      &__title { composes: mdc-dialog__header__title from $mdc-dialog; }
+    }
+
+    &__body { composes: mdc-dialog__body from $mdc-dialog; }
+
+    &__footer { composes: mdc-dialog__footer from $mdc-dialog; }
+
+    &__button {
+      composes: mdc-button from $mdc-button;
+      composes: mdc-dialog__footer__button mdc-dialog__footer__button--accept from $mdc-dialog;
+    }
+  }
+
   &__torch {
-    width: 32px;
-    height: 32px;
-    margin: 0;
-    padding: 0;
+    width: 36px;
+    height: 36px;
+    // margin: 2px;
+    padding: 2px;
     border: none;
     background-color: transparent;
     background-image: url(./sprites/torch.png);
     background-repeat: no-repeat;
+    cursor: pointer;
 
     &:focus {
       outline: none;
@@ -19,7 +102,9 @@
     &--off { background-position: 0 0; }
 
     @keyframes play {
+
       from { background-position: -32px; }
+
       to { background-position: -160px; }
     }
 

@@ -7,7 +7,7 @@ import {
   REQUEST_GEO_DATA,
 } from './actions';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   error_meteorites: '',
   fetching_meteorites: false,
   error_topology: '',

@@ -1,206 +1,97 @@
-import React, { Component } from 'react';
-import { func, object, number, array, bool, string } from 'prop-types';
+import React, { PureComponent } from 'react';
+import { func, object, array, bool, string } from 'prop-types';
 import { connect } from 'react-redux';
-import Touch from './components/Touch';
+import { tileSize, SIGHT, tileType } from './GameConstants';
+import floorTile from './styles/sprites/floors.png';
 import HealthBar from './components/HealthBar';
 import ToggleTorch from './components/ToggleTorch';
-import { onMove, toggleDarkness, resetMap } from './actions';
-import { tileSize, SIGHT } from './GameConstants';
+import Weapon from './components/Weapon';
+import DungeonFloor from './components/DungeonFloor';
 import Message from './components/Message';
-import floorTile from './styles/sprites/floors.png';
+import { move, toggleDarkness, resetMap, pickUpItem, exitStage, battle } from './actions';
 
-/* Use this to update canvas could go in should componenet update in a child componenet */
-function sameArray(arr1, arr2) {
-  if (!arr1 || !arr2) {
-    return false;
-  } else if (arr1 instanceof Array === false || arr2 instanceof Array === false) {
-    return false;
-  } else if (arr1.length !== arr2.length) {
-    return false;
-  }
-  for (let i = 0; i < arr1.length; i += 1) {
-    if (arr1[i] instanceof Array && arr2[i] instanceof Array) {
-      return sameArray(arr1[i], arr2[i]);
-    } else if (arr1[i] !== arr2[i]) {
-      return false;
-    }
-  }
-  return true;
-}
-
-const mapStateToProps = ({ dungeonCrawler: { ...state } }) => ({
-  entities: state.entities,
-  game: state.dungeon,
-  occupiedSpaces: state.occupiedSpaces,
-  level: state.level,
-  darkness: state.darkness,
-  message: state.message,
-});
+const mapStateToProps = ({ dungeonCrawler: { entities, dungeon, occupiedSpaces, darkness, message, map } }) => ({ entities, dungeon, occupiedSpaces, darkness, message, map });
 
 const mapDispatchToProps = dispatch => ({
-  onMove: vector => dispatch(onMove(vector)),
   onToggleDarkness: () => dispatch(toggleDarkness()),
   onResetGame: () => dispatch(resetMap()),
+  onMove: (...args) => dispatch(move(...args)),
+  fight: payload => dispatch(battle(payload)),
+  onExitStage: () => dispatch(exitStage()),
+  onPickUpItem: payload => dispatch(pickUpItem(payload)),
 });
 
-class DungeonCrawler extends Component {
+class DungeonCrawler extends PureComponent {
   constructor() {
     super();
-    this.state = { timers: [] };
-    this.handleKeypress = this.handleKeypress.bind(this);
-    this.handleResize = this.handleResize.bind(this);
-    this.addVector = (c = [], v = []) => ([
-      (c[0] || 0) + (v[0] || 0),
-      (c[1] || 0) + (v[1] || 0),
-    ]);
-    this.extent = (game, dim, pos) => {
-      const m = Math.max(Math.floor(pos - (dim / 2)), 0);
-      const e = Math.min(m + dim, game);
-      // const s0 = (dim > game) ? 0 : m - (e - game);
-      // const s = (m + dim > game) ? s0 : m;
-      // note m - e - game porablly equals 0
-      const s = (m + dim > game) ? 0 : m;
-      return [s, e];
-    };
+    this._handleMove = this._handleMove.bind(this);
   }
-  componentDidMount() {
-    this.img = new Image();
-    this.img.src = floorTile;
-    this.img.onload = () => {
-      this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
-      this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
-      window.addEventListener('keydown', this.handleKeypress);
-      window.addEventListener('resize', this.handleResize);
-      this.clearAndDraw();
-    };
-  }
-  componentDidUpdate(prevProps) {
-    const arr1 = Object.entries(prevProps.occupiedSpaces);
-    const arr2 = Object.entries(this.props.occupiedSpaces);
-    if (prevProps.darkness !== this.props.darkness || prevProps.level !== this.props.level) {
-      this.clearAndDraw();
-    } else if (
-      prevProps.entities.player.x !== this.props.entities.player.x ||
-      prevProps.entities.player.y !== this.props.entities.player.y
-    ) {
-      this.clearAndDraw();
-    } else if (sameArray(arr1, arr2) === false) {
-      this.clearAndDraw();
-    }
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeypress);
-    window.removeEventListener('resize', this.handleResize);
-  }
+  _handleMove(v) {
+    const { occupiedSpaces, map, entities: { player, ...entities } } = this.props;
 
-  handleKeypress(event) {
-    switch (event.keyCode) {
-      case 65:
-      case 37: event.preventDefault(); this.props.onMove({ x: -1, y: 0 }); break;
-      case 87:
-      case 38: event.preventDefault(); this.props.onMove({ x: 0, y: -1 }); break;
-      case 68:
-      case 39: event.preventDefault(); this.props.onMove({ x: 1, y: 0 }); break;
-      case 83:
-      case 40: event.preventDefault(); this.props.onMove({ x: 0, y: 1 }); break;
-      // no default
+    const entityName = occupiedSpaces[`${v.x}x${v.y}`];
+    /* Is the tile an empty floor tile  or wall */
+    if (!entityName) {
+      const isFloor = (map[v.x][v.y] === tileType.FLOOR);
+      const x = (isFloor) ? v.x : player.x;
+      const y = (isFloor) ? v.y : player.y;
+      return this.props.onMove('player', { x, y });
     }
-  }
-  handleResize() {
-    this.canvas.width = Math.floor(this.canvas.clientWidth / tileSize) * tileSize;
-    this.canvas.height = Math.floor(this.canvas.clientHeight / tileSize) * tileSize;
-    this.clearAndDraw();
-  }
-  clearAndDraw() {
-    const ctx = this.canvas.getContext('2d');
-    if (ctx) {
-      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.draw();
+    /* tile is not empty determine collision */
+    const entity = entities[entityName];
+
+    switch (entity.entityType) {
+      case 'weapon': case 'health': return this.props.onPickUpItem({ ...entity, vector: v });
+      case 'exit': return this.props.onExitStage();
+      case 'boss': case 'enemy': this.props.fight({ player, entity }); // falls through
+      default: return this._handleMove({ x: player.x - (v.x - player.x), y: player.y - (v.y - player.y) });
+      // default: return void 0;
     }
+    // default: return this._handleMove({ x: player.x - (v.x - player.x), y: player.y - (v.y - player.y) });
   }
-  draw() {
-    const { entities, game, darkness, occupiedSpaces } = this.props;
-    const cols = (this.canvas.width / tileSize);
-    const rows = (this.canvas.height / tileSize);
-    const [startX, endX] = this.extent(game.length, cols, entities.player.x);
-    const [startY, endY] = this.extent(game[0].length, rows, entities.player.y);
-
-    /*
-    let startY = Math.max(Math.floor(entities.player.y - (rows / 2)), 0);
-    const endY = Math.min(startY + rows, game[0].length);
-    if (endY === game[0].length) {
-      startY = (rows > game[0].length) ? 0 : startY - (endY - game[0].length);
-    }
-    */
-
-    const ctx = this.canvas.getContext('2d');
-    for (let i = startX, dx = 0; i < endX; i += 1, dx += tileSize) {
-      for (let ii = startY, dy = 0; ii < endY; ii += 1, dy += tileSize) {
-        const str = `${i}x${ii}`;
-        const isOccupied = Object.prototype.hasOwnProperty.call(occupiedSpaces, str);
-        const darkX = Math.abs(entities.player.x - i);
-        const darkY = Math.abs(entities.player.y - ii);
-        const darkArea = Math.hypot(darkX, darkY);
-        if (darkness && darkArea >= SIGHT) {
-          ctx.fillStyle = 'black';
-          ctx.fillRect(dx, dy, tileSize, tileSize);
-        } else {
-          const { sx, sy, sw, sh } = game[i][ii];
-          ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
-        }
-        if ((isOccupied && darkness && darkArea < SIGHT) || (isOccupied && !darkness)) {
-          const en = occupiedSpaces[str];
-          const { sx, sy, sw, sh } = entities[en].tile;
-
-          ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, tileSize, tileSize);
-        }
-      }
-    }
-    const wpn = this.hudWeapon.getContext('2d');
-    const { sx, sy, sw, sh } = this.props.entities.player.weapon.tile;
-    wpn.drawImage(this.img, sx, sy, sw, sh, 0, 0, this.hudWeapon.width, this.hudWeapon.height);
-  }
-
   render() {
     /* You'll need to react to prop changes */
     const { classnames } = this.context;
-    return (<div className={classnames('dungeon__container')}>
-      <div className={classnames('dungeon__hud')}>
-        <HealthBar health={this.props.entities.player.health} heartValue={20} />
-        <canvas
-          className={classnames('dungeon__weapon')}
-          ref={(c) => { this.hudWeapon = c; }}
-          width="28px"
-          height="28px"
+    return (<div className={classnames('dungeon')}>
+      <div className={classnames('dungeon__container')}>
+        <div className={classnames('dungeon__hud')}>
+          <HealthBar health={this.props.entities.player.health} heartValue={20} />
+          <ToggleTorch onClick={this.props.onToggleDarkness} value={this.props.darkness} />
+          <Weapon src={floorTile} {...this.props.entities.player.weapon.tile} />
+        </div>
+
+        <DungeonFloor
+          src={floorTile}
+          onMove={this._handleMove}
+          tileSize={tileSize}
+          sight={SIGHT}
+          entities={this.props.entities}
+          game={this.props.dungeon}
+          occupiedSpaces={this.props.occupiedSpaces}
+          darkness={this.props.darkness}
         />
 
-        <ToggleTorch
-          onClick={this.props.onToggleDarkness}
-          value={this.props.darkness}
-        />
       </div>
 
-      <Touch onTouch={this.props.onMove}>
-        <canvas
-          className={classnames('dungeon__floor')}
-          ref={(canvas) => { this.canvas = canvas; }}
-        />
-      </Touch>
-      <Message text={this.props.message} onClose={this.props.onResetGame} />
+      <Message onClick={this.props.onResetGame}>{this.props.message}</Message>
     </div>);
   }
 }
 
 DungeonCrawler.propTypes = {
   entities: object.isRequired,
-  game: array.isRequired,
+  dungeon: array.isRequired,
   occupiedSpaces: object.isRequired,
-  level: number.isRequired,
   darkness: bool.isRequired,
   onMove: func.isRequired,
   message: string.isRequired,
   onResetGame: func.isRequired,
   onToggleDarkness: func.isRequired,
+  map: array.isRequired,
+  // Adding thunks
+  onExitStage: func.isRequired,
+  onPickUpItem: func.isRequired,
+  fight: func.isRequired,
 };
 
 DungeonCrawler.contextTypes = { classnames: func.isRequired };

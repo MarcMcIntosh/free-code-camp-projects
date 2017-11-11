@@ -1,5 +1,4 @@
-import { addVector } from './utils';
-import { tileType, ATTACK_VARIANCE, ENEMY, PLAYER } from './GameConstants';
+import { ATTACK_VARIANCE, ENEMY, PLAYER } from './GameConstants';
 
 const prefix = str => (`ROUGE-LIKE_${str}`);
 /* To Do */
@@ -55,62 +54,48 @@ export const removeEntity = entityName => ({
 
 /* Main Movement controller */
 
-export const onMove = vector => (dispatch, getState) => {
-  /* This could be reducer logic */
-  const { dungeonCrawler: { occupiedSpaces, map, entities, level } } = getState();
+export const exitStage = () => (dispatch) => {
+  dispatch(increaseLevel());
+  dispatch(setMap());
+};
 
-  const v = addVector({ x: entities.player.x, y: entities.player.y }, vector);
+export const pickUpItem = ({ entityType, entityName, vector, ...entity }) => (dispatch) => {
+  if (entityType === 'health') {
+    dispatch(heal('player', entity.health));
+  } else if (entityType === 'weapon') {
+    dispatch(switchWeapon(entityName, entity.attack));
+  }
+  dispatch(removeEntity(entityName));
+  return dispatch(move('player', vector));
+};
 
-  const entityName = occupiedSpaces[`${v.x}x${v.y}`];
-  if (map[v.x][v.y] === tileType.FLOOR && !entityName) {
-    return dispatch(move('player', v));
-  } else if (map[v.x][v.y] !== tileType.FLOOR) {
-    return dispatch(move('player', { x: entities.player.x, y: entities.player.y }));
+/* do battle */
+export const battle = ({
+  player,
+  entity: { entityName, entityType, ...entity },
+}) => (dispatch) => {
+  /* attack powers */
+  const p = Math.floor((Math.random() * ATTACK_VARIANCE) + (player.attack - ATTACK_VARIANCE));
+  const e = Math.floor((Math.random() * ATTACK_VARIANCE) + (entity.attack - ATTACK_VARIANCE));
+
+  /* players response to attack */
+  if (player.health <= e) { dispatch(onLose()); } else if (player.health > e) { dispatch(damage('player', e)); }
+
+  /* enemy response to attck */
+  const xp = (player.level + 1) * ENEMY.xp;
+  if (entity.health > p) {
+    return dispatch(damage(entityName, p));
+  } else if (entityType === 'boss') {
+    return dispatch(onWin());
+  } else if (xp < player.toNextLevel) {
+    dispatch(gainXp(xp));
+  } else if (xp >= player.toNextLevel) {
+    const excess = xp - player.toNextLevel;
+    const attack = (player.level + 1) * PLAYER.attack;
+    const health = (player.level + 1) * PLAYER.health;
+    const toNext = ((player.level + 2) * PLAYER.toNextLevel) - excess;
+    dispatch(levelUp(attack, health, toNext));
   }
 
-  const entity = entities[entityName];
-  switch (entity.entityType) {
-    case 'weapon': {
-      dispatch(switchWeapon(entityName, entity.attack));
-      dispatch(removeEntity(entityName));
-      return dispatch(move('player', v));
-    }
-    case 'health': {
-      dispatch(heal('player', entity.health));
-      dispatch(removeEntity(entityName));
-      return dispatch(move('player', v));
-    }
-    case 'exit': {
-      dispatch(increaseLevel());
-      return dispatch(setMap());
-    }
-    case 'boss':
-    case 'enemy': {
-      const a = ATTACK_VARIANCE;
-      const p = Math.floor((Math.random() * a) + (entities.player.attack - a));
-      const e = Math.floor((Math.random() * a) + (entity.attack - a));
-      if (entity.health > a && entities.player.health < e) {
-        return dispatch(onLose());
-      } else if (entity.health > a && entities.player.health > e) {
-        dispatch(damage(entityName, p));
-        return dispatch(damage('player', e));
-      } else if (entityName === 'boss') {
-        return dispatch(onWin());
-      }
-      const xp = (level + 1) * ENEMY.xp;
-      if (xp >= entities.player.toNextLevel) {
-        const attack = (level + 1) * PLAYER.attack;
-        const health = (level + 1) * PLAYER.health;
-        const toNext = ((level + 2) * PLAYER.toNextLevel) + (entities.player.toNextLevel - xp);
-        dispatch(levelUp(attack, health, toNext));
-      } else {
-        dispatch(gainXp(xp));
-      }
-      return dispatch(removeEntity(entityName));
-    }
-    default: return dispatch(move('player', {
-      x: entities.player.x,
-      y: entities.player.y,
-    }));
-  }
+  return dispatch(removeEntity(entityName));
 };

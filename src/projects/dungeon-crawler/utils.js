@@ -4,6 +4,13 @@ export function addVector(coords, vector) {
   return { x: coords.x + vector.x, y: coords.y + vector.y };
 }
 
+export function extentOf(game, dim, pos) {
+  const m = Math.max(Math.floor(pos - (dim / 2)), 0);
+  const e = Math.min(m + dim, game);
+  const s = (m + dim > game) ? (game - dim) : m;
+  return [s, e];
+}
+
 export function tileAtRandom(arr) {
   const n = Math.floor(Math.random() * arr.length);
   return arr[n];

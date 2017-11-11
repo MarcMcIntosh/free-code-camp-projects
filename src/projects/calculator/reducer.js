@@ -4,7 +4,7 @@ import {
   SET_ANSWER,
 } from './actions';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   display: '',
   answer: null,
   error: '',
