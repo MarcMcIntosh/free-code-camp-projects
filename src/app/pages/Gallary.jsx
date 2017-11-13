@@ -9,6 +9,7 @@ import barchart from '../images/localhost-8080-bar-chart.png';
 import calculator from '../images/localhost-8080-calculator.png';
 import dataglobe from '../images/localhost-8080-data-globe.png';
 import dungeon from '../images/localhost-8080-dungeon-crawler.png';
+import forcedirect from '../images/localhost-8080-force-directed.png';
 
 import recipebox from '../images/localhost-8080-recipe-box.png';
 
@@ -72,7 +73,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.dataGlobe.title} url={appUrls.dataGlobe.url} challenge={appUrls.dataGlobe.challenge} media={dataglobe} />
 
-  <Preview title={appUrls.forceDirected.title} url={appUrls.forceDirected.url} challenge={appUrls.forceDirected.challenge} media={placeholder} />
+  <Preview title={appUrls.forceDirected.title} url={appUrls.forceDirected.url} challenge={appUrls.forceDirected.challenge} media={forcedirect} />
 
   <Preview title={appUrls.heatMap.title} url={appUrls.heatMap.url} challenge={appUrls.heatMap.challenge} media={placeholder} />
 
