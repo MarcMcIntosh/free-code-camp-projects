@@ -6,8 +6,8 @@ import {
   REQUEST_FLAGS,
 } from './actions';
 
-const DEFAULT_STATE = {
-  error: false,
+export const DEFAULT_STATE = {
+  error: '',
   fetching_data: false,
   fetching_flags: false,
   data: {},
@@ -18,7 +18,7 @@ function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case REQUEST_DATA: return {
       ...state,
-      error: false,
+      error: '',
       fetching_data: true,
     };
     case RECIEVE_DATA: return {
@@ -37,7 +37,7 @@ function reducer(state = DEFAULT_STATE, action) {
     };
     case REQUEST_FLAGS: return {
       ...state,
-      error: false,
+      error: '',
       fetching_flags: true,
     };
     default: return state;

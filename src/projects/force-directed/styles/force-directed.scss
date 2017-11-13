@@ -1,0 +1,82 @@
+@import "./variables";
+
+.force-directed {
+  composes: mdc-card from $mdc-card;
+
+  &__container {
+    composes: mdc-card__media from $mdc-card;
+  }
+
+  /* if the width and height are stated in the element this can be skipped */
+
+  &__flag { /* width: 16px;  height: 11px; */ }
+
+  &__links { /* style */ }
+
+  &__nodes { /* style */ }
+
+  &__graph { /* nothing here */ }
+
+  &__link {
+    stroke: #999;
+    stroke-opacity: .6;
+    stroke-width: 1px;
+  }
+
+  &-loader {
+    composes: mdc-linear-progress mdc-linear-progress--indeterminate from $mdc-linear-progress;
+
+    &__buffering-dots {
+      composes: mdc-linear-progress__buffering-dots from $mdc-linear-progress;
+    }
+
+    &__buffer {
+      composes: mdc-linear-progress__buffer from $mdc-linear-progress;
+    }
+
+    &__primary {
+      composes: mdc-linear-progress__bar mdc-linear-progress__primary-bar from $mdc-linear-progress;
+    }
+
+    &__inner {
+      composes: mdc-linear-progress__bar-inner from $mdc-linear-progress;
+    }
+
+    &__secondary {
+      composes: mdc-linear-progress__bar mdc-linear-progress__secondary-bar from $mdc-linear-progress;
+    }
+  }
+
+  &-error {
+    composes: mdc-dialog from $mdc-dialog;
+
+    &--open {
+      composes: mdc-dialog--open from $mdc-dialog;
+    }
+
+    &__surface {
+      composes: mdc-dialog__surface from $mdc-dialog;
+    }
+
+    &__header {
+      composes: mdc-dialog__header from $mdc-dialog;
+
+      &__title {
+        composes: mdc-dialog__header__title from $mdc-dialog;
+      }
+    }
+
+    &__body {
+      composes: mdc-dialog__body from $mdc-dialog;
+    }
+
+    &__footer {
+      composes: mdc-dialog__footer from $mdc-dialog;
+    }
+
+    &__button {
+      composes: mdc-button from $mdc-button;
+      composes: mdc-dialog__footer__button mdc-dialog__footer__button--accept from $mdc-dialog;
+    }
+  }
+}

@@ -3,19 +3,16 @@ import React from 'react';
 import Preview from '../components/Preview';
 import appUrls from '../../common/app-urls';
 import placeholder from '../images/4-3.jpg';
-/* import calculator from 'file-loader!../images/calculator.png';
-import localWeather from 'file-loader!../images/local-weather.png';
-import tribute from 'file-loader!../images/tribute.png';
-import pomodoro from 'file-loader!../images/pomodoro.png';
-import quote from 'file-loader!../images/quote.png';
-import simon from 'file-loader!../images/simon.png';
-import tictacttoe from 'file-loader!../images/tic-tac-toe.png';
-import twitch from 'file-loader!../images/twitch.png';
-import wikipedia from 'file-loader!../images/wikipedia.png'; */
+
+/* done */
 import barchart from '../images/localhost-8080-bar-chart.png';
 import calculator from '../images/localhost-8080-calculator.png';
-import recipebox from '../images/localhost-8080-recipe-box.png';
 import dataglobe from '../images/localhost-8080-data-globe.png';
+import dungeon from '../images/localhost-8080-dungeon-crawler.png';
+
+import recipebox from '../images/localhost-8080-recipe-box.png';
+
+/* to do */
 import localWeather from '../images/local-weather.png';
 import tribute from '../images/tribute.png';
 import pomodoro from '../images/pomodoro.png';
@@ -82,7 +79,7 @@ const Gallary = () => (<div className="preview">
   <Preview title={appUrls.scatterplotGraph.title} url={appUrls.scatterplotGraph.url} challenge={appUrls.scatterplotGraph.challenge} media={placeholder} />
 
   {/* React */}
-  <Preview title={appUrls.dungeonCrawler.title} url={appUrls.dungeonCrawler.url} challenge={appUrls.dungeonCrawler.challenge} media={placeholder} />
+  <Preview title={appUrls.dungeonCrawler.title} url={appUrls.dungeonCrawler.url} challenge={appUrls.dungeonCrawler.challenge} media={dungeon} />
 
   <Preview title={appUrls.gameOfLife.title} url={appUrls.gameOfLife.url} challenge={appUrls.gameOfLife.challenge} media={placeholder} />
 
