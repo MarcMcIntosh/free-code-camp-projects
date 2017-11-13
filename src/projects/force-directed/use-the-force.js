@@ -15,10 +15,10 @@ function getSizes(elem) {
   const aspect = window.innerWidth / window.innerHeight;
   const w0 = offsetLeft * 2;
   const h0 = offsetTop * 2;
-  const w1 = clientWidth - w0;
-  const h1 = Math.min(w1, (window.innerHeight - h0));
-  const width = h1 / aspect;
-  const height = (aspect * (width - w0)) - h0;
+  const w1 = clientWidth;
+  const width = w1;
+  const h1 = Math.min((width - w0), (window.innerHeight / aspect));
+  const height = (h1 / aspect) - h0;
   return [width, height];
 }
 
