@@ -11,14 +11,13 @@ import { drag } from 'd3-drag';
 import image from './styles/images/flags.png';
 
 function getSizes(elem) {
-  const { clientWidth, offsetLeft, offsetTop } = elem;
-  const aspect = window.innerWidth / window.innerHeight;
-  const w0 = offsetLeft * 2;
-  const h0 = offsetTop * 2;
-  const w1 = clientWidth;
-  const width = w1;
-  const h1 = Math.min((width - w0), (window.innerHeight / aspect));
-  const height = (h1 / aspect) - h0;
+  const { clientWidth, offsetTop } = elem;
+  const padding = 16;
+  const w = window.innerHeight;
+  const e = document.documentElement.clientHeight;
+  const h = e || w;
+  const width = clientWidth - (padding * 2);
+  const height = h - (offsetTop + (padding * 3));
   return [width, height];
 }
 
@@ -55,12 +54,17 @@ export default function useTheForce(elem, data, flags, classnames) {
     .append('line')
     .attr('class', classnames('force-directed__link'));
 
+  const charge = forceManyBody();
+  const center = forceCenter(width / 2, height / 2);
+
   const simulation = forceSimulation()
     .force('link', forceLink())
-    .force('charge', forceManyBody())
-    .force('center', forceCenter(width / 2, height / 2))
+    .force('charge', charge)
+    .force('center', center)
     .force('y', forceY(0))
-    .force('x', forceX(0));
+    .force('x', forceX(0))
+    .alphaTarget(1)
+    ;
 
   const nodes = svg.append('g')
     .attr('class', classnames('force-directed__nodes'))
@@ -68,7 +72,6 @@ export default function useTheForce(elem, data, flags, classnames) {
     .data(data.nodes)
     .enter()
     .append('g');
-    // .call(drags);
 
   nodes.append('title').text(d => d.country);
   nodes.append('rect').attr('class', classnames('force-directed__flag'))
@@ -102,13 +105,14 @@ export default function useTheForce(elem, data, flags, classnames) {
   simulation.nodes(this.props.data.nodes).on('tick', ticked);
 
   simulation.force('link').links(this.props.data.links);
-  /*
+
   function resize() {
     const [w, h] = getSizes(elem);
     svg.attr('width', w).attr('height', h);
-    // svg.attr('viewBox', `0 0 ${w} ${h}`);
+    svg.attr('viewBox', `0 0 ${w} ${h}`);
+    simulation.force('center', forceCenter(w / 2, h / 2));
+    simulation.restart();
   }
 
   window.addEventListener('resize', resize);
-  */
 }

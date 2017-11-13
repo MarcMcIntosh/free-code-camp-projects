@@ -2,9 +2,24 @@
 
 .force-directed {
   composes: mdc-card from $mdc-card;
+  overflow: auto;
 
   &__container {
     composes: mdc-card__media from $mdc-card;
+    // margin: auto;
+    // padding: 0;
+  }
+
+  &__header {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
   }
 
   /* if the width and height are stated in the element this can be skipped */

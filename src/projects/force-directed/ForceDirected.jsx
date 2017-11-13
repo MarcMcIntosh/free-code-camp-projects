@@ -48,9 +48,15 @@ class ForceDirected extends Component {
     const { classnames } = this.context;
     return (<div className={classnames('force-directed')}>
       {this.props.fetching && (<Loader />)}
-
-      <ErrorMessage onClick={this.getJson}>{this.props.error}</ErrorMessage>
-
+      <header className={classnames('force-directed__header')}>
+        <h1 className={classnames('force-directed__title')}>
+          National Contiguity
+        </h1>
+        <h2 className={classnames('force-directed__subtitle')}>
+          Countries linked by shared boarders
+        </h2>
+        <ErrorMessage onClick={this.getJson}>{this.props.error}</ErrorMessage>
+      </header>
 
       <div ref={(c) => { this.root = c; }} className={classnames('force-directed__container')} />
     </div>);
