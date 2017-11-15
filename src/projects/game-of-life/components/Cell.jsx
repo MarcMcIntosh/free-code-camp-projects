@@ -10,20 +10,7 @@ const Cell = (props, { classnames }) => (<div className={classnames('game-of-lif
 
   <div
     className={classnames('game-of-life-cell__background')}
-  >
-    {/* <svg
-      className={classnames('game-of-life-cell__checkmark')}
-      viewBox="0 0 24 24"
-    >
-      <path
-        className={classnames('game-of-life-cell__checkmark__path')}
-        fill="none"
-        stroke="white"
-        d="M1.73,12.91 8.1,19.28 22.79,4.59"
-      />
-    </svg>
-    <div className={classnames('game-of-life-cell__mixedmark')} /> */}
-  </div>
+  />
 </div>);
 
 Cell.propTypes = { disabled: bool };

@@ -1,3 +1,7 @@
+@import "@material/theme/mdc-theme.scss";
+@import "@material/ripple/mixins";
+@import "@material/theme/color-palette";
+@import "@material/theme/mixins";
 // @import "~mdc-range-slider/mdc-range-slider.scss";
 @import "./variables";
 
@@ -12,18 +16,28 @@ td {
 } */
 
 .game-of-life {
+  /* $blue: #6a5acd;
+  $theme: #3f51b5;
+  $gray: 	#708090;
+  $black: #000;
+  $cell-size: 18px; */
+  // composes: mdc-theme--dark from mdc-theme;
+  // composes: mdc-card mdc-card--theme-dark from $mdc-card;
   composes: mdc-card from $mdc-card;
   overflow: auto;
 
-  $mild_blue: #1c6ea4;
-  $green_blue: #1c6;
-  $c1: $mild_blue;
+  /* table, tr, td {
+    padding: 0;
+    border: 1px solid black;
+    line-height: 0;
+    border-collapse: collapse;
+  } */
 
   &__media {
     composes: mdc-card__media from $mdc-card;
-    margin: 16px;
-    padding: 0;
-    border: 2px outset $c1;
+    // width: 50%;
+    // height: auto;
+    // margin: auto;
   }
 
   &__table {
@@ -34,20 +48,28 @@ td {
   &__td {
     // width: 50%;
     // padding-bottom: 50%;
-    // nicegreen: #1c6
-    border: 1px solid $c1;
   }
 
   &-cell {
+    /* see https://github.com/material-components/material-components-web/blob/master/demos/checkbox.scss
+    for color manipulation */
+    // composes: mdc-checkbox from $mdc-checkbox;
     composes: mdc-checkbox from $mdc-checkbox;
-    width: 100%;
-    height: auto;
-    padding: 0 0 100%;
+    width: 100%; //  29px;  // 18px
+    height: auto; // 29px; // 18px
+    padding: 0 0 100%; // 11px
+
+    /* this is faster */
 
     &::before,
     &::after { content: none; }
 
+    &__native-control {
+      composes: mdc-checkbox__native-control from $mdc-checkbox;
+    }
+
     &__background {
+      // the ::before controls the afterglow
       composes: mdc-checkbox__background from $mdc-checkbox;
       top: 0;
       left: 0;
@@ -56,13 +78,28 @@ td {
 
       &::before,
       &::after {
+        /* improves rednering speed but removes afterglow */
         content: none;
       }
     }
 
-    &__native-control {
-      composes: mdc-checkbox__native-control from $mdc-checkbox;
+    &__checkmark {
+      composes: mdc-checkbox__checkmark from $mdc-checkbox;
+
+      &__path {
+        composes: mdc-checkbox__checkmark__path from $mdc-checkbox;
+      }
     }
+
+    &__mixedmark {
+      composes: mdc-checkbox__mixedmark from $mdc-checkbox;
+    }
+
+    /* width: $cell-size;
+    height: $cell-size;
+    border-width: 0;
+    &--alive { background-color: $blue; }
+    &--dead { background-color: $gray; } */
   }
 
   .top-menu { text-align: center; }
