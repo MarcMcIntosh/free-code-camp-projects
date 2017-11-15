@@ -43,41 +43,27 @@ td {
   }
 
   &__td {
-    // width: 50%;
-    // padding-bottom: 50%;
+    width: 50%;
+    padding-bottom: 50%;
   }
 
   &-cell {
-    /* see https://github.com/material-components/material-components-web/blob/master/demos/checkbox.scss
-    for color manipulation */
     // composes: mdc-checkbox from $mdc-checkbox;
     composes: mdc-checkbox from $mdc-checkbox;
-    width: 100%; //  29px;  // 18px
-    height: auto; // 29px; // 18px
-    padding: 0 0 100%; // 11px
-
-    /* this is faster */
-
-    &::before,
-    &::after { content: none; }
+    width: 29px;  // 18px
+    height: 29px; // 18px
+    padding: 0; // 11px
 
     &__native-control {
       composes: mdc-checkbox__native-control from $mdc-checkbox;
     }
 
     &__background {
-      // the ::before controls the afterglow
       composes: mdc-checkbox__background from $mdc-checkbox;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-
-      &::before,
-      &::after {
-        /* improves rednering speed but removes afterglow */
-        content: none;
-      }
     }
 
     &__checkmark {

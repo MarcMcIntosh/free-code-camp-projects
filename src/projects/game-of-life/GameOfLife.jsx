@@ -52,7 +52,9 @@ class GameOfLife extends PureComponent {
     const { game } = this.props;
     const { classnames } = this.context;
     return (<div className={classnames('game-of-life')}>
-      <Board data={game} onClick={this._handleClick} />
+      <div className={classnames('game-of-life__media')}>
+        <Board data={game} onClick={this._handleClick} />
+      </div>
     </div>);
   }
 }

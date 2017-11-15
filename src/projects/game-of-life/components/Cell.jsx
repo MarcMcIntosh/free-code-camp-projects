@@ -11,7 +11,7 @@ const Cell = (props, { classnames }) => (<div className={classnames('game-of-lif
   <div
     className={classnames('game-of-life-cell__background')}
   >
-    <svg
+    {/* <svg
       className={classnames('game-of-life-cell__checkmark')}
       viewBox="0 0 24 24"
     >
@@ -22,7 +22,7 @@ const Cell = (props, { classnames }) => (<div className={classnames('game-of-lif
         d="M1.73,12.91 8.1,19.28 22.79,4.59"
       />
     </svg>
-    <div className={classnames('game-of-life-cell__mixedmark')} />
+    <div className={classnames('game-of-life-cell__mixedmark')} /> */}
   </div>
 </div>);
 
