@@ -10,6 +10,7 @@ import {
   SET_RANDOM,
   UPDATE_GEN,
   TOGGLE_SQUARE,
+  RULES,
 } from './actions';
 
 const DEFAULT_STATE = {
@@ -20,6 +21,7 @@ const DEFAULT_STATE = {
   game: randomGame(16, 16),
   gen: 0,
   timer: -1,
+  rules: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -78,6 +80,7 @@ function reducer(state = DEFAULT_STATE, action) {
       };
     }
     case SET_GAME: return { ...state, game: action.payload };
+    case RULES: return { ...state, rules: !state.rules };
     default: return state;
   }
 }

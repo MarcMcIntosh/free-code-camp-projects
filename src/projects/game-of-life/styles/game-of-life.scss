@@ -19,23 +19,64 @@ td {
   $green_blue: #1c6;
   $c1: $mild_blue;
 
+  &__primary { composes: mdc-card__primary from $mdc-card; }
+
+  &__title { composes: mdc-card__title from $mdc-card; }
+
+  &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
+
+  &__rules {
+    composes: mdc-card__supporting-text from $mdc-card;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
   &__media {
     composes: mdc-card__media from $mdc-card;
     margin: 16px;
     padding: 0;
-    border: 2px outset $c1;
+    border: 1px outset $c1;
   }
 
   &__table {
     width: 100%;
     border-collapse: collapse;
+
+    tbody,
+    tr {
+      // padding: 0;
+      // border: none;
+    }
   }
 
   &__td {
     // width: 50%;
     // padding-bottom: 50%;
     // nicegreen: #1c6
-    border: 1px solid $c1;
+    // border: none;
+  }
+
+  &-switch {
+
+    &__switch {
+      composes: mdc-switch from $mdc-switch;
+
+      &--disabled { composes: mdc-switch--disabled from $mdc-switch; }
+    }
+
+    &__native-control {
+      composes: mdc-switch__native-control from $mdc-switch;
+    }
+
+    &__background {
+      composes: mdc-switch__background from $mdc-switch;
+    }
+
+    &__label {
+      composes: mdc-switch-label from $mdc-switch;
+    }
   }
 
   &-cell {

@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { func, number, array, bool } from 'prop-types';
-import { setGame, setSpeed, setSize, nextGen, updateGen, toggleSquare } from './actions';
+import { setGame, setSpeed, setSize, nextGen, updateGen, toggleSquare, toggleRules } from './actions';
+
 
 import Board from './components/Board';
+import Switch from './components/Switch';
 
-const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width } }) => ({ game, speed, running, timer, gen, width });
+const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width, rules } }) => ({ game, speed, running, timer, gen, width, rules });
 
 
 const mapDispatchToProps = dispatch => ({
+  showRules: () => dispatch(toggleRules()),
   onSetGame: payload => dispatch(setGame(payload)),
   onNextGen: timer => dispatch(nextGen(timer)),
   onUpdateGen: () => dispatch(updateGen()),
@@ -49,9 +52,24 @@ class GameOfLife extends PureComponent {
     this.props.onToggleSquare({ x, y });
   }
   render() {
-    const { game } = this.props;
+    const { game, rules } = this.props;
     const { classnames } = this.context;
     return (<div className={classnames('game-of-life')}>
+      <header className={classnames('game-of-life__primary')}>
+        <h1 className={classnames('game-of-life__title')}>
+          {'Conway\'s Game of Life'}
+        </h1>
+        <h2 className={classnames('game-of-life__subtitle')}>
+          <Switch label="Rules" name="rules" onChange={this.props.showRules} />
+        </h2>
+        <hr />
+      </header>
+      <section className={classnames('game-of-life__rules', 'game-of-life__rules--disabled' && rules)}>
+        <li>Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.</li>
+        <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+        <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
+        <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+      </section>
       <div className={classnames('game-of-life__media')}>
         <Board data={game} onClick={this._handleClick} />
       </div>
@@ -60,6 +78,7 @@ class GameOfLife extends PureComponent {
 }
 
 GameOfLife.propTypes = {
+  rules: bool.isRequired,
   running: bool.isRequired,
   gen: number.isRequired,
   timer: number.isRequired,
@@ -70,6 +89,7 @@ GameOfLife.propTypes = {
   onToggleSquare: func.isRequired,
   onNextGen: func.isRequired,
   onUpdateGen: func.isRequired,
+  showRules: func.isRequired,
   // onSetSize: func.isRequired,
   // onSetSpeed: func.isRequired,
 };
