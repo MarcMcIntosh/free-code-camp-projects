@@ -75,6 +75,7 @@
     "@material/layout-grid": "^0.24.0",
     "@material/linear-progress": "^0.24.0",
     "@material/ripple": "^0.24.0",
+    "@material/slider": "^0.25.0",
     "@material/textfield": "^0.24.0",
     "@material/theme": "^0.24.0",
     "@material/typography": "^0.3.0",

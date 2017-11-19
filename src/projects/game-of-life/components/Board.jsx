@@ -16,8 +16,9 @@ const Board = ({
       const k = `row-${i}`;
       return (<tr key={k}>{rows.map((cell, ii) => {
         const kk = `${k}.cell-${ii}`;
+        const val = `${i} ${ii}`;
         return (<td key={kk} className={tdClass}>
-          <Cell value={`${i}.${ii}`} onClick={onClick} disabled={disabled} />
+          <Cell value={val} checked={!!parseInt(cell, 10)} onChange={onClick} disabled={disabled} />
         </td>);
       })}</tr>);
     })}</tbody>

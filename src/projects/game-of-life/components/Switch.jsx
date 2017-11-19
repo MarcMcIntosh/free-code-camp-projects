@@ -9,7 +9,7 @@ const Switch = ({
 }) => (<span className={classnames('game-of-life-switch')}>
   <div className={classnames('game-of-life-switch__switch', props.disabled && 'game-of-life-switch__switch--disabled')}>
     <input type="checkbox" className={classnames('game-of-life-switch__native-control')} {...props} />
-    <div classNames={classnames('game-of-life-switch__background')}><div classNames={classnames('game-of-life-switch__knob')} /></div>
+    <div className={classnames('game-of-life-switch__background')}><div className={classnames('game-of-life-switch__knob')} /></div>
   </div>
   <label htmlFor={props.name} className={classnames('game-of-life-switch__label')}>{label}</label>
 </span>);

@@ -1,26 +1,35 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func, number, array, bool } from 'prop-types';
-import { setGame, setSpeed, setSize, nextGen, updateGen, toggleSquare, toggleRules } from './actions';
+import {
+  // setGame,
+  setSpeed,
+  setSize,
+  // nextGen,
+  // updateGen,
+  toggleSquare,
+  toggleRules,
+} from './actions';
 
 
 import Board from './components/Board';
 import Switch from './components/Switch';
+import Slider from './components/Slider';
 
 const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width, rules } }) => ({ game, speed, running, timer, gen, width, rules });
 
 
 const mapDispatchToProps = dispatch => ({
   showRules: () => dispatch(toggleRules()),
-  onSetGame: payload => dispatch(setGame(payload)),
-  onNextGen: timer => dispatch(nextGen(timer)),
-  onUpdateGen: () => dispatch(updateGen()),
+  // onSetGame: payload => dispatch(setGame(payload)),
+  // onNextGen: timer => dispatch(nextGen(timer)),
+  // onUpdateGen: () => dispatch(updateGen()),
   onToggleSquare: payload => dispatch(toggleSquare(payload)),
-  onSetSpeed: event => dispatch(setSpeed(+event.target.value)),
+  onSetSpeed: value => dispatch(setSpeed(+value)),
   onSetSize: obj => dispatch(setSize(obj)),
 });
 
-class GameOfLife extends PureComponent {
+class GameOfLife extends Component {
   constructor() {
     super();
     this._handleClick = this._handleClick.bind(this);
@@ -45,10 +54,10 @@ class GameOfLife extends PureComponent {
   }
   _run() {
     clearTimeout(this.props.timer);
-    this.props.onNextGen(setTimeout(() => this.props.onUpdateGen(), this.props.speed));
+    // this.props.onNextGen(setTimeout(() => this.props.onUpdateGen(), this.props.speed));
   }
   _handleClick(event) {
-    const [x, y] = event.target.value.split('.');
+    const [y, x] = event.target.value.split(' ');
     this.props.onToggleSquare({ x, y });
   }
   render() {
@@ -60,11 +69,11 @@ class GameOfLife extends PureComponent {
           {'Conway\'s Game of Life'}
         </h1>
         <h2 className={classnames('game-of-life__subtitle')}>
-          <Switch label="Rules" name="rules" onChange={this.props.showRules} />
+          <Switch label="Rules" name="rules" checked={rules} onChange={this.props.showRules} />
         </h2>
         <hr />
       </header>
-      <section className={classnames('game-of-life__rules', 'game-of-life__rules--disabled' && rules)}>
+      <section className={classnames('game-of-life__rules', !rules && 'game-of-life__rules--hidden')}>
         <li>Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.</li>
         <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
         <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
@@ -72,6 +81,16 @@ class GameOfLife extends PureComponent {
       </section>
       <div className={classnames('game-of-life__media')}>
         <Board data={game} onClick={this._handleClick} />
+      </div>
+      <div className={classnames('game-of-life__actions')}>
+        <Slider
+          min={0}
+          max={1000}
+          step={100}
+          value={this.props.speed}
+          label="Speed"
+          onChange={this.props.onSetSpeed}
+        />
       </div>
     </div>);
   }
@@ -87,11 +106,11 @@ GameOfLife.propTypes = {
   game: array.isRequired,
   // onSetGame: func.isRequired,
   onToggleSquare: func.isRequired,
-  onNextGen: func.isRequired,
-  onUpdateGen: func.isRequired,
+  // onNextGen: func.isRequired,
+  // onUpdateGen: func.isRequired,
   showRules: func.isRequired,
   // onSetSize: func.isRequired,
-  // onSetSpeed: func.isRequired,
+  onSetSpeed: func.isRequired,
 };
 
 GameOfLife.contextTypes = { classnames: func.isRequired };

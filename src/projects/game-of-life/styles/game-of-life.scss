@@ -1,5 +1,6 @@
 // @import "~mdc-range-slider/mdc-range-slider.scss";
 @import "./variables";
+@import "./slider";
 
 /* Equal size cells
 table {
@@ -31,6 +32,10 @@ td {
     &--hidden {
       display: none;
     }
+  }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
   }
 
   &__media {
@@ -72,6 +77,10 @@ td {
 
     &__background {
       composes: mdc-switch__background from $mdc-switch;
+    }
+
+    &__knob {
+      composes: mdc-switch__knob from $mdc-switch;
     }
 
     &__label {
