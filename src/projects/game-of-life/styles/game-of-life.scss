@@ -1,4 +1,5 @@
 // @import "~mdc-range-slider/mdc-range-slider.scss";
+// @import "@material/ripple/mixins";
 @import "./variables";
 @import "./slider";
 
@@ -13,7 +14,9 @@ td {
 } */
 
 .game-of-life {
+  /* style the card so that on wider displays the card is not it long */
   composes: mdc-card from $mdc-card;
+  margin: auto;
   overflow: auto;
 
   $mild_blue: #1c6ea4;
@@ -22,27 +25,52 @@ td {
 
   &__primary { composes: mdc-card__primary from $mdc-card; }
 
-  &__title { composes: mdc-card__title from $mdc-card; }
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
 
   &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
 
   &__rules {
     composes: mdc-card__supporting-text from $mdc-card;
+  }
 
-    &--hidden {
-      display: none;
-    }
+  &__list {
+    // composes: mdc-list mdc-list--dense from $mdc-list;
+  }
+
+  &__list-item {
+    // composes: mdc-list-item from $mdc-list;
+  }
+
+  &__settings {
+    composes: mdc-card__media from $mdc-card;
+    // display: block;
   }
 
   &__actions {
     composes: mdc-card__actions from $mdc-card;
+    margin: auto;
+
+    &--vertical {
+      composes: mdc-card__action--vertical from $mdc-card;
+    }
+  }
+
+  &__action {
+    composes: mdc-button mdc-button--raised from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+
+    &--icon {
+      composes: mdc-button__icon from $mdc-button;
+      composes: material-icons from $material-icons;
+      line-height: inherit;
+    }
   }
 
   &__media {
     composes: mdc-card__media from $mdc-card;
-    margin: 16px;
-    padding: 0;
-    border: 1px outset $c1;
+    // margin: 16px;
+    // padding: 0;
+    // border: 1px outset $c1;
   }
 
   &__table {
@@ -67,6 +95,7 @@ td {
 
     &__switch {
       composes: mdc-switch from $mdc-switch;
+      margin: 0 8px;
 
       &--disabled { composes: mdc-switch--disabled from $mdc-switch; }
     }
@@ -84,7 +113,8 @@ td {
     }
 
     &__label {
-      composes: mdc-switch-label from $mdc-switch;
+      composes: mdc-card__subtitle from $mdc-card;
+      // composes: mdc-switch-label from $mdc-switch;
     }
   }
 

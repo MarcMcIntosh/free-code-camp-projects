@@ -65,20 +65,22 @@ class Slider extends Component {
     const { max, min, step } = this.props;
     const position = event.clientX;
     const width = this.root.clientWidth;
-    const range = Math.abs(max - min);
+    // const range = Math.abs(max - min);
+    const range = max;
     const value = calcChange({ range, width, position, step });
-    console.log({ max, min, step, position, width, range, value });
+    // console.log({ value, props, range, max, min, step });
     if (!this.state.inTransit) {
       this.setState({ inTransit: true });
     }
     if (this.props.value !== value) {
-      this.props.onChange(value);
+      this.props.onChange(Math.max(min, Math.min(max, value)));
     }
   }
   render() {
     const { min, max, value, label, step, ...props } = this.props;
-    const range = Math.abs(max - min);
-    const sX = value / range;
+    // const range = Math.abs(max - min);
+    // const sX = value / range;
+    const sX = (value - min) / (max - min);
     const { classnames } = this.context;
 
     return (<div
@@ -96,7 +98,6 @@ class Slider extends Component {
       aria-label={label}
       data-step={step}
       tabIndex="0"
-      data-value={value}
       {...props}
     >
       <div

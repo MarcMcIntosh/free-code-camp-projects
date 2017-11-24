@@ -5,28 +5,35 @@ import {
   // setGame,
   setSpeed,
   setSize,
-  // nextGen,
+  //  nextGen,
   // updateGen,
   toggleSquare,
-  toggleRules,
+  // toggleRules,
+  resetGame,
+  setRandom,
+  togglePlay,
 } from './actions';
 
 
 import Board from './components/Board';
-import Switch from './components/Switch';
-import Slider from './components/Slider';
+import Rules from './components/Rules';
+import Actions from './components/Actions';
+import Settings from './components/Settings';
 
-const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width, rules } }) => ({ game, speed, running, timer, gen, width, rules });
+const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width } }) => ({ game, speed, running, timer, gen, width });
 
 
 const mapDispatchToProps = dispatch => ({
-  showRules: () => dispatch(toggleRules()),
+  // showRules: () => dispatch(toggleRules()),
   // onSetGame: payload => dispatch(setGame(payload)),
   // onNextGen: timer => dispatch(nextGen(timer)),
   // onUpdateGen: () => dispatch(updateGen()),
+  onResetGame: () => dispatch(resetGame()),
+  onSetRandom: () => dispatch(setRandom()),
+  onTogglePlay: () => dispatch(togglePlay()),
   onToggleSquare: payload => dispatch(toggleSquare(payload)),
   onSetSpeed: value => dispatch(setSpeed(+value)),
-  onSetSize: obj => dispatch(setSize(obj)),
+  onSetSize: n => dispatch(setSize({ width: n, height: n })),
 });
 
 class GameOfLife extends Component {
@@ -34,83 +41,109 @@ class GameOfLife extends Component {
     super();
     this._handleClick = this._handleClick.bind(this);
     this._run = this._run.bind(this);
+    this._toggleRules = this._toggleRules.bind(this);
+    this._toggleSettings = this._toggleSettings.bind(this);
+    this._setSize = this._setSize.bind(this);
+    this._handleKeyPress = this._handleKeyPress.bind(this);
+    this.state = {
+      width: 'auto',
+      showSettings: false,
+      showRules: false,
+    };
   }
   componentDidMount() {
+    window.addEventListener('resize', this._setSize);
+    window.addEventListener('keydown', this._handleKeyPress);
+    this._setSize();
     if (this.props.running) this._run();
   }
   componentDidUpdate(prevProps) {
-    if (!this.props.running) {
-      clearTimeout(this.props.timer);
-    } else if (
-      this.props.gen !== prevProps.gen || (
-        this.props.timer === prevProps.timer
-        && this.props.gen === prevProps.gen
-      ) || (
-        this.props.running && !prevProps.running
-      )
-    ) {
+    const { running, gen, timer } = this.props;
+    const timersAreEqual = (timer === prevProps.timer);
+    const gensAreEqual = (gen === prevProps.gen);
+    if (!running && prevProps.running) {
+      clearTimeout(timer);
+    } else if (!gensAreEqual || (timersAreEqual && gensAreEqual) || (running && !prevProps.running)) {
       this._run();
     }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._setSize);
+    window.removeEventListener('keydown', this._handleKeyPress);
+  }
+  _setSize() {
+    const { innerWidth, innerHeight } = window;
+    const ratio = Math.min(innerWidth, innerHeight) / innerWidth;
+    const per = ratio * 100;
+    this.setState({ width: `${per}%` });
   }
   _run() {
     clearTimeout(this.props.timer);
     // this.props.onNextGen(setTimeout(() => this.props.onUpdateGen(), this.props.speed));
+    // this.props.onNextGen(setTimeout(this.props.onUpdateGen, this.props.speed));
   }
   _handleClick(event) {
     const [y, x] = event.target.value.split(' ');
     this.props.onToggleSquare({ x, y });
   }
+  _handleKeyPress(event) {
+    if (event.which === 32) {
+      event.preventDefault();
+      this.props.onTogglePlay();
+    }
+  }
+  _toggleRules() {
+    this.setState({ showRules: !this.state.showRules });
+  }
+  _toggleSettings() {
+    this.setState({ showSettings: !this.state.showSettings });
+  }
   render() {
-    const { game, rules } = this.props;
     const { classnames } = this.context;
-    return (<div className={classnames('game-of-life')}>
+    const isBlank = [].concat(...this.props.game).reduce((a, b) => a + b, 0) === 0;
+    return (<div className={classnames('game-of-life')} style={{ width: this.state.width }} >
       <header className={classnames('game-of-life__primary')}>
         <h1 className={classnames('game-of-life__title')}>
           {'Conway\'s Game of Life'}
         </h1>
-        <h2 className={classnames('game-of-life__subtitle')}>
-          <Switch label="Rules" name="rules" checked={rules} onChange={this.props.showRules} />
-        </h2>
         <hr />
+        <h2 className={classnames('game-of-life__subtitle')}>
+          Generation: {this.props.gen}
+        </h2>
       </header>
-      <section className={classnames('game-of-life__rules', !rules && 'game-of-life__rules--hidden')}>
-        <li>Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.</li>
-        <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
-        <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
-        <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
-      </section>
-      <div className={classnames('game-of-life__media')}>
-        <Board data={game} onClick={this._handleClick} />
+
+      {this.state.showRules && (<Rules />)}
+
+      <Actions running={this.props.running} togglePlay={this.props.onTogglePlay} toggleRules={this._toggleRules} toggleSettings={this._toggleSettings} onSetRandom={this.props.onSetRandom} onResetGame={this.props.onResetGame} isBlank={isBlank} />
+
+      {this.state.showSettings && (<Settings width={this.props.width} onSetSize={this.props.onSetSize} running={this.props.running} speed={this.props.speed} onSetSpeed={this.props.onSetSpeed} />)}
+
+      <div className={classnames('game-of-life__media')} >
+        <Board game={this.props.game} onClick={this._handleClick} />
       </div>
-      <div className={classnames('game-of-life__actions')}>
-        <Slider
-          min={0}
-          max={1000}
-          step={100}
-          value={this.props.speed}
-          label="Speed"
-          onChange={this.props.onSetSpeed}
-        />
-      </div>
+
     </div>);
   }
 }
 
 GameOfLife.propTypes = {
-  rules: bool.isRequired,
+  // rules: bool.isRequired,
   running: bool.isRequired,
   gen: number.isRequired,
   timer: number.isRequired,
   speed: number.isRequired,
-  // width: number.isRequired,
+  width: number.isRequired,
   game: array.isRequired,
   // onSetGame: func.isRequired,
   onToggleSquare: func.isRequired,
   // onNextGen: func.isRequired,
   // onUpdateGen: func.isRequired,
-  showRules: func.isRequired,
-  // onSetSize: func.isRequired,
+  onTogglePlay: func.isRequired,
+  // showRules: func.isRequired,
+  onSetSize: func.isRequired,
   onSetSpeed: func.isRequired,
+  onResetGame: func.isRequired,
+  onSetRandom: func.isRequired,
 };
 
 GameOfLife.contextTypes = { classnames: func.isRequired };
