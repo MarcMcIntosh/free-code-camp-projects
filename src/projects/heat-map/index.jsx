@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { func } from 'prop-types';
 import { Provider } from 'react-redux';
-import store from './src/store';
-import App from './src/App';
+import store from './store';
+import App from './HeatMap';
+import classnames from './styles';
 
 class HeatMap extends Component {
   constructor() {
     super();
     this.store = store;
+    this.classnames = classnames;
+  }
+  getChildContext() {
+    return { classnames: this.classnames };
   }
   render() {
     return (<Provider store={this.store}><App /></Provider>);
   }
 }
 
+HeatMap.childContextTypes = { classnames: func.isRequired };
 
 export default HeatMap;

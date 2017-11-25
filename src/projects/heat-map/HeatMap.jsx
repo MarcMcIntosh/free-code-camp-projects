@@ -29,12 +29,19 @@ class HeatMap extends PureComponent {
     }
   }
   render() {
-    const hasData = Object.keys(this.props.data) > 0;
-    const Err = (!hasData && this.props.error);
+    const { classnames } = this.context;
+    return (<div className={classnames('heat-map')}>
+      {this.props.fetching && (<Loader />)}
+      <header className={classnames('heat-map__header')}>
+        <h1 className={classnames('heat-map__title')}>
+          Title
+        </h1>
+        <h2 className={classnames('heat-map__subtitle')}>
+          Subtitle
+        </h2>
+        {this.props.error && (<ErrorMessage onClick={this.props.onFetchData}>{String(this.props.error)}</ErrorMessage>)}
+      </header>
 
-    return (<div className="heat-map">
-      <ErrorMessage err={Err} onClick={this.props.onFetchData} />
-      <Loader loading={!hasData && this.props.fetching} />
       <div className="heat-map__container" ref={(c) => { this.container = c; }} />
     </div>);
   }
@@ -49,6 +56,8 @@ HeatMap.propTypes = {
   fetching: bool.isRequired,
   data: object.isRequired,
 };
+
+HeatMap.contextTypes = { classnames: func.isRequired };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeatMap);
