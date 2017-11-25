@@ -10,7 +10,7 @@ import 'd3-transition';
 
 const formatMonth = timeFormat('%B');
 const formatYear = timeFormat('%Y');
-const formatDate = timeFormat('%B %Y');
+const formatDate = timeFormat('%B, %Y');
 const formatTemprature = format('.4r');
 
 export default function heatMap(elem, obj, classnames) {
@@ -55,13 +55,17 @@ export default function heatMap(elem, obj, classnames) {
   const tooltip = select(elem).append('div').attr('class', classnames('heat-map__tooltip'));
 
   const mouseEnter = (d) => {
-    const str = `<span><p><time datetime=${d.time}></time>${formatDate(d.time)}</p><p>Temperature: ${formatTemprature(d.temperature)}\u2103</p></span>`;
-    tooltip.style('left', `${event.pageX}px`)
-      .style('top', `${event.pageY}px`);
-
-    tooltip.html(str);
-
-    tooltip.transition().duration(100).style('display', 'inherit').style('opacity', 0.8);
+    const str = `<p>
+    <time datetime=${d.time}><b>${formatDate(d.time)}</b></time>
+    <br /> Temperature: <b>${formatTemprature(d.temperature)}\u2103</b></p>`;
+    tooltip
+      .style('left', `${event.pageX}px`)
+      .style('top', `${event.pageY}px`)
+      .html(str)
+      .transition()
+      .duration(100)
+      .style('display', 'inherit')
+      .style('opacity', 0.8);
   };
 
   const mouseLeave = () => {

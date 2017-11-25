@@ -40,10 +40,10 @@ class HeatMap extends PureComponent {
       {this.props.fetching && (<Loader />)}
       <header className={classnames('heat-map__header')}>
         <h1 className={classnames('heat-map__title')}>
-          Title
+          Monthly Global Land-Surface Temperature
         </h1>
         <h2 className={classnames('heat-map__subtitle')}>
-          Subtitle
+          Data source: <a href="https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json" title="FreeCodeCamp Project Reference Data" target="_blank" rel="noopener noreferrer">FreeCodeCamp</a>
         </h2>
         {this.props.error && (<ErrorMessage onClick={this.props.onFetchData}>{String(this.props.error)}</ErrorMessage>)}
       </header>

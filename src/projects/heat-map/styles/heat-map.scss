@@ -11,31 +11,34 @@
     composes: mdc-card__title mdc-card__title--large from $mdc-card;
   }
 
-  &__suntitle {
+  &__subtitle {
     composes: mdc-card__subtitle from $mdc-card;
   }
 
   &__container {
     composes: mdc-card__media from $mdc-card;
-    // width: 100%;
-    // margin: auto;
-    // padding: 8px;
   }
 
-  &__chart {
-    /* style */
-  }
+  &__chart { /* style */ }
 
   &__tooltip {
+    composes: mdc-typography--body1 from $mdc-typography;
     display: none;
     position: absolute;
+    width: auto;
+    height: auto;
+    padding: 3px 5px;
+    border: 0;
+    border-radius: 5px;
+    background-color: lightsteelblue;
+    // font: 1em sans-serif;
+    text-align: left;
     pointer-events: none;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .2);
     opacity: 0;
   }
 
-  &__bucket {
-    /* stuff */
-  }
+  &__bucket { /* stuff */ }
 
   &__axis {
 
@@ -44,9 +47,7 @@
   }
 
   &__label,
-  &__month {
-    /* classNames used */
-  }
+  &__month { /* nothing */ }
 
   &-loader {
     composes: mdc-linear-progress mdc-linear-progress--indeterminate from $mdc-linear-progress;
