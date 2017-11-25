@@ -11,13 +11,12 @@ import {
 } from './actions';
 
 const DEFAULT_STATE = {
-  width: 16,
-  height: 16,
+  width: 9,
+  height: 9,
   running: true,
   speed: 500,
-  game: randomGame(16, 16),
+  game: randomGame(9, 9),
   gen: 0,
-  timer: -1,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
