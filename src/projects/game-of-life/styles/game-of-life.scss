@@ -68,10 +68,21 @@ td {
 
   &__media {
     composes: mdc-card__media from $mdc-card;
+    // display: block;
     // margin: 16px;
     // padding: 0;
     // border: 1px outset $c1;
   }
+
+  &__board {
+    width: 100%;
+  }
+
+  /* &__canvas {
+    width: 100%;
+    margin: auto;
+    padding: 0;
+  } */
 
   &__table {
     width: 100%;

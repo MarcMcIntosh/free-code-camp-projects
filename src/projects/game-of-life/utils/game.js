@@ -1,11 +1,4 @@
-import zeroGame from './zeroGame';
-import randomGame from './randomGame';
-import nextGame from './nextGame';
-import isOver from './isOver';
-
-export {
-  zeroGame,
-  randomGame,
-  nextGame,
-  isOver,
-};
+export { default as zeroGame } from './zeroGame';
+export { default as randomGame } from './randomGame';
+export { default as nextGame } from './nextGame';
+export { default as isOver } from './isOver';

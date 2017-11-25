@@ -10,7 +10,6 @@ import {
   SET_RANDOM,
   UPDATE_GEN,
   TOGGLE_SQUARE,
-  RULES,
 } from './actions';
 
 const DEFAULT_STATE = {
@@ -21,7 +20,6 @@ const DEFAULT_STATE = {
   game: randomGame(16, 16),
   gen: 0,
   timer: -1,
-  rules: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -72,15 +70,15 @@ function reducer(state = DEFAULT_STATE, action) {
     case UPDATE_GEN: {
       const game = nextGame(state.game);
       const done = isOver(state.game, game);
+      const n = (state.running && !done) ? 0 : 1;
       return {
         ...state,
         game,
-        gen: state.gen + 1,
-        running: done,
+        gen: state.gen + n,
+        running: state.running && done,
       };
     }
-    case SET_GAME: return { ...state, game: action.payload };
-    case RULES: return { ...state, rules: !state.rules };
+    case SET_GAME: return { ...state, game: action.payload, gen: state.gen + 1 };
     default: return state;
   }
 }

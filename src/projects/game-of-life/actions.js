@@ -1,8 +1,5 @@
 const prefix = str => `GAME-OF-LIFE_${str}`;
 
-export const RULES = prefix('RULES');
-export const toggleRules = () => ({ type: RULES });
-
 export const RESET_GAME = prefix('RESET_GAME');
 export const resetGame = () => ({ type: RESET_GAME });
 

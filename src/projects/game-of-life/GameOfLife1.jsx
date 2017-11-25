@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func, number, array, bool } from 'prop-types';
 import {
-  setGame,
+  // setGame,
   setSpeed,
   setSize,
-  // nextGen,
-  // updateGen,
+  nextGen,
+  updateGen,
   toggleSquare,
   // toggleRules,
   resetGame,
@@ -20,32 +20,14 @@ import Rules from './components/Rules';
 import Actions from './components/Actions';
 import Settings from './components/Settings';
 
-const mapStateToProps = ({
-  gameOfLife: {
-    game,
-    speed,
-    running,
-    // timer,
-    gen,
-    width,
-    height,
-  },
-}) => ({
-  game,
-  speed,
-  running,
-  // timer,
-  gen,
-  width,
-  height,
-});
+const mapStateToProps = ({ gameOfLife: { game, speed, running, timer, gen, width, height } }) => ({ game, speed, running, timer, gen, width, height });
 
 
 const mapDispatchToProps = dispatch => ({
   // showRules: () => dispatch(toggleRules()),
-  onSetGame: payload => dispatch(setGame(payload)),
-  // onNextGen: timer => dispatch(nextGen(timer)),
-  // onUpdateGen: () => dispatch(updateGen()),
+  // onSetGame: payload => dispatch(setGame(payload)),
+  onNextGen: timer => dispatch(nextGen(timer)),
+  onUpdateGen: () => dispatch(updateGen()),
   onResetGame: () => dispatch(resetGame()),
   onSetRandom: () => dispatch(setRandom()),
   onTogglePlay: () => dispatch(togglePlay()),
@@ -58,7 +40,7 @@ class GameOfLife extends Component {
   constructor() {
     super();
     this._handleClick = this._handleClick.bind(this);
-    // this._run = this._run.bind(this);
+    this._run = this._run.bind(this);
     this._toggleRules = this._toggleRules.bind(this);
     this._toggleSettings = this._toggleSettings.bind(this);
     this._setSize = this._setSize.bind(this);
@@ -73,7 +55,18 @@ class GameOfLife extends Component {
     window.addEventListener('resize', this._setSize);
     window.addEventListener('keydown', this._handleKeyPress);
     this._setSize();
-    // if (this.props.running) this._run();
+    if (this.props.running) this._run();
+  }
+  componentDidUpdate(prevProps) {
+    const { running, gen, timer } = this.props;
+    const timersAreEqual = (timer === prevProps.timer);
+    const gensAreEqual = (gen === prevProps.gen);
+    const wasRunning = (!running && prevProps.running);
+    if (wasRunning) {
+      clearTimeout(timer);
+    } else if (!gensAreEqual || (timersAreEqual && gensAreEqual) || (running && !prevProps.running)) {
+      this._run();
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this._setSize);
@@ -84,6 +77,11 @@ class GameOfLife extends Component {
     const ratio = Math.min(innerWidth, innerHeight) / innerWidth;
     const per = ratio * 100;
     this.setState({ width: `${per}%` });
+  }
+  _run() {
+    const { timer, running, speed, onNextGen, onUpdateGen } = this.props;
+    clearTimeout(timer);
+    if (running) { onNextGen(setTimeout(onUpdateGen, speed)); }
   }
   _handleClick(event) {
     const [y, x] = event.target.value.split(' ');
@@ -122,8 +120,9 @@ class GameOfLife extends Component {
       {this.state.showSettings && (<Settings width={this.props.width} height={this.props.height} onSetSize={this.props.onSetSize} running={this.props.running} speed={this.props.speed} onSetSpeed={this.props.onSetSpeed} />)}
 
       <div className={classnames('game-of-life__media')} >
-        <Board game={this.props.game} speed={this.props.speed} setGame={this.props.onSetGame} running={this.props.running} onClick={this._handleClick} />
+        <Board game={this.props.game} onClick={this._handleClick} />
       </div>
+
     </div>);
   }
 }
@@ -132,16 +131,15 @@ GameOfLife.propTypes = {
   // rules: bool.isRequired,
   running: bool.isRequired,
   gen: number.isRequired,
-  // timer: number.isRequired,
+  timer: number.isRequired,
   speed: number.isRequired,
   width: number.isRequired,
   height: number.isRequired,
   game: array.isRequired,
   // onSetGame: func.isRequired,
   onToggleSquare: func.isRequired,
-  // onNextGen: func.isRequired,
-  // onUpdateGen: func.isRequired,
-  onSetGame: func.isRequired,
+  onNextGen: func.isRequired,
+  onUpdateGen: func.isRequired,
   onTogglePlay: func.isRequired,
   // showRules: func.isRequired,
   onSetSize: func.isRequired,

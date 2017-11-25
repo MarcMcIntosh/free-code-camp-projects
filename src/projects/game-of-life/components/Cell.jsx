@@ -1,7 +1,9 @@
 import React from 'react';
 import { func, bool } from 'prop-types';
 
-const Cell = (props, { classnames }) => (<div className={classnames('game-of-life-cell', props.disabled && 'game-of-life-cell--disabled')}>
+const Cell = (props, { classnames }) => (<div
+  className={classnames('game-of-life-cell', props.disabled && 'game-of-life-cell--disabled')}
+>
   <input
     type="checkbox"
     className={classnames('game-of-life-cell__native-control')}
