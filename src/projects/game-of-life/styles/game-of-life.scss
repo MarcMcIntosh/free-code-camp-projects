@@ -1,27 +1,11 @@
-// @import "~mdc-range-slider/mdc-range-slider.scss";
-// @import "@material/ripple/mixins";
+
 @import "./variables";
 @import "./slider";
 
-/* Equal size cells
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-td {
-    width: 50%;
-    padding-bottom: 50%;
-} */
-
 .game-of-life {
-  /* style the card so that on wider displays the card is not it long */
   composes: mdc-card from $mdc-card;
   margin: auto;
   overflow: auto;
-
-  $mild_blue: #1c6ea4;
-  $green_blue: #1c6;
-  $c1: $mild_blue;
 
   &__primary { composes: mdc-card__primary from $mdc-card; }
 
@@ -33,26 +17,17 @@ td {
     composes: mdc-card__supporting-text from $mdc-card;
   }
 
-  &__list {
-    // composes: mdc-list mdc-list--dense from $mdc-list;
-  }
+  &__list { /* nothing */ }
 
-  &__list-item {
-    // composes: mdc-list-item from $mdc-list;
-  }
+  &__list-item { /* nothing */ }
 
   &__settings {
     composes: mdc-card__media from $mdc-card;
-    // display: block;
   }
 
   &__actions {
     composes: mdc-card__actions from $mdc-card;
     margin: auto;
-
-    &--vertical {
-      composes: mdc-card__action--vertical from $mdc-card;
-    }
   }
 
   &__action {
@@ -68,39 +43,17 @@ td {
 
   &__media {
     composes: mdc-card__media from $mdc-card;
-    // display: block;
-    // margin: 16px;
-    // padding: 0;
-    // border: 1px outset $c1;
   }
-
-  &__board {
-    width: 100%;
-  }
-
-  /* &__canvas {
-    width: 100%;
-    margin: auto;
-    padding: 0;
-  } */
 
   &__table {
     width: 100%;
     border-collapse: collapse;
 
     tbody,
-    tr {
-      // padding: 0;
-      // border: none;
-    }
+    tr { /* nothing */ }
   }
 
-  &__td {
-    // width: 50%;
-    // padding-bottom: 50%;
-    // nicegreen: #1c6
-    // border: none;
-  }
+  &__td { /* nothing */ }
 
   &-switch {
 
@@ -153,48 +106,6 @@ td {
 
     &__native-control {
       composes: mdc-checkbox__native-control from $mdc-checkbox;
-    }
-  }
-
-  .top-menu { text-align: center; }
-
-  .bottom-menu {
-    padding-bottom: 20px;
-    text-align: center;
-  }
-
-  .title,
-  .subtitle {
-    margin-top: 12px;
-    margin-bottom: 4px;
-  }
-
-  .generation {
-    padding: 8px;
-  }
-
-  .button__group {
-    margin-bottom: 4px;
-
-    button {
-      width: 94px;
-      padding: 4px 8px;
-      // background-color: $theme;
-      // color: $black;
-
-      &:first-child {
-        border-top-left-radius: 16px;
-        border-bottom-left-radius: 16px;
-      }
-
-      &:last-child {
-        border-top-right-radius: 16px;
-        border-bottom-right-radius: 16px;
-      }
-
-      &:disabled {
-        opacity: .8;
-      }
     }
   }
 }
