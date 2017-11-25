@@ -13,17 +13,12 @@ const formatYear = timeFormat('%Y');
 const formatDate = timeFormat('%B %Y');
 const formatTemprature = format('.4r');
 
-const phi = (1 + Math.sqrt(5)) / 2;
-const DEFAULT_OPTS = {
-  width: 600 * phi,
-  height: 600,
-  margins: { top: 10, right: 30, bottom: 60, left: 80 },
-};
-
-
-export default function heatMap(elem, obj, opts = DEFAULT_OPTS) {
-  const width = opts.width - (opts.margins.left + opts.margins.right);
-  const height = opts.height - (opts.margins.top + opts.margins.bottom);
+export default function heatMap(elem, obj, classnames) {
+  const h = 600;
+  const w = h * ((1 + Math.sqrt(5)) / 2);
+  const margins = { top: 10, right: 30, bottom: 60, left: 80 };
+  const width = w - (margins.left + margins.right);
+  const height = h - (margins.top + margins.bottom);
 
   const data = obj.monthlyVariance.map((d) => {
     const time = new Date(d.year, d.month - 1);
@@ -35,24 +30,13 @@ export default function heatMap(elem, obj, opts = DEFAULT_OPTS) {
 
   const months = timeMonth.every(1).range(timeYear.floor(justNow), timeYear.ceil(justNow)).map(formatMonth);
 
-  const svg = select(elem).append('svg');
-  svg.attr('viewBox', `0 0 ${opts.width} ${opts.height}`);
-  svg.attr('preserveAspectRatio', 'xMidYMid meet');
-  svg.classed('heat-map__chart', true);
-
   const colorScale = scaleSequential(interpolateSpectral).domain(extent(data, d => d.temperature).reverse());
 
   const xScale = scaleTime().range([1, width]).domain(extent(data, d => d.time)).nice(timeYear, 1);
 
   const xAxis = axisBottom().scale(xScale).tickFormat(formatYear);
 
-  svg.append('g')
-    .attr('class', 'heat-map__axis axis__x')
-    .attr('transform', `translate(${opts.margin.left},${height + opts.margin.top})`)
-    .call(xAxis);
-
-  const yScale = scaleBand()
-    .domain(months)
+  const yScale = scaleBand().domain(months)
     .range([0, height])
     .paddingOuter([0])
     .paddingInner([0.05])
@@ -60,48 +44,57 @@ export default function heatMap(elem, obj, opts = DEFAULT_OPTS) {
 
   const yAxis = axisLeft().scale(yScale);
 
+  const bucketWidth = (d) => {
+    const startOfYear = timeYear.floor(d.time);
+    const nextYear = timeYear.offset(d.time, 1);
+    const xStart = xScale(startOfYear);
+    const xNext = xScale(nextYear);
+    return xNext - xStart;
+  };
+
+  const tooltip = select(elem).append('div').attr('class', classnames('heat-map__tooltip'));
+
+  const mouseEnter = (d) => {
+    const str = `<span><p><time datetime=${d.time}></time>${formatDate(d.time)}</p><p>Temperature: ${formatTemprature(d.temperature)}\u2103</p></span>`;
+    tooltip.style('left', `${event.pageX}px`)
+      .style('top', `${event.pageY}px`);
+
+    tooltip.html(str);
+
+    tooltip.transition().duration(100).style('display', 'inherit').style('opacity', 0.8);
+  };
+
+  const mouseLeave = () => {
+    tooltip.transition().duration(100).style('opacity', 0).style('display', 'none');
+  };
+
+  const svg = select(elem).append('svg')
+    .attr('viewBox', `0 0 ${w} ${h}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .attr('class', classnames('heat-map__chart'));
+
   svg.append('g')
-    .attr('class', 'heat-map__axis axis__y')
-    .attr('transform', `translate(${opts.margin.left}, ${opts.margin.top})`)
+    .attr('class', classnames('heat-map__axis', 'heat-map__axis--x'))
+    .attr('transform', `translate(${margins.left}, ${height + margins.top})`)
+    .call(xAxis);
+
+  svg.append('g')
+    .attr('class', classnames('heat-map__axis', 'heat-map__axis--y'))
+    .attr('transform', `translate(${margins.left}, ${margins.top})`)
     .call(yAxis);
 
-  const tiles = svg.append('g')
-    .attr('transform', `translate(${opts.margin.left}, ${opts.margin.top})`)
-    .selectAll('heat-map__bucket')
+  svg.append('g')
+    .attr('transform', `translate(${margins.left}, ${margins.top})`)
+    .selectAll(classnames('heat-map__bucket'))
     .data(data)
     .enter()
     .append('rect')
-    .classed('heat-map__bucket', true)
+    .on('mouseenter', mouseEnter)
+    .on('mouseleave', mouseLeave)
+    .attr('class', classnames('heat-map__bucket'))
     .attr('x', d => xScale(timeYear.floor(d.time)))
-    .attr('width', (d) => {
-      const startOfYear = timeYear.floor(d.time);
-      const nextYear = timeYear.offset(startOfYear, 1);
-      const xStart = xScale(startOfYear);
-      const xNext = xScale(nextYear);
-      return xNext - xStart;
-    })
+    .attr('width', bucketWidth)
     .attr('y', d => yScale(formatMonth(d.time)))
     .attr('height', yScale.bandwidth())
     .style('fill', d => colorScale(d.temperature));
-
-  const tooltip = select(elem).append('div')
-    .classed('heat-map__tooltip', true)
-    .style('opacity', 0)
-    .style('position', 'absolute')
-    .style('display', 'none');
-
-  tiles.on('mouseover', (d) => {
-    const str = `<span><p><time datetime=${d.time}></time>${formatDate(d.time)}</p><p>Temperature: ${formatTemprature(d.temperature)}\u2103</p></span>`;
-
-    tooltip
-      .style('left', `${event.pageX}px`)
-      .style('top', `${event.pageY}px`)
-      .html(str)
-      .transition()
-      .duration(100)
-      .style('display', 'inherit')
-      .style('opacity', 0.8);
-  }).on('mouseout', () => {
-    tooltip.transition().duration(100).style('opacity', 0).style('display', 'none');
-  });
 }

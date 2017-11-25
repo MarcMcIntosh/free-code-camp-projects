@@ -27,10 +27,22 @@
   }
 
   &__tooltip {
+    display: none;
     position: absolute;
+    pointer-events: none;
+    opacity: 0;
   }
 
-  &__axis,
+  &__bucket {
+    /* stuff */
+  }
+
+  &__axis {
+
+    &--x,
+    &--y { /* nothing */ }
+  }
+
   &__label,
   &__month {
     /* classNames used */
