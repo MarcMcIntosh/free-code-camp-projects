@@ -12,6 +12,7 @@ import dungeon from '../images/localhost-8080-dungeon-crawler.png';
 import forcedirect from '../images/localhost-8080-force-directed.png';
 import recipebox from '../images/localhost-8080-recipe-box.png';
 import gameoflife from '../images/localhost-8080-game-of-life.png';
+import heatmap from '../images/localhost-8080-heat-map.png';
 
 /* to do */
 import localWeather from '../images/local-weather.png';
@@ -75,7 +76,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.forceDirected.title} url={appUrls.forceDirected.url} challenge={appUrls.forceDirected.challenge} media={forcedirect} />
 
-  <Preview title={appUrls.heatMap.title} url={appUrls.heatMap.url} challenge={appUrls.heatMap.challenge} media={placeholder} />
+  <Preview title={appUrls.heatMap.title} url={appUrls.heatMap.url} challenge={appUrls.heatMap.challenge} media={heatmap} />
 
   <Preview title={appUrls.scatterplotGraph.title} url={appUrls.scatterplotGraph.url} challenge={appUrls.scatterplotGraph.challenge} media={placeholder} />
 
