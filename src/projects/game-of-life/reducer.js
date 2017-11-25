@@ -1,14 +1,12 @@
-import { nextGame, zeroGame, randomGame, isOver } from './utils/game';
+import { zeroGame, randomGame } from './utils/game';
 
 import {
   RESET_GAME,
   TOGGLE_PLAY,
   SET_SPEED,
   SET_SIZE,
-  NEXT_GEN,
   SET_GAME,
   SET_RANDOM,
-  UPDATE_GEN,
   TOGGLE_SQUARE,
 } from './actions';
 
@@ -59,24 +57,8 @@ function reducer(state = DEFAULT_STATE, action) {
       const game = [...state.game];
       const row = [...game[y]];
       row[x] = row[x] ? 0 : 1;
-      // row.splice(x, 1, row[x] ? 0 : 1);
       game.splice(y, 1, row);
       return { ...state, game };
-    }
-    case NEXT_GEN: return {
-      ...state,
-      timer: action.payload,
-    };
-    case UPDATE_GEN: {
-      const game = nextGame(state.game);
-      const done = isOver(state.game, game);
-      const n = (state.running && !done) ? 0 : 1;
-      return {
-        ...state,
-        game,
-        gen: state.gen + n,
-        running: state.running && done,
-      };
     }
     case SET_GAME: return { ...state, game: action.payload, gen: state.gen + 1 };
     default: return state;

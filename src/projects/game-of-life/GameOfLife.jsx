@@ -5,10 +5,7 @@ import {
   setGame,
   setSpeed,
   setSize,
-  // nextGen,
-  // updateGen,
   toggleSquare,
-  // toggleRules,
   resetGame,
   setRandom,
   togglePlay,
@@ -20,32 +17,11 @@ import Rules from './components/Rules';
 import Actions from './components/Actions';
 import Settings from './components/Settings';
 
-const mapStateToProps = ({
-  gameOfLife: {
-    game,
-    speed,
-    running,
-    // timer,
-    gen,
-    width,
-    height,
-  },
-}) => ({
-  game,
-  speed,
-  running,
-  // timer,
-  gen,
-  width,
-  height,
-});
+const mapStateToProps = ({ gameOfLife: { game, speed, running, gen, width, height } }) => ({ game, speed, running, gen, width, height });
 
 
 const mapDispatchToProps = dispatch => ({
-  // showRules: () => dispatch(toggleRules()),
   onSetGame: payload => dispatch(setGame(payload)),
-  // onNextGen: timer => dispatch(nextGen(timer)),
-  // onUpdateGen: () => dispatch(updateGen()),
   onResetGame: () => dispatch(resetGame()),
   onSetRandom: () => dispatch(setRandom()),
   onTogglePlay: () => dispatch(togglePlay()),
@@ -58,7 +34,6 @@ class GameOfLife extends Component {
   constructor() {
     super();
     this._handleClick = this._handleClick.bind(this);
-    // this._run = this._run.bind(this);
     this._toggleRules = this._toggleRules.bind(this);
     this._toggleSettings = this._toggleSettings.bind(this);
     this._setSize = this._setSize.bind(this);
@@ -73,7 +48,6 @@ class GameOfLife extends Component {
     window.addEventListener('resize', this._setSize);
     window.addEventListener('keydown', this._handleKeyPress);
     this._setSize();
-    // if (this.props.running) this._run();
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this._setSize);
@@ -129,21 +103,15 @@ class GameOfLife extends Component {
 }
 
 GameOfLife.propTypes = {
-  // rules: bool.isRequired,
   running: bool.isRequired,
   gen: number.isRequired,
-  // timer: number.isRequired,
   speed: number.isRequired,
   width: number.isRequired,
   height: number.isRequired,
   game: array.isRequired,
-  // onSetGame: func.isRequired,
   onToggleSquare: func.isRequired,
-  // onNextGen: func.isRequired,
-  // onUpdateGen: func.isRequired,
   onSetGame: func.isRequired,
   onTogglePlay: func.isRequired,
-  // showRules: func.isRequired,
   onSetSize: func.isRequired,
   onSetSpeed: func.isRequired,
   onResetGame: func.isRequired,
