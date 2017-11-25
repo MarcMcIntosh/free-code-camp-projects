@@ -13,7 +13,7 @@ import appUrls from './app-urls';
 // import HeatMap from '../projects/heat-map';
 
 /* To do or check with classnames context */
-import Leaderboard from '../projects/leaderboard';
+import LeaderBoard from '../projects/leader-board';
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
@@ -57,7 +57,7 @@ const routes = [
       }, {
         path: appUrls.heatMap.url, component: HeatMap,
       }, */ {
-        path: appUrls.leaderboard.url, component: Leaderboard,
+        path: appUrls.leaderboard.url, component: LeaderBoard,
       }, /* {
         path: appUrls.localWeather.url, component: LocalWeather,
       }, {

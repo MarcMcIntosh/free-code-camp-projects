@@ -40,7 +40,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-heat-map',
   },
   leaderboard: {
-    url: '/leaderboard',
+    url: '/leader-board',
     title: 'Build a Camper Leaderboard',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-camper-leaderboard',
   },
