@@ -10,8 +10,8 @@ import calculator from '../images/localhost-8080-calculator.png';
 import dataglobe from '../images/localhost-8080-data-globe.png';
 import dungeon from '../images/localhost-8080-dungeon-crawler.png';
 import forcedirect from '../images/localhost-8080-force-directed.png';
-
 import recipebox from '../images/localhost-8080-recipe-box.png';
+import gameoflife from '../images/localhost-8080-game-of-life.png';
 
 /* to do */
 import localWeather from '../images/local-weather.png';
@@ -82,7 +82,7 @@ const Gallary = () => (<div className="preview">
   {/* React */}
   <Preview title={appUrls.dungeonCrawler.title} url={appUrls.dungeonCrawler.url} challenge={appUrls.dungeonCrawler.challenge} media={dungeon} />
 
-  <Preview title={appUrls.gameOfLife.title} url={appUrls.gameOfLife.url} challenge={appUrls.gameOfLife.challenge} media={placeholder} />
+  <Preview title={appUrls.gameOfLife.title} url={appUrls.gameOfLife.url} challenge={appUrls.gameOfLife.challenge} media={gameoflife} />
 
   <Preview title={appUrls.leaderboard.title} url={appUrls.leaderboard.url} challenge={appUrls.leaderboard.challenge} media={placeholder} />
 

@@ -9,16 +9,16 @@ import appUrls from './app-urls';
 // import DataGlobe from '../projects/data-globe';
 // import DungeonCrawler from '../projects/dungeon-crawler';
 // import ForceDirected from '../projects/force-directed';
+// import GameOfLife from '../projects/game-of-life';
 
 /* To do or check with classnames context */
-import GameOfLife from '../projects/game-of-life';
+import HeatMap from '../projects/heat-map';
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
 
 /*  to do or check and with out classnames context
 
-import HeatMap from '../projects/heat-map';
 import Leaderboard from '../projects/leaderboard';
 import LocalWeather from '../projects/local-weather';
 import MarkdownPreviewer from '../projects/markdown-previewer';
@@ -52,11 +52,11 @@ const routes = [
         path: appUrls.dungeonCrawler.url, component: DungeonCrawler,
       }, {
         path: appUrls.forceDirected.url, component: ForceDirected,
-      }, */ {
-        path: appUrls.gameOfLife.url, component: GameOfLife,
-      }, /* {
-        path: appUrls.heatMap.url, component: HeatMap,
       }, {
+        path: appUrls.gameOfLife.url, component: GameOfLife,
+      }, */ {
+        path: appUrls.heatMap.url, component: HeatMap,
+      }, /* {
         path: appUrls.leaderboard.url, component: Leaderboard,
       }, {
         path: appUrls.localWeather.url, component: LocalWeather,

@@ -13,11 +13,7 @@ import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
 import heatMap from './heat-map';
 
-const mapStateToProps = state => ({
-  data: state.data,
-  error: state.error,
-  fetching: state.fetching,
-});
+const mapStateToProps = ({ heatMap: { data, error, fetching } }) => ({ data, error, fetching });
 
 const mapDispatchToProps = dispatch => ({
   onFetchData: () => dispatch(fetchData()),
