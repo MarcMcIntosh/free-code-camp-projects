@@ -1,0 +1,58 @@
+// @import "@material/card/mdc-card.scss";
+@import "./variables.scss";
+
+.leaderboard {
+  /* y */
+  // width: 100%;
+  // padding: 6px;
+
+  &__toolbar {
+    composes: mdc-toolbar from $mdc-toolbar;
+  }
+
+  &__users {
+    composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
+  }
+
+  &-user {
+    composes: mdc-list-item from $mdc-list;
+
+    &__start-detail {
+      composes: mdc-list-item__start-detail from $mdc-list;
+    }
+
+    &__end-detail {
+      composes: mdc-list-item__end-detail from $mdc-list;
+    }
+
+    &__text {
+      composes: mdc-list-item__text from $mdc-list;
+
+      &__secondary {
+        composes: mdc-list-itm__text__secondary from $mdc-list;
+      }
+    }
+  }
+
+  .users {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .image {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    border-radius: 100%;
+  }
+
+  .mdc-card__horizontal-block {
+    align-content: space-between;
+    justify-content: flex-start;
+    width: 276px;
+  }
+
+  .mdc-card__media { text-align: center; }
+}
