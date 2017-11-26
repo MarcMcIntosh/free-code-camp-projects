@@ -17,7 +17,7 @@ const mapStateToProps = ({
   },
 }) => ({
   data: [].concat(state[display]),
-  fetching: isFetchingRecent || isFetchingAllTime,
+  fetching: (isFetchingRecent !== isFetchingAllTime || isFetchingRecent || isFetchingAllTime),
   error,
   display,
 });
@@ -46,9 +46,8 @@ class LeaderBoard extends Component {
 
       {error && !fetching && (<ErrorMessage onClick={this.props.fetchData}>{error}</ErrorMessage>)}
 
-      {fetching && (<Loader />)}
-
       <ul className={classnames('leader-board__users')}>
+        {fetching && (<Loader />)}
         {data.map((d, i) => (<User key={d.username} name={d.username} src={d.img} points={d[display]} index={i + 1} />))}
       </ul>
     </div>);

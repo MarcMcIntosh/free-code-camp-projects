@@ -94,10 +94,11 @@ export function getWeather() {
         fetch(apiUrl(payload.latitude, payload.longitude), {
           headers: { Accept: 'application/json' },
         }).then((res) => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json();
-          } return dispatch(receiveError(res.statusText));
-        }).then(json => dispatch(receiveWeather(json)));
+          if (!res.ok) { throw new Error(res.statusText); }
+          return res.json();
+        })
+          .then(json => dispatch(receiveWeather(json)))
+          .catch(error => dispatch(receiveError(String(error))));
       }
     });
   };
@@ -107,6 +108,7 @@ const requestIcon = () => ({ type: REQUEST_ICON });
 const iconBlob = payload => ({ type: ICON_BLOB, payload });
 const iconError = payload => ({ type: ICON_ERROR, payload });
 export const iconHasLoaded = () => dispatch => dispatch({ type: HAS_ICON });
+
 export function getIcon(addr) {
   return (dispatch) => {
     dispatch(requestIcon());

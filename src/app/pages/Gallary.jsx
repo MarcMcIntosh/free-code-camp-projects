@@ -13,6 +13,7 @@ import forcedirect from '../images/localhost-8080-force-directed.png';
 import recipebox from '../images/localhost-8080-recipe-box.png';
 import gameoflife from '../images/localhost-8080-game-of-life.png';
 import heatmap from '../images/localhost-8080-heat-map.png';
+import leaderboard from '../images/localhost-8080-leader-board.png';
 
 /* to do */
 import localWeather from '../images/local-weather.png';
@@ -85,7 +86,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.gameOfLife.title} url={appUrls.gameOfLife.url} challenge={appUrls.gameOfLife.challenge} media={gameoflife} />
 
-  <Preview title={appUrls.leaderboard.title} url={appUrls.leaderboard.url} challenge={appUrls.leaderboard.challenge} media={placeholder} />
+  <Preview title={appUrls.leaderBoard.title} url={appUrls.leaderBoard.url} challenge={appUrls.leaderBoard.challenge} media={leaderboard} />
 
   <Preview title={appUrls.markdownPreviewer.title} url={appUrls.markdownPreviewer.url} challenge={appUrls.markdownPreviewer.challenge} media={placeholder} />
 

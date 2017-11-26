@@ -2,6 +2,7 @@
 
 .leader-board-loader {
   composes: mdc-linear-progress mdc-linear-progress--indeterminate from $mdc-linear-progress;
+  // margin-top: 8px;
 
   &__buffering-dots {
     composes: mdc-linear-progress__buffering-dots from $mdc-linear-progress;
