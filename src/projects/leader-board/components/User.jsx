@@ -1,14 +1,31 @@
-/*
-<li class="mdc-list-item">
-  <span class="mdc-list-item__start-detail grey-bg" role="presentation">
-    <i class="material-icons" aria-hidden="true">folder</i>
+import React from 'react';
+import { func, string } from 'prop-types';
+
+const User = ({ href, src }, { classnames }) => (<li classNames={classnames('leader-board-user')}>
+  <span
+    classNames={classnames('leader-board-user__start-detail')}
+    role="presentation"
+  > <img alt="" src={src} />
   </span>
-  <span class="mdc-list-item__text">
-Photos
-  <span class="mdc-list-item__text__secondary">Jan 9, 2014</span>
+  <span classNames={classnames('leader-board-user__text')}>
+    Thing 1
+    <span classNames={classnames('leader-board-user__text__secondary')}>
+      Thing 2
+    </span>
   </span>
-  <a href="#" class="mdc-list-item__end-detail material-icons" aria-label="View more information" title="More info" onclick="event.preventDefault();">
-    info
-  </a>
-</li>
- */
+  <a
+    href={href}
+    classNames={classnames('leader-board-user__end-detail')}
+    aria-label="View more information"
+    title="More info"
+  >info</a>
+</li>);
+
+User.propTypes = {
+  src: string.isRequired,
+  href: string.isRequired,
+};
+
+User.contextTypes = { clasnames: func.isRequired };
+
+export default User;

@@ -22,6 +22,7 @@
     }
 
     &__end-detail {
+      composes: material-icons from $material-icons;
       composes: mdc-list-item__end-detail from $mdc-list;
     }
 
