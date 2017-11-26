@@ -1,0 +1,21 @@
+@import "./variables.scss";
+
+.leader-board-error {
+  composes: mdc-dialog from $mdc-dialog;
+
+  &--open {
+    composes: mdc-dialog--open from $mdc-dialog;
+  }
+
+  &__surface {
+    composes: mdc-dialog__surface from $mdc-dialog;
+  }
+
+  &__header {
+    composes: mdc-dialog__header from $mdc-dialog;
+
+    &__title {
+      composes: mdc-dialog__header__title from $mdc-dialog;
+    }
+  }
+}

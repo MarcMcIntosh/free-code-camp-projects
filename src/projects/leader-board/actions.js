@@ -35,29 +35,20 @@ export function getData() {
   const recent = addr('recent');
   return (dispatch) => {
     dispatch(requsetRecent());
-    fetch(recent).then((res) => {
-      if (!res.ok) throw new Error(res.statusText);
-      return res.json();
-    }).then((json) => {
-      dispatch(receiveRecent(json));
-    }).catch((recentError) => {
-      dispatch(receiveError({
-        recentError,
-        isFetchingRecent: false,
-      }));
-    });
+    fetch(recent)
+      .then((res) => {
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+      })
+      .then(json => dispatch(receiveRecent(json)))
+      .catch(error => dispatch(receiveError({ error, isFetchingRecent: false })));
 
     dispatch(requestAllTime());
     fetch(alltime).then((res) => {
       if (!res.ok) throw new Error(res.statusText);
       return res.json();
-    }).then((json) => {
-      dispatch(receiveAllTime(json));
-    }).catch((errorAllTime) => {
-      dispatch(receiveError({
-        errorAllTime,
-        isFetchingAllTime: false,
-      }));
-    });
+    })
+      .then(json => dispatch(receiveAllTime(json)))
+      .catch(error => dispatch(receiveError({ error, isFetchingAllTime: false })));
   };
 }

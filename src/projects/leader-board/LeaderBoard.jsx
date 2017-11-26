@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { array, string, func, oneOfType, instanceOf, oneOf, bool } from 'prop-types';
+import { array, string, func, oneOf, bool } from 'prop-types';
 import { getData, setSort } from './actions';
+import User from './components/User';
+import Tab from './components/Tab';
+import Loader from './components/Loader';
+import ErrorMessage from './components/ErrorMessage';
 
-const mapStateToProps = ({ leaderBoard: { recent, alltime, data, errorRecent, errorAllTime, isFetchingRecent, isFetchingAllTime, display, ascending } }) => ({ recent, alltime, data, errorRecent, errorAllTime, isFetchingRecent, isFetchingAllTime, display, ascending });
+const mapStateToProps = ({
+  leaderBoard: {
+    isFetchingRecent,
+    isFetchingAllTime,
+    display,
+    error,
+    ...state
+  },
+}) => ({
+  data: [].concat(state[display]),
+  fetching: isFetchingRecent || isFetchingAllTime,
+  error,
+  display,
+});
 
 const mapDispatchToProps = dispatch => ({
-  sortBy: event => dispatch(setSort(event.target.value)),
+  sortBy: payload => dispatch(setSort(payload)),
   fetchData: () => dispatch(getData()),
 });
 
@@ -17,20 +34,32 @@ class LeaderBoard extends Component {
   }
   componentDidMount() { this.props.fetchData(); }
   render() {
-    const { props, context: { classnames } } = this; return (<div {...props} className={classnames('leader-board')}>contenct</div>);
+    const { data, display, fetching, error } = this.props;
+    const { classnames } = this.context;
+    return (<div className={classnames('leader-board')}>
+
+      <nav className={classnames('leader-board__tab-bar')}>
+        <Tab value="recent" active={(display === 'recent')} onClick={this.props.sortBy}>Recent</Tab>
+        <Tab value="alltime" active={(display === 'alltime')} onClick={this.props.sortBy}>All Time</Tab>
+        <span className={classnames('leader-board__tab-indicator')} />
+      </nav>
+
+      {error && !fetching && (<ErrorMessage onClick={this.props.fetchData}>{error}</ErrorMessage>)}
+
+      {fetching && (<Loader />)}
+
+      <ul className={classnames('leader-board__users')}>
+        {data.map((d, i) => (<User key={d.username} name={d.username} src={d.img} points={d[display]} index={i + 1} />))}
+      </ul>
+    </div>);
   }
 }
 
 LeaderBoard.propTypes = {
-  recent: array.isRequired,
-  alltime: array.isRequired,
+  error: string.isRequired,
+  fetching: bool.isRequired,
   data: array.isRequired,
-  isFetchingRecent: bool.isRequired,
-  isFetchingAllTime: bool.isRequired,
-  ascending: bool.isRequired,
   display: oneOf(['recent', 'alltime']).isRequired,
-  errorRecent: oneOfType([instanceOf(Error), string]).isRequired,
-  errorAllTime: oneOfType([instanceOf(Error), string]).isRequired,
   fetchData: func.isRequired,
   sortBy: func.isRequired,
 };

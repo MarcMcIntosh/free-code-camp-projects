@@ -1,31 +1,25 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import { func, string, number } from 'prop-types';
 
-const User = ({ href, src }, { classnames }) => (<li classNames={classnames('leader-board-user')}>
+const User = ({ src, name, points, index }, { classnames }) => (<li className={classnames('leader-board-user')}>
+  <img src={src} alt="" className={classnames('leader-board-user__start-detail')} />
+  <span className={classnames('leader-board-user__text')}>
+    {name}
+    <span className={classnames('leader-board-user__text__secondary')}>{points}</span>
+  </span>
   <span
-    classNames={classnames('leader-board-user__start-detail')}
-    role="presentation"
-  > <img alt="" src={src} />
+    className={classnames('leader-board-user__end-detail')}
+  ><span className={classnames('leader-board-user__text')}># {index}</span>
   </span>
-  <span classNames={classnames('leader-board-user__text')}>
-    Thing 1
-    <span classNames={classnames('leader-board-user__text__secondary')}>
-      Thing 2
-    </span>
-  </span>
-  <a
-    href={href}
-    classNames={classnames('leader-board-user__end-detail')}
-    aria-label="View more information"
-    title="More info"
-  >info</a>
 </li>);
 
 User.propTypes = {
   src: string.isRequired,
-  href: string.isRequired,
+  name: string.isRequired,
+  points: number.isRequired,
+  index: number.isRequired,
 };
 
-User.contextTypes = { clasnames: func.isRequired };
+User.contextTypes = { classnames: func.isRequired };
 
 export default User;

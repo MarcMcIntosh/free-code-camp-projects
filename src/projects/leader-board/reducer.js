@@ -7,16 +7,13 @@ import {
   SET_SORT,
 } from './actions';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   recent: [],
   alltime: [],
-  data: [],
-  errorRecent: '',
-  errorAllTime: '',
+  error: '',
   isFetchingRecent: false,
   isFetchingAllTime: false,
   display: 'recent',
-  ascending: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
@@ -25,9 +22,10 @@ function reducer(state = DEFAULT_STATE, action) {
     case REQUEST_RECENT: return { ...state, isFetchingRecent: true };
     case RECEIVE_ALLTIME: return { ...state, isFetchingAllTime: false, alltime: action.payload };
     case RECEIVE_RECENT: return { ...state, isFetchingRecent: false, recent: action.payload };
-    case RECEIVE_ERROR: return {
-      ...state, ...action.payload,
-    };
+    case RECEIVE_ERROR: {
+      const { error, ...payload } = action;
+      return { ...state, ...payload, error: String(error) };
+    }
     case SET_SORT: return { ...state, display: action.payload };
     default: return state;
   }

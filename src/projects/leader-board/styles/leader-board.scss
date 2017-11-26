@@ -1,29 +1,49 @@
-// @import "@material/card/mdc-card.scss";
 @import "./variables.scss";
+@import "./error.scss";
+@import "./loader.scss";
 
-.leaderboard {
-  /* y */
-  // width: 100%;
-  // padding: 6px;
+.leader-board {
+  min-width: 320px;
+  max-width: 500px;
+  margin: auto;
 
-  &__toolbar {
-    composes: mdc-toolbar from $mdc-toolbar;
+  &__tab-bar {
+    composes: mdc-tab-bar from $mdc-tabs;
+  }
+
+  &__tab-indicator {
+    composes: mdc-tab-bar__indicator from $mdc-tabs;
+  }
+
+  &__tab {
+    composes: mdc-tab from $mdc-tabs;
+
+    &--active {
+      composes: mdc-tab--active from $mdc-tabs;
+    }
   }
 
   &__users {
+    // composes: mdc-elevation--z2 from $mdc-elevation;
     composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
+    padding-right: 0;
+    padding-left: 0;
+
+    :not(:first-child) { border-top: none; }
   }
 
   &-user {
     composes: mdc-list-item from $mdc-list;
+    padding: 0 16px;
+    border: 1px solid rgba(0, 0, 0, .12);
 
     &__start-detail {
       composes: mdc-list-item__start-detail from $mdc-list;
     }
 
     &__end-detail {
-      composes: material-icons from $material-icons;
       composes: mdc-list-item__end-detail from $mdc-list;
+      width: auto;
     }
 
     &__text {
