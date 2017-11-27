@@ -12,16 +12,17 @@ import appUrls from './app-urls';
 // import GameOfLife from '../projects/game-of-life';
 // import HeatMap from '../projects/heat-map';
 // import LeaderBoard from '../projects/leader-board';
+// import LocalWeather from '../projects/local-weather';
 
 /* To do or check with classnames context */
-import LocalWeather from '../projects/local-weather';
+import MarkdownPreviewer from '../projects/markdown-previewer';
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
 
 /*  to do or check and with out classnames context
 
-import MarkdownPreviewer from '../projects/markdown-previewer';
+
 import QuoteMachine from '../projects/quote-machine';
 import ScatterplotGraph from '../projects/scatterplot-graph';
 import Simon from '../projects/simon';
@@ -58,11 +59,11 @@ const routes = [
         path: appUrls.heatMap.url, component: HeatMap,
       }, {
         path: appUrls.leaderboard.url, component: LeaderBoard,
-      }, */ {
-        path: appUrls.localWeather.url, component: LocalWeather,
-      }, /* {
-        path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
       }, {
+        path: appUrls.localWeather.url, component: LocalWeather,
+      }, */ {
+        path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
+      }, /* {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
         path: appUrls.recipeBox.url, component: RecipeBox,

@@ -1,14 +1,57 @@
 @import "./variables";
+@import "./loader";
+@import "./error";
 
 .local-weather {
-  composes: mdc-elevation--z2 from $mdc-elevation;
-  composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
-  max-width: 320px;
-  margin: auto;
-  padding: 4px 8px;
 
-  &__container {
+  &__card {
+    composes: mdc-card from $mdc-card;
+  }
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
+
+  &__supporting-text {
+    composes: mdc-card__supporting-text from $mdc-card;
+    // padding-bottom: 0;
+  }
+
+  &__details {
+    composes: mdc-typography--caption from $mdc-typography;
+  }
+
+  &__media {
+    composes: mdc-card__media from $mdc-card;
+  }
+
+  &__actions { composes: mdc-card__actions from $mdc-card; }
+
+  &__action {
+    composes: mdc-button from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+
+  &__app {
+    composes: mdc-elevation--z2 from $mdc-elevation;
+    composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
     composes: mdc-list-item from $mdc-list;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: auto;
+    height: auto;
+    margin: auto;
+    padding: 16px;
   }
 
   &__icon {

@@ -1,6 +1,6 @@
 @import "./variables.scss";
 
-.leader-board-error {
+.local-weather-error {
   composes: mdc-dialog from $mdc-dialog;
 
   &--open {

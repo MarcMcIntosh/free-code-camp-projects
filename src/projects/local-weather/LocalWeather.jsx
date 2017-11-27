@@ -1,43 +1,16 @@
 import React, { PureComponent } from 'react';
-import { func, number, string, bool } from 'prop-types';
+import { func, number, string, bool, object } from 'prop-types';
 import { connect } from 'react-redux';
-import TemperatureButton from './components/TemperatureButton';
-import Icon from './components/Icon';
+import Weather from './components/Weather';
+import Loader from './components/Loader';
+import ErrorMessage from './components/ErrorMessage';
+import Details from './components/Details';
 
-import {
-  clientError,
-  setWatchId,
-  clientCoords,
-  geoError,
-  fetchWeather,
-  toggleTemperature,
-} from './actions';
+import { clientError, setWatchId, clientCoords, geoError, fetchWeather, toggleTemperature } from './actions';
 
 const mapStateToProps = ({
-  localWeather: {
-    description,
-    hasCoords,
-    error,
-    weather,
-    temperature,
-    degrees,
-    watchId,
-    longitude,
-    latitude,
-    icon,
-  },
-}) => ({
-  description,
-  hasCoords,
-  error,
-  weather,
-  temperature,
-  degrees,
-  watchId,
-  longitude,
-  latitude,
-  icon,
-});
+  localWeather: { isFetching, description, hasCoords, error, weather, temperature, degrees, watchId, longitude, latitude, icon, details, timestamp },
+}) => ({ isFetching, description, hasCoords, error, weather, temperature, degrees, watchId, longitude, latitude, icon, details, timestamp });
 
 const mapDispatchToProps = dispatch => ({
   setWatchId: n => dispatch(setWatchId(n)),
@@ -45,8 +18,6 @@ const mapDispatchToProps = dispatch => ({
   onGeoError: payload => dispatch(geoError(payload)),
   onCoords: payload => dispatch(clientCoords(payload)),
   fetchWeather: payload => dispatch(fetchWeather(payload)),
-  // getWeather: () => dispatch(getWeather()),
-  // iconHasLoaded: () => dispatch(iconHasLoaded()),
   toggleTemperature: event => dispatch(toggleTemperature(event.target.value)),
 });
 
@@ -57,9 +28,9 @@ class LocalWeather extends PureComponent {
   }
   componentDidMount() { this._geo(); }
   componentWillReceiveProps(nextProps) {
-    const { latitude, longitude, hasCoords, apiKey } = nextProps;
-    const diffrentPosition = (this.props.latitude !== latitude || this.props.longitude !== longitude);
-    if (diffrentPosition && hasCoords) {
+    const { latitude, timestamp, longitude, hasCoords, isFetching, apiKey } = nextProps;
+    // const diffrentPosition = (this.props.latitude !== latitude || this.props.longitude !== longitude);
+    if (timestamp !== this.props.timestamp && hasCoords && !isFetching) {
       this.props.fetchWeather({ latitude, longitude, apiKey });
     }
   }
@@ -76,35 +47,34 @@ class LocalWeather extends PureComponent {
       /* do some thing with navigator */
       navigator.geolocation.clearWatch(this.props.watchId);
     }
-    const options = { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 };
+    const options = { enableHighAccuracy: false, maximumAge: 30000, timeout: 27000 };
     const id = navigator.geolocation.watchPosition(this.props.onCoords, this.props.onGeoError, options);
     return this.props.setWatchId(id);
   }
   render() {
     const { classnames } = this.context;
-    const { weather, description } = this.props;
-    return (<div className={classnames('local-weather')}>
-      {/* <Icon className="local-weather__icon" /> */}
-      <div className={classnames('local-weather__container')}>
-        <Icon
-          src={this.props.icon}
-          title={this.props.description}
-          alt={this.props.weather}
-          className={classnames('local-weather__icon')}
-        />
-        <span className={classnames('local-weather__weather')}>
-          {weather}
-          <span className={classnames('local-weather__description')}>{description}</span>
-        </span>
-        <span className={classnames('local-weather__temprature')}>
-          {weather && (<TemperatureButton
-            className={classnames('local-weather__button')}
-            value={this.props.degrees}
-            temperature={this.props.temperature}
-            onClick={this.props.toggleTemperature}
-          />)}
-        </span>
+    return (<div className={classnames('local-weather__card')}>
+      <header className={classnames('local-weather__primary')}>
+        <h1 className={classnames('local-weather__title')}>
+          Local weather
+        </h1>
+        <h2 className={classnames('local-weather__subtitle')}>
+          Sourced from <a href="http://openweathermap.org/">openweathermap.org</a>.
+        </h2>
+        {this.props.isFetching ? (<Loader />) : (<hr />)}
+      </header>
+      <div className={classnames('local-weather__media')}>
+        {this.props.weather && (<Weather
+          weather={this.props.weather}
+          icon={this.props.icon}
+          description={this.props.description}
+          toggleTemperature={this.props.toggleTemperature}
+          degrees={this.props.degrees}
+          temperature={this.props.temperature}
+        />)}
       </div>
+      {this.props.error && (<ErrorMessage onClick={this._geo}>{this.props.error}</ErrorMessage>)}
+      <div className={classnames('local-weather__supporting-text')}>{Object.keys(this.props.details).length > 0 && (<Details {...this.props.details} timestamp={this.props.timestamp} className={classnames('local-weather__details')} />)}</div>
     </div>);
   }
 }
@@ -119,21 +89,17 @@ LocalWeather.propTypes = {
   longitude: number.isRequired,
   hasCoords: bool.isRequired,
   fetchWeather: func.isRequired,
-  //  getWeather: func.isRequired,
   toggleTemperature: func.isRequired,
-  //  iconHasLoaded: func.isRequired,
-  // celsius: number.isRequired,
-  // fahrenheit: number.isRequired,
   temperature: number.isRequired,
   degrees: string.isRequired,
   icon: string.isRequired,
   description: string.isRequired,
-  // iconLoaded: bool.isRequired,
-  // isLoading: bool.isRequired,
-  // hasCoords: bool.isRequired,
-  // error: string.isRequired,
   weather: string.isRequired,
   apiKey: string,
+  isFetching: bool.isRequired,
+  error: string.isRequired,
+  details: object.isRequired,
+  timestamp: number.isRequired,
 };
 
 LocalWeather.defaultProps = {

@@ -14,9 +14,9 @@ import recipebox from '../images/localhost-8080-recipe-box.png';
 import gameoflife from '../images/localhost-8080-game-of-life.png';
 import heatmap from '../images/localhost-8080-heat-map.png';
 import leaderboard from '../images/localhost-8080-leader-board.png';
+import localWeather from '../images/localhost-8080-local-weather.png';
 
 /* to do */
-import localWeather from '../images/local-weather.png';
 import tribute from '../images/tribute.png';
 import pomodoro from '../images/pomodoro.png';
 import quote from '../images/quote.png';

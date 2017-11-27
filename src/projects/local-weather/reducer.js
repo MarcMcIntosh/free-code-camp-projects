@@ -21,19 +21,14 @@ export const DEFAULT_STATE = {
   success: false,
   latitude: Infinity,
   longitude: Infinity,
-  timestamp: Date.now(),
+  timestamp: 0,
   error: '',
   weather: '',
   icon: '',
   temperature: Infinity,
-  celsius: Infinity,
-  fahrenheit: Infinity,
   degrees: 'C',
   description: '',
-  // loadingIcon: false,
-  // iconLoaded: false,
-  // iconBlob: '',
-  // iconError: '',
+  details: {},
 };
 
 export default function (state = DEFAULT_STATE, action) {
@@ -41,7 +36,6 @@ export default function (state = DEFAULT_STATE, action) {
     case SET_WATCH_ID: return { ...state, watchId: action.payload };
     case REQUEST_WEATHER: return {
       ...state, isFetching: true, error: '',
-      // Include url or somthing?
     };
     case TOGGLE_TEMP: return { ...state, degrees: action.payload };
     case RECEIVE_WEATHER: return {
@@ -61,28 +55,11 @@ export default function (state = DEFAULT_STATE, action) {
       ...state, error: action.payload, isPermitting: false,
     };
     case REQUEST_COORDS: return {
-      ...state, isPermitting: true,
+      ...state, isPermitting: true, error: '',
     };
     case CLIENT_COORDS: return {
-      ...state, ...action.payload, isPermitting: false,
+      ...state, ...action.payload, isPermitting: false, error: '',
     };
-    /*
-    case REQUEST_ICON: return { ...state, loadingIcon: true };
-    case ICON_BLOB: return {
-      ...state,
-      loadingIcon: false,
-      iconBlob: action.payload,
-    };
-    case ICON_ERROR: return {
-      ...state,
-      loadingIcon: false,
-      iconError: action.payload,
-    };
-    case HAS_ICON: return {
-      ...state,
-      iconLoaded: true,
-    }; */
-
     default: return state;
   }
 }
