@@ -24,26 +24,17 @@ export function requestCoords() {
   return { type: REQUEST_COORDS };
 }
 
-const kelvinToCelsius = k => Math.round((k - 273.15) * 100) / 100;
-const kelvinToFahrenheit = k => Math.round(((k * (9 / 5)) - 459.67) * 100) / 100;
-
-
 export function receiveWeather(payload) {
   // const report = payload.weather[0];
   console.log(payload);
   const { description, icon, main } = payload.weather[0];
-  const { latitude, longitude } = payload.coord;
   return {
     type: RECEIVE_WEATHER,
     payload: {
       icon,
       description,
-      latitude,
-      longitude,
       weather: main,
       temperature: payload.main.temp,
-      celsius: kelvinToCelsius(payload.main.temp),
-      fahrenheit: kelvinToFahrenheit(payload.main.temp),
     },
   };
 }
@@ -53,9 +44,18 @@ export function receiveError(payload) {
 export function clientError(payload) {
   return { type: CLIENT_ERROR, payload };
 }
-export function clientCoords(payload) {
-  return { type: CLIENT_COORDS, payload };
-}
+export const clientCoords = ({
+  coords: { latitude, longitude },
+  timestamp,
+}) => ({
+  type: CLIENT_COORDS,
+  payload: {
+    latitude,
+    longitude,
+    timestamp,
+    hasCoords: (typeof latitude === 'number' && typeof longitude === 'number'),
+  },
+});
 
 export function setTempDisplay(payload) {
   return { type: TOGGLE_TEMP, payload };

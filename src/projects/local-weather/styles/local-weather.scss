@@ -1,16 +1,36 @@
-@import "@material/card/mdc-card.scss";
-@import "@material/button/mdc-button.scss";
+@import "./variables";
 
 .local-weather {
-  padding: 6px;
-  text-align: center;
+  composes: mdc-elevation--z2 from $mdc-elevation;
+  composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
+  max-width: 320px;
+  margin: auto;
+  padding: 4px 8px;
 
-  &__icon {
-    display: block;
-    width: 80px;
-    height: 80px;
-    margin: 16px auto auto;
+  &__container {
+    composes: mdc-list-item from $mdc-list;
   }
 
-  &__buttons { margin: auto; }
+  &__icon {
+    composes: mdc-list-item__start-detail from $mdc-list;
+  }
+
+  &__weather {
+    composes: mdc-list-item__text from $mdc-list;
+  }
+
+  &__description {
+    composes: mdc-list-item__text__secondary from $mdc-list;
+  }
+
+  &__temprature {
+    composes: mdc-list-item__end-detail from $mdc-list;
+    width: auto;
+    height: auto;
+  }
+
+  &__button {
+    // margin: auto;
+    composes: mdc-button from $mdc-button;
+  }
 }

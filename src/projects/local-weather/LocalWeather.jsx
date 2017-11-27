@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { func, number, string, bool } from 'prop-types';
 import { connect } from 'react-redux';
+import TemperatureButton from './components/TemperatureButton';
+import Icon from './components/Icon';
 
 import {
   clientError,
@@ -8,38 +10,29 @@ import {
   clientCoords,
   geoError,
   fetchWeather,
-  // iconHasLoaded,
-  // getWeather,
-  // toggleTemperature,
+  toggleTemperature,
 } from './actions';
-
-// import Display from './components/Display';
-// import Icon from './components/Icon';
-// import TempControl from './components/TempControl';
-// import Details from './components/Details';
 
 const mapStateToProps = ({
   localWeather: {
-    // description,
+    description,
     hasCoords,
     error,
-    // weather,
-    // celsius,
-    // fahrenheit,
-    // degrees,
+    weather,
+    temperature,
+    degrees,
     watchId,
     longitude,
     latitude,
     icon,
   },
 }) => ({
-  // description,
+  description,
   hasCoords,
   error,
-  // weather,
-  // celsius,
-  // fahrenheit,
-  // degrees,
+  weather,
+  temperature,
+  degrees,
   watchId,
   longitude,
   latitude,
@@ -54,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
   fetchWeather: payload => dispatch(fetchWeather(payload)),
   // getWeather: () => dispatch(getWeather()),
   // iconHasLoaded: () => dispatch(iconHasLoaded()),
-  // toggleTemperature: event => dispatch(toggleTemperature(event.target.value)),
+  toggleTemperature: event => dispatch(toggleTemperature(event.target.value)),
 });
 
 class LocalWeather extends PureComponent {
@@ -88,22 +81,30 @@ class LocalWeather extends PureComponent {
     return this.props.setWatchId(id);
   }
   render() {
-    return (<div className="mdc-card local-weather">
+    const { classnames } = this.context;
+    const { weather, description } = this.props;
+    return (<div className={classnames('local-weather')}>
       {/* <Icon className="local-weather__icon" /> */}
-      <img
-        src={this.props.icon && `http://openweathermap.org/img/w/${this.props.icon}.png`}
-        alt={this.props.icon}
-      />
-      {/*
-      <section className="mdc-card__primary">
-        <Display className="mdc-card__title--large" />
-        <Details className="mdc-card__subtitle" />
-      </section>
-
-      <section className="mdc-card__actions local-weather__buttons">
-        <TempControl className="mdc-button mdc-button--raised mdc-button--primary" />
-      </section>
-      */}
+      <div className={classnames('local-weather__container')}>
+        <Icon
+          src={this.props.icon}
+          title={this.props.description}
+          alt={this.props.weather}
+          className={classnames('local-weather__icon')}
+        />
+        <span className={classnames('local-weather__weather')}>
+          {weather}
+          <span className={classnames('local-weather__description')}>{description}</span>
+        </span>
+        <span className={classnames('local-weather__temprature')}>
+          {weather && (<TemperatureButton
+            className={classnames('local-weather__button')}
+            value={this.props.degrees}
+            temperature={this.props.temperature}
+            onClick={this.props.toggleTemperature}
+          />)}
+        </span>
+      </div>
     </div>);
   }
 }
@@ -119,18 +120,19 @@ LocalWeather.propTypes = {
   hasCoords: bool.isRequired,
   fetchWeather: func.isRequired,
   //  getWeather: func.isRequired,
-  //  toggleTemperature: func.isRequired,
+  toggleTemperature: func.isRequired,
   //  iconHasLoaded: func.isRequired,
-  //  celsius: number.isRequired,
-  //  fahrenheit: number.isRequired,
-  //  degrees: string.isRequired,
+  // celsius: number.isRequired,
+  // fahrenheit: number.isRequired,
+  temperature: number.isRequired,
+  degrees: string.isRequired,
   icon: string.isRequired,
-  // description: string.isRequired,
+  description: string.isRequired,
   // iconLoaded: bool.isRequired,
   // isLoading: bool.isRequired,
   // hasCoords: bool.isRequired,
-  error: string.isRequired,
-  // weather: string.isRequired,
+  // error: string.isRequired,
+  weather: string.isRequired,
   apiKey: string,
 };
 

@@ -19,15 +19,15 @@ export const DEFAULT_STATE = {
   hasCoords: false,
   isPermitting: false,
   success: false,
-  latitude: 0,
-  longitude: 0,
+  latitude: Infinity,
+  longitude: Infinity,
   timestamp: Date.now(),
   error: '',
   weather: '',
   icon: '',
-  temperature: null,
-  celsius: null,
-  fahrenheit: null,
+  temperature: Infinity,
+  celsius: Infinity,
+  fahrenheit: Infinity,
   degrees: 'C',
   description: '',
   // loadingIcon: false,
@@ -40,7 +40,7 @@ export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {
     case SET_WATCH_ID: return { ...state, watchId: action.payload };
     case REQUEST_WEATHER: return {
-      ...state, isFetching: true, error: null,
+      ...state, isFetching: true, error: '',
       // Include url or somthing?
     };
     case TOGGLE_TEMP: return { ...state, degrees: action.payload };
@@ -63,12 +63,9 @@ export default function (state = DEFAULT_STATE, action) {
     case REQUEST_COORDS: return {
       ...state, isPermitting: true,
     };
-    case CLIENT_COORDS: {
-      const { latitude, longitude, timestamp } = action.payload;
-      return {
-        ...state, latitude, longitude, timestamp, hasCoords: true, isPermitting: false,
-      };
-    }
+    case CLIENT_COORDS: return {
+      ...state, ...action.payload, isPermitting: false,
+    };
     /*
     case REQUEST_ICON: return { ...state, loadingIcon: true };
     case ICON_BLOB: return {
