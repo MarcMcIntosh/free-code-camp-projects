@@ -6,19 +6,21 @@ import {
   CLIENT_COORDS,
   REQUEST_COORDS,
   TOGGLE_TEMP,
-  REQUEST_ICON,
-  ICON_BLOB,
-  ICON_ERROR,
-  HAS_ICON,
+  // REQUEST_ICON,
+  // ICON_BLOB,
+  // ICON_ERROR,
+  // HAS_ICON,
+  SET_WATCH_ID,
 } from './actions';
 
 export const DEFAULT_STATE = {
+  watchId: 0,
   isFetching: false,
   hasCoords: false,
   isPermitting: false,
   success: false,
-  latitude: null,
-  longitude: null,
+  latitude: 0,
+  longitude: 0,
   timestamp: Date.now(),
   error: '',
   weather: '',
@@ -28,14 +30,15 @@ export const DEFAULT_STATE = {
   fahrenheit: null,
   degrees: 'C',
   description: '',
-  loadingIcon: false,
-  iconLoaded: false,
-  iconBlob: '',
-  iconError: '',
+  // loadingIcon: false,
+  // iconLoaded: false,
+  // iconBlob: '',
+  // iconError: '',
 };
 
 export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {
+    case SET_WATCH_ID: return { ...state, watchId: action.payload };
     case REQUEST_WEATHER: return {
       ...state, isFetching: true, error: null,
       // Include url or somthing?
@@ -66,10 +69,8 @@ export default function (state = DEFAULT_STATE, action) {
         ...state, latitude, longitude, timestamp, hasCoords: true, isPermitting: false,
       };
     }
-    case REQUEST_ICON: return {
-      ...state,
-      loadingIcon: true,
-    };
+    /*
+    case REQUEST_ICON: return { ...state, loadingIcon: true };
     case ICON_BLOB: return {
       ...state,
       loadingIcon: false,
@@ -83,7 +84,7 @@ export default function (state = DEFAULT_STATE, action) {
     case HAS_ICON: return {
       ...state,
       iconLoaded: true,
-    };
+    }; */
 
     default: return state;
   }

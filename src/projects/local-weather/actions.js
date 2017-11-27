@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
-const API_KEY = '8098f170d355d6b8099e49533b084a65';
-
 const prefix = str => `LOCAL_WEATHER_${str}`;
+
+export const SET_WATCH_ID = prefix('SET_WATCH_ID');
+export const setWatchId = (payload = 0) => ({ type: SET_WATCH_ID, payload });
 
 export const REQUEST_WEATHER = prefix('REQUEST_WEATHER');
 export const RECEIVE_WEATHER = prefix('RECEIVE_WEATHER');
@@ -11,10 +12,10 @@ export const CLIENT_ERROR = prefix('CLIENT_ERROR');
 export const CLIENT_COORDS = prefix('CLIENT_COORDS');
 export const REQUEST_COORDS = prefix('REQUEST_COORDS');
 export const TOGGLE_TEMP = prefix('TOGGLE_TEMP');
-export const REQUEST_ICON = prefix('REQUEST_ICON');
-export const ICON_BLOB = prefix('ICON_BLOB');
-export const ICON_ERROR = prefix('ICON_ERROR');
-export const HAS_ICON = prefix('HAS_ICON');
+// export const REQUEST_ICON = prefix('REQUEST_ICON');
+// export const ICON_BLOB = prefix('ICON_BLOB');
+// export const ICON_ERROR = prefix('ICON_ERROR');
+// export const HAS_ICON = prefix('HAS_ICON');
 
 export function requestWeather() {
   return { type: REQUEST_WEATHER };
@@ -29,6 +30,7 @@ const kelvinToFahrenheit = k => Math.round(((k * (9 / 5)) - 459.67) * 100) / 100
 
 export function receiveWeather(payload) {
   // const report = payload.weather[0];
+  console.log(payload);
   const { description, icon, main } = payload.weather[0];
   const { latitude, longitude } = payload.coord;
   return {
@@ -63,47 +65,26 @@ export function toggleTemperature(curr) {
   return dispatch => dispatch(setTempDisplay(nxt));
 }
 
-
-function getCoords(cb) {
-  if ('geolocation' in navigator) {
-    return navigator.geolocation.getCurrentPosition(
-      (geo) => {
-        const { longitude, latitude } = geo.coords;
-        return cb(null, {
-          longitude, latitude, ...geo.timestamp,
-        });
-      },
-      error => cb(error),
-    );
+export const geoError = ({ code, message, PERMISSION_DENIED, POSITION_UNAVAILABLE, TIMEOUT, UNKNOWN_ERROR }) => {
+  switch (code) {
+    case PERMISSION_DENIED: return clientError('User denied the request for Geolocation.');
+    case POSITION_UNAVAILABLE: return clientError('Location information is unavailable.');
+    case TIMEOUT: return clientError('The request to get user location timed out.');
+    case UNKNOWN_ERROR: return clientError('An unknown error occurred.');
+    default: return clientError(message);
   }
-  return cb('Sorry, looks like your browser doesn\'t support geolocation');
-}
+};
 
-function apiUrl(lat, lon, id = API_KEY) {
-  return `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${id}`;
-}
+export const fetchWeather = ({ longitude, latitude, apiKey }) => (dispatch) => {
+  const addr = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${apiKey}`;
+  dispatch(requestWeather());
+  fetch(addr, { headers: { Accept: 'application/json' } }).then((res) => {
+    if (!res.ok) { throw new Error(res.statusText); }
+    return res.json();
+  }).then(json => dispatch(receiveWeather(json))).catch(error => dispatch(receiveError(String(error))));
+};
 
-export function getWeather() {
-  return (dispatch) => {
-    dispatch(requestCoords());
-    getCoords((err, payload) => {
-      if (err) {
-        dispatch(clientError(err));
-      } else {
-        dispatch(clientCoords(payload));
-        fetch(apiUrl(payload.latitude, payload.longitude), {
-          headers: { Accept: 'application/json' },
-        }).then((res) => {
-          if (!res.ok) { throw new Error(res.statusText); }
-          return res.json();
-        })
-          .then(json => dispatch(receiveWeather(json)))
-          .catch(error => dispatch(receiveError(String(error))));
-      }
-    });
-  };
-}
-
+/*
 const requestIcon = () => ({ type: REQUEST_ICON });
 const iconBlob = payload => ({ type: ICON_BLOB, payload });
 const iconError = payload => ({ type: ICON_ERROR, payload });
@@ -118,3 +99,4 @@ export function getIcon(addr) {
     }).then(blob => dispatch(iconBlob(blob))).catch(error => dispatch(iconError(error)));
   };
 }
+*/

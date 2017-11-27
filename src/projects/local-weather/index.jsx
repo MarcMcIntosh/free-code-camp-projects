@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { Provider } from 'react-redux';
-import store from './src/store';
-import App from './src/LocalWeather';
-import classnames from './src/styles';
+import store from './store';
+import App from './LocalWeather';
+import classnames from './styles';
 
 class LocalWeather extends Component {
   constructor(props) {
