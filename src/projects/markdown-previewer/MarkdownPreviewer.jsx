@@ -13,39 +13,41 @@ const mapDispatchToProps = dispatch => ({
 class MarkdownPreviewer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rows: this.props.value.split(/\n/).length + 1,
-      focused: false,
-    };
-    this._resize = this._resize.bind(this);
+    this.state = { focused: false };
     this._onFocus = this._onFocus.bind(this);
     this._onBlur = this._onBlur.bind(this);
-  }
-  componentDidMount() { this._resize(); }
-  componentDidUpdate() { this._resize(); }
-  _resize() {
-    console.log(this.textarea);
   }
   _onFocus() { this.setState({ focused: true }); }
   _onBlur() { this.setState({ focused: false }); }
   render() {
     const { props: { onChange, value }, context: { classnames } } = this;
     return (<div className={classnames('markdown-previewer')}>
-      <div className={classnames('markdown-previewer__textfield', this.state.focused && 'markdown-previewer__textfield--focused')}>
-        <textarea
-          ref={(c) => { this.textarea = c; }}
-          name="markdown-input"
-          rows={this.state.rows}
-          className={classnames('markdown-previewer__input')}
-          value={value}
-          onChange={onChange}
-          onFocus={this._onFocus}
-          onBlur={this._onBlur}
-        />
-        <label htmlFor="markdown-input" className={classnames('markdown-previewer__label')}>Markdown</label>
-      </div>
+      <div className={classnames('markdown-previewer__container')}>
 
-      <MarkdownBox markdown={value} />
+        <div className={classnames('markdown-previewer__cell')}>
+          <div className={classnames('markdown-previewer__textfield', this.state.focused && 'markdown-previewer__textfield--focused')}>
+            <textarea
+              name="MarkDown"
+              className={classnames('markdown-previewer__input')}
+              value={value}
+              rows="10"
+              onChange={onChange}
+              onFocus={this._onFocus}
+              onBlur={this._onBlur}
+              wrap="on"
+            />
+            <label htmlFor="MarkDown" className={classnames('markdown-previewer__label')}>MarkDown</label>
+          </div>
+        </div>
+
+        <div className={classnames('markdown-previewer__cell')}>
+          <MarkdownBox
+            name="markdown-output"
+            markdown={value}
+            className={classnames('markdown-previewer__output')}
+          />
+        </div>
+      </div>
     </div>);
   }
 }

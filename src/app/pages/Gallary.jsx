@@ -15,13 +15,14 @@ import gameoflife from '../images/localhost-8080-game-of-life.png';
 import heatmap from '../images/localhost-8080-heat-map.png';
 import leaderboard from '../images/localhost-8080-leader-board.png';
 import localWeather from '../images/localhost-8080-local-weather.png';
+import markdownPreviewer from '../images/localhost-8080-markdown-previewer.png';
 
 /* to do */
-import tribute from '../images/tribute.png';
 import pomodoro from '../images/pomodoro.png';
 import quote from '../images/quote.png';
 import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
+import tribute from '../images/tribute.png';
 import twitch from '../images/twitch.png';
 import wikipedia from '../images/wikipedia.png';
 
@@ -88,7 +89,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.leaderBoard.title} url={appUrls.leaderBoard.url} challenge={appUrls.leaderBoard.challenge} media={leaderboard} />
 
-  <Preview title={appUrls.markdownPreviewer.title} url={appUrls.markdownPreviewer.url} challenge={appUrls.markdownPreviewer.challenge} media={placeholder} />
+  <Preview title={appUrls.markdownPreviewer.title} url={appUrls.markdownPreviewer.url} challenge={appUrls.markdownPreviewer.challenge} media={markdownPreviewer} />
 
   <Preview title={appUrls.recipeBox.title} url={appUrls.recipeBox.url} challenge={appUrls.recipeBox.challenge} media={recipebox} />
 

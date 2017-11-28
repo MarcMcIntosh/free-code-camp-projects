@@ -13,16 +13,16 @@ import appUrls from './app-urls';
 // import HeatMap from '../projects/heat-map';
 // import LeaderBoard from '../projects/leader-board';
 // import LocalWeather from '../projects/local-weather';
+// import MarkdownPreviewer from '../projects/markdown-previewer';
 
 /* To do or check with classnames context */
-import MarkdownPreviewer from '../projects/markdown-previewer';
+import Pomodoro from '../projects/pomodoro';
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
 
 /*  to do or check and with out classnames context
 
-import Pomodoro from '../projects/pomodoro';
 import QuoteMachine from '../projects/quote-machine';
 import ScatterplotGraph from '../projects/scatterplot-graph';
 import Simon from '../projects/simon';
@@ -60,8 +60,10 @@ const routes = [
         path: appUrls.leaderboard.url, component: LeaderBoard,
       }, {
         path: appUrls.localWeather.url, component: LocalWeather,
-      }, */ {
+      }, {
         path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
+      }, */ {
+        path: appUrls.pomodoro.url, component: Pomodoro,
       }, /* {
         path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
@@ -78,8 +80,6 @@ const routes = [
         path: appUrls.twitch.url, component: Twitch,
       }, {
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
-      }, {
-        path: appUrls.pomodoro.url, component: Pomodoro,
       }, */
     ],
   },
