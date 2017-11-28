@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { string, oneOfType, func, number } from 'prop-types';
-import Remarkable from 'remarkable';
-import hljs from 'highlight.js';
+import { string, func } from 'prop-types';
 import { onInput } from './actions';
 import MarkdownBox from './components/MarkdownBox';
 
@@ -12,34 +10,51 @@ const mapDispatchToProps = dispatch => ({
   onChange: event => dispatch(onInput(event.target.value)),
 });
 
-const md = new Remarkable('full', {
-  // html: true,
-  // linkify: true,
-  // typographer: true,
-  highlight: (str, lang) => {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(lang, str).value;
-    }
-    return hljs.highlightAuto(str).value || '';
-  },
-});
+class MarkdownPreviewer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rows: this.props.value.split(/\n/).length + 1,
+      focused: false,
+    };
+    this._resize = this._resize.bind(this);
+    this._onFocus = this._onFocus.bind(this);
+    this._onBlur = this._onBlur.bind(this);
+  }
+  componentDidMount() { this._resize(); }
+  componentDidUpdate() { this._resize(); }
+  _resize() {
+    console.log(this.textarea);
+  }
+  _onFocus() { this.setState({ focused: true }); }
+  _onBlur() { this.setState({ focused: false }); }
+  render() {
+    const { props: { onChange, value }, context: { classnames } } = this;
+    return (<div className={classnames('markdown-previewer')}>
+      <div className={classnames('markdown-previewer__textfield', this.state.focused && 'markdown-previewer__textfield--focused')}>
+        <textarea
+          ref={(c) => { this.textarea = c; }}
+          name="markdown-input"
+          rows={this.state.rows}
+          className={classnames('markdown-previewer__input')}
+          value={value}
+          onChange={onChange}
+          onFocus={this._onFocus}
+          onBlur={this._onBlur}
+        />
+        <label htmlFor="markdown-input" className={classnames('markdown-previewer__label')}>Markdown</label>
+      </div>
 
-const MarkdownPreviewer = ({
-  onChange,
-  value,
-  rows,
-}) => (<div className="markdown-previewer">
-  <textarea className="markdown-previewer__input" value={value} onChange={onChange} rows={parseInt(rows, 10)} />
-  {/* <iframe className="markdown-previewer__output" title="Preview" srcDoc={md.render(value)} /> */}
-  <MarkdownBox markdown={md.render(value)} />
-</div>);
+      <MarkdownBox markdown={value} />
+    </div>);
+  }
+}
 
 MarkdownPreviewer.propTypes = {
   value: string.isRequired,
-  rows: oneOfType([string, number]),
   onChange: func.isRequired,
 };
 
-MarkdownPreviewer.defaultProps = { rows: 10 };
+MarkdownPreviewer.contextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarkdownPreviewer);

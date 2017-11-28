@@ -1,7 +1,27 @@
 @import "./variables";
 @import "./hljs-selectors.scss";
 
-.markdown-previewer { /* ls */ }
+.markdown-previewer {
+
+  &__textfield {
+    composes: mdc-textfield  mdc-textfield--fullwidth mdc-textfield--textarea mdc-textfield--upgraded from $mdc-textfield;
+
+    &--focused {
+      composes: mdc-textfield--focused from $mdc-textfield;
+    }
+    // width: 100%;
+    // height: 100%;
+    // resize: both;
+  }
+
+  &__input {
+    composes: mdc-textfield__input from $mdc-textfield;
+  }
+
+  &__label {
+    composes: mdc-textfield__label mdc-textfield__label--float-above from $mdc-textfield;
+  }
+}
 
 @each $item in $hljs-selectors {
 
