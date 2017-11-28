@@ -1,14 +1,3 @@
 $hljs-selectors: "hljs", "hljs-comment", "hljs-quote", "hljs-keyword", "hljs-selector-tag", "hljs-subst", "hljs-number", "hljs-literal", "hljs-variable", "hljs-template-variable", "hljs-tag", "hljs-attr", "hljs-string", "hljs-doctag", "hljs-title", "hljs-section", "hljs-selector-id", "hljs-type", "hljs-class", "hljs-name", "hljs-attribute", "hljs-regexp", "hljs-link", "hljs-symbol", "hljs-bullet", "hljs-built_in", "hljs-builtin-name", "hljs-meta", "hljs-deletion", "hljs-addition", "hljs-emphasis", "hljs-strong";
 
-/* examples
-
-.thing {
-
-  @each $item in $hljs-selectors {
-
-    // .#{$item} { composes: $item from $hljs; }
-
-    &__#{$item} { composes: $item from $hljs; }
-  }
-}
-*/
+//examples .thing { @each $item in $hljs-selectors { &__#{$item} { composes: $item from $hljs; } } }

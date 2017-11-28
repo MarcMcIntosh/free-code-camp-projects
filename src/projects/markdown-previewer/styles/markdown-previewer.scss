@@ -1,4 +1,11 @@
 @import "./variables";
-@import "./hljs.scss";
+@import "./hljs-selectors.scss";
 
-.markdown-previewer { /* stuff */ }
+.markdown-previewer { /* ls */ }
+
+@each $item in $hljs-selectors {
+
+  .#{$item} {
+    composes: #{$item} from $hljs-file;
+  }
+}
