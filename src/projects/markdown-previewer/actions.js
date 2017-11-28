@@ -1,5 +1,5 @@
 
-const prefix = str => `MARKDOWN_PREVIEWER_${str}`;
+const prefix = str => `MARKDOWN-PREVIEWER_${str}`;
 
 export const ON_INPUT = prefix('ON_INPUT');
 

@@ -22,14 +22,13 @@ import MarkdownPreviewer from '../projects/markdown-previewer';
 
 /*  to do or check and with out classnames context
 
-
+import Pomodoro from '../projects/pomodoro';
 import QuoteMachine from '../projects/quote-machine';
 import ScatterplotGraph from '../projects/scatterplot-graph';
 import Simon from '../projects/simon';
 import TicTacToe from '../projects/tic-tac-toe';
 import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
-import Pomodoro from '../projects/pomodoro';
 */
 
 const routes = [

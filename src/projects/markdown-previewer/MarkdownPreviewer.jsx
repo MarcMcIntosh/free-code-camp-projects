@@ -4,10 +4,9 @@ import { string, oneOfType, func, number } from 'prop-types';
 import Remarkable from 'remarkable';
 import hljs from 'highlight.js';
 import { onInput } from './actions';
+import MarkdownBox from './components/MarkdownBox';
 
-const mapStateToProps = state => ({
-  value: state.input,
-});
+const mapStateToProps = ({ markdownPreviewer: { value } }) => ({ value });
 
 const mapDispatchToProps = dispatch => ({
   onChange: event => dispatch(onInput(event.target.value)),
@@ -29,10 +28,10 @@ const MarkdownPreviewer = ({
   onChange,
   value,
   rows,
-  ...props
-}) => (<div className="markdown-previewer" {...props}>
-  <textarea className="markdown-previewer__input" value={value} rows={parseInt(rows, 10)} />
-  <iframe className="markdown-previewer__output" title="Preview" srcDoc={md.render(value)} />
+}) => (<div className="markdown-previewer">
+  <textarea className="markdown-previewer__input" value={value} onChange={onChange} rows={parseInt(rows, 10)} />
+  {/* <iframe className="markdown-previewer__output" title="Preview" srcDoc={md.render(value)} /> */}
+  <MarkdownBox markdown={md.render(value)} />
 </div>);
 
 MarkdownPreviewer.propTypes = {
