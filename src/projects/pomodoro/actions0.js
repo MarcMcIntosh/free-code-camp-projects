@@ -1,12 +1,19 @@
-const prefix = str => `POMODORO_CLOCK_${str}`;
+const prefix = str => `POMODORO-CLOCK_${str}`;
+
+export const COUNTER_TICK = prefix('COUNTER_TICK');
+export const counterTick = () => ({ type: COUNTER_TICK });
+
+export const START_POMODORO = prefix('START_POMODORO');
+export const startPomodoro = () => ({ type: START_POMODORO });
 
 export const RESET_POMODORO = prefix('RESET_POMODORO');
-export const START_POMODORO = prefix('START_POMODORO');
-export const STOP_POMODORO = prefix('STOP_POMODORO');
 const resetPomodoro = () => ({ type: RESET_POMODORO });
-const startPomodoro = () => ({ type: START_POMODORO });
-const stopPomodoro = () => ({ type: STOP_POMODORO });
 
+export const STOP_POMODORO = prefix('STOP_POMODORO');
+export const stopPomodoro = () => ({ type: STOP_POMODORO });
+
+
+/* Verify below */
 export const SET_SESSION = prefix('SET_SESSION');
 export const BEGIN_SESSION = prefix('BEGIN_SESSION');
 const setSession = payload => ({ type: SET_SESSION, payload });
@@ -22,8 +29,6 @@ export const BEGIN_LONG_BREAK = prefix('BEGIN_LONG_BREAK');
 export const setLongBreak = payload => ({ type: SET_LONG_BREAK, payload });
 export const beginLongBreak = () => ({ type: BEGIN_LONG_BREAK });
 
-export const COUNTER_TICK = prefix('COUNTER_TICK');
-export const counterTick = payload => ({ type: COUNTER_TICK, payload });
 
 export const SET_MAX_ROUNDS = prefix('SET_MAX_ROUNDS');
 export const setMaxRounds = payload => ({

@@ -13,25 +13,34 @@ import {
   START_TIMER,
 } from './actions';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   time: 0,
-  short_break: 5,
-  long_break: 15,
+  shortBreak: 5,
+  longBreak: 15,
   round: 0,
-  max_rounds: 5,
+  maxRounds: 5,
   session: 25,
   rest: false,
   paused: false,
   running: false,
-  timer_id: null,
+  timerId: -1,
   init: true,
+  showMenu: false,
 };
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case COUNTER_TICK: return {
-      ...state, time: state.time + action.payload, running: true,
+    case COUNTER_TICK: {
+      const time = state.time && state.time - 1;
+      // const running = !!(time && state.running);
+      return { ...state, time };
+    }
+    case START_TIMER: return { ...state, timer_id: action.payload, paused: false, running: true };
+    case STOP_POMODORO: return {
+      ...state, paused: true,
     };
+    case START_POMODORO: return { ...state, paused: false, init: false, running: true };
+    case RESET_POMODORO: return { ...state, round: 0, rest: false, paused: false, running: false, time: 0, init: true };
     case BEGIN_SESSION: return {
       ...state,
       time: state.session,
@@ -49,21 +58,6 @@ function reducer(state = DEFAULT_STATE, action) {
       time: state.long_break,
       rest: 'long',
     };
-    case RESET_POMODORO: return {
-      ...state,
-      round: 0,
-      rest: false,
-      paused: false,
-      running: false,
-      time: 0,
-      init: true,
-    };
-    case STOP_POMODORO: return {
-      ...state, paused: true,
-    };
-    case START_POMODORO: return {
-      ...state, paused: false, init: false, running: true,
-    };
     case SET_SESSION: return {
       ...state, session: action.payload,
     };
@@ -76,12 +70,7 @@ function reducer(state = DEFAULT_STATE, action) {
     case SET_MAX_ROUNDS: return {
       ...state, max_rounds: action.payload,
     };
-    case START_TIMER: return {
-      ...state,
-      timer_id: action.payload,
-      paused: false,
-      running: true,
-    };
+
     default: return state;
   }
 }

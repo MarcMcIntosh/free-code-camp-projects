@@ -1,13 +1,8 @@
-# Usage
-
-## Components
-See app.jsx for an example.
-### Clock
-Time Display, standard props can be applied.
-### PlayButton, StopButton ResetButton
-Control Buttons
-### ShortBreak, LongBreak, SetSession, SetRounds
-Container from a ranged input, accepts a classnames prop to pass a class name to the child component. ie
-```jsx
-<ShortBreak className="pomodoro__slider" classnames={{ input: 'mdc-range-slider mdc-range-slider--primary' }} />
-```
+# Pomodoro Clock
+challenge: https://www.freecodecamp.com/challenges/build-a-pomodoro-clock
+## Objective
+Build a CodePen.io app that is functionally similar to this example: https://codepen.io/FreeCodeCamp/full/aNyxXR/
+## User stories
++ I can start a 25 minute pomodoro, and the timer will go off once 25 minutes has elapsed.
++ I can reset the clock for my next pomodoro.
++ I can customize the length of each pomodoro.',

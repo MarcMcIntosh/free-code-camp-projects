@@ -1,1 +1,0 @@
-import './pomodoro.scss';
