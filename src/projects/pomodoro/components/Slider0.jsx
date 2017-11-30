@@ -2,78 +2,106 @@
 import React, { Component } from 'react';
 import { func, number, string, oneOfType, bool } from 'prop-types';
 
+
+/* for callculating where the thumb should go  using percent of range relative width */
+const percentageSteps = (range, interval) => Array.from({
+  length: 1 + Math.max(0, Math.ceil(range / interval)) | 0,
+}, (d, i) => (100 / range) * (i * interval));
+
+
+/* That array could be used for placing display markers */
+const trackWidth = ({ value, min, max, step }) => {
+  const r0 = max - min;
+  const r1 = r0 % step;
+  const range = r0 - r1;
+  const pos = (value - min) / step | 0;
+  const arr = percentageSteps(range, step);
+  return arr[pos];
+};
+
+
+/* The api we want is the same as a range pomodoro-slider
+value, min, max, steps, onChange,
+the varibales that have to calculated from that are
+translateX, scaleX, focused, active and inTransit
+*/
+
+const toValue = ({ range, width, position }) => {
+  /* clientX = width * (value / (max - min));
+  clientX / width = value / (max - min);
+  (clientX / width) * (max - min) = value; */
+  const x0 = Math.max(position, 0);
+  const x1 = Math.min(x0, width);
+  return (x1 / width) * range;
+};
+
+/*
+const fromValue = ({ range, value, width }) => {
+  const scale = value / range;
+  return width * scale;
+};
+*/
+
+const nearestStep = ({ value, step }) => {
+  // could use math abs to ensure positive comparison
+  const half = step / 2 | 0;
+  // here needs some works //
+  const dif = value % step;
+  const pad = (dif < half) ? 0 : step;
+  return value + (pad - dif);
+};
+
+const calcChange = ({ range, width, position, step }) => {
+  const value = toValue({ range, width, position });
+  return nearestStep({ value, step });
+};
+
 class Slider extends Component {
   constructor(props) {
     super(props);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this)
     this.state = {
       active: false,
       focus: false,
       inTransit: false,
       steps: this._steps(),
     };
+
   }
   componentWillUnmount() {
-    /*
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
     window.removeEventListener('mouseleave', this.onMouseUp);
-    */
-    this.root.removeEventListener('mousemove', this.onMouseMove);
-    this.root.removeEventListener('mouseup', this.onMouseUp);
-    this.root.removeEventListener('mouseleave', this.onMouseUp);
   }
   onMouseDown() {
     this.setState({ active: true, focused: true });
-    /* change window with element */
-    // window.addEventListener('mousemove', this.onMouseMove);
-    // window.addEventListener('mouseup', this.onMouseUp);
-    // window.addEventListener('mouseleave', this.onMouseUp);
-    this.root.addEventListener('mousemove', this.onMouseMove);
-    this.root.addEventListener('mouseup', this.onMouseUp);
-    this.root.addEventListener('mouseleave', this.onMouseUp);
+    window.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('mouseup', this.onMouseUp);
+    window.addEventListener('mouseleave', this.onMouseUp);
   }
   onMouseUp() {
-    /*
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
     window.removeEventListener('mouseleave', this.onMouseUp);
-    */
-    this.root.removeEventListener('mousemove', this.onMouseMove);
-    this.root.removeEventListener('mouseup', this.onMouseUp);
-    this.root.removeEventListener('mouseleave', this.onMouseUp);
     this.setState({ active: false, inTransit: false, focused: false });
   }
   onMouseMove(event) {
     const { max, min, step } = this.props;
+    const position = event.clientX;
+    const width = this.root.clientWidth;
     /* this.will need some work */
-    // const r = (max - min);
-    // const saneRange = range - (range % step);
-    const pixlesPerStep = Math.ceil(this.root.clientWidth / this.state.steps.length);
-    const index = Math.floor(event.clientX / pixlesPerStep);
-    // const r = this.state.steps.length * step;
-    const v = index * step;
-    const val = v + (+min);
-    const value = Math.min(max, val);
-    /*
-    const percentage = this.state.steps[index];
-    const stepsCovered = Math.floor((range * percentage) / 100);
-    const v = (range / 100) * Math.floor(percentage);
-    const val = v - -min;
-    const nice = step - (val % step);
-    const value = val + nice;
-    */
-    // const value = ((range / 100) * percentage) + (+min);
 
-    // console.log({ stepsCovered, max, min, range, pixlesPerStep, index, percentage, value, nice, val, v, curr: this.props.value, steps: this.state.steps });
+    // const range = Math.abs(max - min);
+    const range = max;
+    const value = calcChange({ range, width, position, step });
+    // console.log({ value, props, range, max, min, step });
     if (!this.state.inTransit) {
       this.setState({ inTransit: true });
     }
     if (this.props.value !== value) {
-      // this.props.onChange(Math.max(min, Math.min(max, value)));
-      this.props.onChange(value);
+      this.props.onChange(Math.max(min, Math.min(max, value)));
     }
   }
   _steps() {
@@ -81,16 +109,11 @@ class Slider extends Component {
     const r0 = max - min;
     const r1 = r0 % step;
     const range = r0 - r1;
-    return Array.from({ length: 1 + Math.max(0, Math.ceil(range / step)) }, (d, i) => (100 / range) * (i * step));
-  }
-  _position() {
-    const r = this.props.value - this.props.min;
-    const index = Math.floor(r / this.props.step);
-    return this.state.steps[index];
+    return Array.from({ length: 1 + Math.max(0, Math.ceil(range / step)) | 0 }, (d, i) => (100 / range) * (i * step));
   }
   render() {
     const { min, max, value, label, step, name, disabled } = this.props;
-    const w = this._position();
+    const w = trackWidth({ min, max, value, step });
     const { classnames } = this.context;
     return (<div className={classnames('pomodoro__input')}>
       <label className={classnames('pomodoro__label')} htmlFor={name}>{label}</label>
@@ -120,11 +143,7 @@ class Slider extends Component {
         >
           <div className={classnames('pomodoro-slider__track')} style={{ width: `${w}%` }} />
 
-          <div className={classnames('pomodoro-slider__track-marker-container')}>{this.state.steps.map(d => (<div
-            key={d}
-            className={classnames('pomodoro-slider__track-marker')}
-            style={{ left: d + '%', transform: `translateX(${0 - d}%)` }}
-          />))}</div>
+          <div className={classnames('pomodoro-slider__track-marker-container')} />
 
         </div>
 

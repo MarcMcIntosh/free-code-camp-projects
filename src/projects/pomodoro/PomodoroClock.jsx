@@ -43,10 +43,10 @@ class PomodoroClock extends Component {
   }
   render() {
     const {
-      props: { time, round, maxRounds, rest, running, timerId, showMenu },
+      // props: { time, round, maxRounds, rest, running, timerId, showMenu },
       context: { classnames },
     } = this;
-    console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
+    // console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
     return (<div className={classnames('pomodoro')}>
       <Slider
         name="session"
@@ -81,15 +81,15 @@ class PomodoroClock extends Component {
 
 PomodoroClock.propTypes = {
   timerId: number.isRequired,
-  time: number.isRequired,
+  //  time: number.isRequired,
   session: number.isRequired,
   shortBreak: number.isRequired,
   longBreak: number.isRequired,
-  round: number.isRequired,
-  maxRounds: number.isRequired,
-  rest: bool.isRequired,
+  //  round: number.isRequired,
+  //  maxRounds: number.isRequired,
+  //  rest: bool.isRequired,
   running: bool.isRequired,
-  showMenu: bool.isRequired,
+  //  showMenu: bool.isRequired,
   start: func.isRequired,
   stop: func.isRequired,
   reset: func.isRequired,

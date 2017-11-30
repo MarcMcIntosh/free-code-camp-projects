@@ -1,44 +1,20 @@
-
-// const number = n => ((n === null) ? NaN : +n);
-
-/* intrval = (max - min) / step;
-const percentageSteps = (interval = 1) => Array.from({
-  length: Math.max(0, Math.ceil(100 / interval))| 0,
-}, (d, i) => i * interval).concat(100);
-*/
-
-/* for callculating where the thumb should go  using percent of range relative width */
-/* intreval = (max - min) / step; */
-/* use convert value to an index in the array */
-/* precentage = (value - min) / (max - min) */
-/* array index = percentage * interval |0 */
-/*
-const percentageSteps = (interval = 1) => Array.from({
-  length: Math.max(0, Math.ceil(100 / interval)) | 0,
-}, (d, i) => i * interval).concat(100);
-*/
-
+/* elsint-disable */
+/* percent of range relative width */
 const percentageSteps = (range, interval) => Array.from({
   length: 1 + Math.max(0, Math.ceil(range / interval)) | 0,
 }, (d, i) => (100 / range) * (i * interval));
-// const max = 50;
-const max = 30;
-// const min = 1;
-const min = 15;
-const value = 25;
 
-const step = 3;
-const range = max - min;
-const r = range % step;
 
-const arr = percentageSteps(range - r, step);
-// const interval = (step > 2) ? ((max - min) / step) : step;
-// const per = ((value - min) / (range - r)) * 100;
-const id = ((value - min) / step) | 0;
+/* That array could be used for placing display markers */
+const trackWidth = ({ value, min, max, step }) => {
+  const r0 = max - min;
+  const r1 = r0 % step;
+  const range = r0 - r1;
+  const pos = (value - min) / step | 0;
+  const arr = percentageSteps(range, step);
+  return arr[pos];
+};
 
-const res = arr[id];
-console.log(arr.join(', '));
-console.log({ id, res, step, range, array: arr.length });
 /*
 const vals = ({ min, max, step }) => {
   // min should be 0%

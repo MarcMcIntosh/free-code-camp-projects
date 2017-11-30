@@ -29,10 +29,13 @@
 
   &__track-marker-container {
     composes: mdc-slider__track-marker-container from $mdc-slider;
+    display: block;
+    margin: 0;
   }
 
   &__track-marker {
     composes: mdc-slider__track-marker from $mdc-slider;
+    position: absolute;
   }
 
   &__thumb-container {
