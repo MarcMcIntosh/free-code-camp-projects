@@ -46,13 +46,13 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state, session: action.payload,
     };
     case SET_SHORT_BREAK: return {
-      ...state, short_break: action.payload,
+      ...state, shortBreak: action.payload,
     };
     case SET_LONG_BREAK: return {
-      ...state, long_break: action.payload,
+      ...state, longBreak: action.payload,
     };
     case SET_MAX_ROUNDS: return {
-      ...state, max_rounds: action.payload,
+      ...state, maxRounds: action.payload,
     };
 
     default: return state;

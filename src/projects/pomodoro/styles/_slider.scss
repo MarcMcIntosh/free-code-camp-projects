@@ -1,0 +1,57 @@
+@import "./variables";
+
+.pomodoro-slider {
+  composes: mdc-slider mdc-slider--discrete mdc-slider--display-markers from $mdc-slider;
+
+  &--disabled {
+    composes: mdc-slider--disabled from $mdc-slider;
+  }
+
+  &--active {
+    composes: mdc-slider--active from $mdc-slider;
+  }
+
+  &--focus {
+    composes: mdc-slider--focus from $mdc-slider;
+  }
+
+  &--in-transit {
+    composes: mdc-slider--in-transit from $mdc-slider;
+  }
+
+  &__track-container {
+    composes: mdc-slider__track-container from $mdc-slider;
+  }
+
+  &__track {
+    composes: mdc-slider__track from $mdc-slider;
+  }
+
+  &__track-marker-container {
+    composes: mdc-slider__track-marker-container from $mdc-slider;
+  }
+
+  &__track-marker {
+    composes: mdc-slider__track-marker from $mdc-slider;
+  }
+
+  &__thumb-container {
+    composes: mdc-slider__thumb-container from $mdc-slider;
+  }
+
+  &__pin {
+    composes: mdc-slider__pin from $mdc-slider;
+  }
+
+  &__pin-value-marker {
+    composes: mdc-slider__pin-value-marker from $mdc-slider;
+  }
+
+  &__thumb {
+    composes: mdc-slider__thumb from $mdc-slider;
+  }
+
+  &__focus-ring {
+    composes: mdc-slider__focus-ring from $mdc-slider;
+  }
+}

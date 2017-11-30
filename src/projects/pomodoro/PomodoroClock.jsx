@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { number, func, bool } from 'prop-types';
 // import formatTime from './util/formatTime';
-import { start, stop, reset, tick } from './actions';
+import { start, stop, reset, tick, setSession, setShortBreak, setLongBreak } from './actions';
+import Slider from './components/Slider';
 
 const mapStateToProps = ({
   pomodoroClock: { time, shortBreak, longBreak, round, maxRounds, session, rest, running, timerId, showMenu },
@@ -13,9 +14,12 @@ const mapDispatchToProps = dispatch => ({
   start: payload => dispatch(start(payload)),
   stop: () => dispatch(stop()),
   reset: () => dispatch(reset()),
+  setSession: value => dispatch(setSession(value)),
+  setShortBreak: value => dispatch(setShortBreak(value)),
+  setLongBreak: value => dispatch(setLongBreak(value)),
 });
 
-class Pomodoro extends PureComponent {
+class PomodoroClock extends Component {
   constructor(props) {
     super(props);
     this._togglePlay = this._togglePlay.bind(this);
@@ -39,17 +43,43 @@ class Pomodoro extends PureComponent {
   }
   render() {
     const {
-      props: { time, shortBreak, longBreak, round, maxRounds, session, rest, running, timerId, showMenu },
+      props: { time, round, maxRounds, rest, running, timerId, showMenu },
       context: { classnames },
     } = this;
-    console.log({ time, shortBreak, longBreak, round, maxRounds, session, rest, running, timerId, showMenu });
+    console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
     return (<div className={classnames('pomodoro')}>
-      add components here
+      <Slider
+        name="session"
+        label="Session length"
+        min="1"
+        max="50"
+        step="1"
+        value={this.props.session}
+        onChange={this.props.setSession}
+      />
+      <Slider
+        name="shortBreak"
+        label="Short Break"
+        min="1"
+        max="10"
+        step="1"
+        value={this.props.shortBreak}
+        onChange={this.props.setShortBreak}
+      />
+      <Slider
+        name="longBreak"
+        label="Long Break"
+        min="10"
+        max="30"
+        step="5"
+        value={this.props.longBreak}
+        onChange={this.props.setLongBreak}
+      />
     </div>);
   }
 }
 
-Pomodoro.propTypes = {
+PomodoroClock.propTypes = {
   timerId: number.isRequired,
   time: number.isRequired,
   session: number.isRequired,
@@ -64,6 +94,11 @@ Pomodoro.propTypes = {
   stop: func.isRequired,
   reset: func.isRequired,
   tick: func.isRequired,
+  setSession: func.isRequired,
+  setShortBreak: func.isRequired,
+  setLongBreak: func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pomodoro);
+PomodoroClock.contextTypes = { classnames: func.isRequired };
+
+export default connect(mapStateToProps, mapDispatchToProps)(PomodoroClock);

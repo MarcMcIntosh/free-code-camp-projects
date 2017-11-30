@@ -1,10 +1,16 @@
-@import "./variables";
-@import "./slider";
+@import "@material/typography/mdc-typography.scss";
+@import "../../../../app/styles/mdc-range-slider/mdc-range-slider.scss";
+@import "../../../../app/styles/icons.scss";
 
 .pomodoro {
   max-width: 100%;
   margin: auto;
   text-align: center;
+
+  .mdc-range-slider {
+    display: block;
+    margin: 6px auto;
+  }
 
   &__clock { text-align: center; }
 
@@ -17,9 +23,7 @@
     background: none;
 
     &:focus { outline: 0; }
-
     &:disabled { display: none; }
-
     &:active { border: 1px solid #fff; }
   }
 
