@@ -16,65 +16,33 @@ class Slider extends Component {
     };
   }
   componentWillUnmount() {
-    /*
-    window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
-    window.removeEventListener('mouseleave', this.onMouseUp);
-    */
-    this.root.removeEventListener('mousemove', this.onMouseMove);
-    this.root.removeEventListener('mouseup', this.onMouseUp);
-    this.root.removeEventListener('mouseleave', this.onMouseUp);
   }
-  onMouseDown() {
-    this.setState({ active: true, focused: true });
-    /* change window with element */
-    // window.addEventListener('mousemove', this.onMouseMove);
-    // window.addEventListener('mouseup', this.onMouseUp);
-    // window.addEventListener('mouseleave', this.onMouseUp);
+  onMouseDown(event) {
+    event.preventDefault();
+    window.addEventListener('mouseup', this.onMouseUp);
     this.root.addEventListener('mousemove', this.onMouseMove);
-    this.root.addEventListener('mouseup', this.onMouseUp);
-    this.root.addEventListener('mouseleave', this.onMouseUp);
+    this.setState({ active: true, focused: true });
   }
-  onMouseUp() {
-    /*
-    window.removeEventListener('mousemove', this.onMouseMove);
-    window.removeEventListener('mouseup', this.onMouseUp);
-    window.removeEventListener('mouseleave', this.onMouseUp);
-    */
+  onMouseUp(event) {
+    event.preventDefault();
     this.root.removeEventListener('mousemove', this.onMouseMove);
-    this.root.removeEventListener('mouseup', this.onMouseUp);
-    this.root.removeEventListener('mouseleave', this.onMouseUp);
+    window.removeEventListener('mouseup', this.onMouseUp);
     this.setState({ active: false, inTransit: false, focused: false });
   }
   onMouseMove(event) {
+    const { movementX, clientX } = event;
+    event.preventDefault();
+    /* clientWidth might be avaibable from the event */
     const { max, min, step } = this.props;
-    /* this.will need some work */
-    // const r = (max - min);
-    // const saneRange = range - (range % step);
     const pixlesPerStep = Math.ceil(this.root.clientWidth / this.state.steps.length);
-    const index = Math.floor(event.clientX / pixlesPerStep);
-    // const r = this.state.steps.length * step;
+    const index = Math.floor(clientX / pixlesPerStep);
     const v = index * step;
     const val = v + (+min);
     const value = Math.min(max, val);
-    /*
-    const percentage = this.state.steps[index];
-    const stepsCovered = Math.floor((range * percentage) / 100);
-    const v = (range / 100) * Math.floor(percentage);
-    const val = v - -min;
-    const nice = step - (val % step);
-    const value = val + nice;
-    */
-    // const value = ((range / 100) * percentage) + (+min);
-
-    // console.log({ stepsCovered, max, min, range, pixlesPerStep, index, percentage, value, nice, val, v, curr: this.props.value, steps: this.state.steps });
-    if (!this.state.inTransit) {
-      this.setState({ inTransit: true });
-    }
-    if (this.props.value !== value) {
-      // this.props.onChange(Math.max(min, Math.min(max, value)));
+    this.setState({ inTransit: !!(movementX) }, () => {
       this.props.onChange(value);
-    }
+    });
   }
   _steps() {
     const { min, max, step } = this.props;
@@ -135,7 +103,6 @@ class Slider extends Component {
             transform: 'translateX(-50%)',
             left: `${w}%`,
           }}
-          onTouchStart={this.onTouchStart}
           onMouseDown={this.onMouseDown}
         >
           <div className={classnames('pomodoro-slider__pin')}>
