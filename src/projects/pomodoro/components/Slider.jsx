@@ -81,6 +81,7 @@ class Slider extends Component {
         tabIndex="0"
         name={name}
         disabled={disabled}
+        onClick={this.onMouseMove}
       >
         <div
           ref={(track) => { this.track = track; }}
