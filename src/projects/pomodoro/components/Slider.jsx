@@ -2,21 +2,47 @@
 import React, { Component } from 'react';
 import { func, number, string, oneOfType, bool } from 'prop-types';
 
+/* what about key movents */
 class Slider extends Component {
   constructor(props) {
     super(props);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.state = {
       active: false,
-      focus: false,
+      focused: false,
       inTransit: false,
       steps: this._steps(),
     };
   }
   componentWillUnmount() {
     window.removeEventListener('mouseup', this.onMouseUp);
+  }
+  onFocus() {
+    this.setState({ active: true, focused: true });
+  }
+  onBlur() {
+    this.setState({ active: false, focused: false, inTransit: false });
+  }
+  onKeyDown(event) {
+    if (event.defaultPrevented) { return void 0; }
+    const { min, max, value, step, onChange } = this.props;
+    switch (event.key) {
+      case 'ArrowLeft': {
+        event.preventDefault();
+        return onChange(Math.max(min, value - step));
+      }
+      case 'ArrowRight': {
+        event.preventDefault();
+        return onChange(Math.min(max, value + (+step)));
+      }
+      default: return void 0;
+    }
+    // return event.preventDefault();
   }
   onMouseDown(event) {
     event.preventDefault();
@@ -28,11 +54,12 @@ class Slider extends Component {
     event.preventDefault();
     this.root.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
-    this.setState({ active: false, inTransit: false, focused: false });
+    setTimeout(this.onBlur, 500);
+    // this.setState({ active: false, inTransit: false, focused: false });
   }
   onMouseMove(event) {
-    const { movementX, clientX } = event;
-    event.preventDefault();
+    const { movementX, clientX, type } = event;
+    // event.preventDefault();
     /* clientWidth might be avaibable from the event */
     const { max, min, step } = this.props;
     const pixlesPerStep = Math.ceil(this.root.clientWidth / this.state.steps.length);
@@ -40,7 +67,8 @@ class Slider extends Component {
     const v = index * step;
     const val = v + (+min);
     const value = Math.min(max, val);
-    this.setState({ inTransit: !!(movementX) }, () => {
+    this.setState({ active: true, focused: true, inTransit: !!(movementX) }, () => {
+      if (type === 'click') { setTimeout(this.onBlur, 500); }
       this.props.onChange(value);
     });
   }
@@ -68,7 +96,7 @@ class Slider extends Component {
           'pomodoro-slider': true,
           'pomodoro-slider--disabled': disabled,
           'pomodoro-slider--active': this.state.active,
-          'pomodoro-slider--focus': this.state.focus,
+          'pomodoro-slider--focus': this.state.focused,
           'pomodoro-slider--in-transit': this.state.inTransit,
         })}
         role="slider"
@@ -82,6 +110,9 @@ class Slider extends Component {
         name={name}
         disabled={disabled}
         onClick={this.onMouseMove}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        onKeyDown={this.onKeyDown}
       >
         <div
           ref={(track) => { this.track = track; }}
