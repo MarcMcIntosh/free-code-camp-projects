@@ -17,7 +17,7 @@ import {
 
 export const DEFAULT_STATE = {
   timerId: -1,
-  time: 0,
+  time: 25 * 60,
   shortBreak: 5,
   longBreak: 15,
   round: 0,
@@ -40,7 +40,7 @@ function reducer(state = DEFAULT_STATE, action) {
     }
     case START: return { ...state, timerId: action.payload, running: true };
     case STOP: return { ...state, running: false };
-    case RESET: return { ...state, round: 0, rest: false, running: false, time: 0 };
+    case RESET: return { ...state, round: 0, rest: false, running: false, time: state.session * 60 };
     case MENU: return { ...state, showMenu: !state.showMenu };
     case SET_SESSION: return {
       ...state, session: action.payload,

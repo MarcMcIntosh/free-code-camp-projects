@@ -72,6 +72,7 @@
     "@material/dialog": "^0.24.0",
     "@material/elevation": "^0.1.13",
     "@material/grid-list": "^0.24.0",
+    "@material/icon-toggle": "^0.26.0",
     "@material/layout-grid": "^0.24.0",
     "@material/linear-progress": "^0.24.0",
     "@material/list": "^0.25.0",

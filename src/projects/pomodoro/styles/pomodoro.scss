@@ -1,26 +1,155 @@
 @import "./variables";
 @import "./slider";
 
-.pomodoro {
-  max-width: 100%;
-  margin: auto;
-  text-align: center;
+$color-primary: #0bfdfd;
+$easing: cubic-bezier(.5, 0, .5, 1);
+$easing-alt: cubic-bezier(.4, 0, .1, 1);
 
-  &__clock { text-align: center; }
+@keyframes pulse {
+
+  to { opacity: .8; }
+}
+
+.pomodoro {
+  composes: mdc-elevation--z4 from $mdc-elevation;
+  composes: mdc-typography from $mdc-typography;
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 16px;
+
+  &__flex { display: flex; }
+
+  &__clock {
+    margin: auto;
+    padding: 16px;
+    background-color: black;
+    // display: flex;
+    // flex-flow: row nowrap;
+  }
+
+  &__digit {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 32px;
+    height: 64px;
+    margin: 0 10px;
+
+    :nth-child(1) {
+      top: 0;
+      right: 3px;
+      left: 3px;
+      height: 2px;
+    }
+
+    :nth-child(2) {
+      top: 3px;
+      right: 0;
+      bottom: 51%;
+      width: 2px;
+    }
+
+    :nth-child(3) {
+      top: 51%;
+      right: 0;
+      bottom: 3px;
+      width: 2px;
+    }
+
+    :nth-child(4) {
+      right: 4px;
+      bottom: 0;
+      left: 4px;
+      height: 2px;
+    }
+
+    :nth-child(5) {
+      top: 51%;
+      bottom: 3px;
+      left: 0;
+      width: 2px;
+    }
+
+    :nth-child(6) {
+      top: 3%;
+      bottom: 51%;
+      left: 0;
+      width: 2px;
+    }
+
+    :nth-child(7) {
+      top: 49%;
+      right: 6%;
+      bottom: 49%;
+      left: 6%;
+    }
+  }
+
+  &__led {
+
+    &--on { opacity: 1; }
+
+    &--off { opacity: .2; }
+
+    display: inline-block;
+    position: absolute;
+    // min-width: 8px;
+    // min-height: 8px;
+    // margin: 5%;
+    // padding: 6px;
+    // transition: all .9s $easing;
+    background: white;
+    color: $color-primary;
+    // background-color: $color-primary;
+    box-shadow: 0 0 1rem $color-primary, inset 0 0 .125vmin $color-primary;
+    // content: " ";
+  }
+
+  &__time {
+    composes: mdc-typography--headline from $mdc-typography;
+    // composes: mdc-typography--display1 from $mdc-typography;
+  }
+
+  &__icon {
+    composes: mdc-icon-toggle from $mdc-icon-toggle;
+    composes: material-icons from $material-icons;
+
+    &--settings {
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: .62;
+
+      &::before,
+      &::after {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 
   &__button {
-    margin: auto;
-    margin-bottom: 2px;
-    padding: 0;
-    border: 1px solid transparent;
-    border-radius: 48px;
-    background: none;
+    composes: mdc-button from $mdc-button;
 
-    &:focus { outline: 0; }
+    &--icon {
+      // composes: mdc-button--compact from $mdc-button;
+      composes: material-icons from $material-icons;
+      min-width: unset;
+      height: auto;
+      padding: 4px;
+      font-size: 32px;
+    }
 
-    &:disabled { display: none; }
+    &--raised {
+      composes: mdc-button--raised from $mdc-button;
+    }
 
-    &:active { border: 1px solid #fff; }
+    &--stroked {
+      composes: mdc-button--stroked from $mdc-button;
+    }
   }
 
   &__menu {

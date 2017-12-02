@@ -29,7 +29,9 @@ class Slider extends Component {
     this.setState({ active: false, focused: false, inTransit: false });
   }
   onKeyDown(event) {
-    if (event.defaultPrevented) { return void 0; }
+    if (event.defaultPrevented) {
+      return void 0;
+    } else if (!this.state.focused) { this.onFocus(); }
     const { min, max, value, step, onChange } = this.props;
     switch (event.key) {
       case 'ArrowLeft': {

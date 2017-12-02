@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { number, func, bool } from 'prop-types';
 // import formatTime from './util/formatTime';
-import { start, stop, reset, tick, setSession, setShortBreak, setLongBreak } from './actions';
+import { start, stop, reset, tick, menu, setSession, setShortBreak, setLongBreak } from './actions';
 import Slider from './components/Slider';
+// import TimeDisplay from './components/TimeDisplay';
+import Clock from './components/Clock';
 
 const mapStateToProps = ({
   pomodoroClock: { time, shortBreak, longBreak, round, maxRounds, session, rest, running, timerId, showMenu },
@@ -14,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   start: payload => dispatch(start(payload)),
   stop: () => dispatch(stop()),
   reset: () => dispatch(reset()),
+  menu: () => dispatch(menu()),
   setSession: value => dispatch(setSession(value)),
   setShortBreak: value => dispatch(setShortBreak(value)),
   setLongBreak: value => dispatch(setLongBreak(value)),
@@ -48,6 +51,24 @@ class PomodoroClock extends Component {
     } = this;
     // console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
     return (<div className={classnames('pomodoro')}>
+      <section className={classnames('pomodoro__flex')}>
+        <Clock className={classnames('pomodoro__clock')} time={this.props.time} />
+      </section>
+      <section>
+        <button
+          title={this.props.running ? 'Stop' : 'Start'}
+          className={classnames('pomodoro__button', 'pomodoro__button--icon')}
+          tabIndex="0"
+          onClick={this._togglePlay}
+        >{this.props.running ? 'pause_circle_outline' : 'play_circle_outline'}</button>
+        <i
+          role="button"
+          tabIndex="0"
+          title="Settings"
+          className={classnames('pomodoro__icon', 'pomodoro__icon--settings')}
+          onClick={this.props.menu}
+        >settings</i>
+      </section>
       <Slider
         name="session"
         label="Session length"
@@ -81,7 +102,7 @@ class PomodoroClock extends Component {
 
 PomodoroClock.propTypes = {
   timerId: number.isRequired,
-  //  time: number.isRequired,
+  time: number.isRequired,
   session: number.isRequired,
   shortBreak: number.isRequired,
   longBreak: number.isRequired,
@@ -94,6 +115,7 @@ PomodoroClock.propTypes = {
   stop: func.isRequired,
   reset: func.isRequired,
   tick: func.isRequired,
+  menu: func.isRequired,
   setSession: func.isRequired,
   setShortBreak: func.isRequired,
   setLongBreak: func.isRequired,
