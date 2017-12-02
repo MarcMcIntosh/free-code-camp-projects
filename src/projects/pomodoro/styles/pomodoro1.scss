@@ -19,7 +19,7 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   padding: 16px;
 
   &__flex {
-    // display: flex;
+    display: flex;
   }
 
   &__clock {
@@ -32,38 +32,79 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
 
   &__digit {
     display: inline-block;
-    // position: relative;
+    position: relative;
     box-sizing: border-box;
     width: 32px;
     height: 64px;
     margin: 0 10px;
-  }
 
-  &__display-dots {
-    display: inline-block;
+    :nth-child(1) {
+      top: 0;
+      right: 3px;
+      left: 3px;
+      height: 2px;
+    }
+
+    :nth-child(2) {
+      top: 3px;
+      right: 0;
+      bottom: 51%;
+      width: 2px;
+    }
+
+    :nth-child(3) {
+      top: 51%;
+      right: 0;
+      bottom: 3px;
+      width: 2px;
+    }
+
+    :nth-child(4) {
+      right: 4px;
+      bottom: 0;
+      left: 4px;
+      height: 2px;
+    }
+
+    :nth-child(5) {
+      top: 51%;
+      bottom: 3px;
+      left: 0;
+      width: 2px;
+    }
+
+    :nth-child(6) {
+      top: 3%;
+      bottom: 51%;
+      left: 0;
+      width: 2px;
+    }
+
+    :nth-child(7) {
+      top: 49%;
+      right: 6%;
+      bottom: 49%;
+      left: 6%;
+    }
   }
 
   &__led {
-    // fill: white;
-    fill: $color-primary;
-    // fill-rule: evenodd;
-    // stroke: $color-primary;
-    stroke: black;
-    stroke-linejoin: bevel;
-    stroke-width: .5;
 
-    &--on {
-      fill-opacity: 1;
-      stroke-opacity: .4;
-    }
+    &--on { opacity: 1; }
 
-    &--off {
-      fill-opacity: .2;
-      stroke-opacity: 1;
-    }
+    &--off { opacity: .2; }
 
+    display: inline-block;
+    position: absolute;
+    // min-width: 8px;
+    // min-height: 8px;
+    // margin: 5%;
+    // padding: 6px;
+    // transition: all .9s $easing;
+    background: white;
+    color: $color-primary;
     // background-color: $color-primary;
-    // box-shadow: 0 0 1rem $color-primary, inset 0 0 .125vmin $color-primary;
+    box-shadow: 0 0 1rem $color-primary, inset 0 0 .125vmin $color-primary;
     // content: " ";
   }
 
