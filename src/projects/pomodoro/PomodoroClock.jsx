@@ -51,7 +51,7 @@ class PomodoroClock extends Component {
     } = this;
     // console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
     return (<div className={classnames('pomodoro')}>
-      <section className={classnames('pomodoro__flex')}>
+      <section className={classnames('pomodoro__primary')}>
         <Clock className={classnames('pomodoro__clock')} time={this.props.time} />
       </section>
       <section>

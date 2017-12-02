@@ -2,32 +2,49 @@
 @import "./slider";
 
 $color-primary: #0bfdfd;
-$easing: cubic-bezier(.5, 0, .5, 1);
 $easing-alt: cubic-bezier(.4, 0, .1, 1);
 
 @keyframes pulse {
 
-  to { opacity: .8; }
+  from {
+    fill-opacity: .8;
+    stroke-opacity: .4;
+  }
+
+  to {
+    fill-opacity: .6;
+    stroke-opacity: 1;
+  }
 }
 
 .pomodoro {
-  composes: mdc-elevation--z4 from $mdc-elevation;
+  // composes: mdc-elevation--z4 from $mdc-elevation;
   composes: mdc-typography from $mdc-typography;
+  composes: mdc-card from $mdc-card;
   position: relative;
   margin: auto;
   box-sizing: border-box;
   padding: 16px;
 
-  &__flex {
-    // display: flex;
+  &__primary {
+    composes: mdc-primary from $mdc-card;
+  }
+
+  &__media {
+    composes: mdc-card__media from $mdc-card;
   }
 
   &__clock {
-    margin: auto;
+    display: inline-block;
+    // margin: auto;
     padding: 16px;
     background-color: black;
     // display: flex;
     // flex-flow: row nowrap;
+  }
+
+  &__display {
+    display: inline-block;
   }
 
   &__digit {
@@ -36,11 +53,14 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
     box-sizing: border-box;
     width: 32px;
     height: 64px;
-    margin: 0 10px;
+    margin: 0 6px;
   }
 
-  &__display-dots {
+  &__dots {
     display: inline-block;
+    width: 12px;
+    height: 64px;
+    margin: 0;
   }
 
   &__led {
@@ -51,6 +71,12 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
     stroke: black;
     stroke-linejoin: bevel;
     stroke-width: .5;
+
+    $easing: cubic-bezier(.5, 0, .5, 1);
+
+    &--blink {
+      animation: pulse 1s $easing 0s infinite alternate;
+    }
 
     &--on {
       fill-opacity: 1;

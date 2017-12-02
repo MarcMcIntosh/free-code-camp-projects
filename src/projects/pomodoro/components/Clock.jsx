@@ -2,17 +2,17 @@ import React from 'react';
 import { number, func } from 'prop-types';
 // https://codepen.io/davidkpiano/pen/Vmyyzd?editors=1010
 import DoubleDigits from './DoubleDigits';
+import DoubleDots from './DoubleDots';
 
 const Clock = ({ time, ...props }, { classnames }) => {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   return (<div {...props}>
-    <DoubleDigits data={minutes} />
-    <span className={classnames('pomodoro__display-dots')}>
-      <div className={classnames('pomodoro__display-dot')} />
-      <div className={classnames('pomodoro__display-dot')} />
+    <DoubleDigits className={classnames('pomodoro__display')} data={minutes} />
+    <span className={classnames('pomodoro__display')}>
+      <DoubleDots />
     </span>
-    <DoubleDigits data={seconds} />
+    <DoubleDigits className={classnames('pomodoro__display')} data={seconds} />
   </div>);
 };
 
