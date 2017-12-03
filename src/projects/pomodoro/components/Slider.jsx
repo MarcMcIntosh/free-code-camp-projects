@@ -45,7 +45,6 @@ class Slider extends Component {
       }
       default: return void 0;
     }
-    // return event.preventDefault();
   }
   onMouseDown(event) {
     event.preventDefault();
@@ -57,23 +56,14 @@ class Slider extends Component {
     this.root.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
     setTimeout(this.onBlur, 500);
-    // this.setState({ active: false, inTransit: false, focused: false });
   }
   onMouseMove(event) {
     if (event.defaultPrevented) { return; }
     event.preventDefault();
-    const { clientX, movementX } = event;
-    const { max, min, step, value, onChange } = this.props;
-    const { steps } = this.state;
-    const { width, left } = this.root.getBoundingClientRect();
-    /* clientWidth might be avaibable from the event */
-    const pixlesPerStep = width / (steps.length - 1);
-    const index = Math.round((clientX - left) / pixlesPerStep);
-    const v = (index * step) + Number(min);
-    const val = Math.min(max, v);
-
-    this.setState({ inTransit: !!(movementX) }, () => {
-      if (val !== value) { onChange(val); }
+    this.setState({
+      inTransit: !!(event.movementX),
+    }, () => {
+      this._handleChange(event.clientX);
     });
   }
   _steps() {
@@ -90,19 +80,18 @@ class Slider extends Component {
   }
   _onClick(event) {
     if (event.defaultPrevented) { return; }
-    const { clientX } = event;
+    event.preventDefault();
+    this._handleChange(event.clientX);
+  }
+  _handleChange(clientX) {
     const { max, min, step, value, onChange } = this.props;
-    const { steps } = this.state;
     const { width, left } = this.root.getBoundingClientRect();
-
-    const pxPerStep = width / (steps.length - 1);
+    const pxPerStep = width / (this.state.steps.length - 1);
     const idx = Math.round((clientX - left) / pxPerStep);
     const v = (idx * step) + Number(min);
     const val = Math.min(v, max);
-    if (val !== value) {
-      onChange(val);
-      event.preventDefault();
-    }
+    if (val !== value) { return onChange(val); }
+    return void 0;
   }
   render() {
     const { min, max, value, label, step, name, disabled } = this.props;
