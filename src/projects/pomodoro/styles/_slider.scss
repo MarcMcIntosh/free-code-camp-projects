@@ -1,4 +1,6 @@
 @import "./variables";
+@import "@material/theme/mixins";
+@import "@material/theme/variables";
 
 .pomodoro-slider {
   composes: mdc-slider mdc-slider--discrete mdc-slider--display-markers from $mdc-slider;
@@ -21,10 +23,14 @@
 
   &__track-container {
     composes: mdc-slider__track-container from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, rgba($pomodoro-color-primary, $pomodoro-led-opacity-off), true);
   }
 
   &__track {
     composes: mdc-slider__track from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, $pomodoro-color-primary, true);
   }
 
   &__track-marker-container {
@@ -36,6 +42,14 @@
   &__track-marker {
     composes: mdc-slider__track-marker from $mdc-slider;
     position: absolute;
+
+    @include mdc-theme-prop(background-color, $pomodoro-color-primary, true);
+  }
+
+  &__track-marker-container::after,
+  &__track-marker::after {
+
+    @include mdc-theme-prop(background-color, $pomodoro-color-primary, true);
   }
 
   &__thumb-container {
@@ -44,6 +58,10 @@
 
   &__pin {
     composes: mdc-slider__pin from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, rgba($pomodoro-color-primary, $pomodoro-led-fill-opacity-off), true);
+
+    @include mdc-theme-prop(color, $pomodoro-color-primary, true);
   }
 
   &__pin-value-marker {
@@ -52,9 +70,19 @@
 
   &__thumb {
     composes: mdc-slider__thumb from $mdc-slider;
+
+    @include mdc-theme-prop(fill, darken($pomodoro-color-primary, 80%), true);
+
+    @include mdc-theme-prop(stroke, $pomodoro-color-primary, true);
   }
 
   &__focus-ring {
     composes: mdc-slider__focus-ring from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, $pomodoro-color-primary, true);
+  }
+
+  &--focus &__focus-ring {
+    opacity: $pomodoro-led-fill-opacity-off;
   }
 }

@@ -2,9 +2,6 @@
 @import "./slider";
 @import "@material/theme/mdc-theme.scss";
 
-$color-primary: #0bfdfd;
-$easing-alt: cubic-bezier(.4, 0, .1, 1);
-
 @keyframes pulse {
 
   from {
@@ -27,6 +24,7 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   margin: auto;
   // box-sizing: border-box;
   padding: 16px;
+  background-color: black;
 
   &__primary {
     composes: mdc-card__primary from $mdc-card;
@@ -83,30 +81,24 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   &__led {
     // @include mdc-theme-prop(fill, $mdc-theme-secondary);
 
-    fill: $color-primary;
+    fill: $pomodoro-color-primary;
     stroke: black;
     stroke-linejoin: bevel;
     stroke-width: .5;
 
-    $easing: cubic-bezier(.5, 0, .5, 1);
-
     &--blink {
-      animation: pulse 1s $easing 0s infinite alternate;
+      animation: pulse 1s $pomodoro-easing 0s infinite alternate;
     }
 
     &--on {
-      fill-opacity: 1;
-      stroke-opacity: .4;
+      fill-opacity: $pomodoro-led-fill-opacity-on;
+      stroke-opacity: $pomodoro-led-stroke-opacity-on;
     }
 
     &--off {
-      fill-opacity: .2;
-      stroke-opacity: 1;
+      fill-opacity: $pomodoro-led-fill-opacity-off;
+      stroke-opacity: $pomodoro-led-stroke-opacity-off;
     }
-
-    // background-color: $color-primary;
-    // box-shadow: 0 0 1rem $color-primary, inset 0 0 .125vmin $color-primary;
-    // content: " ";
   }
 
   &__time {
@@ -138,7 +130,7 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
     composes: mdc-button mdc-button--compact from $mdc-button;
     composes: mdc-card__action from $mdc-card;
 
-    @include mdc-theme-prop(color, $color-primary, true);
+    @include mdc-theme-prop(color, $pomodoro-color-primary, true);
 
     min-width: unset;
 

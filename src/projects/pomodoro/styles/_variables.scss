@@ -1,3 +1,5 @@
+@import "@material/theme/color-palette.scss";
+
 $mdc-slider: "@material/slider/mdc-slider.scss";
 $mdc-typography: "@material/typography/mdc-typography.scss";
 $mdc-button: "@material/button/mdc-button.scss";
@@ -6,3 +8,21 @@ $mdc-elevation: "@material/elevation/mdc-elevation.scss";
 $mdc-theme: "@material/theme/mdc-theme.scss";
 $mdc-icon-toggle: "@material/icon-toggle/mdc-icon-toggle.scss";
 $mdc-card: "@material/card/mdc-card.scss";
+
+// $pomodoro-color-primary: #0bfdfd;
+
+$pomodoro-color-primary: $material-color-cyan-a200;
+
+// $material-color-cyan-a200: #18ffff;
+// $material-color-cyan-a400: #00e5ff;
+// $material-color-cyan-a700: #00b8d4;
+
+$pomodoro-easing: cubic-bezier(.5, 0, .5, 1);
+
+$pomodoro-bg-color: black;
+$pomodoro-led-opacity-off: .2;
+$pomodoro-led-opacity-on: 1;
+$pomodoro-led-fill-opacity-on: 1;
+$pomodoro-led-fill-opacity-off: .2;
+$pomodoro-led-stroke-opacity-off: 1;
+$pomodoro-led-stroke-opacity-on: .4;
