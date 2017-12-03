@@ -1,4 +1,3 @@
-/* eslint no-bitwise: ["error", { "int32Hint": true }] */
 import React, { Component } from 'react';
 import { func, number, string, oneOfType, bool } from 'prop-types';
 
@@ -52,7 +51,8 @@ class Slider extends Component {
     this.root.addEventListener('mousemove', this.onMouseMove);
     this.setState({ active: true, focused: true });
   }
-  onMouseUp() {
+  onMouseUp(event) {
+    event.preventDefault();
     this.root.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
     setTimeout(this.onBlur, 500);
@@ -123,10 +123,7 @@ class Slider extends Component {
         onBlur={this.onBlur}
         onKeyDown={this.onKeyDown}
       >
-        <div
-          ref={(track) => { this.track = track; }}
-          className={classnames('pomodoro-slider__track-container')}
-        >
+        <div className={classnames('pomodoro-slider__track-container')} >
           <div className={classnames('pomodoro-slider__track')} style={{ width: `${w}%` }} />
 
           <div className={classnames('pomodoro-slider__track-marker-container')}>{this.state.steps.map(d => (<div
