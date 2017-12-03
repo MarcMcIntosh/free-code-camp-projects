@@ -12,6 +12,7 @@ class Slider extends Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this._onClick = this._onClick.bind(this);
     this.state = {
       active: false,
       focused: false,
@@ -52,26 +53,27 @@ class Slider extends Component {
     this.root.addEventListener('mousemove', this.onMouseMove);
     this.setState({ active: true, focused: true });
   }
-  onMouseUp(event) {
-    event.preventDefault();
+  onMouseUp() {
     this.root.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
     setTimeout(this.onBlur, 500);
     // this.setState({ active: false, inTransit: false, focused: false });
   }
   onMouseMove(event) {
-    const { movementX, clientX, type } = event;
-    // event.preventDefault();
+    if (event.defaultPrevented) { return; }
+    event.preventDefault();
+    const { clientX, movementX } = event;
+    const { max, min, step, value, onChange } = this.props;
+    const { steps } = this.state;
+    const { width, left } = this.root.getBoundingClientRect();
     /* clientWidth might be avaibable from the event */
-    const { max, min, step } = this.props;
-    const pixlesPerStep = Math.ceil(this.root.clientWidth / this.state.steps.length);
-    const index = Math.floor(clientX / pixlesPerStep);
-    const v = index * step;
-    const val = v + (+min);
-    const value = Math.min(max, val);
-    this.setState({ active: true, focused: true, inTransit: !!(movementX) }, () => {
-      if (type === 'click') { setTimeout(this.onBlur, 500); }
-      this.props.onChange(value);
+    const pixlesPerStep = width / (steps.length - 1);
+    const index = Math.round((clientX - left) / pixlesPerStep);
+    const v = (index * step) + Number(min);
+    const val = Math.min(max, v);
+
+    this.setState({ inTransit: !!(movementX) }, () => {
+      if (val !== value) { onChange(val); }
     });
   }
   _steps() {
@@ -85,6 +87,22 @@ class Slider extends Component {
     const r = this.props.value - this.props.min;
     const index = Math.floor(r / this.props.step);
     return this.state.steps[index];
+  }
+  _onClick(event) {
+    if (event.defaultPrevented) { return; }
+    const { clientX } = event;
+    const { max, min, step, value, onChange } = this.props;
+    const { steps } = this.state;
+    const { width, left } = this.root.getBoundingClientRect();
+
+    const pxPerStep = width / (steps.length - 1);
+    const idx = Math.round((clientX - left) / pxPerStep);
+    const v = (idx * step) + Number(min);
+    const val = Math.min(v, max);
+    if (val !== value) {
+      onChange(val);
+      event.preventDefault();
+    }
   }
   render() {
     const { min, max, value, label, step, name, disabled } = this.props;
@@ -111,7 +129,7 @@ class Slider extends Component {
         tabIndex="0"
         name={name}
         disabled={disabled}
-        onClick={this.onMouseMove}
+        onClick={this._onClick}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onKeyDown={this.onKeyDown}

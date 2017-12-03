@@ -1,5 +1,6 @@
 @import "./variables";
 @import "./slider";
+@import "@material/theme/mdc-theme.scss";
 
 $color-primary: #0bfdfd;
 $easing-alt: cubic-bezier(.4, 0, .1, 1);
@@ -22,25 +23,41 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   composes: mdc-typography from $mdc-typography;
   composes: mdc-card from $mdc-card;
   position: relative;
+  max-width: 400px;
   margin: auto;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   padding: 16px;
 
   &__primary {
-    composes: mdc-primary from $mdc-card;
+    composes: mdc-card__primary from $mdc-card;
   }
 
   &__media {
     composes: mdc-card__media from $mdc-card;
   }
 
+  &__horizontal-block {
+    composes: mdc-card__horizontal-block from $mdc-card;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+    background: black;
+  }
+
+  &__settings {
+    composes: mdc-card__supporting-text from $mdc-card;
+  }
+
   &__clock {
     display: inline-block;
-    // margin: auto;
     padding: 16px;
-    background-color: black;
-    // display: flex;
-    // flex-flow: row nowrap;
+  }
+
+  &__actions {
+    // composes: mdc-card__actions from $mdc-card;
+    composes: mdc-card__actions mdc-card__actions--vertical from $mdc-card;
   }
 
   &__display {
@@ -64,10 +81,9 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   }
 
   &__led {
-    // fill: white;
+    // @include mdc-theme-prop(fill, $mdc-theme-secondary);
+
     fill: $color-primary;
-    // fill-rule: evenodd;
-    // stroke: $color-primary;
     stroke: black;
     stroke-linejoin: bevel;
     stroke-width: .5;
@@ -119,23 +135,20 @@ $easing-alt: cubic-bezier(.4, 0, .1, 1);
   }
 
   &__button {
-    composes: mdc-button from $mdc-button;
+    composes: mdc-button mdc-button--compact from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+
+    @include mdc-theme-prop(color, $color-primary, true);
+
+    min-width: unset;
 
     &--icon {
-      // composes: mdc-button--compact from $mdc-button;
       composes: material-icons from $material-icons;
-      min-width: unset;
-      height: auto;
-      padding: 4px;
-      font-size: 32px;
-    }
-
-    &--raised {
-      composes: mdc-button--raised from $mdc-button;
-    }
-
-    &--stroked {
-      composes: mdc-button--stroked from $mdc-button;
+      composes: mdc-button__icon from $mdc-button;
+      // height: auto;
+      // padding: 4px;
+      // font-size: 32px;
+      opacity: .8;
     }
   }
 
