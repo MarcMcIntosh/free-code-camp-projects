@@ -17,7 +17,7 @@ const ErrorMessage = ({
 >
   <div className={classnames('scatterplot-error__surface')}>
     <header className={classnames('scatterplot-error__header')}>
-      <h2 className={classnames('scatterplot-error__header__title')}>Error fetching data.</h2>
+      <h2 className={classnames('scatterplot-error__header__title')}>Whoops!</h2>
     </header>
     <section className={classnames('scatterplot-error__body')}>
       {children}

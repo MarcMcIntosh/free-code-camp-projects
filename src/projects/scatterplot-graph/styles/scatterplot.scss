@@ -3,8 +3,22 @@
 @import "./loader.scss";
 
 .scatterplot {
+  composes: mdc-card from $mdc-card;
+
+  &__header {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title from $mdc-card;
+  }
+
+  &__subtitle {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
 
   &__container {
+    composes: mdc-card__media from $mdc-card;
     display: block;
     padding: 8px;
     text-align: center;

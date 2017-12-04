@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { func, instanceOf, bool, oneOfType, array } from 'prop-types';
+import { func, bool, string, array } from 'prop-types';
 
 import { fetchData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchData: () => dispatch(fetchData()),
 });
 
-class GraphContainer extends PureComponent {
+class ScatterPlotGraph extends PureComponent {
   constructor(props) {
     super(props);
     this.scatterplot = scatterplot;
@@ -33,7 +33,7 @@ class GraphContainer extends PureComponent {
   render() {
     const { classnames } = this.context;
     return (<div className={classnames('scatterplot')}>
-      <header>
+      <header className={classnames('scatterplot__header')}>
         <h1 className={classnames('scatterplot__title')}>
           Doping in Professional Bicycle Racing
         </h1>
@@ -43,25 +43,20 @@ class GraphContainer extends PureComponent {
         {(this.props.fetching) ? (<Loader />) : (<hr />)}
       </header>
 
-      <ErrorMessage onClick={this.props.onFetchData}>{this.props.error}</ErrorMessage>
+      {this.props.error && (<ErrorMessage onClick={this.props.onFetchData}>{this.props.error}</ErrorMessage>)}
 
       <div className={classnames('scatterplot__container')} ref={(c) => { this.root = c; }} />
-
-      <footer className={classnames('scatterplot__supporting-text')}>
-        data from: https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/cyclist-data.json
-      </footer>
     </div>);
   }
 }
 
-GraphContainer.propTypes = {
+ScatterPlotGraph.propTypes = {
   onFetchData: func.isRequired,
-  error: oneOfType([
-    bool,
-    instanceOf(Error),
-  ]).isRequired,
+  error: string.isRequired,
   fetching: bool.isRequired,
   data: array.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);
+ScatterPlotGraph.contextTypes = { classnames: func.isRequired };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScatterPlotGraph);

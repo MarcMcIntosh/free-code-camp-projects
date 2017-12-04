@@ -1,17 +1,17 @@
 import { select, event } from 'd3-selection';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { timeParse } from 'd3-time-format';
+// import { timeParse } from 'd3-time-format';
 import { scaleLinear, scaleOrdinal, schemeCategory10 } from 'd3-scale';
 import { extent } from 'd3-array';
 import 'd3-transition';
 // import { formatData } from './utils';
 
-const parseTime = timeParse('%M:%S');
+// const parseTime = timeParse('%M:%S');
 // const formatTime = timeFormat('%M:%S');
-
-function formatData(arr) {
-  const bestTime = arr.map(d => d.Seconds).reduce((a, b) => Math.min(a, b));
-  return arr.map(d => ({
+/*
+function formatData(data) {
+  const bestTime = data.map(d => d.Seconds).reduce((a, b) => Math.min(a, b));
+  return data.map(d => ({
     behind: Math.abs(d.Seconds - bestTime),
     position: d.Place,
     name: d.Name,
@@ -22,11 +22,11 @@ function formatData(arr) {
     url: d.URL,
   }));
 }
-
+*/
 const color = scaleOrdinal(schemeCategory10);
 
-export default function scatterplot(elem, arr, classnames) {
-  const data = formatData(arr);
+export default function scatterplot(elem, data, classnames) {
+  // const data = formatData(data);
   const phi = (1 + Math.sqrt(5)) / 2;
   const w = 600 * phi;
   const h = 600;
@@ -38,11 +38,13 @@ export default function scatterplot(elem, arr, classnames) {
 
   const width = w - (margins.left + margins.right);
   const height = h - (margins.top + margins.bottom);
-  const xScale = scaleLinear().rangeRound([0, width]).domain(extent(data, d => d.behind).reverse());
+  // const xScale = scaleLinear().rangeRound([0, width]).domain(extent(data, d => d.behind).reverse());
+  const xScale = scaleLinear().rangeRound([0, width]).domain(extent(data, d => d.Seconds).reverse());
   const xAxis = axisBottom().scale(xScale);
 
-  const yScale = scaleLinear().range([0, height]).domain([0, data.length + 1]);
+  // const yScale = scaleLinear().range([0, height]).domain([0, data.length + 1]);
   // .domain(extent(data, d => d.position));
+  const yScale = scaleLinear().range([0, height]).domain(extent(data, d => d.Place));
   const yAxis = axisLeft().scale(yScale);
 
   const g = svg.append('g').attr('transform', `translate(${margins.left},${margins.top})`);
@@ -55,18 +57,18 @@ export default function scatterplot(elem, arr, classnames) {
 
   const circle = g.selectAll('circle').data(data)
     .enter().append('circle')
-    .attr('cx', d => xScale(d.behind))
-    .attr('cy', d => yScale(d.position))
+    .attr('cx', d => xScale(d.Seconds))
+    .attr('cy', d => yScale(d.Place))
     .attr('r', 5)
-    .style('fill', d => ((d.doping === '') ? color('No doping allegations') : color('Riders with doping allegations')));
+    .style('fill', d => ((d.Doping === '') ? color('No doping allegations') : color('Riders with doping allegations')));
 
   circle.on('mouseover', (d) => {
     // console.log('moused');
-    let str = `<span>${d.name}</span></br>${d.time}</br>${d.year}</br>${d.nationality}</br>`;
-    if (d.doping === '') {
+    let str = `<span>${d.Name}</span></br>${d.Time}</br>${d.Year}</br>${d.Nationality}</br>`;
+    if (d.Doping === '') {
       str += 'No doping allegations';
     } else {
-      str += d.doping;
+      str += d.Doping;
     }
     tooltip.transition().duration(200).style('opacity', 0.9);
     tooltip.html(str).style('left', `${event.pageX + 5}px`).style('top', `${event.pageY - 50}px`);
