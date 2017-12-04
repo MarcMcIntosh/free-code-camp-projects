@@ -40,7 +40,7 @@ class QuoteMachine extends PureComponent {
     const top = (screenY > height) ? Math.round((screenY / 2) - (height / 2)) : 0;
     const options = { scrollbar: 'yes', resizable: 'yes', toolbar: 'no', location: 'yes', width, height, left, top };
     const text = encodeURIComponent(message);
-    const address = `https://twitter/intent/tweet/text=${text}`;
+    const address = `https://twitter.com/intent/tweet/text=${text}`;
     const opts = Object.keys(options).map(k => `${k}=${options[k]}`).join();
     window.open(address, 'intent', opts);
   }
