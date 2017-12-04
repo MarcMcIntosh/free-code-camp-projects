@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { func, instanceOf, bool, oneOfType, array } from 'prop-types';
 
 import { fetchData } from './actions';
-import { MAIN_TITLE, SUB_TITLE } from './constants';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
 import draw from './scatterplot';
@@ -32,15 +31,22 @@ class GraphContainer extends PureComponent {
     const { classnames } = this.context;
     return (<div className={classnames('scatterplot')}>
       <header>
-        <h1 className={classnames('scatterplot__title')}>{MAIN_TITLE}</h1>
-        <h2 className={classnames('scatterplot__sub-title')}>{SUB_TITLE}</h2>
+        <h1 className={classnames('scatterplot__title')}>
+          Doping in Professional Bicycle Racing
+        </h1>
+        <h2 className={classnames('scatterplot__subtitle')}>
+          35 Fastest times up Alpe d&apos;Huez, Normalized to 13.8km distance.
+        </h2>
+        {(this.props.fetching) ? (<Loader />) : (<hr />)}
       </header>
 
-      <ErrorMessage className={classnames('scatterplot__error')} err={(this.props.error && true)} onclick={this.props.onFetchData} />
-
-      <Loader isLoading={this.props.fetching} className={classnames('scatterplot__loader')} />
+      <ErrorMessage onClick={this.props.onFetchData}>{this.props.error}</ErrorMessage>
 
       <div className={classnames('scatterplot__container')} ref={(c) => { this.root = c; }} />
+
+      <footer className={classnames('scatterplot__supporting-text')}>
+        data from: https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/cyclist-data.json
+      </footer>
     </div>);
   }
 }

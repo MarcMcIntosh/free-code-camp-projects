@@ -1,5 +1,9 @@
+@import "./variables.scss";
+@import "./error.scss";
+@import "./loader.scss";
 
 .scatterplot {
+
   &__container {
     display: block;
     padding: 8px;
@@ -12,6 +16,7 @@
   }
 
   &__axis {
+
     path,
     line {
       fill: none;

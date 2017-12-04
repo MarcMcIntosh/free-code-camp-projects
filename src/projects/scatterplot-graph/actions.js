@@ -1,34 +1,21 @@
 import fetch from 'isomorphic-fetch';
 import cyclistData from './data';
 
-export const REQUEST_DATA = 'REQUEST_DATA';
-export const requestData = () => ({ type: REQUEST_DATA });
+const prefix = str => `SCATTER-PLOT-GRAPH_${str}`;
 
-export const RECIEVE_DATA = 'RECIEVE_DATA';
-export const recieveData = payload => ({
-  type: RECIEVE_DATA,
-  payload,
-});
+export const REQUEST = prefix('REQUEST');
+export const request = () => ({ type: REQUEST });
 
-export const RECIEVE_ERROR = 'RECIEVE_ERROR';
-export const recieveError = payload => ({
-  type: RECIEVE_ERROR,
-  payload,
-});
+export const RECIEVE = prefix('RECIEVE');
+export const recieve = payload => ({ type: RECIEVE, payload });
+
+export const REJECT = prefix('REJECT');
+export const reject = payload => ({ type: REJECT, payload });
 
 export const fetchData = (address = cyclistData) => (dispatch) => {
-  dispatch(requestData());
+  dispatch(request());
   return fetch(address).then((res) => {
-    if (!res.ok) {
-      const error = new Error(res.statusText);
-      error.response = res;
-      throw error;
-    } else {
-      return res.json();
-    }
-  }).then((json) => {
-    dispatch(recieveData(json));
-  }).catch((error) => {
-    dispatch(recieveError(error));
-  });
+    if (!res.ok) { throw new Error(res.statusText); }
+    return res.json();
+  }).then(json => dispatch(recieve(json))).catch(error => dispatch(reject(error.toString())));
 };

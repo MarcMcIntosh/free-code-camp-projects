@@ -1,10 +1,6 @@
 import { REQUEST, RECIEVE, REJECT } from './actions';
 
-export const DEFAULT_STATE = {
-  error: false,
-  fetching: false,
-  data: [],
-};
+export const DEFAULT_STATE = { error: false, fetching: false, data: [] };
 
 export default function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
