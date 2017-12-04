@@ -47,18 +47,14 @@ class PomodoroClock extends Component {
     return this.props.start(timerId);
   }
   render() {
-    const {
-      // props: { time, round, maxRounds, rest, running, timerId, showMenu },
-      context: { classnames },
-    } = this;
-    // console.log({ time, round, maxRounds, rest, running, timerId, showMenu });
+    const { classnames } = this.context;
     const minutes = Math.floor(this.props.time / 60);
     const seconds = this.props.time % 60;
     return (<div className={classnames('pomodoro')}>
       <section className={classnames('pomodoro__horizontal-block')}>
 
         <section className={classnames('pomodoro__clock')}>
-          {/* <Clock className={classnames('pomodoro__clock')} time={this.props.time} /> */}
+
           <DoubleDigits className={classnames('pomodoro__display')} data={minutes} />
 
           <span className={classnames('pomodoro__display')}><DoubleDots /></span>
@@ -73,19 +69,16 @@ class PomodoroClock extends Component {
 
           <button title={this.props.showMenu ? 'close settings' : 'open settings'} tabIndex="0" onClick={this.props.menu} className={classnames('pomodoro__button')}><i className={classnames('pomodoro__button--icon')}>settings</i></button>
 
-          {/* <i role="button" tabIndex="0" title="Settings" className={classnames('pomodoro__icon', 'pomodoro__icon--settings')} onClick={this.props.menu}>settings</i> */}
         </section>
 
       </section>
 
-      <section className={classnames('pomodoro__settings')}>
-        <section className={classnames('pomodoro__primary')}>
-          <Slider name="session" label="Session length" min="1" max="50" step="1" value={this.props.session} onChange={this.props.setSession} />
+      <section className={classnames('pomodoro__settings', this.props.showMenu && 'pomodoro__settings--open')}>
+        <Slider name="session" label="Session length" min="1" max="50" step="1" value={this.props.session} onChange={this.props.setSession} />
 
-          <Slider name="shortBreak" label="Short Break" min="1" max="10" step="1" value={this.props.shortBreak} onChange={this.props.setShortBreak} />
+        <Slider name="shortBreak" label="Short Break" min="1" max="10" step="1" value={this.props.shortBreak} onChange={this.props.setShortBreak} />
 
-          <Slider name="longBreak" label="Long Break" min="10" max="30" step="5" value={this.props.longBreak} onChange={this.props.setLongBreak} />
-        </section>
+        <Slider name="longBreak" label="Long Break" min="10" max="30" step="5" value={this.props.longBreak} onChange={this.props.setLongBreak} />
       </section>
     </div>);
   }

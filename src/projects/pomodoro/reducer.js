@@ -43,7 +43,7 @@ function reducer(state = DEFAULT_STATE, action) {
     case RESET: return { ...state, round: 0, rest: false, running: false, time: state.session * 60 };
     case MENU: return { ...state, showMenu: !state.showMenu };
     case SET_SESSION: return {
-      ...state, session: action.payload,
+      ...state, session: action.payload, time: (!state.running && !state.rest && !state.round) ? (action.payload * 60) : (+state.time),
     };
     case SET_SHORT_BREAK: return {
       ...state, shortBreak: action.payload,

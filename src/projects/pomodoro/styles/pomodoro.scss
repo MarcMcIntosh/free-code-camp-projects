@@ -1,6 +1,8 @@
 @import "./variables";
 @import "./slider";
-@import "@material/theme/mdc-theme.scss";
+@import "@material/typography/mixins.scss";
+// @import "@material/animation/functions.scss";
+// @import "@material/animation/variables.scss";
 
 @keyframes pulse {
 
@@ -16,13 +18,10 @@
 }
 
 .pomodoro {
-  // composes: mdc-elevation--z4 from $mdc-elevation;
-  composes: mdc-typography from $mdc-typography;
   composes: mdc-card from $mdc-card;
   position: relative;
   max-width: 400px;
   margin: auto;
-  // box-sizing: border-box;
   padding: 16px;
   background-color: black;
 
@@ -41,11 +40,30 @@
     justify-content: center;
     margin: auto;
     padding: 0;
-    background: black;
   }
 
   &__settings {
-    composes: mdc-card__supporting-text from $mdc-card;
+    display: none;
+    margin: 0;
+    padding: inherit;
+
+    &--open {
+      display: inline-block;
+    }
+  }
+
+  &__input {
+    composes: mdc-form-field from $mdc-form-field;
+
+    @include mdc-typography(caption);
+
+    display: flex;
+    color: $pomodoro-color-primary;
+  }
+
+  &__label {
+    // min-width: 85px;
+    width: 75px;
   }
 
   &__clock {
@@ -129,10 +147,8 @@
   &__button {
     composes: mdc-button mdc-button--compact from $mdc-button;
     composes: mdc-card__action from $mdc-card;
-
-    @include mdc-theme-prop(color, $pomodoro-color-primary, true);
-
     min-width: unset;
+    color: $pomodoro-color-primary !important;
 
     &--icon {
       composes: material-icons from $material-icons;
@@ -142,17 +158,5 @@
       // font-size: 32px;
       opacity: .8;
     }
-  }
-
-  &__menu {
-    margin: auto;
-    padding: 6px;
-    text-align: center;
-  }
-
-  &__slider {
-    margin: auto;
-    margin-bottom: 6px;
-    padding: 4px;
   }
 }
