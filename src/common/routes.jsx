@@ -14,16 +14,16 @@ import appUrls from './app-urls';
 // import LeaderBoard from '../projects/leader-board';
 // import LocalWeather from '../projects/local-weather';
 // import MarkdownPreviewer from '../projects/markdown-previewer';
+// import Pomodoro from '../projects/pomodoro';
 
 /* To do or check with classnames context */
-import Pomodoro from '../projects/pomodoro';
+import QuoteMachine from '../projects/quote-machine';
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
 
 /*  to do or check and with out classnames context
 
-import QuoteMachine from '../projects/quote-machine';
 import ScatterplotGraph from '../projects/scatterplot-graph';
 import Simon from '../projects/simon';
 import TicTacToe from '../projects/tic-tac-toe';
@@ -62,11 +62,11 @@ const routes = [
         path: appUrls.localWeather.url, component: LocalWeather,
       }, {
         path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
-      }, */ {
-        path: appUrls.pomodoro.url, component: Pomodoro,
-      }, /* {
-        path: appUrls.quoteMachine.url, component: QuoteMachine,
       }, {
+        path: appUrls.pomodoro.url, component: Pomodoro,
+      }, */ {
+        path: appUrls.quoteMachine.url, component: QuoteMachine,
+      }, /* {
         path: appUrls.recipeBox.url, component: RecipeBox,
       }, {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,

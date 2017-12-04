@@ -16,9 +16,9 @@ import heatmap from '../images/localhost-8080-heat-map.png';
 import leaderboard from '../images/localhost-8080-leader-board.png';
 import localWeather from '../images/localhost-8080-local-weather.png';
 import markdownPreviewer from '../images/localhost-8080-markdown-previewer.png';
+import pomodoro from '../images/localhost-8080-pomodoro.png';
 
 /* to do */
-import pomodoro from '../images/pomodoro.png';
 import quote from '../images/quote.png';
 import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
