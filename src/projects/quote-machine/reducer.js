@@ -1,8 +1,4 @@
-import {
-  REQUEST,
-  RECEIVE,
-  ERROR,
-} from './actions';
+import { REQUEST, RECEIVE, ERROR } from './actions';
 
 export const DEFAULT_STATE = {
   error: '',

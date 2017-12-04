@@ -5,7 +5,6 @@ import appUrls from './app-urls';
 /* Done with classnames context */
 // import BarChart from '../projects/bar-chart';
 // import Calculator from '../projects/calculator';
-// import RecipeBox from '../projects/recipe-box';
 // import DataGlobe from '../projects/data-globe';
 // import DungeonCrawler from '../projects/dungeon-crawler';
 // import ForceDirected from '../projects/force-directed';
@@ -15,9 +14,11 @@ import appUrls from './app-urls';
 // import LocalWeather from '../projects/local-weather';
 // import MarkdownPreviewer from '../projects/markdown-previewer';
 // import Pomodoro from '../projects/pomodoro';
+// import QuoteMachine from '../projects/quote-machine';
 
 /* To do or check with classnames context */
-import QuoteMachine from '../projects/quote-machine';
+import RecipeBox from '../projects/recipe-box';
+
 
 /* Done with-out context */
 // import TributePage from '../projects/tribute-page';
@@ -64,11 +65,11 @@ const routes = [
         path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer,
       }, {
         path: appUrls.pomodoro.url, component: Pomodoro,
-      }, */ {
-        path: appUrls.quoteMachine.url, component: QuoteMachine,
-      }, /* {
-        path: appUrls.recipeBox.url, component: RecipeBox,
       }, {
+        path: appUrls.quoteMachine.url, component: QuoteMachine,
+      }, */ {
+        path: appUrls.recipeBox.url, component: RecipeBox,
+      }, /* {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
         path: appUrls.simon.url, component: Simon,

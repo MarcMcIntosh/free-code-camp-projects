@@ -36,25 +36,26 @@ class QuoteMachine extends PureComponent {
     const left = Math.round((screenX / 2) - (width / 2));
     const top = (screenY > height) ? Math.round((screenY / 2) - (height / 2)) : 0;
     const options = { scrollbar: 'yes', resizable: 'yes', toolbar: 'no', location: 'yes', width, height, left, top };
-    const text = encodeURIComponent(message);
-    const address = `https://twitter.com/intent/tweet/text=${text}`;
+    const address = `https://twitter.com/intent/tweet?text=${message}`;
     const opts = Object.keys(options).map(k => `${k}=${options[k]}`).join();
     window.open(address, 'intent', opts);
   }
   render() {
     const { classnames } = this.context;
     return (<div className={classnames('quote-machine')}>
-      {this.props.isFetching && (<Loader />)}
       <div className={classnames('quote-machine__primary')}>
-        <h1 className={classnames('quote-machine__quote')}>
-          <i>{this.props.quote}</i>
-        </h1>
-        <h2 className={classnames('quote-machine__author')}>{this.props.author}</h2>
+        <i className={classnames('quote-machine__quote')}>
+          &quot;{this.props.quote}&quot;
+        </i>
+        <h2 className={classnames('quote-machine__author')}>
+          &nbsp;&nbsp;--&nbsp;&nbsp;{this.props.author}
+        </h2>
+        {this.props.isFetching ? (<Loader />) : (<hr />)}
       </div>
-      {this.props.error && (<p>this.props.error</p>)}
+      {this.props.error && (<div className={classnames('quote-machine__error')}>{this.props.error}</div>)}
       <div className={classnames('quote-machine__actions')}>
         <button disabled={this.props.isFetching} type="button" title="Next Quote" tabIndex="0" className={classnames('quote-machine__button')} onClick={this.props.fetchQuote}>next</button>
-        <button disabled={!(this.props.quote && this.props.author && this.props.isFetching)} type="button" title="Tweet" tabIndex="0" className={classnames('quote-machine__button')} onClick={this.tweet}>Tweet</button>
+        <button disabled={(!this.props.quote || !this.props.author || this.props.isFetching)} type="button" title="Tweet" tabIndex="0" className={classnames('quote-machine__button')} onClick={this.tweet}>Tweet</button>
       </div>
     </div>);
   }

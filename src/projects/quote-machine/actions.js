@@ -5,7 +5,6 @@ const prefix = str => `QUOTE-MACHINE_${str}`;
 export const REQUEST = prefix('REQUEST');
 export const RECEIVE = prefix('RECEIVE');
 export const ERROR = prefix('ERROR');
-export const QUOTE = prefix('TWEET');
 
 export const request = () => ({ type: REQUEST });
 

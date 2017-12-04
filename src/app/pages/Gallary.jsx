@@ -17,9 +17,9 @@ import leaderboard from '../images/localhost-8080-leader-board.png';
 import localWeather from '../images/localhost-8080-local-weather.png';
 import markdownPreviewer from '../images/localhost-8080-markdown-previewer.png';
 import pomodoro from '../images/localhost-8080-pomodoro.png';
+import quote from '../images/localhost-8080-quote-machine.png'
 
 /* to do */
-import quote from '../images/quote.png';
 import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
 import tribute from '../images/tribute.png';
