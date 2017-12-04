@@ -33,14 +33,14 @@ function reducer(state = DEFAULT_STATE, action) {
     case TICK: {
       if (!state.running) { return state; }
       const time = (state.time && state.time - 1) || (state.rest && state.session * 60) || (state.round % 4 && state.shortBreak * 60) || state.longBreak * 60;
-      const rest = !(state.time && state.rest);
+      const rest = (!state.time && state.rest);
       const round = ((state.round === 0) || (state.time === 0 && state.rest)) ? state.round + 1 : state.round;
       const running = state.round < state.maxRounds;
       return { ...state, time, rest, round, running };
     }
     case START: return { ...state, timerId: action.payload, running: true };
     case STOP: return { ...state, running: false };
-    case RESET: return { ...state, round: 0, rest: false, running: false, time: state.session * 60 };
+    case RESET: return { ...state, round: 0, rest: false, running: false, time: state.session * 60, session: 25, shortBreak: 5, longBreak: 15, rounds: 0, maxRounds: Infinity };
     case MENU: return { ...state, showMenu: !state.showMenu };
     case SET_SESSION: return {
       ...state, session: action.payload, time: (!state.running && !state.rest && !state.round) ? (action.payload * 60) : (+state.time),

@@ -88,7 +88,7 @@ class Slider extends Component {
     const { width, left } = this.root.getBoundingClientRect();
     const pxPerStep = width / (this.state.steps.length - 1);
     const idx = Math.round((clientX - left) / pxPerStep);
-    const v = (idx * step) + Number(min);
+    const v = Math.max(min, (idx * step) + Number(min));
     const val = Math.min(v, max);
     if (val !== value) { return onChange(val); }
     return void 0;

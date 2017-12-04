@@ -25,12 +25,10 @@
   padding: 16px;
   background-color: black;
 
-  &__primary {
-    composes: mdc-card__primary from $mdc-card;
-  }
-
-  &__media {
-    composes: mdc-card__media from $mdc-card;
+  &__text {
+    composes: mdc-card__supporting-text from $mdc-card;
+    color: $pomodoro-color-primary;
+    text-align: center;
   }
 
   &__horizontal-block {
@@ -61,10 +59,7 @@
     color: $pomodoro-color-primary;
   }
 
-  &__label {
-    // min-width: 85px;
-    width: 75px;
-  }
+  &__label { width: 75px; }
 
   &__clock {
     display: inline-block;
@@ -72,17 +67,18 @@
   }
 
   &__actions {
-    // composes: mdc-card__actions from $mdc-card;
     composes: mdc-card__actions mdc-card__actions--vertical from $mdc-card;
   }
 
-  &__display {
-    display: inline-block;
+  &__display { display: inline-block; }
+
+  &__reset {
+    display: flex;
+    padding-top: 8px;
   }
 
   &__digit {
     display: inline-block;
-    // position: relative;
     box-sizing: border-box;
     width: 32px;
     height: 64px;
@@ -97,8 +93,6 @@
   }
 
   &__led {
-    // @include mdc-theme-prop(fill, $mdc-theme-secondary);
-
     fill: $pomodoro-color-primary;
     stroke: black;
     stroke-linejoin: bevel;
@@ -119,31 +113,6 @@
     }
   }
 
-  &__time {
-    composes: mdc-typography--headline from $mdc-typography;
-    // composes: mdc-typography--display1 from $mdc-typography;
-  }
-
-  &__icon {
-    composes: mdc-icon-toggle from $mdc-icon-toggle;
-    composes: material-icons from $material-icons;
-
-    &--settings {
-      position: absolute;
-      top: 0;
-      right: 0;
-      opacity: .62;
-
-      &::before,
-      &::after {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
   &__button {
     composes: mdc-button mdc-button--compact from $mdc-button;
     composes: mdc-card__action from $mdc-card;
@@ -153,10 +122,13 @@
     &--icon {
       composes: material-icons from $material-icons;
       composes: mdc-button__icon from $mdc-button;
-      // height: auto;
-      // padding: 4px;
-      // font-size: 32px;
       opacity: .8;
+    }
+
+    &--reset {
+      composes: mdc-button mdc-button--stroked from $mdc-button;
+      margin: auto;
+      border-color: $pomodoro-color-primary !important;
     }
   }
 }

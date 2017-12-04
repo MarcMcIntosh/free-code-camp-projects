@@ -50,6 +50,7 @@ class PomodoroClock extends Component {
     const { classnames } = this.context;
     const minutes = Math.floor(this.props.time / 60);
     const seconds = this.props.time % 60;
+    const rr = this.props.rest ? 'Rest' : `Round: #${this.props.round}`;
     return (<div className={classnames('pomodoro')}>
       <section className={classnames('pomodoro__horizontal-block')}>
 
@@ -74,11 +75,21 @@ class PomodoroClock extends Component {
       </section>
 
       <section className={classnames('pomodoro__settings', this.props.showMenu && 'pomodoro__settings--open')}>
+
         <Slider name="session" label="Session length" min="1" max="50" step="1" value={this.props.session} onChange={this.props.setSession} />
 
         <Slider name="shortBreak" label="Short Break" min="1" max="10" step="1" value={this.props.shortBreak} onChange={this.props.setShortBreak} />
 
         <Slider name="longBreak" label="Long Break" min="10" max="30" step="5" value={this.props.longBreak} onChange={this.props.setLongBreak} />
+
+        <div className={classnames('pomodoro__reset')}>
+          <button name="Reset" onClick={this.props.reset} type="button" tabIndex="0" className={classnames('pomodoro__button', 'pomodoro__button--reset')}>reset</button>
+        </div>
+
+        <section className={classnames('pomodoro__text')}>
+          {(this.props.round) ? rr : 'Press play to start clock'}
+        </section>
+
       </section>
     </div>);
   }
@@ -90,9 +101,9 @@ PomodoroClock.propTypes = {
   session: number.isRequired,
   shortBreak: number.isRequired,
   longBreak: number.isRequired,
-  //  round: number.isRequired,
+  round: number.isRequired,
   //  maxRounds: number.isRequired,
-  //  rest: bool.isRequired,
+  rest: bool.isRequired,
   running: bool.isRequired,
   showMenu: bool.isRequired,
   start: func.isRequired,
