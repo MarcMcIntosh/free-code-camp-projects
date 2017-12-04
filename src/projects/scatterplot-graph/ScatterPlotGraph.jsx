@@ -5,7 +5,7 @@ import { func, instanceOf, bool, oneOfType, array } from 'prop-types';
 import { fetchData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
-import draw from './scatterplot';
+import scatterplot from './scatterplot';
 
 const mapStateToProps = ({ scatterPlotGraph: { data, error, fetching } }) => ({ data, error, fetching });
 
@@ -16,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
 class GraphContainer extends PureComponent {
   constructor(props) {
     super(props);
+    this.scatterplot = scatterplot;
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
@@ -23,8 +24,10 @@ class GraphContainer extends PureComponent {
       this.props.onFetchData();
     }
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.length === 0 && this.props.data.length > 0) { draw(this.root, this.props.data); }
+  componentDidUpdate() {
+    if (this.props.data.length > 0) {
+      this.scatterplot(this.root, this.props.data, this.context.classnames);
+    }
   }
   handleClick() { this.props.onFetchData(); }
   render() {

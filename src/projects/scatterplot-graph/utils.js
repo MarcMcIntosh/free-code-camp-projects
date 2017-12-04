@@ -7,11 +7,9 @@ export function behindRange(arr) {
   const behind = arr.map(d => d.behind);
   const max = Math.max(...behind);
   const min = Math.min(...behind);
-  return [
-    Math.ceil(max / 100) * 100,
-    min,
-  ];
+  return [Math.ceil(max / 100) * 100, min];
 }
+
 export function formatData(arr) {
   const bestTime = arr.map(d => d.Seconds).reduce((a, b) => Math.min(a, b));
   return arr.map(d => ({
