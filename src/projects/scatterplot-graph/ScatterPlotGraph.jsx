@@ -8,11 +8,7 @@ import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
 import draw from './scatterplot';
 
-const mapStateToProps = state => ({
-  data: state.data,
-  error: state.error,
-  fetching: state.fetching,
-});
+const mapStateToProps = ({ scatterPlotGraph: { data, error, fetching } }) => ({ data, error, fetching });
 
 const mapDispatchToProps = dispatch => ({
   onFetchData: () => dispatch(fetchData()),
@@ -33,17 +29,18 @@ class GraphContainer extends PureComponent {
   }
   handleClick() { this.props.onFetchData(); }
   render() {
-    return (<div className="scatterplot">
+    const { classnames } = this.context;
+    return (<div className={classnames('scatterplot')}>
       <header>
-        <h1 className="scatterplot__title">{MAIN_TITLE}</h1>
-        <h2 className="scatterplot__sub-title">{SUB_TITLE}</h2>
+        <h1 className={classnames('scatterplot__title')}>{MAIN_TITLE}</h1>
+        <h2 className={classnames('scatterplot__sub-title')}>{SUB_TITLE}</h2>
       </header>
 
-      <ErrorMessage className="scatterplot__error" err={(this.props.error && true)} onclick={this.props.onFetchData} />
+      <ErrorMessage className={classnames('scatterplot__error')} err={(this.props.error && true)} onclick={this.props.onFetchData} />
 
-      <Loader isLoading={this.props.fetching} className="scatterplot__loader" />
+      <Loader isLoading={this.props.fetching} className={classnames('scatterplot__loader')} />
 
-      <div className="scatterplot__container" ref={(c) => { this.root = c; }} />
+      <div className={classnames('scatterplot__container')} ref={(c) => { this.root = c; }} />
     </div>);
   }
 }
