@@ -23,7 +23,7 @@
   max-width: 400px;
   margin: auto;
   padding: 16px;
-  background-color: black;
+  background-color: $pomodoro-bg-color;
 
   &__text {
     composes: mdc-card__supporting-text from $mdc-card;
@@ -94,7 +94,7 @@
 
   &__led {
     fill: $pomodoro-color-primary;
-    stroke: black;
+    stroke: $pomodoro-bg-color;
     stroke-linejoin: bevel;
     stroke-width: .5;
 

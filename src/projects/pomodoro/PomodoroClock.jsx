@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { number, func, bool } from 'prop-types';
-// import formatTime from './util/formatTime';
 import { start, stop, reset, tick, menu, setSession, setShortBreak, setLongBreak } from './actions';
 import Slider from './components/Slider';
 import DoubleDigits from './components/DoubleDigits';
 import DoubleDots from './components/DoubleDots';
-// import TimeDisplay from './components/TimeDisplay';
-// import Clock from './components/Clock';
 
 const mapStateToProps = ({
   pomodoroClock: { time, shortBreak, longBreak, round, maxRounds, session, rest, running, timerId, showMenu },
