@@ -1,20 +1,32 @@
-@import "@material/card/mdc-card.scss";
-@import "@material/button/mdc-button.scss";
+@import "./variables.scss";
 
 .quote-machine {
-  margin: auto;
-  padding: 20px;
-  text-align: center;
+  composes: mdc-card from $mdc-card;
 
-  &__buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
+  // margin: auto;
+  // padding: 20px;
+  // text-align: center;
 
-    button {
-      // padding: inherit !important;
-      margin: auto;
-      text-align: center;
-    }
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
   }
+
+  &__quote {
+    composes: mdc-card__title from $mdc-card;
+  }
+
+  &__author {
+    composes: mdc-card__subtitle from $mdc-card;
+  }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
+  &__button {
+    composes: mdc-button mdc-button--raised from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+
+  // &__button { display: flex; justify-content: space-around; margin-bottom: 10px; button { padding: inherit !important; margin: auto; text-align: center; }
 }

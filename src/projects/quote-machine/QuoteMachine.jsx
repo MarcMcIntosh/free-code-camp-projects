@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
 import { func, string, bool } from 'prop-types';
 import { connect } from 'react-redux';
-// import TweetButton from './components/TweetButton';
-// import NextButton from './components/NextButton';
-// import Display from './components/Display';
 import { fetchQuote, handleError } from './actions';
-
+import Loader from './components/Loader';
 
 const mapStateToProps = ({ quoteMachine: { error, isFetching, author, quote } }) => ({ error, isFetching, author, quote });
 
@@ -47,11 +44,18 @@ class QuoteMachine extends PureComponent {
   render() {
     const { classnames } = this.context;
     return (<div className={classnames('quote-machine')}>
+      {this.props.isFetching && (<Loader />)}
+      <div className={classnames('quote-machine__primary')}>
+        <h1 className={classnames('quote-machine__quote')}>
+          <i>{this.props.quote}</i>
+        </h1>
+        <h2 className={classnames('quote-machine__author')}>{this.props.author}</h2>
+      </div>
       {this.props.error && (<p>this.props.error</p>)}
-      {this.props.isFetching && (<p>loading...</p>)}
-      {this.props.quote && (<p>{this.props.quote}</p>)}
-      {this.props.author && (<p>{this.props.author}</p>)}
-      <button type="button" title="Tweet" onClick={this.tweet}>Tweet</button>
+      <div className={classnames('quote-machine__actions')}>
+        <button disabled={this.props.isFetching} type="button" title="Next Quote" tabIndex="0" className={classnames('quote-machine__button')} onClick={this.props.fetchQuote}>next</button>
+        <button disabled={!(this.props.quote && this.props.author && this.props.isFetching)} type="button" title="Tweet" tabIndex="0" className={classnames('quote-machine__button')} onClick={this.tweet}>Tweet</button>
+      </div>
     </div>);
   }
 }

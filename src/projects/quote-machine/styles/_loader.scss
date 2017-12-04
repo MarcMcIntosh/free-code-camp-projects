@@ -1,0 +1,25 @@
+@import "./variables.scss";
+
+.quote-machine-loader {
+  composes: mdc-linear-progress mdc-linear-progress--indeterminate from $mdc-linear-progress;
+
+  &__buffering-dots {
+    composes: mdc-linear-progress__buffering-dots from $mdc-linear-progress;
+  }
+
+  &__buffer {
+    composes: mdc-linear-progress__buffer from $mdc-linear-progress;
+  }
+
+  &__primary {
+    composes: mdc-linear-progress__bar mdc-linear-progress__primary-bar from $mdc-linear-progress;
+  }
+
+  &__inner {
+    composes: mdc-linear-progress__bar-inner from $mdc-linear-progress;
+  }
+
+  &__secondary {
+    composes: mdc-linear-progress__bar mdc-linear-progress__secondary-bar from $mdc-linear-progress;
+  }
+}
