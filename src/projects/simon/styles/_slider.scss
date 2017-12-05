@@ -1,0 +1,88 @@
+@import "./variables";
+@import "@material/theme/mixins";
+@import "@material/theme/variables";
+
+.simon-slider {
+  composes: mdc-slider mdc-slider--discrete mdc-slider--display-markers from $mdc-slider;
+
+  &--disabled {
+    composes: mdc-slider--disabled from $mdc-slider;
+  }
+
+  &--active {
+    composes: mdc-slider--active from $mdc-slider;
+  }
+
+  &--focus {
+    composes: mdc-slider--focus from $mdc-slider;
+  }
+
+  &--in-transit {
+    composes: mdc-slider--in-transit from $mdc-slider;
+  }
+
+  &__track-container {
+    composes: mdc-slider__track-container from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, rgba($simon-color-primary, $simon-led-opacity-off), true);
+  }
+
+  &__track {
+    composes: mdc-slider__track from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, $simon-color-primary, true);
+  }
+
+  &__track-marker-container {
+    composes: mdc-slider__track-marker-container from $mdc-slider;
+    display: block;
+    margin: 0;
+  }
+
+  &__track-marker {
+    composes: mdc-slider__track-marker from $mdc-slider;
+    position: absolute;
+
+    @include mdc-theme-prop(background-color, $simon-color-primary, true);
+  }
+
+  &__track-marker-container::after,
+  &__track-marker::after {
+
+    @include mdc-theme-prop(background-color, $simon-color-primary, true);
+  }
+
+  &__thumb-container {
+    composes: mdc-slider__thumb-container from $mdc-slider;
+  }
+
+  &__pin {
+    composes: mdc-slider__pin from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, rgba($simon-color-primary, $simon-led-fill-opacity-off), true);
+
+    @include mdc-theme-prop(color, $simon-color-primary, true);
+  }
+
+  &__pin-value-marker {
+    composes: mdc-slider__pin-value-marker from $mdc-slider;
+  }
+
+  &__thumb {
+    composes: mdc-slider__thumb from $mdc-slider;
+
+    @include mdc-theme-prop(fill, darken($simon-color-primary, 80%), true);
+
+    @include mdc-theme-prop(stroke, $simon-color-primary, true);
+  }
+
+  &__focus-ring {
+    composes: mdc-slider__focus-ring from $mdc-slider;
+
+    @include mdc-theme-prop(background-color, $simon-color-primary, true);
+  }
+
+  &--focus &__focus-ring {
+    opacity: $simon-led-fill-opacity-off;
+  }
+}

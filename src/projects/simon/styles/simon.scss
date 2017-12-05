@@ -1,0 +1,171 @@
+@import "@material/typography/mixins";
+@import "@material/elevation/mixins";
+@import "@material/theme/mixins";
+@import "./variables.scss";
+@import "./slider";
+// @import "../../../../app/styles/mdc-range-slider/mdc-range-slider.scss";
+
+.simon {
+
+  @include mdc-elevation(2);
+
+  max-width: 800px;
+  margin: auto;
+  padding: 12px;
+  text-align: center;
+
+  &__input,
+  &__label { /* style */ }
+
+  &__header {
+
+    @include mdc-typography(headline);
+  }
+
+  &__button {
+    composes: mdc-button mdc-button--raised from $mdc-button;
+
+    &--primary {
+      composes: mdc-button--primary from $mdc-button;
+    }
+
+    &--secondary {
+      composes: mdc-button--secondary from $mdc-button;
+    }
+  }
+
+  &__menu {
+    composes: material-icons from $material-icons;
+    padding: 0;
+    float: right;
+    border: none;
+    outline: none;
+    background: none;
+    color: rgba(0, 0, 0, .54);
+    font-size: 24px;
+  }
+
+  &__settings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+  }
+
+  &__contol {
+    composes: material-icons from $material-icons;
+    margin: auto;
+    padding: 0;
+    border-radius: 36px;
+    font-size: 24px;
+
+    &:disabled { display: none; }
+  }
+
+  &__round {
+
+    @include mdc-typography(subheading1);
+  }
+
+  &__number {
+
+    @include mdc-typography(subheading2);
+  }
+
+  &__difficulty {
+
+    @include mdc-typography(subheading1);
+  }
+
+  &__mode {
+
+    @include mdc-typography(subheading2);
+
+    width: 80px;
+    text-align: center;
+  }
+
+  &__volume {
+
+    @include mdc-typography(subheading2);
+  }
+
+  &__keys { justify-content: center; }
+
+  &__key {
+    min-width: 64px;
+    max-width: 100%;
+    height: 100%;
+    min-height: 50px;
+    border-radius: 2px;
+    outline: none;
+    cursor: default;
+
+    @media screen and (min-width: 320px) {
+      max-width: 50%;
+    }
+
+    &--red {
+      background-color: $key-color-red-off;
+
+      &:active,
+      &--active { background-color: $key-color-red-on; }
+    }
+
+    &--orange {
+      background-color: $key-color-orange-off;
+
+      &:active,
+      &--active { background-color: $key-color-orange-on; }
+    }
+
+    &--green {
+      background-color: $key-color-green-off;
+
+      &:active,
+      &--active { background-color: $key-color-green-on; }
+    }
+
+    &--blue {
+      background-color: $key-color-blue-off;
+
+      &:active,
+      &--active { background-color: $key-color-blue-on; }
+    }
+
+    &--white {
+      background-color: $key-color-white-off;
+
+      &:active,
+      &--active { background-color: $key-color-white-on; }
+    }
+  }
+
+  &__wave {
+    composes: mdc-button mdc-button--primary mdc-button--raised from mdc-button;
+    max-width: 64px;
+    margin: 6px;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &--sine {
+      background-image: url(../assets/sine.svg);
+    }
+
+    &--triangle {
+      background-image: url(../assets/triangle.svg);
+      background-size: 18px;
+    }
+
+    &--square {
+      background-image: url(../assets/square.svg);
+    }
+
+    &--sawtooth {
+      background-image: url(../assets/saw-tooth.svg);
+      background-size: 18px;
+    }
+  }
+}

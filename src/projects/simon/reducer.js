@@ -38,6 +38,7 @@ const DEFAULT_STATE = {
   error: '',
   tone: -1,
   colors: COLORS.NORMAL,
+  settings: false,
 };
 
 function addRandomNote(arr, notes) {
