@@ -29,7 +29,10 @@
     margin-left: 1%;
   }
 
+  // &__tick {}
+
   &__axis {
+    composes: mdc-typography--body2 from $mdc-typography;
 
     path,
     line {
