@@ -18,7 +18,7 @@ import localWeather from '../images/localhost-8080-local-weather.png';
 import markdownPreviewer from '../images/localhost-8080-markdown-previewer.png';
 import pomodoro from '../images/localhost-8080-pomodoro.png';
 import quote from '../images/localhost-8080-quote-machine.png'
-
+import scatterplot from '../images/localhost-8080-scatterplot-graph.png';
 /* to do */
 import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
@@ -80,7 +80,7 @@ const Gallary = () => (<div className="preview">
 
   <Preview title={appUrls.heatMap.title} url={appUrls.heatMap.url} challenge={appUrls.heatMap.challenge} media={heatmap} />
 
-  <Preview title={appUrls.scatterplotGraph.title} url={appUrls.scatterplotGraph.url} challenge={appUrls.scatterplotGraph.challenge} media={placeholder} />
+  <Preview title={appUrls.scatterplotGraph.title} url={appUrls.scatterplotGraph.url} challenge={appUrls.scatterplotGraph.challenge} media={scatterplot} />
 
   {/* React */}
   <Preview title={appUrls.dungeonCrawler.title} url={appUrls.dungeonCrawler.url} challenge={appUrls.dungeonCrawler.challenge} media={dungeon} />

@@ -13,35 +13,14 @@ import {
 } from 'd3-scale';
 import { extent } from 'd3-array';
 import 'd3-transition';
-// import { formatData } from './utils';
-/*
-function formatData(data) {
-  const bestTime = data.map(d => d.Seconds).reduce((a, b) => Math.min(a, b));
-  return data.map(d => ({
-    behind: Math.abs(d.Seconds - bestTime),
-    position: d.Place,
-    name: d.Name,
-    year: d.Year,
-    time: parseTime(d.Time),
-    nationality: d.Nationality,
-    doping: d.Doping,
-    url: d.URL,
-  }));
-}
-*/
+
 const color = scaleOrdinal(schemeCategory10);
 
 export default function scatterplot(elem, data, classnames) {
-  // const data = formatData(data);
-
-  // const parseTime = timeParse(':%S');
-  // const formatTime = timeFormat('%M:%S');
-  // const toTime = s => formatTime(parseTime(s));
-
   const phi = (1 + Math.sqrt(5)) / 2;
   const w = 600 * phi;
   const h = 600;
-  const margins = { top: 10, right: 40, bottom: 60, left: 40 };
+  const margins = { top: 20, right: 30, bottom: 60, left: 60 };
   const svg = select(elem).append('svg')
     .attr('class', classnames('scatterplot__graph'))
     .attr('viewBox', `0 0 ${w} ${h}`)
@@ -84,7 +63,7 @@ export default function scatterplot(elem, data, classnames) {
     .style('text-anchor', 'middle')
     .text('Place');
 
-  const tooltip = select(elem).append('div').attr('class', classnames('scatterplot__tooltip')).style('opacity', 0);
+  const toolTip = select(elem).append('div').attr('class', classnames('scatterplot__tooltip')).style('opacity', 0);
 
   const circle = g.selectAll('circle').data(data)
     .enter().append('circle')
@@ -94,19 +73,22 @@ export default function scatterplot(elem, data, classnames) {
     .style('fill', d => ((d.Doping === '') ? color('No doping allegations') : color('Riders with doping allegations')));
 
   circle.on('mouseover', (d) => {
-    // console.log('moused');
-    let str = `<span>${d.Name}</span></br>${d.Time}</br>${d.Year}</br>${d.Nationality}</br>`;
-    if (d.Doping === '') {
-      str += 'No doping allegations';
-    } else {
-      str += d.Doping;
-    }
-    tooltip.transition().duration(200).style('opacity', 0.9);
-    tooltip.html(str).style('left', `${event.pageX + 5}px`).style('top', `${event.pageY - 50}px`);
+    const { pageX, pageY, view: { innerWidth, innerHeight } } = event;
+    const str = `<span>#${d.Place}</span></br><span>${d.Name}</span></br>${d.Time}</br>${d.Year}</br>${d.Nationality}</br><span>${d.Doping || 'No doping allegations'}</span>`;
+
+    toolTip.html(str);
+
+    const toolTipWidth = toolTip.property('clientWidth');
+    const toolTipHeight = toolTip.property('clientHeight');
+    const toolTipLeft = (pageX + toolTipWidth > innerWidth) ? (pageX - toolTipWidth) : pageX;
+    const toolTipTop = (pageY + toolTipHeight > innerHeight) ? (pageY - toolTipHeight) : pageY;
+
+    toolTip.style('left', Math.max(toolTipLeft, 0) + 'px').style('top', Math.max(toolTipTop, 0) + 'px');
+    toolTip.transition().duration(200).style('opacity', 0.9);
   });
 
   circle.on('mouseout', () => {
-    tooltip.transition().duration(500).style('opacity', 0);
+    toolTip.transition().duration(500).style('opacity', 0);
   });
 
   const legend = svg.selectAll(classnames('.scatterplot__legend'))
