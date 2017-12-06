@@ -5,6 +5,9 @@ export const START_GAME = prefix('START_GAME');
 const startGame = () => ({ type: START_GAME });
 export const onStartGame = () => dispatch => dispatch(startGame());
 
+export const ERROR = prefix('ERROR');
+export const onError = payload => ({ type: ERROR, payload });
+
 export const SET_VOLUME = prefix('SET_VOLUME');
 export const onSetVolume = payload => dispatch => dispatch({ type: SET_VOLUME, payload });
 

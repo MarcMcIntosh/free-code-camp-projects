@@ -11,6 +11,7 @@ import {
   START_GAME,
   COUNT_UP,
   SET_VOLUME,
+  ERROR,
 } from './actions';
 
 const { MAJOR } = Constants.SCALES.PYTHAGOREAN;
@@ -88,6 +89,7 @@ function reducer(state = DEFAULT_STATE, action) {
       challenge: [],
     };
     case RESET_ROUND: return { ...state, count: 0 };
+    case ERROR: return { ...state, error: action.payload };
     default: return state;
   }
 }
