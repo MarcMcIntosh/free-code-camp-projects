@@ -80,7 +80,6 @@ const mapDispatchToProps = dispatch => ({
 class Simon extends Component {
   constructor(props) {
     super(props);
-    this.aiplay = this.aiplay.bind(this);
     this.auto = this.auto.bind(this);
     this.ai = this.ai.bind(this);
   }
@@ -238,7 +237,6 @@ Simon.propTypes = {
   onToggleMode: func.isRequired,
   onResetGame: func.isRequired,
   onResetRound: func.isRequired,
-  // onPlayerInput: func.isRequired,
   onCountUp: func.isRequired,
   onNextRound: func.isRequired,
   onToggleSettings: func.isRequired,

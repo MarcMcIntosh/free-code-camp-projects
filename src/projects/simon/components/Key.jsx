@@ -67,7 +67,9 @@ class Key extends PureComponent {
     this.props.playerInput(this.props.frequency);
   }
   _mouseUp() {
-    this.props.playerInput(-1);
+    if (this.props.playing) {
+      this.props.playerInput(-1);
+    }
   }
   render() {
     const { frequency, wave, bpm, turn, playing, playerInput, ctKey, ...rest } = this.props;
