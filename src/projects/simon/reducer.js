@@ -5,6 +5,7 @@ import {
   RESET_ROUND,
   TOGGLE_MODE,
   TOGGLE_WAVE,
+  TOGGLE_SETTINGS,
   NEXT_ROUND,
   AI_PLAY,
   AI_END,
@@ -12,6 +13,7 @@ import {
   COUNT_UP,
   SET_VOLUME,
   ERROR,
+  SET_TONE,
 } from './actions';
 
 const { MAJOR } = Constants.SCALES.PYTHAGOREAN;
@@ -59,11 +61,8 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state,
       count: state.count + 1,
     };
-    case AI_PLAY: return {
-      ...state,
-      turn: false,
-      tone: action.payload,
-    };
+    case SET_TONE: return { ...state, tone: action.payload };
+    case AI_PLAY: return { ...state, tone: action.payload };
     case AI_END: return { ...state, turn: true, tone: -1 };
     case NEXT_ROUND: return {
       ...state,
@@ -77,6 +76,7 @@ function reducer(state = DEFAULT_STATE, action) {
       mode: (state.mode === MODE.NORMAL) ? (MODE.HARD) : MODE.NORMAL,
     };
     case TOGGLE_WAVE: return { ...state, wave: nxtWave(state.wave) };
+    case TOGGLE_SETTINGS: return { ...state, settings: !state.settings };
     case SET_VOLUME: return { ...state, volume: action.payload };
     case RESET_GAME: return {
       ...state,

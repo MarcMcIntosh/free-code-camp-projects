@@ -4,118 +4,82 @@ import { connect } from 'react-redux';
 // import KeyBoard from './components/KeyBoard';
 import Key from './components/Key';
 import Slider from './components/Slider';
-import AudioContext from './components/AudioContext';
 
-import {
-  toggleWave,
-  toggleSettings,
-  setVolume,
-  startGame,
-  aiEnd,
-  toggleMode,
-  resetGame,
-  resetRound,
-  setTone,
-  nextRound,
-  countUp,
-} from './actions';
+import { onToggleWave, onSetVolume, onStartGame, onAiEnd, onAiPlay, onToggleMode, onResetGame, onPlayerInput, onError } from './actions';
 
-const mapStateToProps = ({ simon: {
-  volume,
-  notes,
-  wave,
-  challenge,
-  bpm,
-  colors,
-  inGame,
-  turn,
-  round,
-  mode,
-  settings,
-  error,
-  tone,
-  count,
-},
-}) => ({
-  count,
-  volume,
-  notes,
-  wave,
-  challenge,
-  bpm,
-  colors,
-  inGame,
-  turn,
-  round,
-  mode,
-  settings,
-  error,
-  tone,
-});
+
+const mapStateToProps = ({ simon: { volume, notes, wave, challenge, bpm, colors, inGame, turn, round, mode, settings } }) => ({ volume, notes, wave, challenge, bpm, colors, inGame, turn, round, mode, settings });
 
 const mapDispatchToProps = dispatch => ({
-  onToggleSettings: () => dispatch(toggleSettings()),
-  onToggleWave: () => dispatch(toggleWave()),
-  onSetVolume: n => dispatch(setVolume(+n)),
-  onStartGame: () => dispatch(startGame()),
-  onAiEnd: () => dispatch(aiEnd()),
-  onToggleMode: () => dispatch(toggleMode()),
-  onResetGame: () => dispatch(resetGame()),
-  onResetRound: () => dispatch(resetRound()),
-  onSetTone: n => dispatch(setTone(+n)),
-  onNextRound: () => dispatch(nextRound()),
-  onCountUp: () => dispatch(countUp()),
+  onToggleWave: () => dispatch(onToggleWave()),
+  onSetVolume: n => dispatch(onSetVolume(+n)),
+  onStartGame: () => dispatch(onStartGame()),
+  onAiEnd: () => dispatch(onAiEnd()),
+  onAiPlay: n => dispatch(onAiPlay(+n)),
+  onToggleMode: () => dispatch(onToggleMode()),
+  onResetGame: () => dispatch(onResetGame()),
+  onError: str => dispatch(onError(str)),
+  onPlayerInput: n => dispatch(onPlayerInput(+n)),
 });
 
 class Simon extends Component {
   constructor(props) {
     super(props);
+    this.AudioContext = null;
+    this.aux = null;
+    this.compressor = null;
     this.aiplay = this.aiplay.bind(this);
     this.auto = this.auto.bind(this);
   }
-  componentDidUpdate(prevProps) {
-    const { turn, inGame } = this.props;
-    if (inGame && !prevProps.inGame) {
-      this.auto();
-    } else if (prevProps.turn && !turn) {
-      this.auto();
-    }
-  }
-  aiplay(tone, time) {
-    this.props.onSetTone(tone);
-    setTimeout(() => this.props.onSetTone(-1), time / 2);
-  }
-  _playerInput(value) {
-    const { count, challenge, turn, inGame, onSetTone, mode, bpm, onResetGame, onResetRound, onNextRound, onCountUp } = this.props;
-    if (inGame && !turn) {
-      return void 0;
-    } else if (!inGame) {
-      return onSetTone(value);
-    } else if (challenge[count] !== value) {
-      const reset = (mode === 'hard') ? onResetGame : onResetRound;
-      setTimeout(reset, (60000 / bpm));
+  componentWillMount() {
+    if (!('AudioContext' in window || 'webkitAudioContext' in window)) {
+      this.props.onError('Browser Audio Api Context un-avaible');
     } else {
-      const next = (count < challenge.length - 1) ? onCountUp : onNextRound;
-      setTimeout(next, (60000 / bpm));
+      this.AudioContext = new (window.AudioContext || window.webkitAudioContext)();
+      this.aux = this.AudioContext.createGain();
+      this.compressor = this.AudioContext.createDynamicsCompressor();
+      this.compressor.threshold.value = -10;
+      this.compressor.attack.value = 0.5;
+      this.aux.gain.value = (this.props.volume / 100);
+      this.aux.connect(this.compressor);
+      this.compressor.connect(this.AudioContext.destination);
     }
-    return onSetTone(value);
   }
-  auto() {
-    const { bpm, challenge } = this.props;
-    const t = (60 * 1000) / bpm;
-    
-    /* for (let i = 0; i < challenge.length; i += 1) {
-      setTimeout(() => this.aiplay(challenge[i], t), t * (i + 1));
+  componentWillReceiveProps(nextProps) {
+    const { challenge, volume, bpm } = this.props;
+    if (challenge.length < nextProps.challenge.length) {
+      setTimeout(() => {
+        this.auto(nextProps.challenge);
+      }, 60000 / bpm);
     }
-    */
-    setTimeout(this.props.onAiEnd, t * challenge.length);
+    if (volume !== nextProps.volume) {
+      this.aux.gain.value = nextProps.volume / 100;
+    }
+  }
+  componentWillUnmount() { return this.AudioContext && this.AudioContext.close(); }
+  aiplay(n, t) {
+    const osc = this.AudioContext.createOscillator();
+    osc.frequency.value = n;
+    osc.type = this.props.wave;
+    osc.connect(this.aux);
+    this.props.onAiPlay(n);
+    osc.start(this.AudioContext.currentTime);
+    setTimeout(() => {
+      osc.stop(this.AudioContext.currentTime);
+      osc.disconnect(this.aux);
+    }, t);
+  }
+  auto(arr, index) {
+    const i = index || 0;
+    const t = (60 * 1000) / this.props.bpm;
+    if (i < arr.length) {
+      this.aiplay(arr[i], t);
+      setTimeout(() => { this.auto(arr, i + 1); }, t * 2);
+    } else { this.props.onAiEnd(); }
   }
   render() {
     const { classnames } = this.context;
-    return (<AudioContext
-      gain={this.props.volume / 100}
-      className={classnames('simon')}
-    >
+    return (<div className={classnames('simon')}>
       {this.props.error && (<p>{this.props.error}</p>)}
       <h1 className={classnames('simon__header')}>
       Simon says <small className={classnames('simon__round')}>
@@ -127,9 +91,9 @@ class Simon extends Component {
           type="button"
           title="settings"
           tabIndex="0"
-          onClick={this.props.onToggleSettings}
+          onClick={this.showSettings}
           className={classnames('simon__menu')}
-        >{(!this.props.settings) ? 'settings' : 'close'}</button>
+        >{(!this.state.showSettings) ? 'settings' : 'close'}</button>
       </h1>
 
       {(this.props.settings) ? (<section className={classnames('simon__settings')}>
@@ -143,7 +107,7 @@ class Simon extends Component {
           className={classnames('simon__button', 'simon__button--primary', 'simon__button--raised')}
         >{this.props.mode}</button>
 
-        <Slider name="Volume" min="0" max="100" step="10" onChange={this.props.onSetVolume} label="Vol:" value={this.props.volume} />
+        <Slider min="0" max="100" step="10" onChange={this.props.onSetVolume} label="Vol:" value={this.props.volume} />
 
         <button
           type="button"
@@ -169,7 +133,7 @@ class Simon extends Component {
       >play_circle_outline</button>
 
       <button
-        className={classnames('simon__control')}
+        classNames={classnames('simon__control')}
         tabIndex="0"
         title="stop"
         onClick={this.props.onResetGame}
@@ -180,24 +144,27 @@ class Simon extends Component {
           const controlKey = this.props.controlKeys[index];
           const color = this.props.colors[index];
           return (<Key
-            title={`${note} Hertz`}
-            key={note}
             className={classnames('simon__key', `simon__key--${color}`, {
               [`simon__key--${color}--active`]: this.props.tone === note,
             })}
+            title={`${note} Hertz`}
+            key={note}
+            audio={this.AudioContext}
+            aux={this.aux}
             frequency={note}
             disabled={this.props.inGame && !this.props.turn}
             wave={this.props.wave}
-            playing={this.props.tone === note}
+            tone={this.props.tone}
+            playing={this.props.inGame}
             turn={this.props.turn}
             bpm={this.props.bpm}
-            playerInput={this.props.onSetTone}
+            playerInput={this.props.onPlayerInput}
             ctKey={controlKey}
           />);
         })}
       </div>
 
-    </AudioContext>);
+    </div>);
   }
 }
 
@@ -205,7 +172,7 @@ Simon.propTypes = {
   volume: number.isRequired,
   bpm: number.isRequired,
   round: number.isRequired,
-  count: number.isRequired,
+  // count: number.isRequired,
   tone: number.isRequired,
   settings: bool.isRequired,
   turn: bool.isRequired,
@@ -220,14 +187,11 @@ Simon.propTypes = {
   onSetVolume: func.isRequired,
   onStartGame: func.isRequired,
   onAiEnd: func.isRequired,
-  onSetTone: func.isRequired,
+  onAiPlay: func.isRequired,
   onToggleMode: func.isRequired,
   onResetGame: func.isRequired,
-  onResetRound: func.isRequired,
-  // onPlayerInput: func.isRequired,
-  onCountUp: func.isRequired,
-  onNextRound: func.isRequired,
-  onToggleSettings: func.isRequired,
+  onError: func.isRequired,
+  onPlayerInput: func.isRequired,
   controlKeys: array,
 };
 

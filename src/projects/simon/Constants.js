@@ -13,7 +13,7 @@ module.exports = {
     HARD: 'hard',
   },
   COLORS: {
-    NORMAL: ['red', 'orange', 'green', 'blue'],
+    NORMAL: ['red', 'yellow', 'green', 'blue'],
     HARD: [...Array(6)].fill('white'),
   },
   CLASSNAMES: {

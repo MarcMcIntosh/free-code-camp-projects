@@ -1,113 +1,101 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { string, number, oneOf, bool, func, any } from 'prop-types';
-import Constants from '../Constants';
-import { onPlayerInput } from '../actions';
+import React, { PureComponent } from 'react';
+import { string, number, bool, func, any } from 'prop-types';
 
-const mapStateToProps = state => ({
-  tone: state.tone,
-  turn: state.turn,
-  bpm: state.bpm,
-  playing: state.inGame,
-});
-
-const mapDispatchToProps = dispatch => ({
-  playerInput: frequency => dispatch(onPlayerInput(frequency)),
-});
-
-
-class Key extends Component {
+class Key extends PureComponent {
   constructor(props) {
     super(props);
     this.oscillator = null;
-    this.play = this.play.bind(this);
-    this.stop = this.stop.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.state = { keyHeld: false };
+    this._mouseDown = this._mouseDown.bind(this);
+    this._mouseUp = this._mouseUp.bind(this);
+    this._keyUp = this._keyUp.bind(this);
+    this._keyDown = this._keyDown.bind(this);
   }
   componentDidMount() {
-    window.addEventListener('keydown', this.onKeyDown);
-    window.addEventListener('keyup', this.onKeyUp);
+    window.addEventListener('keydown', this._keyDown);
   }
   componentWillReceiveProps() {
     if (this.oscillator !== null && !this.props.turn) {
       this.oscillator.stop(60 / (this.props.bpm * 2));
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.playing && !prevProps.playing) {
+      this._play();
+    } else if (!this.props.playing && prevProps.playing) {
+      this._stop();
+    }
+  }
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.onKeyDown);
-    window.removeEventListener('keyup', this.onKeyUp);
+    if (this.oscillator) {
+      this.oscillator.disconnect(this.context.gainNode);
+    }
+    window.removeEventListener('keydown', this._keyDown);
+    window.removeEventListener('keyup', this._keyUp);
   }
-  onKeyDown(event) {
+  _keyDown(event) {
+    if (event.defaultPrevented) { return; }
     if (event.key === this.props.ctKey) {
-      this.setState({ keyHeld: true }, this.play);
+      window.addEventListener('keyup', this._keyUp);
+      this.props.playerInput(this.props.frequency);
     }
   }
-  onKeyUp(event) {
+  _keyUp(event) {
+    if (event.defaultPrevented) { return; }
     if (event.key === this.props.ctKey) {
-      this.setState({ keyHeld: false });
-      this.stop();
-    }
-    if (this.oscillator !== null) {
-      this.oscillator.stop();
-      this.ocsillator = null;
+      window.removeEventListener('keyup', this._keyUp);
+      this.props.playerInput(-1);
     }
   }
-  play() {
-    if (!this.props.turn) return;
-    this.oscillator = this.props.audio.createOscillator();
-    this.oscillator.type = this.props.wave;
-    this.oscillator.frequency.value = this.props.frequency;
-    this.oscillator.connect(this.props.aux);
-    this.oscillator.start(this.props.audio.currentTime);
-    // if (this.props.playing) this.props.playerInput(this.props.frequency);
+  _play() {
+    const { audioContext, gainNode } = this.context;
+    if (audioContext.createOscillator) {
+      this.oscillator = audioContext.createOscillator();
+      this.oscillator.type = this.props.wave;
+      this.oscillator.frequency.value = this.props.frequency;
+      this.oscillator.connect(gainNode);
+      this.oscillator.start(this.context.audioContext.currentTime);
+    }
   }
-  stop() {
-    if (!this.oscillator) return;
-    if (this.props.playing) this.props.playerInput(this.props.frequency);
-    this.oscillator.disconnect(this.props.aux);
-    this.oscillator.stop(this.props.audio.currentTime);
+  _stop() {
+    if (!this.oscillator) { return; }
+    const { audioContext, gainNode } = this.context;
+    this.oscillator.stop(audioContext.currentTime);
+    this.oscillator.disconnect(gainNode);
     this.oscillator = null;
   }
+  _mouseDown() {
+    this.props.playerInput(this.props.frequency);
+  }
+  _mouseUp() {
+    this.props.playerInput(-1);
+  }
   render() {
-    const { frequency, tone, turn, className, disabled } = this.props;
+    const { frequency, wave, bpm, turn, playing, playerInput, ctKey, ...rest } = this.props;
     return (<button
       type="button"
       tabIndex="0"
-      title={`${frequency} Hertz Tone`}
-      className={(
-        (frequency === tone && !turn)
-        || this.state.keyHeld
-      ) ? `${className}--active` : className
-      }
-      disabled={disabled}
-      onMouseDown={this.play}
-      onMouseUp={this.stop}
-      onMouseOut={this.stop}
+      onMouseDown={this._mouseDown}
+      onMouseUp={this._mouseUp}
+      onMouseOut={this._mouseUp}
+      {...rest}
     />);
   }
 }
-const { SIN, SQU, SAW, TRI } = Constants.WAVES;
 
 Key.propTypes = {
-  className: string.isRequired,
   frequency: number.isRequired,
-  // audio: instanceOf(window.AudioContext).isRequired,
-  // aux: instanceOf(window.GainNode).isRequired,
-  audio: any.isRequired,
-  aux: any.isRequired,
-  wave: oneOf([SIN, SQU, SAW, TRI]).isRequired,
+  wave: string.isRequired,
   bpm: number.isRequired,
-  tone: number.isRequired,
   turn: bool.isRequired,
   playing: bool.isRequired,
-  // color: string.isRequired,
   playerInput: func.isRequired,
-  disabled: bool,
   ctKey: string.isRequired,
 };
 
 Key.defaultProps = { disabled: false };
+Key.contextTypes = {
+  audioContext: any.isRequired,
+  gainNode: any.isRequired,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Key);
+export default Key;
