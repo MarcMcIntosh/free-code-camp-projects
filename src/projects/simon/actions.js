@@ -19,6 +19,8 @@ export const toggleMode = () => ({ type: TOGGLE_MODE });
 export const TOGGLE_WAVE = prefix('TOGGLE_WAVE');
 export const toggleWave = () => ({ type: TOGGLE_WAVE });
 
+export const AI_START = prefix('AI_START');
+export const aiStart = payload => ({ type: AI_START, payload });
 
 export const AI_END = prefix('AI_END');
 export const aiEnd = () => ({ type: AI_END });

@@ -11,6 +11,8 @@ import {
   toggleSettings,
   setVolume,
   startGame,
+  aiStart,
+  aiPlay,
   aiEnd,
   toggleMode,
   resetGame,
@@ -35,6 +37,9 @@ const mapStateToProps = ({ simon: {
   error,
   tone,
   count,
+  aiClock,
+  aiCount,
+  aiChallenge,
 },
 }) => ({
   count,
@@ -51,6 +56,9 @@ const mapStateToProps = ({ simon: {
   settings,
   error,
   tone,
+  aiCount,
+  aiClock,
+  aiChallenge,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -58,13 +66,15 @@ const mapDispatchToProps = dispatch => ({
   onToggleWave: () => dispatch(toggleWave()),
   onSetVolume: n => dispatch(setVolume(+n)),
   onStartGame: () => dispatch(startGame()),
-  onAiEnd: () => dispatch(aiEnd()),
   onToggleMode: () => dispatch(toggleMode()),
   onResetGame: () => dispatch(resetGame()),
   onResetRound: () => dispatch(resetRound()),
   onSetTone: n => dispatch(setTone(+n)),
   onNextRound: () => dispatch(nextRound()),
   onCountUp: () => dispatch(countUp()),
+  onAiStart: n => dispatch(aiStart(n)),
+  onAiPlay: n => dispatch(aiPlay(n)),
+  onAiEnd: () => dispatch(aiEnd()),
 });
 
 class Simon extends Component {
@@ -72,6 +82,7 @@ class Simon extends Component {
     super(props);
     this.aiplay = this.aiplay.bind(this);
     this.auto = this.auto.bind(this);
+    this.ai = this.ai.bind(this);
   }
   componentDidUpdate(prevProps) {
     const { turn, inGame } = this.props;
@@ -80,10 +91,6 @@ class Simon extends Component {
     } else if (prevProps.turn && !turn) {
       this.auto();
     }
-  }
-  aiplay(tone, time) {
-    this.props.onSetTone(tone);
-    setTimeout(() => this.props.onSetTone(-1), time / 2);
   }
   _playerInput(value) {
     const { count, challenge, turn, inGame, onSetTone, mode, bpm, onResetGame, onResetRound, onNextRound, onCountUp } = this.props;
@@ -100,15 +107,20 @@ class Simon extends Component {
     }
     return onSetTone(value);
   }
-  auto() {
-    const { bpm, challenge } = this.props;
-    const t = (60 * 1000) / bpm;
-    
-    /* for (let i = 0; i < challenge.length; i += 1) {
-      setTimeout(() => this.aiplay(challenge[i], t), t * (i + 1));
+  ai() {
+    const { aiCount, aiChallenge, aiClock } = this.props;
+    const note = aiChallenge[aiCount];
+    if (note) {
+      this.props.onAiPlay(note);
+    } else {
+      clearInterval(aiClock);
+      this.props.onAiEnd();
     }
-    */
-    setTimeout(this.props.onAiEnd, t * challenge.length);
+  }
+  auto() {
+    const t = (60 * 1000) / this.props.bpm;
+    const timerId = setInterval(this.ai, t / 2);
+    this.props.onAiStart(timerId);
   }
   render() {
     const { classnames } = this.context;
@@ -219,6 +231,8 @@ Simon.propTypes = {
   onToggleWave: func.isRequired,
   onSetVolume: func.isRequired,
   onStartGame: func.isRequired,
+  onAiStart: func.isRequired,
+  onAiPlay: func.isRequired,
   onAiEnd: func.isRequired,
   onSetTone: func.isRequired,
   onToggleMode: func.isRequired,
@@ -229,6 +243,9 @@ Simon.propTypes = {
   onNextRound: func.isRequired,
   onToggleSettings: func.isRequired,
   controlKeys: array,
+  aiCount: number.isRequired,
+  aiChallenge: array.isRequired,
+  aiClock: number.isRequired,
 };
 
 Simon.defaultProps = { controlKeys: ['h', 'j', 'k', 'l'] };

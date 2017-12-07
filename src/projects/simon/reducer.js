@@ -7,6 +7,7 @@ import {
   TOGGLE_WAVE,
   TOGGLE_SETTINGS,
   NEXT_ROUND,
+  AI_START,
   AI_PLAY,
   AI_END,
   START_GAME,
@@ -33,6 +34,9 @@ const DEFAULT_STATE = {
   round: 0,
   notes: arpeggio(MAJOR, 0),
   challenge: [],
+  aiChallenge: [],
+  aiCount: 0,
+  aiClock: -1,
   count: 0,
   mode: MODE.NORMAL,
   wave: WAVES.TRI,
@@ -49,28 +53,47 @@ function addRandomNote(arr, notes) {
   return arr.concat(notes[n]);
 }
 
+function aiNotes(arr) {
+  return Array.from({
+    length: arr.length * 2,
+  }, (note, index) => {
+    if (index % 2) { return -1; }
+    return arr[index / 2];
+  });
+}
+
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case START_GAME: return {
-      ...state,
-      inGame: true,
-      turn: false,
-      challenge: addRandomNote(state.challenge, state.notes),
-    };
+    case START_GAME: {
+      const challenge = addRandomNote(state.challenge, state.notes);
+      const aiChallenge = aiNotes(challenge);
+      return {
+        ...state, inGame: true, turn: false, challenge, aiChallenge, aiCount: 0, count: 0,
+      };
+    }
     case COUNT_UP: return {
       ...state,
       count: state.count + 1,
     };
     case SET_TONE: return { ...state, tone: action.payload };
-    case AI_PLAY: return { ...state, tone: action.payload };
-    case AI_END: return { ...state, turn: true, tone: -1 };
-    case NEXT_ROUND: return {
+    case AI_START: return { ...state, aiClock: action.payload };
+    case AI_PLAY: return {
       ...state,
-      turn: false,
-      count: 0,
-      round: state.round + 1,
-      challenge: addRandomNote(state.challenge, state.notes),
+      tone: action.payload,
+      aiCount: state.aiCount + 1,
     };
+    case AI_END: return {
+      ...state,
+      turn: true,
+      tone: -1,
+      aiCount: 0,
+      aiClock: -1,
+    };
+    case NEXT_ROUND: {
+      const challenge = addRandomNote(state.challenge, state.notes);
+      const aiChallenge = aiNotes(challenge);
+      return { ...state, challenge, aiChallenge, turn: false, count: 0, aiCount: 0, round: state.round + 1 };
+    }
     case TOGGLE_MODE: return {
       ...state,
       mode: (state.mode === MODE.NORMAL) ? (MODE.HARD) : MODE.NORMAL,
@@ -87,6 +110,8 @@ function reducer(state = DEFAULT_STATE, action) {
       turn: true,
       tone: -1,
       challenge: [],
+      aiCount: 0,
+      aiChallenge: [],
     };
     case RESET_ROUND: return { ...state, count: 0 };
     case ERROR: return { ...state, error: action.payload };
