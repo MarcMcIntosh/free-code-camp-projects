@@ -11,6 +11,7 @@
 
   @include mdc-elevation(2);
 
+  position: relative;
   max-width: 800px;
   margin: auto;
   padding: 12px;
@@ -71,14 +72,21 @@
   }
 
   &__menu {
+    composes: mdc-icon-toggle from $mdc-icon-toggle;
     composes: material-icons from $material-icons;
-    padding: 0;
-    float: right;
-    border: none;
-    outline: none;
-    background: none;
-    color: rgba(0, 0, 0, .54);
-    font-size: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: inherit;
+
+    @include mdc-ripple-surface;
+
+    @include mdc-ripple-radius(1.5rem);
+    // border: none;
+    // outline: none;
+    // background: none;
+    // color: rgba(0, 0, 0, .54);
+    // font-size: 24px;
   }
 
   &__settings {

@@ -140,13 +140,13 @@ class Simon extends Component {
         Round: <span className={classnames('simon__number')}>{this.props.round}</span>
       </h1>
 
-      <button
-        type="button"
+      <i
+        role="button"
         title="settings"
-        tabIndex="0"
+        tabIndex="-1"
         onClick={this.props.onToggleSettings}
         className={classnames('simon__menu')}
-      >{(!this.props.settings) ? 'settings' : 'close'}</button>
+      >{(!this.props.settings) ? 'settings' : 'close'}</i>
 
       {(this.props.settings) ? (<section className={classnames('simon__settings')}>
 
