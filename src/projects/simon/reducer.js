@@ -46,6 +46,7 @@ const DEFAULT_STATE = {
   tone: -1,
   colors: COLORS.NORMAL,
   settings: false,
+  winner: false,
 };
 
 function addRandomNote(arr, notes) {
@@ -96,7 +97,7 @@ function reducer(state = DEFAULT_STATE, action) {
     };
     case NEXT_ROUND: {
       const aiChallenge = addRandomNote(state.aiChallenge, state.notes);
-      return { ...state, aiChallenge, turn: false, count: 0, aiCount: 0, round: state.round + 1 };
+      return { ...state, aiChallenge, turn: false, count: 0, aiCount: 0, round: state.round + 1, winner: state.round === 20 };
     }
     case TOGGLE_MODE: return {
       ...state,
@@ -117,6 +118,7 @@ function reducer(state = DEFAULT_STATE, action) {
       tone: -1,
       aiCount: 0,
       aiChallenge: [],
+      winner: false,
     };
     case RESET_ROUND: return {
       ...state,

@@ -5,7 +5,6 @@
 @import "./variables.scss";
 @import "./slider";
 @import "./switch";
-// @import "../../../../app/styles/mdc-range-slider/mdc-range-slider.scss";
 
 .simon {
 
@@ -14,17 +13,18 @@
   @include mdc-elevation(2);
 
   position: relative;
-  max-width: 800px;
+  max-width: 570px;
   margin: auto;
   padding: 12px;
+  // background-color: #eee;
   text-align: center;
 
   &--error {
     background-color: $simon-color-error;
   }
 
-  &__icons {
-    composes: material-icons from $material-icons;
+  &--winner {
+    background-color: $simon-color-winner;
   }
 
   &__round {
@@ -60,6 +60,11 @@
     }
   }
 
+  /*
+  &__icons {
+    composes: material-icons from $material-icons;
+  }
+
   &__icon-toggle {
     composes: mdc-icon-toggle mdc-icon-toggle--primary from $mdc-icon-toggle;
     composes: material-icons from $material-icons;
@@ -84,6 +89,17 @@
     }
   }
 
+  &__control {
+    composes: material-icons from $material-icons;
+    margin: auto;
+    padding: 0;
+    border-radius: 36px;
+    font-size: 24px;
+
+    &:disabled { display: none; }
+  }
+  */
+
   &__menu {
     composes: mdc-icon-toggle from $mdc-icon-toggle;
     composes: material-icons from $material-icons;
@@ -100,6 +116,7 @@
   &__settings {
     composes: mdc-list mdc-list--two-line from $mdc-list;
     display: none;
+    margin-bottom: 20px;
     padding-right: 0;
     padding-left: 0;
 
@@ -130,30 +147,22 @@
     }
   }
 
-  &__control {
-    composes: material-icons from $material-icons;
-    margin: auto;
-    padding: 0;
-    border-radius: 36px;
-    font-size: 24px;
-
-    &:disabled { display: none; }
+  &__grid {
+    composes: mdc-layout-grid from $mdc-layout-grid;
   }
 
-  &__keys { justify-content: center; }
+  &__keys {
+    composes: mdc-layout-grid__inner from $mdc-layout-grid;
+  }
 
   &__key {
-    min-width: 64px;
-    max-width: 100%;
+    composes: mdc-layout-grid__cell mdc-layout-grid__cell--span-4-mobile mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-desktop from $mdc-layout-grid;
+    width: 100%;
     height: 100%;
-    min-height: 50px;
+    min-height: 80px;
     border-radius: 2px;
     outline: none;
     cursor: default;
-
-    @media screen and (min-width: 320px) {
-      max-width: 50%;
-    }
 
     &--red {
       background-color: $key-color-red-off;

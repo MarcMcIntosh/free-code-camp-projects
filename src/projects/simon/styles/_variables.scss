@@ -7,6 +7,7 @@ $mdc-form-field: "@material/form-field/mdc-form-field";
 $mdc-switch: "@material/switch/mdc-switch.scss";
 $mdc-textfield: "@material/textfield/mdc-textfield.scss";
 $mdc-list: "@material/list/mdc-list.scss";
+$mdc-layout-grid: "@material/layout-grid/mdc-layout-grid.scss";
 
 $simon-color-primary: blue;
 $simon-switch-color: $material-color-red-500;
@@ -23,6 +24,7 @@ $simon-led-stroke-color: black;
 
 $simon-color-menu: rgba(0, 0, 0, .54);
 $simon-color-error: $material-color-red-400;
+$simon-color-winner: $material-color-teal-500;
 
 $key-color-red-off: $material-color-red-a700;
 $key-color-red-on: $material-color-red-a100;

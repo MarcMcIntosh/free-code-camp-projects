@@ -19,8 +19,9 @@ import markdownPreviewer from '../images/localhost-8080-markdown-previewer.png';
 import pomodoro from '../images/localhost-8080-pomodoro.png';
 import quote from '../images/localhost-8080-quote-machine.png'
 import scatterplot from '../images/localhost-8080-scatterplot-graph.png';
+import simon from '../images/localhost-8080-simon-says.png';
+
 /* to do */
-import simon from '../images/simon.png';
 import tictacttoe from '../images/tic-tac-toe.png';
 import tribute from '../images/tribute.png';
 import twitch from '../images/twitch.png';

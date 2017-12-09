@@ -17,9 +17,10 @@ import appUrls from './app-urls';
 // import QuoteMachine from '../projects/quote-machine';
 // import RecipeBox from '../projects/recipe-box';
 // import ScatterplotGraph from '../projects/scatterplot-graph';
+// import Simon from '../projects/simon';
 
 /* To do or check with classnames context */
-import Simon from '../projects/simon';
+import TicTacToe from '../projects/tic-tac-toe';
 
 
 /* Done with-out context */
@@ -27,7 +28,6 @@ import Simon from '../projects/simon';
 
 /*  to do or check and with out classnames context
 
-import TicTacToe from '../projects/tic-tac-toe';
 import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 */
@@ -71,11 +71,11 @@ const routes = [
         path: appUrls.recipeBox.url, component: RecipeBox,
       }, {
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
-      }, */ {
-        path: appUrls.simon.url, component: Simon,
-      }, /* {
-        path: appUrls.ticTacToe.url, component: TicTacToe,
       }, {
+        path: appUrls.simon.url, component: Simon,
+      }, */ {
+        path: appUrls.ticTacToe.url, component: TicTacToe,
+      }, /* {
         path: appUrls.tribute.url, component: TributePage,
       }, {
         path: appUrls.twitch.url, component: Twitch,

@@ -13,15 +13,9 @@ import Constants from './Constants';
 
 const { _, O, X } = Constants.PLAYER;
 
-const mapStateToProps = state => ({
-  board: state.board,
-  player: state.player,
-  turn: state.turn,
-  ai: state.ai,
-  init: state.init,
-  winner: state.winner,
-  done: state.done,
-});
+const mapStateToProps = ({
+  ticTacToe: { board, player, turn, ai, init, winner, done },
+}) => ({ board, player, turn, ai, init, winner, done });
 
 const mapDispatchToProps = dispatch => ({
   takeTurn: (arr, i) => dispatch(onTakeTurn(arr, i)),

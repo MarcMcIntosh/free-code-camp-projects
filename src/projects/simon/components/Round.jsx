@@ -4,12 +4,12 @@ import SevenSegmentDisplay from './SevenSegmentDisplay';
 
 const Round = ({ data, ...props }) => {
   const str = (+data >= 10) ? data.toString() : '0' + data;
-  return (<span {...props}>
+  return (<button {...props}>
     {str.split('').map((d, i) => {
       const k = i;
       return (<SevenSegmentDisplay key={k} data={d} />);
     })}
-  </span>);
+  </button>);
 };
 
 Round.propTypes = {
