@@ -1,0 +1,34 @@
+@import "./variables.scss";
+@import "@material/switch/mixins.scss";
+
+// mdc-switch-track-color($color)	Sets the track color
+// mdc-switch-knob-color($color)	Sets the knob color
+// mdc-switch-focus-indicator-color($color) Sets the focus indicator color
+
+.simon-switch {
+  composes: mdc-switch from $mdc-switch;
+
+  @include mdc-switch-track-color($simon-switch-color);
+
+  @include mdc-switch-knob-color($simon-switch-color);
+
+  @include mdc-switch-focus-indicator-color($simon-switch-color);
+
+  &--disabled { composes: mdc-switch--disabled from $mdc-switch; }
+
+  &__native-control {
+    composes: mdc-switch__native-control from $mdc-switch;
+  }
+
+  &__knob {
+    composes: mdc-switch__knob from $mdc-switch;
+  }
+
+  &__background {
+    composes: mdc-switch__background from $mdc-switch;
+  }
+
+  &-label {
+    composes: mdc-switch-label from $mdc-switch;
+  }
+}

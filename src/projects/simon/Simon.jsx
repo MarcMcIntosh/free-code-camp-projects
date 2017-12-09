@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Key from './components/Key';
 import Slider from './components/Slider';
 import AudioContext from './components/AudioContext';
+import IconToggle from './components/IconToggle';
+import Switch from './components/Switch';
 
 import {
   toggleWave,
@@ -87,25 +89,31 @@ class Simon extends Component {
     this._playerInput = this._playerInput.bind(this);
   }
   componentDidUpdate(prevProps) {
-    const { turn, inGame, tone, aiChallenge, aiCount, mode, bpm } = this.props;
-    const correct = aiChallenge[aiCount] === tone;
-    const sameCount = aiCount === prevProps.aiCount;
+    const { turn, inGame } = this.props;
     if (inGame && !prevProps.inGame) {
       this.auto();
     } else if (prevProps.turn && !turn) {
       this.auto();
-    } else if (turn && sameCount && correct && aiCount < aiChallenge.length - 1) {
-      this.props.onCountUp();
-    } else if (turn && sameCount && correct && aiCount === aiChallenge.length - 1) {
-      this.props.onNextRound();
-    } else if (turn && sameCount && !correct) {
-      this.props.handleError(mode, 60000 / bpm);
     }
   }
   _playerInput(value) {
-    const { turn, inGame, onSetTone } = this.props;
-    if (inGame && !turn) { return void 0; }
-    return onSetTone(value);
+    const { turn, error, inGame, aiChallenge, aiCount, mode, bpm } = this.props;
+    const correct = aiChallenge[aiCount] === value;
+    const index = aiChallenge.length - 1;
+    if (inGame && !turn) {
+      return void 0;
+    } else if (error) {
+      this.props.onSetTone(value);
+    } else if (aiCount === 0 && value === -1) {
+      this.props.onSetTone(value);
+    } else if (correct && aiCount < index) {
+      this.props.onCountUp();
+    } else if (correct && aiCount === index) {
+      this.props.onNextRound();
+    } else if (inGame && turn && !correct) {
+      this.props.handleError(mode, 60000 / bpm);
+    }
+    return this.props.onSetTone(value);
   }
   ai() {
     const { aiCount, aiChallenge, aiClock } = this.props;
@@ -145,16 +153,10 @@ class Simon extends Component {
 
       {(this.props.settings) ? (<section className={classnames('simon__settings')}>
 
-        <button
-          type="button"
-          tabIndex="0"
-          title="Toggle difficulty setting"
-          onClick={this.props.onToggleMode}
-          value={this.props.mode}
-          className={classnames('simon__button', 'simon__button--primary', 'simon__button--raised')}
-        >{this.props.mode}</button>
+        <Switch name="mode" label="Difficulty" onChange={this.props.onToggleMode} value={this.props.mode} />
 
-        <Slider name="Volume" min="0" max="100" step="10" onChange={this.props.onSetVolume} label="Vol:" value={this.props.volume} />
+        <label htmlFor="Volume" className={classnames('simon__helptext')}>Volume</label>
+        <Slider name="Volume" min="0" max="100" step="10" onChange={this.props.onSetVolume} value={this.props.volume} label="Volume" />
 
         <button
           type="button"
@@ -165,26 +167,10 @@ class Simon extends Component {
           value={this.props.wave}
         />
 
-        <p className="mdc-typography--body1">
-          <span className="mdc-typography--body2"> Contol Keys</span> h j k l </p>
-
       </section>) : null }
 
-      <button
-        type="button"
-        className={classnames('simon__control')}
-        tabIndex="0"
-        title="start"
-        onClick={this.props.onStartGame}
-        disabled={this.props.inGame}
-      >play_circle_outline</button>
 
-      <button
-        className={classnames('simon__control')}
-        tabIndex="0"
-        title="stop"
-        onClick={this.props.onResetGame}
-      >replay</button>
+      <IconToggle title={(!this.props.inGame) ? 'start' : 'reset'} onClick={(!this.props.inGame) ? (this.props.onStartGame) : (this.props.onResetGame)}>{(!this.props.inGame) ? 'play_circle_outline' : 'replay'}</IconToggle>
 
       <div className={classnames('simon__keys')}>
         {this.props.notes.map((note, index) => {
@@ -207,6 +193,8 @@ class Simon extends Component {
           />);
         })}
       </div>
+
+      <p className={classnames('simon__helptext')}>Contol Keys: h j k l </p>
 
     </AudioContext>);
   }

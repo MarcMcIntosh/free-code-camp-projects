@@ -7,6 +7,7 @@ class Key extends PureComponent {
     this.oscillator = null;
     this._mouseDown = this._mouseDown.bind(this);
     this._mouseUp = this._mouseUp.bind(this);
+    this._mouseLeave = this._mouseLeave.bind(this);
     this._keyUp = this._keyUp.bind(this);
     this._keyDown = this._keyDown.bind(this);
   }
@@ -67,6 +68,13 @@ class Key extends PureComponent {
     this.props.playerInput(this.props.frequency);
   }
   _mouseUp() {
+    if (event.defaultPrevented) { return; }
+    if (this.props.playing) {
+      this.props.playerInput(-1);
+    }
+  }
+  _mouseLeave(event) {
+    if (event.defaultPrevented) { return; }
     if (this.props.playing) {
       this.props.playerInput(-1);
     }
@@ -78,7 +86,7 @@ class Key extends PureComponent {
       tabIndex="0"
       onMouseDown={this._mouseDown}
       onMouseUp={this._mouseUp}
-      onMouseOut={this._mouseUp}
+      onMouseLeave={this._mouseLeave}
       {...rest}
     />);
   }

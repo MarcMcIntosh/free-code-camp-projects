@@ -1,9 +1,14 @@
 @import "@material/theme/color-palette.scss";
 $mdc-button: "@material/button/mdc-button.scss";
 $mdc-slider: "@material/slider/mdc-slider.scss";
+$mdc-icon-toggle: "@material/icon-toggle/mdc-icon-toggle.scss";
 $material-icons: "material-design-icons/iconfont/material-icons.css";
+$mdc-form-field: "@material/form-field/mdc-form-field";
+$mdc-switch: "@material/switch/mdc-switch.scss";
+$mdc-textfield: "@material/textfield/mdc-textfield.scss";
 
 $simon-color-primary: blue;
+$simon-switch-color: $material-color-red-500;
 $simon-led-opacity-off: .2;
 $simon-led-opacity-on: 1;
 $simon-led-fill-opacity-on: 1;

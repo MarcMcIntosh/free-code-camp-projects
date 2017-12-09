@@ -1,8 +1,10 @@
 @import "@material/typography/mixins";
 @import "@material/elevation/mixins";
+@import "@material/ripple/mixins";
 @import "@material/theme/mixins";
 @import "./variables.scss";
 @import "./slider";
+@import "./switch";
 // @import "../../../../app/styles/mdc-range-slider/mdc-range-slider.scss";
 
 .simon {
@@ -18,12 +20,38 @@
     background-color: $simon-color-error;
   }
 
-  &__input,
+  &__input {
+    composes: mdc-form-field from $mdc-form-field;
+  }
+
   &__label { /* style */ }
+
+  &__icons {
+    composes: material-icons from $material-icons;
+  }
+
+  &__helptext {
+    composes: mdc-textfield-helptext mdc-textfield-helptext--persistent  from $mdc-textfield;
+  }
 
   &__header {
 
     @include mdc-typography(headline);
+  }
+
+  &__icon-toggle {
+    composes: mdc-icon-toggle mdc-icon-toggle--primary from $mdc-icon-toggle;
+    composes: material-icons from $material-icons;
+    // composes: mdc-ripple-upgraded mdc-ripple-upgraded--unbounded from $mdc-ripple;
+    // padding: 0;
+    // font-size: 48px;
+    margin: auto;
+    padding: 6px;
+    font-size: 36px;
+
+    @include mdc-ripple-surface;
+
+    @include mdc-ripple-radius(24px);
   }
 
   &__button {
@@ -50,14 +78,14 @@
   }
 
   &__settings {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    margin: auto;
+    // display: flex;
+    // flex-wrap: wrap;
+    // align-items: center;
+    // justify-content: space-around;
+    // margin: auto;
   }
 
-  &__contol {
+  &__control {
     composes: material-icons from $material-icons;
     margin: auto;
     padding: 0;

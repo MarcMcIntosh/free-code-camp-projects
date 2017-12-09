@@ -16,7 +16,7 @@ export const TOGGLE_MODE = prefix('TOGGLE_MODE');
 export const toggleMode = () => ({ type: TOGGLE_MODE });
 
 export const ERROR = prefix('ERROR');
-export const error = () => ({ type: ERROR });
+export const error = payload => ({ type: ERROR, payload });
 
 export const handleError = (mode, duration) => (dispatch) => {
   dispatch(error(true));

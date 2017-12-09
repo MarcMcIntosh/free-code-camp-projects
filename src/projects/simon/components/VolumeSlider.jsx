@@ -97,60 +97,62 @@ class Slider extends Component {
     const { min, max, value, label, step, name, disabled } = this.props;
     const w = this._position();
     const { classnames } = this.context;
-    return (<div
-      ref={(root) => { this.root = root; }}
-      className={classnames({
-        'simon-slider': true,
-        'simon-slider--disabled': disabled,
-        'simon-slider--active': this.state.active,
-        'simon-slider--focus': this.state.focused,
-        'simon-slider--in-transit': this.state.inTransit,
-      })}
-      role="slider"
-      aria-valuemin={min}
-      aria-valuemax={max}
-      aria-valuenow={value}
-      data-step={step}
-      aria-disabled={disabled}
-      aria-label={label}
-      tabIndex="0"
-      name={name}
-      title={label}
-      disabled={disabled}
-      onClick={this._onClick}
-      onFocus={this.onFocus}
-      onBlur={this.onBlur}
-      onKeyDown={this.onKeyDown}
-    >
-      <div className={classnames('simon-slider__track-container')} >
-        <div className={classnames('simon-slider__track')} style={{ width: `${w}%` }} />
-
-        <div className={classnames('simon-slider__track-marker-container')}>{this.state.steps.map(d => (<div
-          key={d}
-          className={classnames('simon-slider__track-marker')}
-          style={{ left: d + '%', transform: `translateX(${0 - d}%)` }}
-        />))}</div>
-
-      </div>
-
+    return (<div className={classnames('simon__input')}>
+      <label className={classnames('simon__icons')} htmlFor={name}>volume_up</label>
       <div
-        role="presentation"
-        className={classnames('simon-slider__thumb-container')}
-        style={{
-          transform: 'translateX(-50%)',
-          left: `${w}%`,
-        }}
-        onMouseDown={this.onMouseDown}
+        ref={(root) => { this.root = root; }}
+        className={classnames({
+          'simon-slider': true,
+          'simon-slider--disabled': disabled,
+          'simon-slider--active': this.state.active,
+          'simon-slider--focus': this.state.focused,
+          'simon-slider--in-transit': this.state.inTransit,
+        })}
+        role="slider"
+        aria-valuemin={min}
+        aria-valuemax={max}
+        aria-valuenow={value}
+        data-step={step}
+        aria-disabled={disabled}
+        aria-label={label}
+        tabIndex="0"
+        name={name}
+        disabled={disabled}
+        onClick={this._onClick}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        onKeyDown={this.onKeyDown}
       >
-        <div className={classnames('simon-slider__pin')}>
-          <span className={classnames('simon-slider__pin-value-marker')}>{value}</span>
+        <div className={classnames('simon-slider__track-container')} >
+          <div className={classnames('simon-slider__track')} style={{ width: `${w}%` }} />
+
+          <div className={classnames('simon-slider__track-marker-container')}>{this.state.steps.map(d => (<div
+            key={d}
+            className={classnames('simon-slider__track-marker')}
+            style={{ left: d + '%', transform: `translateX(${0 - d}%)` }}
+          />))}</div>
+
         </div>
 
-        <svg className={classnames('simon-slider__thumb')} width="21" height="21">
-          <circle cx="10.5" cy="10.5" r="7.875" />
-        </svg>
+        <div
+          role="presentation"
+          className={classnames('simon-slider__thumb-container')}
+          style={{
+            transform: 'translateX(-50%)',
+            left: `${w}%`,
+          }}
+          onMouseDown={this.onMouseDown}
+        >
+          <div className={classnames('simon-slider__pin')}>
+            <span className={classnames('simon-slider__pin-value-marker')}>{value}</span>
+          </div>
 
-        <div className={classnames('simon-slider__focus-ring')} />
+          <svg className={classnames('simon-slider__thumb')} width="21" height="21">
+            <circle cx="10.5" cy="10.5" r="7.875" />
+          </svg>
+
+          <div className={classnames('simon-slider__focus-ring')} />
+        </div>
       </div>
     </div>);
   }
