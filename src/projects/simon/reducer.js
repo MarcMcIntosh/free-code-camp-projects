@@ -105,7 +105,7 @@ function reducer(state = DEFAULT_STATE, action) {
       ...state,
       round: 0,
       count: 0,
-      error: action.payload || '',
+      error: false,
       inGame: false,
       turn: true,
       tone: -1,
@@ -113,7 +113,13 @@ function reducer(state = DEFAULT_STATE, action) {
       aiCount: 0,
       aiChallenge: [],
     };
-    case RESET_ROUND: return { ...state, count: 0 };
+    case RESET_ROUND: return {
+      ...state,
+      turn: false,
+      count: 0,
+      aiCount: 0,
+      error: false,
+    };
     case ERROR: return { ...state, error: action.payload };
     default: return state;
   }

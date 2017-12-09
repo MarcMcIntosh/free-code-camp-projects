@@ -14,6 +14,10 @@
   padding: 12px;
   text-align: center;
 
+  &--error {
+    background-color: $simon-color-error;
+  }
+
   &__input,
   &__label { /* style */ }
 

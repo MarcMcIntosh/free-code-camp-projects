@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { number, func, string, oneOf, bool, array } from 'prop-types';
+import { number, func, oneOf, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
 // import KeyBoard from './components/KeyBoard';
 import Key from './components/Key';
@@ -20,13 +20,14 @@ import {
   setTone,
   nextRound,
   countUp,
+  handleError,
 } from './actions';
 
 const mapStateToProps = ({ simon: {
   volume,
   notes,
   wave,
-  challenge,
+  // challenge,
   bpm,
   colors,
   inGame,
@@ -36,17 +37,17 @@ const mapStateToProps = ({ simon: {
   settings,
   error,
   tone,
-  count,
+  // count,
   aiClock,
   aiCount,
   aiChallenge,
 },
 }) => ({
-  count,
+  // count,
   volume,
   notes,
   wave,
-  challenge,
+  // challenge,
   bpm,
   colors,
   inGame,
@@ -75,6 +76,7 @@ const mapDispatchToProps = dispatch => ({
   onAiStart: n => dispatch(aiStart(n)),
   onAiPlay: n => dispatch(aiPlay(n)),
   onAiEnd: () => dispatch(aiEnd()),
+  handleError: (mode, duration) => dispatch(handleError(mode, duration)),
 });
 
 class Simon extends Component {
@@ -82,28 +84,27 @@ class Simon extends Component {
     super(props);
     this.auto = this.auto.bind(this);
     this.ai = this.ai.bind(this);
+    this._playerInput = this._playerInput.bind(this);
   }
   componentDidUpdate(prevProps) {
-    const { turn, inGame } = this.props;
+    const { turn, inGame, tone, aiChallenge, aiCount, mode, bpm } = this.props;
+    const correct = aiChallenge[aiCount] === tone;
+    const sameCount = aiCount === prevProps.aiCount;
     if (inGame && !prevProps.inGame) {
       this.auto();
     } else if (prevProps.turn && !turn) {
       this.auto();
+    } else if (turn && sameCount && correct && aiCount < aiChallenge.length - 1) {
+      this.props.onCountUp();
+    } else if (turn && sameCount && correct && aiCount === aiChallenge.length - 1) {
+      this.props.onNextRound();
+    } else if (turn && sameCount && !correct) {
+      this.props.handleError(mode, 60000 / bpm);
     }
   }
   _playerInput(value) {
-    const { count, challenge, turn, inGame, onSetTone, mode, bpm, onResetGame, onResetRound, onNextRound, onCountUp } = this.props;
-    if (inGame && !turn) {
-      return void 0;
-    } else if (!inGame) {
-      return onSetTone(value);
-    } else if (challenge[count] !== value) {
-      const reset = (mode === 'hard') ? onResetGame : onResetRound;
-      setTimeout(reset, (60000 / bpm));
-    } else {
-      const next = (count < challenge.length - 1) ? onCountUp : onNextRound;
-      setTimeout(next, (60000 / bpm));
-    }
+    const { turn, inGame, onSetTone } = this.props;
+    if (inGame && !turn) { return void 0; }
     return onSetTone(value);
   }
   ai() {
@@ -125,9 +126,8 @@ class Simon extends Component {
     const { classnames } = this.context;
     return (<AudioContext
       gain={this.props.volume / 100}
-      className={classnames('simon')}
+      className={classnames('simon', this.props.error && 'simon--error')}
     >
-      {this.props.error && (<p>{this.props.error}</p>)}
       <h1 className={classnames('simon__header')}>
       Simon says <small className={classnames('simon__round')}>
         Round:
@@ -202,7 +202,7 @@ class Simon extends Component {
             playing={this.props.tone === note}
             turn={this.props.turn}
             bpm={this.props.bpm}
-            playerInput={this.props.onSetTone}
+            playerInput={this._playerInput}
             ctKey={controlKey}
           />);
         })}
@@ -216,17 +216,18 @@ Simon.propTypes = {
   volume: number.isRequired,
   bpm: number.isRequired,
   round: number.isRequired,
-  count: number.isRequired,
+  // count: number.isRequired,
   tone: number.isRequired,
   settings: bool.isRequired,
   turn: bool.isRequired,
   inGame: bool.isRequired,
   notes: array.isRequired,
-  challenge: array.isRequired,
+  // challenge: array.isRequired,
   wave: oneOf(['sine', 'square', 'sawtooth', 'triangle']).isRequired,
   mode: oneOf(['normal', 'hard']).isRequired,
   colors: array.isRequired,
-  error: string.isRequired,
+  error: bool.isRequired,
+  handleError: func.isRequired,
   onToggleWave: func.isRequired,
   onSetVolume: func.isRequired,
   onStartGame: func.isRequired,
@@ -236,7 +237,6 @@ Simon.propTypes = {
   onSetTone: func.isRequired,
   onToggleMode: func.isRequired,
   onResetGame: func.isRequired,
-  onResetRound: func.isRequired,
   onCountUp: func.isRequired,
   onNextRound: func.isRequired,
   onToggleSettings: func.isRequired,

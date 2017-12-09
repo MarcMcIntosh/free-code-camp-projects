@@ -15,6 +15,14 @@ export const resetRound = () => ({ type: RESET_ROUND });
 export const TOGGLE_MODE = prefix('TOGGLE_MODE');
 export const toggleMode = () => ({ type: TOGGLE_MODE });
 
+export const ERROR = prefix('ERROR');
+export const error = () => ({ type: ERROR });
+
+export const handleError = (mode, duration) => (dispatch) => {
+  dispatch(error(true));
+  const reset = mode === 'hard' ? resetGame : resetRound;
+  setTimeout(() => dispatch(reset()), duration);
+};
 
 export const TOGGLE_WAVE = prefix('TOGGLE_WAVE');
 export const toggleWave = () => ({ type: TOGGLE_WAVE });
