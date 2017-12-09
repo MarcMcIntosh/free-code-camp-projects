@@ -73,6 +73,7 @@ function reducer(state = DEFAULT_STATE, action) {
         turn: false,
         aiChallenge,
         aiCount: 0,
+        round: 1,
       };
     }
     case COUNT_UP: return {

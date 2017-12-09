@@ -136,37 +136,43 @@ class Simon extends Component {
       gain={this.props.volume / 100}
       className={classnames('simon', this.props.error && 'simon--error')}
     >
-      <h1 className={classnames('simon__header')}>
-      Simon says <small className={classnames('simon__round')}>
-        Round:
-        </small>
-        <span className={classnames('simon__number')}>{this.props.round}</span>
-
-        <button
-          type="button"
-          title="settings"
-          tabIndex="0"
-          onClick={this.props.onToggleSettings}
-          className={classnames('simon__menu')}
-        >{(!this.props.settings) ? 'settings' : 'close'}</button>
+      <h1 className={classnames('simon__round')}>
+        Round: <span className={classnames('simon__number')}>{this.props.round}</span>
       </h1>
+
+      <button
+        type="button"
+        title="settings"
+        tabIndex="0"
+        onClick={this.props.onToggleSettings}
+        className={classnames('simon__menu')}
+      >{(!this.props.settings) ? 'settings' : 'close'}</button>
 
       {(this.props.settings) ? (<section className={classnames('simon__settings')}>
 
         <Switch name="mode" label="Difficulty" onChange={this.props.onToggleMode} value={this.props.mode} />
 
+        <hr className={classnames('simon__rule')} />
+
         <label htmlFor="Volume" className={classnames('simon__helptext')}>Volume</label>
         <Slider name="Volume" min="0" max="100" step="10" onChange={this.props.onSetVolume} value={this.props.volume} label="Volume" />
 
+        <hr className={classnames('simon__rule')} />
+
+        <div>
+          <label htmlFor="wave" className={classnames('simon__helptext')}>Wave</label>
+        </div>
         <button
           type="button"
-          title="Tone control"
+          name="wave"
+          title="Wave shape"
           tabIndex="0"
           className={classnames('simon__wave', this.props.wave && `simon__wave--${this.props.wave}`)}
           onClick={this.props.onToggleWave}
           value={this.props.wave}
         />
 
+        <hr className={classnames('simon__rule')} />
       </section>) : null }
 
 

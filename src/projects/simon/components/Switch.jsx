@@ -3,7 +3,7 @@ import { string, func } from 'prop-types';
 
 const Switch = (props, { classnames }) => (<div>
   <div>
-    <label htmlFor={props.name} className={classnames('simon__label')}>{props.label}</label>
+    <label htmlFor={props.name} className={classnames('simon__helptext')}>{props.label}</label>
     <p className={classnames('simon__helptext')}>{props.value}</p>
   </div>
 

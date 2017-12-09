@@ -20,6 +20,10 @@
     background-color: $simon-color-error;
   }
 
+  &__rule {
+    opacity: 0;
+  }
+
   &__input {
     composes: mdc-form-field from $mdc-form-field;
   }
@@ -175,12 +179,11 @@
   }
 
   &__wave {
-    composes: mdc-button mdc-button--primary mdc-button--raised from $mdc-button;
-    max-width: 64px;
-    margin: 6px;
-    outline: none;
+    composes: mdc-button from $mdc-button;
+    background-color: rgba($simon-wave-background, .8) !important;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 24px;
 
     &--sine {
       background-image: url(../assets/sine.svg);
@@ -188,7 +191,7 @@
 
     &--triangle {
       background-image: url(../assets/triangle.svg);
-      background-size: 18px;
+      // background-size: 18px;
     }
 
     &--square {
@@ -197,7 +200,7 @@
 
     &--sawtooth {
       background-image: url(../assets/saw-tooth.svg);
-      background-size: 18px;
+      // background-size: 18px;
     }
   }
 }
