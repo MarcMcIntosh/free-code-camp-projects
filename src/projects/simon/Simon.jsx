@@ -3,10 +3,10 @@ import { number, func, oneOf, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
 // import KeyBoard from './components/KeyBoard';
 import Key from './components/Key';
-import Slider from './components/Slider';
 import AudioContext from './components/AudioContext';
 import IconToggle from './components/IconToggle';
-import Switch from './components/Switch';
+import Settings from './components/Settings';
+import Round from './components/Round';
 
 import {
   toggleWave,
@@ -132,53 +132,17 @@ class Simon extends Component {
   }
   render() {
     const { classnames } = this.context;
-    return (<AudioContext
-      gain={this.props.volume / 100}
-      className={classnames('simon', this.props.error && 'simon--error')}
-    >
-      <h1 className={classnames('simon__round')}>
-        Round: <span className={classnames('simon__number')}>{this.props.round}</span>
-      </h1>
+    return (<div className={classnames('simon', this.props.error && 'simon--error')} >
 
-      <i
-        role="button"
-        title="settings"
-        tabIndex="-1"
-        onClick={this.props.onToggleSettings}
-        className={classnames('simon__menu')}
-      >{(!this.props.settings) ? 'settings' : 'close'}</i>
+      <i role="button" title="settings" tabIndex="-1" onClick={this.props.onToggleSettings} className={classnames('simon__menu')} >{(!this.props.settings) ? 'settings' : 'close'}</i>
 
-      {(this.props.settings) ? (<section className={classnames('simon__settings')}>
+      <Settings isOpen={this.props.settings} wave={this.props.wave} volume={this.props.volume} mode={this.props.mode} onToggleWave={this.props.onToggleWave} onToggleMode={this.props.onToggleMode} onSetVolume={this.props.onSetVolume} controlKeys={this.props.controlKeys} />
 
-        <Switch name="mode" label="Difficulty" onChange={this.props.onToggleMode} value={this.props.mode} />
-
-        <hr className={classnames('simon__rule')} />
-
-        <label htmlFor="Volume" className={classnames('simon__helptext')}>Volume</label>
-        <Slider name="Volume" min="0" max="100" step="10" onChange={this.props.onSetVolume} value={this.props.volume} label="Volume" />
-
-        <hr className={classnames('simon__rule')} />
-
-        <div>
-          <label htmlFor="wave" className={classnames('simon__helptext')}>Wave</label>
-        </div>
-        <button
-          type="button"
-          name="wave"
-          title="Wave shape"
-          tabIndex="0"
-          className={classnames('simon__wave', this.props.wave && `simon__wave--${this.props.wave}`)}
-          onClick={this.props.onToggleWave}
-          value={this.props.wave}
-        />
-
-        <hr className={classnames('simon__rule')} />
-      </section>) : null }
-
+      <Round className={classnames('simon__round')} data={this.props.round} title="Round" />
 
       <IconToggle title={(!this.props.inGame) ? 'start' : 'reset'} onClick={(!this.props.inGame) ? (this.props.onStartGame) : (this.props.onResetGame)}>{(!this.props.inGame) ? 'play_circle_outline' : 'replay'}</IconToggle>
 
-      <div className={classnames('simon__keys')}>
+      <AudioContext className={classnames('simon__keys')} gain={this.props.volume / 100}>
         {this.props.notes.map((note, index) => {
           const controlKey = this.props.controlKeys[index];
           const color = this.props.colors[index];
@@ -198,11 +162,8 @@ class Simon extends Component {
             ctKey={controlKey}
           />);
         })}
-      </div>
-
-      <p className={classnames('simon__helptext')}>Contol Keys: h j k l </p>
-
-    </AudioContext>);
+      </AudioContext>
+    </div>);
   }
 }
 

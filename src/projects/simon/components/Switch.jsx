@@ -1,27 +1,13 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { func } from 'prop-types';
 
-const Switch = (props, { classnames }) => (<div>
-  <div>
-    <label htmlFor={props.name} className={classnames('simon__helptext')}>{props.label}</label>
-    <p className={classnames('simon__helptext')}>{props.value}</p>
-  </div>
+const Switch = (props, { classnames }) => (<div className={classnames('simon-switch')}>
+  <input type="checkbox" {...props} className={classnames('simon-switch__native-control')} />
 
-  <div className={classnames('simon-switch')}>
-
-    <input type="checkbox" {...props} className={classnames('simon-switch__native-control')} />
-
-    <div className={classnames('simon-switch__background')}>
-      <div className={classnames('simon-switch__knob')} />
-    </div>
+  <div className={classnames('simon-switch__background')}>
+    <div className={classnames('simon-switch__knob')} />
   </div>
 </div>);
-
-Switch.propTypes = {
-  label: string.isRequired,
-  name: string.isRequired,
-  value: string.isRequired,
-};
 
 Switch.contextTypes = { classnames: func.isRequired };
 

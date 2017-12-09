@@ -9,6 +9,8 @@
 
 .simon {
 
+  @include mdc-typography-base;
+
   @include mdc-elevation(2);
 
   position: relative;
@@ -21,35 +23,46 @@
     background-color: $simon-color-error;
   }
 
-  &__rule {
-    opacity: 0;
-  }
-
-  &__input {
-    composes: mdc-form-field from $mdc-form-field;
-  }
-
-  &__label { /* style */ }
-
   &__icons {
     composes: material-icons from $material-icons;
   }
 
-  &__helptext {
-    composes: mdc-textfield-helptext mdc-textfield-helptext--persistent  from $mdc-textfield;
+  &__round {
+    display: inline-block;
+    padding: 0 2px;
+    border: solid rgba(0, 0, 0, .2);
+    background-color: $simon-led-background-color;
   }
 
-  &__header {
+  &__digit {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 16px;
+    height: 32px;
+    // margin: 0 2px;
+    padding: 0 2px;
+  }
 
-    @include mdc-typography(headline);
+  &__led {
+    fill: $simon-led-fill-color;
+    stroke: $simon-led-stroke-color;
+    stroke-linejoin: bevel;
+    stroke-width: .5;
+
+    &--on {
+      fill-opacity: $simon-led-fill-opacity-on;
+      stroke-opacity: $simon-led-stroke-opacity-on;
+    }
+
+    &--off {
+      fill-opacity: $simon-led-fill-opacity-off;
+      stroke-opacity: $simon-led-stroke-opacity-off;
+    }
   }
 
   &__icon-toggle {
     composes: mdc-icon-toggle mdc-icon-toggle--primary from $mdc-icon-toggle;
     composes: material-icons from $material-icons;
-    // composes: mdc-ripple-upgraded mdc-ripple-upgraded--unbounded from $mdc-ripple;
-    // padding: 0;
-    // font-size: 48px;
     margin: auto;
     padding: 6px;
     font-size: 36px;
@@ -82,19 +95,39 @@
     @include mdc-ripple-surface;
 
     @include mdc-ripple-radius(1.5rem);
-    // border: none;
-    // outline: none;
-    // background: none;
-    // color: rgba(0, 0, 0, .54);
-    // font-size: 24px;
   }
 
   &__settings {
-    // display: flex;
-    // flex-wrap: wrap;
-    // align-items: center;
-    // justify-content: space-around;
-    // margin: auto;
+    composes: mdc-list mdc-list--two-line from $mdc-list;
+    display: none;
+    padding-right: 0;
+    padding-left: 0;
+
+    &--open { display: block; }
+
+    @include mdc-elevation(2);
+  }
+
+  &__setting {
+    composes: mdc-list-item from $mdc-list;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    padding: 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+    &__title {
+      composes: mdc-list-item__text from $mdc-list;
+
+      @include mdc-typography(body1);
+    }
+
+    &__content {
+      composes: mdc-list-item__secondary-text from $mdc-list;
+
+      @include mdc-typography(body2);
+    }
   }
 
   &__control {
@@ -105,34 +138,6 @@
     font-size: 24px;
 
     &:disabled { display: none; }
-  }
-
-  &__round {
-
-    @include mdc-typography(subheading1);
-  }
-
-  &__number {
-
-    @include mdc-typography(subheading2);
-  }
-
-  &__difficulty {
-
-    @include mdc-typography(subheading1);
-  }
-
-  &__mode {
-
-    @include mdc-typography(subheading2);
-
-    width: 80px;
-    text-align: center;
-  }
-
-  &__volume {
-
-    @include mdc-typography(subheading2);
   }
 
   &__keys { justify-content: center; }
