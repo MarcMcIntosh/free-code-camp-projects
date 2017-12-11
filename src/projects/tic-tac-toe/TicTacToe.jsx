@@ -27,7 +27,7 @@ class TicTacToe extends PureComponent {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidUpdate() {
-    if (!this.props.init && !this.props.done && this.props.turn === this.props.ai) {
+    if (!this.props.init && this.props.ai && this.props.turn === this.props.ai) {
       this.aiMove();
     }
   }
@@ -44,7 +44,7 @@ class TicTacToe extends PureComponent {
     const { classnames } = this.context;
     return (<div className={classnames('tic-tac-toe')}>
       {/* Inofmation display */}
-      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.selectPlayer} />
+      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.setPlayer} />
 
       {/* Game */}
       <div className={classnames('tic-tac-toe__board')}>{board.map((d, i) => {
@@ -77,7 +77,7 @@ TicTacToe.propTypes = {
   difficulty: number.isRequired,
   board: array.isRequired,
   resetGame: func.isRequired,
-  selectPlayer: func.isRequired,
+  setPlayer: func.isRequired,
   takeTurn: func.isRequired,
 };
 

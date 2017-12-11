@@ -37,19 +37,13 @@ function reducer(state = getInitialState(), action) {
     }
 
     case SET_PLAYER: {
-      const ai = getOpponent(state.turn);
-      return {
-        ...state,
-        player: action.payload,
-        ai,
-        turn: O,
-        init: false,
-      };
+      const ai = getOpponent(action.payload);
+      return { ...state, ai, turn: O, init: false, player: action.payload };
     }
     case TAKE_TURN: {
       const board = state.board.slice();
       board[action.payload] = state.turn;
-      const winner = checkWinner(board);
+      const winner = checkWinner(board) || _;
       const done = (winner) ? true : isFull(board);
       const turn = getOpponent(state.turn);
       return { ...state, turn, board, winner, done };
