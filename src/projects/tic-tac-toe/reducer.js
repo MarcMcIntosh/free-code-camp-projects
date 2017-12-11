@@ -1,25 +1,23 @@
 import Constants from './Constants';
+import checkWinner from './util/check-winner';
+import isFull from './util/is-full';
 import getOpponent from './util/get-opponent';
-import {
-  RESET_GAME,
-  SET_PLAYER,
-  TAKE_TURN,
-  CHECK_BOARD,
-} from './actions';
+
+import { RESET_GAME, SET_PLAYER, TAKE_TURN } from './actions';
 
 const { _, O } = Constants.PLAYER;
 
 function getInitialState(dif = 6) {
   return {
-    board: [...Array(9)].map(() => _),
-    ai: Constants.PLAYER._,
-    player: Constants.PLAYER._,
-    winner: null,
+    board: Array.from({ length: 9 }, () => _),
+    ai: _,
+    player: _,
+    winner: _,
     done: false,
-    turn: null,
+    turn: _,
     init: true,
     difficulty: dif,
-    timer_id: null,
+    timerId: -1,
   };
 }
 
@@ -38,26 +36,24 @@ function reducer(state = getInitialState(), action) {
       return getInitialState(state.difficulty + 1);
     }
 
-    case SET_PLAYER: return {
-      ...state,
-      player: action.payload,
-      ai: getOpponent(action.payload),
-      turn: O,
-      init: false,
-    };
-
-    case TAKE_TURN: {
-      const { turn, board } = action;
-      return { ...state, turn, board };
+    case SET_PLAYER: {
+      const ai = getOpponent(state.turn);
+      return {
+        ...state,
+        player: action.payload,
+        ai,
+        turn: O,
+        init: false,
+      };
     }
-
-    case CHECK_BOARD: return {
-      ...state,
-      done: action.payload.done,
-      winner: action.payload.winner,
-      timer_id: action.payload.timer_id,
-    };
-
+    case TAKE_TURN: {
+      const board = state.board.slice();
+      board[action.payload] = state.turn;
+      const winner = checkWinner(board);
+      const done = (winner) ? true : isFull(board);
+      const turn = getOpponent(state.turn);
+      return { ...state, turn, board, winner, done };
+    }
     default: return state;
   }
 }

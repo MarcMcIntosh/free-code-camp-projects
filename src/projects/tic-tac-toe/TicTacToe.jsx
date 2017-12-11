@@ -1,67 +1,66 @@
 import React, { PureComponent } from 'react';
+import { bool, oneOf, func, array, number } from 'prop-types';
 import { connect } from 'react-redux';
-import { bool, oneOf, func, array } from 'prop-types';
+import minimax from './util/minimax';
 import Header from './components/Header';
-import {
-  onTakeTurn,
-  onAiMove,
-  onCheckBoard,
-  onResetGame,
-  onSelectPlayer,
-} from './actions';
+import { takeTurn, resetGame, setPlayer } from './actions';
 import Constants from './Constants';
 
 const { _, O, X } = Constants.PLAYER;
 
 const mapStateToProps = ({
-  ticTacToe: { board, player, turn, ai, init, winner, done },
-}) => ({ board, player, turn, ai, init, winner, done });
+  ticTacToe: { timerId, board, player, turn, ai, init, winner, done, difficulty },
+}) => ({ board, player, turn, ai, init, winner, done, timerId, difficulty });
 
 const mapDispatchToProps = dispatch => ({
-  takeTurn: (arr, i) => dispatch(onTakeTurn(arr, i)),
-  aiMove: (arr, i) => dispatch(onAiMove(arr, i)),
-  checkBoard: arr => dispatch(onCheckBoard(arr)),
-  resetGame: () => dispatch(onResetGame()),
-  selectPlayer: event => dispatch(onSelectPlayer(event.target.value)),
+  takeTurn: payload => dispatch(takeTurn(payload)),
+  resetGame: () => dispatch(resetGame()),
+  setPlayer: event => dispatch(setPlayer(event.target.value)),
 });
 
 
 class TicTacToe extends PureComponent {
   constructor(props) {
     super(props);
+    this.minimax = minimax;
+    this.aiMove = this.aiMove.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    const { turn, checkBoard, init, aiMove } = this.props;
-
-    if (!init && !nextProps.done && turn !== nextProps.turn) { checkBoard(nextProps.board); }
-
-    if (!nextProps.init && nextProps.ai === nextProps.turn) { aiMove(nextProps.board, nextProps.ai); }
+  componentDidUpdate() {
+    if (!this.props.init && !this.props.done && this.props.turn === this.props.ai) {
+      this.aiMove();
+    }
+  }
+  aiMove() {
+    const { board, ai, difficulty } = this.props;
+    const move = this.minimax(board, ai, 0, ai, difficulty);
+    return this.props.takeTurn(move);
   }
   handleClick(event) {
-    const { takeTurn, player, board } = this.props;
-    const arr = board.slice();
-    arr[event.target.value] = player;
-    return takeTurn(arr, player);
+    this.props.takeTurn(event.target.value);
   }
   render() {
-    const { selectPlayer, init, done, turn, player, winner, resetGame, board } = this.props;
-
-    return (<div className="tic-tac-toe">
+    const { init, done, turn, player, winner, board } = this.props;
+    const { classnames } = this.context;
+    return (<div className={classnames('tic-tac-toe')}>
       {/* Inofmation display */}
-      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={resetGame} selectPlayer={selectPlayer} />
+      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.selectPlayer} />
 
       {/* Game */}
-      <div className="tic-tac-toe__board">{board.map((d, i) => {
-        let cn = 'tic-tac-toe__cell';
-        switch (d) {
-          case X: cn += ' tic-tac-toe__cell--X'; break;
-          case O: cn += ' tic-tac-toe__cell--O'; break;
-          /* no default */
-        }
+      <div className={classnames('tic-tac-toe__board')}>{board.map((d, i) => {
         const k = `cell-${i}`;
-        const dis = (done || player !== turn || d === X || d === O);
-        return (<button type="button" className={cn} key={k} value={i} onClick={this.handleClick} disabled={dis} />);
+        return (<button
+          type="button"
+          key={k}
+          value={i}
+          onClick={this.handleClick}
+          disabled={(done || player !== turn || d !== _)}
+          className={classnames({
+            'tic-tac-toe__cell': true,
+            'tic-tac-toe__cell--X': d === X,
+            'tic-tac-toe__cell--O': d === O,
+          })}
+        />);
       })}</div>
 
     </div>);
@@ -75,12 +74,13 @@ TicTacToe.propTypes = {
   player: oneOf([_, O, X]).isRequired,
   winner: oneOf([_, O, X]).isRequired,
   ai: oneOf([_, O, X]).isRequired,
+  difficulty: number.isRequired,
+  board: array.isRequired,
   resetGame: func.isRequired,
   selectPlayer: func.isRequired,
   takeTurn: func.isRequired,
-  aiMove: func.isRequired,
-  checkBoard: func.isRequired,
-  board: array.isRequired,
 };
+
+TicTacToe.contextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicTacToe);

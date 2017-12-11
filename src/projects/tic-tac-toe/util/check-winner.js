@@ -42,5 +42,5 @@ function cols(arr, i) {
 
 /* Give it an array */
 module.exports = function getWinner(arr) {
-  return diagonals(arr) || rows(arr) || cols(arr) || null;
+  return diagonals(arr) || rows(arr) || cols(arr) || false;
 };
