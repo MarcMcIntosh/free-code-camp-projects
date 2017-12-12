@@ -1,13 +1,12 @@
 @import "@material/elevation/mixins";
 @import "@material/button/mixins";
 @import "./variables";
+@import "./slider";
 
 .tic-tac-toe {
-  $bg_x: rgba(255, 0, 0, .86);
-  $bg_o: rgba(0, 0, 255, .86);
 
   &__button {
-    composes: mdc-button from $mdc-button;
+    composes: mdc-button mdc-button--raised from $mdc-button;
 
     &__icon {
       composes: material-icons from $material-icons;
@@ -17,7 +16,6 @@
         @include mdc-button-container-fill-color($tic-tac-toe-color-red);
 
         @include mdc-button-ink-color($tic-tac-toe-color-ink);
-        // background-color: $tic-tac-toe-color-red !important;
       }
 
       &--O {

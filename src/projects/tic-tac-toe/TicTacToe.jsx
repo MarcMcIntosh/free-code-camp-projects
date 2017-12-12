@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { bool, oneOf, func, array, number } from 'prop-types';
 import { connect } from 'react-redux';
 import minimax from './util/minimax';
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class TicTacToe extends PureComponent {
+class TicTacToe extends Component {
   constructor(props) {
     super(props);
     this.minimax = minimax;
@@ -43,9 +43,6 @@ class TicTacToe extends PureComponent {
     const { init, done, turn, player, winner, board } = this.props;
     const { classnames } = this.context;
     return (<div className={classnames('tic-tac-toe')}>
-      {/* Inofmation display */}
-      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.setPlayer} />
-
       {/* Game */}
       <div className={classnames('tic-tac-toe__board')}>{board.map((d, i) => {
         const k = `cell-${i}`;
@@ -63,6 +60,9 @@ class TicTacToe extends PureComponent {
         />);
       })}</div>
 
+      {/* Inofmation display */}
+
+      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.setPlayer} />
     </div>);
   }
 }

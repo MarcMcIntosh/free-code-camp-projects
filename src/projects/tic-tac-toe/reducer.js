@@ -3,7 +3,7 @@ import checkWinner from './util/check-winner';
 import isFull from './util/is-full';
 import getOpponent from './util/get-opponent';
 
-import { RESET_GAME, SET_PLAYER, TAKE_TURN } from './actions';
+import { RESET_GAME, SET_PLAYER, TAKE_TURN, SET_DIFFICULTY } from './actions';
 
 const { _, O } = Constants.PLAYER;
 
@@ -48,6 +48,7 @@ function reducer(state = getInitialState(), action) {
       const turn = getOpponent(state.turn);
       return { ...state, turn, board, winner, done };
     }
+    case SET_DIFFICULTY: return { ...state, difficulty: action.payload };
     default: return state;
   }
 }
