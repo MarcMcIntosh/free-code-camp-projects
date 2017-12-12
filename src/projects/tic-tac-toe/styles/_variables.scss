@@ -1,0 +1,14 @@
+@import "@material/theme/color-palette";
+
+$mdc-button: "@material/button/mdc-button.scss";
+$mdc-slider: "@material/slider/mdc-slider.scss";
+$mdc-icon-toggle: "@material/icon-toggle/mdc-icon-toggle.scss";
+$material-icons: "material-design-icons/iconfont/material-icons.css";
+
+$tic-tac-toe-color-ink: white;
+$tic-tac-toe-color-blue: rgba($material-color-blue-500, .86);
+$tic-tac-toe-color-red: rgba($material-color-pink-500, .86);
+$tic-tac-toe-image-x: url(./images/ic_clear_24px.svg);
+$tic-tac-toe-image-o: url(./images/ic_radio_button_unchecked_24px.svg);
+$tic-tac-toe-color-board: $material-color-grey-100;
+$tic-tac-toe-color-cell: $material-color-grey-300;

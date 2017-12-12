@@ -15,13 +15,13 @@ const Header = ({
 }) => {
   if (init) {
     return (<div className={classnames('tic-tac-toe__header')}><h2>Select Player</h2>
-      <button type="button" tabIndex="0" value={Constants.PLAYER.O} className={classnames('tic-tac-toe__select', 'tic-tac-toe__select--O')} onClick={selectPlayer} />
-      <button type="button" tabIndex="0" value={Constants.PLAYER.X} className={classnames('tic-tac-toe__select', 'tic-tac-toe__select--X')} onClick={selectPlayer} />
+      <button type="button" tabIndex="0" value={Constants.PLAYER.O} className={classnames('tic-tac-toe__button', 'tic-tac-toe__button__icon', 'tic-tac-toe__button__icon--O')} onClick={selectPlayer}>radio_button_unchecked</button>
+      <button type="button" tabIndex="0" value={Constants.PLAYER.X} className={classnames('tic-tac-toe__button', 'tic-tac-toe__button__icon', 'tic-tac-toe__button__icon--X')} onClick={selectPlayer}>clear</button>
     </div>);
   } else if (done) {
     return (<div className={classnames('tic-tac-toe__header')}>
       <h2>{(winner) ? `${winner} Won` : 'Draw'}</h2>
-      <button type="button" title="Reset" tabIndex="0" className={classnames('tic-tac-toe__select', 'tic-tac-toe__select--reset')} onClick={resetGame}>Reset</button>
+      <button type="button" title="Reset" tabIndex="0" className={classnames('tic-tac-toe__button')} onClick={resetGame}>Reset</button>
     </div>);
   }
   return (<h2 className={classnames('tic-tac-toe__header')}>{(turn === player) ? 'Player\'s Turn' : 'Computer\'s Turn'}</h2>);
