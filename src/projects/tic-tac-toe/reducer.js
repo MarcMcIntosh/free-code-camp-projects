@@ -8,6 +8,7 @@ import { RESET_GAME, SET_PLAYER, TAKE_TURN, SET_DIFFICULTY } from './actions';
 const { _, O } = Constants.PLAYER;
 
 function getInitialState(dif = 6) {
+  const difficulty = Math.max(0, Math.min(dif, 9));
   return {
     board: Array.from({ length: 9 }, () => _),
     ai: _,
@@ -16,7 +17,7 @@ function getInitialState(dif = 6) {
     done: false,
     turn: _,
     init: true,
-    difficulty: dif,
+    difficulty,
     timerId: -1,
   };
 }
@@ -25,7 +26,9 @@ function reducer(state = getInitialState(), action) {
   switch (action.type) {
     /* Automatic difficulty scaling */
     case RESET_GAME: {
-      if (state.winner === state.ai) {
+      if (state.init) {
+        return { ...state };
+      } else if (state.winner === state.ai) {
         // Get easyeir when ai wins
         return getInitialState(state.difficulty - 2);
       } else if (state.winner === state.player) {

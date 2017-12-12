@@ -4,39 +4,51 @@
 @import "./slider";
 
 .tic-tac-toe {
+  max-width: 570px;
+  margin: auto;
+  padding: 8px;
+
+  // @include mdc-elevation(2);
 
   &__button {
     composes: mdc-button mdc-button--raised from $mdc-button;
 
+    &--reset {
+      width: 100%;
+      margin: 0 auto;
+    }
+
     &__icon {
       composes: material-icons from $material-icons;
+
+      @include mdc-button-ink-color($tic-tac-toe-color-ink);
 
       &--X {
 
         @include mdc-button-container-fill-color($tic-tac-toe-color-red);
-
-        @include mdc-button-ink-color($tic-tac-toe-color-ink);
       }
 
       &--O {
-        // background-color: $tic-tac-toe-color-blue !important;
 
         @include mdc-button-container-fill-color($tic-tac-toe-color-blue);
-
-        @include mdc-button-ink-color($tic-tac-toe-color-ink);
       }
     }
   }
 
+  &__info {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 5px;
+  }
+
   &__header {
-    width: 90%;
-    margin: auto;
-    padding: 5%;
+    composes: mdc-typography--title from $mdc-typography;
     text-align: center;
+  }
 
-    @media only screen and (min-width: 600px) { width: 75%; }
-
-    @media only screen and (min-width: 768px) { width: 50%; }
+  &__label {
+    composes: mdc-textfield-helptext mdc-textfield-helptext--persistent from $mdc-textfield;
   }
 
   &__board {

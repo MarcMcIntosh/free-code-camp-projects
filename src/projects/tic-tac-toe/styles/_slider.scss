@@ -4,6 +4,7 @@
 
 .tic-tac-toe-slider {
   composes: mdc-slider mdc-slider--discrete mdc-slider--display-markers from $mdc-slider;
+  margin-top: 18px;
 
   &--disabled {
     composes: mdc-slider--disabled from $mdc-slider;

@@ -100,11 +100,11 @@ class Slider extends Component {
     return (<div
       ref={(root) => { this.root = root; }}
       className={classnames({
-        'tic-tact-toe-slider': true,
-        'tic-tact-toe-slider--disabled': disabled,
-        'tic-tact-toe-slider--active': this.state.active,
-        'tic-tact-toe-slider--focus': this.state.focused,
-        'tic-tact-toe-slider--in-transit': this.state.inTransit,
+        'tic-tac-toe-slider': true,
+        'tic-tac-toe-slider--disabled': disabled,
+        'tic-tac-toe-slider--active': this.state.active,
+        'tic-tac-toe-slider--focus': this.state.focused,
+        'tic-tac-toe-slider--in-transit': this.state.inTransit,
       })}
       role="slider"
       aria-valuemin={min}
@@ -122,12 +122,12 @@ class Slider extends Component {
       onBlur={this.onBlur}
       onKeyDown={this.onKeyDown}
     >
-      <div className={classnames('tic-tact-toe-slider__track-container')} >
-        <div className={classnames('tic-tact-toe-slider__track')} style={{ width: `${w}%` }} />
+      <div className={classnames('tic-tac-toe-slider__track-container')} >
+        <div className={classnames('tic-tac-toe-slider__track')} style={{ width: `${w}%` }} />
 
-        <div className={classnames('tic-tact-toe-slider__track-marker-container')}>{this.state.steps.map(d => (<div
+        <div className={classnames('tic-tac-toe-slider__track-marker-container')}>{this.state.steps.map(d => (<div
           key={d}
-          className={classnames('tic-tact-toe-slider__track-marker')}
+          className={classnames('tic-tac-toe-slider__track-marker')}
           style={{ left: d + '%', transform: `translateX(${0 - d}%)` }}
         />))}</div>
 
@@ -135,22 +135,22 @@ class Slider extends Component {
 
       <div
         role="presentation"
-        className={classnames('tic-tact-toe-slider__thumb-container')}
+        className={classnames('tic-tac-toe-slider__thumb-container')}
         style={{
           transform: 'translateX(-50%)',
           left: `${w}%`,
         }}
         onMouseDown={this.onMouseDown}
       >
-        <div className={classnames('tic-tact-toe-slider__pin')}>
-          <span className={classnames('tic-tact-toe-slider__pin-value-marker')}>{value}</span>
+        <div className={classnames('tic-tac-toe-slider__pin')}>
+          <span className={classnames('tic-tac-toe-slider__pin-value-marker')}>{value}</span>
         </div>
 
-        <svg className={classnames('tic-tact-toe-slider__thumb')} width="21" height="21">
+        <svg className={classnames('tic-tac-toe-slider__thumb')} width="21" height="21">
           <circle cx="10.5" cy="10.5" r="7.875" />
         </svg>
 
-        <div className={classnames('tic-tact-toe-slider__focus-ring')} />
+        <div className={classnames('tic-tac-toe-slider__focus-ring')} />
       </div>
     </div>);
   }

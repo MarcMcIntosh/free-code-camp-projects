@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { bool, oneOf, func, array, number } from 'prop-types';
 import { connect } from 'react-redux';
 import minimax from './util/minimax';
-import Header from './components/Header';
-import { takeTurn, resetGame, setPlayer } from './actions';
+// import Header from './components/Header';
+import Slider from './components/Slider';
+import PlayerSelect from './components/PlayerSelect';
+import GameOver from './components/GameOver';
+
+import { takeTurn, resetGame, setPlayer, setDifficulty } from './actions';
 import Constants from './Constants';
 
 const { _, O, X } = Constants.PLAYER;
@@ -16,6 +20,7 @@ const mapDispatchToProps = dispatch => ({
   takeTurn: payload => dispatch(takeTurn(payload)),
   resetGame: () => dispatch(resetGame()),
   setPlayer: event => dispatch(setPlayer(event.target.value)),
+  setDifficulty: value => dispatch(setDifficulty(value)),
 });
 
 
@@ -25,6 +30,7 @@ class TicTacToe extends Component {
     this.minimax = minimax;
     this.aiMove = this.aiMove.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.gameOverMessage = this.gameOverMessage.bind(this);
   }
   componentDidUpdate() {
     if (!this.props.init && this.props.ai && this.props.turn === this.props.ai) {
@@ -39,8 +45,16 @@ class TicTacToe extends Component {
   handleClick(event) {
     this.props.takeTurn(event.target.value);
   }
+  gameOverMessage() {
+    if (this.props.winner === this.props.player) {
+      return 'Contragulations, You won';
+    } else if (this.props.winner === this.props.ai) {
+      return 'Try again';
+    }
+    return 'Draw, try again';
+  }
   render() {
-    const { init, done, turn, player, winner, board } = this.props;
+    const { done, turn, player, board } = this.props;
     const { classnames } = this.context;
     return (<div className={classnames('tic-tac-toe')}>
       {/* Game */}
@@ -61,8 +75,15 @@ class TicTacToe extends Component {
       })}</div>
 
       {/* Inofmation display */}
+      <div className={classnames('tic-tac-toe__info')}>
+        {this.props.init && (<PlayerSelect onClick={this.props.setPlayer} />)}
 
-      <Header init={init} done={done} turn={turn} player={player} winner={winner} resetGame={this.props.resetGame} selectPlayer={this.props.setPlayer} />
+        {this.props.done && (<GameOver onClick={this.props.resetGame}>{this.gameOverMessage()}</GameOver>)}
+
+        <Slider onChange={this.props.setDifficulty} value={this.props.difficulty} min="1" max="9" name="difficulty" label="difficulty" step="1" />
+        <label htmlFor="difficulty" className={classnames('tic-tac-toe__label')}>Difficulty</label>
+      </div>
+
     </div>);
   }
 }
@@ -79,6 +100,7 @@ TicTacToe.propTypes = {
   resetGame: func.isRequired,
   setPlayer: func.isRequired,
   takeTurn: func.isRequired,
+  setDifficulty: func.isRequired,
 };
 
 TicTacToe.contextTypes = { classnames: func.isRequired };
