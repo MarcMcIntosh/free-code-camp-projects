@@ -18,13 +18,13 @@ import appUrls from './app-urls';
 // import RecipeBox from '../projects/recipe-box';
 // import ScatterplotGraph from '../projects/scatterplot-graph';
 // import Simon from '../projects/simon';
+// import TicTacToe from '../projects/tic-tac-toe';
 
 /* To do or check with classnames context */
-import TicTacToe from '../projects/tic-tac-toe';
+import TributePage from '../projects/tribute-page';
 
 
 /* Done with-out context */
-// import TributePage from '../projects/tribute-page';
 
 /*  to do or check and with out classnames context
 
@@ -73,11 +73,11 @@ const routes = [
         path: appUrls.scatterplotGraph.url, component: ScatterplotGraph,
       }, {
         path: appUrls.simon.url, component: Simon,
-      }, */ {
-        path: appUrls.ticTacToe.url, component: TicTacToe,
-      }, /* {
-        path: appUrls.tribute.url, component: TributePage,
       }, {
+        path: appUrls.ticTacToe.url, component: TicTacToe,
+      }, */ {
+        path: appUrls.tribute.url, component: TributePage,
+      }, /* {
         path: appUrls.twitch.url, component: Twitch,
       }, {
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
