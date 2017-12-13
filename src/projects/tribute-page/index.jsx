@@ -1,27 +1,24 @@
-import React from 'react';
-import './src/styles';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { func } from 'prop-types';
+import store from './store';
+import TributePage from './TributePage';
+import classnames from './styles';
 
+class Container extends Component {
+  constructor(props) {
+    super(props);
+    this.classnames = classnames;
+    this.store = store;
+  }
+  getChildContext() {
+    return { classnames: this.classnames };
+  }
+  render() {
+    return (<Provider store={this.store}><TributePage /></Provider>);
+  }
+}
 
-const HodorImg = require('./src/images/Season_6_hodor_main.jpg');
+Container.childContextTypes = { classnames: func.isRequired };
 
-const TributePage = () => (<div className="tribute-page">
-
-  <h1 className="tribute-page__heading">Hodor</h1>
-
-  <div className="tribute-page__content">
-
-    <img className="tribute-page__image" src={HodorImg} role="presentation" alt="Hodor" />
-
-    <div className="tribute__caption">
-
-      <h3>Valar Morghulis</h3>
-
-      <a href="http://gameofthrones.wikia.com/wiki/Hodor" target="_blank" rel="noopener noreferrer" className="tribute__link">Game of Thrones</a>
-
-    </div>
-
-  </div>
-
-</div>);
-
-export default TributePage;
+export default Container;
