@@ -19,16 +19,16 @@ import appUrls from './app-urls';
 // import ScatterplotGraph from '../projects/scatterplot-graph';
 // import Simon from '../projects/simon';
 // import TicTacToe from '../projects/tic-tac-toe';
+// import TributePage from '../projects/tribute-page';
 
 /* To do or check with classnames context */
-import TributePage from '../projects/tribute-page';
+import TwitchTv from '../projects/twitch-tv';
 
 
 /* Done with-out context */
 
 /*  to do or check and with out classnames context
 
-import Twitch from '../projects/twitch';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 */
 
@@ -75,11 +75,11 @@ const routes = [
         path: appUrls.simon.url, component: Simon,
       }, {
         path: appUrls.ticTacToe.url, component: TicTacToe,
-      }, */ {
-        path: appUrls.tribute.url, component: TributePage,
-      }, /* {
-        path: appUrls.twitch.url, component: Twitch,
       }, {
+        path: appUrls.tribute.url, component: TributePage,
+      }, */ {
+        path: appUrls.twitch.url, component: TwitchTv,
+      }, /* {
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
       }, */
     ],

@@ -1,34 +1,58 @@
 @import "./variables";
+@import "./loader";
 
 .tribute-page {
   composes: mdc-card from $mdc-card;
+  max-width: 700px;
+  margin: auto;
 
   &__primary {
     composes: mdc-card__primary from $mdc-card;
   }
 
   &__title {
-    composes: mdc-card__title from $mdc-card;
-    // composes: mdc-card__title mdc-card__title--large from $mdc-card;
+    // composes: mdc-card__title from $mdc-card;
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
   }
 
   &__subtitle {
     composes: mdc-card__subtitle from $mdc-card;
   }
 
+  &__link { /* style for link */ }
+
   &__supporting-text {
     composes: mdc-card__supporting-text from $mdc-card;
+    margin: auto;
   }
 
   &__quotes {
     composes: mdc-list from $mdc-list;
+
+    &--hidden { visibility: hidden; }
   }
 
   &__quote {
     composes: mdc-list-item from $mdc-list;
+    justify-content: center;
   }
 
   &__media {
     composes: mdc-card__media from $mdc-card;
+    position: relative;
+    height: 0;
+    margin: 16px;
+    padding-top: 25px;
+    padding-bottom: 56.25%; /* 16:9 */
+  }
+
+  &__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &--hidden { visibility: hidden; }
   }
 }

@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
-import { func, array, string } from 'prop-types';
+import { func, array, string, bool } from 'prop-types';
 import { connect } from 'react-redux';
-import { setSrc } from './actions';
+import { setSrc, onLoad, onError } from './actions';
+import Loader from './components/Loader';
 
 const mapStateToProps = ({
-  tributePage: { src },
-}) => ({ src });
+  tributePage: { src, loading, loaded, error },
+}) => ({ src, loading, loaded, error });
 
 const mapDispatchToProps = dispatch => ({
   setSrc: payload => dispatch(setSrc(payload)),
+  onLoad: () => dispatch(onLoad()),
+  onError: error => dispatch(onError(error)),
 });
 
 class TributePage extends PureComponent {
@@ -16,38 +19,45 @@ class TributePage extends PureComponent {
     const base = `https://www.youtube.com/embed/${this.props.video}`;
     const args = 'autoplay=1&modestbranding=1&rel=0&iv_load_policy=3';
     const addr = (window.origin) ? `${base}?${args}&origin=${window.origin}` : `${base}?${args}`;
+    if (this.video) {
+      this.video.onload = this.props.onLoad;
+      this.video.onerror = this.props.onError;
+    }
     this.props.setSrc(addr);
   }
   render() {
     const { classnames } = this.context;
-    return (<div className={classnames('tribute')}>
-      <section className={classnames('tribute__primary')}>
-        <h1 className={classnames('tribute__title')}>
+    return (<div className={classnames('tribute-page')}>
+      <section className={classnames('tribute-page__primary')}>
+        <h1 className={classnames('tribute-page__title')}>
           {this.props.title}
           {this.props.cite && (<cite>{this.props.cite}</cite>)}
         </h1>
-        <a
-          href={this.props.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={classnames('tribue__subtitle')}
-        >{this.props.href}</a>
+        <h2 className={classnames('tribute-page__subtitle')}>
+          <a className={classnames('tribute-page__link')} href={this.props.href} target="_blank" rel="noopener noreferrer">{this.props.href}</a>
+        </h2>
+        <hr />
       </section>
-      <section className={classnames('tribute__media')}>
+      <section className={classnames('tribute-page__media')}>
         <iframe
-          className={classnames('tribute__video')}
+          className={classnames('tribute-page__video', {
+            'tribute-page__video--hidden': this.props.loading || !this.props.loaded,
+          })}
           title="tribute"
           height="360"
           width="640"
-          rel="0"
           src={this.props.src}
+          ref={(elem) => { this.video = elem; }}
+          sandbox="allow-scripts allow-same-origin"
         />
+        {this.props.loading && (<Loader />) }
       </section>
-      <section className={classnames('tribute__supportint-text')}>
-        <ul className={classnames('tribute__quotes')}>{this.props.quotes.map((quote, index) => {
-          const k = index;
-          return (<li key={k} className={classnames('tribute__quote')}>{quote}</li>);
-        })}</ul>
+      <section className={classnames('tribute-page__supporting-text')}>
+        {this.props.error || (<ul className={classnames({ 'tribute-page__quotes': true, 'tribute-page__quotes--hidden': !this.props.loaded })}>
+          {this.props.quotes.map((quote, index) => {
+            const k = index;
+            return (<li key={k} className={classnames('tribute-page__quote')}>{quote}</li>);
+          })}</ul>)}
       </section>
     </div>);
   }
@@ -55,7 +65,12 @@ class TributePage extends PureComponent {
 
 TributePage.propTypes = {
   src: string.isRequired,
+  error: string.isRequired,
   setSrc: func.isRequired,
+  onError: func.isRequired,
+  onLoad: func.isRequired,
+  loading: bool.isRequired,
+  loaded: bool.isRequired,
   quotes: array,
   video: string,
   href: string,

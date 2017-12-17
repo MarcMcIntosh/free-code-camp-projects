@@ -1,28 +1,17 @@
-import {
-  SET_TIMER,
-  SET_SRC,
-} from './actions';
+import { SET_SRC, ON_LOAD, ON_ERROR } from './actions';
 
 export const DEFAULT_STATE = {
-  timer: 0,
   loading: false,
+  loaded: false,
   src: '',
-  duration: 3000,
+  error: '',
 };
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case SET_TIMER: return {
-      ...state,
-      loading: true,
-      timer: action.payload,
-    };
-    case SET_SRC: return {
-      ...state,
-      loading: false,
-      src: action.payload,
-      timer: 0,
-    };
+    case SET_SRC: return { ...state, loading: true, src: action.payload, timer: 0 };
+    case ON_LOAD: return { ...state, loading: false, loaded: true };
+    case ON_ERROR: return { ...state, loading: false, loaded: false, error: action.payload };
     default: return state;
   }
 }

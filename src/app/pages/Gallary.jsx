@@ -21,9 +21,9 @@ import quote from '../images/localhost-8080-quote-machine.png'
 import scatterplot from '../images/localhost-8080-scatterplot-graph.png';
 import simon from '../images/localhost-8080-simon-says.png';
 import tictacttoe from '../images/localhost-8080-tic-tac-toe.png';
+import tribute from '../images/Woodhouse.png';
 
 /* to do */
-import tribute from '../images/tribute.png';
 import twitch from '../images/twitch.png';
 import wikipedia from '../images/wikipedia.png';
 
