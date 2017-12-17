@@ -1,5 +1,3 @@
-import USER_NAMES from './users';
-
 import {
   RECEIVE_ERROR,
   RECEIVE_USER,
@@ -11,7 +9,6 @@ export const DEFAULT_STATE = {
   error: '',
   users: {},
   display: 'all',
-  USER_NAMES,
   filters: ['all', 'online', 'offline'],
 };
 

@@ -3,6 +3,10 @@ import errorImageUrl from './utils/error-image-url';
 
 const prefix = str => `TWITCH-TV_${str}`;
 
+// export const REQUEST = prefix('REQUEST');
+// export const RECEIVED = prefix('RECEIVE');
+// export const REJECTED = prefix('REJECTED');
+
 export const RECEIVE_USER = prefix('RECEIVE_USER');
 export const RECEIVE_ERROR = prefix('RECEIVE_ERROR');
 export const RECEIVE_STREAM = prefix('RECEIVE_STREAM');

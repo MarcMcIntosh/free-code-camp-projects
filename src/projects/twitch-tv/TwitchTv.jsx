@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { fetchUsers, toggleDisplay } from './actions';
 import User from './components/User';
 
-const mapStateToProps = state => ({
-  names: state.USER_NAMES,
+const mapStateToProps = ({
+  twitchTv: { ...state },
+}) => ({
   error: state.error,
   users: state.users,
   display: state.display,
@@ -67,12 +68,16 @@ class TwitchTv extends PureComponent {
 
 TwitchTv.propTypes = {
   onLoadUsers: func.isRequired,
-  names: array.isRequired,
+  names: array,
   users: object.isRequired,
   filters: array.isRequired,
   display: string.isRequired,
   setFilter: func.isRequired,
   data: array.isRequired,
+};
+
+TwitchTv.defaultProps = {
+  names: ['freecodecamp', 'ESL_SC2', 'OgamingSC2', 'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'brunofin', 'comster404'],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TwitchTv);
