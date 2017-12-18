@@ -1,21 +1,39 @@
-@import "@material/card/mdc-card.scss";
-@import "@material/button/mdc-button.scss";
+@import "./variables";
 
 .twitch-tv {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: auto;
+
+  &__horizontal-block { composes: mdc-card__horizontal-block from $mdc-card; }
+
+  &__primary { composes: mdc-card__primary from $mdc-card; }
+
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+
+  &__actions { composes: mdc-card__actions mdc-card__actions--vertical from $mdc-card; }
+
   &__user-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-around;
-    align-items: stretch;
-    justify-content: space-around;
-    // flex-direction: row;
-    // align-content: flex-start;
+    composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
   }
 
-  &__user {
-    max-width: 380px;
-    margin: 6px !important;
-    // flex-grow: 1;
-    // margin: 6px;
+  &__user-item {
+    composes: mdc-list-item from $mdc-list;
+
+    &__start-detail {
+      composes: mdc-list-item__start-detail from $mdc-list;
+    }
+
+    &__end-detail {
+      composes: mdc-list-item__end-detail from $mdc-list;
+    }
+
+    &__text {
+      composes: mdc-list-item__text from $mdc-list;
+
+      &__secondary {
+        composes: mdc-list-itm__text__secondary from $mdc-list;
+      }
+    }
   }
 }
