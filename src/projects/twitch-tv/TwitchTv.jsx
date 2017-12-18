@@ -1,44 +1,32 @@
 import React, { PureComponent } from 'react';
-import { string, array, object, func } from 'prop-types';
+import { string, array, object, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers, toggleDisplay } from './actions';
-import User from './components/User';
+// import User from './components/User';
+import UserList from './components/UserList';
 
-const mapStateToProps = ({
-  twitchTv: { ...state },
-}) => ({
-  error: state.error,
-  users: state.users,
-  display: state.display,
-  filters: ['all', 'online', 'offline'],
-  data: Object.keys(state.users).map(d => state.users[d]).sort((a, b) => {
-    if (a.streaming && !b.streaming) {
-      return -1;
-    } else if (a.streaming && b.streaming) {
-      return (a.name > b.name) ? -1 : 0;
-    } else if (a.error && !b.error) {
-      return 1;
-    } else if (a.error && b.error) {
-      return (a.name > b.name) ? 0 : 1;
-    }
-    return 0;
-  }).filter((d) => {
-    if (state.display === 'online' && !d.streaming) {
-      return false;
-    } else if (state.display === 'offline' && d.streaming) {
-      return false;
-    }
-    return true;
-  }),
-});
+const mapStateToProps = ({ twitchTv: { error, users, display, fetching } }) => ({ error, fetching, users, display });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onLoadUsers: () => dispatch(fetchUsers(ownProps.names)),
+const mapDispatchToProps = dispatch => ({
+  fetchUsers: arr => dispatch(fetchUsers(arr)),
   setFilter: event => dispatch(toggleDisplay(event.target.value)),
 });
 
 class TwitchTv extends PureComponent {
-  componentDidMount() { this.props.onLoadUsers(); }
+  componentDidMount() {
+    this.props.fetchUsers(this.userUrls());
+  }
+  componentDidUpdate(prevProps) {
+    if (!this.props.fetching && !prevProps.fetching) {
+      this.props.fetchUsers(this.userUrls());
+    }
+  }
+  userUrls() {
+    const host = 'https://wind-bow.glitch.me/twitch-api';
+    const channels = this.props.names.map(name => ({ name, url: `${host}/channels/${name}` }));
+    const streams = this.props.names.map(name => ({ name, url: `${host}/streams/${name}` }));
+    return [].concat(channels, streams);
+  }
   render() {
     return (<div className="twitch-tv">
       <div className="mdc-card">
@@ -57,9 +45,8 @@ class TwitchTv extends PureComponent {
             title={`Set Filter to ${f}`}
           >{f}</button>))}</section>
 
-          <section className="twitch-tv__users">
-            {this.props.data.map(d => (<User {...d} />))}
-          </section>
+          <UserList users={this.props.users} display={this.props.display} />
+
         </div>
       </div>
     </div>);
@@ -67,17 +54,19 @@ class TwitchTv extends PureComponent {
 }
 
 TwitchTv.propTypes = {
-  onLoadUsers: func.isRequired,
+  filters: array,
   names: array,
+  fetchUsers: func.isRequired,
   users: object.isRequired,
-  filters: array.isRequired,
   display: string.isRequired,
   setFilter: func.isRequired,
-  data: array.isRequired,
+  // data: array.isRequired,
+  fetching: bool.isRequired,
 };
 
 TwitchTv.defaultProps = {
   names: ['freecodecamp', 'ESL_SC2', 'OgamingSC2', 'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'brunofin', 'comster404'],
+  filters: ['all', 'online', 'offline'],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TwitchTv);
