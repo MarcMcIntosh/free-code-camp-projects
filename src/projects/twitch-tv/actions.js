@@ -26,12 +26,10 @@ export const toggleDisplay = (term) => {
 
 const userReducer = arr => [].concat(arr).reduce((a, b) => (Object.prototype.hasOwnProperty.call(a, b.name) ? ({ ...a,
   [b.name]: { ...a[b.name], ...b },
-}) : ({ ...a,
-  [b.name]: { ...b },
-})), {});
+}) : ({ ...a, [b.name]: b })), {});
 
 export const fetchUsers = userUrls => (dispatch) => {
-  const promises = userUrls.map(({ name, url }) => fetch(url).then(res => res.json()).then(json => ({ name, ...json })));
+  const promises = userUrls.map(({ name, url }) => fetch(url).then(res => res.json()).then(json => ({ ...json, name })));
 
   dispatch(request(userUrls));
 

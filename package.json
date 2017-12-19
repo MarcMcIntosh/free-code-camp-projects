@@ -71,6 +71,7 @@
     "@material/checkbox": "^0.25.0",
     "@material/dialog": "^0.24.0",
     "@material/elevation": "^0.1.13",
+    "@material/fab": "^0.27.0",
     "@material/form-field": "^0.26.0",
     "@material/grid-list": "^0.24.0",
     "@material/icon-toggle": "^0.26.0",

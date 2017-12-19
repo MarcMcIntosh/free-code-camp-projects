@@ -1,3 +1,4 @@
+@import "@material/theme/color-palette.scss";
 @import "./variables";
 
 .twitch-tv {
@@ -25,14 +26,33 @@
     }
 
     &__end-detail {
+      composes: mdc-button from $mdc-button;
+      composes: material-icons from $material-icons;
       composes: mdc-list-item__end-detail from $mdc-list;
+      width: auto;
+      min-width: unset;
+      height: auto;
+      padding: 12px;
+      border-radius: 50%;
+      // text-decoration: none;
+
+      &--disabled {
+        color: $material-color-red-a700 !important;
+        pointer-events: none !important;
+        // cursor: default;
+        cursor: not-allowed;
+      }
+
+      &--active {
+        // composes: mdc-button--raised from $mdc-button;
+      }
     }
 
     &__text {
       composes: mdc-list-item__text from $mdc-list;
 
       &__secondary {
-        composes: mdc-list-itm__text__secondary from $mdc-list;
+        composes: mdc-list-item__text__secondary from $mdc-list;
       }
     }
   }
