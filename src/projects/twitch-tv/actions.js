@@ -1,6 +1,3 @@
-// import twitchUrl from './utils/twitch-url';
-// import errorImageUrl from './utils/error-image-url';
-
 const prefix = str => `TWITCH-TV_${str}`;
 
 export const REQUEST = prefix('REQUEST');

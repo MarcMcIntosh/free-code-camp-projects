@@ -22,9 +22,9 @@ import scatterplot from '../images/localhost-8080-scatterplot-graph.png';
 import simon from '../images/localhost-8080-simon-says.png';
 import tictacttoe from '../images/localhost-8080-tic-tac-toe.png';
 import tribute from '../images/Woodhouse.png';
+import twitch from '../images/localhost-8080-twitch-tv.png';
 
 /* to do */
-import twitch from '../images/twitch.png';
 import wikipedia from '../images/wikipedia.png';
 
 

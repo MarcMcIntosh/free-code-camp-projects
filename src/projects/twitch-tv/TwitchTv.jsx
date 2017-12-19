@@ -2,14 +2,13 @@ import React, { PureComponent } from 'react';
 import { string, array, object, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers, toggleDisplay } from './actions';
-// import User from './components/User';
 import UserList from './components/UserList';
 
 const mapStateToProps = ({ twitchTv: { error, users, display, fetching } }) => ({ error, fetching, users, display });
 
 const mapDispatchToProps = dispatch => ({
   fetchUsers: arr => dispatch(fetchUsers(arr)),
-  setFilter: event => dispatch(toggleDisplay(event.target.value)),
+  setFilter: str => dispatch(toggleDisplay(str)),
 });
 
 class TwitchTv extends PureComponent {
@@ -28,27 +27,21 @@ class TwitchTv extends PureComponent {
     return [].concat(channels, streams);
   }
   render() {
-    return (<div className="twitch-tv">
-      <div className="mdc-card">
-        <div className="mdc-card__horizontal-block">
-          <section className="mdc-card__primary">
-            <h1 className="mdc-card__title mdc-card__title--large">Twitch TV Streams</h1>
-          </section>
+    const { classnames } = this.context;
+    return (<div className={classnames('twitch-tv')}>
+      <section className={classnames('twitch-tv__primary')}>
+        <h1 className={classnames('twitch-tv__title')}>Twitch TV Streams</h1>
+      </section>
+      <nav className={classnames('twitch-tv__tab-bar')}>   {this.props.filters.map(d => (<a
+        key={d}
+        className={classnames('twitch-tv__tab', this.props.display === d && 'twitch-tv__tab--active')}
+        role="presentation"
+        value={d}
+        onClick={(event) => { event.preventDefault(); return this.props.setFilter(d); }}
+      >{d}</a>))}</nav>
 
-          {/* header */}
-          <section className="mdc-card__actions mdc-card__actions--vertical">{this.props.filters.map(f => (<button
-            className="mdc-button mdc-button--raised mdc-button--compact twitch-tv__button"
-            key={f}
-            value={f}
-            disabled={(this.props.display === f)}
-            onClick={this.props.setFilter}
-            title={`Set Filter to ${f}`}
-          >{f}</button>))}</section>
+      <UserList users={this.props.users} display={this.props.display} />
 
-          <UserList users={this.props.users} display={this.props.display} />
-
-        </div>
-      </div>
     </div>);
   }
 }
@@ -68,5 +61,7 @@ TwitchTv.defaultProps = {
   names: ['freecodecamp', 'ESL_SC2', 'OgamingSC2', 'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'brunofin', 'comster404'],
   filters: ['all', 'online', 'offline'],
 };
+
+TwitchTv.contextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TwitchTv);

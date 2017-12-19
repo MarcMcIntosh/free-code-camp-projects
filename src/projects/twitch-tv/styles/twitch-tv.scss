@@ -6,23 +6,44 @@
   max-width: 600px;
   margin: auto;
 
-  &__horizontal-block { composes: mdc-card__horizontal-block from $mdc-card; }
-
   &__primary { composes: mdc-card__primary from $mdc-card; }
 
-  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+  &__title {
+    composes: mdc-card__title mdc-card__title--large from $mdc-card;
+    text-align: center;
+  }
 
-  &__actions { composes: mdc-card__actions mdc-card__actions--vertical from $mdc-card; }
+  &__tab {
+    composes: mdc-tab from $mdc-tabs;
+
+    &--active { composes: mdc-tab--active from $mdc-tabs; }
+
+    &-bar {
+      composes: mdc-tab-bar from $mdc-tabs;
+
+      &__indicator { composes: mdc-tab-bar__indicator from $mdc-tabs; }
+    }
+  }
 
   &__user-list {
     composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
+    padding-right: 0;
+    padding-left: 0;
+
+    :not(:first-child) { border-top: none; }
   }
 
   &__user-item {
     composes: mdc-list-item from $mdc-list;
+    padding: 0 16px;
+    border-bottom: .5px solid rgba(0, 0, 0, .2);
 
     &__start-detail {
       composes: mdc-list-item__start-detail from $mdc-list;
+      background-image: url(../assets/Glitch_Purple_RGB.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 72%;
     }
 
     &__end-detail {
