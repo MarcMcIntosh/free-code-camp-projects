@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { func } from 'prop-types';
 import { Provider } from 'react-redux';
-import store from './src/store';
-import App from './src/WikipediaViewer';
+import store from './store';
+import App from './WikipediaViewer';
+import classnames from './styles';
 
-class WikipediaViewer extends Component {
+class Container extends Component {
   constructor(props) {
     super(props);
     this.store = store;
+    this.classnames = classnames;
+  }
+  getChildContext() {
+    return { classnames: this.classnames };
   }
   render() {
     return (<Provider store={store}><App /></Provider>);
   }
 }
 
+Container.childContextTypes = { classnames: func.isRequired };
 
-export default WikipediaViewer;
+export default Container;
