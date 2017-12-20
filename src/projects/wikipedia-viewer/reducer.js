@@ -1,19 +1,28 @@
-import { REQUESTS, RECEIVED, REJECTED } from './actions';
+import { ON_CHANGE, ON_FOCUS, ON_BLUR, REQUESTS, RECEIVED, REJECTED } from './actions';
 
-export const DEFAULT_STATE = { isFetching: false, results: {}, error: '' };
+export const DEFAULT_STATE = {
+  submitting: false,
+  results: {},
+  error: '',
+  active: false,
+  value: '',
+};
 
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case REQUESTS: return { ...state, isFetching: true };
+    case ON_CHANGE: return { ...state, error: '', value: action.payload };
+    case ON_FOCUS: return { ...state, active: true };
+    case ON_BLUR: return { ...state, active: false };
+    case REQUESTS: return { ...state, submit: true };
     case RECEIVED: return {
       ...state,
       error: '',
-      isFetching: false,
+      submitting: false,
       results: action.payload,
     };
     case REJECTED: return {
       ...state,
-      isFetching: false,
+      submitting: false,
       error: String(action.payload),
     };
     default: return state;
