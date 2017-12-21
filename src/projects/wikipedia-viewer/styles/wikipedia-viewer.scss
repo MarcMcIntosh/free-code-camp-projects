@@ -2,6 +2,48 @@
 
 .wikipedia-viewer {
 
+  &__results {
+    composes: mdc-list mdc-list--two-line from $mdc-list;
+    padding-right: 0;
+    padding-left: 0;
+
+    :not(:first-child) { border-top: none; }
+  }
+
+  &__result {
+    composes: mdc-list-item from $mdc-list;
+    padding: 0 16px;
+    border-bottom: .5px solid rgba(0, 0, 0, .2);
+
+    &__title {
+      composes: mdc-list-item__text from $mdc-list;
+    }
+
+    &__extract {
+      composes: mdc-list-item__text__secondary from $mdc-list;
+    }
+  }
+
+  &__card {
+    composes: mdc-card from $mdc-card;
+  }
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+  }
+
+  &__title {
+    composes: mdc-card__title from $mdc-card;
+  }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+  }
+
+  &__extract {
+    composes: mdc-card__supporting-text from $mdc-card;
+  }
+
   &__search {
     // composes: mdc-textfield from $mdc-textfield;
     // composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;

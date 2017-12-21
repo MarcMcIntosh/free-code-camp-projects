@@ -10,7 +10,7 @@ const wikiUrl = str => [
   'prop=extracts',
   'exintro',
   'explaintext',
-  'exsentences=1',
+  'exsentences=3',
   'exlimit=max',
   `gsrsearch=${str}`,
 ].join('&');
