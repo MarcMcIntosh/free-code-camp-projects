@@ -1,53 +1,44 @@
 @import "./variables.scss";
 
 .wikipedia-viewer {
+  width: 100%;
+
+  &__header { text-align: center; }
+
+  &__random { text-align: center; }
 
   &__results {
-    composes: mdc-list mdc-list--two-line from $mdc-list;
-    padding-right: 0;
-    padding-left: 0;
 
     :not(:first-child) { border-top: none; }
   }
 
-  &__result {
-    composes: mdc-list-item from $mdc-list;
-    padding: 0 16px;
-    border-bottom: .5px solid rgba(0, 0, 0, .2);
+  &__card { composes: mdc-card from $mdc-card; }
 
-    &__title {
-      composes: mdc-list-item__text from $mdc-list;
-    }
+  &__content { composes: mdc-card__horizontal-block from $mdc-card; }
 
-    &__extract {
-      composes: mdc-list-item__text__secondary from $mdc-list;
-    }
-  }
+  &__primary { composes: mdc-card__primary from $mdc-card; }
 
-  &__card {
-    composes: mdc-card from $mdc-card;
-  }
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
 
-  &__primary {
-    composes: mdc-card__primary from $mdc-card;
-  }
+  &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
 
-  &__title {
-    composes: mdc-card__title from $mdc-card;
-  }
+  &__extract { composes: mdc-card__supporting-text from $mdc-card; }
 
-  &__actions {
-    composes: mdc-card__actions from $mdc-card;
-  }
+  &__actions { composes: mdc-card__actions mdc-card__actions--vertical from $mdc-card; }
 
-  &__extract {
-    composes: mdc-card__supporting-text from $mdc-card;
+  &__action {
+    composes: mdc-button mdc-button--compact from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+    composes: material-icons from $material-icons;
+    width: auto;
+    min-width: unset;
+    height: auto;
+    padding: 12px;
+    border-radius: 50%;
   }
 
   &__search {
-    // composes: mdc-textfield from $mdc-textfield;
-    // composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
-    composes: mdc-textfield mdc-textfield--box mdc-textfield--with-leading-icon from $mdc-textfield;
+    composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
 
     &--upgraded { composes: mdc-textfield--upgraded from $mdc-textfield; }
 
@@ -56,7 +47,7 @@
     &--invalid { composes: mdc-textfield--invalid from $mdc-textfield; }
   }
 
-  &__input { composes: mdc-textfield__label from $mdc-textfield; }
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
 
   &__label {
     composes: mdc-textfield__label from $mdc-textfield;
@@ -83,7 +74,8 @@
   }
 
   &__icon {
-    composes: material-icons from $material-design-icons;
+    composes: material-icons from $material-icons;
     composes: mdc-textfield__icon from $mdc-textfield;
+    cursor: pointer;
   }
 }

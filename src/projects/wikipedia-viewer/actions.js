@@ -51,7 +51,10 @@ export const onSubmit = payload => (dispatch) => {
   return fetch(url).then((res) => {
     if (!res.ok) { throw new Error(res.statusText); }
     return res.json();
-  }).then(({ query: { pages } }) => Object.entries(pages))
+  }).then(({ query }) => {
+    if (!query) { throw new Error('No results found'); }
+    return query;
+  }).then(({ pages }) => Object.entries(pages))
     .then(pages => sortResults(pages, payload))
     .then(arr => arr.reduce(reduceEntries, {}))
     .then(results => dispatch(received(results)))

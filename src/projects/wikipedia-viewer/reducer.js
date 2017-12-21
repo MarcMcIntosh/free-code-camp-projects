@@ -11,8 +11,8 @@ export const DEFAULT_STATE = {
 function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case ON_CHANGE: return { ...state, error: '', value: action.payload };
-    case ON_FOCUS: return { ...state, active: true };
-    case ON_BLUR: return { ...state, active: false };
+    case ON_FOCUS: return { ...state, error: '', active: true };
+    case ON_BLUR: return { ...state, error: '', active: false };
     case REQUESTS: return { ...state, submit: true };
     case RECEIVED: return {
       ...state,
