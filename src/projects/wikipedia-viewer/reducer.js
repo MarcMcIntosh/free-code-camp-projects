@@ -2,7 +2,7 @@ import { ON_CHANGE, ON_FOCUS, ON_BLUR, REQUESTS, RECEIVED, REJECTED } from './ac
 
 export const DEFAULT_STATE = {
   submitting: false,
-  results: {},
+  results: [],
   error: '',
   active: false,
   value: '',

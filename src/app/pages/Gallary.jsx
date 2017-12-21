@@ -23,10 +23,9 @@ import simon from '../images/localhost-8080-simon-says.png';
 import tictacttoe from '../images/localhost-8080-tic-tac-toe.png';
 import tribute from '../images/Woodhouse.png';
 import twitch from '../images/localhost-8080-twitch-tv.png';
+import wikipedia from '../images/localhost-8080-wikipedia-viewer.png';
 
-/* to do */
-import wikipedia from '../images/wikipedia.png';
-
+// to do
 
 /*  apiUrls[keys]
 'tribute',

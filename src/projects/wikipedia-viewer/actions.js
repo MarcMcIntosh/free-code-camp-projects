@@ -32,16 +32,20 @@ export const received = payload => ({ type: RECEIVED, payload });
 
 export const rejected = payload => ({ type: REJECTED, payload });
 
-function reduceEntries(a, [k, v]) { return { ...a, [k]: v }; }
+// function reduceEntries(a, [k, v]) { return { ...a, [k]: v }; }
 
-function sortResults(arr, payload) {
-  return arr.sort(([, a], [, b]) => {
-    const a0 = a.title.search(payload);
-    const b0 = b.title.search(payload);
-    const a1 = a.extract.search(payload);
-    const b1 = b.extract.search(payload);
-    return -(a0 > b0) || +(a0 < b0) || -(a1 > b1) || (a1 < b1) || 0;
+function lengthOrZero(arr) { return Array.isArray(arr) ? arr.length : 0; }
+
+function sortResults(arr, str) {
+  const re = new RegExp(str, 'igm');
+  const payload = arr.sort((a, b) => {
+    const a0 = lengthOrZero(a.title.match(re));
+    const b0 = lengthOrZero(b.title.match(re));
+    const a1 = lengthOrZero(a.extract.match(re));
+    const b1 = lengthOrZero(b.extract.match(re));
+    return b0 - a0 || b1 - a1;
   });
+  return payload;
 }
 
 export const onSubmit = payload => (dispatch) => {
@@ -54,9 +58,8 @@ export const onSubmit = payload => (dispatch) => {
   }).then(({ query }) => {
     if (!query) { throw new Error('No results found'); }
     return query;
-  }).then(({ pages }) => Object.entries(pages))
+  }).then(({ pages }) => Object.values(pages))
     .then(pages => sortResults(pages, payload))
-    .then(arr => arr.reduce(reduceEntries, {}))
     .then(results => dispatch(received(results)))
     .catch(error => dispatch(rejected(error)));
 };

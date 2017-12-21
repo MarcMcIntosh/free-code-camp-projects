@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
-import { object, func, bool, string } from 'prop-types';
+import { array, func, bool, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { onSubmit, onChange, onFocus, onBlur } from './actions';
-// import ListItem from './components/ListItem';
-// import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar';
 import Result from './components/Result';
 
 
@@ -28,32 +27,16 @@ class WikipediaViewer extends PureComponent {
     return void 0;
   }
   render() {
-    const { results, error, submitting, active, value } = this.props;
     const { classnames } = this.context;
     return (<div className={classnames('wikipedia-viewer')}>
-
-      <form className={classnames('wikipedia-viewer__header')} noValidate onSubmit={this._handleSubmit}>
-        <div className={classnames('wikipedia-viewer__search', active && 'wikipedia-viewer__search--focused', (active || value) && 'wikipedia-viewer__search--upgraded', error && 'wikipedia-viewer__search--invalid')}>
-          <input onChange={this.props.onChange} value={value} tabIndex="0" onFocus={this.props.onFocus} onBlur={this.props.onBlur} type="search" name="gsrsearch" className={classnames('wikipedia-viewer__input')} />
-
-          <label htmlFor="grsearch" className={classnames('wikipedia-viewer__label', (value || active) && 'wikipedia-viewer__label--float-above')}>Search Wikipedia For</label>
-
-          <a className={classnames('wikipedia-viewer__icon')} role="button" type="submit" title="Search Wikipedia" tabIndex="0" disabled={submitting || !value} onClick={this._handleSubmit}>search</a>
-
-          <div className={classnames('wikipedia-viewer__line', active && 'wikipedia-viewer__line--active')} />
-
-        </div>
-
-        <p className={classnames('wikipedia-viewer__helptext', error && 'wikipedia-viewer__helptext--validation-msg')}>{error}</p>
-
-      </form>
+      <SearchBar className={classnames('wikipedia-viewer__header')} noValidate onSubmit={this._handleSubmit} onChange={this.props.onChange} onBlur={this.props.onBlur} onFocus={this.props.onFocus} error={this.props.error} submitting={this.props.submitting} active={this.props.active} value={this.props.value} />
 
       <section className={classnames('wikipedia-viewer__random')}>
         <a title="random wiki" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noopener noreferrer">Open a Random Wiki</a>
       </section>
 
       <ul className={classnames('wikipedia-viewer__results')}>
-        {Object.entries(results).map(([key, { pageid, title, extract }]) => (<Result key={key} pageid={pageid} title={title} extract={extract} />))}
+        {this.props.results.map(({ pageid, title, extract }) => (<Result key={pageid} pageid={pageid} title={title} extract={extract} />))}
       </ul>
     </div>);
   }
@@ -68,7 +51,7 @@ WikipediaViewer.propTypes = {
   submitting: bool.isRequired,
   active: bool.isRequired,
   error: string.isRequired,
-  results: object.isRequired,
+  results: array.isRequired,
 };
 
 WikipediaViewer.contextTypes = { classnames: func.isRequired };
