@@ -1,5 +1,6 @@
 // import React from 'react';
-import { App, About, Gallary } from '../app/pages';
+import { About, Gallary } from '../app/pages';
+import renderRoute from './renderRoute';
 // import appUrls from './app-urls';
 
 /* Done with classnames context */
@@ -25,7 +26,7 @@ import { App, About, Gallary } from '../app/pages';
 
 const routes = [
   {
-    component: App,
+    component: renderRoute,
     routes: [
       {
         path: '/',
