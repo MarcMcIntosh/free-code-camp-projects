@@ -134,6 +134,7 @@
     "redux-persist": "^4.10.1",
     "redux-thunk": "^2.2.0",
     "remarkable": "^1.7.1",
+    "serialize-javascript": "^1.4.0",
     "to-id": "^1.0.5",
     "topojson-client": "^3.0.0",
     "typeface-roboto": "0.0.35",

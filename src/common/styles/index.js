@@ -1,4 +1,4 @@
 import classnames from 'classnames/bind';
-import styles from './calculator.scss';
+import styles from './main.scss';
 
 export default classnames.bind(styles);

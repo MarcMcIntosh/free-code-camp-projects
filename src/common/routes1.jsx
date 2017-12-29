@@ -1,6 +1,6 @@
 // import React from 'react';
 import { App, About, Gallary } from '../app/pages';
-// import appUrls from './app-urls';
+import appUrls from './app-urls';
 
 /* Done with classnames context */
 // import BarChart from '../projects/bar-chart';
@@ -21,7 +21,9 @@ import { App, About, Gallary } from '../app/pages';
 // import TicTacToe from '../projects/tic-tac-toe';
 // import TributePage from '../projects/tribute-page';
 // import TwitchTv from '../projects/twitch-tv';
-// import WikipediaViewer from '../projects/wikipedia-viewer';
+
+/* To do or check with classnames context */
+import WikipediaViewer from '../projects/wikipedia-viewer';
 
 const routes = [
   {
@@ -70,9 +72,9 @@ const routes = [
         path: appUrls.tribute.url, component: TributePage,
       }, {
         path: appUrls.twitch.url, component: TwitchTv,
-      }, {
+      }, */ {
         path: appUrls.wikipediaViewer.url, component: WikipediaViewer,
-      }, */
+      },
     ],
   },
 ];

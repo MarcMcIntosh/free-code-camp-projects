@@ -35,7 +35,17 @@ function trajectory(x0, y0, x1, y1) {
   return 'up';
 }
 
-export const DEFAULT_STATE = { darkness: true, message: '', ...generateGame() };
+export const DEFAULT_STATE = {
+  darkness: true,
+  message: '',
+  // ...generateGame(),
+  map: [],
+  level: 1,
+  occupiedSpaces: {},
+  entities: {},
+  dungeon: [],
+  ready: false,
+};
 
 export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {
@@ -46,7 +56,7 @@ export default function (state = DEFAULT_STATE, action) {
       ...state,
       ...generateGame(state.level, state.entities.player),
     };
-    case RESET_MAP: return { ...state, message: '', ...generateGame() };
+    case RESET_MAP: return { ...state, ready: true, message: '', ...generateGame() };
     case WIN: return { ...state, message: 'WINNER!' };
     case LOSE: return { ...state, message: 'GAME OVER' };
     case RESET_MESSAGE: return { ...state, message: '' };

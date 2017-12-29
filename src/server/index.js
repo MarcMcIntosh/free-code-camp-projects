@@ -5,7 +5,8 @@ import webpack from 'webpack';
 import helmet from 'helmet';
 import compression from 'compression';
 import { ENV } from '../common/env';
-import renderMiddleware from './render/middleware';
+// import renderMiddleware from './render/middleware';
+import renderMiddleware from './initHtml';
 
 const app = express();
 

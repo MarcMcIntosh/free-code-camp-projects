@@ -10,7 +10,7 @@ import DungeonFloor from './components/DungeonFloor';
 import Message from './components/Message';
 import { move, toggleDarkness, resetMap, pickUpItem, exitStage, battle } from './actions';
 
-const mapStateToProps = ({ dungeonCrawler: { entities, dungeon, occupiedSpaces, darkness, message, map } }) => ({ entities, dungeon, occupiedSpaces, darkness, message, map });
+const mapStateToProps = ({ dungeonCrawler: { entities, dungeon, occupiedSpaces, darkness, message, map, ready } }) => ({ entities, dungeon, occupiedSpaces, darkness, message, map, ready });
 
 const mapDispatchToProps = dispatch => ({
   onToggleDarkness: () => dispatch(toggleDarkness()),
@@ -26,6 +26,7 @@ class DungeonCrawler extends PureComponent {
     super();
     this._handleMove = this._handleMove.bind(this);
   }
+  componentDidMount() { this.props.onResetGame(); }
   _handleMove(v) {
     const { occupiedSpaces, map, entities: { player, ...entities } } = this.props;
 
@@ -53,7 +54,7 @@ class DungeonCrawler extends PureComponent {
     /* You'll need to react to prop changes */
     const { classnames } = this.context;
     return (<div className={classnames('dungeon')}>
-      <div className={classnames('dungeon__container')}>
+      {this.props.ready && (<div className={classnames('dungeon__container')}>
         <div className={classnames('dungeon__hud')}>
           <HealthBar health={this.props.entities.player.health} heartValue={20} />
           <ToggleTorch onClick={this.props.onToggleDarkness} value={this.props.darkness} />
@@ -71,14 +72,14 @@ class DungeonCrawler extends PureComponent {
           darkness={this.props.darkness}
         />
 
-      </div>
-
+      </div>)}
       <Message onClick={this.props.onResetGame}>{this.props.message}</Message>
     </div>);
   }
 }
 
 DungeonCrawler.propTypes = {
+  ready: bool.isRequired,
   entities: object.isRequired,
   dungeon: array.isRequired,
   occupiedSpaces: object.isRequired,
