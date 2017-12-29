@@ -10,7 +10,8 @@ import store from '../../common/store';
 const preloadedState = serialize(store.getState());
 
 function main(req, res) {
-  const app = renderToString(<App location={req.url} />);
+  const staticContext = {};
+  const app = renderToString(<App location={req.url} context={staticContext} />);
   const styles = staticAssets.createStylesheets();
   const scripts = staticAssets.createAppScript();
   const html = `
