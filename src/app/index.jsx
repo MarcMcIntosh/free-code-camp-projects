@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import routes from '../common/routes';
@@ -9,4 +9,4 @@ const App = (<Container>
   <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
 </Container>);
 
-render(App, document.getElementById('app'));
+hydrate(App, document.getElementById('app'));
