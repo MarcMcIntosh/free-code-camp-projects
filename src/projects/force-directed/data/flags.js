@@ -1,4 +1,4 @@
 /* eslint-disable */
-import flags from 'file-loader!./flags.json';
+import flags from './flags.json';
 
 export default flags;

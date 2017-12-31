@@ -1,4 +1,4 @@
 /* eslint-disable */
-import globalTemperatureData from 'file-loader!./global-temperature.json';
+import globalTemperatureData from './global-temperature.json';
 
 export default globalTemperatureData;

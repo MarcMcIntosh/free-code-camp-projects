@@ -10,7 +10,11 @@ const output = res('../build/server');
 
 const externals = [].concat(nodeExternals({ whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'] }));
 
-const babelRules = { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' };
+const babelRules = { test: /\.jsx?$/,
+  exclude: /node_modules/,
+  use: 'babel-loader',
+  // options: { modules: false }, // removes un-needed deps with tree shaking
+};
 
 const imageRules = {
   test: /\.(gif|svg|woff(2)?|ttf|eot|png|jpg|jpeg)$/,
@@ -19,6 +23,7 @@ const imageRules = {
 };
 
 const cssOptions = { sourceMap: true, modules: true, localIdentName: '[name]__[local]--[hash:base64:5]', importLoaders: 1 };
+
 const postCssOptions = { indent: 'postcss', sourceMap: true, config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } } };
 
 const cssRules = { test: /\.css$/,
@@ -38,11 +43,20 @@ const scssRules = { test: /\.s(a|c)ss$/,
   ],
 };
 
+const jsonRule = { test: /\.json$/,
+  exclude: /node_modules/,
+  // include: /node_modules\/world-atlas/,
+  loader: 'file-loader',
+  options: { emitFile: false, name: '[path][name].[ext]' },
+  // options: { emitFile: false },
+};
+
 const plugins = [
   new WriteFilePlugin(),
   new LimitChunkCountPlugin({ maxChunks: 1 }),
   new DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
 ];
+
 
 module.exports = {
   name: 'server',
@@ -52,7 +66,7 @@ module.exports = {
   entry: [entry],
   externals,
   output: { path: output, filename: '[name].js', libraryTarget: 'commonjs2' },
-  module: { rules: [imageRules, babelRules, cssRules, scssRules] },
+  module: { rules: [imageRules, babelRules, cssRules, scssRules, jsonRule] },
   resolve: { extensions: ['.js', '.jsx', '.css', '.scss', '.sass'] },
   plugins,
 };

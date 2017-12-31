@@ -1,4 +1,4 @@
 /* eslint-disable */
-import cyclistData from 'file-loader!./cyclist-data.json';
+import cyclistData from './cyclist-data.json';
 
 export default cyclistData;

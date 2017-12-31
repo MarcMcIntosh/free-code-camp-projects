@@ -2,6 +2,13 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
 
+
+const imageRules = {
+  test: /\.(gif|svg|woff(2)?|ttf|eot|png|jpg|jpeg)$/,
+  loader: 'url-loader',
+  options: { limit: 8192, name: '[hash].[ext]', emitFile: true },
+};
+
 module.exports = {
   name: 'client',
   target: 'web',
@@ -14,7 +21,7 @@ module.exports = {
     publicPath: '/static/'
   },
   module: {
-    rules: [
+    rules: [ imageRules,
       {
         test: /\.js$/,
         exclude: /node_modules/,

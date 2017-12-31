@@ -1,4 +1,4 @@
 /* eslint-disable */
-import countries from 'file-loader!./countries.json';
+import countries from './countries.json';
 
 export default countries;

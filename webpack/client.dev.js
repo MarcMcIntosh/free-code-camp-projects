@@ -14,7 +14,12 @@ const output = { filename: '[name].js', chunkFilename: '[name].js', path: res('.
 // const devtool = 'source-map';
 const devtool = 'eval';
 
-const babelRules = { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' };
+const babelRules = {
+  test: /\.jsx?$/,
+  exclude: /node_modules/,
+  use: 'babel-loader',
+  // options: { modules: false }, // removes un-needed deps with tree shaking
+};
 
 const cssOptions = { sourceMap: true, modules: true, localIdentName: '[name]__[local]--[hash:base64:5]', importLoaders: 1 };
 
@@ -40,7 +45,13 @@ const scssRules = { test: /\.s(a|c)ss$/,
 const imageRules = {
   test: /\.(gif|svg|woff(2)?|ttf|eot|png|jpg|jpeg)$/,
   loader: 'url-loader',
-  options: { limit: 8192, name: '[path]-[name].[ext]', emitFile: true },
+  options: { limit: 8192, name: '[name].[ext]', emitFile: true },
+};
+
+const jsonRule = { test: /\.json$/,
+  exclude: /node_modules/,
+  loader: 'file-loader',
+  options: { name: '[path][name].[ext]' },
 };
 
 const plugins = [
@@ -58,7 +69,7 @@ module.exports = {
   devtool,
   entry,
   output,
-  module: { rules: [imageRules, babelRules, cssRules, scssRules] },
+  module: { rules: [imageRules, babelRules, cssRules, scssRules, jsonRule] },
   resolve: { extensions: ['.js', '.jsx', '.css', '.scss', '.sass'] },
   plugins,
 };
