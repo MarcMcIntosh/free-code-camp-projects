@@ -1,41 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom/server';
-// import createHistory from 'history/createMemoryHistory';
+import { renderToString } from 'react-dom/server';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-// important differance
-import App from '../app/App';
+
+import App from './App';
 
 export default ({ clientStats }) => (req, res) => {
-  const app = ReactDOM.renderToString(<App history={history} />)
-  const chunkNames = flushChunkNames()
+  const staticContext = {};
+  const app = renderToString(<App location={req.url} context={staticContext} />);
 
-  const {
-    js,
-    styles,
-    cssHash,
-    scripts,
-    stylesheets
-  } = flushChunks(clientStats, { chunkNames })
+  const chunkNames = flushChunkNames();
 
-  console.log('PATH', req.path)
-  console.log('DYNAMIC CHUNK NAMES RENDERED', chunkNames)
-  console.log('SCRIPTS SERVED', scripts)
-  console.log('STYLESHEETS SERVED', stylesheets)
+  const { js, styles, cssHash, scripts, stylesheets } = flushChunks(clientStats, { chunkNames });
 
-  res.send(
-    `<!doctype html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <title>react-universal-component-boilerplate</title>
-          ${styles}
-        </head>
-        <body>
-          <div id="root">${app}</div>
-          ${cssHash}
-          ${js}
-        </body>
-      </html>`
-  )
-}
+  console.log('PATH', req.path);
+  console.log('DYNAMIC CHUNK NAMES RENDERED', chunkNames);
+  console.log('SCRIPTS SERVED', scripts);
+  console.log('STYLESHEETS SERVED', stylesheets);
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en-GB">
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Free-code-camp projects" />
+        <meta name="author" content="Marc McIntosh" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Marc's project" />
+        <title>Marc's projects</title>
+        ${styles}
+      </head>
+    <body>
+      <div id="root">${app}</div>
+      ${cssHash}
+      ${js}
+    </body>
+  </html>`;
+
+  res.status(200).send(html);
+};
