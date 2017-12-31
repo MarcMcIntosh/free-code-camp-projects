@@ -1,12 +1,15 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import routes from '../common/routes';
-import Container from '../common/Container';
+import AppContainer from 'react-hot-loader/lib/AppContainer';
+import App from './App';
 
-const App = (<Container>
-  <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
-</Container>);
+const render = Component => hydrate(<AppContainer><Component /></AppContainer>, document.getElementById('root'));
 
-hydrate(App, document.getElementById('app'));
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./App', () => {
+    const updatedApp = require('./components/App').default; // eslint-disable-line
+    render(updatedApp);
+  });
+}
+
+render(App);

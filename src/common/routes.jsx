@@ -1,5 +1,5 @@
 // import React from 'react';
-import { About, Gallary } from '../app/pages';
+import { About } from '../app/pages';
 import renderRoute from './renderRoute';
 // import appUrls from './app-urls';
 
@@ -15,6 +15,7 @@ import renderRoute from './renderRoute';
 // import LocalWeather from '../projects/local-weather';
 // import MarkdownPreviewer from '../projects/markdown-previewer';
 // import Pomodoro from '../projects/pomodoro';
+import Portfolio from '../projects/portfolio';
 // import QuoteMachine from '../projects/quote-machine';
 // import RecipeBox from '../projects/recipe-box';
 // import ScatterplotGraph from '../projects/scatterplot-graph';
@@ -24,6 +25,9 @@ import renderRoute from './renderRoute';
 // import TwitchTv from '../projects/twitch-tv';
 // import WikipediaViewer from '../projects/wikipedia-viewer';
 
+// import appData from '../projects/portfolio/appData';
+// const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
+
 const routes = [
   {
     component: renderRoute,
@@ -31,7 +35,7 @@ const routes = [
       {
         path: '/',
         exact: true,
-        component: Gallary,
+        component: Portfolio,
       }, {
         path: '/about', component: About,
       }, /* {

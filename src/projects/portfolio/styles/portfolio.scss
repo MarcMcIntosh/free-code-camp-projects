@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+.preview {
+  composes: mdc-card from $mdc-card;
+  min-width: 320px;
+  max-width: 21.875rem;
+  margin: 24px;
+
+  @media (min-width: 768px) { margin-bottom: 24px; }
+
+  &__block { composes: mdc-card__horizontal-block from $mdc-card; }
+
+  &__primary { composes: mdc-card__primary from $mdc-card; }
+
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+
+  &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
+
+  &__media { composes: mdc-card__media-item from $mdc-card; }
+
+  &__actions { composes: mdc-card__actions from $mdc-card; }
+
+  &__action {
+    composes: mdc-button mdc-button--compact from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+  }
+}
