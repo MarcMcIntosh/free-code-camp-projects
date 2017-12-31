@@ -58,6 +58,7 @@
     "write-file-webpack-plugin": "^4.2.0"
   },
   "scripts": {
+    "start": "npm run clean && cross-env NODE_ENV=development node src/server/dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development nodemon",
     "clean": "rimraf build",

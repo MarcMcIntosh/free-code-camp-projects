@@ -5,7 +5,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const res = p => resolve(__dirname, p);
 
-const entry = res('../server/render.js');
+const entry = res('../src/server/render.jsx');
 const output = res('../build/server');
 
 const externals = [].concat(nodeExternals({ whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'] }));

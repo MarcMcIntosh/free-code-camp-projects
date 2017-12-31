@@ -7,7 +7,7 @@ const render = Component => hydrate(<AppContainer><Component /></AppContainer>, 
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./App', () => {
-    const updatedApp = require('./components/App').default; // eslint-disable-line
+    const updatedApp = require('./App').default; // eslint-disable-line
     render(updatedApp);
   });
 }

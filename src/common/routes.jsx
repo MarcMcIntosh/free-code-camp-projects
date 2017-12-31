@@ -1,5 +1,5 @@
 // import React from 'react';
-import { About } from '../app/pages';
+import About from '../app/pages/About';
 import renderRoute from './renderRoute';
 // import appUrls from './app-urls';
 
