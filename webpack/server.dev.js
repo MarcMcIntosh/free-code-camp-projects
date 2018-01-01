@@ -34,7 +34,9 @@ const cssRules = { test: /\.css$/,
   ],
 };
 
-const scssRules = { test: /\.s(a|c)ss$/,
+const scssRules = {
+  // test: /\.s(a|c)ss$/,
+  test: /\.scss$/,
   use: [
     { loader: 'css-loader/locals', options: Object.assign({}, cssOptions, { importLoaders: 3 }) },
     { loader: 'postcss-loader', options: postCssOptions },

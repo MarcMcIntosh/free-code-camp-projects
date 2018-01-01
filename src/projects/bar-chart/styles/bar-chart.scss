@@ -1,6 +1,6 @@
-@import "./variables";
-@import "./error";
-@import "./loader";
+@import "./variables.scss";
+@import "./error.scss";
+@import "./loader.scss";
 
 .bar-chart {
   composes: mdc-card from $mdc-card;

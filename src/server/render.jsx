@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-
+import favicon from './favicon/space_invader.png';
 import App from './App';
 
 export default ({ clientStats }) => (req, res) => {
@@ -18,8 +18,7 @@ export default ({ clientStats }) => (req, res) => {
   console.log('SCRIPTS SERVED', scripts);
   console.log('STYLESHEETS SERVED', stylesheets);
 
-  const html = `
-    <!DOCTYPE html>
+  const html = `<!DOCTYPE html>
     <html lang="en-GB">
       <head>
         <meta charset="utf-8" />
@@ -33,6 +32,7 @@ export default ({ clientStats }) => (req, res) => {
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Marc's project" />
         <title>Marc's projects</title>
+        <link rel="icon" type="image/png" href="${favicon}" />
         ${styles}
       </head>
     <body>

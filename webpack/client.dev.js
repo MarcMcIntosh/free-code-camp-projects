@@ -10,7 +10,12 @@ const app = res('../src/app/index.jsx');
 const hmr = ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false', 'react-hot-loader/patch'];
 
 const entry = hmr.concat(app);
-const output = { filename: '[name].js', chunkFilename: '[name].js', path: res('../build/client') };
+const output = {
+  filename: '[name].js',
+  chunkFilename: '[name].js',
+  path: res('../build/client'),
+  publicPath: '/',
+};
 // const devtool = 'source-map';
 const devtool = 'eval';
 
@@ -26,20 +31,27 @@ const cssOptions = { sourceMap: true, modules: true, localIdentName: '[name]__[l
 const postCssOptions = { indent: 'postcss', sourceMap: true, config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } } };
 
 const cssRules = { test: /\.css$/,
-  use: ExtractCssChunks.extract({ use: [
-    { loader: 'css-loader', options: cssOptions },
-    { loader: 'postcss-loader', options: postCssOptions },
-    'resolve-url-loader',
-  ] }),
+  use: ExtractCssChunks.extract({
+    fallback: 'style-loader',
+    use: [
+      { loader: 'css-loader', options: cssOptions },
+      { loader: 'postcss-loader', options: postCssOptions },
+      'resolve-url-loader',
+    ],
+  }),
 };
 
-const scssRules = { test: /\.s(a|c)ss$/,
-  use: ExtractCssChunks.extract({ use: [
-    { loader: 'css-loader', options: Object.assign({}, cssOptions, { importLoaders: 3 }) },
-    { loader: 'postcss-loader', options: postCssOptions },
-    'resolve-url-loader',
-    { loader: 'sass-loader', options: { sourceMap: true, includePaths: [res('../node_modules')] } },
-  ] }),
+const scssRules = { // test: /\.s(a|c)ss$/,
+  test: /\.scss$/,
+  use: ExtractCssChunks.extract({
+    fallback: 'style-loader',
+    use: [
+      { loader: 'css-loader', options: Object.assign({}, cssOptions, { importLoaders: 3 }) },
+      { loader: 'postcss-loader', options: postCssOptions },
+      'resolve-url-loader',
+      { loader: 'sass-loader', options: { sourceMap: true, includePaths: [res('../node_modules')] } },
+    ],
+  }),
 };
 
 const imageRules = {

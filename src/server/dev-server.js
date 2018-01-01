@@ -1,4 +1,3 @@
-// eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true }]
 require('colors');
 const express = require('express');
 const webpack = require('webpack');

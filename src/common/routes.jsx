@@ -4,7 +4,7 @@ import renderRoute from './renderRoute';
 // import appUrls from './app-urls';
 
 /* Done with classnames context */
-// import BarChart from '../projects/bar-chart';
+import BarChart from '../projects/bar-chart';
 // import Calculator from '../projects/calculator';
 // import DataGlobe from '../projects/data-globe';
 // import DungeonCrawler from '../projects/dungeon-crawler';
@@ -25,23 +25,18 @@ import Portfolio from '../projects/portfolio';
 // import TwitchTv from '../projects/twitch-tv';
 // import WikipediaViewer from '../projects/wikipedia-viewer';
 
-// import appData from '../projects/portfolio/appData';
-// const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
+import appData from '../projects/portfolio/appData';
+
+const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
 const routes = [
   {
     component: renderRoute,
     routes: [
-      {
-        path: '/',
-        exact: true,
-        component: Portfolio,
-      }, {
-        path: '/about', component: About,
-      }, /* {
-        path: appUrls.barChart.url, component: BarChart,
-      },
-      {
+      { path: '/', exact: true, component: Portfolio },
+      { path: '/about', component: About },
+      { path: appUrls.barChart, component: BarChart },
+      /* {
         path: appUrls.calculator.url, component: Calculator,
       },  {
         path: appUrls.dataGlobe.url, component: DataGlobe,
