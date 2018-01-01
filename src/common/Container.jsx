@@ -33,3 +33,4 @@ ReduxContainer.propTypes = {
 };
 
 export default ReduxContainer;
+export favicon from './assets/favicon.png';

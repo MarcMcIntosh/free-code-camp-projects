@@ -2,8 +2,12 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-import favicon from './favicon/space_invader.png';
-import App from './App';
+import { StaticRouter } from 'react-router';
+import { renderRoutes } from 'react-router-config';
+import routes from '../common/routes';
+import Container, { favicon } from '../common/Container';
+
+const App = props => (<Container><StaticRouter {...props}>{renderRoutes(routes)}</StaticRouter></Container>);
 
 export default ({ clientStats }) => (req, res) => {
   const staticContext = {};
