@@ -10,11 +10,12 @@ import classnames from 'classnames/bind';
 import { fetchData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
-// import styles from './styles/bar-chart.scss';
+import styles from './styles/main.scss';
+// import styles from './styles/test.scss';
 
 import draw from './bar-chart';
 
-const styles = {};
+// const styles = {};
 
 const mapStateToProps = ({ barChart: { data, fetching, error } }) => ({ data, fetching, error });
 

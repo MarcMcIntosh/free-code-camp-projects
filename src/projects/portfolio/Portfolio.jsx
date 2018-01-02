@@ -5,7 +5,7 @@ import classnames from 'classnames/bind';
 import styles from './styles/portfolio.scss';
 import Preview from './components/Preview';
 
-const mapStateToProps = ({ apps }) => ({ apps });
+const mapStateToProps = ({ portfolio: { apps } }) => ({ apps });
 
 const mapDispatchToProps = () => ({});
 
