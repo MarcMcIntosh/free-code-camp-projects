@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { array, string, func, oneOf, bool } from 'prop-types';
+import classnames from './styles';
 import { getData, setSort } from './actions';
 import User from './components/User';
 import Tab from './components/Tab';
@@ -30,23 +31,24 @@ const mapDispatchToProps = dispatch => ({
 class LeaderBoard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.clasnsnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this.props.fetchData(); }
+
   render() {
     const { data, display, fetching, error } = this.props;
-    const { classnames } = this.context;
-    return (<div className={classnames('leader-board')}>
+    return (<div className={this.classnames('leader-board')}>
 
-      <nav className={classnames('leader-board__tab-bar')}>
+      <nav className={this.classnames('leader-board__tab-bar')}>
         <Tab value="recent" active={(display === 'recent')} onClick={this.props.sortBy}>Recent</Tab>
         <Tab value="alltime" active={(display === 'alltime')} onClick={this.props.sortBy}>All Time</Tab>
-        <span className={classnames('leader-board__tab-indicator')} />
+        <span className={this.classnames('leader-board__tab-indicator')} />
       </nav>
 
       {error && !fetching && (<ErrorMessage onClick={this.props.fetchData}>{error}</ErrorMessage>)}
 
-      <ul className={classnames('leader-board__users')}>
+      <ul className={this.classnames('leader-board__users')}>
         {fetching && (<Loader />)}
         {data.map((d, i) => (<User key={d.username} name={d.username} src={d.img} points={d[display]} index={i + 1} />))}
       </ul>
@@ -63,6 +65,6 @@ LeaderBoard.propTypes = {
   sortBy: func.isRequired,
 };
 
-LeaderBoard.contextTypes = { classnames: func.isRequired };
+LeaderBoard.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderBoard);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func, number, array, bool } from 'prop-types';
+import classnames from './styles';
 import {
   setGame,
   setSpeed,
@@ -33,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
 class GameOfLife extends Component {
   constructor() {
     super();
+    this.classnames = classnames;
     this._handleClick = this._handleClick.bind(this);
     this._toggleRules = this._toggleRules.bind(this);
     this._toggleSettings = this._toggleSettings.bind(this);
@@ -44,6 +46,8 @@ class GameOfLife extends Component {
       showRules: false,
     };
   }
+  getChildContext() { return { classnames: this.classnames }; }
+
   componentDidMount() {
     window.addEventListener('resize', this._setSize);
     window.addEventListener('keydown', this._handleKeyPress);
@@ -76,15 +80,14 @@ class GameOfLife extends Component {
     this.setState({ showSettings: !this.state.showSettings });
   }
   render() {
-    const { classnames } = this.context;
     const isBlank = [].concat(...this.props.game).reduce((a, b) => a + b, 0) === 0;
-    return (<div className={classnames('game-of-life')} style={{ width: this.state.width }} >
-      <header className={classnames('game-of-life__primary')}>
-        <h1 className={classnames('game-of-life__title')}>
+    return (<div className={this.classnames('game-of-life')} style={{ width: this.state.width }} >
+      <header className={this.classnames('game-of-life__primary')}>
+        <h1 className={this.classnames('game-of-life__title')}>
           {'Conway\'s Game of Life'}
         </h1>
         <hr />
-        <h2 className={classnames('game-of-life__subtitle')}>
+        <h2 className={this.classnames('game-of-life__subtitle')}>
           Generation: {this.props.gen}
         </h2>
       </header>
@@ -95,7 +98,7 @@ class GameOfLife extends Component {
 
       {this.state.showSettings && (<Settings width={this.props.width} height={this.props.height} onSetSize={this.props.onSetSize} running={this.props.running} speed={this.props.speed} onSetSpeed={this.props.onSetSpeed} />)}
 
-      <div className={classnames('game-of-life__media')} >
+      <div className={this.classnames('game-of-life__media')} >
         <Board game={this.props.game} speed={this.props.speed} setGame={this.props.onSetGame} running={this.props.running} onClick={this._handleClick} />
       </div>
     </div>);
@@ -118,6 +121,6 @@ GameOfLife.propTypes = {
   onSetRandom: func.isRequired,
 };
 
-GameOfLife.contextTypes = { classnames: func.isRequired };
+GameOfLife.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOfLife);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { string, func } from 'prop-types';
+import classnames from './styles';
 import { onInput } from './actions';
 import MarkdownBox from './components/MarkdownBox';
 
@@ -16,19 +17,21 @@ class MarkdownPreviewer extends Component {
     this.state = { focused: false };
     this._onFocus = this._onFocus.bind(this);
     this._onBlur = this._onBlur.bind(this);
+    this.classnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   _onFocus() { this.setState({ focused: true }); }
   _onBlur() { this.setState({ focused: false }); }
   render() {
-    const { props: { onChange, value }, context: { classnames } } = this;
-    return (<div className={classnames('markdown-previewer')}>
-      <div className={classnames('markdown-previewer__container')}>
+    const { onChange, value } = this.props;
+    return (<div className={this.classnames('markdown-previewer')}>
+      <div className={this.classnames('markdown-previewer__container')}>
 
-        <div className={classnames('markdown-previewer__cell')}>
-          <div className={classnames('markdown-previewer__textfield', this.state.focused && 'markdown-previewer__textfield--focused')}>
+        <div className={this.classnames('markdown-previewer__cell')}>
+          <div className={this.classnames('markdown-previewer__textfield', this.state.focused && 'markdown-previewer__textfield--focused')}>
             <textarea
               name="MarkDown"
-              className={classnames('markdown-previewer__input')}
+              className={this.classnames('markdown-previewer__input')}
               value={value}
               rows="10"
               onChange={onChange}
@@ -36,15 +39,15 @@ class MarkdownPreviewer extends Component {
               onBlur={this._onBlur}
               wrap="on"
             />
-            <label htmlFor="MarkDown" className={classnames('markdown-previewer__label')}>MarkDown</label>
+            <label htmlFor="MarkDown" className={this.classnames('markdown-previewer__label')}>MarkDown</label>
           </div>
         </div>
 
-        <div className={classnames('markdown-previewer__cell')}>
+        <div className={this.classnames('markdown-previewer__cell')}>
           <MarkdownBox
             name="markdown-output"
             markdown={value}
-            className={classnames('markdown-previewer__output')}
+            className={this.classnames('markdown-previewer__output')}
           />
         </div>
       </div>
@@ -57,6 +60,6 @@ MarkdownPreviewer.propTypes = {
   onChange: func.isRequired,
 };
 
-MarkdownPreviewer.contextTypes = { classnames: func.isRequired };
+MarkdownPreviewer.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarkdownPreviewer);

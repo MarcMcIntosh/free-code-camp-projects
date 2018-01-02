@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { number, func, oneOf, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
-// import KeyBoard from './components/KeyBoard';
+import classnames from './styles';
 import Key from './components/Key';
 import AudioContext from './components/AudioContext';
-// import IconToggle from './components/IconToggle';
 import Settings from './components/Settings';
 import Round from './components/Round';
 
@@ -89,6 +88,7 @@ class Simon extends Component {
     this.auto = this.auto.bind(this);
     this.ai = this.ai.bind(this);
     this._playerInput = this._playerInput.bind(this);
+    this.classnames = classnames;
   }
   componentDidUpdate(prevProps) {
     const { turn, inGame, winner } = this.props;
@@ -135,25 +135,24 @@ class Simon extends Component {
     this.props.onAiStart(timerId);
   }
   render() {
-    const { classnames } = this.context;
-    return (<div className={classnames('simon', {
+    return (<div className={this.classnames('simon', {
       'simon--error': this.props.error,
       'simon--winner': this.props.winner,
     })}
     >
 
-      <i role="button" title="settings" tabIndex="-1" onClick={this.props.onToggleSettings} className={classnames('simon__menu')} >{(!this.props.settings) ? 'settings' : 'close'}</i>
+      <i role="button" title="settings" tabIndex="-1" onClick={this.props.onToggleSettings} className={this.classnames('simon__menu')} >{(!this.props.settings) ? 'settings' : 'close'}</i>
 
       <Settings isOpen={this.props.settings} wave={this.props.wave} volume={this.props.volume} mode={this.props.mode} onToggleWave={this.props.onToggleWave} onToggleMode={this.props.onToggleMode} onSetVolume={this.props.onSetVolume} controlKeys={this.props.controlKeys} />
 
       <Round
-        className={classnames('simon__round')}
+        className={this.classnames('simon__round')}
         data={this.props.round}
         title={(!this.props.inGame) ? 'start' : 'reset'}
         onClick={(!this.props.inGame) ? (this.props.onStartGame) : (this.props.onResetGame)}
       />
-      <div className={classnames('simon__grid')}>
-        <AudioContext className={classnames('simon__keys')} gain={this.props.volume / 100}>
+      <div className={this.classnames('simon__grid')}>
+        <AudioContext className={this.classnames('simon__keys')} gain={this.props.volume / 100}>
           {this.props.notes.map((note, index) => {
             const controlKey = this.props.controlKeys[index];
             const color = this.props.colors[index];
@@ -168,7 +167,7 @@ class Simon extends Component {
               bpm={this.props.bpm}
               playerInput={this._playerInput}
               ctKey={controlKey}
-              className={classnames('simon__key', `simon__key--${color}`, { [`simon__key--${color}--active`]: this.props.tone === note })}
+              className={this.classnames('simon__key', `simon__key--${color}`, { [`simon__key--${color}--active`]: this.props.tone === note })}
             />);
           })}
         </AudioContext>
@@ -214,6 +213,6 @@ Simon.propTypes = {
 
 Simon.defaultProps = { controlKeys: ['h', 'j', 'k', 'l'] };
 
-Simon.contextTypes = { classnames: func.isRequired };
+Simon.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Simon);

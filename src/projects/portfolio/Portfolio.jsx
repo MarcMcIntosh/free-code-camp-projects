@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
-import classnames from 'classnames/bind';
-import styles from './styles/portfolio.scss';
+import classnames from './styles';
 import Preview from './components/Preview';
 
 const mapStateToProps = ({ portfolio: { apps } }) => ({ apps });
@@ -12,7 +11,7 @@ const mapDispatchToProps = () => ({});
 class Portfolio extends PureComponent {
   constructor() {
     super();
-    this.classnames = classnames.bind(styles);
+    this.classnames = classnames;
   }
   getChildContext() {
     return { classnames: this.classnames };

@@ -27,7 +27,7 @@ class GraphContainer extends PureComponent {
     if (!this.props.has_meteroites || !this.props.has_topology) {
       this.fetchData();
     } else {
-      this.draw(this.root, this.props.topology, this.props.meteorites, this.context.classnames);
+      this.draw(this.root, this.props.topology, this.props.meteorites, this.classnames);
     }
   }
   componentDidUpdate() {

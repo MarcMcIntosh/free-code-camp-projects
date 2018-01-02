@@ -7,7 +7,7 @@ import {
   oneOfType,
   object,
 } from 'prop-types';
-
+import classnames from './styles';
 import { fetchData } from './actions';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
@@ -23,7 +23,9 @@ class HeatMap extends PureComponent {
   constructor(props) {
     super(props);
     this._draw = heatMap;
+    this.classnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {
     if (Object.keys(this.props.data).length === 0) {
       this.props.onFetchData();
@@ -31,18 +33,17 @@ class HeatMap extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     if (Object.keys(prevProps.data).length === 0 && Object.keys(this.props.data).length > 0) {
-      this._draw(this.container, this.props.data, this.context.classnames);
+      this._draw(this.container, this.props.data, this.classnames);
     }
   }
   render() {
-    const { classnames } = this.context;
-    return (<div className={classnames('heat-map')}>
+    return (<div className={this.classnames('heat-map')}>
       {this.props.fetching && (<Loader />)}
-      <header className={classnames('heat-map__header')}>
-        <h1 className={classnames('heat-map__title')}>
+      <header className={this.classnames('heat-map__header')}>
+        <h1 className={this.classnames('heat-map__title')}>
           Monthly Global Land-Surface Temperature
         </h1>
-        <h2 className={classnames('heat-map__subtitle')}>
+        <h2 className={this.classnames('heat-map__subtitle')}>
           Data source: <a href="https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json" title="FreeCodeCamp Project Reference Data" target="_blank" rel="noopener noreferrer">FreeCodeCamp</a>
         </h2>
         {this.props.error && (<ErrorMessage onClick={this.props.onFetchData}>{String(this.props.error)}</ErrorMessage>)}
@@ -63,7 +64,7 @@ HeatMap.propTypes = {
   data: object.isRequired,
 };
 
-HeatMap.contextTypes = { classnames: func.isRequired };
+HeatMap.childContextTypes = { classnames: func.isRequired };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeatMap);

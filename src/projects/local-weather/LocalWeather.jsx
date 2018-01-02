@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { func, number, string, bool, object } from 'prop-types';
 import { connect } from 'react-redux';
+import classnames from './styles';
 import Weather from './components/Weather';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
@@ -25,7 +26,9 @@ class LocalWeather extends PureComponent {
   constructor(props) {
     super(props);
     this._geo = this._geo.bind(this);
+    this.classnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this._geo(); }
   componentWillReceiveProps(nextProps) {
     const { latitude, timestamp, longitude, hasCoords, isFetching, apiKey } = nextProps;
@@ -52,18 +55,17 @@ class LocalWeather extends PureComponent {
     return this.props.setWatchId(id);
   }
   render() {
-    const { classnames } = this.context;
-    return (<div className={classnames('local-weather__card')}>
-      <header className={classnames('local-weather__primary')}>
-        <h1 className={classnames('local-weather__title')}>
+    return (<div className={this.classnames('local-weather__card')}>
+      <header className={this.classnames('local-weather__primary')}>
+        <h1 className={this.classnames('local-weather__title')}>
           Local weather
         </h1>
-        <h2 className={classnames('local-weather__subtitle')}>
+        <h2 className={this.classnames('local-weather__subtitle')}>
           Sourced from <a href="http://openweathermap.org/">openweathermap.org</a>.
         </h2>
         {this.props.isFetching ? (<Loader />) : (<hr />)}
       </header>
-      <div className={classnames('local-weather__media')}>
+      <div className={this.classnames('local-weather__media')}>
         {this.props.weather && (<Weather
           weather={this.props.weather}
           icon={this.props.icon}
@@ -74,7 +76,7 @@ class LocalWeather extends PureComponent {
         />)}
       </div>
       {this.props.error && (<ErrorMessage onClick={this._geo}>{this.props.error}</ErrorMessage>)}
-      <div className={classnames('local-weather__supporting-text')}>{Object.keys(this.props.details).length > 0 && (<Details {...this.props.details} timestamp={this.props.timestamp} className={classnames('local-weather__details')} />)}</div>
+      <div className={this.classnames('local-weather__supporting-text')}>{Object.keys(this.props.details).length > 0 && (<Details {...this.props.details} timestamp={this.props.timestamp} className={this.classnames('local-weather__details')} />)}</div>
     </div>);
   }
 }
@@ -106,6 +108,6 @@ LocalWeather.defaultProps = {
   apiKey: '8098f170d355d6b8099e49533b084a65',
 };
 
-LocalWeather.contextTypes = { classnames: func.isRequired };
+LocalWeather.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalWeather);

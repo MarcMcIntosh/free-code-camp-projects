@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { func, bool, number, array } from 'prop-types';
 import ReactModal from 'react-modal';
+import classnames from './styles';
 import RecipeForm from './components/form';
 import Menu from './components/menu';
 import Recipe from './components/recipe';
@@ -24,39 +25,34 @@ const mapDispatchToProps = dispatch => ({
   onDelete: n => dispatch(deleteRecipe(+n)),
 });
 
-const RecipeBox = ({
-  editting,
-  reading,
-  onCreate,
-  recipes,
-  onUpdate,
-  onRead,
-  onDelete,
-}, {
-  classnames,
-}) => (<div className={classnames('recipe-box')}>
+class RecipeBox extends PureComponent {
+  constructor() {
+    super();
+    this.classnames = classnames;
+  }
+  getChildContext() { return { classnames: this.classnames }; }
 
-  <Menu recipes={recipes} onRead={onRead} onCreate={() => onCreate(true)} />
+  render() {
+    const { editting, reading, onCreate, recipes, onUpdate, onRead, onDelete } = this.props;
+    return (<div className={this.classnames('recipe-box')}>
+      <Menu recipes={recipes} onRead={onRead} onCreate={() => onCreate(true)} />
 
-  <ReactModal
-    isOpen={editting || reading >= 0}
-    onRequestClose={(event) => {
-      event.preventDefault();
-      onCreate(false);
-      onRead(-1);
-    }}
-    contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
-    className={classnames('recipe-box-modal__container')}
-    overlayClassName={classnames('recipe-box-modal__overlay')}
-  >
-    <div>
-      {editting && (<RecipeForm initialValues={(reading >= 0) ? recipes[reading] : { ingredients: [null] }} onSubmit={values => onUpdate({ index: reading, values })} onCancel={() => onCreate(false)} />)}
+      <ReactModal
+        isOpen={editting || reading >= 0}
+        onRequestClose={(event) => { event.preventDefault(); onCreate(false); onRead(-1); }}
+        contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
+        className={this.classnames('recipe-box-modal__container')}
+        overlayClassName={this.classnames('recipe-box-modal__overlay')}
+      >
+        <div>
+          {editting && (<RecipeForm initialValues={(reading >= 0) ? recipes[reading] : { ingredients: [null] }} onSubmit={values => onUpdate({ index: reading, values })} onCancel={() => onCreate(false)} />)}
 
-      {!editting && reading >= 0 && (<Recipe recipe={recipes[reading]} onEdit={() => onCreate(true)} onDelete={() => onDelete(reading)} />)}
-    </div>
-
-  </ReactModal>
-</div>);
+          {!editting && reading >= 0 && (<Recipe recipe={recipes[reading]} onEdit={() => onCreate(true)} onDelete={() => onDelete(reading)} />)}
+        </div>
+      </ReactModal>
+    </div>);
+  }
+}
 
 RecipeBox.propTypes = {
   onCreate: func.isRequired,
@@ -68,7 +64,7 @@ RecipeBox.propTypes = {
   recipes: array.isRequired,
 };
 
-RecipeBox.contextTypes = {
+RecipeBox.childContextTypes = {
   classnames: func.isRequired,
 };
 

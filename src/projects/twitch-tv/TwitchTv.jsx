@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { string, array, object, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
+import classnames from './styles';
 import { fetchUsers, toggleDisplay } from './actions';
 import UserList from './components/UserList';
 
@@ -12,6 +13,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class TwitchTv extends PureComponent {
+  constructor() {
+    super();
+    this.classnames = classnames;
+  }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {
     this.props.fetchUsers(this.userUrls());
   }
@@ -27,14 +33,13 @@ class TwitchTv extends PureComponent {
     return [].concat(channels, streams);
   }
   render() {
-    const { classnames } = this.context;
-    return (<div className={classnames('twitch-tv')}>
-      <section className={classnames('twitch-tv__primary')}>
-        <h1 className={classnames('twitch-tv__title')}>Twitch TV Streams</h1>
+    return (<div className={this.classnames('twitch-tv')}>
+      <section className={this.classnames('twitch-tv__primary')}>
+        <h1 className={this.classnames('twitch-tv__title')}>Twitch TV Streams</h1>
       </section>
-      <nav className={classnames('twitch-tv__tab-bar')}>   {this.props.filters.map(d => (<a
+      <nav className={this.classnames('twitch-tv__tab-bar')}>   {this.props.filters.map(d => (<a
         key={d}
-        className={classnames('twitch-tv__tab', this.props.display === d && 'twitch-tv__tab--active')}
+        className={this.classnames('twitch-tv__tab', this.props.display === d && 'twitch-tv__tab--active')}
         role="presentation"
         value={d}
         onClick={(event) => { event.preventDefault(); return this.props.setFilter(d); }}
@@ -62,6 +67,6 @@ TwitchTv.defaultProps = {
   filters: ['all', 'online', 'offline'],
 };
 
-TwitchTv.contextTypes = { classnames: func.isRequired };
+TwitchTv.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TwitchTv);
