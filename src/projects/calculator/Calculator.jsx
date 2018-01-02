@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { handleUserInput } from './actions';
 import Buttons from './components/CalculatorButtons';
 import Display from './components/Display';
+import classnames from './styles';
 
 const mapStateToProps = ({ calculator: { display } }) => ({ display });
 
@@ -16,7 +17,9 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this._onKeyPress = this._onKeyPress.bind(this);
+    this.classnanmes = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {
     window.addEventListener('keydown', this._onKeyPress);
   }
@@ -41,7 +44,7 @@ class Calculator extends Component {
     return void 0;
   }
   render() {
-    return (<div className={this.context.classnames('calculator')}>
+    return (<div className={this.classnames('calculator')}>
       <Display value={this.props.display} />
       <Buttons onClick={this.props.handleClick} />
     </div>);
@@ -54,6 +57,7 @@ Calculator.propTypes = {
   handleClick: func.isRequired,
 };
 
-Calculator.contextTypes = { classnames: func.isRequired };
+Calculator.childContextTypes = { classnames: func.isRequired };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculator);

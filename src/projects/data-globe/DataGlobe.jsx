@@ -5,26 +5,10 @@ import drawGraph from './data-globe';
 import { fetchMtrData, fetchGeoData } from './actions';
 import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
+import classnames from './styles';
 
-const mapStateToProps = ({
-  dataGlobe: {
-    topology,
-    meteorites,
-    error_topology,
-    error_meteorites,
-    fetching_topology,
-    fetching_meteorites,
-  },
-}) => ({
-  topology,
-  meteorites,
-  error_topology,
-  error_meteorites,
-  fetching_topology,
-  fetching_meteorites,
-  has_topology: Object.keys(topology).length > 0,
-  has_meteroites: Object.keys(meteorites).length > 0,
-});
+const mapStateToProps = ({ dataGlobe: { topology, meteorites, error_topology, error_meteorites, fetching_topology, fetching_meteorites }, // eslint-disable-line
+}) => ({ topology, meteorites, error_topology, error_meteorites, fetching_topology, fetching_meteorites, has_topology: Object.keys(topology).length > 0, has_meteroites: Object.keys(meteorites).length > 0 });
 
 const mapDispatchToProps = dispatch => ({
   fetchMeteorites: () => dispatch(fetchMtrData()),
@@ -36,7 +20,9 @@ class GraphContainer extends PureComponent {
     super(props);
     this.draw = drawGraph;
     this.fetchData = this.fetchData.bind(this);
+    this.clasnsnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {
     if (!this.props.has_meteroites || !this.props.has_topology) {
       this.fetchData();
@@ -55,17 +41,16 @@ class GraphContainer extends PureComponent {
     if (!this.props.fetching_topology && !this.props.has_topology) { this.props.fetchTopology(); }
   }
   render() {
-    const { classnames } = this.context;
     const error = (this.props.error_meteorites || this.props.error_topology);
     const isLoading = (!this.props.has_topology || !this.props.has_meteroites || this.props.fetching_topology || this.props.fetching_meteorites);
-    return (<div className={classnames('data-globe')}>
-      <section className={classnames('data-globe__header')}>
-        <h1 className={classnames('data-globe__title')}>Recorded meteroite landing zones</h1>
-        <h2 className={classnames('data-globe__subtitle')}>Left click to zoom in and hold shift and click to zoom out</h2>
+    return (<div className={this.classnames('data-globe')}>
+      <section className={this.classnames('data-globe__header')}>
+        <h1 className={this.classnames('data-globe__title')}>Recorded meteroite landing zones</h1>
+        <h2 className={this.classnames('data-globe__subtitle')}>Left click to zoom in and hold shift and click to zoom out</h2>
       </section>
       <div className="data-globe__container" ref={(c) => { this.root = c; }} />
 
-      <section className={classnames('data-globe__footer')}>
+      <section className={this.classnames('data-globe__footer')}>
         {isLoading && <Loader />}
         {error && <ErrorMessage onClick={this.fetchData}>{this.props.error_topology || this.props.error_meteorites}</ErrorMessage>}
       </section>
@@ -86,7 +71,7 @@ GraphContainer.propTypes = {
   fetchTopology: func.isRequired,
 };
 
-GraphContainer.contextTypes = { classnames: func.isRequired };
+GraphContainer.childContextTypes = { classnames: func.isRequired };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(GraphContainer);

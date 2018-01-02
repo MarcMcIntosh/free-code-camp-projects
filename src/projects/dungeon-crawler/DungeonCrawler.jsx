@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { func, object, array, bool, string } from 'prop-types';
 import { connect } from 'react-redux';
+import classnames from './styles';
 import { tileSize, SIGHT, tileType } from './GameConstants';
 import floorTile from './styles/sprites/floors.png';
 import HealthBar from './components/HealthBar';
@@ -25,7 +26,9 @@ class DungeonCrawler extends PureComponent {
   constructor() {
     super();
     this._handleMove = this._handleMove.bind(this);
+    this.classnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this.props.onResetGame(); }
   _handleMove(v) {
     const { occupiedSpaces, map, entities: { player, ...entities } } = this.props;
@@ -52,10 +55,9 @@ class DungeonCrawler extends PureComponent {
   }
   render() {
     /* You'll need to react to prop changes */
-    const { classnames } = this.context;
-    return (<div className={classnames('dungeon')}>
-      {this.props.ready && (<div className={classnames('dungeon__container')}>
-        <div className={classnames('dungeon__hud')}>
+    return (<div className={this.classnames('dungeon')}>
+      {this.props.ready && (<div className={this.classnames('dungeon__container')}>
+        <div className={this.classnames('dungeon__hud')}>
           <HealthBar health={this.props.entities.player.health} heartValue={20} />
           <ToggleTorch onClick={this.props.onToggleDarkness} value={this.props.darkness} />
           <Weapon src={floorTile} {...this.props.entities.player.weapon.tile} />
@@ -95,6 +97,6 @@ DungeonCrawler.propTypes = {
   fight: func.isRequired,
 };
 
-DungeonCrawler.contextTypes = { classnames: func.isRequired };
+DungeonCrawler.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DungeonCrawler);
