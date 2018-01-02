@@ -1,27 +1,26 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
-import barChart from '../../projects/bar-chart/reducer';
-import calculator from '../../projects/calculator/reducer';
-import dataGlobe from '../../projects/data-globe/reducer';
-import dungeonCrawler from '../../projects/dungeon-crawler/reducer';
-import forceDirected from '../../projects/force-directed/reducer';
-import gameOfLife from '../../projects/game-of-life/reducer';
-import heatMap from '../../projects/heat-map/reducer';
-import leaderBoard from '../../projects/leader-board/reducer';
-import localWeather from '../../projects/local-weather/reducer';
-import markdownPreviewer from '../../projects/markdown-previewer/reducer';
-import pomodoroClock from '../../projects/pomodoro/reducer';
+import { reducer as barChart } from '../../projects/bar-chart';
+import { reducer as calculator } from '../../projects/calculator';
+import { reducer as dataGlobe } from '../../projects/data-globe';
+import { reducer as dungeonCrawler } from '../../projects/dungeon-crawler';
+import { reducer as forceDirected } from '../../projects/force-directed';
+import { reducer as gameOfLife } from '../../projects/game-of-life';
+import { reducer as heatMap } from '../../projects/heat-map';
+import { reducer as leaderBoard } from '../../projects/leader-board';
+import { reducer as localWeather } from '../../projects/local-weather';
+import { reducer as markdownPreviewer } from '../../projects/markdown-previewer';
+import { reducer as pomodoroClock } from '../../projects/pomodoro';
 import { reducer as portfolio } from '../../projects/portfolio';
-
-import quoteMachine from '../../projects/quote-machine/reducer';
-import recipeBox from '../../projects/recipe-box/reducer';
-import scatterPlotGraph from '../../projects/scatterplot-graph/reducer';
-import simon from '../../projects/simon/reducer';
-import ticTacToe from '../../projects/tic-tac-toe/reducer';
-import tributePage from '../../projects/tribute-page/reducer';
-import twitchTv from '../../projects/twitch-tv/reducer';
-import wikipediaViewer from '../../projects/wikipedia-viewer/reducer';
+import { reducer as quoteMachine } from '../../projects/quote-machine';
+import { reducer as recipeBox } from '../../projects/recipe-box';
+import { reducer as scatterPlotGraph } from '../../projects/scatterplot-graph';
+import { reducer as simon } from '../../projects/simon';
+import { reducer as ticTacToe } from '../../projects/tic-tac-toe';
+import { reducer as tributePage } from '../../projects/tribute-page';
+import { reducer as twitchTv } from '../../projects/twitch-tv';
+import { reducer as wikipediaViewer } from '../../projects/wikipedia-viewer';
 
 
 const reducer = combineReducers({

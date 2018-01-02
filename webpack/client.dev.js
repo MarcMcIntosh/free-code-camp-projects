@@ -9,7 +9,11 @@ const res = p => resolve(__dirname, p);
 const app = res('../src/app/index.jsx');
 const hmr = ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false', 'react-hot-loader/patch'];
 
-const entry = hmr.concat(app);
+const entry = {
+  main: hmr.concat(app),
+  // vendor: ['react', 'react-redux', 'classnames/bind'],
+};
+
 const output = {
   filename: '[name].js',
   chunkFilename: '[name].js',
@@ -69,7 +73,11 @@ const jsonRule = { test: /\.json$/,
 const plugins = [
   new WriteFilePlugin(),
   new ExtractCssChunks(),
-  new CommonsChunkPlugin({ names: ['bootstrap'], filename: '[name].js', minChunks: Infinity }),
+  new CommonsChunkPlugin({
+    names: ['bootstrap'],
+    filename: '[name].js',
+    minChunks: Infinity,
+  }),
   new HotModuleReplacementPlugin(),
   new NoEmitOnErrorsPlugin(),
   new DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
