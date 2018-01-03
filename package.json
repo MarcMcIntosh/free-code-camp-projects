@@ -31,7 +31,6 @@
     "file-loader": "^0.11.2",
     "lerna": "^2.5.1",
     "node-sass": "^4.7.2",
-    "nodemon": "^1.14.6",
     "postcss-cssnext": "^3.0.2",
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.0.9",
@@ -59,13 +58,10 @@
     "write-file-webpack-plugin": "^4.2.0"
   },
   "scripts": {
-    "start": "npm run clean && cross-env NODE_ENV=development node src/server/dev-server.js",
+    "start": "npm run clean && cross-env NODE_ENV=development node webpack/dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development nodemon",
     "clean": "rimraf build/*",
-    "build": "npm run clean && cross-env NODE_ENV=production npm run webpack -- --env.browser && NODE_ENV=production npm run webpack -- --env.server",
-    "build:dev": "cross-env NODE_ENV=development npm run webpack -- --env.server",
-    "webpack": "webpack --colors --display-error-details --config ./webpack/webpack.config.js"
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --colors --display-error-details --config ./webpack/dist.config.js"
   },
   "repository": {
     "type": "git",

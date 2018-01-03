@@ -11,16 +11,25 @@ const App = props => (<Container><StaticRouter {...props}>{renderRoutes(routes)}
 
 export default ({ clientStats }) => (req, res) => {
   const staticContext = {};
+  /* not req url include query strings */
   const app = renderToString(<App location={req.url} context={staticContext} />);
 
   const chunkNames = flushChunkNames();
 
-  const { js, styles, cssHash, scripts, stylesheets } = flushChunks(clientStats, { chunkNames });
+  const {
+    js,
+    styles,
+    cssHash,
+    // scripts, stylesheets,
+  } = flushChunks(clientStats, { chunkNames });
 
-  console.log('PATH', req.path);
-  console.log('DYNAMIC CHUNK NAMES RENDERED', chunkNames);
-  console.log('SCRIPTS SERVED', scripts);
-  console.log('STYLESHEETS SERVED', stylesheets);
+  /*
+    console.log('PATH', req.path, '\n');
+    console.log('URL', req.url);
+    console.log('DYNAMIC CHUNK NAMES RENDERED', chunkNames);
+    console.log('SCRIPTS SERVED', scripts);
+    console.log('STYLESHEETS SERVED', stylesheets);
+  */
 
   const html = `<!DOCTYPE html>
     <html lang="en-GB">

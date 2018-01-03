@@ -1,20 +1,18 @@
 require('colors');
 const express = require('express');
 const webpack = require('webpack');
-// const noFavicon = require('express-no-favicons')
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const clientConfig = require('../../webpack/client.dev');
-const serverConfig = require('../../webpack/server.dev');
-const clientConfigProd = require('../../webpack/client.prod');
-const serverConfigProd = require('../../webpack/server.prod');
+const clientConfig = require('./client.dev');
+const serverConfig = require('./server.dev');
+const clientConfigProd = require('./client.prod');
+const serverConfigProd = require('./server.prod');
 
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;
 const DEV = process.env.NODE_ENV === 'development';
 const app = express();
-// app.use(noFavicon());
 
 let isBuilt = false;
 
