@@ -24,6 +24,9 @@ export const gainXp = xp => ({ type: GAIN_XP, xp });
 export const DAMAGE = prefix('DAMAGE');
 export const damage = (entityName, value) => ({ type: DAMAGE, entityName, value });
 
+export const ON_PRESS = prefix('ON_PRESS');
+export const onPress = (payload = 0) => ({ type: ON_PRESS, payload });
+
 export const HEAL = prefix('HEAL');
 export const heal = (entityName, value) => ({
   type: HEAL, entityName, value });

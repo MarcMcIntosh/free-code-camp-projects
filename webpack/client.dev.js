@@ -72,7 +72,9 @@ const jsonRule = { test: /\.json$/,
 
 const plugins = [
   new WriteFilePlugin(),
-  new ExtractCssChunks(),
+  new ExtractCssChunks({
+    ignoreOrder: true,
+  }),
   new CommonsChunkPlugin({
     names: ['bootstrap'],
     filename: '[name].js',

@@ -20,7 +20,7 @@ class GraphContainer extends PureComponent {
     super(props);
     this.draw = drawGraph;
     this.fetchData = this.fetchData.bind(this);
-    this.clasnsnames = classnames;
+    this.classnames = classnames;
   }
   getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {
@@ -32,7 +32,7 @@ class GraphContainer extends PureComponent {
   }
   componentDidUpdate() {
     if (this.props.has_topology && this.props.has_meteroites) {
-      this.draw(this.root, this.props.topology, this.props.meteorites, this.context.classnames);
+      this.draw(this.root, this.props.topology, this.props.meteorites, this.classnames);
     }
   }
   fetchData() {

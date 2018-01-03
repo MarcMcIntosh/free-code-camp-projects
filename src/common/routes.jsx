@@ -1,9 +1,5 @@
-// import React from 'react';
 import About from '../app/pages/About';
 import renderRoute from './renderRoute';
-// import appUrls from './app-urls';
-
-/* Done with classnames context */
 import BarChart from '../projects/bar-chart';
 import Calculator from '../projects/calculator';
 import DataGlobe from '../projects/data-globe';
@@ -36,24 +32,24 @@ const routes = [
       { path: '/', exact: true, component: Portfolio },
       { path: '/about', component: About },
       { path: appUrls.barChart, component: BarChart },
-      { path: appUrls.calculator.url, component: Calculator },
-      { path: appUrls.dataGlobe.url, component: DataGlobe },
-      { path: appUrls.dungeonCrawler.url, component: DungeonCrawler },
-      { path: appUrls.forceDirected.url, component: ForceDirected },
-      { path: appUrls.gameOfLife.url, component: GameOfLife },
-      { path: appUrls.heatMap.url, component: HeatMap },
-      { path: appUrls.leaderboard.url, component: LeaderBoard },
-      { path: appUrls.localWeather.url, component: LocalWeather },
-      { path: appUrls.markdownPreviewer.url, component: MarkdownPreviewer },
-      { path: appUrls.pomodoro.url, component: Pomodoro },
-      { path: appUrls.quoteMachine.url, component: QuoteMachine },
-      { path: appUrls.recipeBox.url, component: RecipeBox },
-      { path: appUrls.scatterplotGraph.url, component: ScatterplotGraph },
-      { path: appUrls.simon.url, component: Simon },
-      { path: appUrls.ticTacToe.url, component: TicTacToe },
-      { path: appUrls.tribute.url, component: TributePage },
-      { path: appUrls.twitch.url, component: TwitchTv },
-      { path: appUrls.wikipediaViewer.url, component: WikipediaViewer },
+      { path: appUrls.calculator, component: Calculator },
+      { path: appUrls.dataGlobe, component: DataGlobe },
+      { path: appUrls.dungeonCrawler, component: DungeonCrawler },
+      { path: appUrls.forceDirected, component: ForceDirected },
+      { path: appUrls.gameOfLife, component: GameOfLife },
+      { path: appUrls.heatMap, component: HeatMap },
+      { path: appUrls.leaderboard, component: LeaderBoard },
+      { path: appUrls.localWeather, component: LocalWeather },
+      { path: appUrls.markdownPreviewer, component: MarkdownPreviewer },
+      { path: appUrls.pomodoro, component: Pomodoro },
+      { path: appUrls.quoteMachine, component: QuoteMachine },
+      { path: appUrls.recipeBox, component: RecipeBox },
+      { path: appUrls.scatterplotGraph, component: ScatterplotGraph },
+      { path: appUrls.simon, component: Simon },
+      { path: appUrls.ticTacToe, component: TicTacToe },
+      { path: appUrls.tribute, component: TributePage },
+      { path: appUrls.twitch, component: TwitchTv },
+      { path: appUrls.wikipediaViewer, component: WikipediaViewer },
     ],
   },
 ];

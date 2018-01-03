@@ -64,4 +64,3 @@ BarChart.propTypes = {
 BarChart.childContextTypes = { classnames: func.isRequired };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BarChart);
-export redcuer from './reducer';

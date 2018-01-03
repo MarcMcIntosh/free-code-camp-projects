@@ -26,7 +26,13 @@ const done = () => !isBuilt && app.listen(3000, () => {
 if (DEV) {
   const compiler = webpack([clientConfig, serverConfig]);
   const clientCompiler = compiler.compilers[0];
-  const options = { publicPath, stats: { colors: true } };
+  const options = { publicPath,
+    stats: {
+      colors: true,
+      modules: false,
+      // children: false,
+    },
+  };
 
   app.use(webpackDevMiddleware(compiler, options));
   app.use(webpackHotMiddleware(clientCompiler));

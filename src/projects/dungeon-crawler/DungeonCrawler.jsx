@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { func, object, array, bool, string } from 'prop-types';
+import React, { Component } from 'react';
+import { func, object, array, bool, string, number } from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from './styles';
 import { tileSize, SIGHT, tileType } from './GameConstants';
@@ -9,9 +9,10 @@ import ToggleTorch from './components/ToggleTorch';
 import Weapon from './components/Weapon';
 import DungeonFloor from './components/DungeonFloor';
 import Message from './components/Message';
-import { move, toggleDarkness, resetMap, pickUpItem, exitStage, battle } from './actions';
+import Dpad from './components/Dpad';
+import { move, toggleDarkness, resetMap, pickUpItem, exitStage, battle, onPress } from './actions';
 
-const mapStateToProps = ({ dungeonCrawler: { entities, dungeon, occupiedSpaces, darkness, message, map, ready } }) => ({ entities, dungeon, occupiedSpaces, darkness, message, map, ready });
+const mapStateToProps = ({ dungeonCrawler: { pressing, entities, dungeon, occupiedSpaces, darkness, message, map, ready } }) => ({ pressing, entities, dungeon, occupiedSpaces, darkness, message, map, ready });
 
 const mapDispatchToProps = dispatch => ({
   onToggleDarkness: () => dispatch(toggleDarkness()),
@@ -20,16 +21,42 @@ const mapDispatchToProps = dispatch => ({
   fight: payload => dispatch(battle(payload)),
   onExitStage: () => dispatch(exitStage()),
   onPickUpItem: payload => dispatch(pickUpItem(payload)),
+  onPress: n => dispatch(onPress(n)),
 });
 
-class DungeonCrawler extends PureComponent {
+class DungeonCrawler extends Component {
   constructor() {
     super();
     this._handleMove = this._handleMove.bind(this);
     this.classnames = classnames;
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.goIn = this.goIn.bind(this);
   }
   getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this.props.onResetGame(); }
+  onMouseUp() {
+    clearTimeout(this.props.pressing);
+    this.props.onPress(0);
+  }
+  onMouseDown(value) {
+    const t = setInterval(() => { this.goIn(value); }, 100);
+    this.props.onPress(t);
+  }
+  goIn(direction) {
+    switch (direction) {
+      case 'left': return this._move([-1, 0]);
+      case 'right': return this._move([1, 0]);
+      case 'up': return this._move([0, -1]);
+      case 'down': return this._move([0, 1]);
+      default: return void 0;
+    }
+  }
+  _move(v) {
+    const x = this.props.entities.player.x + (v[0] || 0);
+    const y = this.props.entities.player.y + (v[1] || 0);
+    this._handleMove({ x, y });
+  }
   _handleMove(v) {
     const { occupiedSpaces, map, entities: { player, ...entities } } = this.props;
 
@@ -63,9 +90,11 @@ class DungeonCrawler extends PureComponent {
           <Weapon src={floorTile} {...this.props.entities.player.weapon.tile} />
         </div>
 
+        <Dpad onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} />
+
         <DungeonFloor
           src={floorTile}
-          onMove={this._handleMove}
+          onPress={this.goIn}
           tileSize={tileSize}
           sight={SIGHT}
           entities={this.props.entities}
@@ -73,7 +102,6 @@ class DungeonCrawler extends PureComponent {
           occupiedSpaces={this.props.occupiedSpaces}
           darkness={this.props.darkness}
         />
-
       </div>)}
       <Message onClick={this.props.onResetGame}>{this.props.message}</Message>
     </div>);
@@ -91,10 +119,11 @@ DungeonCrawler.propTypes = {
   onResetGame: func.isRequired,
   onToggleDarkness: func.isRequired,
   map: array.isRequired,
-  // Adding thunks
   onExitStage: func.isRequired,
   onPickUpItem: func.isRequired,
   fight: func.isRequired,
+  pressing: number.isRequired,
+  onPress: func.isRequired,
 };
 
 DungeonCrawler.childContextTypes = { classnames: func.isRequired };

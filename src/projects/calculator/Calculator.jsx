@@ -17,7 +17,7 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this._onKeyPress = this._onKeyPress.bind(this);
-    this.classnanmes = classnames;
+    this.classnames = classnames;
   }
   getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() {

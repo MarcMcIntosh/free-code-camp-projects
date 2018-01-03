@@ -27,7 +27,7 @@ class ForceDirected extends Component {
     this.getJson = this.getJson.bind(this);
     this.useTheForce = useTheForce;
     this.draw = this.draw.bind(this);
-    this.classnanmes = classnames;
+    this.classnames = classnames;
   }
   getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this.getJson(); }

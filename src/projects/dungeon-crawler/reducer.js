@@ -16,6 +16,7 @@ import {
   LEVEL_UP,
   MOVE,
   REMOVE_ENTITY,
+  ON_PRESS,
 } from './actions';
 
 function rmOccupiedSpace(obj, x, y) {
@@ -45,10 +46,12 @@ export const DEFAULT_STATE = {
   entities: {},
   dungeon: [],
   ready: false,
+  pressing: 0,
 };
 
 export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {
+    case ON_PRESS: return { ...state, pressing: action.payload };
     case TOGGLE_DARKNESS: return {
       ...state, darkness: !state.darkness,
     };

@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 class LeaderBoard extends Component {
   constructor(props) {
     super(props);
-    this.clasnsnames = classnames;
+    this.classnames = classnames;
   }
   getChildContext() { return { classnames: this.classnames }; }
   componentDidMount() { this.props.fetchData(); }

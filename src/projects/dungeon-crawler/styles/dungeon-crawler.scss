@@ -24,6 +24,7 @@
 
   @include for-size(desktop) { max-width: 80%; }
 
+  position: relative;
   max-width: 100%;
   margin: auto;
   padding: 16px;
@@ -110,6 +111,34 @@
 
     &--on {
       animation: play .8s steps(4) infinite;
+    }
+  }
+
+  &__d-pad {
+    position: absolute;
+    top: 70%;
+    // width: 40%;
+    // height: 100%;
+    margin: 2px;
+    padding: 4px;
+    z-index: 1;
+
+    &__button {
+      min-width: 16px;
+      min-height: 16px;
+
+      &--up,
+      &--down {
+        display: block;
+        height: 32px;
+        margin: auto;
+      }
+
+      &--left,
+      &--right {
+        display: inline;
+        width: 32px;
+      }
     }
   }
 }

@@ -1,18 +1,26 @@
 import React, { PureComponent } from 'react';
 import { func, array, string, number, object, bool } from 'prop-types';
-import Hammer from 'react-hammerjs';
 import { extentOf } from '../utils';
 
-/* renders canvas and handleds movement */
+function whichKey(code) {
+  // LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40,
+  switch (code) {
+    case 65: case 37: return 'left';
+    case 87: case 38: return 'up';
+    case 68: case 39: return 'right';
+    case 83: case 40: return 'down';
+    default: return '';
+  }
+}
 
 class DungeonFloor extends PureComponent {
-  constructor() {
-    super();
-    this._handleSwipe = this._handleSwipe.bind(this);
+  constructor(props) {
+    super(props);
     this._handleKeyPress = this._handleKeyPress.bind(this);
     this._handleResize = this._handleResize.bind(this);
-    this._move = this._move.bind(this);
+    this._handleKeyUp = this._handleKeyUp.bind(this);
     this.draw = this.draw.bind(this);
+    this.refCallback = this.refCallback.bind(this);
   }
   componentDidMount() {
     this.img = new Image();
@@ -20,39 +28,24 @@ class DungeonFloor extends PureComponent {
     this.img.onload = () => {
       window.addEventListener('keydown', this._handleKeyPress);
       window.addEventListener('resize', this._handleResize);
+      window.addEventListener('keyup', this._handleKeyUp);
       this._handleResize();
     };
   }
-
   componentDidUpdate() { this.draw(); }
   componentWillUnmount() {
     window.removeEventListener('keydown', this._handleKeypress);
     window.removeEventListener('resize', this._handleResize);
+    window.removeEventListener('keyup', this._handleKeyUp);
   }
-  _move(v) {
-    const x = this.props.entities.player.x + (v[0] || 0);
-    const y = this.props.entities.player.y + (v[1] || 0);
-    this.props.onMove({ x, y });
-  }
-  _handleSwipe(event) {
-    const vel = Math.abs(event.overallVelocity);
-    const y = (event.angle <= 100 && event.angle >= 80 && 1) || (event.angle <= -80 && event.angle >= -100 && -1) || 0;
-    const x = (event.angle >= -10 && event.angle <= 10 && 1) || (event.angle > 80 && event.angle < 100 && -1) || 0;
-    // return vel >= 0.75 && this._move({ x, y });
-    return vel >= 0.75 && this._move([x, y]);
-  }
+  refCallback(elem) { this.canvas = elem; }
   _handleKeyPress(event) {
-    switch (event.keyCode) {
-      case 65: case 37: event.preventDefault(); return this._move([-1, 0]);
-
-      case 87: case 38: event.preventDefault(); return this._move([0, -1]);
-
-      case 68: case 39: event.preventDefault(); return this._move([1, 0]);
-
-      case 83: case 40: event.preventDefault(); return this._move([0, 1]);
-
-      default: return void 0;
-    }
+    const str = whichKey(event.keyCode);
+    if (str) { event.preventDefault(); this.props.onPress(str); }
+  }
+  _handleKeyUp(event) {
+    const str = whichKey(event.keyCode);
+    if (str) { event.preventDefault(); this.props.onPress(''); }
   }
   _handleResize() {
     const w = this.canvas.clientWidth;
@@ -99,12 +92,7 @@ class DungeonFloor extends PureComponent {
     }
   }
   render() {
-    return (<Hammer onSwipe={this._handleSwipe}>
-      <canvas
-        className={this.context.classnames('dungeon__floor')}
-        ref={(c) => { this.canvas = c; }}
-      />
-    </Hammer>);
+    return (<canvas ref={this.refCallback} className={this.context.classnames('dungeon__floor')} />);
   }
 }
 
@@ -116,7 +104,7 @@ DungeonFloor.propTypes = {
   occupiedSpaces: object.isRequired,
   darkness: bool.isRequired,
   sight: number.isRequired,
-  onMove: func.isRequired,
+  onPress: func.isRequired,
 };
 
 DungeonFloor.contextTypes = { classnames: func.isRequired };
