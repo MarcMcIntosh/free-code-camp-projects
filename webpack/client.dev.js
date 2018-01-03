@@ -1,3 +1,3 @@
 const config = require('./base.config.js');
 
-export default config({ server: false, production: false });
+module.exports = config({ server: false, production: false });
