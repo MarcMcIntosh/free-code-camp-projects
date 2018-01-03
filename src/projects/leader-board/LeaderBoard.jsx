@@ -14,10 +14,13 @@ const mapStateToProps = ({
     isFetchingAllTime,
     display,
     error,
-    ...state
+    recent,
+    alltime,
   },
 }) => ({
-  data: [].concat(state[display]),
+  // data: [].concat(state[display]),
+  recent,
+  alltime,
   fetching: (isFetchingRecent !== isFetchingAllTime || isFetchingRecent || isFetchingAllTime),
   error,
   display,
@@ -37,7 +40,8 @@ class LeaderBoard extends Component {
   componentDidMount() { this.props.fetchData(); }
 
   render() {
-    const { data, display, fetching, error } = this.props;
+    const { display, fetching, error, ...props } = this.props;
+    const data = [].concat(props[display]);
     return (<div className={this.classnames('leader-board')}>
 
       <nav className={this.classnames('leader-board__tab-bar')}>
@@ -59,7 +63,8 @@ class LeaderBoard extends Component {
 LeaderBoard.propTypes = {
   error: string.isRequired,
   fetching: bool.isRequired,
-  data: array.isRequired,
+  recent: array.isRequired,
+  alltime: array.isRequired,
   display: oneOf(['recent', 'alltime']).isRequired,
   fetchData: func.isRequired,
   sortBy: func.isRequired,

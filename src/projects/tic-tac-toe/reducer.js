@@ -8,7 +8,7 @@ import { RESET_GAME, SET_PLAYER, TAKE_TURN, SET_DIFFICULTY } from './actions';
 const { _, O } = Constants.PLAYER;
 
 function getInitialState(dif = 6) {
-  const difficulty = Math.max(0, Math.min(dif, 9));
+  const difficulty = Math.max(1, Math.min(dif, 9));
   return {
     board: Array.from({ length: 9 }, () => _),
     ai: _,

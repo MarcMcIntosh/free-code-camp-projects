@@ -20,7 +20,6 @@ import TicTacToe from '../projects/tic-tac-toe';
 import TributePage from '../projects/tribute-page';
 import TwitchTv from '../projects/twitch-tv';
 import WikipediaViewer from '../projects/wikipedia-viewer';
-
 import appData from '../projects/portfolio/appData';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
@@ -38,7 +37,7 @@ const routes = [
       { path: appUrls.forceDirected, component: ForceDirected },
       { path: appUrls.gameOfLife, component: GameOfLife },
       { path: appUrls.heatMap, component: HeatMap },
-      { path: appUrls.leaderboard, component: LeaderBoard },
+      { path: appUrls.leaderBoard, component: LeaderBoard },
       { path: appUrls.localWeather, component: LocalWeather },
       { path: appUrls.markdownPreviewer, component: MarkdownPreviewer },
       { path: appUrls.pomodoro, component: Pomodoro },

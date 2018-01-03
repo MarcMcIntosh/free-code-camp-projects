@@ -90,6 +90,7 @@ class Simon extends Component {
     this._playerInput = this._playerInput.bind(this);
     this.classnames = classnames;
   }
+  getChildContext() { return { classnames: this.classnames }; }
   componentDidUpdate(prevProps) {
     const { turn, inGame, winner } = this.props;
     if (inGame && !prevProps.inGame) {

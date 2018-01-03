@@ -34,12 +34,9 @@ class TributePage extends PureComponent {
   render() {
     return (<div className={this.classnames('tribute-page')}>
       <section className={this.classnames('tribute-page__primary')}>
-        <h1 className={this.classnames('tribute-page__title')}>
-          {this.props.title}
-          {this.props.cite && (<cite>{this.props.cite}</cite>)}
-        </h1>
+        <h1 className={this.classnames('tribute-page__title')}>{this.props.title}</h1>
         <h2 className={this.classnames('tribute-page__subtitle')}>
-          <a className={this.classnames('tribute-page__link')} href={this.props.href} target="_blank" rel="noopener noreferrer">{this.props.href}</a>
+          <a className={this.classnames('tribute-page__link')} href={this.props.href} target="_blank" rel="noopener noreferrer">{this.props.cite || this.props.href}</a>
         </h2>
         <hr />
       </section>

@@ -39,6 +39,7 @@ class RecipeBox extends PureComponent {
 
       <ReactModal
         isOpen={editting || reading >= 0}
+        ariaHideApp={false}
         onRequestClose={(event) => { event.preventDefault(); onCreate(false); onRead(-1); }}
         contentLabel={(editting) ? 'Recipe Form' : 'Recipe'}
         className={this.classnames('recipe-box-modal__container')}

@@ -28,8 +28,8 @@ class AudioContext extends Component {
 
       // this.compressor.threshold.value = -10;
       // this.compressor.attack.value = 0.5;
-
-      this.gainNode.gain.value = this.props.gain;
+      this.gainNode.gain.setValueAtTime(this.props.gain, this.audioContext.currentTime);
+      // this.gainNode.gain.value = this.props.gain;
       this.gainNode.connect(this.compressor);
       this.compressor.connect(this.audioContext.destination);
     }
@@ -37,7 +37,7 @@ class AudioContext extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.gain !== prevProps.gain) {
       this.compressor.threshold.value = -100 + (this.props.gain * 100);
-      this.gainNode.gain.value = this.props.gain;
+      this.gainNode.gain.setValueAtTime(this.props.gain, this.audioContext.currentTime);
     }
   }
   componentWillUnmount() {

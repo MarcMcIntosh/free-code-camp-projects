@@ -52,7 +52,8 @@ class Key extends PureComponent {
     if (audioContext.createOscillator) {
       this.oscillator = audioContext.createOscillator();
       this.oscillator.type = this.props.wave;
-      this.oscillator.frequency.value = this.props.frequency;
+      this.oscillator.frequency.setTargetAtTime(this.props.frequency, this.context.audioContext.currentTime, 0);
+      // this.oscillator.frequency.value = this.props.frequency;
       this.oscillator.connect(gainNode);
       this.oscillator.start(this.context.audioContext.currentTime);
     }
