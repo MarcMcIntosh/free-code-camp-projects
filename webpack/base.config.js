@@ -15,6 +15,8 @@ const modulesDir = path.resolve(__dirname, '..', 'node_modules');
 const CLIENT_OUT = path.resolve(__dirname, '..', 'build', 'client');
 const SERVER_OUT = path.resolve(__dirname, '..', 'build', 'server');
 const CLIENT_APP = path.resolve(__dirname, '..', 'src', 'app', 'index.jsx');
+const STATS_OUT = '../stats.json';
+
 const CLIENT_HMR = [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
   'react-hot-loader/patch',
@@ -115,7 +117,7 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
   const DEFAULT_CLIENT_PLUGINS = [
     new ExtractCssChunks({ ignoreOrder: true }),
     new CommonsChunkPlugin({ names: ['bootstrap', 'vendor'], filename: production ? '[name].[chunkhash].js' : '[name].js', minChunks: Infinity }),
-    new StatsPlugin(dist ? '../server/stats.json' : 'stats.json'),
+    new StatsPlugin(STATS_OUT),
   ];
 
   const CLIENT_DEV_PLUGINS = [new WriteFilePlugin(), new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()];
@@ -132,7 +134,7 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
     new LimitChunkCountPlugin({ maxChunks: 1 }),
   ];
 
-  const SERVER_PLUGINS = dist ? [min] : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+  const SERVER_PLUGINS = dist ? [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS, min) : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
 
   return server ? SERVER_PLUGINS : CLIENT_PLUGINS;
 };

@@ -42,8 +42,8 @@
     position: relative;
     height: 0;
     margin: 16px;
-    padding-top: 25px;
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px !important;
+    padding-bottom: 56.25% !important; /* 16:9 */
   }
 
   &__video {
