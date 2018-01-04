@@ -1,11 +1,12 @@
 {
   "presets": ["react", "env", "stage-0" ],
-  "plugins": ["universal-import"],
+  "plugins": ["universal-import", "transform-runtime"],
   "env": {
     "development": {
       "plugins": ["react-hot-loader/babel"]
     },
     "production": {
+      "compact": true,
       "presets": ["react-optimize"],
     }
   }

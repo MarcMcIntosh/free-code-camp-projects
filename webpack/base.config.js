@@ -19,8 +19,6 @@ const CLIENT_HMR = [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
   'react-hot-loader/patch',
 ];
-const SERVER_ENTRY = path.resolve(__dirname, '..', 'src', 'server', 'render.jsx');
-const STATS_OUT = 'stats.json';
 
 const postCssOptions = { loader: 'postcss-loader', options: { indent: 'postcss', sourceMap: true, config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } } } };
 
@@ -32,21 +30,37 @@ const target = ({ server = false } = {}) => (server ? 'node' : 'web');
 
 const devtool = ({ production = false } = {}) => (production ? 'source-map' : 'eval');
 
-const clientEntry = ({ production = false } = {}) => (production ? CLIENT_APP : CLIENT_HMR.concat(CLIENT_APP));
+const clientEntry = ({ production = false } = {}) => {
+  const main = production ? CLIENT_APP : CLIENT_HMR.concat(CLIENT_APP);
+  const vendor = ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk'];
+  return { main, vendor };
+};
 
-const entry = ({ server = false, production = false } = {}) => (server ? SERVER_ENTRY : clientEntry({ production }));
+const serverEntry = f => path.resolve(__dirname, '..', 'src', 'server', f);
+
+const entry = ({ server = false, production = false, dist = false } = {}) => (server ? serverEntry(dist ? 'index.js' : 'render.jsx') : clientEntry({ production }));
 
 const externals = ({ server = false, production = false } = {}) => (server && !production ? [].concat(nodeExternals({
   whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'],
 })) : []);
 
-const clientOut = ({ production }) => ({ filename: production ? '[name].[chunkhash].js' : '[name].js', chunkFilename: production ? '[name].[chunkhash].js' : '[name].js', path: CLIENT_OUT, publicPath: '/' });
+const clientOut = ({ production }) => ({
+  filename: production ? '[name].[chunkhash].js' : '[name].js',
+  chunkFilename: production ? '[name].[chunkhash].js' : '[name].js',
+  path: CLIENT_OUT,
+  publicPath: '/',
+});
 
-const serverOut = () => ({ path: SERVER_OUT, filename: '[name].js', libraryTarget: 'commonjs2' });
+const serverOut = ({ production = false }) => ({
+  path: SERVER_OUT,
+  filename: 'index.js',
+  chunkFilename: production ? '[name].[chunkhash].js' : '[name].js',
+  libraryTarget: 'commonjs2',
+});
 
-const output = ({ server = false, production = false } = {}) => (server ? serverOut() : clientOut({ production }));
+const output = ({ server = false, production = false } = {}) => (server ? serverOut({ production }) : clientOut({ production }));
 
-const resolve = { extensions: ['.js', '.jsx', '.css', '.scss', '.sass'] };
+const resolve = { extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.sass'] };
 
 const cssOptions = ({ server = false, production = false, importLoaders = 1 } = {}) => ({
   loader: server ? 'css-loader/locals' : 'css-loader',
@@ -81,51 +95,58 @@ const jsonRule = ({ server = false, production = false }) => ({
   options: { name: production ? '[hash].[ext]' : '[path][name].[ext]', emitFile: !server },
 });
 
+const jsRule = { test: /\.jsx?$/, use: 'babel-loader', exclude: /node_modules/ };
+
 const rules = ({ server = false, production = false }) => {
   const css = cssRules({ server, production });
   const scss = scssRules({ server, production });
   const images = imageRules({ server, production });
   const json = jsonRule({ server, production });
-  return [{ test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }, css, scss, images, json];
+  return [jsRule, css, scss, images, json];
 };
 
-const plugins = ({ server = false, production = false } = {}) => {
+const plugins = ({ server = false, production = false, dist = false } = {}) => {
+  const min = new UglifyJsPlugin({ compress: { screw_ie8: true, warnings: false }, mangle: { screw_ie8: true }, output: { screw_ie8: true, comments: false }, sourceMap: !server });
+
   const DEFAULT_PLUGINS = [new DefinePlugin({
     'process.env': { NODE_ENV: JSON.stringify(production ? 'production' : 'development') },
   })];
 
   const DEFAULT_CLIENT_PLUGINS = [
     new ExtractCssChunks({ ignoreOrder: true }),
-    new CommonsChunkPlugin({ names: ['bootstrap'], filename: production ? '[name].[chunkhash].js' : '[name].js', minChunks: Infinity }),
+    new CommonsChunkPlugin({ names: ['bootstrap', 'vendor'], filename: production ? '[name].[chunkhash].js' : '[name].js', minChunks: Infinity }),
+    new StatsPlugin(dist ? '../server/stats.json' : 'stats.json'),
   ];
 
   const CLIENT_DEV_PLUGINS = [new WriteFilePlugin(), new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()];
 
   const CLIENT_PROD_PLUGINS = [
-    new UglifyJsPlugin({ compress: { screw_ie8: true, warnings: false }, mangle: { screw_ie8: true }, output: { screw_ie8: true, comments: false }, sourceMap: true }),
+    min,
     new HashedModuleIdsPlugin(),
-    new StatsPlugin(STATS_OUT),
   ];
 
   const CLIENT_PLUGINS = [].concat(DEFAULT_PLUGINS, DEFAULT_CLIENT_PLUGINS, production ? CLIENT_PROD_PLUGINS : CLIENT_DEV_PLUGINS);
 
-  const SERVER_DEFAULTS = [new WriteFilePlugin(), new LimitChunkCountPlugin({ maxChunks: 1 })];
+  const SERVER_DEFAULTS = [
+    new WriteFilePlugin(),
+    new LimitChunkCountPlugin({ maxChunks: 1 }),
+  ];
 
-  const SERVER_PLUGINS = [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+  const SERVER_PLUGINS = dist ? [min] : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
 
   return server ? SERVER_PLUGINS : CLIENT_PLUGINS;
 };
 
-const config = ({ server = false, production = false }) => ({
+const config = ({ server = false, production = false, dist = false } = {}) => ({
   name: name({ server }),
   target: target({ server }),
   devtool: devtool({ production }),
-  entry: entry({ server, production }),
+  entry: entry({ server, production, dist }),
   output: output({ server }),
   externals: externals({ server, production }),
   module: { rules: rules({ server, production }) },
   resolve,
-  plugins: plugins({ server, production }),
+  plugins: plugins({ server, production, dist }),
 });
 
 module.exports = config;
