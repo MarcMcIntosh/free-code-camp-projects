@@ -34,7 +34,7 @@ const devtool = ({ production = false } = {}) => (production ? 'source-map' : 'e
 
 const clientEntry = ({ production = false } = {}) => {
   const main = production ? CLIENT_APP : CLIENT_HMR.concat(CLIENT_APP);
-  const vendor = ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk'];
+  const vendor = ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'classnames/bind'];
   return { main, vendor };
 };
 
