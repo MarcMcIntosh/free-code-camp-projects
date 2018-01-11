@@ -17,8 +17,12 @@ class Portfolio extends PureComponent {
     return { classnames: this.classnames };
   }
   render() {
-    return (<div className={this.classnames('portfolio')}>
-      {Object.entries(this.props.apps).map(([k, { title, challenge, url, media }]) => (<Preview key={k} title={title} challenge={challenge} url={url} media={media} />))}
+    return (<div className={this.classnames('gird')}>
+      <div className={this.classnames('grid__inner')}>
+        {Object.entries(this.props.apps).map(([k, { title, challenge, url, media }]) => (<div key={k} className={this.classnames('grid__cell')}>
+          <Preview title={title} challenge={challenge} url={url} media={media} />
+        </div>))}
+      </div>
     </div>);
   }
 }

@@ -3,8 +3,6 @@
   @keyframes #{$name} { @content; }
 }
 
-@mixin use-animation($name, $time) { animation: $name $time infinite; }
-
 @include animation(up) {
 
   0%,
@@ -26,51 +24,45 @@
   100% { margin-left: -1px; }
 }
 
-// body { margin: 0; background: #000; overflow: hidden; }
+@mixin use-animation($name, $time) { animation: $name $time infinite; }
 
 .loader {
-  // $bg: rgba(51, 51, 51 ,.7);
-  $bg: #000;
   $width: 100px;
   $height: $width/2;
-  $pacman_color: #ffc107;
-  $dot_color: #ccc;
+  $amber: #ffc107;
+  $grey: #ccc;
   $time: .4s;
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: $bg;
-  // z-index: 10;
+  margin: 0;
+  background: #000;
+  overflow: hidden;
 
   &__pacman {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: $width;
-    height: $height;
 
     &::before,
     &::after {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: $pacman_color;
+      top: 50%;
+      left: 50%;
+      width: $width;
+      height: $height;
+      margin-top: - $height;
+      margin-left: - $width/2;
+      border-radius: $height $height 0 0;
+      background: $amber;
       content: "";
-    }
-
-    &::before {
-      margin-top: -50%;
-      border-radius: 0 0 $height $height;
 
       @include use-animation(up, $time);
     }
 
     &::after {
-      // margin-top: 0;
-      border-radius: $height $height 0 0;
+      margin-top: -1px;
+      border-radius: 0 0 $height $height;
 
       @include use-animation(down, $time);
     }
@@ -85,9 +77,8 @@
     margin-top: - $height/10;
     margin-left: 30px;
     border-radius: 50%;
-    background: $dot_color;
-    box-shadow: 30px 0 0 $dot_color, 60px 0 0 $dot_color, 90px 0 0 $dot_color, 120px 0 0 $dot_color, 150px 0 0 $dot_color;
-    z-index: -1;
+    background: $grey;
+    box-shadow: 30px 0 0 $grey, 60px 0 0 $grey, 90px 0 0 $grey, 120px 0 0 $grey, 150px 0 0 $grey;
 
     @include use-animation(r-to-l, $time);
   }

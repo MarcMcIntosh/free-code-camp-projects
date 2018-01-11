@@ -1,0 +1,23 @@
+@keyframes spin {
+
+  from { transform: rotate(0deg); }
+
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  $color_bg: #f3f3f3;
+  $color_fg: #111;
+  // $color_fg: #3498db;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid $color_bg;
+  border-top: 16px solid $color_fg;
+  border-radius: 50%;
+  z-index: 1;
+  animation: spin 2s linear infinite;
+}

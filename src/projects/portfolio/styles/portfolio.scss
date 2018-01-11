@@ -1,12 +1,26 @@
 @import "./variables.scss";
 
+.grid {
+  composes: mdc-layout-grid from $mdc-layout-grid;
+  margin: 16px;
+
+  &__inner { composes: mdc-layout-grid__inner from $mdc-layout-grid; }
+
+  &__cell { composes: mdc-layout-grid__cell from $mdc-layout-grid; }
+}
+
 .preview {
   composes: mdc-card from $mdc-card;
-  min-width: 320px;
-  max-width: 21.875rem;
-  margin: 24px;
+  justify-content: space-between !important;
+  height: 100%;
 
-  @media (min-width: 768px) { margin-bottom: 24px; }
+  /* test this */
+  // display: inline-flex !important;
+  // min-width: 320px;
+  // max-width: 21.875rem;
+  // margin: 24px;
+
+  // @media (min-width: 768px) { margin-bottom: 24px; }
 
   &__block { composes: mdc-card__horizontal-block from $mdc-card; }
 
