@@ -1,0 +1,22 @@
+{
+  "name": "image-search",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marc McIntosh <email@marcmcintosh.ninja>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "pouchdb": "^6.2.0",
+    "pouchdb-adapter-leveldb": "^6.2.0",
+    "pouchdb-find": "^6.2.0",
+    "pouchdb-node": "^6.2.0",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "express": "^4.15.3"
+  }
+}

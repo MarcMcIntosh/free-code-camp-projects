@@ -1,0 +1,22 @@
+{
+  "name": "fcc-api-projects",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.marcmcintosh.ninja/fcc-api-projects"
+  },
+  "author": "Marc McIntosh <email@marcmcintosh.ninja>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "graphql": "^0.9.6",
+    "pouchdb-node": "^6.2.0",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "lerna": "^2.0.0"
+  }
+}
