@@ -21,6 +21,7 @@ import TributePage from '../projects/tribute-page';
 import TwitchTv from '../projects/twitch-tv';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import appData from '../projects/portfolio/appData';
+import NotFound from '../app/pages/NotFound';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -49,6 +50,7 @@ const routes = [
       { path: appUrls.tribute, component: TributePage },
       { path: appUrls.twitch, component: TwitchTv },
       { path: appUrls.wikipediaViewer, component: WikipediaViewer },
+      { component: NotFound },
     ],
   },
 ];

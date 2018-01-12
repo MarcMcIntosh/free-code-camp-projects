@@ -1,0 +1,20 @@
+$mdc-card: "@material/mdc-card/mdc-card.scss";
+$mdc-list: "@material/mdc-list/mdc-list.scss";
+
+.card {
+  composes: mdc-card from $mdc-card;
+
+  &__primary { composes: mdc-card__primary from $mdc-card; }
+
+  &__title { composes: mdc-card__title from $mdc-card; }
+
+  &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
+
+  &__supporting-text { composes: mdc-card__supporting-text from $mdc-card; }
+}
+
+.list {
+  composes: mdc-list from $mdc-list;
+
+  &__item { composes: mdc-list-item from $mdc-list; }
+}
