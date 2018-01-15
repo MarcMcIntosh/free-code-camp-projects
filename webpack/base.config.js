@@ -143,7 +143,7 @@ const config = ({ server = false, production = false, dist = false } = {}) => ({
   name: name({ server }),
   target: target({ server }),
   devtool: devtool({ production }),
-  entry: entry({ server, production, dist }),
+  entry: entry({ server, production }),
   output: output({ server }),
   externals: externals({ server, production }),
   module: { rules: rules({ server, production }) },

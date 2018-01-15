@@ -18,12 +18,14 @@ import { DEFAULT_STATE as ticTacToe } from '../../projects/tic-tac-toe';
 import { DEFAULT_STATE as tributePage } from '../../projects/tribute-page';
 import { DEFAULT_STATE as twitchTv } from '../../projects/twitch-tv';
 import { DEFAULT_STATE as wikipediaViewer } from '../../projects/wikipedia-viewer';
+import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
 
 const DEFAULT_STATE = {
   barChart,
   calculator,
   dataGlobe,
   dungeonCrawler,
+  fileSize,
   forceDirected,
   gameOfLife,
   heatMap,

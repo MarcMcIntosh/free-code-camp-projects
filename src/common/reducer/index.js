@@ -21,6 +21,7 @@ import { reducer as ticTacToe } from '../../projects/tic-tac-toe';
 import { reducer as tributePage } from '../../projects/tribute-page';
 import { reducer as twitchTv } from '../../projects/twitch-tv';
 import { reducer as wikipediaViewer } from '../../projects/wikipedia-viewer';
+import { reducer as fileSize } from '../../projects/file-size';
 
 
 const reducer = combineReducers({
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   calculator,
   dataGlobe,
   dungeonCrawler,
+  fileSize,
   forceDirected,
   gameOfLife,
   heatMap,

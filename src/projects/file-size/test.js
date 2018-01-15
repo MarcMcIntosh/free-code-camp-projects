@@ -24,8 +24,8 @@ app.listen('8080', () => {
       'file-size': fs.createReadStream(`${__dirname}/package.json`),
       attachments: [
         fs.createReadStream(`${__dirname}/task.js`),
-        fs.createReadStream(`${__dirname}/index.js`),
-      ]
+        fs.createReadStream(`${__dirname}/README.md`),
+      ],
     }
   }, (err, res, body) => {
     if(err) {

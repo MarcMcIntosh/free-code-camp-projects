@@ -22,6 +22,7 @@ import TwitchTv from '../projects/twitch-tv';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import appData from '../projects/portfolio/appData';
 import NotFound from '../app/pages/NotFound';
+import FileSize from '../projects/file-size';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -35,6 +36,7 @@ const routes = [
       { path: appUrls.calculator, component: Calculator },
       { path: appUrls.dataGlobe, component: DataGlobe },
       { path: appUrls.dungeonCrawler, component: DungeonCrawler },
+      { path: appUrls.fileSize, component: FileSize },
       { path: appUrls.forceDirected, component: ForceDirected },
       { path: appUrls.gameOfLife, component: GameOfLife },
       { path: appUrls.heatMap, component: HeatMap },

@@ -33,6 +33,7 @@ const D3 = ['d3', 'data-visualisations'];
 const FRONTEND = ['client', 'front-end'];
 const REACT = ['react', 'redux'];
 const API = ['api'];
+const SERVER = ['server-side'];
 
 const apps = {
   barChart: {
@@ -62,6 +63,14 @@ const apps = {
     title: 'Rogue-like dungeon crawler game',
     media: dungeonCrawler,
     tags: [].concat(GAME, REACT),
+  },
+  /* new */
+  fileSize: {
+    url: '/file-size',
+    challenge: 'https://www.freecodecamp.com/challenges/file-metadata-microservice',
+    title: 'File Metadata Microservice',
+    media: '',
+    tags: [].concat(API, SERVER),
   },
   forceDirected: {
     url: '/force-directed',
