@@ -19,6 +19,7 @@ import { DEFAULT_STATE as tributePage } from '../../projects/tribute-page';
 import { DEFAULT_STATE as twitchTv } from '../../projects/twitch-tv';
 import { DEFAULT_STATE as wikipediaViewer } from '../../projects/wikipedia-viewer';
 import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
+import { DEFAULT_STATE as imageSearch } from '../../projects/image-search';
 
 const DEFAULT_STATE = {
   barChart,
@@ -29,6 +30,7 @@ const DEFAULT_STATE = {
   forceDirected,
   gameOfLife,
   heatMap,
+  imageSearch,
   leaderBoard,
   localWeather,
   markdownPreviewer,

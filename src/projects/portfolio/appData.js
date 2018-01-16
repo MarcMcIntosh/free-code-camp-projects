@@ -11,6 +11,7 @@ import barChart from './assets/bar-chart.png';
 import calculator from './assets/calculator.png';
 import dataGlobe from './assets/data-globe.png';
 import dungeonCrawler from './assets/dungeon-crawler.png';
+import fileSize from './assets/file-size.png';
 import forceDirected from './assets/force-directed.png';
 import gameOfLife from './assets/game-of-life.png';
 import heatMap from './assets/heat-map.png';
@@ -64,13 +65,12 @@ const apps = {
     media: dungeonCrawler,
     tags: [].concat(GAME, REACT),
   },
-  /* new */
   fileSize: {
     url: '/file-size',
     challenge: 'https://www.freecodecamp.com/challenges/file-metadata-microservice',
     title: 'File Metadata Microservice',
-    media: '',
-    tags: [].concat(API, SERVER),
+    media: fileSize,
+    tags: [].concat(API, SERVER, 'file size'),
   },
   forceDirected: {
     url: '/force-directed',
@@ -92,6 +92,13 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-heat-map',
     media: heatMap,
     tags: [].concat(D3, 'heat map', 'graph'),
+  },
+  imageSearch: {
+    url: '/image-search',
+    title: 'Image search',
+    challenge: 'https://www.freecodecamp.com/challenges/image-search-abstraction-layer',
+    media: '',
+    tags: [].concat(API, SERVER, 'image search'),
   },
   leaderBoard: {
     url: '/leader-board',

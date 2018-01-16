@@ -23,6 +23,7 @@ import WikipediaViewer from '../projects/wikipedia-viewer';
 import appData from '../projects/portfolio/appData';
 import NotFound from '../app/pages/NotFound';
 import FileSize from '../projects/file-size';
+import ImageSearch from '../projects/image-search';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -40,6 +41,7 @@ const routes = [
       { path: appUrls.forceDirected, component: ForceDirected },
       { path: appUrls.gameOfLife, component: GameOfLife },
       { path: appUrls.heatMap, component: HeatMap },
+      { path: appUrls.imageSearch, component: ImageSearch },
       { path: appUrls.leaderBoard, component: LeaderBoard },
       { path: appUrls.localWeather, component: LocalWeather },
       { path: appUrls.markdownPreviewer, component: MarkdownPreviewer },
