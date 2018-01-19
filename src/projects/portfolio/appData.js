@@ -27,6 +27,7 @@ import ticTacToe from './assets/tic-tac-toe.png';
 import twitchTv from './assets/twitch-tv.png';
 import wikipediaViewer from './assets/wikipedia-viewer.png';
 import woodhouse from './assets/Woodhouse.png';
+import imageSearch from './assets/image-search.png';
 
 
 const GAME = ['game'];
@@ -97,7 +98,7 @@ const apps = {
     url: '/image-search',
     title: 'Image search',
     challenge: 'https://www.freecodecamp.com/challenges/image-search-abstraction-layer',
-    media: '',
+    media: imageSearch,
     tags: [].concat(API, SERVER, 'image search'),
   },
   leaderBoard: {
