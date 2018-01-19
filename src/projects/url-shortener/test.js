@@ -6,7 +6,7 @@ const fetch = require('isomorphic-fetch');
 const app = express();
 
 const handleResponse = (res) => {
-  console.log(res);
+  // console.log(res);
   if (!res.ok) {
     const e = new Error(res.statusText);
     e.stack = res;

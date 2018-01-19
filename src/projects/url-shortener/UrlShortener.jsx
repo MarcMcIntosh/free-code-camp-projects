@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { func } from 'prop-types';
+import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { received, rejected, request } from './actions';
 import classnames from './styles';
@@ -20,7 +20,8 @@ class UrlShortener extends PureComponent {
   }
   getChildContext() { return { classnames: this.classnames }; }
   handleSubmit(values) {
-    this.props.onRequest(values);
+    const addr = this.props.submitUrl.replace(/\/?$/, `/${values.url}`);
+    this.props.onRequest(addr);
   }
   render() {
     return (<div />);
@@ -29,8 +30,13 @@ class UrlShortener extends PureComponent {
 
 UrlShortener.propTypes = {
   onRequest: func.isRequired,
+  submitUrl: string.isRequired,
   // onReceived: func.isRequired,
   // onRejected: func.isRequired
+};
+
+UrlShortener.defaultProps = {
+  submitUrl: '/api/url-shortener',
 };
 
 UrlShortener.childContextTypes = { classnames: func.isRequired };
