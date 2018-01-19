@@ -1,9 +1,10 @@
 const Busboy = require('busboy');
+const { Router } = require('express');
 
 /* use with a post request */
 /* app.post('file-size', fileSize, (req, res) => { res.json({ data: req.fileSize }); }) */
 
-module.exports = function fileSize(req, res) {
+function fileSize(req, res) {
   const busboy = new Busboy({ headers: req.headers });
   const data = [];
 
@@ -21,3 +22,9 @@ module.exports = function fileSize(req, res) {
 
   req.pipe(busboy);
 };
+
+const router = Router();
+
+router.post('/file-size', fileSize);
+
+module.exports = router;

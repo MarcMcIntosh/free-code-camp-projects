@@ -49,7 +49,7 @@ function recent(req, res) {
 }
 
 const router = Router();
-router.get('/search/:term', searchFor);
-router.get('/latest', recent);
+router.get('/image-search/search/:term', searchFor);
+router.get('/image-search/latest', recent);
 
 module.exports = router;
