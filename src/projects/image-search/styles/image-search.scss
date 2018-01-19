@@ -1,0 +1,112 @@
+@import "./variables.scss";
+
+.results {
+  margin: 1.5em 0;
+  padding: 16px;
+  column-gap: 1.5em;
+}
+
+.image-search {
+  height: 100vh;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.latest {
+
+  &__link {
+    display: flex;
+    margin: 10px auto;
+    // text-align: center;
+  }
+
+  &__button { margin: auto; }
+}
+
+@media only screen and (min-width: 400px) {
+
+  .results { column-count: 2; }
+}
+
+@media only screen and (min-width: 700px) {
+
+  .results { column-count: 3; }
+}
+
+@media only screen and (min-width: 900px) {
+
+  .results { column-count: 4; }
+}
+
+.item {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 1.5em;
+  padding: 1em;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 2px 2px 4px 0 #ccc;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.form { display: flex; }
+
+.information {
+  composes: mdc-typography--caption	from $mdc-typography;
+  text-align: center;
+}
+
+.list {
+  composes: mdc-list mdc-list--two-line from $mdc-list;
+
+  &-item {
+    composes: mdc-list-item from $mdc-list;
+
+    &__text {
+      composes: mdc-list-item__text from $mdc-list;
+
+      &__secondary {
+        composes: mdc-list-item__text__secondary from $mdc-list;
+      }
+    }
+  }
+}
+
+.search {
+  composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
+  margin: auto;
+
+  &--upgraded { composes: mdc-textfield--upgraded from $mdc-textfield; }
+
+  &--focused { composes: mdc-textfield--focused from $mdc-textfield; }
+
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+
+  // &__helptext { composes: mdc-textfield-helptext from $mdc-textfield; }
+
+  &__label {
+    composes: mdc-textfield__label from $mdc-textfield;
+
+    &--float-above {
+      composes: mdc-textfield__label--float-above from $mdc-textfield;
+    }
+  }
+
+  &__line {
+    composes: mdc-textfield__bottom-line from $mdc-textfield;
+
+    &--active {
+      composes: mdc-textfield__bottom-line--active from $mdc-textfield;
+    }
+  }
+
+  &__icon {
+    composes: material-icons from $material-icons;
+    composes: mdc-textfield__icon from $mdc-textfield;
+    cursor: pointer;
+  }
+}

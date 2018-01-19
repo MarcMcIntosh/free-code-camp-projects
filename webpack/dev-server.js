@@ -1,5 +1,7 @@
 require('colors');
+const { resolve } = require('path');
 const express = require('express');
+const favicon = require('serve-favicon');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -16,6 +18,9 @@ const DEV = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+const FAVICON_PATH = resolve(__dirname, '..', 'src', 'common', 'assets', 'favicon.png');
+
+app.use(favicon(FAVICON_PATH));
 app.use('/api', api);
 
 let isBuilt = false;

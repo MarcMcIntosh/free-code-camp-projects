@@ -1,8 +1,11 @@
 const { format } = require('url');
+const { resolve } = require('path');
 const { Router } = require('express');
 const fetch = require('isomorphic-fetch');
 const db = require('./db');
-require('dotenv').config();
+
+const ENV_PATH = resolve(__dirname, '.env');
+require('dotenv').config({ path: ENV_PATH });
 
 const cx = process.env.CSE_ID;
 const key = process.env.API_KEY;
@@ -10,7 +13,7 @@ const protocol = 'https';
 const host = 'www.googleapis.com';
 const slashes = true;
 const pathname = '/customsearch/v1';
-const formatUrl = (q = 'lolcats', start = 0) => format({ protocol, slashes, host, pathname, query: { q, start, cx, key } });
+const formatUrl = (q = 'lolcats', start = 1) => format({ protocol, slashes, host, pathname, query: { q, start, cx, key } });
 
 const errorToJson = (error) => {
   if (error instanceof Error) {
@@ -20,16 +23,20 @@ const errorToJson = (error) => {
 };
 
 function searchFor(req, res) {
-  const { term, offset } = req.params;
+  // const { term, offset } = req.params;
+  const term = req.params.term;
+  const offset = Object.prototype.hasOwnProperty.call(req.query, 'offset') && req.query.offset ? req.query.offset : 1;
   const addr = formatUrl(term, offset);
   const headers = { Accept: 'application/json' };
   return db.save(term, () => fetch(addr, { headers })
     .then((response) => {
-      if (!response.ok) { throw response; }
+      if (!response.ok) { throw response.statusText; }
       return response.json();
     })
-    .then(res.json)
-    .catch((error) => { const obj = errorToJson(error); return res.json(obj); }))
+    .then(json => res.json(json))
+    .catch((error) => {
+      const obj = errorToJson(error); return res.json(obj);
+    }))
   ;
 }
 

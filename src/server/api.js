@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/file-size', fileSize);
 router.use('/image-search', imageSearch);
+// router.use('*', (req, res) => res.end());
 
 module.exports = router;

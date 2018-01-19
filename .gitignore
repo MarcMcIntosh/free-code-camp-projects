@@ -1,7 +1,6 @@
 node_modules
 .env
 .tmp
-.data
 dist
 build
 lerna-debug.log
