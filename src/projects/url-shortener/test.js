@@ -19,7 +19,7 @@ app.use(middleware);
 
 app.listen('8080', () => {
   const base = 'http://localhost:8080';
-  const address = 'http://git.marcmcintosh.ninja';
+  const address = 'http://github.com/MarcMcIntosh';
   fetch(`${base}/url-shortener`, {
     method: 'POST',
     body: JSON.stringify({ url: address }),
@@ -28,9 +28,9 @@ app.listen('8080', () => {
     .then(handleResponse)
     .then((json) => {
       console.log(json);
-      return fetch(`${base}${json.url}`);
+      // return fetch(`${base}${json.url}`);
     })
-    .then((res) => {
+    /* .then((res) => {
       if (!res.ok) {
         const e = new Error(res.statusText);
         e.stack = res;
@@ -38,6 +38,6 @@ app.listen('8080', () => {
       }
       return res.text();
     })
-    .then(console.log)
+    .then(console.log) */
     .catch(error => console.error(error));
 });

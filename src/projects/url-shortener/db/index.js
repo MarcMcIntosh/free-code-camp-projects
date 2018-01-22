@@ -11,15 +11,13 @@ const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 // save the design doc
 db.get(viewByAddress._id, (e, res) => {
   const doc = Object.assign({}, res, viewByAddress);
-  return db.put(doc, (err) => {
-    if (err && err.name !== 'conflict') { return console.error(err); }
-    return void 0;
-  });
+  return db.put(doc, () => void 0);
 });
 
-function updateAddress(doc, cb) {
-  return db.get(doc._id, (err, res) => {
-    const obj = Object.assign({}, res, { updated_at: Date.now() });
+function updateAddress(docid, cb) {
+  return db.get(docid, (err, res) => {
+    const { id, rev, ...rest } = res;
+    const obj = { _id: id, _rev: rev, ...rest, updated_at: Date.now() };
     return db.put(obj, cb);
   });
 }
@@ -42,16 +40,8 @@ function saveAddress(address, cb) {
 function saveUrl(address, cb) {
   return db.query('by_address', { key: address }, (err, res) => {
     if (err) { return cb(err); }
-    if (res.rows.length === 0) { return saveAddress(address, cb); }
-    if (res.rows.lennth === 1) { return updateAddress(res.rows[0], cb); }
-    /* clean up matches keeping the shortest id */
-    console.log(res.rows);
-    const docs = res.rows.sort((a, b) => a.id.length - b.id.length).map((d) => {
-      const { id, ...doc } = d;
-      return { _id: id, ...doc };
-    });
-    const toRemove = docs.slice(1).map(d => Object.assign({}, d, { _deleted: true }));
-    return db.bulkDocs(toRemove, () => updateAddress(docs[0], cb));
+    if (res.rows.length > 0) { return updateAddress(res.rows[0].id, cb); }
+    return saveAddress(address, cb);
   });
 }
 

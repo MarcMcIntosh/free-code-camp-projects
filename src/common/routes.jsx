@@ -24,6 +24,7 @@ import appData from '../projects/portfolio/appData';
 import NotFound from '../app/pages/NotFound';
 import FileSize from '../projects/file-size';
 import ImageSearch from '../projects/image-search';
+import UrlShortener from '../projects/url-shortener';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -53,6 +54,7 @@ const routes = [
       { path: appUrls.ticTacToe, component: TicTacToe },
       { path: appUrls.tribute, component: TributePage },
       { path: appUrls.twitch, component: TwitchTv },
+      { path: appUrls.urlShortener, component: UrlShortener },
       { path: appUrls.wikipediaViewer, component: WikipediaViewer },
       { component: NotFound },
     ],

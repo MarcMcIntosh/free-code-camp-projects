@@ -35,7 +35,7 @@ const D3 = ['d3', 'data-visualisations'];
 const FRONTEND = ['client', 'front-end'];
 const REACT = ['react', 'redux'];
 const API = ['api'];
-const SERVER = ['server-side'];
+const SERVER = ['server-side', 'micro-service'];
 
 const apps = {
   barChart: {
@@ -177,6 +177,13 @@ const apps = {
     title: 'Twitch-tv info',
     media: twitchTv,
     tags: [].concat(FRONTEND, API, 'twitch tv'),
+  },
+  urlShortener: {
+    url: '/url-shortener',
+    challenge: 'https://www.freecodecamp.com/challenges/url-shortener-microservice',
+    title: 'URL Shortener Microservice',
+    meida: '',
+    tags: [].concat(SERVER, API, 'url shortener'),
   },
   wikipediaViewer: {
     url: '/wikipedia-viewer',

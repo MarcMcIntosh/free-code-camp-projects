@@ -1,1 +1,56 @@
 @import "./variables.scss";
+
+.url-shortener {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: 16px auto;
+}
+
+.list {
+  composes: mdc-list from $mdc-list;
+
+  &__item { composes: mdc-list-item from $mdc-list; }
+
+  &__icon {
+    composes: mdc-list-item__start-detail from $mdc-list;
+    composes: material-icons from $material-icons;
+    cursor: pointer;
+  }
+}
+
+.address {
+  composes: mdc-textfield mdc-textfield--box mdc-textfield--with-trailing-icon from $mdc-textfield;
+  width: 100%;
+
+  &--upgraded { composes: mdc-textfield--upgraded from $mdc-textfield; }
+
+  &--focused { composes: mdc-textfield--focused from $mdc-textfield; }
+
+  &--invalid { composes: mdc-textfield--invalid from $mdc-textfield; }
+
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+
+  &__label {
+    composes: mdc-textfield__label from $mdc-textfield;
+
+    &--float-above { composes: mdc-textfield__label--float-above from $mdc-textfield; }
+  }
+
+  &__helptext {
+    composes: mdc-textfield-helptext from $mdc-textfield;
+
+    &--validation-msg { composes: mdc-textfield-helptext--validation-msg from $mdc-textfield; }
+  }
+
+  &__line {
+    composes: mdc-textfield__bottom-line from $mdc-textfield;
+
+    &--active { composes: mdc-textfield__bottom-line--active from $mdc-textfield; }
+  }
+
+  &__icon {
+    composes: material-icons from $material-icons;
+    composes: mdc-textfield__icon from $mdc-textfield;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { saveUrl, getUrl } = require('./db');
-const { isWebUri } = require('valid-url');
+const { isUri } = require('valid-url');
 
 
 function parseBody(req, res, next) {
@@ -18,12 +18,14 @@ function parseBody(req, res, next) {
 
 function shortenUrl(req, res) {
   const { url } = req.body;
-  const valid = isWebUri(url);
+  const valid = isUri(url);
   if (!valid) { return res.json({ message: `Invalid url: check ${url}` }); }
   return saveUrl(url, (err, doc) => {
     if (err) { return res.json({ message: err.toString() }); }
     const shortened = `/${doc.id}`;
-    return res.json({ url: req.url.replace(/\/?$/, shortened) });
+    const path = req.originalUrl.replace(/\/?$/, shortened);
+    const address = req.protocol + '://' + req.headers.host;
+    return res.json({ url: address + path });
   });
 }
 

@@ -23,6 +23,7 @@ import { reducer as twitchTv } from '../../projects/twitch-tv';
 import { reducer as wikipediaViewer } from '../../projects/wikipedia-viewer';
 import { reducer as fileSize } from '../../projects/file-size';
 import { reducer as imageSearch } from '../../projects/image-search';
+import { reducer as urlShortener } from '../../projects/url-shortener';
 
 const reducer = combineReducers({
   barChart,
@@ -47,6 +48,7 @@ const reducer = combineReducers({
   ticTacToe,
   tributePage,
   twitchTv,
+  urlShortener,
   wikipediaViewer,
 });
 

@@ -20,6 +20,7 @@ import { DEFAULT_STATE as twitchTv } from '../../projects/twitch-tv';
 import { DEFAULT_STATE as wikipediaViewer } from '../../projects/wikipedia-viewer';
 import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
 import { DEFAULT_STATE as imageSearch } from '../../projects/image-search';
+import { DEFAULT_STATE as urlShortener } from '../../projects/url-shortener';
 
 const DEFAULT_STATE = {
   barChart,
@@ -43,6 +44,7 @@ const DEFAULT_STATE = {
   ticTacToe,
   tributePage,
   twitchTv,
+  urlShortener,
   wikipediaViewer,
 };
 

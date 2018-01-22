@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Image Search Abstraction Layer',
   challenge: 'https://www.freecodecamp.com/challenges/image-search-abstraction-layer',
-  objective: 'Build a full stack JavaScript app that allows you to search for images like this:'
+  objective: 'Build a full stack JavaScript app that allows you to search for images like this:',
   example: 'https://cryptic-ridge-9197.herokuapp.com/',
   stroies: [
     'I can get the image URLs, alt text and page urls for a set of images relating to a given search string.',

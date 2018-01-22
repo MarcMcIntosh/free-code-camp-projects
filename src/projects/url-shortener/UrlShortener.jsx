@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react';
-import { func, string } from 'prop-types';
+import { func, string, array } from 'prop-types';
 import { connect } from 'react-redux';
-import { received, rejected, request } from './actions';
+import { onSubmit } from './actions';
 import classnames from './styles';
+import UrlForm from './components/Form';
+import Results from './components/Results';
 
-const mapStateToProps = ({ urlShortener: { result, error, fetching } }) => ({ result, error, fetching });
+const mapStateToProps = ({ urlShortener: { results, error, fetching } }) => ({ results, error, fetching });
 
 const mapDispatchToProps = dispatch => ({
-  onRequest: payload => dispatch(request(payload)),
-  onReceived: payload => dispatch(received(payload)),
-  onRejected: payload => dispatch(rejected(payload)),
+  onSubmit: (address, values) => dispatch(onSubmit(address, values)),
 });
 
 class UrlShortener extends PureComponent {
@@ -20,19 +20,21 @@ class UrlShortener extends PureComponent {
   }
   getChildContext() { return { classnames: this.classnames }; }
   handleSubmit(values) {
-    const addr = this.props.submitUrl.replace(/\/?$/, `/${values.url}`);
-    this.props.onRequest(addr);
+    const addr = this.props.submitUrl.replace(/\/?$/, '/');
+    this.props.onSubmit(addr, values);
   }
   render() {
-    return (<div />);
+    return (<div className={this.classnames('url-shortener')}>
+      <UrlForm onSubmit={this.handleSubmit} />
+      <Results results={this.props.results} />
+    </div>);
   }
 }
 
 UrlShortener.propTypes = {
-  onRequest: func.isRequired,
+  onSubmit: func.isRequired,
   submitUrl: string.isRequired,
-  // onReceived: func.isRequired,
-  // onRejected: func.isRequired
+  results: array.isRequired,
 };
 
 UrlShortener.defaultProps = {
