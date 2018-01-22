@@ -28,7 +28,7 @@ import twitchTv from './assets/twitch-tv.png';
 import wikipediaViewer from './assets/wikipedia-viewer.png';
 import woodhouse from './assets/Woodhouse.png';
 import imageSearch from './assets/image-search.png';
-
+import urlShortener from './assets/url-shortener.png';
 
 const GAME = ['game'];
 const D3 = ['d3', 'data-visualisations'];
@@ -182,7 +182,7 @@ const apps = {
     url: '/url-shortener',
     challenge: 'https://www.freecodecamp.com/challenges/url-shortener-microservice',
     title: 'URL Shortener Microservice',
-    meida: '',
+    meida: urlShortener,
     tags: [].concat(SERVER, API, 'url shortener'),
   },
   wikipediaViewer: {

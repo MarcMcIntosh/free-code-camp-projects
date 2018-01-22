@@ -32,7 +32,8 @@ function saveAddress(address, cb) {
   return db.allDocs({ startkey, endkey }, (err, res) => {
     if (err) { return cb(err); }
     if (res.rows.length === 0) { return db.put(doc, cb); }
-    doc._id = res.rows.map(d => d.id).filter(d => !longId.search(d)).map(d => d.length).reduce((a, b) => (a < b ? b : a), 4);
+    const n = res.rows.map(d => d.id).filter(d => !longId.search(d)).map(d => d.length).reduce((a, b) => (a < b ? b : a), 4);
+    doc._id = longId.substring(0, n);
     return db.put(doc, cb);
   });
 }

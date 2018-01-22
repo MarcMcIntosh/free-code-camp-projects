@@ -19,7 +19,7 @@ app.use(middleware);
 
 app.listen('8080', () => {
   const base = 'http://localhost:8080';
-  const address = 'http://github.com/MarcMcIntosh';
+  const address = 'https://youtu.be/j9GBSc6nwVg';
   fetch(`${base}/url-shortener`, {
     method: 'POST',
     body: JSON.stringify({ url: address }),
