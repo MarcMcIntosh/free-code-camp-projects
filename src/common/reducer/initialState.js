@@ -21,6 +21,7 @@ import { DEFAULT_STATE as wikipediaViewer } from '../../projects/wikipedia-viewe
 import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
 import { DEFAULT_STATE as imageSearch } from '../../projects/image-search';
 import { DEFAULT_STATE as urlShortener } from '../../projects/url-shortener';
+import { DEFAULT_STATE as headerParser } from '../../projects/header-parser';
 
 const DEFAULT_STATE = {
   barChart,
@@ -30,6 +31,7 @@ const DEFAULT_STATE = {
   fileSize,
   forceDirected,
   gameOfLife,
+  headerParser,
   heatMap,
   imageSearch,
   leaderBoard,

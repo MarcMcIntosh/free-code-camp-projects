@@ -29,6 +29,7 @@ import wikipediaViewer from './assets/wikipedia-viewer.png';
 import woodhouse from './assets/Woodhouse.png';
 import imageSearch from './assets/image-search.png';
 import urlShortener from './assets/url-shortener.png';
+import headerParser from './assets/header-parser.png';
 
 const GAME = ['game'];
 const D3 = ['d3', 'data-visualisations'];
@@ -86,6 +87,13 @@ const apps = {
     title: 'Game of Life',
     media: gameOfLife,
     tags: [].concat(REACT, GAME, 'game of life'),
+  },
+  headerParser: {
+    url: '/header-parser',
+    challenge: 'https://www.freecodecamp.com/challenges/request-header-parser-microservice',
+    title: 'Request Header Parser',
+    media: headerParser,
+    tags: [].concat(SERVER, API, 'headers'),
   },
   heatMap: {
     url: '/heat-map',

@@ -24,6 +24,7 @@ import { reducer as wikipediaViewer } from '../../projects/wikipedia-viewer';
 import { reducer as fileSize } from '../../projects/file-size';
 import { reducer as imageSearch } from '../../projects/image-search';
 import { reducer as urlShortener } from '../../projects/url-shortener';
+import { reducer as headerParser } from '../../projects/header-parser';
 
 const reducer = combineReducers({
   barChart,
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   fileSize,
   forceDirected,
   gameOfLife,
+  headerParser,
   heatMap,
   imageSearch,
   leaderBoard,
