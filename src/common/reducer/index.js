@@ -25,6 +25,7 @@ import { reducer as fileSize } from '../../projects/file-size';
 import { reducer as imageSearch } from '../../projects/image-search';
 import { reducer as urlShortener } from '../../projects/url-shortener';
 import { reducer as headerParser } from '../../projects/header-parser';
+import { reducer as timestamp } from '../../projects/timestamp';
 
 const reducer = combineReducers({
   barChart,
@@ -48,6 +49,7 @@ const reducer = combineReducers({
   scatterPlotGraph,
   simon,
   ticTacToe,
+  timestamp,
   tributePage,
   twitchTv,
   urlShortener,

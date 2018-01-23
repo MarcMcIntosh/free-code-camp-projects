@@ -22,6 +22,7 @@ import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
 import { DEFAULT_STATE as imageSearch } from '../../projects/image-search';
 import { DEFAULT_STATE as urlShortener } from '../../projects/url-shortener';
 import { DEFAULT_STATE as headerParser } from '../../projects/header-parser';
+import { DEFAULT_STATE as timestamp } from '../../projects/timestamp';
 
 const DEFAULT_STATE = {
   barChart,
@@ -44,6 +45,7 @@ const DEFAULT_STATE = {
   scatterPlotGraph,
   simon,
   ticTacToe,
+  timestamp,
   tributePage,
   twitchTv,
   urlShortener,

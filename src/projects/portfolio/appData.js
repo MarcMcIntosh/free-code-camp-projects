@@ -172,6 +172,13 @@ const apps = {
     media: ticTacToe,
     tags: [].concat(GAME, 'minimax', 'ai', 'knots and crosses'),
   },
+  timestamp: {
+    url: '/timestamp',
+    title: 'Timestamp Microservice',
+    challenge: 'https://www.freecodecamp.com/challenges/timestamp-microservice',
+    media: '',
+    tags: [].concat(SERVER, API, 'timestamp'),
+  },
   tribute: {
     title: 'Tribute Page',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-tribute-page',
