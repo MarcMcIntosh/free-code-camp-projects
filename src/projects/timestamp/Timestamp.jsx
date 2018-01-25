@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react';
-import { func, string, object } from 'prop-types';
+import { func, string, object, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from './styles';
-import { fetchDate } from './actions';
+import { fetchDate, reset } from './actions';
 import DateForm from './components/Form';
 import Results from './components/Results';
-import Message from './components/Message';
 
 const mapStateToProps = ({ timestamp: { error, message, data, fetching } }) => ({ error, data, fetching, message });
 
 const mapDispatchToProps = dispatch => ({
   onFetchDate: payload => dispatch(fetchDate(payload)),
+  onClear: () => dispatch(reset()),
 });
 
 class Timestamp extends PureComponent {
@@ -18,8 +18,10 @@ class Timestamp extends PureComponent {
     super(props);
     this.classnames = classnames;
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.has = (obj, str) => Object.prototype.hasOwnProperty.call(obj, str);
   }
   getChildContext() { return { classnames: this.classnames }; }
+
   handleSubmit(values) {
     const { unix, natural } = values;
     const time = natural || unix;
@@ -28,10 +30,9 @@ class Timestamp extends PureComponent {
     this.props.onFetchDate(addr);
   }
   render() {
+    const hasResults = this.has(this.props, 'message') && this.has(this.props.data, 'unix') && this.has(this.props.data, 'natural');
     return (<div className={this.classnames('timestamp')}>
-      <DateForm onSubmit={this.handleSubmit} />
-      <Message text={this.props.message} />
-      <Results results={this.props.data} />
+      {hasResults ? (<Results error={this.props.error} message={this.props.message} unix={this.props.data.unix} natural={this.props.data.natural} onClick={this.props.onClear} />) : (<DateForm onSubmit={this.handleSubmit} />)}
     </div>);
   }
 }
@@ -40,9 +41,9 @@ Timestamp.propTypes = {
   apiUrl: string.isRequired,
   onFetchDate: func.isRequired,
   message: string.isRequired,
-  // error: bool.isRequired,
-  // fetching: bool.isRequired,
   data: object.isRequired,
+  onClear: func.isRequired,
+  error: bool.isRequired,
 };
 
 Timestamp.defaultProps = { apiUrl: '/api/timestamp' };

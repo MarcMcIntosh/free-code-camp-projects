@@ -2,6 +2,7 @@
 
 .list {
   composes: mdc-list mdc-list--two-line from $mdc-list;
+  composes: mdc-card__supporting-text from $mdc-card;
 
   &__item { composes: mdc-list-tem from $mdc-list; }
 
@@ -9,5 +10,37 @@
     composes: mdc-list-item__text from $mdc-list;
 
     &__secondary { composes: mdc-list-item__text__secondary from $mdc-list; }
+  }
+}
+
+.card {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: auto;
+
+  &__primary { composes: mdc-card__primary from $mdc-card; }
+
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+
+  &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
+
+  &__actions { composes: mdc-card__actions from $mdc-card; }
+
+  &__action {
+    composes: mdc-button mdc-button--raised from $mdc-button;
+    composes: mdc-card__action from $mdc-card;
+    margin: auto !important;
+  }
+}
+
+.form {
+  composes: mdc-textfield from $mdc-textfield;
+
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+
+  &__line {
+    composes: mdc-textfield__bottom-line from $mdc-textfield;
+
+    &--active { composes: mdc-textfield__bottom-line--active from $mdc-textfield; }
   }
 }

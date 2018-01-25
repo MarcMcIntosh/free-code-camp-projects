@@ -1,4 +1,4 @@
-import { REQUEST, RECEIVED, REJECTED } from './actions';
+import { REQUEST, RECEIVED, REJECTED, RESET } from './actions';
 
 export const DEFAULT_STATE = {
   fetching: false,
@@ -18,6 +18,7 @@ export default function reducer(state = DEFAULT_STATE, action) {
       const { message } = action.payload;
       return { ...state, fetching: false, error: true, message };
     }
+    case RESET: return { ...state, ...DEFAULT_STATE };
     default: return state;
   }
 }

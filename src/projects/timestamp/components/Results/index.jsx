@@ -1,15 +1,28 @@
 import React from 'react';
-import { func, object } from 'prop-types';
+import { func, string, number, bool } from 'prop-types';
 import Item from './Item';
 
-const hasProp = (obj, str) => Object.prototype.hasOwnProperty.call(obj, str) && obj[str] !== null;
+const Results = ({ error, message, unix, natural, onClick }, { classnames }) => (<div className={classnames('card')}>
+  <header className={classnames('card__primary')}>
+    <h1 className={classnames('card__title')}>{error ? 'Error' : 'Success'}</h1>
+    <h2 className={classnames('card__subtitle')}>{message}</h2>
+  </header>
+  <ul className={classnames('list')}>
+    <Item title="Unix timestamp" text={unix} />
+    <Item title="Locale Date String" text={natural} />
+  </ul>
+  <section className={classnames('card__actions')}>
+    <button onClick={onClick} title="Clear" className={classnames('card__action')}>Clear</button>
+  </section>
+</div>);
 
-const Results = ({ results }, { classnames }) => (<ul className={classnames('list')}>
-  {hasProp(results, 'unix') && (<Item title="Unix timestamp" text={results.unix} />)}
-  {hasProp(results, 'natural') && (<Item title="Locale Date String" text={results.natural} />)}
-</ul>);
-
-Results.propTypes = { results: object.isRequired };
+Results.propTypes = {
+  unix: number.isRequired,
+  natural: string.isRequired,
+  message: string.isRequired,
+  onClick: func.isRequired,
+  error: bool.isRequired,
+};
 Results.contextTypes = { classnames: func.isRequired };
 
 export default Results;

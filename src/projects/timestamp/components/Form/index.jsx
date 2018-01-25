@@ -5,13 +5,14 @@ import RenderDatePicker from './RenderDatePicker';
 import RenderUTC from './RenderUTC';
 // import validate from './validate';
 
-const DateForm = ({ handleSubmit }, { classnames }) => (<form onSubmit={handleSubmit}>
-  <Field name="unix" component={RenderUTC} />
-  <div>
-    <label className={classnames('label')} htmlFor="datestring">Date Picker</label>
-    <Field name="natural" component={RenderDatePicker} showTime={false} />
-  </div>
-  <button type="submit">submit</button>
+const DateForm = ({ handleSubmit }, { classnames }) => (<form onSubmit={handleSubmit} className={classnames('card')}>
+  <section className={classnames('card__primary')}>
+    <Field name="natural" component={RenderDatePicker} showTime={false} placeholder="Click To Select" />
+    <Field name="unix" component={RenderUTC} />
+  </section>
+  <section className={classnames('card__actions')}>
+    <button className={classnames('card__action')} type="submit">submit</button>
+  </section>
 </form>);
 
 DateForm.propTypes = propTypes;

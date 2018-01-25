@@ -1,14 +1,21 @@
 const { Router } = require('express');
 
+function dateToUtc(val) {
+  const nan = isNaN(val);
+  if (nan) return Date.parse(val);
+  const d = new Date(0);
+  return d.valueOf() + Number(val);
+}
+
 function formatTime(str, lang) {
-  const d = new Date(str);
-  const unix = d.getTime();
+  const unix = dateToUtc(str);
+  const d = new Date(unix);
   if (isNaN(unix)) {
     return { unix: null, natural: null, error: true, message: `Accepted date fromats are, 'Month date, year' ie: January 1, 1890. or the number of milliseconds from 1 January 1970 00:00:00 UTC. check: ${str}` };
   }
   return {
     error: false,
-    message: `Success: ${str} has been parse in to unix time and localie ${lang}`,
+    message: `Date has been parsed to UTC and ${lang[0]}`,
     unix,
     natural: d.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' }),
   };
