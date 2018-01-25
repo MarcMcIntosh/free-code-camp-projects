@@ -1,1 +1,13 @@
 @import "./variables.scss";
+
+.list {
+  composes: mdc-list mdc-list--two-line from $mdc-list;
+
+  &__item { composes: mdc-list-tem from $mdc-list; }
+
+  &__text {
+    composes: mdc-list-item__text from $mdc-list;
+
+    &__secondary { composes: mdc-list-item__text__secondary from $mdc-list; }
+  }
+}
