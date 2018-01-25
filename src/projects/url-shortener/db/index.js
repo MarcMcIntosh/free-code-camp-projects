@@ -6,6 +6,8 @@ const viewByAddress = require('./viewByAddress');
 
 const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
 
+// const DATA_DIR = process.env.DATA_DIR ? resolve(process.env.DATA_DIR, 'url-shortener') : resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
+
 const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 
 // save the design doc

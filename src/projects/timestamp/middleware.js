@@ -23,7 +23,8 @@ function formatTime(str, lang) {
 
 function timestamp(req, res) {
   const str = decodeURIComponent(req.params.time);
-  const lang = req.acceptsLanguages();
+  const acceptLang = req.acceptsLanguages();
+  const lang = acceptLang[0] !== '*' ? acceptLang : 'en-GB';
   const time = formatTime(str, lang);
   res.json(time);
 }

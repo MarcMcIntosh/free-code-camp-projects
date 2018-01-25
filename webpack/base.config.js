@@ -42,9 +42,15 @@ const serverEntry = f => path.resolve(__dirname, '..', 'src', 'server', f);
 
 const entry = ({ server = false, production = false, dist = false } = {}) => (server ? serverEntry(dist ? 'index.js' : 'render.jsx') : clientEntry({ production }));
 
-const externals = ({ server = false, production = false } = {}) => (server && !production ? [].concat(nodeExternals({
-  whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'],
-})) : []);
+const externals = ({
+  server = false,
+  // production = false,
+} = {}) => {
+  if (server) {
+    return [nodeExternals({ whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'] })];
+  }
+  return [];
+};
 
 const clientOut = ({ production }) => ({
   filename: production ? '[name].[chunkhash].js' : '[name].js',
@@ -124,6 +130,7 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
 
   const CLIENT_PROD_PLUGINS = [
     min,
+    new WriteFilePlugin(),
     new HashedModuleIdsPlugin(),
   ];
 
@@ -143,8 +150,9 @@ const config = ({ server = false, production = false, dist = false } = {}) => ({
   name: name({ server }),
   target: target({ server }),
   devtool: devtool({ production }),
-  entry: entry({ server, production }),
-  output: output({ server }),
+  node: server && dist ? { __filename: true, __dirname: true } : undefined,
+  entry: entry({ server, production, dist }),
+  output: output({ server, production }),
   externals: externals({ server, production }),
   module: { rules: rules({ server, production }) },
   resolve,

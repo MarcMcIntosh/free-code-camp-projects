@@ -30,6 +30,7 @@ import woodhouse from './assets/Woodhouse.png';
 import imageSearch from './assets/image-search.png';
 import urlShortener from './assets/url-shortener.png';
 import headerParser from './assets/header-parser.png';
+import timestamp from './assets/timestamp.png';
 
 const GAME = ['game'];
 const D3 = ['d3', 'data-visualisations'];
@@ -176,7 +177,7 @@ const apps = {
     url: '/timestamp',
     title: 'Timestamp Microservice',
     challenge: 'https://www.freecodecamp.com/challenges/timestamp-microservice',
-    media: '',
+    media: timestamp,
     tags: [].concat(SERVER, API, 'timestamp'),
   },
   tribute: {
