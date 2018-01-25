@@ -21,16 +21,23 @@ import { reducer as ticTacToe } from '../../projects/tic-tac-toe';
 import { reducer as tributePage } from '../../projects/tribute-page';
 import { reducer as twitchTv } from '../../projects/twitch-tv';
 import { reducer as wikipediaViewer } from '../../projects/wikipedia-viewer';
-
+import { reducer as fileSize } from '../../projects/file-size';
+import { reducer as imageSearch } from '../../projects/image-search';
+import { reducer as urlShortener } from '../../projects/url-shortener';
+import { reducer as headerParser } from '../../projects/header-parser';
+import { reducer as timestamp } from '../../projects/timestamp';
 
 const reducer = combineReducers({
   barChart,
   calculator,
   dataGlobe,
   dungeonCrawler,
+  fileSize,
   forceDirected,
   gameOfLife,
+  headerParser,
   heatMap,
+  imageSearch,
   leaderBoard,
   localWeather,
   markdownPreviewer,
@@ -42,8 +49,10 @@ const reducer = combineReducers({
   scatterPlotGraph,
   simon,
   ticTacToe,
+  timestamp,
   tributePage,
   twitchTv,
+  urlShortener,
   wikipediaViewer,
 });
 

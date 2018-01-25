@@ -22,6 +22,11 @@ import TwitchTv from '../projects/twitch-tv';
 import WikipediaViewer from '../projects/wikipedia-viewer';
 import appData from '../projects/portfolio/appData';
 import NotFound from '../app/pages/NotFound';
+import FileSize from '../projects/file-size';
+import ImageSearch from '../projects/image-search';
+import UrlShortener from '../projects/url-shortener';
+import HeaderParser from '../projects/header-parser';
+import Timestamp from '../projects/timestamp';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -35,9 +40,12 @@ const routes = [
       { path: appUrls.calculator, component: Calculator },
       { path: appUrls.dataGlobe, component: DataGlobe },
       { path: appUrls.dungeonCrawler, component: DungeonCrawler },
+      { path: appUrls.fileSize, component: FileSize },
       { path: appUrls.forceDirected, component: ForceDirected },
       { path: appUrls.gameOfLife, component: GameOfLife },
+      { path: appUrls.headerParser, component: HeaderParser },
       { path: appUrls.heatMap, component: HeatMap },
+      { path: appUrls.imageSearch, component: ImageSearch },
       { path: appUrls.leaderBoard, component: LeaderBoard },
       { path: appUrls.localWeather, component: LocalWeather },
       { path: appUrls.markdownPreviewer, component: MarkdownPreviewer },
@@ -46,9 +54,11 @@ const routes = [
       { path: appUrls.recipeBox, component: RecipeBox },
       { path: appUrls.scatterplotGraph, component: ScatterplotGraph },
       { path: appUrls.simon, component: Simon },
+      { path: appUrls.timestamp, component: Timestamp },
       { path: appUrls.ticTacToe, component: TicTacToe },
       { path: appUrls.tribute, component: TributePage },
       { path: appUrls.twitch, component: TwitchTv },
+      { path: appUrls.urlShortener, component: UrlShortener },
       { path: appUrls.wikipediaViewer, component: WikipediaViewer },
       { component: NotFound },
     ],

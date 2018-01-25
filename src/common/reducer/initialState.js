@@ -18,15 +18,23 @@ import { DEFAULT_STATE as ticTacToe } from '../../projects/tic-tac-toe';
 import { DEFAULT_STATE as tributePage } from '../../projects/tribute-page';
 import { DEFAULT_STATE as twitchTv } from '../../projects/twitch-tv';
 import { DEFAULT_STATE as wikipediaViewer } from '../../projects/wikipedia-viewer';
+import { DEFAULT_STATE as fileSize } from '../../projects/file-size';
+import { DEFAULT_STATE as imageSearch } from '../../projects/image-search';
+import { DEFAULT_STATE as urlShortener } from '../../projects/url-shortener';
+import { DEFAULT_STATE as headerParser } from '../../projects/header-parser';
+import { DEFAULT_STATE as timestamp } from '../../projects/timestamp';
 
 const DEFAULT_STATE = {
   barChart,
   calculator,
   dataGlobe,
   dungeonCrawler,
+  fileSize,
   forceDirected,
   gameOfLife,
+  headerParser,
   heatMap,
+  imageSearch,
   leaderBoard,
   localWeather,
   markdownPreviewer,
@@ -37,8 +45,10 @@ const DEFAULT_STATE = {
   scatterPlotGraph,
   simon,
   ticTacToe,
+  timestamp,
   tributePage,
   twitchTv,
+  urlShortener,
   wikipediaViewer,
 };
 

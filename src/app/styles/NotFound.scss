@@ -1,5 +1,5 @@
-$mdc-card: "@material/mdc-card/mdc-card.scss";
-$mdc-list: "@material/mdc-list/mdc-list.scss";
+$mdc-card: "@material/card/mdc-card.scss";
+$mdc-list: "@material/list/mdc-list.scss";
 
 .card {
   composes: mdc-card from $mdc-card;

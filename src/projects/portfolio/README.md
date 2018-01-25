@@ -1,8 +1,10 @@
 # Build a Personal Portfolio Webpage
-https://www.freecodecamp.org/challenges/build-a-personal-portfolio-webpage
+challenge: https://www.freecodecamp.org/challenges/build-a-personal-portfolio-webpage
+
 ## Objective
 Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/YqLyXB/.
 Fulfill the below user stories. Use whichever libraries you need. Give it your own personal style.
+
 ## User stories
 + I can access all of the portfolio webpage's content just by scrolling.
 + I can click different buttons that will take me to the portfolio creator's different social media pages.

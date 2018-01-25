@@ -5,14 +5,14 @@ import flushChunks from 'webpack-flush-chunks';
 import { StaticRouter } from 'react-router';
 import { renderRoutes } from 'react-router-config';
 import routes from '../common/routes';
-import Container, { favicon } from '../common/Container';
+import Container from '../common/Container';
 
 const App = props => (<Container><StaticRouter {...props}>{renderRoutes(routes)}</StaticRouter></Container>);
 
 export default ({ clientStats }) => (req, res) => {
   const staticContext = {};
   /* not req url include query strings */
-  const app = renderToString(<App location={req.url} context={staticContext} />);
+  const app = renderToString(<App location={req.path} context={staticContext} />);
 
   const chunkNames = flushChunkNames();
 
@@ -45,7 +45,6 @@ export default ({ clientStats }) => (req, res) => {
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Marc's project" />
         <title>Marc's projects</title>
-        <link rel="icon" type="image/png" href="${favicon}" />
         ${styles}
       </head>
     <body>
@@ -55,5 +54,5 @@ export default ({ clientStats }) => (req, res) => {
     </body>
   </html>`;
 
-  res.status(200).send(html);
+  return res.status(200).send(html);
 };

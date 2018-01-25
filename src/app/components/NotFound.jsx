@@ -1,5 +1,5 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames/bind';
 import appData from '../../projects/portfolio/appData';
@@ -7,10 +7,10 @@ import styles from '../styles/NotFound.scss';
 
 const cx = classnames.bind(styles);
 
-const NotFound = ({ location }) => (<div className={cx('card')}>
+const NotFound = ({ location: { pathname } }) => (<div className={cx('card')}>
   <section className={cx('card__primary')}>
     <h1 className={cx('card__title')}>Error</h1>
-    <h2 className={cx('card__subtitle')}>{location} : not found</h2>
+    <h2 className={cx('card__subtitle')}>{pathname} : not found</h2>
   </section>
   <section className={cx('card__supporting-text')}>
     Try one of
@@ -22,6 +22,6 @@ const NotFound = ({ location }) => (<div className={cx('card')}>
   </section>
 </div>);
 
-NotFound.propTypes = { location: string.isRequired };
+NotFound.propTypes = { location: shape({ pathname: string.isRequired }).isRequired };
 
 export default NotFound;

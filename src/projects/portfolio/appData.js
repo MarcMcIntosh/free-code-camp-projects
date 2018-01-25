@@ -11,6 +11,7 @@ import barChart from './assets/bar-chart.png';
 import calculator from './assets/calculator.png';
 import dataGlobe from './assets/data-globe.png';
 import dungeonCrawler from './assets/dungeon-crawler.png';
+import fileSize from './assets/file-size.png';
 import forceDirected from './assets/force-directed.png';
 import gameOfLife from './assets/game-of-life.png';
 import heatMap from './assets/heat-map.png';
@@ -26,13 +27,16 @@ import ticTacToe from './assets/tic-tac-toe.png';
 import twitchTv from './assets/twitch-tv.png';
 import wikipediaViewer from './assets/wikipedia-viewer.png';
 import woodhouse from './assets/Woodhouse.png';
-
+import imageSearch from './assets/image-search.png';
+import urlShortener from './assets/url-shortener.png';
+import headerParser from './assets/header-parser.png';
 
 const GAME = ['game'];
 const D3 = ['d3', 'data-visualisations'];
 const FRONTEND = ['client', 'front-end'];
 const REACT = ['react', 'redux'];
 const API = ['api'];
+const SERVER = ['server-side', 'micro-service'];
 
 const apps = {
   barChart: {
@@ -63,6 +67,13 @@ const apps = {
     media: dungeonCrawler,
     tags: [].concat(GAME, REACT),
   },
+  fileSize: {
+    url: '/file-size',
+    challenge: 'https://www.freecodecamp.com/challenges/file-metadata-microservice',
+    title: 'File Metadata Microservice',
+    media: fileSize,
+    tags: [].concat(API, SERVER, 'file size'),
+  },
   forceDirected: {
     url: '/force-directed',
     challenge: 'https://www.freecodecamp.com/challenges/show-national-contiguity-with-a-force-directed-graph',
@@ -77,12 +88,26 @@ const apps = {
     media: gameOfLife,
     tags: [].concat(REACT, GAME, 'game of life'),
   },
+  headerParser: {
+    url: '/header-parser',
+    challenge: 'https://www.freecodecamp.com/challenges/request-header-parser-microservice',
+    title: 'Request Header Parser',
+    media: headerParser,
+    tags: [].concat(SERVER, API, 'headers'),
+  },
   heatMap: {
     url: '/heat-map',
     title: 'Heat Map',
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-heat-map',
     media: heatMap,
     tags: [].concat(D3, 'heat map', 'graph'),
+  },
+  imageSearch: {
+    url: '/image-search',
+    title: 'Image search',
+    challenge: 'https://www.freecodecamp.com/challenges/image-search-abstraction-layer',
+    media: imageSearch,
+    tags: [].concat(API, SERVER, 'image search'),
   },
   leaderBoard: {
     url: '/leader-board',
@@ -147,6 +172,13 @@ const apps = {
     media: ticTacToe,
     tags: [].concat(GAME, 'minimax', 'ai', 'knots and crosses'),
   },
+  timestamp: {
+    url: '/timestamp',
+    title: 'Timestamp Microservice',
+    challenge: 'https://www.freecodecamp.com/challenges/timestamp-microservice',
+    media: '',
+    tags: [].concat(SERVER, API, 'timestamp'),
+  },
   tribute: {
     title: 'Tribute Page',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-tribute-page',
@@ -160,6 +192,13 @@ const apps = {
     title: 'Twitch-tv info',
     media: twitchTv,
     tags: [].concat(FRONTEND, API, 'twitch tv'),
+  },
+  urlShortener: {
+    url: '/url-shortener',
+    challenge: 'https://www.freecodecamp.com/challenges/url-shortener-microservice',
+    title: 'URL Shortener Microservice',
+    meida: urlShortener,
+    tags: [].concat(SERVER, API, 'url shortener'),
   },
   wikipediaViewer: {
     url: '/wikipedia-viewer',

@@ -1,0 +1,60 @@
+@import "./variables.scss";
+
+.list {
+  composes: mdc-list from $mdc-list;
+  composes: mdc-card__supporting-text from $mdc-card;
+  // padding-top: 0;
+
+  &__item {
+    composes: mdc-list-item from $mdc-list;
+    height: auto !important;
+    min-height: 48px;
+    white-space: normal !important;
+  }
+}
+
+.card {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: 16px auto;
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+    // padding-bottom: 0;
+  }
+
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+
+  &__actions { composes: mdc-card__actoins from $mdc-card; }
+
+  &__action {
+    composes: mdc-card__action from $mdc-card;
+    composes: mdc-button mdc-button--compact from $mdc-button;
+  }
+}
+
+@keyframes blink {
+
+  0% { opacity: 0; }
+
+  20% { opacity: inherit; }
+
+  100% { opacity: 0; }
+}
+
+.loading {
+  composes: mdc-card__subtitle from $mdc-card;
+
+  &__dot {
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-duration: 1.4s;
+
+    &--1 { animation-delay: 0; }
+
+    &--2 { animation-delay: .2s; }
+
+    &--2 { animation-delay: .4s; }
+  }
+}

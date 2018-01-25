@@ -1,0 +1,65 @@
+@import "./variables.scss";
+
+.card {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 16px;
+}
+
+.file-size {
+  composes: mdc-list-group from $mdc-list;
+}
+
+.divider { composes: mdc-list-divider from $mdc-list; }
+
+.icons { composes: material-icons from $material-icons; }
+
+.list {
+  composes: mdc-list mdc-list--two-line mdc-list--avatar-list from $mdc-list;
+
+  /* two line list required */
+
+  &-item {
+    composes: mdc-list-item from $mdc-list;
+
+    &__text { composes: mdc-list-item__text from $mdc-list; }
+
+    &__secondary { composes: mdc-list-item__text__secondary from $mdc-list; }
+
+    &__start-detail {
+      composes: mdc-list-item__start-detail from $mdc-list;
+    }
+  }
+}
+
+.file-input {
+  width: 200px;
+  height: 200px;
+  margin: 16px auto;
+  padding: 6px;
+  float: right;
+  border-style: dashed;
+  text-align: center;
+}
+
+.input {
+  margin: auto;
+  background-image: url(../assets/ic_note_add_black_48px.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.loader {
+  composes: mdc-linear-progress mdc-linear-progress--indeterminate from $mdc-linear-progress;
+
+  &__buffering-dots { composes: mdc-linear-progress__buffering-dots from $mdc-linear-progress; }
+
+  &__buffer { composes: mdc-linear-progress__buffer from $mdc-linear-progress; }
+
+  &__primary { composes: mdc-linear-progress__bar mdc-linear-progress__primary-bar from $mdc-linear-progress; }
+
+  &__inner { composes: mdc-linear-progress__bar-inner from $mdc-linear-progress; }
+
+  &__secondary { composes: mdc-linear-progress__bar mdc-linear-progress__secondary-bar from $mdc-linear-progress; }
+}
