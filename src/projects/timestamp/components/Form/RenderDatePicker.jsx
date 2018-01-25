@@ -10,7 +10,6 @@ const RenderDatePicker = ({ input: { onChange, ...input }, format, placeholder }
     {...input}
     placeholder={placeholder}
     dateFormat={format}
-    type="button"
     selected={input.value ? moment(input.value, format) : null}
     onChange={val => onChange(moment(val).format(format))}
   />
