@@ -10,8 +10,6 @@ const {
 const WriteFilePlugin = require('write-file-webpack-plugin'); // see whar chunks are built
 const nodeExternals = require('webpack-node-externals');
 const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line
-// const cssnano = require('cssnano');
-// const autoprefixer = require('autoprefixer');
 
 const modulesDir = path.resolve(__dirname, '..', 'node_modules');
 const CLIENT_OUT = path.resolve(__dirname, '..', 'build', 'client');
@@ -23,26 +21,14 @@ const CLIENT_HMR = [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
   'react-hot-loader/patch',
 ];
-/*
-plugins: [
-  // require('postcss-import')({ root: loader.resourcePath }),
-  // require('postcss-cssnext')(),
-  autoprefixer(),
-  cssnano({ preset: 'default' }),
-],
-*/
-const postCssOptions = { loader: 'postcss-loader',
+
+const postCssOptions = {
+  loader: 'postcss-loader',
   options: {
     ident: 'postcss',
     sourceMap: true,
     config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } },
-    plugins: () => [
-      // require('postcss-url')({ url: "rebase" }), // eslint-disable-line
-      // require('postcss-import')({ root: loader.resourcePath }), // eslint-disable-line
-      // require('postcss-cssnext')({ features: { customProperties: { warnings: false } }}), // eslint-disable-line
-      require('autoprefixer')(), // eslint-disable-line
-      // require('cssnano')({ preset: ['default', { warnForDuplicates: false, discardComments: { removeAll: true } }] }), // eslint-disable-line
-    ],
+    plugins: () => [require('autoprefixer')()], // eslint-disable-line
   },
 };
 
@@ -172,6 +158,7 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
 const config = ({ server = false, production = false, dist = false } = {}) => ({
   name: name({ server }),
   target: target({ server }),
+  stats: { children: false },
   devtool: devtool({ production }),
   node: server && dist ? { __filename: true, __dirname: true } : undefined,
   entry: entry({ server, production, dist }),
