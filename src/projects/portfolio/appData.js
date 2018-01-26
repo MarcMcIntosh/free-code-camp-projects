@@ -198,7 +198,7 @@ const apps = {
     url: '/url-shortener',
     challenge: 'https://www.freecodecamp.com/challenges/url-shortener-microservice',
     title: 'URL Shortener Microservice',
-    meida: urlShortener,
+    media: urlShortener,
     tags: [].concat(SERVER, API, 'url shortener'),
   },
   wikipediaViewer: {

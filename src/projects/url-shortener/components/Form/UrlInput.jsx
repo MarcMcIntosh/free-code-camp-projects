@@ -10,7 +10,7 @@ const Input = ({ input, type, label, meta: { active, error, submitting }, submit
   })}
   >
 
-    <input {...input} type={type} className={classnames('address__input')} />
+    <input {...input} type={type} className={classnames('address__input')} spellCheck={false} />
 
     <label htmlFor={input.name} className={classnames('address__label', { 'address__label--float-above': input.value || active })} >{label}</label>
 
