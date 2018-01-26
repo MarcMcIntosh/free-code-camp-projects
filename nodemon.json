@@ -1,7 +1,0 @@
-{
-    "verbose": true,
-    "watch": [ "src", "webpack" ],
-    "exec": "npm run build:dev && node dist/server/server.dev.js",
-    "delay": "2500"
-}
- 
