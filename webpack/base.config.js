@@ -10,6 +10,8 @@ const {
 const WriteFilePlugin = require('write-file-webpack-plugin'); // see whar chunks are built
 const nodeExternals = require('webpack-node-externals');
 const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line
+// const cssnano = require('cssnano');
+// const autoprefixer = require('autoprefixer');
 
 const modulesDir = path.resolve(__dirname, '..', 'node_modules');
 const CLIENT_OUT = path.resolve(__dirname, '..', 'build', 'client');
@@ -21,8 +23,28 @@ const CLIENT_HMR = [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
   'react-hot-loader/patch',
 ];
-
-const postCssOptions = { loader: 'postcss-loader', options: { indent: 'postcss', sourceMap: true, config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } } } };
+/*
+plugins: [
+  // require('postcss-import')({ root: loader.resourcePath }),
+  // require('postcss-cssnext')(),
+  autoprefixer(),
+  cssnano({ preset: 'default' }),
+],
+*/
+const postCssOptions = { loader: 'postcss-loader',
+  options: {
+    ident: 'postcss',
+    sourceMap: true,
+    config: { ctx: { cssnext: {}, cssnano: {}, autoprefixer: {} } },
+    plugins: () => [
+      // require('postcss-url')({ url: "rebase" }), // eslint-disable-line
+      // require('postcss-import')({ root: loader.resourcePath }), // eslint-disable-line
+      // require('postcss-cssnext')({ features: { customProperties: { warnings: false } }}), // eslint-disable-line
+      require('autoprefixer')(), // eslint-disable-line
+      // require('cssnano')({ preset: ['default', { warnForDuplicates: false, discardComments: { removeAll: true } }] }), // eslint-disable-line
+    ],
+  },
+};
 
 const indentName = (production = false) => (production ? '[hash:base64]' : '[name]-[local]');
 
@@ -77,6 +99,7 @@ const cssOptions = ({ server = false, production = false, importLoaders = 1 } = 
     modules: true,
     localIdentName: indentName(production),
     importLoaders,
+    minimize: production,
   },
 });
 
