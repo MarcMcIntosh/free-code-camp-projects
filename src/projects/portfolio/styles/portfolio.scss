@@ -2,7 +2,6 @@
 
 .grid {
   composes: mdc-layout-grid from $mdc-layout-grid;
-  margin: 16px;
 
   &__inner { composes: mdc-layout-grid__inner from $mdc-layout-grid; }
 
