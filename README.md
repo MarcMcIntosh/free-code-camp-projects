@@ -2,7 +2,7 @@
 A of projects from http://freecodecamp.com
 
 ## Use notes
-Add google search API_KEY and CSE_ID to src/projects/image-search/.env
+Add google search API_KEY and CSE_ID to .env for the image-search program
 
 ### Development
 Run in development with hot module reloading with
