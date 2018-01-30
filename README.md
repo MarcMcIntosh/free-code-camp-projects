@@ -5,6 +5,8 @@ A of projects from http://freecodecamp.com
 Add google search API_KEY and CSE_ID to .env for the image-search program
 
 #### Development
+*For some of the applications couchdb or pouchdb-server shnould be avialable at 127.0.0.1:5984*
+
 Run in development with hot module reloading with `npm start`
 
 #### Production
@@ -14,7 +16,7 @@ npm run build && node server.js
 ```
 ### Directories
 + **webpack** webpack configuration and development server directory
-+ **data** Pouchdb data directory for local-databases
++ **data** development data directory for local-databases used by pouchdb-server
 + **src/app** client side applicaiton container
 + **src/server** server side renderer, api routes
 + **src/projects** Each project has a directory in-here

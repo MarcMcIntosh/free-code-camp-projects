@@ -1,14 +1,14 @@
-const { resolve } = require('path');
-const PouchDB = require('pouchdb-node');
+const PouchDB = require('pouchdb-http').plugin(require('pouchdb-mapreduce'));
 const md5 = require('./md5');
 const shortenHash = require('./shortenHash');
 const viewByAddress = require('./viewByAddress');
 
-const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
+// const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
 
 // const DATA_DIR = process.env.DATA_DIR ? resolve(process.env.DATA_DIR, 'url-shortener') : resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
+// const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 
-const db = new PouchDB(DATA_DIR, { auto_compaction: true });
+const db = new PouchDB('http://127.0.0.1:5984/url-shortener');
 
 // save the design doc
 db.get(viewByAddress._id, (e, res) => {
