@@ -1,10 +1,11 @@
-const PouchDB = require('pouchdb-http').plugin(require('pouchdb-find'));
+const { resolve } = require('path');
+const PouchDB = require('pouchdb-node').plugin(require('pouchdb-find'));
 const createDoc = require('./createDoc');
 
-// const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'image-search');
-// const db = new PouchDB(DATA_DIR, { auto_compaction: true });
+const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'image-search');
+const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 
-const db = new PouchDB('http://127.0.0.1:5984/image-search');
+// const db = new PouchDB('http://127.0.0.1:5984/image-search');
 
 function save(term, cb) {
   const doc = createDoc(term);

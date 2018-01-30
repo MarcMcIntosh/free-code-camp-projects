@@ -5,7 +5,6 @@ A of projects from http://freecodecamp.com
 Add google search API_KEY and CSE_ID to .env for the image-search program
 
 #### Development
-*For some of the applications couchdb or pouchdb-server shnould be avialable at 127.0.0.1:5984*
 
 Run in development with hot module reloading with `npm start`
 
