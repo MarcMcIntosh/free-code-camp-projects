@@ -56,7 +56,8 @@
     "start": "npm run clean && cross-env NODE_ENV=development node webpack/dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf build/*",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack --colors --display-error-details --config ./webpack/dist-config.js"
+    "build": "npm run clean && npm run dist",
+    "dist": "cross-env NODE_ENV=production webpack --progress --colors --display-error-details --config ./webpack/dist-config.js"
   },
   "repository": {
     "type": "git",
