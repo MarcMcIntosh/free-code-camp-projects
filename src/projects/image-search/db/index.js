@@ -1,4 +1,4 @@
-const { reslove } = require('path');
+const { resolve } = require('path');
 const PouchDB = require('pouchdb-node').plugin(require('pouchdb-find'));
 const createDoc = require('./createDoc');
 
