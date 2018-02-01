@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { string, func } from 'prop-types';
 
-const Preview = ({ title, challenge, url, media }, { classnames }) => (<div className={classnames('preview')}>
+const Preview = ({ title, challenge, url, media, repository }, { classnames }) => (<div className={classnames('preview')}>
 
   <div className={classnames('preview__block')}>
     <section className={classnames('preview__primary')}>
@@ -12,8 +12,9 @@ const Preview = ({ title, challenge, url, media }, { classnames }) => (<div clas
   </div>
 
   <div className={classnames('preview__actions')}>
-    <Link className={classnames('preview__action')} to={url}>View</Link>
-    <a className={classnames('preview__action')} href={challenge}>About</a>
+    <Link className={classnames('preview__action', 'preview__action--raised')} title="View application" to={url}>View</Link>
+    <a className={classnames('preview__action')} href={challenge} title="Application spec-sheet">Spec</a>
+    <a className={classnames('preview__action')} href={repository} title="Code repository">Repo</a>
   </div>
 </div>);
 
@@ -23,6 +24,7 @@ Preview.propTypes = {
   url: string.isRequired,
   challenge: string.isRequired,
   media: string.isRequired,
+  repository: string.isRequired,
 };
 
 Preview.contextTypes = { classnames: func.isRequired };

@@ -31,10 +31,16 @@
 
   &__media { composes: mdc-card__media-item from $mdc-card; }
 
-  &__actions { composes: mdc-card__actions from $mdc-card; }
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+    justify-content: space-around;
+  }
 
   &__action {
-    composes: mdc-button mdc-button--compact from $mdc-button;
+    // composes: mdc-button mdc-button--compact from $mdc-button;
+    composes: mdc-button from $mdc-button;
     composes: mdc-card__action from $mdc-card;
+
+    &--raised { composes: mdc-button--raised from $mdc-button; }
   }
 }
