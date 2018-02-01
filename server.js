@@ -17,8 +17,7 @@ const app = express();
 app.use(helmet());
 app.use(compression());
 app.use(favicon(FAVICON_PATH));
+/* uncomment for express to server static assets */
 // app.use(express.static(outputPath));
-// app.use('/api', server.api);
-// console.log(server.api);
 app.use(server);
 app.listen(port);
