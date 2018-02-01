@@ -10,7 +10,7 @@ const clientConfig = require('./client.dev');
 const serverConfig = require('./server.dev');
 const clientConfigProd = require('./client.prod');
 const serverConfigProd = require('./server.prod');
-const api = require('../src/server/api');
+// const api = require('../src/server/api');
 
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;
@@ -21,7 +21,7 @@ const app = express();
 const FAVICON_PATH = resolve(__dirname, '..', 'src', 'common', 'assets', 'favicon.png');
 
 app.use(favicon(FAVICON_PATH));
-app.use('/api', api);
+// app.use('/api', api);
 
 let isBuilt = false;
 

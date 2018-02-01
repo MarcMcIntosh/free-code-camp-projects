@@ -50,7 +50,10 @@ const clientEntry = ({ production = false } = {}) => {
 
 const serverEntry = f => path.resolve(__dirname, '..', 'src', 'server', f);
 
-const entry = ({ server = false, production = false, dist = false } = {}) => (server ? serverEntry(dist ? 'index.js' : 'render.jsx') : clientEntry({ production }));
+// const entry = ({ server = false, production = false, dist = false } = {}) => (server ? serverEntry(dist ? 'index.js' : 'render.jsx') : clientEntry({ production }));
+
+const entry = ({ server = false, production = false } = {}) => (server ? serverEntry('index.js') : clientEntry({ production }));
+
 
 const externals = ({
   server = false,
@@ -162,7 +165,7 @@ const config = ({ server = false, production = false, dist = false } = {}) => ({
   target: target({ server }),
   stats: { children: false },
   devtool: devtool({ production }),
-  node: server && dist ? { __filename: true, __dirname: true } : undefined,
+  node: server ? { __filename: true, __dirname: true } : undefined,
   entry: entry({ server, production, dist }),
   output: output({ server, production }),
   externals: externals({ server, production }),
