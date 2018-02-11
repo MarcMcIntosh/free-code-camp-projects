@@ -7,22 +7,18 @@ const hashPassword = require('./hash');
 
 function createToken(user, cb) {
   // return jwt.sign(user._id, user.salt, { expiresIn: '7d' }, cb);
-  return jwt.sign({ id: user._id, hash: user.hash }, SECRET_KEY, cb);
+  return jwt.sign({ id: user._id }, SECRET_KEY, cb);
 }
 
 function createSession(user, cb) {
   return createToken(user, (err, token) => {
     if (err) { cb(err); }
-    return db.get(user._id, (error, doc) => {
-      const timestamp = Date.now();
-      const sess = { [token]: { created_at: Date.now() } };
-      const session = Object.assign({}, doc.session, sess);
-      const userDoc = Object.assign({}, doc, {
-        updated_at: timestamp,
-        session,
-      });
-      return db.put(userDoc, e => cb(e, token));
-    });
+    db.put({
+      _id: token,
+      type: 'session',
+      created_by: user._id,
+      created_at: Date.now(),
+    }, () => cb(null, token));
   });
 }
 
@@ -38,7 +34,7 @@ function validateEmail(req, res) {
     return res.status(409).json({ error: 'invalid', message: 'Invalid email address' });
   }
 
-  return db.query('auth/email', { key: req.params.email, limit: 1 }, (error, docs) => {
+  return db.query('users/email', { key: req.params.email, limit: 1 }, (error, docs) => {
     if (error) {
       res.status(500).send(error);
     } else if (docs.rows.length === 0) {
@@ -68,11 +64,11 @@ function register(req, res) {
   const { username, email, password } = req.body;
 
   const errorsInUse = {};
-  return db.query('auth/email', { key: email, limit: 1 }, (e, emailAdress) => {
+  return db.query('users/email', { key: email, limit: 1 }, (e, emailAdress) => {
     if (e) { return res.status(500).send(e); }
     if (emailAdress.rows.length > 0) { errorsInUse.email = 'email address in use'; }
 
-    return db.query('auth/username', { key: username, limit: 1 }, (er, userNameRes) => {
+    return db.query('users/username', { key: username, limit: 1 }, (er, userNameRes) => {
       if (er) { return res.status(500).send(er); }
       if (userNameRes.row.length > 0) { errorsInUse.username = 'username in use'; }
 
@@ -124,7 +120,7 @@ function login(req, res) {
 
 function validateUsername(req, res, next) {
   if (!req.params.username) { return next({ error: 'Username required', status: 400 }); }
-  return db.query('auth/username', { key: req.params.username, limit: 1 }, (error, docs) => {
+  return db.query('users/username', { key: req.params.username, limit: 1 }, (error, docs) => {
     if (error) {
       res.status(500).send(error);
     } else if (docs.rows.length === 0) {

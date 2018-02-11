@@ -16,76 +16,76 @@ passport.use(new passportJWT.Strategy({
 }, (payload, done) => db.get(payload.id, (err, user) => done(err, user))));
 
 
+function onLogin(userDoc, cb) {
+  if (!userDoc.local.failedLoginAttempts) { return cb(null, userDoc); }
+  /* reset failedLoginsCounter */
+  const doc = userDoc;
+  doc.local.failedLoginAttempts = 0;
+  doc.updated_at = Date.now();
+  return db.put(doc, (err, res) => {
+    if (err) { return cb(null, userDoc, { message: err }); }
+    return db.get(res.id, cb);
+  });
+}
+
+function onLockOut(userDoc, cb) {
+  const doc = userDoc;
+  doc.local.failedLoginAttempts = 0;
+  const timestamp = Date.now();
+  doc.local.lockedUntil = timestamp + LOCKOUT_TIME;
+  doc.updated_at = timestamp;
+  const minutes = Math.round(LOCKOUT_TIME / 60);
+
+  return db.put(doc, err => cb(err, false, { error: 'Unauthorized', message: `Maximum failed login attempts exceeded. Your account has been locked for ${minutes} minutes` }));
+}
+
+function onFail(userDoc, cb) {
+  const doc = userDoc;
+  doc.local.failedLoginAttempts += 1;
+  doc.updated_at = Date.now();
+  return db.put(doc, err => cb(err, false, { error: 'Unauthorized', message: 'Invalid username or password' }));
+}
+
+function localLogin(id, password, cb) {
+  return db.get(id, (e, d) => {
+    if (e) { cb(e); }
+    if (d.local && d.local.lockedUntil && d.local.lockedUntil > Date.now()) {
+    /* Brute force timeout */
+      return cb(null, false, { error: 'Unauthorized', message: 'Your account is currently locked. Please wait a few minutes and try again.' });
+    } else if (!d.local || !d.local.hash) {
+      /* No hash to check password against  */
+      return cb(null, false, { error: 'Unauthorized', message: 'This account use a social login' });
+    }
+
+    const hash = hashPassword(password, d.local.salt);
+
+    /* password verified */
+    if (d.local.hash === hash) { return onLogin(d, cb); }
+
+    /* failed one too many times */
+    if (d.local.failedLoginAttempts >= MAX_FAILED_LOGINS) { return onLockOut(d, cb); }
+
+    /* Increment failed attempts acount */
+    return onFail(d, cb);
+  });
+}
+
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
   session: false,
   // passReqToCallback: true,
-}, (username, password, done) => db.query('auth/username', { key: username, limit: 1 }, (err, res) => {
+}, (username, password, done) => db.query('users/username', { key: username, limit: 1 }, (err, res) => {
   if (err) { return done(err); }
 
-  if (res.rows.length === 0) { return done(null, false, { error: 'Unauthorized', message: 'Incorrect username or password' }); }
+  if (res.rows.length === 1) { return localLogin(res.rows[0].id, password, done); }
 
-  /* Get the user doc */
-  return db.get(res.rows[0].id, (error, userDoc) => {
-    if (error) { done(error); }
-
-    if (userDoc.local && userDoc.local.lockedUntil && userDoc.local.lockedUntil > Date.now()) {
-    /* Brute force timeout */
-      return done(null, false, { error: 'Unauthorized', message: 'Your account is currently locked. Please wait a few minutes and try again.' });
-    } else if (!userDoc.local || !userDoc.local.hash) {
-      /* No hash to check password against  */
-      return done(null, false, { error: 'Unauthorized', message: 'Incorrect username or password' });
-    }
-
-    /* verify password */
-    const hash = hashPassword(password, userDoc.local.salt);
-
-    if (userDoc.local.hash !== hash) {
-      /* Check number of fails, lock if to many */
-      if (userDoc.local.failedLoginAttempts >= MAX_FAILED_LOGINS) {
-        const doc = Object.assign({}, userDoc);
-        doc.local.failedLoginAttempts = 0;
-        const timestamp = Date.now();
-        doc.local.lockedUntil = timestamp + LOCKOUT_TIME;
-        doc.updated_at = timestamp;
-
-        return db.put(doc, (e) => {
-          if (err) { return done(e); }
-
-          const minutes = Math.round(LOCKOUT_TIME / 60);
-
-          return done(null, false, { error: 'Unauthorized', message: `Maximum failed login attempts exceeded. Your account has been locked for ${minutes} minutes` });
-        });
-      }
-
-      /* Update failed attempts acount */
-      const userFail = Object.assign({}, userDoc);
-      const failedLoginAttempts = (userFail.local.failedLoginAttempts || 0) + 1;
-      userFail.local.failedLoginAttempts = failedLoginAttempts;
-      userFail.updated_at = Date.now();
-
-      return db.put(userFail, (e) => {
-        if (e) { return done(e); }
-
-        return done(null, false, { error: 'Unauthorized', message: 'Invalid username or password' });
-      });
-    } else if (userDoc.local.failedLoginAttempts !== 0) {
-      // reset login attempts if need be
-
-      const userDocUpdate = Object.assign({}, userDoc);
-      userDocUpdate.local.failedLoginAttempts = 0;
-      userDocUpdate.updated_at = Date.now();
-
-      return db.put(userDocUpdate, (e, resp) => {
-        if (e) { done(e); }
-        return db.get(resp.id, done);
-      });
-    }
-    // Verified passwaord and no failed login attempts
-    return done(null, userDoc);
+  // try email login
+  return db.query('users/email', { key: username, limit: 1 }, (emailErr, docs) => {
+    if (emailErr) { return done(emailErr); }
+    if (docs.row.length === 1) { return localLogin(docs.rows[0].id, password, done); }
+    return done(null, false, { error: 'Unauthorized', message: 'Incorrect username or password' });
   });
 })));
-
 
 module.exports = passport;
