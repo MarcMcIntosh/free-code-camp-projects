@@ -7,7 +7,7 @@ const hashPassword = require('./hash');
 
 function createToken(user, cb) {
   // return jwt.sign(user._id, user.salt, { expiresIn: '7d' }, cb);
-  return jwt.sign({ id: user._id }, SECRET_KEY, cb);
+  return jwt.sign({ id: user._id, rev: user._rev }, SECRET_KEY, cb);
 }
 
 function createSession(user, cb) {
