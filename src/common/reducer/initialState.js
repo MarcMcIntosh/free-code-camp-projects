@@ -24,6 +24,7 @@ import { DEFAULT_STATE as urlShortener } from '../../projects/url-shortener';
 import { DEFAULT_STATE as headerParser } from '../../projects/header-parser';
 import { DEFAULT_STATE as timestamp } from '../../projects/timestamp';
 import { DEFAULT_STATE as session } from './session';
+import { DEFAULT_STATE as votingApp } from '../../projects/voting-app';
 
 const DEFAULT_STATE = {
   barChart,
@@ -51,6 +52,7 @@ const DEFAULT_STATE = {
   tributePage,
   twitchTv,
   urlShortener,
+  votingApp,
   wikipediaViewer,
 };
 

@@ -4,8 +4,8 @@ export const DEFAULT_STATE = {
   token: '',
   username: '',
   id: '',
-  isFetching: false,
-  inAuthenticated: false,
+  fetching: false,
+  authenticated: false,
   error: '',
 };
 
@@ -17,14 +17,14 @@ export default function reducer(state = DEFAULT_STATE, action) {
       const token = valFrom(['data', 'token'], action.payload);
       const username = valFrom(['data', 'username'], action.payload);
       const id = valFrom(['data', 'id'], action.payload);
-      return { ...state, token, username, id, isFetching: false, isAuthenticated: true, error: '' };
+      return { ...state, token, username, id, fetching: false, authenticated: true, error: '' };
     }
     case REJECTED: {
       const error = action.payload.message || action.payload.toString();
-      return { ...state, isFetching: false, isAuthenticated: false, error };
+      return { ...state, fetching: false, authenticated: false, error };
     }
-    case REMOVE: return { ...state, user: {}, isFetching: false, isAuthenticated: false, error: '' };
-    case REGISTER: case LOGIN: case LOGOUT: return { ...state, isFetching: true, error: '' };
+    case REMOVE: return { ...state, user: {}, fetching: false, authenticated: false, error: '' };
+    case REGISTER: case LOGIN: case LOGOUT: return { ...state, fetching: true, error: '' };
     default: return state;
   }
 }

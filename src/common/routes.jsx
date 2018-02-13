@@ -27,6 +27,7 @@ import ImageSearch from '../projects/image-search';
 import UrlShortener from '../projects/url-shortener';
 import HeaderParser from '../projects/header-parser';
 import Timestamp from '../projects/timestamp';
+import VotingApp from '../projects/voting-app';
 
 const appUrls = Object.entries(appData).map(([k, { url }]) => ({ [k]: url })).reduce((a, b) => ({ ...a, ...b }), {});
 
@@ -59,6 +60,7 @@ const routes = [
       { path: appUrls.tribute, component: TributePage },
       { path: appUrls.twitch, component: TwitchTv },
       { path: appUrls.urlShortener, component: UrlShortener },
+      { path: appUrls.votingApp, component: VotingApp },
       { path: appUrls.wikipediaViewer, component: WikipediaViewer },
       { component: NotFound },
     ],

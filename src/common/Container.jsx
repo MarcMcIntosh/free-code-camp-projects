@@ -8,6 +8,8 @@ import { AppContainer } from 'react-hot-loader';
 // import { routes } from './routes';
 import store from './store';
 import classnames from './styles';
+/* refresh a session */
+import { refresh } from './actions/session';
 /* Usage, child prop should be either broswer router or static router */
 
 class ReduxContainer extends Component {
@@ -17,6 +19,11 @@ class ReduxContainer extends Component {
     // this.classnames = classnames;
   }
   // getChildContext() { return { classnames: this.classnames }; }
+  componentDidMount() {
+    /* try and refresh a stale token */
+    const { session: { token } } = this.store.getState();
+    if (token) { this.store.dispatch(refresh({ authorization: `Bearer ${token}` })); }
+  }
   render() {
     return (<AppContainer>
       <Provider store={this.store}>

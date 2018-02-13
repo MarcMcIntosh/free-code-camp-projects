@@ -38,7 +38,7 @@ const FRONTEND = ['client', 'front-end'];
 const REACT = ['react', 'redux'];
 const API = ['api'];
 const SERVER = ['server-side', 'micro-service'];
-
+const FULL_STACK = ['full stack'];
 
 const apps = {
   barChart: {
@@ -224,6 +224,14 @@ const apps = {
     media: urlShortener,
     tags: [].concat(SERVER, API, 'url shortener'),
     repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/url-shortener',
+  },
+  votingApp: {
+    url: '/voting-app',
+    challenge: 'https://www.freecodecamp.com/challenges/build-a-voting-app',
+    title: 'Polling App',
+    media: '',
+    tags: [].concat(FULL_STACK, 'polling', 'voting', 'questions'),
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/voting-app',
   },
   wikipediaViewer: {
     url: '/wikipedia-viewer',

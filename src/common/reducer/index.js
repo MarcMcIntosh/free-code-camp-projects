@@ -27,6 +27,7 @@ import { reducer as urlShortener } from '../../projects/url-shortener';
 import { reducer as headerParser } from '../../projects/header-parser';
 import { reducer as timestamp } from '../../projects/timestamp';
 import session from './session';
+import { reducer as votingApp } from '../../projects/voting-app';
 
 const reducer = combineReducers({
   barChart,
@@ -55,6 +56,7 @@ const reducer = combineReducers({
   tributePage,
   twitchTv,
   urlShortener,
+  votingApp,
   wikipediaViewer,
 });
 
