@@ -26,6 +26,7 @@ import { reducer as imageSearch } from '../../projects/image-search';
 import { reducer as urlShortener } from '../../projects/url-shortener';
 import { reducer as headerParser } from '../../projects/header-parser';
 import { reducer as timestamp } from '../../projects/timestamp';
+import session from './session';
 
 const reducer = combineReducers({
   barChart,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   dungeonCrawler,
   fileSize,
   forceDirected,
+  form,
   gameOfLife,
   headerParser,
   heatMap,
@@ -45,7 +47,7 @@ const reducer = combineReducers({
   portfolio,
   quoteMachine,
   recipeBox,
-  form,
+  session,
   scatterPlotGraph,
   simon,
   ticTacToe,

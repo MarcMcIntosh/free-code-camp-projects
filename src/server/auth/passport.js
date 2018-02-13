@@ -8,13 +8,11 @@ const SECRET_KEY = require('./key');
 const MAX_FAILED_LOGINS = 5;
 const LOCKOUT_TIME = 5 * 60 * 1000;
 
-passport.use(LocalStrategy);
 passport.use(new passportJWT.Strategy({
   jwtFromRequest: passportJWT.ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: SECRET_KEY,
   ignoreExpiration: true,
-}, (payload, done) => db.get(payload.id, (err, user) => done(err, user))));
-
+}, (payload, done) => db.get(payload.id, (err, session) => done(err, session))));
 
 function onLogin(userDoc, cb) {
   if (!userDoc.local.failedLoginAttempts) { return cb(null, userDoc); }

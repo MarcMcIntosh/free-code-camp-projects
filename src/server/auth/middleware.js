@@ -22,8 +22,19 @@ function createSession(user, cb) {
   });
 }
 
+function refresh(req, res) {
+  return db.get(res.user.created_by, (err, userDoc) => {
+    if (err) { return res.status(400).send(err); }
+    return res.json({
+      message: 'session refreshed',
+      data: { token: req.user._id, id: userDoc._id, username: userDoc.username },
+    });
+  });
+}
 // regexp from https://github.com/angular/angular.js/blob/master/src/ng/directive/input.js#L4
 const EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
+const PASSWORD_REGEXP = /\s/;
+
 
 function validateEmail(req, res) {
   if (!req.params.email) {
@@ -48,20 +59,26 @@ function validateReg(body) {
   const { username, email, password } = body;
   const errors = {};
   if (!username) { errors.username = 'Required'; }
-  if (!password) { errors.password = 'Required'; }
+  if (!password) {
+    errors.password = 'Required';
+  } else if (PASSWORD_REGEXP.test(password)) {
+    errors.password = 'No Spaces or tabs allowed';
+  }
   if (!email) {
     errors.email = 'Required';
   } else if (!email.match(EMAIL_REGEXP)) {
     errors.email = 'Invalid email address';
   }
-  return Object.keys(errors).length > 0 ? errors : undefined;
+  return errors;
 }
 
 function register(req, res) {
   const invalid = validateReg(req.body);
-  if (invalid) { return res.status(400).json({ message: 'Errors in registration', errors: invalid }); }
+  if (Object.keys(invalid).length > 0) { return res.status(400).json({ message: 'Errors in registration', errors: invalid }); }
 
-  const { username, email, password } = req.body;
+  const username = req.body.username.trim();
+  const email = req.body.email.trim();
+  const password = req.body.password;
 
   const errorsInUse = {};
   return db.query('users/email', { key: email, limit: 1 }, (e, emailAdress) => {
@@ -112,10 +129,22 @@ function login(req, res) {
 
       return createSession(user, (errToken, token) => {
         if (errToken) { res.status(500).send(errToken); }
-        res.json({ id: user._id, username: user.username, token });
+        res.json({ message: 'successfully logged-in', data: { id: user._id, username: user.username, token } });
       });
     });
   })(req, res);
+}
+
+function logout(req, res) {
+  return db.get(req.user._id, (err, session) => {
+    if (err) { return res.status(500).send(err); }
+    const sess = session;
+    sess._deleted = true;
+    return db.put(sess, (error, resp) => {
+      if (error) { return res.status(500).send(error); }
+      return res.json({ message: 'successfully logged out of sessoin', data: resp });
+    });
+  });
 }
 
 function validateUsername(req, res, next) {
@@ -133,9 +162,14 @@ function validateUsername(req, res, next) {
 module.exports = {
   register,
   login,
+  logout,
   validateEmail,
   validateUsername,
   requireAuth,
+  EMAIL_REGEXP,
+  PASSWORD_REGEXP,
+  validateReg,
+  refresh,
 };
 
 /* Not implimented see superlogin for detialss
