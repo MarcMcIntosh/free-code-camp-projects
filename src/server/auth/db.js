@@ -11,7 +11,7 @@ const DDOCS_IDS = ddocs.map(ddoc => ddoc._id);
 /* Check views for updates */
 
 db.allDocs({ keys: DDOCS_IDS, include_docs: true }, (err, res) => {
-  const resDocs = res.rows.reduce((a, b) => Object.assign({}, a, { [b._id]: b }), {});
+  const resDocs = res.rows.reduce((a, b) => Object.assign({}, a, { [b.id]: b.doc }), {});
 
   const toRemove = Object.entries(resDocs).map(([k, v]) => {
     if (DDOCS_IDS.indexOf(k) === -1) {

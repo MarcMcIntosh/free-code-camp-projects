@@ -14,7 +14,7 @@ const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 // save the design doc
 db.get(viewByAddress._id, (e, res) => {
   const doc = Object.assign({}, res, viewByAddress);
-  return db.put(doc, () => void 0);
+  return db.put(doc, () => db.viewCleanup(() => void 0));
 });
 
 function updateAddress(docid, cb) {

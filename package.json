@@ -126,6 +126,7 @@
     "passport-twitter": "^1.0.4",
     "pouchdb-find": "^6.4.2",
     "pouchdb-node": "^6.4.2",
+    "pouchdb-upsert": "^2.2.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-datepicker": "^1.0.4",
