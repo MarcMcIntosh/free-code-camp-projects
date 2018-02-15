@@ -12,10 +12,10 @@ const Register = ({
   submitting,
 }, {
   classnames,
-}) => (<form classNames={classnames('card')} onSubmit={handleSubmit}>
-  <Field label="User name" type="text" component={renderField} />
-  <Field label="Email address" type="email" component={renderField} />
-  <Field label="Password" type="password" component={renderField} />
+}) => (<form className={classnames('card')} onSubmit={handleSubmit}>
+  <Field name="username" label="User name" type="text" component={renderField} />
+  <Field name="email" label="Email address" type="email" component={renderField} />
+  <Field name="password" label="Password" type="password" component={renderField} />
 
   {error && <strong>{error}</strong>}
   <div>

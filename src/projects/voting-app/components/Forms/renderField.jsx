@@ -6,7 +6,7 @@ const renderField = ({
   input,
   label,
   type,
-  meta: { active, error },
+  meta: { active, error, touched },
 }, {
   classnames,
 }) => (<div>
@@ -19,7 +19,7 @@ const renderField = ({
 
   </div>
 
-  {error && (<span className={classnames('field__helptext', 'field__helptext--validation-msg')}>{error}</span>)}
+  {touched && error && (<span className={classnames('field__helptext', 'field__helptext--validation-msg')}>{error}</span>)}
 </div>);
 
 renderField.propTypes = fieldPropTypes;

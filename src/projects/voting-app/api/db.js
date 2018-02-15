@@ -47,9 +47,9 @@ function createPoll(req, res) {
 
     const answers = req.body.answers.map(answer => createAnswerDoc({ question: qdoc.id, answer, user: req.user.created_by, timestamp }));
 
-    return db.bulkDocs(answers, (erro, resp) => {
+    return db.bulkDocs(answers, (erro) => {
       if (erro) { return res.status(erro.status || 500).send(erro); }
-      return res.json(resp);
+      return res.json(qdoc);
     });
   });
 }
@@ -130,4 +130,11 @@ function getResults(req, res) {
   });
 }
 
-module.exports = { createPoll, appendAnswer, getPoll, getResults };
+function getQuestions(req, res) {
+  return db.get('questions/created_at', { descending: true }, (err, resp) => {
+    if (err) { return res.status(err.status || 500).send(err); }
+    return res.json(resp.rows);
+  });
+}
+
+module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions };

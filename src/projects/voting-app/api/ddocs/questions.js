@@ -8,9 +8,9 @@ const questions = {
         if (doc.type === 'question' && doc.created_by) { emit(doc.created_by); }
       }.toString(),
     },
-    all: {
+    created_at: {
       map: function(doc) {
-        if (doc.type === 'question') { emit(doc.question); }
+        if (doc.type === 'question' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'created_at')) { emit(doc.created_at, doc.question); }
       }
     },
     answers: {

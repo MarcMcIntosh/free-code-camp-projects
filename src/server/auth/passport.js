@@ -1,6 +1,7 @@
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
+const AnonymousStrategy = require('passport-anonymous').Strategy;
 const hashPassword = require('./hash');
 const db = require('./db');
 const SECRET_KEY = require('./key');
@@ -8,8 +9,10 @@ const SECRET_KEY = require('./key');
 const MAX_FAILED_LOGINS = 5;
 const LOCKOUT_TIME = 5 * 60 * 1000;
 
+passport.use(new AnonymousStrategy());
+
 passport.use(new passportJWT.Strategy({
-  jwtFromRequest: passportJWT.ExtractJWT.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: SECRET_KEY,
   ignoreExpiration: true,
 }, (payload, done) => db.get(payload.id, (err, session) => done(err, session))));

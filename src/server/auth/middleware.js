@@ -4,21 +4,14 @@ const db = require('./db');
 const SECRET_KEY = require('./key');
 const createUserDoc = require('./createUserDoc');
 const hashPassword = require('./hash');
+const validateReg = require('./utils/validateReg');
+const EMAIL_REGEXP = require('./utils/emailRegexp');
 
 function createToken(user, cb) {
   // return jwt.sign(user._id, user.salt, { expiresIn: '7d' }, cb);
-  return jwt.sign({ id: user._id, rev: user._rev }, SECRET_KEY, cb);
-}
-
-function createSession(user, cb) {
-  return createToken(user, (err, token) => {
+  return jwt.sign({ id: user._id, rev: user._rev }, SECRET_KEY, (err, token) => {
     if (err) { cb(err); }
-    db.put({
-      _id: token,
-      type: 'session',
-      created_by: user._id,
-      created_at: Date.now(),
-    }, () => cb(null, token));
+    return db.put({ _id: token, type: 'session', created_by: user._id, created_at: Date.now() }, () => cb(null, token));
   });
 }
 
@@ -31,10 +24,6 @@ function refresh(req, res) {
     });
   });
 }
-// regexp from https://github.com/angular/angular.js/blob/master/src/ng/directive/input.js#L4
-const EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
-const PASSWORD_REGEXP = /\s/;
-
 
 function validateEmail(req, res) {
   if (!req.params.email) {
@@ -55,22 +44,6 @@ function validateEmail(req, res) {
   });
 }
 
-function validateReg(body) {
-  const { username, email, password } = body;
-  const errors = {};
-  if (!username) { errors.username = 'Required'; }
-  if (!password) {
-    errors.password = 'Required';
-  } else if (PASSWORD_REGEXP.test(password)) {
-    errors.password = 'No Spaces or tabs allowed';
-  }
-  if (!email) {
-    errors.email = 'Required';
-  } else if (!email.match(EMAIL_REGEXP)) {
-    errors.email = 'Invalid email address';
-  }
-  return errors;
-}
 
 function register(req, res) {
   const invalid = validateReg(req.body);
@@ -103,7 +76,7 @@ function register(req, res) {
           return db.get(doc.id, (error, sessionUser) => {
             if (error) { res.status(500).send(error); }
 
-            return createSession(sessionUser, (tokenError, token) => {
+            return createToken(sessionUser, (tokenError, token) => {
               if (tokenError) { res.status(500).send(tokenError); }
 
               return res.json({ message: 'successfully registered and logged in', data: { token, username, id: sessionUser._id } });
@@ -115,9 +88,13 @@ function register(req, res) {
   });
 }
 
-function requireAuth(req, res, next) {
+/* function requireAuth(req, res, next) {
   return passport.authenticate('jwt', { session: false })(req, res, next);
-}
+} */
+
+const requireAuth = passport.authenticate('jst', { sessoin: false });
+
+const optionalAuth = passport.authenticate(['jwt', 'anonymous'], { session: false });
 
 function login(req, res) {
   return passport.authenticate('local', (err, user, info) => {
@@ -127,7 +104,7 @@ function login(req, res) {
     return req.login(user, { session: false }, (error) => {
       if (error) { res.send(error); }
 
-      return createSession(user, (errToken, token) => {
+      return createToken(user, (errToken, token) => {
         if (errToken) { res.status(500).send(errToken); }
         res.json({ message: 'successfully logged-in', data: { id: user._id, username: user.username, token } });
       });
@@ -166,10 +143,9 @@ module.exports = {
   validateEmail,
   validateUsername,
   requireAuth,
-  EMAIL_REGEXP,
-  PASSWORD_REGEXP,
   validateReg,
   refresh,
+  optionalAuth,
 };
 
 /* Not implimented see superlogin for detialss

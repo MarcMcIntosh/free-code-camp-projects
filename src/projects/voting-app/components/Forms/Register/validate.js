@@ -1,3 +1,4 @@
 // import { EMAIL_REGEXP } from '../../../../../server/auth/middleware';
+import validateReg from '../../../../../server/auth/utils/validateReg';
 
-export { validateReg as default } from '../../../../../server/auth/middleware';
+export default validateReg;
