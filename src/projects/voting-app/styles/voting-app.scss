@@ -21,3 +21,15 @@
     &--validation-msg { composes: mdc-textfield-helptext--validation-msg from $mdc-textfield; }
   }
 }
+
+.toolbar {
+
+  &__row,
+  &__title { /* styles */ }
+
+  &__section {
+
+    &--align-start,
+    &--align-end { /* styles */ }
+  }
+}

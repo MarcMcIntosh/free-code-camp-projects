@@ -1,21 +1,18 @@
 import React, { PureComponent } from 'react';
 import { func, object } from 'prop-types';
 
+
 class Poll extends PureComponent {
-  componentDidMount() {
-    const { match } = this.props;
-    if (match.params && Object.prototype.hasOwnProperty.call(match.params, 'question')) {
-      this.props.getPoll(match.params.poll);
-    }
-  }
   render() {
-    return (<div className={this.context.classnames('poll')}>View Poll </div>);
+    return (<div className={this.context.classnames('poll')}>View Poll {this.props.match.params.question}</div>);
   }
 }
 
 Poll.propTypes = {
-  getPoll: func.isRequired,
+  // getPoll: func.isRequired,
   match: object.isRequired,
 };
+
+Poll.contextTypes = { classnames: func.isRequired };
 
 export default Poll;
