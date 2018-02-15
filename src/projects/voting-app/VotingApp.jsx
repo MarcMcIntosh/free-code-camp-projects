@@ -1,8 +1,17 @@
 import React, { PureComponent } from 'react';
 import { func, string, bool, shape } from 'prop-types';
+import { SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { login, register, logout, refresh, createPoll } from './actions';
+import fetch from 'isomorphic-fetch';
+
+import {
+  login,
+  register,
+  logout,
+  refresh,
+  // createPoll,
+} from './actions';
 import classnames from './styles';
 import RegisterPage from './pages/Register';
 import CreatePoll from './pages/CreatePoll';
@@ -32,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   onRegister: values => dispatch(register(values)),
   onLogout: values => dispatch(logout(values)),
   onRefresh: values => dispatch(refresh(values)),
-  onCreate: values => dispatch(createPoll(values)),
+  // onCreate: values => dispatch(createPoll(values)),
   // redirect: str => dispatch(redirect(str)),
 });
 
@@ -40,8 +49,24 @@ class VotingApp extends PureComponent {
   constructor(props) {
     super(props);
     this.classnames = classnames;
+    this.onCreate = this.onCreate.bind(this);
   }
   getChildContext() { return { classnames: this.classnames }; }
+  onCreate(values) {
+    return fetch('/api/voting-app/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.props.token}`,
+      },
+      body: JSON.stringify(values),
+    }).then((res) => {
+      if (res.ok) { return res.json(); }
+      const error = new Error(res.statusText);
+      error.stack = res;
+      throw error;
+    }).then(json => json).catch((error) => { throw new SubmissionError(error); });
+  }
   render() {
     /* if this.props.route doesn't work use the url in portfolio/appData.js */
     const path = this.props.route.path.replace(/\/$/, '');
@@ -53,15 +78,7 @@ class VotingApp extends PureComponent {
 
       <Route
         path={path + '/create'}
-        render={props => (<CreatePoll
-          redirect={path}
-          isAuthorised={this.props.authenticated}
-          onSubmit={this.props.onCreate}
-          onSubmitSuccess={(res) => {
-            console.log(res);
-            props.history.push(path + '/view/' + res.id);
-          }}
-        />)}
+        render={({ history }) => (<CreatePoll redirect={path} isAuthorised={this.props.authenticated} onSubmit={this.props.onCreate} onSubmitSuccess={res => history.push(path + '/view/' + res.id)} />)}
       />
     </div>);
   }
@@ -73,7 +90,7 @@ VotingApp.propTypes = {
   onCreate: func.isRequired,
   // onRefresh: func.isRequired,
   // onLogout: func.isRequired,
-  // token: string.isRequired,
+  token: string.isRequired,
   // id: string.isRequired,
   // fetching: bool.isRequired,
   authenticated: bool.isRequired,

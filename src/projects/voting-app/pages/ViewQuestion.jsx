@@ -4,7 +4,7 @@ import { func, object } from 'prop-types';
 class Poll extends PureComponent {
   componentDidMount() {
     const { match } = this.props;
-    if (match.params && Object.prototype.hasOwnProperty.call(match.params, 'poll')) {
+    if (match.params && Object.prototype.hasOwnProperty.call(match.params, 'question')) {
       this.props.getPoll(match.params.poll);
     }
   }

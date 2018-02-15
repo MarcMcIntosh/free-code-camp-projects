@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import PollForm from '../components/Forms/Poll';
+import PollForm from '../components/Forms/CreatePoll';
 
 const CreatePoll = ({ isAuthorised, redirect, ...props }) => (isAuthorised ? (<PollForm {...props} />) : (<Redirect to={redirect} />));
 

@@ -24,7 +24,7 @@ function trackerCookie(req, res, next) {
 // list of polls
 router.get('/', getQuestions);
 // view a poll
-router.get('/view/:poll', getPoll);
+router.get('/view/:question', getPoll);
 // vote
 router.post('/vote', optionalAuth, trackerCookie, (req, res) => {
   console.log('user', req.user);
