@@ -7,18 +7,24 @@ const renderAnswer = ({
   onClick,
   type,
   label,
-  meta: { active },
+  meta: { active, touched, error },
 }, {
   classnames,
-}) => (<div className={classnames('form__input', { 'form__input--focused': active })} >
+}) => (<div>
+  <div className={classnames('field__input', { 'field__input--focused': active })} >
 
-  <input {...input} type={type} className={classnames('form__input')} />
+    <input {...input} type={type} className={classnames('field__input')} />
 
-  <label htmlFor={input.name} className={classnames('form__label', { 'form__label--float-above': input.value || active })}>{label}</label>
+    <label htmlFor={input.name} className={classnames('field__label', { 'field__label--float-above': input.value || active })}>{label}</label>
 
-  <i className={classnames('form__icon')} tabIndex="0" role="button" title="Remove answer" onClick={onClick} >close</i>
+    <i className={classnames('field__icon')} tabIndex="0" role="button" title="Remove answer" onClick={onClick} >close</i>
 
-  <div className={classnames('form__line', { 'form__line--active': active })} />
+    <div className={classnames('field__line', { 'field__line--active': active })} />
+
+  </div>
+
+  {touched && error && (<span className={classnames('field__helptext', 'field__helptext--validation-msg')}>{error}</span>)}
+
 </div>);
 
 renderAnswer.propTypes = {

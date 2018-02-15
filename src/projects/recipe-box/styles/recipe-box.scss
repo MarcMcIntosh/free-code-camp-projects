@@ -29,6 +29,7 @@
 
 .recipe-box {
   /* shared styles */
+
   &__actions {
     composes: mdc-card__actions from $mdc-card;
   }

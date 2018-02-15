@@ -5,6 +5,7 @@ const SECRET_KEY = require('./key');
 const createUserDoc = require('./createUserDoc');
 const hashPassword = require('./hash');
 const validateReg = require('./utils/validateReg');
+const validateLogin = require('./utils/validateLogin');
 const EMAIL_REGEXP = require('./utils/emailRegexp');
 
 function createToken(user, cb) {
@@ -97,6 +98,9 @@ const requireAuth = passport.authenticate('jst', { sessoin: false });
 const optionalAuth = passport.authenticate(['jwt', 'anonymous'], { session: false });
 
 function login(req, res) {
+  const errors = validateLogin(req.body);
+  if (Object.keys(errors).length > 0) { return res.json(errors); }
+
   return passport.authenticate('local', (err, user, info) => {
     if (err) { return res.status(400).send(err); }
     if (!user) { return res.status(401).json(info); } // athenticate failed

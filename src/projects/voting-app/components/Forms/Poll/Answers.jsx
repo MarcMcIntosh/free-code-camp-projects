@@ -10,21 +10,21 @@ const Answers = ({
 }, {
   classnames,
 }) => (<div {...props}>
-  <h2 className={classnames('recipe-box-form__title')}>Answers</h2>
+  <h2 className={classnames('form__title')}>Answers</h2>
 
   {fields.map((ingredient, index) => {
-    const k = `ingredients[${index}]`;
-    return (<Field key={k} name={k} type="text" component={renderAnswer} label={`Ingredient #${index + 1}`} onClick={() => fields.remove(index)} />);
+    const k = `answers[${index}]`;
+    return (<Field key={k} name={k} type="text" component={renderAnswer} label={`Answer #${index + 1}`} onClick={() => fields.remove(index)} />);
   })}
   {error && <span className="error">{error}</span>}
 
   <button
-    className={classnames('form_action')}
-    title="Add Ingredient"
+    className={classnames('form__action')}
+    title="Add Answer"
     type="button"
     tabIndex="0"
     onClick={() => fields.push()}
-  >Add Answer<i className={classnames('form_action--icon')}>playlist_add</i> </button>
+  >Add Answer<i className={classnames('form__action--icon')}>playlist_add</i> </button>
 </div>);
 
 Answers.propTypes = { ...fieldArrayPropTypes };

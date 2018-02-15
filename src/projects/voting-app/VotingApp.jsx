@@ -6,6 +6,7 @@ import { login, register, logout, refresh, createPoll } from './actions';
 import classnames from './styles';
 import RegisterPage from './pages/Register';
 import CreatePoll from './pages/CreatePoll';
+import LoginPage from './pages/Login';
 // import HandleRedirect from './components/HandleRedirect';
 
 
@@ -44,20 +45,21 @@ class VotingApp extends PureComponent {
   render() {
     /* if this.props.route doesn't work use the url in portfolio/appData.js */
     const path = this.props.route.path.replace(/\/$/, '');
-    return (<div className={classnames('app')}>
-      <h1>Voting app</h1>
+    return (<div>
+
+      <Route path={path + '/login'} render={() => (<LoginPage redirect={path} isAuthorised={this.props.authenticated} onSubmit={this.props.onLogin} />)} />
 
       <Route path={path + '/register'} render={() => (<RegisterPage redirect={path} isAuthorised={this.props.authenticated} onSubmit={this.props.onRegister} />)} />
 
       <Route
         path={path + '/create'}
-        render={() => (<CreatePoll
+        render={props => (<CreatePoll
           redirect={path}
           isAuthorised={this.props.authenticated}
           onSubmit={this.props.onCreate}
-          onSubmitSuccess={(res, dispatch, props) => {
-            const str = this.props.route.path.replace(/\/$/, '/view/' + res.id);
-            props.history.push(str);
+          onSubmitSuccess={(res) => {
+            console.log(res);
+            props.history.push(path + '/view/' + res.id);
           }}
         />)}
       />
@@ -66,9 +68,7 @@ class VotingApp extends PureComponent {
 }
 
 VotingApp.propTypes = {
-  // redirectTo: string.isRequired,
-  // redirect: func.isRequired,
-  // onLogin: func.isRequired,
+  onLogin: func.isRequired,
   onRegister: func.isRequired,
   onCreate: func.isRequired,
   // onRefresh: func.isRequired,

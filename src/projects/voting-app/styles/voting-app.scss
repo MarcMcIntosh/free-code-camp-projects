@@ -1,0 +1,23 @@
+@import "./variables.scss";
+
+.field {
+  composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
+
+  &--focused { composes: mdc-textfield--focused from $mdc-textfield; }
+
+  &--invalid { composes: mdc-textfield--invalid from $mdc-textfield; }
+
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+
+  &__label {
+    composes: mdc-textfield__label from $mdc-textfield;
+
+    &--float-above { composes: mdc-textfield__label--float-above from $mdc-textfield; }
+  }
+
+  &__helptext {
+    composes: mdc-textfield-helptext from $mdc-textfield;
+
+    &--validation-msg { composes: mdc-textfield-helptext--validation-msg from $mdc-textfield; }
+  }
+}
