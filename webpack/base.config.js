@@ -9,9 +9,7 @@ const {
   optimize: { LimitChunkCountPlugin, CommonsChunkPlugin, UglifyJsPlugin },
 } = require('webpack');
 const WriteFilePlugin = require('write-file-webpack-plugin'); // see whar chunks are built
-const nodeExternals = require('webpack-node-externals');
 const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line
-// const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
 const modulesDir = path.resolve(__dirname, '..', 'node_modules');
