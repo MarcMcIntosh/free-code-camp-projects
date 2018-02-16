@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const {
@@ -55,12 +56,19 @@ const serverEntry = f => path.resolve(__dirname, '..', 'src', 'server', f);
 const entry = ({ server = false, production = false } = {}) => (server ? serverEntry('index.js') : clientEntry({ production }));
 
 
+const externalsProd = fs.readdirSync(modulesDir).filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x)).reduce((ext, mod) => Object.assign({}, ext, { [mod]: `commonjs ${mod}` }), {});
+
 const externals = ({
   server = false,
-  // production = false,
+  production = false,
 } = {}) => {
-  if (server) {
-    return [nodeExternals({ whitelist: [/\.bin\//, 'react-universal-component', 'webpack-flush-chunks', 'require-universal-module'] })];
+  if (server && production) {
+    return [
+      // 'leveldown',
+      'pouchdb-node',
+    ];
+  } else if (server && !production) {
+    return [externalsProd];
   }
   return [];
 };
@@ -77,6 +85,7 @@ const serverOut = ({ production = false }) => ({
   filename: 'index.js',
   chunkFilename: production ? '[name].[chunkhash].js' : '[name].js',
   libraryTarget: 'commonjs2',
+  publicPath: '/',
 });
 
 const output = ({ server = false, production = false } = {}) => (server ? serverOut({ production }) : clientOut({ production }));
@@ -104,10 +113,17 @@ const scssRules = ({ server, production }) => {
   return { test: /\.s(a|c)ss$/, use: server ? loaders : ExtractCssChunks.extract({ use: loaders }) };
 };
 
-const imageRules = ({ server = false, production = false }) => ({
+const imageRules = ({
+  server = false,
+  production = false,
+}) => ({
   test: /\.(gif|svg|woff(2)?|ttf|eot|png|jpg|jpeg)$/,
   loader: 'url-loader',
-  options: { limit: 8192, name: production ? '[hash].[ext]' : '[name].[ext]', emitFile: !server },
+  options: {
+    limit: 8192,
+    name: production ? '[hash].[ext]' : '[name].[ext]',
+    emitFile: !server,
+  },
 });
 
 const jsonRule = ({ server = false, production = false }) => ({
