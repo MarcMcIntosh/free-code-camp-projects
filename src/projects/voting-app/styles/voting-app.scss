@@ -7,7 +7,7 @@
 
   &__primary { composes: mdc-card__primary from $mdc-card; }
 
-  &__title { composes: mdc-card__title mdc-card__title--large; }
+  &__title { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
 
   &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
 
