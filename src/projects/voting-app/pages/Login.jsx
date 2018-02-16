@@ -1,13 +1,22 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
+import { bool, string, shape } from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import LoginForm from '../components/Forms/Register';
+import { login } from '../../../common/actions/session';
 
-const RegisterPage = ({ isAuthorised, redirect, ...props }) => (!isAuthorised ? (<LoginForm {...props} />) : (<Redirect to={redirect} />));
+import LoginForm from '../components/Forms/Login';
 
-RegisterPage.propTypes = {
+const mapStateToProps = ({ authenticated }) => ({ authenticated });
+
+const mapDispatchToProps = dispatch => ({ onSubmit: values => dispatch(login(values)) });
+
+const LoginPage = ({ authenticated, ...props }, { links: { home } }) => (authenticated ? (<Redirect to={home} />) : (<LoginForm {...props} />));
+
+LoginPage.propTypes = {
   redirect: string.isRequired,
-  isAuthorised: bool.isRequired,
+  authenticated: bool.isRequired,
 };
 
-export default RegisterPage;
+LoginPage.contextTypes = { links: shape({ home: string.isRequired }) };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

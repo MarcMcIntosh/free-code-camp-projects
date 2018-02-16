@@ -6,12 +6,25 @@ import renderField from '../renderField';
 import validate from './validate';
 
 const LoginForm = ({ handleSubmit, submitting }, { classnames, links: { register } }) => (<form onSubmit={handleSubmit} className={classnames('card')}>
-  <Field name="username" label="User" type="text" component={renderField} />
-  <Field name="password" label="Password" type="password" component={renderField} />
-  <div>
-    <button type="submit" disabled={submitting}>Login</button>
-    <Link to={register} title="register">sign up</Link>
-  </div>
+
+  <section className={classnames('card__primary')}>
+
+    <h1 className={classnames('card__title')}>Login</h1>
+
+    <Field name="username" label="User" type="text" component={renderField} />
+
+    <Field name="password" label="Password" type="password" component={renderField} />
+
+  </section>
+
+  <section className={classnames('card__actions')}>
+
+    <button title="Submit" className={classnames('card__action', 'card__action--primary')} type="submit" disabled={submitting}>Login</button>
+
+    <Link to={register} title="register" className={classnames('card__action', 'card__action--accent')}>Register</Link>
+
+  </section>
+
 </form>);
 
 LoginForm.propTypes = propTypes;

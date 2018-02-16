@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const PouchDB = require('pouchdb-node').plugin(require('pouchdb-upsert'));
 const ddocs = require('./ddocs');
 
-const DATA_DIR = resolve(__dirname, '..', '..', 'auth');
+const DATA_DIR = resolve(__dirname, '..', '..', '..', 'data', 'auth');
 
 const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 

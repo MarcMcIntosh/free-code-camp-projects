@@ -10,7 +10,7 @@ const renderField = ({
 }, {
   classnames,
 }) => (<div>
-  <div className={classnames('field', { 'field--upgraded': input.value || active, 'field--focused': active, 'field--invalid': error })}>
+  <div className={classnames('field', { 'field--upgraded': input.value || active, 'field--focused': active, 'field--invalid': touched && error })}>
     <input {...input} type={type} className={classnames('field__input')} spellCheck={false} />
 
     <label htmlFor={input.name} className={classnames('field__label', { 'field__label--float-above': input.value || active })} >{label}</label>

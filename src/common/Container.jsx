@@ -22,7 +22,7 @@ class ReduxContainer extends Component {
   componentDidMount() {
     /* try and refresh a stale token */
     const { session: { token } } = this.store.getState();
-    if (token) { this.store.dispatch(refresh({ authorization: `Bearer ${token}` })); }
+    if (token) { this.store.dispatch(refresh()); }
   }
   render() {
     return (<AppContainer>

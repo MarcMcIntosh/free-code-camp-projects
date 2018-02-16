@@ -13,13 +13,26 @@ const PollForm = ({
   submitting,
 }, {
   classnames,
-}) => (<form onSubmit={handleSubmit} className={classnames('form')}>
-  <Field name="question" label="Question" type="text" component={renderField} />
-  <FieldArray name="answers" component={Answers} />
-  <div>
-    <button type="submit" disabled={submitting}>Submit</button>
-    <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-  </div>
+}) => (<form onSubmit={handleSubmit} className={classnames('card')}>
+
+  <section className={classnames('card__primary')}>
+
+    <h1 className={classnames('card__title')}>Create Poll</h1>
+
+    <Field name="question" label="Question" type="text" component={renderField} />
+
+    <FieldArray name="answers" component={Answers} />
+
+  </section>
+
+  <section className={classnames('card__actions')}>
+
+    <button type="submit" disabled={submitting} className={classnames('card__action', 'card__action--primary')}>Submit</button>
+
+    <button type="button" disabled={pristine || submitting} onClick={reset} className={classnames('card__action', 'card__action--accent')}>Clear</button>
+
+  </section>
+
 </form>);
 
 PollForm.propTypes = propTypes;

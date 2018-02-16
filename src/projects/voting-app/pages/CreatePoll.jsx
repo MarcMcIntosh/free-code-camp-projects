@@ -1,13 +1,24 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
+import { bool, string, shape, func } from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import PollForm from '../components/Forms/CreatePoll';
+import CreatePollForm from '../components/Forms/CreatePoll';
+import { createPoll } from '../actions';
 
-const CreatePoll = ({ isAuthorised, redirect, ...props }) => (isAuthorised ? (<PollForm {...props} />) : (<Redirect to={redirect} />));
+const mapStateToProps = ({ authenticated }) => ({ authenticated });
 
-CreatePoll.propTypes = {
-  redirect: string.isRequired,
-  isAuthorised: bool.isRequired,
-};
+const mapDispatchToProps = dispatch => ({ onSubmit: values => dispatch(createPoll(values)) });
 
-export default CreatePoll;
+const CreatePoll = ({
+  authenticated,
+  history: { push },
+  ...props
+}, {
+  links: { view, login },
+}) => (authenticated ? (<CreatePollForm {...props} onSubmitSuccess={res => push(view + '/' + res.id)} />) : (<Redirect to={login} />));
+
+CreatePoll.propTypes = { authenticated: bool.isRequired, history: shape({ push: func.isRequired }).isRequired };
+
+CreatePoll.contextTypes = { links: shape({ view: string.isRequired, login: string.isRequired }).isRequired };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePoll);
