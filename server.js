@@ -14,7 +14,8 @@ const outputPath = resolve(__dirname, 'build', 'client');
 const server = renderer({ clientStats, outputPath });
 
 const app = express();
-app.use(helmet({ xssFilter: false })); // X-XSS-Protection: 1; mode=block get set by nginx
+// app.use(helmet({ xssFilter: false })); // X-XSS-Protection: 1; mode=block get set by nginx
+app.use(helmet());
 app.use(compression());
 app.use(favicon(FAVICON_PATH));
 /* uncomment for express to server static assets */
