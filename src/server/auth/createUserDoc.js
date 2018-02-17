@@ -7,7 +7,6 @@ function createUserDoc(username, email, salt, hash) {
     email,
     username,
     local,
-    session: [],
     type: 'user',
     created_at: timestamp,
     updated_at: timestamp,

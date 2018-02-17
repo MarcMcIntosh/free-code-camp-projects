@@ -1,15 +1,5 @@
 /* eslint-disable */
 
-const sessions = {
-  _id: '_design/sessions',
-  views: {
-    created_by: {
-      map: function(doc) {
-        if (doc.type === 'session' && doc.created_by) { emit(doc.created_by, null); }
-      }.toString(),
-    }
-  }
-}
 const users = {
   _id: '_design/users',
   views: {
@@ -47,4 +37,4 @@ const users = {
   }
 };
 
-module.exports = [users, sessions];
+module.exports = users;

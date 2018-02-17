@@ -15,7 +15,13 @@ passport.use(new passportJWT.Strategy({
   jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: SECRET_KEY,
   ignoreExpiration: true,
-}, (payload, done) => db.get(payload.id, (err, session) => done(err, session))));
+}, (payload, done) => db.get(payload._id, (err, user) => {
+  if (err) { return done(err); }
+  if (payload.local && user.local && payload.local.hash === user.local.hash) {
+    return done(null, user);
+  }
+  return done(null, false);
+})));
 
 function onLogin(userDoc, cb) {
   if (!userDoc.local.failedLoginAttempts) { return cb(null, userDoc); }

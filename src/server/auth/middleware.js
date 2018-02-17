@@ -10,10 +10,7 @@ const EMAIL_REGEXP = require('./utils/emailRegexp');
 
 function createToken(user, cb) {
   // return jwt.sign(user._id, user.salt, { expiresIn: '7d' }, cb);
-  return jwt.sign({ id: user._id, rev: user._rev }, SECRET_KEY, (err, token) => {
-    if (err) { cb(err); }
-    return db.put({ _id: token, type: 'session', created_by: user._id, created_at: Date.now() }, () => cb(null, token));
-  });
+  return jwt.sign(user, SECRET_KEY, cb);
 }
 
 function refresh(req, res) {
@@ -95,7 +92,7 @@ function register(req, res) {
   return passport.authenticate('jwt', { session: false })(req, res, next);
 } */
 
-const requireAuth = passport.authenticate('jst', { sessoin: false });
+const requireAuth = passport.authenticate('jwt', { session: false });
 
 const optionalAuth = passport.authenticate(['jwt', 'anonymous'], { session: false });
 
@@ -119,13 +116,27 @@ function login(req, res) {
 }
 
 function logout(req, res) {
+  console.log(req.user);
+  /* this deletes the user */
   return db.get(req.user._id, (err, session) => {
     if (err) { return res.status(500).send(err); }
     const sess = session;
     sess._deleted = true;
     return db.put(sess, (error, resp) => {
       if (error) { return res.status(500).send(error); }
-      return res.json({ message: 'successfully logged out of sessoin', data: resp });
+      return res.json({ message: 'successfully logged out of session', data: resp });
+    });
+  });
+}
+
+function remove(req, res) {
+  return db.get(req.user._id, (err, session) => {
+    if (err) { return res.status(500).send(err); }
+    const sess = session;
+    sess._deleted = true;
+    return db.put(sess, (error, resp) => {
+      if (error) { return res.status(500).send(error); }
+      return res.json({ message: 'Account Deleted', data: resp });
     });
   });
 }
@@ -146,6 +157,7 @@ module.exports = {
   register,
   login,
   logout,
+  remove,
   validateEmail,
   validateUsername,
   requireAuth,
