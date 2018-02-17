@@ -48,7 +48,9 @@ function validateEmail(req, res) {
 
 function register(req, res) {
   const invalid = validateReg(req.body);
-  if (Object.keys(invalid).length > 0) { return res.status(400).json({ message: 'Errors in registration', errors: invalid }); }
+  if (Object.keys(invalid).length > 0) {
+    return res.json({ validationErrors: invalid, message: 'Errors in registration' });
+  }
 
   const username = req.body.username.trim();
   const email = req.body.email.trim();
@@ -99,7 +101,7 @@ const optionalAuth = passport.authenticate(['jwt', 'anonymous'], { session: fals
 
 function login(req, res) {
   const errors = validateLogin(req.body);
-  if (Object.keys(errors).length > 0) { return res.json(errors); }
+  if (Object.keys(errors).length > 0) { return res.json({ message: 'Invalid login', validationErrors: errors }); }
 
   return passport.authenticate('local', (err, user, info) => {
     if (err) { return res.status(400).send(err); }

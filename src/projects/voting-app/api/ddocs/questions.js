@@ -10,22 +10,24 @@ const questions = {
     },
     created_at: {
       map: function(doc) {
-        if (doc.type === 'question' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'created_at')) { emit(doc.created_at, doc.question); }
-      }
+        if (doc.type === 'question' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'created_at')) {
+          emit(doc.created_at, doc.question);
+        }
+      }.toString(),
     },
     answers: {
       map: function(doc) {
         if (doc.type === 'answer' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'answer')) {
           emit(doc.question, doc.answer);
         }
-      }
+      }.toString(),
     },
     votes: {
       map: function(doc) {
         if (doc.type === 'vote' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'answer') ) {
           emit(doc.question, doc.answer);
         }
-      },
+      }.toString(),
       reduce: '_count',
     },
   }

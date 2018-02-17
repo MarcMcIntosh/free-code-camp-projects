@@ -15,7 +15,7 @@ const Register = ({
 
   <section className={classnames('card__primary')}>
 
-    <h1 classNames={classnames('card__title')}>Register account</h1>
+    <h1 className={classnames('card__title')}>Register account</h1>
 
     <Field name="username" label="User name" type="text" component={renderField} />
 
@@ -25,11 +25,11 @@ const Register = ({
 
   </section>
 
-  <section classNames={classnames('card__actions')}>
+  <section className={classnames('card__actions')}>
 
-    <button type="submit" disabled={submitting} classNames={classnames('card__action', 'card__action--primary')}>Sign Up</button>
+    <button type="submit" disabled={submitting} className={classnames('card__action', 'card__action--primary')}>Sign Up</button>
 
-    <button type="button" disabled={pristine || submitting} onClick={reset} classNames={classnames('card__action', 'card__action--accent')}>Reset</button>
+    <button type="button" disabled={pristine || submitting} onClick={reset} className={classnames('card__action', 'card__action--accent')}>Reset</button>
 
   </section>
 

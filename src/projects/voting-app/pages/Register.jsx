@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { register } from '../../../common/actions/session';
 import RegisterForm from '../components/Forms/Register';
 
-const mapStateToProps = ({ authenticated }) => ({ authenticated });
+const mapStateToProps = ({ session: { authenticated } }) => ({ authenticated });
 
 const mapDispatchToProps = dispatch => ({ onSubmit: values => dispatch(register(values)) });
 

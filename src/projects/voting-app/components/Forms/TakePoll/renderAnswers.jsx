@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, FieldArray } from 'redux-form'
+import { Field } from 'redux-form'
 import CheckBox from './CheckBox';
 
 const renderAnswers = ({ fields, error }) => (<ul>

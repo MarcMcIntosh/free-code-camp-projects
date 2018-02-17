@@ -5,9 +5,8 @@ const sessions = {
   views: {
     created_by: function(doc) {
       if (doc.type === 'session' && doc.created_by) { emit(doc.created_by, null); }
-    }
+    }.toString()
   }
-  // .toString(),
 }
 const users = {
   _id: '_design/users',
@@ -16,15 +15,13 @@ const users = {
       if(doc.type === 'user' && doc.email) {
         emit(doc.email, null);
       }
-    },
-    //.toString(),
+    }.toString(),
 
     username: function(doc) {
       if(doc.type === 'user' && doc.username) {
         emit(doc.username, null);
       }
-    },
-    // .toString(),
+    }.toString(),
 
     /* Passport providers */
     /* facebook: function(doc) {

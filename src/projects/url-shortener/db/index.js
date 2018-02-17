@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const PouchDB = require('pouchdb-node');
+const PouchDB = require('pouchdb-node').plugin(require('pouchdb-upsert'));
 const md5 = require('./md5');
 const shortenHash = require('./shortenHash');
 const viewByAddress = require('./viewByAddress');
@@ -9,12 +9,19 @@ const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shorten
 // const DATA_DIR = process.env.DATA_DIR ? resolve(process.env.DATA_DIR, 'url-shortener') : resolve(__dirname, '..', '..', '..', '..', 'data', 'url-shortener');
 const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 
-// const db = new PouchDB('http://127.0.0.1:5984/url-shortener');
-
-// save the design doc
-db.get(viewByAddress._id, (e, res) => {
-  const doc = Object.assign({}, res, viewByAddress);
-  return db.put(doc, () => db.viewCleanup(() => void 0));
+db.upsert(viewByAddress._id, (diff) => {
+  const str1 = JSON.stringify(viewByAddress.views);
+  const str2 = JSON.stringify(diff.views);
+  return str1 !== str2 ? viewByAddress : false;
+}, (err, res) => {
+  if (!err && res.updated) {
+    Object.keys(viewByAddress.views).forEach((d, i, a) => {
+      const qs = name + '/' + d;
+      db.query(qs, {
+        limit: 0,
+      }, () => (i === a.length - 1 ? db.viewCleanup(() => void 0) : void 0));
+    });
+  }
 });
 
 function updateAddress(docid, cb) {
