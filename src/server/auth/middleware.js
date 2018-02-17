@@ -63,7 +63,7 @@ function register(req, res) {
 
     return db.query('users/username', { key: username, limit: 1 }, (er, userNameRes) => {
       if (er) { return res.status(500).send(er); }
-      if (userNameRes.row.length > 0) { errorsInUse.username = 'username in use'; }
+      if (userNameRes.rows.length > 0) { errorsInUse.username = 'username in use'; }
 
       if (Object.keys(errorsInUse).length > 0) {
         return res.status(400).json({ message: 'Errors registering', errors: errorsInUse });

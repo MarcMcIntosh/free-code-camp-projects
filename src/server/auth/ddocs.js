@@ -3,26 +3,23 @@
 const sessions = {
   _id: '_design/sessions',
   views: {
-    created_by: function(doc) {
-      if (doc.type === 'session' && doc.created_by) { emit(doc.created_by, null); }
-    }.toString()
+    created_by: {
+      map: function(doc) {
+        if (doc.type === 'session' && doc.created_by) { emit(doc.created_by, null); }
+      }.toString(),
+    }
   }
 }
 const users = {
   _id: '_design/users',
   views: {
-    email: function(doc) {
-      if(doc.type === 'user' && doc.email) {
-        emit(doc.email, null);
-      }
-    }.toString(),
+    email: {
+      map: function(doc) { if(doc.type === 'user' && doc.email) { emit(doc.email, null); } }.toString(),
+    },
 
-    username: function(doc) {
-      if(doc.type === 'user' && doc.username) {
-        emit(doc.username, null);
-      }
-    }.toString(),
-
+    username: {
+      map: function(doc) { if(doc.type === 'user' && doc.username) { emit(doc.username, null); } }.toString(),
+    }
     /* Passport providers */
     /* facebook: function(doc) {
       if(doc.facebook && doc.facebook.profile) {

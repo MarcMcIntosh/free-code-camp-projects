@@ -17,7 +17,7 @@ ddocs.forEach((d, i, a) => {
       Object.keys(d.views).forEach((dd, ii, aa) => {
         const qs = name + '/' + dd;
         db.query(qs, {
-          limit: 0,
+          // limit: 0,
         }, () => (i === a.length - 1 && ii === aa.length - 1 ? db.viewCleanup(() => void 0) : void 0));
       });
     }
