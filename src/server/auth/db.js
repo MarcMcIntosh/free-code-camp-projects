@@ -4,7 +4,7 @@ const ddoc = require('./ddoc');
 
 const DATA_DIR = resolve(__dirname, '..', '..', '..', 'data', 'auth');
 
-PouchDB.debug.enable('*');
+// PouchDB.debug.enable('*');
 
 const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 

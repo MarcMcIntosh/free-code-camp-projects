@@ -1,155 +1,75 @@
-const jwt = require('jsonwebtoken');
 const passport = require('./passport');
 const db = require('./db');
-const SECRET_KEY = require('./key');
-const createUserDoc = require('./createUserDoc');
-const hashPassword = require('./hash');
-const validateReg = require('./utils/validateReg');
-const validateLogin = require('./utils/validateLogin');
-const EMAIL_REGEXP = require('./utils/emailRegexp');
+const sessions = require('./sessions');
+const usernameRules = require('./utils/validateUsername');
 
-function createToken(user, cb) {
-  // return jwt.sign(user._id, user.salt, { expiresIn: '7d' }, cb);
-  return jwt.sign(user, SECRET_KEY, cb);
-}
 
-function refresh(req, res) {
-  return db.get(res.user.created_by, (err, userDoc) => {
-    if (err) { return res.status(400).send(err); }
-    return res.json({
-      message: 'session refreshed',
-      data: { token: req.user._id, id: userDoc._id, username: userDoc.username },
+function register(req, res, next) {
+  return passport.authenticate('local-register', (err, user, info) => {
+    if (err) { return next(err); }
+    if (!user) { return res.json(info); }
+    return req.login(user, (erro) => {
+      if (erro) { return res.json(erro); }
+      return res.json(user);
     });
-  });
+  })(req, res, next);
 }
 
-function validateEmail(req, res) {
-  if (!req.params.email) {
-    return res.status(400).json({ error: 'required', message: 'Email adress required' });
-  }
+function requireAuth(req, res, next) { return req.isAuthenticated() ? next() : res.status(401); }
 
-  if (!req.params.email.match(EMAIL_REGEXP)) {
-    return res.status(409).json({ error: 'invalid', message: 'Invalid email address' });
-  }
+function notAuthOnly(req, res, next) { return !req.user ? next() : res.json({ error: true, message: 'Currently logged in' }); }
 
-  return db.query('users/email', { key: req.params.email, limit: 1 }, (error, docs) => {
-    if (error) {
-      res.status(500).send(error);
-    } else if (docs.rows.length === 0) {
-      return res.status(200).json({ ok: true });
-    }
-    return res.status(409).json({ error: 'Email address in use' });
-  });
-}
+function login(req, res, next) {
+  return passport.authenticate('local-login', (err, user, info) => {
+    if (err) { return next(err); }
 
+    if (!user) { return res.json(info); }
 
-function register(req, res) {
-  const invalid = validateReg(req.body);
-  if (Object.keys(invalid).length > 0) {
-    return res.json({ validationErrors: invalid, message: 'Errors in registration' });
-  }
-
-  const username = req.body.username.trim();
-  const email = req.body.email.trim();
-  const password = req.body.password;
-
-  const errorsInUse = {};
-  return db.query('users/email', { key: email, limit: 1 }, (e, emailAdress) => {
-    if (e) { return res.status(500).send(e); }
-    if (emailAdress.rows.length > 0) { errorsInUse.email = 'email address in use'; }
-
-    return db.query('users/username', { key: username, limit: 1 }, (er, userNameRes) => {
-      if (er) { return res.status(500).send(er); }
-      if (userNameRes.rows.length > 0) { errorsInUse.username = 'username in use'; }
-
-      if (Object.keys(errorsInUse).length > 0) {
-        return res.status(400).json({ message: 'Errors registering', errors: errorsInUse });
-      }
-      return hashPassword(password, (err, salt, hash) => {
-        if (err) { res.status(500).send(err); }
-
-        const userDoc = createUserDoc(username, email, salt, hash);
-
-        return db.post(userDoc, (erro, doc) => {
-          if (erro) { res.status(500).send(erro); }
-
-          return db.get(doc.id, (error, sessionUser) => {
-            if (error) { res.status(500).send(error); }
-
-            return createToken(sessionUser, (tokenError, token) => {
-              if (tokenError) { res.status(500).send(tokenError); }
-
-              return res.json({ message: 'successfully registered and logged in', data: { token, username, id: sessionUser._id } });
-            });
-          });
-        });
+    return req.login(user, (erro) => {
+      if (erro) { return res.json({ message: 'Error logging-in', stack: erro }); }
+      return res.json({
+        message: 'successfully logged-in',
+        data: { username: user.local.username, id: user._id },
       });
     });
-  });
-}
-
-/* function requireAuth(req, res, next) {
-  return passport.authenticate('jwt', { session: false })(req, res, next);
-} */
-
-const requireAuth = passport.authenticate('jwt', { session: false });
-
-const optionalAuth = passport.authenticate(['jwt', 'anonymous'], { session: false });
-
-function login(req, res) {
-  const errors = validateLogin(req.body);
-  if (Object.keys(errors).length > 0) { return res.json({ message: 'Invalid login', validationErrors: errors }); }
-
-  return passport.authenticate('local', (err, user, info) => {
-    if (err) { return res.status(400).send(err); }
-    if (!user) { return res.status(401).json(info); } // athenticate failed
-
-    return req.login(user, { session: false }, (error) => {
-      if (error) { res.send(error); }
-
-      return createToken(user, (errToken, token) => {
-        if (errToken) { res.status(500).send(errToken); }
-        res.json({ message: 'successfully logged-in', data: { id: user._id, username: user.username, token } });
-      });
-    });
-  })(req, res);
+  })(req, res, next);
 }
 
 function logout(req, res) {
-  console.log(req.user);
-  /* this deletes the user */
-  return db.get(req.user._id, (err, session) => {
-    if (err) { return res.status(500).send(err); }
-    const sess = session;
-    sess._deleted = true;
-    return db.put(sess, (error, resp) => {
-      if (error) { return res.status(500).send(error); }
-      return res.json({ message: 'successfully logged out of session', data: resp });
-    });
-  });
+  req.logout();
+  res.json({ message: 'logged out' });
 }
 
 function remove(req, res) {
-  return db.get(req.user._id, (err, session) => {
+  return db.get(req.user._id, (err, userDoc) => {
     if (err) { return res.status(500).send(err); }
-    const sess = session;
-    sess._deleted = true;
-    return db.put(sess, (error, resp) => {
+    const user = Object.assign({}, userDoc, {
+      updated_at: Date.now(),
+      _deleted: true,
+    });
+    return db.put(user, (error, resp) => {
       if (error) { return res.status(500).send(error); }
       return res.json({ message: 'Account Deleted', data: resp });
     });
   });
 }
 
-function validateUsername(req, res, next) {
-  if (!req.params.username) { return next({ error: 'Username required', status: 400 }); }
+function validateUsername(req, res) {
+  const validationErrors = usernameRules(req.params);
+
+  if (Object.keys(validationErrors).length > 0) {
+    return res.json({ message: 'Invalid', validationErrors });
+  }
   return db.query('users/username', { key: req.params.username, limit: 1 }, (error, docs) => {
     if (error) {
       res.status(500).send(error);
-    } else if (docs.rows.length === 0) {
-      return res.status(200).json({ ok: true });
+    } else if (docs.rows.length > 0) {
+      return res.status(409).json({
+        message: 'Username already in use',
+        validationErrors: { username: 'Already in use' },
+      });
     }
-    return res.status(409).json({ error: 'Username already in use' });
+    return res.status(200).json({ message: 'Username available', username: req.params.username });
   });
 }
 
@@ -158,12 +78,10 @@ module.exports = {
   login,
   logout,
   remove,
-  validateEmail,
   validateUsername,
   requireAuth,
-  validateReg,
-  refresh,
-  optionalAuth,
+  notAuthOnly,
+  sessions,
 };
 
 /* Not implimented see superlogin for detialss

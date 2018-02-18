@@ -1,27 +1,19 @@
 const passport = require('passport');
-const passportJWT = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
-const AnonymousStrategy = require('passport-anonymous').Strategy;
 const hashPassword = require('./hash');
 const db = require('./db');
-const SECRET_KEY = require('./key');
+const validateReg = require('./utils/validateReg');
+const validateLogin = require('./utils/validateLogin');
+const createUserDoc = require('./createUserDoc');
 
 const MAX_FAILED_LOGINS = 5;
 const LOCKOUT_TIME = 5 * 60 * 1000;
 
-passport.use(new AnonymousStrategy());
+// passport.use(new AnonymousStrategy());
 
-passport.use(new passportJWT.Strategy({
-  jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: SECRET_KEY,
-  ignoreExpiration: true,
-}, (payload, done) => db.get(payload._id, (err, user) => {
-  if (err) { return done(err); }
-  if (payload.local && user.local && payload.local.hash === user.local.hash) {
-    return done(null, user);
-  }
-  return done(null, false);
-})));
+passport.serializeUser((user, cb) => cb(null, user._id));
+
+passport.deserializeUser((id, cb) => db.get(id, cb));
 
 function onLogin(userDoc, cb) {
   if (!userDoc.local.failedLoginAttempts) { return cb(null, userDoc); }
@@ -64,35 +56,69 @@ function localLogin(id, password, cb) {
       return cb(null, false, { error: 'Unauthorized', message: 'This account use a social login' });
     }
 
-    const hash = hashPassword(password, d.local.salt);
+    /* create a hash from user provided password and the stored salt */
+    return hashPassword(password, d.local.salt, (er, hash) => {
+      /* password verified */
+      if (d.local.hash === hash) { return onLogin(d, cb); }
 
-    /* password verified */
-    if (d.local.hash === hash) { return onLogin(d, cb); }
+      /* failed one too many times */
+      if (d.local.failedLoginAttempts >= MAX_FAILED_LOGINS) { return onLockOut(d, cb); }
 
-    /* failed one too many times */
-    if (d.local.failedLoginAttempts >= MAX_FAILED_LOGINS) { return onLockOut(d, cb); }
+      /* Increment failed attempts acount */
 
-    /* Increment failed attempts acount */
-    return onFail(d, cb);
+      return onFail(d, cb);
+    });
   });
 }
 
-passport.use(new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
-  session: false,
+  // session: false,
   // passReqToCallback: true,
-}, (username, password, done) => db.query('users/username', { key: username, limit: 1 }, (err, res) => {
-  if (err) { return done(err); }
+}, (username, password, done) => {
+  const validationErrors = validateLogin({ username, password });
 
-  if (res.rows.length === 1) { return localLogin(res.rows[0].id, password, done); }
+  if (Object.keys(validationErrors).length > 0) {
+    return done(null, false, { message: 'Invalid', validationErrors });
+  }
 
-  // try email login
-  return db.query('users/email', { key: username, limit: 1 }, (emailErr, docs) => {
-    if (emailErr) { return done(emailErr); }
-    if (docs.row.length === 1) { return localLogin(docs.rows[0].id, password, done); }
+  return db.query('users/username', { key: username, limit: 1 }, (err, res) => {
+    if (err) { return done(err); }
+    if (res.rows.length > 0) { return localLogin(res.rows[0].id, password, done); }
+
     return done(null, false, { error: 'Unauthorized', message: 'Incorrect username or password' });
   });
-})));
+}));
+
+passport.use('local-register', new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password',
+}, (username, password, done) => {
+  const validationErrors = validateReg({ username, password });
+
+  if (Object.keys(validationErrors).length > 0) {
+    return done(null, false, { message: 'Invalid', validationErrors });
+  }
+
+  return db.query('users/username', { key: username, limit: 1 }, (er, res) => {
+    if (er) { return done(er); }
+
+    if (res.rows.length > 0) { return done(null, false, { message: 'Username in-use', validationErrors: { username: 'Unavailable' } }); }
+
+    return hashPassword(password, (err, salt, hash) => {
+      if (err) { return done(err); }
+
+      const userDoc = createUserDoc(username, salt, hash);
+
+      return db.post(userDoc, (erro, resp) => {
+        if (erro) { return done(erro); }
+
+        /* same doc returned after login or register */
+        return db.get(resp.id, done);
+      });
+    });
+  });
+}));
 
 module.exports = passport;

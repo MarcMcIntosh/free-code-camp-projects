@@ -1,29 +1,39 @@
 const { Router } = require('express');
 const passport = require('./passport');
 const bodyParser = require('body-parser');
+
 const {
   login,
-  validateEmail,
+  // validateEmail,
   validateUsername,
   register,
   requireAuth,
   logout,
-  refresh,
+  notAuthOnly,
+  sessions,
 } = require('./middleware');
 
 
 const router = Router();
 
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-router.use(passport.initialize());
+router.use(sessions);
 
-router.post('/register', register);
-router.post('/login', login);
+router.use(passport.initialize());
+router.use(passport.session());
+
+router.post('/register', notAuthOnly, register);
+router.post('/login', notAuthOnly, login);
 router.get('/logout', requireAuth, logout);
-router.get('/refresh', requireAuth, refresh);
 router.get('/validate-username/:username', validateUsername);
-router.get('/validate-email/:email', validateEmail);
+router.get('/test', (req, res) => {
+  console.log(req);
+  res.end();
+});
+// router.get('/validate-email/:email', validateEmail);
+// router.get('/refresh', requireAuth, refresh);
 
 
 module.exports = router;

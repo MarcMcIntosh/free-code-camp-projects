@@ -16,7 +16,6 @@ export const remove = payload => ({ type: REMOVE, payload });
 export const REGISTER = prefix('REGISTER');
 export const LOGIN = prefix('LOGIN');
 export const LOGOUT = prefix('LOGOUT');
-export const REFRESH = prefix('REFRESH');
 
 function handleRes(res) {
   if (res.ok) { return res.json(); }
@@ -38,6 +37,7 @@ export const register = payload => (dispatch) => {
   return fetch('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
     body: JSON.stringify(payload),
   }).then(handleRes)
     .then(checkForValidationErrors)
@@ -56,6 +56,7 @@ export const login = payload => (dispatch) => {
   return fetch('/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
     body: JSON.stringify(payload),
   }).then(handleRes)
     .then(checkForValidationErrors)
@@ -69,16 +70,7 @@ export const login = payload => (dispatch) => {
     });
 };
 
-export const logout = () => (dispatch, getState) => {
-  const { session: { token } } = getState();
-  const payload = { Authorization: `Bearer ${token}` };
-  dispatch({ type: LOGOUT, payload });
-  return fetch('/api/auth/logout', { headers: payload }).then(handleRes).then(json => dispatch(remove(json))).catch(error => dispatch(rejected(error)));
-};
-
-export const refresh = () => (dispatch, getState) => {
-  const { session: { token } } = getState();
-  const payload = { Authorization: `Bearer ${token}` };
-  dispatch({ type: REFRESH, payload });
-  return fetch('/api/auth/refresh', { headers: payload }).then(handleRes).then(json => dispatch(recieved(json))).catch(error => dispatch(rejected(error)));
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  return fetch('/api/auth/logout', { credentials: 'same-origin' }).then(handleRes).then(json => dispatch(remove(json))).catch(error => dispatch(rejected(error)));
 };

@@ -1,7 +1,6 @@
 import { RECIEVED, REJECTED, REMOVE, REGISTER, LOGOUT, LOGIN } from '../actions/session';
 
 export const DEFAULT_STATE = {
-  token: '',
   username: '',
   id: '',
   fetching: false,
@@ -14,10 +13,9 @@ const valFrom = (arr, obj) => arr.reduce((a, b) => (a && Object.prototype.hasOwn
 export default function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case RECIEVED: {
-      const token = valFrom(['data', 'token'], action.payload);
       const username = valFrom(['data', 'username'], action.payload);
-      const id = valFrom(['data', 'id'], action.payload);
-      return { ...state, token, username, id, fetching: false, authenticated: true, error: '' };
+      const id = valFrom(['data', '_id'], action.payload);
+      return { ...state, username, id, fetching: false, authenticated: true, error: '' };
     }
     case REJECTED: {
       const error = action.payload.message || action.payload.toString();
