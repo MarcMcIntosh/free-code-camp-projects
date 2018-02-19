@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import { func, string, bool, shape, object } from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import { logout } from '../../common/actions/session';
+// import { logout } from '../../common/actions/session';
+import { requestUser, logout } from './actions';
 import classnames from './styles';
 import RegisterPage from './pages/Register';
 import CreatePoll from './pages/CreatePoll';
@@ -11,13 +12,12 @@ import PollPage from './pages/Poll';
 // import HandleRedirect from './components/HandleRedirect';
 
 
-const mapStateToProps = ({
-  session: { token, id, username, authenticated, ...session },
-  votingApp: { fetching },
-}) => ({ token, id, username, fetching: session.fetching || fetching, authenticated });
+const mapStateToProps = ({ votingApp: { fetching, user, authenticated },
+}) => ({ fetching, authenticated, user });
 
 const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
+  fetchUser: () => dispatch(requestUser()),
 });
 
 class VotingApp extends PureComponent {
@@ -31,6 +31,7 @@ class VotingApp extends PureComponent {
       register: path + '/register',
       create: path + '/create',
       view: path + '/view',
+      user: path,
     };
   }
   getChildContext() {
@@ -38,6 +39,9 @@ class VotingApp extends PureComponent {
       classnames: this.classnames,
       links: this.links,
     };
+  }
+  componentDidMount() {
+    if (!this.props.authenticated) { this.props.fetchUser(); }
   }
   render() {
     /* if this.props.route doesn't work use the url in portfolio/appData.js */
@@ -72,8 +76,10 @@ VotingApp.propTypes = {
   // fetching: bool.isRequired,
   // onRefresh: func.isRequired,
   onLogout: func.isRequired,
+  fetchUser: func.isRequired,
   // id: string.isRequired,
   // fetching: bool.isRequired,
+  // user: object.isRequired,
   authenticated: bool.isRequired,
   route: shape({
     path: string.isRequired,

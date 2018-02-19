@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { getPoll } from '../actions';
 
-const mapStateToProps = ({ fetching, poll, error }) => ({ fetching, poll, error });
+const mapStateToProps = ({ votingApp: { fetching, poll, error } }) => ({ fetching, poll, error });
 
 const mapDispatchToProps = (dispatch, { match: { params: { poll } } }) => ({
   fetchPoll: () => dispatch(getPoll(poll)),

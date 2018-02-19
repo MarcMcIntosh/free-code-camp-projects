@@ -1,24 +1,37 @@
 import React from 'react';
-import { bool, string, shape, func } from 'prop-types';
+import { bool, string, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CreatePollForm from '../components/Forms/CreatePoll';
-import { createPoll } from '../actions';
+import { createPoll, getUser } from '../actions';
 
-const mapStateToProps = ({ authenticated }) => ({ authenticated });
+const mapStateToProps = ({ votingApp: { authenticated } }) => ({ authenticated });
 
-const mapDispatchToProps = dispatch => ({ onSubmit: values => dispatch(createPoll(values)) });
+const mapDispatchToProps = dispatch => ({
+  onSubmit: values => dispatch(createPoll(values)),
+});
 
 const CreatePoll = ({
   authenticated,
-  history: { push },
+  // history: { push },
   ...props
 }, {
   links: { view, login },
-}) => (authenticated ? (<CreatePollForm {...props} onSubmitSuccess={res => push(view + '/' + res.id)} />) : (<Redirect to={login} />));
+}) => (authenticated ? (<CreatePollForm
+  {...props}
+  onSubmitSuccess={(res, dispatch, { history }) => {
+    dispatch(getUser());
+    return history.push(view + '/' + res.id);
+  }}
+/>) : (<Redirect to={login} />));
 
-CreatePoll.propTypes = { authenticated: bool.isRequired, history: shape({ push: func.isRequired }).isRequired };
+CreatePoll.propTypes = {
+  authenticated: bool.isRequired,
+  // history: shape({ push: func.isRequired }).isRequired,
+};
 
-CreatePoll.contextTypes = { links: shape({ view: string.isRequired, login: string.isRequired }).isRequired };
+CreatePoll.contextTypes = {
+  links: shape({ view: string.isRequired, login: string.isRequired }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePoll);

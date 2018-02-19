@@ -1,25 +1,18 @@
 const { Router } = require('express');
-const bodyParser = require('body-parser');
-
-const {
-  requireAuth,
-  // optionalAuth,
-  sessions,
-} = require('../../../server/auth/middleware');
-const { createPoll, appendAnswer, getPoll, getResults, getQuestions } = require('./db');
+const authApi = require('../../../common/authApi/routes');
+const { requireAuth } = require('../../../common/authApi/middleware');
+const { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions } = require('./db');
 
 const router = Router();
 
-
-router.use(bodyParser);
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(authApi);
 
 // list of polls
 router.get('/', getQuestions);
 // view a poll
 router.get('/view/:question', getPoll);
 // vote
-router.post('/vote', sessions, (req, res) => {
+router.post('/vote', (req, res) => {
   console.log('user', req.user);
   console.log('session', req.sessionId);
   res.json(res.user || req.session);
@@ -30,9 +23,12 @@ router.get('/results/:poll', getResults);
 /* create a poll */
 router.post('/create', requireAuth, createPoll);
 
+router.get('/account', requireAuth, updateVotes, getUserQuestions);
 /* update when adding an answer */
-router.post('/update', requireAuth, appendAnswer);
+// could be a patch request
+router.post('/answer', requireAuth, appendAnswer);
 // router.get('/user/:user' /* , see users polls */);
+
 // router.get('/account', requireAuth);
 
 module.exports = router;

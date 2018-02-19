@@ -9,8 +9,11 @@ function register(req, res, next) {
     if (err) { return next(err); }
     if (!user) { return res.json(info); }
     return req.login(user, (erro) => {
-      if (erro) { return res.json(erro); }
-      return res.json(user);
+      if (erro) { return res.json({ message: 'Error logging-in', stack: erro }); }
+      return res.json({
+        message: 'successfully logged-in',
+        data: { username: user.local.username, id: user._id, session: req.sessionId },
+      });
     });
   })(req, res, next);
 }
@@ -29,7 +32,7 @@ function login(req, res, next) {
       if (erro) { return res.json({ message: 'Error logging-in', stack: erro }); }
       return res.json({
         message: 'successfully logged-in',
-        data: { username: user.local.username, id: user._id },
+        data: { username: user.local.username, id: req.user._id, session: req.sessionId },
       });
     });
   })(req, res, next);
@@ -64,12 +67,12 @@ function validateUsername(req, res) {
     if (error) {
       res.status(500).send(error);
     } else if (docs.rows.length > 0) {
-      return res.status(409).json({
+      return res.json({
         message: 'Username already in use',
-        validationErrors: { username: 'Already in use' },
+        validationErrors: { username: 'Unavailable' },
       });
     }
-    return res.status(200).json({ message: 'Username available', username: req.params.username });
+    return res.json({ message: 'Username available', username: req.params.username });
   });
 }
 

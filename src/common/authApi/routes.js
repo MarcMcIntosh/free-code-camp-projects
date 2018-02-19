@@ -28,10 +28,7 @@ router.post('/register', notAuthOnly, register);
 router.post('/login', notAuthOnly, login);
 router.get('/logout', requireAuth, logout);
 router.get('/validate-username/:username', validateUsername);
-router.get('/test', (req, res) => {
-  console.log(req);
-  res.end();
-});
+
 // router.get('/validate-email/:email', validateEmail);
 // router.get('/refresh', requireAuth, refresh);
 

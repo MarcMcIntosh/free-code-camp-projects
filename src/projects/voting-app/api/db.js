@@ -139,4 +139,25 @@ function getQuestions(req, res) {
   });
 }
 
-module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions };
+function updateVotes(req, res, next) {
+  return db.get('votes/created_by', { key: req.sessionId, include_docs: true }, (err, resp) => {
+    if (err) { return next(err); }
+    if (resp.rows === 0) { return next(); }
+    const timestamp = Date.now();
+    const docs = resp.rows.map(d => Object.assign({}, d.doc, {
+      updated_at: timestamp,
+      created_by: req.user.id,
+    }));
+    return db.bulkDocs(docs, erro => next(erro));
+  });
+}
+
+function getUserQuestions(req, res) {
+  return db.get('questions/created_by', { key: req.user._id, include_docs: true }, (err, resp) => {
+    if (err) { return res.json(err); }
+    const user = Object.assign({}, req.user, { questions: resp.rows });
+    return res.json(user);
+  });
+}
+
+module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions };

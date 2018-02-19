@@ -26,7 +26,6 @@ import { reducer as imageSearch } from '../../projects/image-search';
 import { reducer as urlShortener } from '../../projects/url-shortener';
 import { reducer as headerParser } from '../../projects/header-parser';
 import { reducer as timestamp } from '../../projects/timestamp';
-import session from './session';
 import { reducer as votingApp } from '../../projects/voting-app';
 
 const reducer = combineReducers({
@@ -48,7 +47,6 @@ const reducer = combineReducers({
   portfolio,
   quoteMachine,
   recipeBox,
-  session,
   scatterPlotGraph,
   simon,
   ticTacToe,

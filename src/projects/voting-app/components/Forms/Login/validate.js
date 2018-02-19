@@ -1,3 +1,3 @@
-import validateLogin from '../../../../../server/auth/utils/validateLogin';
+import validateLogin from '../../../../../common/authApi/utils/validateLogin';
 
 export default validateLogin;

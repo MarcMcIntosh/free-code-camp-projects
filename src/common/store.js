@@ -12,12 +12,7 @@ const enhancers = (isClient && !isProduction) ? compose(autoRehydrate(), applyMi
 const store = createStore(reducer, initialState, enhancers);
 
 if (isClient) {
-  persistStore(store, { whitelist: ['recipeBox', 'session'], keyPrefix: '_marcmcintosh' });
+  persistStore(store, { whitelist: ['recipeBox'], keyPrefix: '_marcmcintosh' });
 }
-/*
-if (typeof self === 'object') {
-  persistStore(store, { whitelist: ['recipeBox', 'session'], keyPrefix: '_marcmcintosh' });
-}
-*/
 
 export default store;

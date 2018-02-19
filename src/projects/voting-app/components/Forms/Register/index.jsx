@@ -3,6 +3,7 @@ import { func } from 'prop-types';
 import { Field, reduxForm, propTypes } from 'redux-form';
 import renderField from '../renderField';
 import validate from './validate';
+import asyncValidate from './asyncValidate';
 
 const Register = ({
   handleSubmit,
@@ -41,4 +42,6 @@ Register.contextTypes = { classnames: func.isRequired };
 export default reduxForm({
   form: 'register-voting-app',
   validate,
+  asyncValidate,
+  asyncChangeFields: ['username'],
 })(Register);

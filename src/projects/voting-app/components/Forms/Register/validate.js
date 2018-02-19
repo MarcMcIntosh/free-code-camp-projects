@@ -1,4 +1,3 @@
-// import { EMAIL_REGEXP } from '../../../../../server/auth/middleware';
-import validateReg from '../../../../../server/auth/utils/validateReg';
+import validateReg from '../../../../../common/authApi/utils/validateReg';
 
 export default validateReg;
