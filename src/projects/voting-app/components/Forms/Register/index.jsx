@@ -12,7 +12,7 @@ const Register = ({
   submitting,
 }, {
   classnames,
-}) => (<form className={classnames('card')} onSubmit={handleSubmit}>
+}) => (<form className={classnames('card', 'form')} onSubmit={handleSubmit}>
 
   <section className={classnames('card__primary')}>
 

@@ -40,7 +40,7 @@ function createPoll(req, res) {
     return res.status(401).json({ message: 'Unauthorised user', data: req.user });
   }
 
-  const timestamp = Date.now();
+  const timestamp = new Date().toJSON();
 
   const QUESTION_DOC = { created_by: req.user.created_by, created_at: timestamp, updated_at: timestamp, question: req.body.question, type: 'question' };
 
@@ -69,7 +69,7 @@ function appendAnswer(req, res) {
     const doc = createAnswerDoc({
       question: resp.id,
       answer: req.body.answer,
-      timestamp: Date.now(),
+      timestamp: new Date().toJSON(),
       user: req.user.created_by,
     });
     return db.put(doc, (erro, respo) => {
@@ -143,7 +143,7 @@ function updateVotes(req, res, next) {
   return db.get('votes/created_by', { key: req.sessionId, include_docs: true }, (err, resp) => {
     if (err) { return next(err); }
     if (resp.rows === 0) { return next(); }
-    const timestamp = Date.now();
+    const timestamp = new Date().toJSON();
     const docs = resp.rows.map(d => Object.assign({}, d.doc, {
       updated_at: timestamp,
       created_by: req.user.id,

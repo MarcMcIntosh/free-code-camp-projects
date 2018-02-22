@@ -5,7 +5,7 @@ import { Field, reduxForm, propTypes } from 'redux-form';
 import renderField from '../renderField';
 import validate from './validate';
 
-const LoginForm = ({ handleSubmit, submitting }, { classnames, links: { register } }) => (<form onSubmit={handleSubmit} className={classnames('card')}>
+const LoginForm = ({ handleSubmit, submitting }, { classnames, links: { register } }) => (<form onSubmit={handleSubmit} className={classnames('card', 'form')}>
 
   <section className={classnames('card__primary')}>
 

@@ -46,8 +46,9 @@ function logout(req, res) {
 function remove(req, res) {
   return db.get(req.user._id, (err, userDoc) => {
     if (err) { return res.status(500).send(err); }
+    const timestamp = new Date().toJSON();
     const user = Object.assign({}, userDoc, {
-      updated_at: Date.now(),
+      updated_at: timestamp,
       _deleted: true,
     });
     return db.put(user, (error, resp) => {

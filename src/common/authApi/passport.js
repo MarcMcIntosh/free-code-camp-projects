@@ -5,6 +5,7 @@ const db = require('./db');
 const validateReg = require('./utils/validateReg');
 const validateLogin = require('./utils/validateLogin');
 const createUserDoc = require('./createUserDoc');
+const timestamp = require('./timestamp');
 
 const MAX_FAILED_LOGINS = 5;
 const LOCKOUT_TIME = 5 * 60 * 1000;
@@ -20,7 +21,7 @@ function onLogin(userDoc, cb) {
   /* reset failedLoginsCounter */
   const doc = userDoc;
   doc.local.failedLoginAttempts = 0;
-  doc.updated_at = Date.now();
+  doc.updated_at = timestamp();
   return db.put(doc, (err, res) => {
     if (err) { return cb(null, userDoc, { message: err }); }
     return db.get(res.id, cb);
@@ -30,9 +31,8 @@ function onLogin(userDoc, cb) {
 function onLockOut(userDoc, cb) {
   const doc = userDoc;
   doc.local.failedLoginAttempts = 0;
-  const timestamp = Date.now();
-  doc.local.lockedUntil = timestamp + LOCKOUT_TIME;
-  doc.updated_at = timestamp;
+  doc.local.lockedUntil = new Date(Date.now() + LOCKOUT_TIME).toJSON();
+  doc.updated_at = timestamp();
   const minutes = Math.round(LOCKOUT_TIME / 60);
 
   return db.put(doc, err => cb(err, false, { error: 'Unauthorized', message: `Maximum failed login attempts exceeded. Your account has been locked for ${minutes} minutes` }));
@@ -41,14 +41,14 @@ function onLockOut(userDoc, cb) {
 function onFail(userDoc, cb) {
   const doc = userDoc;
   doc.local.failedLoginAttempts += 1;
-  doc.updated_at = Date.now();
+  doc.updated_at = timestamp();
   return db.put(doc, err => cb(err, false, { error: 'Unauthorized', message: 'Invalid username or password' }));
 }
 
 function localLogin(id, password, cb) {
   return db.get(id, (e, d) => {
     if (e) { cb(e); }
-    if (d.local && d.local.lockedUntil && d.local.lockedUntil > Date.now()) {
+    if (d.local && d.local.lockedUntil && d.local.lockedUntil > timestamp()) {
     /* Brute force timeout */
       return cb(null, false, { error: 'Unauthorized', message: 'Your account is currently locked. Please wait a few minutes and try again.' });
     } else if (!d.local || !d.local.hash) {

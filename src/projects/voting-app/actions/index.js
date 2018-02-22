@@ -19,6 +19,9 @@ export const REQUEST_USER = prefix('REQUEST_USER');
 export const REJECTED_USER = prefix('REJECTED_USER');
 export const RECIEVED_USER = prefix('RECIEVED_USER');
 export const REMOVE_USER = prefix('REMOVE_USER');
+export const TOGGLE_MENU = prefix('TOGGLE_MENU');
+
+export const toggleMenu = () => ({ type: TOGGLE_MENU });
 
 const recievedUser = payload => ({ type: RECIEVED_USER, payload });
 const rejectedUser = payload => ({ type: REJECTED_USER, payload });

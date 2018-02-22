@@ -5,7 +5,7 @@ const questions = {
   views: {
     created_by: {
       map: function(doc) {
-        if (doc.type === 'question' && doc.created_by) { emit(doc.created_by); }
+        if (doc.type === 'question' && doc.created_by) { emit(doc.created_by, doc.question); }
       }.toString(),
     },
     created_at: {

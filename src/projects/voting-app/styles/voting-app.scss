@@ -1,9 +1,37 @@
 @import "./variables.scss";
 
-.form {
+.material-icons { composes: material-icons from $material-design-icons; }
+
+.menu {
+  composes: mdc-simple-menu from $mdc-menu;
+
+  &--open-from-bottom-right {
+    // mdc-simple-menu--open-from-bottom-right
+    composes: mdc-simple-menu--open-from-bottom-right from $mdc-menu;
+  }
+
+  &--open { composes: mdc-simple-menu--open from $mdc-menu; }
+
+  /* use sepratly */
+
+  &__anchor { composes: mdc-menu-anchor from $mdc-menu; }
+
+  &__list {
+    composes: mdc-simple-menu__items from $mdc-menu;
+    composes: mdc-list from $mdc-list;
+  }
+
+  &__item {
+    composes: mdc-list-item from $mdc-list;
+    // composes: mdc-list-item from $mdc-menu;
+    // composes: mdc-ripple-surface from $mdc-ripple;
+  }
+}
+
+.card {
   composes: mdc-card from $mdc-card;
-  max-width: 600px;
-  margin: auto;
+  // max-width: 600px;
+  // margin: auto;
 
   &__primary { composes: mdc-card__primary from $mdc-card; }
 
@@ -37,6 +65,40 @@
   }
 }
 
+.question {
+  composes: mdc-card from $mdc-card;
+  composes: mdc-ripple-surface from $mdc-ripple;
+
+  &__text { composes: mdc-card__title from $mdc-card; }
+
+  &__time { composes: mdc-card__subtitle from $mdc-card; }
+}
+
+.list {
+  composes: mdc-list mdc-list--two-line from $mdc-list;
+  // padding: 8px 0;
+  height: auto;
+  min-height: 72px;
+  padding: 0;
+
+  &-item {
+    composes: mdc-list-item from $mdc-list;
+    composes: mdc-ripple-surface from $mdc-ripple;
+    padding: 0 16px;
+
+    &__text {
+      composes: mdc-list-item__text from $mdc-list;
+
+      &__secondary { composes: mdc-list-item__text__secondary from $mdc-list; }
+    }
+  }
+}
+
+.form {
+  max-width: 600px;
+  margin: auto;
+}
+
 .field {
   composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
 
@@ -62,6 +124,8 @@
 .toolbar {
   composes: mdc-toolbar from $mdc-toolbar;
 
+  &-fixed-adjust { composes: mdc-toolbar-fixed-adjust from $mdc-toolbar; }
+
   &__row { composes: mdc-toolbar__row from $mdc-toolbar; }
 
   &__title {
@@ -77,4 +141,8 @@
 
     &--align-end { composes: mdc-toolbar__section--align-end from $mdc-toolbar; }
   }
+
+  &__menu-icon { composes: mdc-toolbar__menu-icon from $mdc-toolbar; }
+
+  &__icon { composes: mdc-toolbar__icon from $mdc-toolbar; }
 }

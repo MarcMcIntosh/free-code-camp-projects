@@ -13,7 +13,7 @@ const PollForm = ({
   submitting,
 }, {
   classnames,
-}) => (<form onSubmit={handleSubmit} className={classnames('card')}>
+}) => (<form onSubmit={handleSubmit} className={classnames('card', 'form')}>
 
   <section className={classnames('card__primary')}>
 
