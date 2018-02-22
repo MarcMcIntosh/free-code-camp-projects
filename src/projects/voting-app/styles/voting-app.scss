@@ -14,17 +14,22 @@
 
   /* use sepratly */
 
-  &__anchor { composes: mdc-menu-anchor from $mdc-menu; }
+  &__anchor {
+    composes: mdc-menu-anchor from $mdc-menu;
+  }
 
   &__list {
     composes: mdc-simple-menu__items from $mdc-menu;
     composes: mdc-list from $mdc-list;
+    // width: 100%;
+    padding: 0;
   }
 
   &__item {
     composes: mdc-list-item from $mdc-list;
     // composes: mdc-list-item from $mdc-menu;
-    // composes: mdc-ripple-surface from $mdc-ripple;
+    composes: mdc-ripple-surface from $mdc-ripple;
+    padding: 0 16px;
   }
 }
 
@@ -142,7 +147,10 @@
     &--align-end { composes: mdc-toolbar__section--align-end from $mdc-toolbar; }
   }
 
-  &__menu-icon { composes: mdc-toolbar__menu-icon from $mdc-toolbar; }
+  &__menu-icon {
+    composes: mdc-toolbar__menu-icon from $mdc-toolbar;
+    outline: none;
+  }
 
   &__icon { composes: mdc-toolbar__icon from $mdc-toolbar; }
 }

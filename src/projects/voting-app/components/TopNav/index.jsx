@@ -8,9 +8,9 @@ class TopNav extends PureComponent {
     this.handleClickOutSide = this.handleClickOutSide.bind(this);
     this.setRef = this.setRef.bind(this);
   }
-  componentDidMount() { document.addEventListener('mousedown', this.handleClickOutside); }
+  componentDidMount() { document.addEventListener('mousedown', this.handleClickOutSide); }
 
-  componentWillUnmount() { document.removeEventListener('mousedown', this.handleClickOutside); }
+  componentWillUnmount() { document.removeEventListener('mousedown', this.handleClickOutSide); }
 
   setRef(node) { this.node = node; }
 
@@ -30,18 +30,7 @@ class TopNav extends PureComponent {
 
         <section className={classnames('toolbar__section', 'toolbar__section--align-start')}>
 
-          <Link to="/" title="Back to App page" className={classnames('material-icons', 'toolbar__icon')}>home</Link>
-
-          <Link to={home} className={classnames('toolbar__title')}>Voting App</Link>
-
-        </section>
-
-        <section className={classnames('toolbar__section')}>
-          {/* add a loader here */}
-        </section>
-
-        <section className={classnames('toolbar__section', 'toolbar__section--align-end')}>
-          <div className={classnames('menu__anchor')}>
+          <div className={classnames('menu__anchor')} ref={this.setRef}>
 
             <button tabIndex="0" className={classnames('material-icons', 'toolbar__menu-icon')} onClick={onToggleMenu}>menu</button>
 
@@ -51,10 +40,21 @@ class TopNav extends PureComponent {
 
                 <Link to={authenticated ? logout : login} tabIndex="0" role="menuitem" title={msg} className={classnames('menu__item')}>{msg}</Link>
 
-              </ul>
+                <Link to="/" tabIndex="0" role="menuitem" title="Back to App page" className={classnames('menu__item')}>Back To Portfolio</Link>
 
+              </ul>
             </div>
           </div>
+        </section>
+
+        <section className={classnames('toolbar__section')}>
+          {/* add a loader here */}
+          <Link to={home} className={classnames('toolbar__title')}>Voting App</Link>
+
+        </section>
+
+        <section className={classnames('toolbar__section', 'toolbar__section--align-end')}>
+          {/* other content */}
         </section>
       </div>
     </header>);
