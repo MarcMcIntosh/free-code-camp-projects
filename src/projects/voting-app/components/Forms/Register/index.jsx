@@ -10,25 +10,26 @@ const Register = ({
   pristine,
   reset,
   submitting,
+  error,
 }, {
   classnames,
 }) => (<form className={classnames('card', 'form')} onSubmit={handleSubmit}>
 
   <section className={classnames('card__primary')}>
 
-    <h1 className={classnames('card__title')}>Register account</h1>
-
-    <Field name="username" label="User name" type="text" component={renderField} />
-
-    {/* <Field name="email" label="Email address" type="email" component={renderField} /> */}
-
-    <Field name="password" label="Password" type="password" component={renderField} />
+    <h1 className={classnames('card__title')}>Register</h1>
 
   </section>
 
+  <Field name="username" label="User name" type="text" component={renderField} />
+
+  <Field name="password" label="Password" type="password" component={renderField} />
+
+  <section className={classnames('form__helptext', error && 'form__helptext--validation-msg')}>{`Error: ${error}`}</section>
+
   <section className={classnames('card__actions')}>
 
-    <button type="submit" disabled={submitting} className={classnames('card__action', 'card__action--primary')}>Sign Up</button>
+    <button type="submit" disabled={submitting} className={classnames('card__action', 'card__action--primary')}>Submit</button>
 
     <button type="button" disabled={pristine || submitting} onClick={reset} className={classnames('card__action', 'card__action--accent')}>Reset</button>
 
@@ -43,5 +44,6 @@ export default reduxForm({
   form: 'register-voting-app',
   validate,
   asyncValidate,
-  asyncChangeFields: ['username'],
+  // asyncChangeFields: ['username'],
+  asyncBlurFields: ['username'],
 })(Register);

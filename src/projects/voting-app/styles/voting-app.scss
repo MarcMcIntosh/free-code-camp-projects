@@ -31,6 +31,10 @@
     composes: mdc-ripple-surface from $mdc-ripple;
     padding: 0 16px;
   }
+
+  &__divider {
+    composes: mdc-list-divider from $mdc-list;
+  }
 }
 
 .card {
@@ -45,6 +49,10 @@
   &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
 
   &__actions { composes: mdc-card__actions from $mdc-card; }
+
+  &__supporting-text { composes: mdc-card__supporting-text from $mdc-card; }
+
+  &__media { composes: mdc-card__media from $mdc-card; }
 
   &__action {
     composes: mdc-button from $mdc-button;
@@ -100,18 +108,33 @@
 }
 
 .form {
-  max-width: 600px;
+  max-width: 360px;
   margin: auto;
+
+  &__helptext {
+    composes: mdc-textfield-helptext from $mdc-textfield;
+    padding: 0 8px;
+
+    &--validation-msg {
+      composes: mdc-textfield-helptext--validation-msg from $mdc-textfield;
+      color: #d50000;
+      opacity: 1;
+    }
+  }
 }
 
 .field {
   composes: mdc-textfield mdc-textfield--box mdc-textfield--upgraded from $mdc-textfield;
 
+  &--fullwidth { composes: mdc-textfield--fullwidth from $mdc-textfield; }
+
   &--focused { composes: mdc-textfield--focused from $mdc-textfield; }
 
   &--invalid { composes: mdc-textfield--invalid from $mdc-textfield; }
 
-  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+  &__input {
+    composes: mdc-textfield__input from $mdc-textfield;
+  }
 
   &__label {
     composes: mdc-textfield__label from $mdc-textfield;
@@ -123,6 +146,8 @@
     composes: mdc-textfield-helptext from $mdc-textfield;
 
     &--validation-msg { composes: mdc-textfield-helptext--validation-msg from $mdc-textfield; }
+
+    &--persistent { composes: mdc-textfield-helptext--persistent from $mdc-textfield; }
   }
 }
 

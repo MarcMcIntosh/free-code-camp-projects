@@ -18,6 +18,7 @@ function register(req, res, next) {
   })(req, res, next);
 }
 
+
 function requireAuth(req, res, next) { return req.isAuthenticated() ? next() : res.status(401); }
 
 function notAuthOnly(req, res, next) { return !req.user ? next() : res.json({ error: true, message: 'Currently logged in' }); }
@@ -60,18 +61,14 @@ function remove(req, res) {
 
 function validateUsername(req, res) {
   const validationErrors = usernameRules(req.params);
-
   if (Object.keys(validationErrors).length > 0) {
-    return res.json({ message: 'Invalid', validationErrors });
+    return res.status(400).send({ message: 'Invalid', validationErrors });
   }
   return db.query('users/username', { key: req.params.username, limit: 1 }, (error, docs) => {
     if (error) {
       res.status(500).send(error);
     } else if (docs.rows.length > 0) {
-      return res.json({
-        message: 'Username already in use',
-        validationErrors: { username: 'Unavailable' },
-      });
+      return res.status(400).send({ message: 'Username already in use', validationErrors: { username: 'Unavailable' } });
     }
     return res.json({ message: 'Username available', username: req.params.username });
   });

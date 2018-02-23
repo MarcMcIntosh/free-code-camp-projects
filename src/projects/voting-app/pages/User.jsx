@@ -7,12 +7,12 @@ import {
   // object,
 } from 'prop-types';
 import { connect } from 'react-redux';
-import { requestUser } from '../actions';
+import { refresh } from '../actions';
 
 const mapStateToProps = ({ authenticated, user }) => ({ authenticated, user });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUser: () => dispatch(requestUser()),
+  fetchUser: () => dispatch(refresh()),
 });
 
 class UserPage extends PureComponent {

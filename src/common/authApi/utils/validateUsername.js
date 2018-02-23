@@ -1,4 +1,4 @@
-const USERNAME_REGEXP = require('github-username-regex');
+const USERNAME_REGEXP = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
 const CHAR_REGEXP = /[^a-z/d-]/i;
 const CONSECUTIVE_HYPHENS_REGEXP = /--/i;

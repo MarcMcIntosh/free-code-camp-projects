@@ -23,7 +23,7 @@ class TopNav extends PureComponent {
     const { classnames, links: { login, logout, home } } = this.context;
     const { menuIsOpen, onToggleMenu, authenticated } = this.props;
 
-    const msg = authenticated ? 'Sign Out' : 'Sign In';
+    const msg = authenticated ? 'Sign-out' : 'Sign-in';
 
     return (<header className={classnames('toolbar')}>
       <div className={classnames('toolbar__row')}>
@@ -38,9 +38,12 @@ class TopNav extends PureComponent {
 
               <ul className={classnames('menu__list')} role="menu">
 
+                <Link to="/" tabIndex="0" role="menuitem" title="Back to App page" className={classnames('menu__item')}>Go back to apps</Link>
+
+                <li className={classnames('menu__divider')} />
+
                 <Link to={authenticated ? logout : login} tabIndex="0" role="menuitem" title={msg} className={classnames('menu__item')}>{msg}</Link>
 
-                <Link to="/" tabIndex="0" role="menuitem" title="Back to App page" className={classnames('menu__item')}>Back To Portfolio</Link>
 
               </ul>
             </div>

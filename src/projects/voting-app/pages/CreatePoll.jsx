@@ -3,7 +3,7 @@ import { bool, string, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CreatePollForm from '../components/Forms/CreatePoll';
-import { createPoll, getUser } from '../actions';
+import { createPoll, refresh } from '../actions';
 
 const mapStateToProps = ({ votingApp: { authenticated } }) => ({ authenticated });
 
@@ -20,7 +20,7 @@ const CreatePoll = ({
 }) => (authenticated ? (<CreatePollForm
   {...props}
   onSubmitSuccess={(res, dispatch, { history }) => {
-    dispatch(getUser());
+    dispatch(refresh());
     return history.push(view + '/' + res.id);
   }}
 />) : (<Redirect to={login} />));

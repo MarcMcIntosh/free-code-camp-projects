@@ -1,7 +1,16 @@
 const { Router } = require('express');
 const authApi = require('../../../common/authApi/routes');
 const { requireAuth } = require('../../../common/authApi/middleware');
-const { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions } = require('./db');
+const {
+  createPoll,
+  appendAnswer,
+  getPoll,
+  getResults,
+  getQuestions,
+  updateVotes,
+  // getUserQuestions,
+  getUserAccount,
+} = require('./db');
 
 const router = Router();
 
@@ -23,7 +32,11 @@ router.get('/results/:poll', getResults);
 /* create a poll */
 router.post('/create', requireAuth, createPoll);
 
-router.get('/account', requireAuth, updateVotes, getUserQuestions);
+router.get('/account', (req, res, next) => {
+  console.log(req.sessionID);
+  console.log(req.user);
+  next();
+}, requireAuth, updateVotes, getUserAccount);
 /* update when adding an answer */
 // could be a patch request
 router.post('/answer', requireAuth, appendAnswer);

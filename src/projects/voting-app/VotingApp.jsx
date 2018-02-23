@@ -3,7 +3,7 @@ import { func, string, bool, shape, object } from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 // import { logout } from '../../common/actions/session';
-import { requestUser, logout, toggleMenu } from './actions';
+import { refresh, toggleMenu } from './actions';
 import classnames from './styles';
 import RegisterPage from './pages/Register';
 import CreatePoll from './pages/CreatePoll';
@@ -19,8 +19,7 @@ const mapStateToProps = ({ votingApp: { fetching, user, authenticated, menuIsOpe
 }) => ({ fetching, authenticated, user, menuIsOpen });
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: () => dispatch(logout()),
-  fetchUser: () => dispatch(requestUser()),
+  fetchUser: () => dispatch(refresh()),
   onToggleMenu: () => dispatch(toggleMenu()),
 });
 

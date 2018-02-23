@@ -28,7 +28,7 @@ ddocs.forEach((d, i, a) => {
   });
 });
 
-const createAnswerDoc = ({ user, question, answer, timestamp = Date.now() }) => ({
+const createAnswerDoc = ({ user, question, answer, timestamp = new Date().toJSON() }) => ({
   question, answer, created_at: timestamp, updated_at: timestamp, created_by: user, type: 'answer',
 });
 
@@ -140,13 +140,13 @@ function getQuestions(req, res) {
 }
 
 function updateVotes(req, res, next) {
-  return db.get('votes/created_by', { key: req.sessionId, include_docs: true }, (err, resp) => {
+  return db.get('votes/created_by', { key: req.sessionID, include_docs: true }, (err, resp) => {
     if (err) { return next(err); }
     if (resp.rows === 0) { return next(); }
     const timestamp = new Date().toJSON();
     const docs = resp.rows.map(d => Object.assign({}, d.doc, {
       updated_at: timestamp,
-      created_by: req.user.id,
+      created_by: req.user._id,
     }));
     return db.bulkDocs(docs, erro => next(erro));
   });
@@ -160,4 +160,22 @@ function getUserQuestions(req, res) {
   });
 }
 
-module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions };
+function getUserAccount(req, res) {
+  const user = { id: req.user._id, username: res.user.local.username };
+
+  return db.get('questions/created_by', { key: req.user._id }, (e, questions) => {
+    if (e) { res.status(500); }
+
+    user.questions = questions.rows;
+
+    return db.get('votes/created_by', { key: res.user._id }, (er, votes) => {
+      if (er) { res.status(500); }
+
+      user.answers = votes.rows;
+
+      return res.json(user);
+    });
+  });
+}
+
+module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions, getUserAccount };

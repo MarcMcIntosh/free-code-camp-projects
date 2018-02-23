@@ -19,7 +19,7 @@ const renderField = ({
 
   </div>
 
-  {touched && error && (<span className={classnames('field__helptext', 'field__helptext--validation-msg')}>{error}</span>)}
+  <span className={classnames('field__helptext', touched && error && 'field__helptext--validation-msg')}>{touched && error}</span>
 </div>);
 
 renderField.propTypes = fieldPropTypes;

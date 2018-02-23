@@ -28,6 +28,10 @@ router.post('/register', notAuthOnly, register);
 router.post('/login', notAuthOnly, login);
 router.get('/logout', requireAuth, logout);
 router.get('/validate-username/:username', validateUsername);
+router.get('/user', requireAuth, (req, res) => {
+  res.json(req.user);
+});
+
 
 // router.get('/validate-email/:email', validateEmail);
 // router.get('/refresh', requireAuth, refresh);
