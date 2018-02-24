@@ -1,6 +1,24 @@
 @import "./variables.scss";
+@import "@material/button/mixins.scss";
 
 .material-icons { composes: material-icons from $material-design-icons; }
+
+.button {
+  composes: mdc-button from $mdc-button;
+
+  &--raised { composes: mdc-button--raised from $mdc-button; }
+
+  &--accent {
+    composes: mdc-button--accent from $mdc-button;
+
+    @include mdc-button-container-fill-color(secondary);
+  }
+
+  &__icon {
+    composes: mdc-button__icon from $mdc-button;
+    composes: material-icons;
+  }
+}
 
 .menu {
   composes: mdc-simple-menu from $mdc-menu;
@@ -132,8 +150,13 @@
 
   &--invalid { composes: mdc-textfield--invalid from $mdc-textfield; }
 
-  &__input {
-    composes: mdc-textfield__input from $mdc-textfield;
+  &--with-trailing-icon { composes: mdc-textfield--with-trailing-icon from $mdc-textfield; }
+
+  &__input { composes: mdc-textfield__input from $mdc-textfield; }
+
+  &__icon {
+    composes: mdc-textfield__icon from $mdc-textfield;
+    composes: material-icons from $material-design-icons;
   }
 
   &__label {

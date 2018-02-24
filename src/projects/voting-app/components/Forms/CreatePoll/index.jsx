@@ -6,7 +6,7 @@ import Answers from './Answers';
 import validate from '../../../util/validatePoll';
 
 const PollForm = ({
-  // error,
+  error,
   handleSubmit,
   pristine,
   reset,
@@ -17,17 +17,17 @@ const PollForm = ({
 
   <section className={classnames('card__primary')}>
 
-    <h1 className={classnames('card__title')}>Create Poll</h1>
-
-    <Field name="question" label="Question" type="text" component={renderField} />
-
-    <FieldArray name="answers" component={Answers} />
+    <h1 className={classnames('card__title')}>Ask a question</h1>
 
   </section>
 
+  <Field name="question" label="Question" type="text" component={renderField} />
+
+  <FieldArray name="answers" component={Answers} />
+
   <section className={classnames('card__actions')}>
 
-    <button type="submit" disabled={submitting} className={classnames('card__action', 'card__action--primary')}>Submit</button>
+    <button type="submit" disabled={submitting || error} className={classnames('card__action', 'card__action--primary')}>Submit</button>
 
     <button type="button" disabled={pristine || submitting} onClick={reset} className={classnames('card__action', 'card__action--accent')}>Clear</button>
 

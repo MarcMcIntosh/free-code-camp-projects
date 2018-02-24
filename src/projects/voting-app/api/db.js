@@ -28,26 +28,37 @@ ddocs.forEach((d, i, a) => {
   });
 });
 
-const createAnswerDoc = ({ user, question, answer, timestamp = new Date().toJSON() }) => ({
-  question, answer, created_at: timestamp, updated_at: timestamp, created_by: user, type: 'answer',
+const createAnswerDoc = ({
+  created_by, // eslint-disable-line
+  question,
+  answer,
+  timestamp = new Date().toJSON(),
+}) => ({
+  type: 'answer',
+  created_by,
+  created_at: timestamp,
+  updated_at: timestamp,
+  question,
+  answer,
 });
 
 function createPoll(req, res) {
-  const errors = validatePoll(req.body);
-  if (Object.key(errors).length > 0) { return res.status(400).json(errors); }
-
-  if (!req.user || !req.user.created_by) {
-    return res.status(401).json({ message: 'Unauthorised user', data: req.user });
-  }
+  const validationErrors = validatePoll(req.body);
+  if (Object.keys(validationErrors).length > 0) { return res.json({ validationErrors }); }
 
   const timestamp = new Date().toJSON();
 
-  const QUESTION_DOC = { created_by: req.user.created_by, created_at: timestamp, updated_at: timestamp, question: req.body.question, type: 'question' };
+  const QUESTION_DOC = { created_by: req.user._id, created_at: timestamp, updated_at: timestamp, question: req.body.question, type: 'question' };
 
-  return db.put(QUESTION_DOC, (err, qdoc) => {
+  return db.post(QUESTION_DOC, (err, qdoc) => {
     if (err) { return res.status(err.status || 500).send(err); }
 
-    const answers = req.body.answers.map(answer => createAnswerDoc({ question: qdoc.id, answer, user: req.user.created_by, timestamp }));
+    const answers = req.body.answers.map(answer => createAnswerDoc({
+      created_by: req.user._id,
+      question: qdoc.id,
+      answer,
+      timestamp,
+    }));
 
     return db.bulkDocs(answers, (erro) => {
       if (erro) { return res.status(erro.status || 500).send(erro); }
@@ -88,7 +99,7 @@ function getPoll(req, res) {
 
     return db.query('questions/answers', { key: resp.id }, (erro, answers) => {
       if (erro) { return res.status(err.status || 500).send(erro); }
-      const obj = Object.assign({}, resp, { answers });
+      const obj = Object.assign({}, resp, { answers: answers.rows });
       return res.json(obj);
     });
   });
@@ -133,16 +144,16 @@ function getResults(req, res) {
 }
 
 function getQuestions(req, res) {
-  return db.get('questions/created_at', { descending: true }, (err, resp) => {
+  return db.query('questions/created_at', { descending: true }, (err, resp) => {
     if (err) { return res.status(err.status || 500).send(err); }
     return res.json(resp.rows);
   });
 }
 
 function updateVotes(req, res, next) {
-  return db.get('votes/created_by', { key: req.sessionID, include_docs: true }, (err, resp) => {
-    if (err) { return next(err); }
-    if (resp.rows === 0) { return next(); }
+  return db.query('votes/created_by', { key: req.sessionID, include_docs: true }, (err, resp) => {
+    if (err) { res.json(err); }
+    if (resp.rows.length === 0) { return next(); }
     const timestamp = new Date().toJSON();
     const docs = resp.rows.map(d => Object.assign({}, d.doc, {
       updated_at: timestamp,
@@ -153,7 +164,7 @@ function updateVotes(req, res, next) {
 }
 
 function getUserQuestions(req, res) {
-  return db.get('questions/created_by', { key: req.user._id, include_docs: true }, (err, resp) => {
+  return db.query('questions/created_by', { key: req.user._id, include_docs: true }, (err, resp) => {
     if (err) { return res.json(err); }
     const user = Object.assign({}, req.user, { questions: resp.rows });
     return res.json(user);
@@ -166,12 +177,12 @@ function getUserAccount(req, res) {
     // this may need changed for social auth
     username: req.user.username,
   };
-  return db.get('questions/created_by', { key: req.user._id }, (e, questions) => {
+
+  return db.query('questions/created_by', { key: user.id }, (e, questions) => {
     if (e) { res.status(500); }
 
     user.questionsAsked = questions.rows;
-
-    return db.get('votes/created_by', { key: res.user._id }, (er, votes) => {
+    return db.query('votes/created_by', { key: user.id }, (er, votes) => {
       if (er) { res.status(500); }
 
       user.votes = votes.rows;

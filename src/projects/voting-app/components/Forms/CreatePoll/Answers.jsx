@@ -5,26 +5,20 @@ import renderAnswer from './renderAnswer';
 
 const Answers = ({
   fields,
-  meta: { error },
+  meta: { error, dirty },
   ...props
 }, {
   classnames,
 }) => (<div {...props}>
-  <h2 className={classnames('form__title')}>Answers</h2>
+  <section className={classnames('card__primary')}>
+    <button className={classnames('button', 'button--raised', dirty && error && 'button--accent')} title="Add Answer" type="button" tabIndex="0" onClick={() => fields.push()}>Add Answers</button>
 
+    <span className={classnames('card__subtitle', 'form__helptext', dirty && error && 'form__helptext--validation-msg')}>{error}</span>
+  </section>
   {fields.map((ingredient, index) => {
     const k = `answers[${index}]`;
     return (<Field key={k} name={k} type="text" component={renderAnswer} label={`Answer #${index + 1}`} onClick={() => fields.remove(index)} />);
   })}
-  {error && <span className="error">{error}</span>}
-
-  <button
-    className={classnames('form__action')}
-    title="Add Answer"
-    type="button"
-    tabIndex="0"
-    onClick={() => fields.push()}
-  >Add Answer<i className={classnames('form__action--icon')}>playlist_add</i> </button>
 </div>);
 
 Answers.propTypes = { ...fieldArrayPropTypes };

@@ -13,7 +13,6 @@ const {
 } = require('./db');
 
 const router = Router();
-
 router.use(authApi);
 
 // list of polls
@@ -21,7 +20,10 @@ router.get('/', getQuestions);
 // view a poll
 router.get('/view', (req, res) => res.status(404));
 
-router.get('/view/:question', getPoll);
+router.get('/view/:question', (req, res, next) => {
+  console.log(req.path);
+  next();
+}, getPoll);
 // vote
 router.post('/vote', (req, res) => {
   console.log('user', req.user);
@@ -34,11 +36,7 @@ router.get('/results/:poll', getResults);
 /* create a poll */
 router.post('/create', requireAuth, createPoll);
 
-router.get('/account', (req, res, next) => {
-  console.log(req.sessionID);
-  console.log(req.user);
-  next();
-}, requireAuth, updateVotes, getUserAccount);
+router.get('/account', requireAuth, updateVotes, getUserAccount);
 /* update when adding an answer */
 // could be a patch request
 router.post('/answer', requireAuth, appendAnswer);

@@ -143,7 +143,7 @@ export const getPoll = payload => (dispatch) => {
   dispatch(getPollRequest(payload));
   if (!payload) { return dispatch(getPollRejected({ message: 'poll id required' })); }
 
-  return fetch(`poll/${payload}`, {
+  return fetch(`view/${payload}`, {
     headers: { Accept: 'application/json' },
   }).then(handleRes).then(json => dispatch(getPollRecieved(json))).catch(error => dispatch(getPollRejected(error)));
 };

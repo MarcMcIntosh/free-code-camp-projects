@@ -11,13 +11,13 @@ const renderAnswer = ({
 }, {
   classnames,
 }) => (<div>
-  <div className={classnames('field__input', { 'field__input--focused': active })} >
+  <div className={classnames('field', 'field--with-trailing-icon', { 'field--upgraded': input.value || active, 'field--focused': active, 'field--invalid': touched && error })}>
 
     <input {...input} type={type} className={classnames('field__input')} />
 
     <label htmlFor={input.name} className={classnames('field__label', { 'field__label--float-above': input.value || active })}>{label}</label>
 
-    <i className={classnames('field__icon')} tabIndex="0" role="button" title="Remove answer" onClick={onClick} >close</i>
+    <i className={classnames('material-icons', 'field__icon')} tabIndex="0" role="button" title="Remove answer" onClick={onClick}>close</i>
 
     <div className={classnames('field__line', { 'field__line--active': active })} />
 
