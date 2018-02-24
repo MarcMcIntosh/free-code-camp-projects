@@ -1,32 +1,45 @@
-import React from 'react';
-import { bool, string, shape } from 'prop-types';
+import React, { PureComponent } from 'react';
+import { bool, string, shape, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CreatePollForm from '../components/Forms/CreatePoll';
 import { createPoll, refresh } from '../actions';
 
-const mapStateToProps = ({ votingApp: { authenticated } }) => ({ authenticated });
+const mapStateToProps = ({ votingApp: { authenticated, fetching } }) => ({ authenticated, fetching });
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: values => dispatch(createPoll(values)),
+  onCheckAuth: () => dispatch(refresh()),
 });
 
-const CreatePoll = ({
-  authenticated,
-  // history: { push },
-  ...props
-}, {
-  links: { view, login },
-}) => (authenticated ? (<CreatePollForm
-  {...props}
-  onSubmitSuccess={(res, dispatch, { history }) => {
-    dispatch(refresh());
-    return history.push(view + '/' + res.id);
-  }}
-/>) : (<Redirect to={login} />));
+class CreatePoll extends PureComponent {
+  componentDidMount() {
+    if (!this.props.authenticated) { this.props.onCheckAuth(); }
+  }
+  render() {
+    const { authenticated, fetching, ...props } = this.props;
+    const { view, login } = this.context;
+    if (!authenticated && !fetching) {
+      return (<Redirect to={login} />);
+    }
+    return (<div>
+      {!authenticated && fetching && (<div>Checking authorisation</div>)}
+
+      <CreatePollForm
+        {...props}
+        onSubmitSuccess={(res, dispatch, { history }) => {
+          dispatch(refresh());
+          history.push(view + '/' + res.id);
+        }}
+      />
+    </div>);
+  }
+}
 
 CreatePoll.propTypes = {
   authenticated: bool.isRequired,
+  fetching: bool.isRequired,
+  onCheckAuth: func.isRequired,
   // history: shape({ push: func.isRequired }).isRequired,
 };
 
