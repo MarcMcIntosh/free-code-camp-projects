@@ -12,7 +12,7 @@ function register(req, res, next) {
       if (erro) { return res.json({ message: 'Error logging-in', stack: erro }); }
       return res.json({
         message: 'successfully logged-in',
-        data: { username: user.local.username, id: user._id, session: req.sessionId },
+        data: { username: user.username, id: user._id, session: req.sessionID },
       });
     });
   })(req, res, next);
@@ -33,7 +33,7 @@ function login(req, res, next) {
       if (erro) { return res.json({ message: 'Error logging-in', stack: erro }); }
       return res.json({
         message: 'successfully logged-in',
-        data: { username: user.local.username, id: req.user._id, session: req.sessionId },
+        data: { username: user.username, id: req.user._id, session: req.sessionId },
       });
     });
   })(req, res, next);

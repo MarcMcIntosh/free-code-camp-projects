@@ -105,7 +105,7 @@ const questionsRequest = () => ({ type: QUESTIONS_REQUEST });
 const questionsRejected = payload => ({ type: QUESTIONS_REJECTED, payload });
 const questionsRecieved = payload => ({ type: QUESTIONS_RECIEVED, payload });
 
-export const questions = () => (dispatch) => {
+export const getQuestions = () => (dispatch) => {
   dispatch(questionsRequest());
   return fetch('questions', { headers: { Accept: 'application/json' } }).then(handleRes).then(json => dispatch(questionsRecieved(json))).catch(error => dispatch(questionsRejected(error)));
 };

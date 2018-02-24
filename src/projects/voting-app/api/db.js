@@ -70,7 +70,7 @@ function appendAnswer(req, res) {
       question: resp.id,
       answer: req.body.answer,
       timestamp: new Date().toJSON(),
-      user: req.user.created_by,
+      user: req.user._id,
     });
     return db.put(doc, (erro, respo) => {
       if (erro) { return res.status(erro.status || 400).send(erro); }
@@ -161,17 +161,20 @@ function getUserQuestions(req, res) {
 }
 
 function getUserAccount(req, res) {
-  const user = { id: req.user._id, username: res.user.local.username };
-
+  const user = {
+    id: req.user._id,
+    // this may need changed for social auth
+    username: req.user.username,
+  };
   return db.get('questions/created_by', { key: req.user._id }, (e, questions) => {
     if (e) { res.status(500); }
 
-    user.questions = questions.rows;
+    user.questionsAsked = questions.rows;
 
     return db.get('votes/created_by', { key: res.user._id }, (er, votes) => {
       if (er) { res.status(500); }
 
-      user.answers = votes.rows;
+      user.votes = votes.rows;
 
       return res.json(user);
     });

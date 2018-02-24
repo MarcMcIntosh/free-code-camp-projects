@@ -27,6 +27,9 @@ router.use(passport.session());
 router.post('/register', notAuthOnly, register);
 router.post('/login', notAuthOnly, login);
 router.get('/logout', requireAuth, logout);
+router.get('/validate-username', (req, res) => {
+  res.json({ validationErrors: { username: 'Required' } });
+});
 router.get('/validate-username/:username', validateUsername);
 router.get('/user', requireAuth, (req, res) => {
   res.json(req.user);

@@ -4,8 +4,8 @@ const users = {
   _id: '_design/users',
   views: {
     username: {
-      map: function(doc) { if(doc.type === 'user' && doc.local && doc.local.username) {
-        emit(doc.local.username, null);
+      map: function(doc) { if(doc.type === 'user' && doc.username) {
+        emit(doc.username, null);
       } }.toString(),
     }
     /* Passport providers */

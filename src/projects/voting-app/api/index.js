@@ -19,11 +19,13 @@ router.use(authApi);
 // list of polls
 router.get('/', getQuestions);
 // view a poll
+router.get('/view', (req, res) => res.status(404));
+
 router.get('/view/:question', getPoll);
 // vote
 router.post('/vote', (req, res) => {
   console.log('user', req.user);
-  console.log('session', req.sessionId);
+  console.log('session', req.sessionID);
   res.json(res.user || req.session);
 });
 

@@ -28,7 +28,11 @@ export const DEFAULT_STATE = {
   username: '',
   id: '',
   questions: [],
-  answers: {},
+  questionsAsked: [],
+  // answers: {},
+  // votes should be key value pairs of quesiton._id:answer._id;
+  votes: {},
+
   poll: {},
 };
 
@@ -50,7 +54,8 @@ export default function reducer(state = DEFAULT_STATE, action) {
     case REFRESH_REQUEST: return { ...state, fetching: true };
 
     case REGISTER_RECIEVED:
-    case LOGIN_RECIEVED:
+    case LOGIN_RECIEVED: return { ...state, authenticated: true, fetching: false };
+
     case REFRESH_RECIEVED: return { ...state, ...action.payload, authenticated: true, fetching: false };
 
     case REFRESH_REJECTED:

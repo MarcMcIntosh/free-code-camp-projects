@@ -17,10 +17,10 @@ passport.serializeUser((user, cb) => cb(null, user._id));
 passport.deserializeUser((id, cb) => db.get(id, cb));
 
 function onLogin(userDoc, cb) {
-  if (!userDoc.local.failedLoginAttempts) { return cb(null, userDoc); }
+  if (!userDoc.failedLoginAttempts) { return cb(null, userDoc); }
   /* reset failedLoginsCounter */
   const doc = userDoc;
-  doc.local.failedLoginAttempts = 0;
+  doc.failedLoginAttempts = 0;
   doc.updated_at = timestamp();
   return db.put(doc, (err, res) => {
     if (err) { return cb(null, userDoc, { message: err }); }
@@ -30,8 +30,8 @@ function onLogin(userDoc, cb) {
 
 function onLockOut(userDoc, cb) {
   const doc = userDoc;
-  doc.local.failedLoginAttempts = 0;
-  doc.local.lockedUntil = new Date(Date.now() + LOCKOUT_TIME).toJSON();
+  doc.failedLoginAttempts = 0;
+  doc.lockedUntil = new Date(Date.now() + LOCKOUT_TIME).toJSON();
   doc.updated_at = timestamp();
   const minutes = Math.round(LOCKOUT_TIME / 60);
 
@@ -40,7 +40,7 @@ function onLockOut(userDoc, cb) {
 
 function onFail(userDoc, cb) {
   const doc = userDoc;
-  doc.local.failedLoginAttempts += 1;
+  doc.failedLoginAttempts += 1;
   doc.updated_at = timestamp();
   return db.put(doc, err => cb(err, false, { error: 'Unauthorized', message: 'Invalid username or password' }));
 }
@@ -48,21 +48,21 @@ function onFail(userDoc, cb) {
 function localLogin(id, password, cb) {
   return db.get(id, (e, d) => {
     if (e) { cb(e); }
-    if (d.local && d.local.lockedUntil && d.local.lockedUntil > timestamp()) {
+    if (d.lockedUntil && d.lockedUntil > timestamp()) {
     /* Brute force timeout */
       return cb(null, false, { error: 'Unauthorized', message: 'Your account is currently locked. Please wait a few minutes and try again.' });
-    } else if (!d.local || !d.local.hash) {
+    } else if (!d.hash) {
       /* No hash to check password against  */
       return cb(null, false, { error: 'Unauthorized', message: 'This account use a social login' });
     }
 
     /* create a hash from user provided password and the stored salt */
-    return hashPassword(password, d.local.salt, (er, hash) => {
+    return hashPassword(password, d.salt, (er, hash) => {
       /* password verified */
-      if (d.local.hash === hash) { return onLogin(d, cb); }
+      if (d.hash === hash) { return onLogin(d, cb); }
 
       /* failed one too many times */
-      if (d.local.failedLoginAttempts >= MAX_FAILED_LOGINS) { return onLockOut(d, cb); }
+      if (d.failedLoginAttempts >= MAX_FAILED_LOGINS) { return onLockOut(d, cb); }
 
       /* Increment failed attempts acount */
 
