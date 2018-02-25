@@ -39,9 +39,12 @@ function login(req, res, next) {
   })(req, res, next);
 }
 
-function logout(req, res) {
+function logout(req, res, next) {
   req.logout();
-  res.json({ message: 'logged out' });
+  return req.session.destroy((err) => {
+    if (err) { return next(err); }
+    return res.json({ authenticated: req.isAuthenticated() });
+  });
 }
 
 function remove(req, res) {

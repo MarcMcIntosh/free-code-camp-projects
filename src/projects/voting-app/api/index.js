@@ -10,6 +10,7 @@ const {
   updateVotes,
   // getUserQuestions,
   getUserAccount,
+  setVote,
 } = require('./db');
 
 const router = Router();
@@ -18,21 +19,18 @@ router.use(authApi);
 // list of polls
 router.get('/', getQuestions);
 // view a poll
-router.get('/view', (req, res) => res.status(404));
+router.get('/view', (req, res) => res.status(400).send({ error: true, status: 400, message: 'parameter mnissing from url' }));
 
-router.get('/view/:question', (req, res, next) => {
+router.get('/view/:id', (req, res, next) => {
   console.log(req.path);
   next();
 }, getPoll);
 // vote
-router.post('/vote', (req, res) => {
-  console.log('user', req.user);
-  console.log('session', req.sessionID);
-  res.json(res.user || req.session);
-});
+
+router.post('/vote', setVote, (req, res) => res.json({ [req.body.question]: req.body.answer || '' }));
 
 /* Show results, redirect after voting ? */
-router.get('/results/:poll', getResults);
+router.get('/results/:id', getResults);
 /* create a poll */
 router.post('/create', requireAuth, createPoll);
 

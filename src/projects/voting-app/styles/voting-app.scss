@@ -1,7 +1,12 @@
 @import "./variables.scss";
 @import "@material/button/mixins.scss";
+@import "./checkbox.scss";
 
 .material-icons { composes: material-icons from $material-design-icons; }
+
+.answer {
+  composes: mdc-form-field from $mdc-form-field;
+}
 
 .button {
   composes: mdc-button from $mdc-button;

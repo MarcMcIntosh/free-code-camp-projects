@@ -107,7 +107,7 @@ const questionsRecieved = payload => ({ type: QUESTIONS_RECIEVED, payload });
 
 export const getQuestions = () => (dispatch) => {
   dispatch(questionsRequest());
-  return fetch('questions', { headers: { Accept: 'application/json' } }).then(handleRes).then(json => dispatch(questionsRecieved(json))).catch(error => dispatch(questionsRejected(error)));
+  return fetch('', { headers: { Accept: 'application/json' } }).then(handleRes).then(json => dispatch(questionsRecieved(json))).catch(error => dispatch(questionsRejected(error)));
 };
 
 
@@ -146,4 +146,29 @@ export const getPoll = payload => (dispatch) => {
   return fetch(`view/${payload}`, {
     headers: { Accept: 'application/json' },
   }).then(handleRes).then(json => dispatch(getPollRecieved(json))).catch(error => dispatch(getPollRejected(error)));
+};
+
+// export const SET_VOTE_TO = prefix('SET_VOTE_TO');
+export const SET_VOTE_REQUEST = prefix('SET_VOTE_REQUEST');
+export const SET_VOTE_REJECTED = prefix('SET_VOTE_REQUEST');
+export const SET_VOTE_RECIEVED = prefix('SET_VOTE_REJECTED');
+
+const setVoteRequest = payload => ({ type: SET_VOTE_REQUEST, payload });
+const setVoteRejected = payload => ({ type: SET_VOTE_REJECTED, payload });
+const setVoteRecieved = payload => ({ type: SET_VOTE_RECIEVED, payload });
+
+export const setVote = payload => (dispatch) => {
+  dispatch(setVoteRequest(payload));
+  return fetch('vote', {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body: JSON.stringify(payload),
+  }).then(handleRes).then((json) => {
+    const info = { ...json, ...payload };
+    return dispatch(setVoteRecieved(info));
+  }).catch((err) => {
+    const info = { message: err, ...payload };
+    return dispatch(setVoteRejected(info));
+  });
 };

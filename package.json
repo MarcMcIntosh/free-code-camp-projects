@@ -123,6 +123,7 @@
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "pouchdb": "^6.4.3",
     "pouchdb-find": "^6.4.2",
     "pouchdb-node": "^6.4.2",
     "pouchdb-upsert": "^2.2.0",

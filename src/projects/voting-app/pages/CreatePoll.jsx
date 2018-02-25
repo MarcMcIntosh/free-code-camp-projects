@@ -18,7 +18,7 @@ class CreatePoll extends PureComponent {
   }
   render() {
     const { authenticated, fetching, ...props } = this.props;
-    const { view, login } = this.context;
+    const { links: { view, login } } = this.context;
     if (!authenticated && !fetching) {
       return (<Redirect to={login} />);
     }

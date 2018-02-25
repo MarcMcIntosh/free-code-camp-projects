@@ -55,11 +55,11 @@ class VotingApp extends PureComponent {
 
       <Route exact path={this.links.home} component={QuestionsPage} />
 
-      <Route path={this.links.view + '/:poll'} component={PollPage} />
+      <Route path={this.links.view + '/:id'} component={PollPage} />
 
       <Route path={this.links.login} component={LoginPage} />
 
-      <Route path={this.links.logout} compoenet={LogoutPage} />
+      <Route path={this.links.logout} component={LogoutPage} />
 
       <Route path={this.links.register} component={RegisterPage} />
 

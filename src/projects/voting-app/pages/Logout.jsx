@@ -12,11 +12,11 @@ class LogOutPage extends PureComponent {
   componentDidMount() { this.props.onLogout(); }
   render() {
     const { classnames, links: { home } } = this.context;
-    const { fetching, onLogout } = this.props;
+    const { fetching, onLogout, authenticated } = this.props;
 
-    if (!this.props.authenticated) { return (<Redirect to={home} />); }
+    if (!authenticated) { return (<Redirect to={home} />); }
 
-    return (<div className={classnames('card')}>
+    return (<div className={classnames('card', 'form')}>
 
       <section className={classnames('card__primary')}>
         <h1 className={classnames('card__title')}>Signing Out</h1>

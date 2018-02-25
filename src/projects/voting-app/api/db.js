@@ -1,3 +1,4 @@
+/* eslint camelcase: off */
 const { resolve } = require('path');
 const PouchDB = require('pouchdb-node').plugin(require('pouchdb-upsert'));
 const ddocs = require('./ddocs');
@@ -91,13 +92,9 @@ function appendAnswer(req, res) {
 }
 
 function getPoll(req, res) {
-  if (Object.prototype.hasOwnProperty.call(req.params, 'question') === false) {
-    return res.status(400).json({ message: 'parameter missing form url' });
-  }
-  return db.get(req.params.question, (err, resp) => {
+  return db.get(req.params.id, (err, resp) => {
     if (err) { return res.status(err.status || 500).send(err); }
-
-    return db.query('questions/answers', { key: resp.id }, (erro, answers) => {
+    return db.query('questions/answers', { key: resp._id }, (erro, answers) => {
       if (erro) { return res.status(err.status || 500).send(erro); }
       const obj = Object.assign({}, resp, { answers: answers.rows });
       return res.json(obj);
@@ -106,12 +103,7 @@ function getPoll(req, res) {
 }
 
 function getResults(req, res) {
-  /* use this after sucessfuly voting */
-  if (Object.prototype.hasOwnProperty.call(req.params, 'question') === false) {
-    return res.status(400).json({ message: 'parameter missing form url' });
-  }
-
-  return db.get(req.params.question, (err, doc) => {
+  return db.get(req.params.id, (err, doc) => {
     if (err) { res.status(err.status || 500).send(err); }
 
     return db.query('questions/answers', {
@@ -185,11 +177,69 @@ function getUserAccount(req, res) {
     return db.query('votes/created_by', { key: user.id }, (er, votes) => {
       if (er) { res.status(500); }
 
-      user.votes = votes.rows;
+      user.votes = votes.rows.map(d => d.value).reduce((a, b) => {
+        const { question, answer } = b;
+        return Object.assign({}, a, { [question]: answer });
+      }, {});
 
       return res.json(user);
     });
   });
 }
 
-module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions, getUserAccount };
+function createVote({ question = '', answer = '', created_by = '', created_at = 0 } = {}) {
+  const timestamp = created_at || new Date().toJSON();
+  return {
+    type: 'vote',
+    created_by,
+    created_at: timestamp,
+    updated_at: timestamp,
+    question,
+    answer,
+  };
+}
+
+function setVote(req, res, next) {
+  const id = req.user && req.user._id ? req.user._id : req.sessionID;
+
+  const hasQuestion = Object.prototype.hasOwnProperty.call(req.body, 'question');
+
+  if (!id || !hasQuestion) { return res.status(400); }
+
+  const question = req.body.question;
+  const answer = req.body.answer === undefined ? '' : req.body.answer;
+
+  return db.query('votes/created_by_on_question', {
+    key: [id, question],
+    include_docs: true,
+  }, (err, docs) => {
+    if (err) { return next(err); }
+
+    const timestamp = new Date().toJSON();
+
+    if (docs.rows.length === 0) {
+      /* create a new doc */
+      const doc = createVote({ question, answer, created_by: id, created_at: timestamp });
+
+      return db.post(doc, erro => next(erro));
+    } else if (docs.rows.length === 1) {
+      /* update a single doc */
+      const doc = docs.rows[0].doc;
+      doc.answer = answer;
+      doc.updated_at = timestamp;
+
+      return db.put(doc, erro => next(erro));
+    }
+    /* Multiple docs on same question for user */
+    const moreDocs = docs.rows.map(d => d.doc).sort((a, b) => a.updated_at < b.updated_at).map((d, i) => {
+      const doc = d;
+      doc.updated_at = timestamp;
+      if (i === 0) { doc.answer = answer; } else { doc._deleted = true; }
+      return doc;
+    });
+
+    return db.bulkDocs(moreDocs, erro => next(erro));
+  });
+}
+
+module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions, getUserAccount, setVote };

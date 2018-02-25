@@ -5,7 +5,16 @@ const votes = {
   views: {
     created_by: {
       map: function(doc) {
-        if (doc.type === 'vote' && doc.created_by) { emit(doc.created_by); }
+        if (doc.type === 'vote' && doc.created_by && doc.question) {
+          emit(doc.created_by, { question: doc.question, answer: doc.answer || '' });
+        }
+      }.toString(),
+    },
+    created_by_on_question: {
+      map: function(doc) {
+        if (doc.type === 'vote' && doc.question && doc.created_by) {
+          emit([doc.created_by, doc.question]);
+        }
       }.toString(),
     },
     answer: {

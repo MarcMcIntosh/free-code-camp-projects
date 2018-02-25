@@ -33,13 +33,17 @@ export const DEFAULT_STATE = {
   // votes should be key value pairs of quesiton._id:answer._id;
   votes: {},
 
-  poll: {},
+  poll: {
+    _id: '',
+    question: '',
+    answers: [],
+  },
 };
 
 export default function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case TOGGLE_MENU: return { ...state, menuIsOpen: !state.menuIsOpen };
-    case QUESTIONS_RECIEVED: return { ...state, questions: action.payload };
+    case QUESTIONS_RECIEVED: return { ...state, fetching: false, questions: action.payload };
 
     case QUESTIONS_REJECTED: return { ...state, fetching: false };
     case GET_POLL_RECIEVED: return { ...state, fetching: false, poll: action.payload };
