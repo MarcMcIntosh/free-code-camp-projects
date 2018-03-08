@@ -1,21 +1,31 @@
-const path = require('path');
+const { resolve } = require('path');
+/* this stops emitter warnings */
+require('events').EventEmitter.defaultMaxListeners = 0;
+
+
 const session = require('express-session');
 const PouchSession = require('session-pouchdb-store');
-// const PouchDB = require('pouchdb-node');
-// const PouchDB = require('pouchdb');
+/* const SQLiteStore = require('connect-sqlite3')(session);
+* CLustering issue,
+* Error Code SQLITE_LOCKED (6): Database Is Locked
+* https://github.com/rawberg/connect-sqlite3/issues/15
+*
+* sqlite3 sessions.db 'pragma journal_mode=wal;'
+* const FileStore = require('session-file-store')(session);
+*/
 
-const DATA_DIR = path.resolve(__dirname, '..', '..', '..', 'data', 'sessions');
+const DATA_DIR = resolve(__dirname, '..', '..', '..', 'data', 'sessions');
+
 const SECRET_KEY = require('./key');
-
-// const sessionDB = new PouchDB(DATA_DIR, { adapter: 'leveldb' });
-// const sessionDB = new PouchDB(DATA_DIR);
 
 const MAX_AGE = 1000 * 60 * 60 * 24 * 3; // 3 days,
 module.exports = session({
-  secret: SECRET_KEY,
-  // resave: true,
   resave: false,
   saveUninitialized: true,
-  maxAge: MAX_AGE,
+  rolling: true,
+  secret: SECRET_KEY,
   store: new PouchSession(DATA_DIR),
+  // store: new FileStore({ path: DATA_DIR }),
+  // store: new SQLiteStore({ dir: DATA_DIR, db: 'sessions.db' }),
+  cookie: { maxAge: MAX_AGE },
 });

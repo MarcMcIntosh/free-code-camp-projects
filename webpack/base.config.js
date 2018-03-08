@@ -62,8 +62,9 @@ const externals = ({
 } = {}) => {
   if (server && production) {
     return [
-      // 'leveldown',
-      'pouchdb-node',
+      'leveldown',
+      // 'pouchdb-node',
+      // 'sqlite3',
     ];
   } else if (server && !production) {
     return [externalsProd];

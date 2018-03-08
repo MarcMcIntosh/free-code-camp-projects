@@ -150,8 +150,8 @@ export const getPoll = payload => (dispatch) => {
 
 // export const SET_VOTE_TO = prefix('SET_VOTE_TO');
 export const SET_VOTE_REQUEST = prefix('SET_VOTE_REQUEST');
-export const SET_VOTE_REJECTED = prefix('SET_VOTE_REQUEST');
-export const SET_VOTE_RECIEVED = prefix('SET_VOTE_REJECTED');
+export const SET_VOTE_REJECTED = prefix('SET_VOTE_REJECTED');
+export const SET_VOTE_RECIEVED = prefix('SET_VOTE_RECIEVED');
 
 const setVoteRequest = payload => ({ type: SET_VOTE_REQUEST, payload });
 const setVoteRejected = payload => ({ type: SET_VOTE_REJECTED, payload });
@@ -162,13 +162,6 @@ export const setVote = payload => (dispatch) => {
   return fetch('vote', {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    credentials: 'same-origin',
     body: JSON.stringify(payload),
-  }).then(handleRes).then((json) => {
-    const info = { ...json, ...payload };
-    return dispatch(setVoteRecieved(info));
-  }).catch((err) => {
-    const info = { message: err, ...payload };
-    return dispatch(setVoteRejected(info));
-  });
+  }).then(handleRes).then(json => dispatch(setVoteRecieved(json))).catch(err => dispatch(setVoteRejected(err)));
 };

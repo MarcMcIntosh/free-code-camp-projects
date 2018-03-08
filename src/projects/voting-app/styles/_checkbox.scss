@@ -3,15 +3,23 @@
 .checkbox {
   composes: mdc-checkbox from $mdc-checkbox;
 
+  &--disabled {
+    composes: mdc-checkbox--disabled from $mdc-checkbox;
+  }
+
   &__background { composes: mdc-checkbox__background from $mdc-checkbox; }
 
-  &__native-control { composes: mdc-checkbox__native-control from $mdc-checkbox; }
+  &__native-control {
+    composes: mdc-checkbox__native-control from $mdc-checkbox;
+
+    // &:indeterminate {}
+  }
 
   &__mixedmark { composes: mdc-checkbox__mixedmark from $mdc-checkbox; }
 
   &__checkmark {
     composes: mdc-checkbox__checkmark from $mdc-checkbox;
 
-    &-path { composes: mdc-checkbox__checkmark-path from $mdc-checkbox; }
+    &__path { composes: mdc-checkbox__checkmark__path from $mdc-checkbox; }
   }
 }

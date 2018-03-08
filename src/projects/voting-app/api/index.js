@@ -21,13 +21,9 @@ router.get('/', getQuestions);
 // view a poll
 router.get('/view', (req, res) => res.status(400).send({ error: true, status: 400, message: 'parameter mnissing from url' }));
 
-router.get('/view/:id', (req, res, next) => {
-  console.log(req.path);
-  next();
-}, getPoll);
-// vote
+router.get('/view/:id', getPoll);
 
-router.post('/vote', setVote, (req, res) => res.json({ [req.body.question]: req.body.answer || '' }));
+router.post('/vote', setVote, (req, res) => res.json({ question: req.body.question, answer: req.body.answer || '' }));
 
 /* Show results, redirect after voting ? */
 router.get('/results/:id', getResults);

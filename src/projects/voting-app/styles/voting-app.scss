@@ -4,8 +4,37 @@
 
 .material-icons { composes: material-icons from $material-design-icons; }
 
+.poll {
+  composes: mdc-card from $mdc-card;
+  max-width: 600px;
+  margin: auto;
+
+  &__primary {
+    composes: mdc-card__primary from $mdc-card;
+    padding: 11px !important;
+  }
+
+  &__question { composes: mdc-card__title mdc-card__title--large from $mdc-card; }
+
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+    justify-content: space-evenly;
+  }
+
+  &__action { composes: mdc-card__action from $mdc-card; }
+}
+
 .answer {
   composes: mdc-form-field from $mdc-form-field;
+  composes: mdc-ripple-surface from $mdc-ripple;
+  display: flex !important;
+
+  &__label {
+    width: 100%;
+    // height: 100%;
+    padding: 4px;
+    cursor: pointer;
+  }
 }
 
 .button {
@@ -71,7 +100,11 @@
 
   &__subtitle { composes: mdc-card__subtitle from $mdc-card; }
 
-  &__actions { composes: mdc-card__actions from $mdc-card; }
+  &__actions {
+    composes: mdc-card__actions from $mdc-card;
+
+    &--space-evenly { justify-content: space-evenly; }
+  }
 
   &__supporting-text { composes: mdc-card__supporting-text from $mdc-card; }
 

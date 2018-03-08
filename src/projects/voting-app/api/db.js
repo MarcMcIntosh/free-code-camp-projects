@@ -143,15 +143,26 @@ function getQuestions(req, res) {
 }
 
 function updateVotes(req, res, next) {
+  if (Object.prototype.hasOwnProperty.call(req.session, 'votesUpdated') && req.session.votesUpdated) {
+    return next();
+  }
   return db.query('votes/created_by', { key: req.sessionID, include_docs: true }, (err, resp) => {
-    if (err) { res.json(err); }
-    if (resp.rows.length === 0) { return next(); }
+    if (err) {
+      req.session.votesUpdated = false;
+      return next(err);
+    } else if (resp.rows.length === 0) {
+      req.session.votesUpdated = true;
+      return next();
+    }
     const timestamp = new Date().toJSON();
     const docs = resp.rows.map(d => Object.assign({}, d.doc, {
       updated_at: timestamp,
       created_by: req.user._id,
     }));
-    return db.bulkDocs(docs, erro => next(erro));
+    return db.bulkDocs(docs, (erro) => {
+      req.session.votesUpdated = true;
+      return next(erro);
+    });
   });
 }
 
@@ -201,7 +212,6 @@ function createVote({ question = '', answer = '', created_by = '', created_at = 
 
 function setVote(req, res, next) {
   const id = req.user && req.user._id ? req.user._id : req.sessionID;
-
   const hasQuestion = Object.prototype.hasOwnProperty.call(req.body, 'question');
 
   if (!id || !hasQuestion) { return res.status(400); }

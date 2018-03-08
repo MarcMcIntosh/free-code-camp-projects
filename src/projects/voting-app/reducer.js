@@ -19,6 +19,9 @@ import {
   GET_POLL_REQUEST,
   GET_POLL_RECIEVED,
   GET_POLL_REJECTED,
+  SET_VOTE_REQUEST,
+  SET_VOTE_REJECTED,
+  SET_VOTE_RECIEVED,
 } from './actions';
 
 export const DEFAULT_STATE = {
@@ -32,7 +35,9 @@ export const DEFAULT_STATE = {
   // answers: {},
   // votes should be key value pairs of quesiton._id:answer._id;
   votes: {},
-
+  submittingVote: false,
+  vottingError: '',
+  error: '',
   poll: {
     _id: '',
     question: '',
@@ -62,9 +67,22 @@ export default function reducer(state = DEFAULT_STATE, action) {
 
     case REFRESH_RECIEVED: return { ...state, ...action.payload, authenticated: true, fetching: false };
 
-    case REFRESH_REJECTED:
+    case REFRESH_REJECTED: return { ...state, authenticated: false, fetching: false, username: '', id: '' };
+
     case LOGOUT_REJECTED:
-    case LOGOUT_RECIEVED: return { ...state, authenticated: false, fetching: false, username: '', id: '', answers: {} };
+    case LOGOUT_RECIEVED: return { ...state, authenticated: false, fetching: false, username: '', id: '', answers: {}, error: action.payload };
+
+    case SET_VOTE_REQUEST: return { ...state, submittingVote: true, vottingError: '' };
+
+    case SET_VOTE_REJECTED: return { ...state, submittingVote: false, vottingError: action.payload };
+
+    case SET_VOTE_RECIEVED: {
+      const votes = { ...state.votes };
+      const { question, answer } = action.payload;
+      const hasVoted = Object.prototype.hasOwnProperty.call(votes, question);
+      votes[question] = (hasVoted && votes[question] === answer) ? '' : answer;
+      return { ...state, submittingVote: false, vottingError: '', votes };
+    }
 
     case REGISTER_REJECTED:
     case LOGIN_REJECTED: return { ...state, fetching: false, authenticated: false };
