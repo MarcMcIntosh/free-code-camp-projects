@@ -165,3 +165,17 @@ export const setVote = payload => (dispatch) => {
     body: JSON.stringify(payload),
   }).then(handleRes).then(json => dispatch(setVoteRecieved(json))).catch(err => dispatch(setVoteRejected(err)));
 };
+
+export const RESULTS_REQUEST = prefix('RESULTS_REQUEST');
+export const RESULTS_RECIEVED = prefix('RESULTS_RECIEVED');
+export const RESULTS_REJECTED = prefix('RESULTS_REJECTED');
+
+const resultsRequest = payload => ({ type: RESULTS_REQUEST, payload });
+const resultsRecieved = payload => ({ type: RESULTS_RECIEVED, payload });
+const resultsRejected = payload => ({ type: RESULTS_REJECTED, payload });
+
+export const getResults = payload => (dispatch) => {
+  dispatch(resultsRequest(payload));
+  const addr = 'results/' + payload;
+  return fetch(addr).then(handleRes).then(json => dispatch(resultsRecieved(json))).catch(err => dispatch(resultsRejected(err)));
+};

@@ -22,6 +22,9 @@ import {
   SET_VOTE_REQUEST,
   SET_VOTE_REJECTED,
   SET_VOTE_RECIEVED,
+  RESULTS_REQUEST,
+  RESULTS_RECIEVED,
+  RESULTS_REJECTED,
 } from './actions';
 
 export const DEFAULT_STATE = {
@@ -43,6 +46,11 @@ export const DEFAULT_STATE = {
     question: '',
     answers: [],
   },
+  results: {
+    _id: '',
+    question: '',
+    answers: [],
+  },
 };
 
 export default function reducer(state = DEFAULT_STATE, action) {
@@ -60,22 +68,20 @@ export default function reducer(state = DEFAULT_STATE, action) {
     case CREATE_POLL_REQUEST:
     case QUESTIONS_REQUEST:
     case GET_POLL_REQUEST:
-    case REFRESH_REQUEST: return { ...state, fetching: true };
+    case REFRESH_REQUEST:
+    case RESULTS_REQUEST: return { ...state, fetching: true };
 
     case REGISTER_RECIEVED:
     case LOGIN_RECIEVED: return { ...state, authenticated: true, fetching: false };
 
     case REFRESH_RECIEVED: return { ...state, ...action.payload, authenticated: true, fetching: false };
-
     case REFRESH_REJECTED: return { ...state, authenticated: false, fetching: false, username: '', id: '' };
 
     case LOGOUT_REJECTED:
     case LOGOUT_RECIEVED: return { ...state, authenticated: false, fetching: false, username: '', id: '', answers: {}, error: action.payload };
 
     case SET_VOTE_REQUEST: return { ...state, submittingVote: true, vottingError: '' };
-
     case SET_VOTE_REJECTED: return { ...state, submittingVote: false, vottingError: action.payload };
-
     case SET_VOTE_RECIEVED: {
       const votes = { ...state.votes };
       const { question, answer } = action.payload;
@@ -83,6 +89,9 @@ export default function reducer(state = DEFAULT_STATE, action) {
       votes[question] = (hasVoted && votes[question] === answer) ? '' : answer;
       return { ...state, submittingVote: false, vottingError: '', votes };
     }
+
+    case RESULTS_RECIEVED: return { ...state, fetching: false, results: action.payload };
+    case RESULTS_REJECTED: return { ...state, fetching: false, error: action.payload };
 
     case REGISTER_REJECTED:
     case LOGIN_REJECTED: return { ...state, fetching: false, authenticated: false };

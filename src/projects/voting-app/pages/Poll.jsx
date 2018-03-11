@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { func, bool, string, shape, array, object } from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getPoll, setVote } from '../actions';
 // import TakePollForm from '../components/Forms/TakePoll';
 import Answer from '../components/Poll/Answer';
@@ -18,13 +19,13 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch, {
   match: { params: { id } },
 }) => ({
-  fetchPoll: () => dispatch(getPoll(id)),
+  fetchData: () => dispatch(getPoll(id)),
   onSetVote: payload => dispatch(setVote(payload)),
 });
 
 class Poll extends PureComponent {
   // static function to call server-side
-  // static fetchData(store) { store.dispatch(this.props.fetchPoll()); }
+  // static fetchData(store) { store.dispatch(this.props.fetchData()); }
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,7 @@ class Poll extends PureComponent {
 
   componentDidMount() {
     if (this.props._id !== this.props.match.params.id && !this.props.fetching) {
-      this.props.fetchPoll();
+      this.props.fetchData();
     }
   }
   handleChange(event) {
@@ -51,7 +52,7 @@ class Poll extends PureComponent {
       answers,
       submittingVote,
     } = this.props;
-    const { classnames } = this.context;
+    const { classnames, links: { results } } = this.context;
 
     /* Only vote once */
     return (<div className={classnames('poll')}>
@@ -75,7 +76,7 @@ class Poll extends PureComponent {
       />))}</section>
 
       <section className={classnames('card__actions', 'card__actions--space-evenly')}>
-        <button className={classnames('card__action')}>Results</button>
+        <Link className={classnames('card__action')} to={results + '/' + this.props._id}>Results</Link>
         {this.props.authenticated && (<button className={classnames('card__action')} disabled={this.props.votes[this.props._id]}>Add answer</button>)}
       </section>
     </div>);
@@ -83,7 +84,7 @@ class Poll extends PureComponent {
 }
 
 Poll.propTypes = {
-  fetchPoll: func.isRequired,
+  fetchData: func.isRequired,
   fetching: bool.isRequired,
   authenticated: bool.isRequired,
   submittingVote: bool.isRequired,
@@ -94,11 +95,14 @@ Poll.propTypes = {
   onSetVote: func.isRequired,
   match: shape({
     params: shape({ id: string.isRequired }).isRequired,
-    url: string.isRequired,
+    // url: string.isRequired,
   }).isRequired,
   // match: shape({ params: shape({ poll: string.isRequired }).isRequired }).isRequired,
 };
 
-Poll.contextTypes = { classnames: func.isRequired };
+Poll.contextTypes = {
+  classnames: func.isRequired,
+  links: shape({ results: string.isRequired }),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Poll);

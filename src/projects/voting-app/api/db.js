@@ -125,7 +125,16 @@ function getResults(req, res) {
           [b.key]: b.value,
         }), {});
 
-        const ans = Object.entries(answers).map(([k, v]) => Object.assign({}, v, { votes: obj[k] || 0 }));
+        const ans = Object.entries(answers).map(([k, v]) => Object.assign({}, v, { votes: obj[k] || 0 })).sort((a, b) => {
+          if (a.votes !== b.votes) {
+            return b.votes - a.votes;
+          } else if (a.created_at > b.created_at) {
+            return -1;
+          } else if (a.created_at < b.created_at) {
+            return 1;
+          }
+          return 0;
+        });
 
         const result = Object.assign({}, doc, { answers: ans });
 

@@ -20,12 +20,12 @@ const SECRET_KEY = require('./key');
 
 const MAX_AGE = 1000 * 60 * 60 * 24 * 3; // 3 days,
 module.exports = session({
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   rolling: true,
   secret: SECRET_KEY,
+  cookie: { maxAge: MAX_AGE },
   store: new PouchSession(DATA_DIR),
   // store: new FileStore({ path: DATA_DIR }),
   // store: new SQLiteStore({ dir: DATA_DIR, db: 'sessions.db' }),
-  cookie: { maxAge: MAX_AGE },
 });

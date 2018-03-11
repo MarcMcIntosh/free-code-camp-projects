@@ -4,6 +4,8 @@
 
 .material-icons { composes: material-icons from $material-design-icons; }
 
+.chart { width: 316px; }
+
 .poll {
   composes: mdc-card from $mdc-card;
   max-width: 600px;
