@@ -32,11 +32,7 @@ class Poll extends PureComponent {
     this.isChecked = this.isChecked.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props._id !== this.props.match.params.id && !this.props.fetching) {
-      this.props.fetchData();
-    }
-  }
+  componentDidMount() { this.props.fetchData(); }
   handleChange(event) {
     this.props.onSetVote({ question: event.target.name, answer: event.target.value });
   }
@@ -52,7 +48,7 @@ class Poll extends PureComponent {
       answers,
       submittingVote,
     } = this.props;
-    const { classnames, links: { results } } = this.context;
+    const { classnames, links: { results, addAnswer } } = this.context;
 
     /* Only vote once */
     return (<div className={classnames('poll')}>
@@ -77,7 +73,11 @@ class Poll extends PureComponent {
 
       <section className={classnames('card__actions', 'card__actions--space-evenly')}>
         <Link className={classnames('card__action')} to={results + '/' + this.props._id}>Results</Link>
-        {this.props.authenticated && (<button className={classnames('card__action')} disabled={this.props.votes[this.props._id]}>Add answer</button>)}
+        {this.props.authenticated && (<Link
+          className={classnames('card__action')}
+          disabled={this.props.votes[this.props._id]}
+          to={addAnswer + '/' + this.props._id}
+        >Add answer</Link>)}
       </section>
     </div>);
   }
@@ -85,7 +85,6 @@ class Poll extends PureComponent {
 
 Poll.propTypes = {
   fetchData: func.isRequired,
-  fetching: bool.isRequired,
   authenticated: bool.isRequired,
   submittingVote: bool.isRequired,
   answers: array.isRequired,
@@ -93,10 +92,6 @@ Poll.propTypes = {
   question: string.isRequired,
   votes: object.isRequired,
   onSetVote: func.isRequired,
-  match: shape({
-    params: shape({ id: string.isRequired }).isRequired,
-    // url: string.isRequired,
-  }).isRequired,
   // match: shape({ params: shape({ poll: string.isRequired }).isRequired }).isRequired,
 };
 

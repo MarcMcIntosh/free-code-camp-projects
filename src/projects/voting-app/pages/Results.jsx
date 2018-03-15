@@ -55,10 +55,6 @@ ResultsPage.propTypes = {
   _id: string.isRequired,
   question: string.isRequired,
   answers: array.isRequired,
-  /* match: shape({
-    params: shape({ id: string.isRequired }).isRequired,
-    url: string.isRequired,
-  }).isRequired, */
 };
 
 ResultsPage.contextTypes = {

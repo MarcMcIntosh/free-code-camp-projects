@@ -12,6 +12,8 @@ import PollPage from './pages/Poll';
 import QuestionsPage from './pages/Questions';
 import LogoutPage from './pages/Logout';
 import ResultsPage from './pages/Results';
+import AddAnswerPage from './pages/AddAnswer';
+import UserPage from './pages/User';
 import TopNav from './components/TopNav';
 // import HandleRedirect from './components/HandleRedirect';
 
@@ -36,8 +38,9 @@ class VotingApp extends PureComponent {
       register: path + '/register',
       create: path + '/create',
       view: path + '/view',
-      user: path,
+      user: path + '/user',
       results: path + '/results',
+      addAnswer: path + '/add-answer',
       // poll: '/question',
     };
   }
@@ -59,6 +62,8 @@ class VotingApp extends PureComponent {
 
       <Route path={this.links.view + '/:id'} component={PollPage} />
 
+      <Route path={this.links.addAnswer + '/:id'} component={AddAnswerPage} />
+
       <Route path={this.links.login} component={LoginPage} />
 
       <Route path={this.links.logout} component={LogoutPage} />
@@ -68,6 +73,8 @@ class VotingApp extends PureComponent {
       <Route path={this.links.create} component={CreatePoll} />
 
       <Route path={this.links.results + '/:id'} component={ResultsPage} />
+
+      <Route path={this.links.user} component={UserPage} />
 
     </div>);
   }

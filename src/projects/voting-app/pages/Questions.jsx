@@ -15,7 +15,8 @@ class QuestionsPage extends PureComponent {
   render() {
     const { classnames } = this.context;
     return (<div>
-      {this.props.fetching ? (<p className={classnames('loader')}>loading</p>) : (<QuestionsList questions={this.props.questions} />)}
+      {this.props.fetching && (<p className={classnames('loader')}>loading</p>)}
+      <QuestionsList questions={this.props.questions} />
     </div>);
   }
 }

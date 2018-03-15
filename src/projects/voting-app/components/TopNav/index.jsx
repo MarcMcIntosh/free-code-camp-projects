@@ -20,7 +20,7 @@ class TopNav extends PureComponent {
     }
   }
   render() {
-    const { classnames, links: { login, logout, home } } = this.context;
+    const { classnames, links: { login, logout, home, create, user } } = this.context;
     const { menuIsOpen, onToggleMenu, authenticated } = this.props;
 
     const msg = authenticated ? 'Sign-out' : 'Sign-in';
@@ -41,6 +41,10 @@ class TopNav extends PureComponent {
                 <Link to="/" tabIndex="0" role="menuitem" title="Back to App page" className={classnames('menu__item')}>Go back to apps</Link>
 
                 <li className={classnames('menu__divider')} />
+
+                {authenticated && (<Link to={create} tabIndex="0" role="menuitem" title="Ask a question" className={classnames('menu__item')}>Ask a question</Link>)}
+
+                {authenticated && (<Link to={user} tabIndex="0" role="menuitem" title="Account" className={classnames('menu__item')}>Account</Link>)}
 
                 <Link to={authenticated ? logout : login} tabIndex="0" role="menuitem" title={msg} className={classnames('menu__item')}>{msg}</Link>
 
@@ -75,6 +79,7 @@ TopNav.contextTypes = {
     login: string.isRequired,
     logout: string.isRequired,
     home: string.isRequired,
+    create: string.isRequired,
   }).isRequired,
   classnames: func.isRequired,
 };

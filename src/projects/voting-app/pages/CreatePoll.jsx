@@ -27,10 +27,7 @@ class CreatePoll extends PureComponent {
 
       <CreatePollForm
         {...props}
-        onSubmitSuccess={(res, dispatch, { history }) => {
-          dispatch(refresh());
-          history.push(view + '/' + res.id);
-        }}
+        onSubmitSuccess={(res, dispatch, { history }) => history.push(view + '/' + res.payload.id)}
       />
     </div>);
   }

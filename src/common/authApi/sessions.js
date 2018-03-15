@@ -19,13 +19,16 @@ const DATA_DIR = resolve(__dirname, '..', '..', '..', 'data', 'sessions');
 const SECRET_KEY = require('./key');
 
 const MAX_AGE = 1000 * 60 * 60 * 24 * 3; // 3 days,
+
+const storeOptions = { maxIdle: MAX_AGE, scavenge: 5 * 60 * 1000, purge: MAX_AGE };
+
 module.exports = session({
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   rolling: true,
   secret: SECRET_KEY,
   cookie: { maxAge: MAX_AGE },
-  store: new PouchSession(DATA_DIR),
+  store: new PouchSession(DATA_DIR, storeOptions),
   // store: new FileStore({ path: DATA_DIR }),
   // store: new SQLiteStore({ dir: DATA_DIR, db: 'sessions.db' }),
 });

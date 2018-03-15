@@ -4,39 +4,60 @@ import {
   func,
   string,
   shape,
+  array,
   // object,
 } from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { refresh } from '../actions';
 
-const mapStateToProps = ({ authenticated, user }) => ({ authenticated, user });
+const mapStateToProps = ({
+  votingApp: { authenticated, username, questionsAsked },
+}) => ({ authenticated, username, questionsAsked });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUser: () => dispatch(refresh()),
+  fetchData: () => dispatch(refresh()),
 });
 
 class UserPage extends PureComponent {
-  componentDidMount() {
-    /* stuff */
-    const { authenticated, history, fetchUser } = this.props;
-    const { links: { login } } = this.context;
-
-    if (!authenticated) { history.push(login); } else { fetchUser(); }
-  }
+  componentDidMount() { this.props.fetchData(); }
   render() {
-    return (<div>More stuff</div>);
+    const { links: { login }, classnames } = this.context;
+    const { authenticated, username, questionsAsked } = this.props;
+    return (!authenticated) ? (<Redirect to={login} />) : (<div>
+      <div className={classnames('card')}>
+        <header className={classnames('card__primary')}>
+          <h1 className={classnames('card__title')}>{username}</h1>
+        </header>
+        <section className={classnames('card__actions')}>
+          <button className={classnames('card__action')}>Ask Question</button>
+          <button className={classnames('card__action')}>Delete Account</button>
+        </section>
+      </div>
+
+      {questionsAsked.map(d => (<div key={d._id} className={classnames('card')}>
+        <section className={classnames('card__primary')}>
+          <h1 className={classnames('card__title')}>{d.question}</h1>
+          <h2 className={classnames('card__subtitle')}>
+            {new Date(d.created_by).toLocaleDateString()}
+          </h2>
+        </section>
+      </div>))}
+    </div>);
   }
 }
 
 UserPage.propTypes = {
   authenticated: bool.isRequired,
-  history: shape({ push: func.isRequired }).isRequired,
+  username: string.isRequired,
   // user: object.isRequired,
-  fetchUser: func.isRequired,
+  fetchData: func.isRequired,
+  questionsAsked: array.isRequired,
 };
 
 UserPage.contextTypes = {
   links: shape({ login: string.isRequired }).isRequired,
+  classnames: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

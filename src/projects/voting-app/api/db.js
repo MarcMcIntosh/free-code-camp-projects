@@ -7,6 +7,8 @@ const validateNewAnswer = require('../util/validateNewAnswer');
 
 const DATA_DIR = resolve(__dirname, '..', '..', '..', '..', 'data', 'voting-app');
 
+// PouchDB.debug.enable('*');
+
 const db = new PouchDB(DATA_DIR, { auto_compaction: true });
 
 ddocs.forEach((d, i, a) => {
@@ -70,21 +72,17 @@ function createPoll(req, res) {
 
 function appendAnswer(req, res) {
   const errors = validateNewAnswer(req.body);
-  if (Object.keys(errors) > 0) { return res.status(400).json({ errors }); }
-
-  if (!req.user || !req.user.created_by) {
-    return res.status(401).json({ message: 'Unauthorised user', data: req.user });
-  }
+  if (Object.keys(errors) > 0) { return res.json({ validationErrors: errors }); }
 
   return db.get(req.body.question, (err, resp) => {
     if (err) { return res.status(err.status || 500).send(err); }
     const doc = createAnswerDoc({
-      question: resp.id,
+      question: resp._id,
       answer: req.body.answer,
       timestamp: new Date().toJSON(),
-      user: req.user._id,
+      created_by: req.user._id,
     });
-    return db.put(doc, (erro, respo) => {
+    return db.post(doc, (erro, respo) => {
       if (erro) { return res.status(erro.status || 400).send(erro); }
       return res.json(respo);
     });
@@ -107,7 +105,7 @@ function getResults(req, res) {
     if (err) { res.status(err.status || 500).send(err); }
 
     return db.query('questions/answers', {
-      key: doc.id,
+      key: doc._id,
       include_docs: true,
     }, (erro, resp) => {
       if (erro) { return res.status(erro.status || 500).send(erro); }
@@ -190,10 +188,17 @@ function getUserAccount(req, res) {
     username: req.user.username,
   };
 
-  return db.query('questions/created_by', { key: user.id }, (e, questions) => {
+  return db.query('questions/created_by', { key: user.id, include_docs: true }, (e, questions) => {
     if (e) { res.status(500); }
 
-    user.questionsAsked = questions.rows;
+    user.questionsAsked = questions.rows.map(d => d.doc).sort((a, b) => {
+      if (a.updated_at < b.updated_at) {
+        return 1;
+      } else if (a.updated_at > b.updated_at) {
+        return -1;
+      }
+      return 0;
+    });
     return db.query('votes/created_by', { key: user.id }, (er, votes) => {
       if (er) { res.status(500); }
 
@@ -261,4 +266,13 @@ function setVote(req, res, next) {
   });
 }
 
-module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions, getUserAccount, setVote };
+function deleteQuestion(req, res, next) {
+  return db.get(req.params.id, (err, doc) => {
+    if (err) { return res.status(err.status || 500).send(err); }
+    if (req.user._id !== doc.created_by) { return res.status(401).json({ message: 'user id does not match document created_by' }); }
+    const updated = Object.assign({}, doc, { _deleted: true });
+    return db.put(updated, erro => next(erro));
+  });
+}
+
+module.exports = { createPoll, appendAnswer, getPoll, getResults, getQuestions, updateVotes, getUserQuestions, getUserAccount, setVote, deleteQuestion };

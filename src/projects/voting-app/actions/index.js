@@ -112,12 +112,12 @@ export const getQuestions = () => (dispatch) => {
 
 
 export const CREATE_POLL_REQUEST = prefix('CREATE_POLL_REQUEST');
-// export const CREATE_POLL_REJECTED = prefix('CREATE_POLL_REJECTED');
-// export const CREATE_POLL_RECIEVED = prefix('CREATE_POLL_RECIEVED');
+export const CREATE_POLL_REJECTED = prefix('CREATE_POLL_REJECTED');
+export const CREATE_POLL_RECIEVED = prefix('CREATE_POLL_RECIEVED');
 
 const createPollRequest = payload => ({ type: CREATE_POLL_REQUEST, payload });
-// const createPollRejected = payload => ({ type: CREATE_POLL_REJECTED, payload });
-// const createPollRecieved = payload => ({ type: CREATE_POLL_RECIEVED, payload });
+const createPollRejected = payload => ({ type: CREATE_POLL_REJECTED, payload });
+const createPollRecieved = payload => ({ type: CREATE_POLL_RECIEVED, payload });
 
 export const createPoll = payload => (dispatch) => {
   dispatch(createPollRequest(payload));
@@ -126,14 +126,19 @@ export const createPoll = payload => (dispatch) => {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
     credentials: 'same-origin',
     body: JSON.stringify(payload),
-  }).then(handleRes).catch((error) => { throw new SubmissionError(error); });
+  }).then(handleRes).then(json => dispatch(createPollRecieved(json))).catch((error) => {
+    dispatch(createPollRejected(error));
+    throw new SubmissionError(error);
+  });
 };
 
 
 export const GET_POLL_REQUEST = prefix('GET_POLL_REQUEST');
 export const GET_POLL_RECIEVED = prefix('GET_POLL_RECIEVED');
 export const GET_POLL_REJECTED = prefix('GET_POLL_REJECTED');
+export const REMOVE_POLL = prefix('REMOVE_POLL');
 
+export const removePoll = () => ({ type: REMOVE_POLL });
 const getPollRequest = payload => ({ type: GET_POLL_REQUEST, payload });
 const getPollRecieved = payload => ({ type: GET_POLL_RECIEVED, payload });
 const getPollRejected = payload => ({ type: GET_POLL_REJECTED, payload });
@@ -178,4 +183,24 @@ export const getResults = payload => (dispatch) => {
   dispatch(resultsRequest(payload));
   const addr = 'results/' + payload;
   return fetch(addr).then(handleRes).then(json => dispatch(resultsRecieved(json))).catch(err => dispatch(resultsRejected(err)));
+};
+
+export const APPEND_ANSWER_REQUEST = prefix('APPEND_ANSWER_REQUEST');
+// export const APPEND_ANSWER_RECIEVED = prefix('APPEND_ANSWER_RECIEVED');
+// export const APPEND_ANSWER_REJECTED = prefix('APPEND_ANSWER_REJECTED');
+
+const appendAnswerRequest = payload => ({ type: APPEND_ANSWER_REQUEST, payload });
+// const appendAnswerRecieved = payload => ({ type: APPEND_ANSWER_RECIEVED, payload });
+// const appendAnswerRejected = payload => ({ type: APPEND_ANSWER_REJECTED, payload });
+
+export const appendAnswer = payload => (dispatch) => {
+  dispatch(appendAnswerRequest(payload));
+  return fetch('add-answer', {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).then(handleRes).catch((err) => {
+    throw new SubmissionError(err);
+  });
+  // .then(json => dispatch(appendAnswerRecieved(json))).catch(err => dispatch(appendAnswerRejected(err)));
 };

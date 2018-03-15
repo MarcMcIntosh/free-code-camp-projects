@@ -11,6 +11,7 @@ const {
   // getUserQuestions,
   getUserAccount,
   setVote,
+  deleteQuestion,
 } = require('./db');
 
 const router = Router();
@@ -39,9 +40,10 @@ router.post('/create', requireAuth, createPoll);
 router.get('/account', requireAuth, updateVotes, getUserAccount);
 /* update when adding an answer */
 // could be a patch request
-router.post('/answer', requireAuth, appendAnswer);
-// router.get('/user/:user' /* , see users polls */);
 
+router.post('/add-answer', requireAuth, appendAnswer);
+// router.get('/user/:user' /* , see users polls */);
+router.delete('/:id', requireAuth, deleteQuestion, getUserAccount);
 // router.get('/account', requireAuth);
 
 module.exports = router;
