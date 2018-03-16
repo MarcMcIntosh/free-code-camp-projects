@@ -15,6 +15,17 @@ const questions = {
         }
       }.toString(),
     },
+    related_to: {
+      map: function(doc) {
+        if(doc.type === 'question') {
+          emit(doc._id);
+        } else if (doc.type === 'answer' && doc.question) {
+          emit(doc.question);
+        } else if (doc.type === 'vote' && doc.question) {
+          emit(doc.question)
+        }
+      }
+    },
     answers: {
       map: function(doc) {
         if (doc.type === 'answer' && Object.prototype.hasOwnProperty.call(doc, 'question') && Object.prototype.hasOwnProperty.call(doc, 'answer')) {

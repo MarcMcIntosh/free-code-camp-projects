@@ -267,11 +267,16 @@ function setVote(req, res, next) {
 }
 
 function deleteQuestion(req, res, next) {
-  return db.get(req.params.id, (err, doc) => {
+  return db.query(req.params.id, (err, doc) => {
     if (err) { return res.status(err.status || 500).send(err); }
     if (req.user._id !== doc.created_by) { return res.status(401).json({ message: 'user id does not match document created_by' }); }
-    const updated = Object.assign({}, doc, { _deleted: true });
-    return db.put(updated, erro => next(erro));
+    return db.query('questions/realted_to', {
+      key: doc._id,
+    }, (erro, respo) => {
+      if (erro) { return res.status(erro.status || 500).send(erro); }
+      const docs = respo.rows.map(d => Object.assign({}, d, { _deleted: true }));
+      return db.bulkDocs(docs, error => next(error));
+    });
   });
 }
 

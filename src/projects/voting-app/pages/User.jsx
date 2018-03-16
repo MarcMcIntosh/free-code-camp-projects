@@ -8,12 +8,12 @@ import {
   // object,
 } from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { refresh } from '../actions';
 
 const mapStateToProps = ({
-  votingApp: { authenticated, username, questionsAsked },
-}) => ({ authenticated, username, questionsAsked });
+  votingApp: { authenticated, username, questionsAsked, fetching },
+}) => ({ authenticated, username, questionsAsked, fetching });
 
 const mapDispatchToProps = dispatch => ({
   fetchData: () => dispatch(refresh()),
@@ -22,13 +22,19 @@ const mapDispatchToProps = dispatch => ({
 class UserPage extends PureComponent {
   componentDidMount() { this.props.fetchData(); }
   render() {
-    const { links: { login }, classnames } = this.context;
-    const { authenticated, username, questionsAsked } = this.props;
-    return (!authenticated) ? (<Redirect to={login} />) : (<div>
+    const { links: { login, view, results }, classnames } = this.context;
+    const { authenticated, username, questionsAsked, fetching } = this.props;
+    if (fetching) {
+      return (<div>loading...</div>);
+    } else if (!authenticated) {
+      return (<Redirect to={login} />);
+    }
+    return (<div>
       <div className={classnames('card')}>
         <header className={classnames('card__primary')}>
-          <h1 className={classnames('card__title')}>{username}</h1>
+          <h1 className={classnames('card__title')}>Hello {username}</h1>
         </header>
+
         <section className={classnames('card__actions')}>
           <button className={classnames('card__action')}>Ask Question</button>
           <button className={classnames('card__action')}>Delete Account</button>
@@ -37,17 +43,24 @@ class UserPage extends PureComponent {
 
       {questionsAsked.map(d => (<div key={d._id} className={classnames('card')}>
         <section className={classnames('card__primary')}>
-          <h1 className={classnames('card__title')}>{d.question}</h1>
-          <h2 className={classnames('card__subtitle')}>
-            {new Date(d.created_by).toLocaleDateString()}
+          <h1 className={classnames('question__text')}>{d.question}</h1>
+          <h2 className={classnames('question__time')}>
+            {new Date(d.created_at).toLocaleDateString()}
           </h2>
         </section>
+        <section className={classnames('card__actions')}>
+          <Link to={view + '/' + d._id} className={classnames('card__action')}>View</Link>
+          <Link to={results + '/' + d._id} className={classnames('card__action', 'card__action--primary')}>Results</Link>
+          <button className={classnames('card__action')}>Delete</button>
+        </section>
       </div>))}
+
     </div>);
   }
 }
 
 UserPage.propTypes = {
+  fetching: bool.isRequired,
   authenticated: bool.isRequired,
   username: string.isRequired,
   // user: object.isRequired,
@@ -56,7 +69,7 @@ UserPage.propTypes = {
 };
 
 UserPage.contextTypes = {
-  links: shape({ login: string.isRequired }).isRequired,
+  links: shape({ login: string.isRequired, view: string.isRequired, results: string.isRequired }).isRequired,
   classnames: func.isRequired,
 };
 
