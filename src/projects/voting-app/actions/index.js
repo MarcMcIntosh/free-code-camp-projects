@@ -204,3 +204,21 @@ export const appendAnswer = payload => (dispatch) => {
   });
   // .then(json => dispatch(appendAnswerRecieved(json))).catch(err => dispatch(appendAnswerRejected(err)));
 };
+
+
+export const DELETE_QUESTION_REQUEST = prefix('DELETE_QUESTION_REQUEST');
+export const DELETE_QUESTION_RECIEVED = prefix('DELETE_QUESTION_RECIEVED');
+export const DELETE_QUESTION_REJECTED = prefix('DELETE_QUESTION_REJECTED');
+
+const deleteQuestionRequest = payload => ({ type: DELETE_QUESTION_REQUEST, payload });
+// same result as refresh
+const deleteQuestionRecieved = payload => ({ type: DELETE_QUESTION_RECIEVED, payload });
+const deleteQuestionRejected = payload => ({ type: DELETE_QUESTION_REJECTED, payload });
+
+export const deleteQuestion = (payload, dispatch) => {
+  dispatch(deleteQuestionRequest(payload));
+  const address = 'delete/' + payload;
+  return fetch(address, {
+    method: 'DELETE',
+  }).then(json => dispatch(deleteQuestionRecieved(json))).catch(err => dispatch(deleteQuestionRejected(err)));
+};
