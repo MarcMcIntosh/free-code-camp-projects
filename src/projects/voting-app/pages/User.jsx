@@ -9,7 +9,7 @@ import {
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { refresh, deleteQuestion } from '../actions';
+import { refresh, deleteQuestion, deleteAccount } from '../actions';
 
 const mapStateToProps = ({
   votingApp: { authenticated, username, questionsAsked, fetching },
@@ -18,13 +18,14 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
   fetchData: () => dispatch(refresh()),
   onDeleteQuestion: event => dispatch(deleteQuestion(event.target.value)),
+  onDeleteAccount: () => dispatch(deleteAccount()),
 });
 
 class UserPage extends PureComponent {
   componentDidMount() { this.props.fetchData(); }
   render() {
     const { links: { login, view, results, create }, classnames } = this.context;
-    const { authenticated, username, questionsAsked, fetching, onDeleteQuestion } = this.props;
+    const { authenticated, username, questionsAsked, fetching, onDeleteQuestion, onDeleteAccount } = this.props;
     if (fetching) {
       return (<div>loading...</div>);
     } else if (!authenticated) {
@@ -38,7 +39,7 @@ class UserPage extends PureComponent {
 
         <section className={classnames('card__actions', 'card__actions--space-evenly')}>
           <Link to={create} className={classnames('card__action', 'card__action--primary')}>Ask Question</Link>
-          <button className={classnames('card__action', 'card__action--accent')}>Delete Account</button>
+          <button className={classnames('card__action', 'card__action--accent')} title="Delete account" onClick={onDeleteAccount}>Delete Account</button>
         </section>
       </div>
 
@@ -68,6 +69,7 @@ UserPage.propTypes = {
   fetchData: func.isRequired,
   questionsAsked: array.isRequired,
   onDeleteQuestion: func.isRequired,
+  onDeleteAccount: func.isRequired,
 };
 
 UserPage.contextTypes = {
