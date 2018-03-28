@@ -47,7 +47,7 @@ function logout(req, res, next) {
   });
 }
 
-function remove(req, res) {
+function remove(req, res, next) {
   return db.get(req.user._id, (err, userDoc) => {
     if (err) { return res.status(500).send(err); }
     const timestamp = new Date().toJSON();
@@ -55,10 +55,7 @@ function remove(req, res) {
       updated_at: timestamp,
       _deleted: true,
     });
-    return db.put(user, (error, resp) => {
-      if (error) { return res.status(500).send(error); }
-      return res.json({ message: 'Account Deleted', data: resp });
-    });
+    return db.put(user, erro => next(erro));
   });
 }
 

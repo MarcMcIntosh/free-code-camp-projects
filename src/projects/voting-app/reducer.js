@@ -38,6 +38,15 @@ import {
   RESULTS_RECIEVED,
   RESULTS_REJECTED,
 
+  // to do
+  DELETE_QUESTION_REQUEST,
+  DELETE_QUESTION_RECIEVED,
+  DELETE_QUESTION_REJECTED,
+
+  DELETE_ACCOUNT_REQUEST,
+  DELETE_ACCOUNT_RECIEVED,
+  DELETE_ACCOUNT_REJECTED,
+
 } from './actions';
 
 export const DEFAULT_STATE = {
@@ -83,19 +92,25 @@ export default function reducer(state = DEFAULT_STATE, action) {
     case QUESTIONS_REQUEST:
     case GET_POLL_REQUEST:
     case REFRESH_REQUEST:
-    case RESULTS_REQUEST: return { ...state, fetching: true };
+    case RESULTS_REQUEST:
+    case DELETE_QUESTION_REQUEST:
+    case DELETE_ACCOUNT_REQUEST: return { ...state, fetching: true };
 
     case CREATE_POLL_RECIEVED:
     case CREATE_POLL_REJECTED: return { ...state, fetching: false };
 
     case REGISTER_RECIEVED:
-    case LOGIN_RECIEVED: return { ...state, authenticated: true, fetching: false };
+    case LOGIN_RECIEVED:
+    case DELETE_QUESTION_RECIEVED: return { ...state, authenticated: true, fetching: false };
 
     case REFRESH_RECIEVED: return { ...state, ...action.payload, authenticated: true, fetching: false };
     case REFRESH_REJECTED: return { ...state, authenticated: false, fetching: false, username: '', id: '' };
 
     case LOGOUT_REJECTED:
-    case LOGOUT_RECIEVED: return { ...state, authenticated: false, fetching: false, username: '', id: '', answers: {}, error: action.payload };
+    case LOGOUT_RECIEVED:
+    case DELETE_QUESTION_REJECTED:
+    case DELETE_ACCOUNT_REJECTED:
+    case DELETE_ACCOUNT_RECIEVED: return { ...state, authenticated: false, fetching: false, username: '', id: '', answers: {}, error: action.payload || '' };
 
     case SET_VOTE_REQUEST: return { ...state, submittingVote: true, vottingError: '' };
     case SET_VOTE_REJECTED: return { ...state, submittingVote: false, vottingError: action.payload };

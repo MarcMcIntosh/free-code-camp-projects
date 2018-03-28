@@ -215,10 +215,23 @@ const deleteQuestionRequest = payload => ({ type: DELETE_QUESTION_REQUEST, paylo
 const deleteQuestionRecieved = payload => ({ type: DELETE_QUESTION_RECIEVED, payload });
 const deleteQuestionRejected = payload => ({ type: DELETE_QUESTION_REJECTED, payload });
 
-export const deleteQuestion = (payload, dispatch) => {
+export const deleteQuestion = payload => (dispatch) => {
   dispatch(deleteQuestionRequest(payload));
   const address = 'delete/' + payload;
   return fetch(address, {
     method: 'DELETE',
-  }).then(json => dispatch(deleteQuestionRecieved(json))).catch(err => dispatch(deleteQuestionRejected(err)));
+  }).then(handleRes).then(json => dispatch(deleteQuestionRecieved(json))).catch(err => dispatch(deleteQuestionRejected(err)));
+};
+
+export const DELETE_ACCOUNT_REQUEST = prefix('DELETE_ACCOUNT_REQUEST');
+export const DELETE_ACCOUNT_RECIEVED = prefix('DELETE_ACCOUNT_RECIEVED');
+export const DELETE_ACCOUNT_REJECTED = prefix('DELETE_ACCOUNT_REJECTED');
+
+const deleteAccountRequest = () => ({ type: DELETE_ACCOUNT_REQUEST });
+const deleteAccountRecieved = payload => ({ type: DELETE_ACCOUNT_RECIEVED, payload });
+const deleteAccountRejected = payload => ({ type: DELETE_ACCOUNT_REJECTED, payload });
+
+export const deleteAccount = () => (dispatch) => {
+  dispatch(deleteAccountRequest());
+  return fetch('account', { method: 'DELETE' }).then(handleRes).then(json => dispatch(deleteAccountRecieved(json))).catch(err => dispatch(deleteAccountRejected(err)));
 };

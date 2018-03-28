@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
 class UserPage extends PureComponent {
   componentDidMount() { this.props.fetchData(); }
   render() {
-    const { links: { login, view, results }, classnames } = this.context;
+    const { links: { login, view, results, create }, classnames } = this.context;
     const { authenticated, username, questionsAsked, fetching, onDeleteQuestion } = this.props;
     if (fetching) {
       return (<div>loading...</div>);
@@ -36,9 +36,9 @@ class UserPage extends PureComponent {
           <h1 className={classnames('card__title')}>Hello {username}</h1>
         </header>
 
-        <section className={classnames('card__actions')}>
-          <button className={classnames('card__action')}>Ask Question</button>
-          <button className={classnames('card__action')}>Delete Account</button>
+        <section className={classnames('card__actions', 'card__actions--space-evenly')}>
+          <Link to={create} className={classnames('card__action', 'card__action--primary')}>Ask Question</Link>
+          <button className={classnames('card__action', 'card__action--accent')}>Delete Account</button>
         </section>
       </div>
 
@@ -49,10 +49,10 @@ class UserPage extends PureComponent {
             {new Date(d.created_at).toLocaleDateString()}
           </h2>
         </section>
-        <section className={classnames('card__actions')}>
+        <section className={classnames('card__actions', 'card__actions--space-evenly')}>
           <Link to={view + '/' + d._id} className={classnames('card__action')}>View</Link>
           <Link to={results + '/' + d._id} className={classnames('card__action', 'card__action--primary')}>Results</Link>
-          <button value={d._id} title="Delete this question" className={classnames('card__action')} onClick={onDeleteQuestion}>Delete</button>
+          <button value={d._id} title="Delete this question" className={classnames('card__action', 'card__action--accent')} onClick={onDeleteQuestion}>Delete</button>
         </section>
       </div>))}
 

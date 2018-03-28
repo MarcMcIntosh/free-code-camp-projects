@@ -11,6 +11,7 @@ const {
   logout,
   notAuthOnly,
   sessions,
+  remove,
 } = require('./middleware');
 
 
@@ -35,7 +36,7 @@ router.get('/user', requireAuth, (req, res) => {
   res.json(req.user);
 });
 
-
+router.delete('/account', requireAuth, remove, logout);
 // router.get('/validate-email/:email', validateEmail);
 // router.get('/refresh', requireAuth, refresh);
 
