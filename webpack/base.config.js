@@ -6,8 +6,14 @@ const {
   NoEmitOnErrorsPlugin,
   DefinePlugin,
   HashedModuleIdsPlugin,
-  optimize: { LimitChunkCountPlugin, CommonsChunkPlugin, UglifyJsPlugin },
+  optimize: {
+    LimitChunkCountPlugin,
+    CommonsChunkPlugin,
+    // UglifyJsPlugin,
+  },
 } = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 const WriteFilePlugin = require('write-file-webpack-plugin'); // see whar chunks are built
 const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line
 
@@ -56,19 +62,24 @@ const entry = ({ server = false, production = false } = {}) => (server ? serverE
 
 const externalsProd = fs.readdirSync(modulesDir).filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x)).reduce((ext, mod) => Object.assign({}, ext, { [mod]: `commonjs ${mod}` }), {});
 
-const externals = ({
+/* const externals = ({
   server = false,
   production = false,
 } = {}) => {
   if (server && production) {
     return [
-      'leveldown',
+      // 'leveldown',
       // 'pouchdb-node',
       // 'sqlite3',
     ];
   } else if (server && !production) {
     return [externalsProd];
   }
+  return [];
+}; */
+
+const externals = ({ server = false } = {}) => {
+  if (server) { return [].concat(externalsProd); }
   return [];
 };
 
@@ -143,7 +154,12 @@ const rules = ({ server = false, production = false }) => {
 };
 
 const plugins = ({ server = false, production = false, dist = false } = {}) => {
-  const min = new UglifyJsPlugin({ compress: { screw_ie8: true, warnings: false }, mangle: { screw_ie8: true }, output: { screw_ie8: true, comments: false }, sourceMap: !server });
+  const min = new UglifyJsPlugin({
+    uglifyOptions: {
+      output: { comments: !dist },
+    },
+    sourceMap: !server,
+  });
 
   const DEFAULT_PLUGINS = [new DefinePlugin({
     'process.env': { NODE_ENV: JSON.stringify(production ? 'production' : 'development') },
@@ -170,7 +186,9 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
     new LimitChunkCountPlugin({ maxChunks: 1 }),
   ];
 
-  const SERVER_PLUGINS = dist ? [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS, min) : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+  // const SERVER_PLUGINS = dist ? [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS, min) : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+
+  const SERVER_PLUGINS = [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
 
   return server ? SERVER_PLUGINS : CLIENT_PLUGINS;
 };
