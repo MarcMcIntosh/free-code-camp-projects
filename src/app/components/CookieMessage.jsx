@@ -2,7 +2,6 @@ import React from 'react';
 import { bool, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import classnames from '../styles/cookies';
 import acceptCookies from '../actions';
 
 const mapStateToProps = ({ app: { cookiesAccepted } }) => ({
@@ -17,6 +16,8 @@ const mapDispatchToProps = dispatch => ({
 const CookieMessage = ({
   cookiesAccepted,
   onClick,
+}, {
+  classnames,
 }) => !cookiesAccepted && (<footer className={classnames('cookie-message', cookiesAccepted && 'cookie-message--accepted')}>
   This website uses cookies to give you the best possible experience.
   <Link tabIndex="0" to="about">Learn more</Link>
