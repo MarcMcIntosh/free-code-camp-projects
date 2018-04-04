@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+.cookie-message {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+  text-align: center;
+
+  &__button {
+    composes: mdc-button from $mdc-button;
+  }
+}

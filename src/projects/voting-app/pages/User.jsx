@@ -35,6 +35,7 @@ class UserPage extends PureComponent {
       <div className={classnames('card')}>
         <header className={classnames('card__primary')}>
           <h1 className={classnames('card__title')}>Hello {username}</h1>
+          <h2 className={classnames('card__subtitle')}>Account and question managment</h2>
         </header>
 
         <section className={classnames('card__actions', 'card__actions--space-evenly')}>

@@ -31,6 +31,7 @@ import imageSearch from './assets/image-search.png';
 import urlShortener from './assets/url-shortener.png';
 import headerParser from './assets/header-parser.png';
 import timestamp from './assets/timestamp.png';
+import votingApp from './assets/voting-app.png';
 
 const GAME = ['game'];
 const D3 = ['d3', 'data-visualisations'];
@@ -229,7 +230,7 @@ const apps = {
     url: '/voting-app',
     challenge: 'https://www.freecodecamp.com/challenges/build-a-voting-app',
     title: 'Polling App',
-    media: '',
+    media: votingApp,
     tags: [].concat(FULL_STACK, 'polling', 'voting', 'questions'),
     repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/voting-app',
   },

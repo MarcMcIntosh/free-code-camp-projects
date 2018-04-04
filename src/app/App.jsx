@@ -5,7 +5,9 @@ import routes from '../common/routes';
 import Container from '../common/Container';
 
 const App = () => (<Container>
-  <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+  <BrowserRouter>
+    {renderRoutes(routes)}
+  </BrowserRouter>
 </Container>);
 
 export default App;
