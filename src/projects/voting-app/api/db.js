@@ -17,8 +17,8 @@ ddocs.forEach((d, i, a) => {
     const str1 = JSON.stringify(d.views);
     const str2 = JSON.stringify(diff.views);
     return str1 !== str2 ? d : false;
-  }, (err, res) => {
-    if (!err && res.updated) {
+  }).then((res) => {
+    if (res.updated) {
       Object.keys(d.views).forEach((dd, ii, aa) => {
         const qs = name + '/' + dd;
         return db.query(qs, {
@@ -28,7 +28,7 @@ ddocs.forEach((d, i, a) => {
         });
       });
     }
-  });
+  }).catch(console.error);
 });
 
 const createAnswerDoc = ({

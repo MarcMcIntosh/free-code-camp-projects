@@ -14,12 +14,16 @@ db.upsert(viewByAddress._id, (diff) => {
   const str2 = JSON.stringify(diff.views);
   return str1 !== str2 ? viewByAddress : false;
 }, (err, res) => {
+  const name = viewByAddress._id.replace(/^_design\//, '');
   if (!err && res.updated) {
     Object.keys(viewByAddress.views).forEach((d, i, a) => {
       const qs = name + '/' + d;
       db.query(qs, {
         limit: 0,
-      }, () => (i === a.length - 1 ? db.viewCleanup(() => void 0) : void 0));
+      }, () => {
+        if (i === a.length - 1) return db.viewCleanup(() => void 0);
+        return void 0;
+      });
     });
   }
 });

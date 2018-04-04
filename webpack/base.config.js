@@ -157,7 +157,9 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
   const min = new UglifyJsPlugin({
     uglifyOptions: {
       output: { comments: !dist },
+      ecma: 8,
     },
+    cache: true,
     sourceMap: !server,
   });
 
@@ -186,9 +188,9 @@ const plugins = ({ server = false, production = false, dist = false } = {}) => {
     new LimitChunkCountPlugin({ maxChunks: 1 }),
   ];
 
-  // const SERVER_PLUGINS = dist ? [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS, min) : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+  const SERVER_PLUGINS = dist ? [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS, min) : [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
 
-  const SERVER_PLUGINS = [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
+  // const SERVER_PLUGINS = [].concat(DEFAULT_PLUGINS, SERVER_DEFAULTS);
 
   return server ? SERVER_PLUGINS : CLIENT_PLUGINS;
 };
