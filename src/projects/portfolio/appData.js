@@ -48,7 +48,7 @@ const apps = {
     url: '/bar-chart',
     media: barChart,
     tags: [].concat(D3, 'bar chart'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/bar-chart',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/bar-chart',
   },
   calculator: {
     title: 'Calculator',
@@ -56,7 +56,7 @@ const apps = {
     url: '/calculator',
     media: calculator,
     tags: [].concat(FRONTEND, 'calculator'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/calculator',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/calculator',
   },
   dataGlobe: {
     url: '/data-globe',
@@ -64,7 +64,7 @@ const apps = {
     title: 'Map Data Across the Globe',
     media: dataGlobe,
     tags: [].concat(D3, 'heat map', 'map', 'geo'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/data-globe',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/data-globe',
   },
   dungeonCrawler: {
     url: '/dungeon-crawler',
@@ -72,7 +72,7 @@ const apps = {
     title: 'Rogue-like dungeon crawler game',
     media: dungeonCrawler,
     tags: [].concat(GAME, REACT),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/dungeon-crawler',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/dungeon-crawler',
   },
   fileSize: {
     url: '/file-size',
@@ -80,7 +80,7 @@ const apps = {
     title: 'File Metadata Microservice',
     media: fileSize,
     tags: [].concat(API, SERVER, 'file size'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/file-size',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/file-size',
   },
   forceDirected: {
     url: '/force-directed',
@@ -88,7 +88,7 @@ const apps = {
     title: 'National contiguity',
     media: forceDirected,
     tags: [].concat(D3, 'force directed', 'chart', 'flags'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/force-directed',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/force-directed',
   },
   gameOfLife: {
     url: '/game-of-life',
@@ -96,7 +96,7 @@ const apps = {
     title: 'Game of Life',
     media: gameOfLife,
     tags: [].concat(REACT, GAME, 'game of life'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/game-of-life',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/game-of-life',
   },
   headerParser: {
     url: '/header-parser',
@@ -104,7 +104,7 @@ const apps = {
     title: 'Request Header Parser',
     media: headerParser,
     tags: [].concat(SERVER, API, 'headers'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/header-parser',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/header-parser',
   },
   heatMap: {
     url: '/heat-map',
@@ -112,7 +112,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-heat-map',
     media: heatMap,
     tags: [].concat(D3, 'heat map', 'graph'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/heat-map',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/heat-map',
   },
   imageSearch: {
     url: '/image-search',
@@ -120,7 +120,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/image-search-abstraction-layer',
     media: imageSearch,
     tags: [].concat(API, SERVER, 'image search'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/image-search',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/image-search',
   },
   leaderBoard: {
     url: '/leader-board',
@@ -128,7 +128,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-camper-leaderboard',
     media: leaderBoard,
     tags: [].concat(REACT, API, FRONTEND, 'leader board'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/leader-board',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/leader-board',
   },
   localWeather: {
     url: '/local-weather',
@@ -136,7 +136,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/show-the-local-weather',
     media: localWeather,
     tags: [].concat(API, FRONTEND, 'weather'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/local-weather',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/local-weather',
   },
   markdownPreviewer: {
     url: '/markdown-previewer',
@@ -144,7 +144,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-markdown-previewer',
     media: markdownPreviewer,
     tags: [].concat(REACT, 'markdown', 'editor'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/markdown-previewer',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/markdown-previewer',
   },
   pomodoro: {
     url: '/pomodoro',
@@ -152,7 +152,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-pomodoro-clock',
     media: pomodoro,
     tags: [].concat(FRONTEND, 'clock'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/pomodoro',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/pomodoro',
   },
   quoteMachine: {
     url: '/quote-machine',
@@ -160,7 +160,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-random-quote-machine',
     media: quoteMachine,
     tags: [].concat(FRONTEND, 'quotes'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/quote-machine',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/quote-machine',
   },
   recipeBox: {
     url: '/recipe-box',
@@ -168,7 +168,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-recipe-box',
     media: recipeBox,
     tags: [].concat(REACT, FRONTEND, 'persist', 'memory', 'recipe'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/recipe-box',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/recipe-box',
   },
   scatterplotGraph: {
     url: '/scatterplot-graph',
@@ -176,7 +176,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/visualize-data-with-a-scatterplot-graph',
     media: scatterplotGraph,
     tags: [].concat(D3, 'scatterplot', 'graph'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/scatterplot-graph',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/scatterplot-graph',
   },
   simon: {
     url: '/simon-says',
@@ -184,7 +184,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-simon-game',
     media: simonSays,
     tags: [].concat(GAME, 'simon says', 'ai'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/simon',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/simon',
   },
   ticTacToe: {
     url: '/tic-tac-toe',
@@ -192,7 +192,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/build-a-tic-tac-toe-game',
     media: ticTacToe,
     tags: [].concat(GAME, 'minimax', 'ai', 'knots and crosses'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/tic-tac-toe',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/tic-tac-toe',
   },
   timestamp: {
     url: '/timestamp',
@@ -200,7 +200,7 @@ const apps = {
     challenge: 'https://www.freecodecamp.com/challenges/timestamp-microservice',
     media: timestamp,
     tags: [].concat(SERVER, API, 'timestamp'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/timestamp',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/timestamp',
   },
   tribute: {
     title: 'Tribute Page',
@@ -208,7 +208,7 @@ const apps = {
     url: '/tribute-page',
     media: woodhouse,
     tags: [].concat(FRONTEND, 'tribute page'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/tribute-page',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/tribute-page',
   },
   twitch: {
     url: '/twitch-streams',
@@ -216,7 +216,7 @@ const apps = {
     title: 'Twitch-tv info',
     media: twitchTv,
     tags: [].concat(FRONTEND, API, 'twitch tv'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/twitch-tv',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/twitch-tv',
   },
   urlShortener: {
     url: '/url-shortener',
@@ -224,7 +224,7 @@ const apps = {
     title: 'URL Shortener Microservice',
     media: urlShortener,
     tags: [].concat(SERVER, API, 'url shortener'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/url-shortener',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/url-shortener',
   },
   votingApp: {
     url: '/voting-app',
@@ -232,7 +232,7 @@ const apps = {
     title: 'Polling App',
     media: votingApp,
     tags: [].concat(FULL_STACK, 'polling', 'voting', 'questions'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/voting-app',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/voting-app',
   },
   wikipediaViewer: {
     url: '/wikipedia-viewer',
@@ -240,7 +240,7 @@ const apps = {
     title: 'Wikipedia Finder',
     media: wikipediaViewer,
     tags: [].concat(FRONTEND, 'wikipedia'),
-    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/src/projects/wikipedia-viewer',
+    repository: 'https://github.com/MarcMcIntosh/free-code-camp-projects/tree/master/src/projects/wikipedia-viewer',
   },
 };
 
