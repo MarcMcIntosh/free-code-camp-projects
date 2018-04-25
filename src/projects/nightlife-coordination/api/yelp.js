@@ -1,12 +1,26 @@
 const { resolve } = require('path');
 const fetch = require('isomorphic-fetch');
+const { stringify } = require('querystring');
 
 const ENV_PATH = resolve(__dirname, '..', '.env');
 require('dotenv').config({ path: ENV_PATH });
 
+
+function hasCoords(obj) {
+  return Object.prototype.hasOwnProperty.call(obj, 'latitude') && Object.prototype.hasOwnProperty.call(obj, 'longitude');
+}
+
+function yelpEndPoint(obj) {
+  const str = stringify(obj);
+  return 'https://api.yelp.com/v3/events?' + str;
+}
+
 function searchByLocation(req, res) {
-  if (!req.query.location) { return res.json({ error: 'missing location', status: 400, message: 'missing location in request address' }); }
-  const str = `https://api.yelp.com/v3/events?location=${req.query.location}`;
+  if (!req.query.location || !hasCoords(req.query)) {
+    return res.json({ error: 'missing location', status: 400, message: 'missing location in request address' });
+  }
+
+  const str = yelpEndPoint(req.query);
   return fetch(str, {
     method: 'GET',
     headers: {

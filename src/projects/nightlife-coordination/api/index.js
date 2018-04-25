@@ -13,12 +13,12 @@ router.use(authApi);
 
 /* unauthenticated */
 router.get('/events', searchByLocation);
-router.get('/events/:id', searchById);
+router.get('/event/:id', searchById);
 
 /* authenticated */
 router.get('/account', requireAuth, getUserAccount);
-router.delete('/events/:id', requireAuth, deleteEvent, getUserAccount);
-router.put('/events/:id', requireAuth, saveEvent, getUserAccount);
+router.delete('/event/:id', requireAuth, deleteEvent, getUserAccount);
+router.put('/event/:id', requireAuth, saveEvent, getUserAccount);
 /* save a users intrest in an event rather than the event it's self */
 
 module.exports = router;

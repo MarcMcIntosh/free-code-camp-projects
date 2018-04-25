@@ -31,7 +31,6 @@ export const DEFAULT_STATE = {
 
 export default function reducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
     case LOGOUT_REQUEST:
