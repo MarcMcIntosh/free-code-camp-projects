@@ -1,5 +1,5 @@
 import { SubmissionError } from 'redux-form';
-import fetch from './apiService';
+import { saveEvent, deleteEvent, getEvent, geoSearch, locationSearch } from './apiService';
 
 const prefix = str => `NIGHTLIFE-COORDINATION_${str}`;
 
@@ -7,7 +7,6 @@ function handleRes(res) {
   if (!res.ok) { throw res.statusText; }
   return res.json();
 }
-
 
 function hasValidationErrors(json) {
   if (Object.prototype.hasOwnProperty.call(json, 'validationErrors')) {
@@ -110,4 +109,86 @@ const deleteAccountRejected = payload => ({ type: DELETE_ACCOUNT_REJECTED, paylo
 export const deleteAccount = () => (dispatch) => {
   dispatch(deleteAccountRequest());
   return fetch('account', { method: 'DELETE' }).then(handleRes).then(json => dispatch(deleteAccountRecieved(json))).catch(err => dispatch(deleteAccountRejected(err)));
+};
+
+
+export const SAVE_EVENT_REQUEST = prefix('SAVE_EVENT_REQUEST');
+export const SAVE_EVENT_REJECTED = prefix('SAVE_EVENT_REJECTED');
+export const SAVE_EVENT_RECIEVED = prefix('SAVE_EVENT_RECIEVED');
+
+const saveEventRequest = payload => ({ type: SAVE_EVENT_REQUEST, payload });
+const saveEventRejected = payload => ({ type: SAVE_EVENT_REJECTED, payload });
+const saveEventRecieved = payload => ({ type: SAVE_EVENT_RECIEVED, payload });
+
+export const handleSaveEvent = payload => (dispatch) => {
+  dispatch(saveEventRequest(payload));
+  return saveEvent(payload)
+    .then(handleRes)
+    .then(json => dispatch(saveEventRecieved(json)))
+    .catch(err => dispatch(saveEventRejected(err)));
+};
+
+export const DELETE_EVENT_REQUEST = prefix('DELETE_EVENT_REQUEST');
+export const DELETE_EVENT_RECIEVED = prefix('DELETE_EVENT_RECIEVED');
+export const DELETE_EVENT_REJECTED = prefix('DELETE_EVENT_REJECTED');
+
+const deleteEventRequest = payload => ({ type: DELETE_EVENT_REQUEST, payload });
+const deleteEventRecieved = payload => ({ type: DELETE_EVENT_RECIEVED, payload });
+const deleteEventRejected = payload => ({ type: DELETE_EVENT_REJECTED, payload });
+
+export const handleDeleteEvent = payload => (dispatch) => {
+  dispatch(deleteEventRequest(payload));
+  return deleteEvent(payload)
+    .then(handleRes)
+    .then(json => dispatch(deleteEventRecieved(json)))
+    .catch(err => dispatch(deleteEventRejected(err)));
+};
+
+export const GET_EVENT_REQUEST = prefix('GET_EVENT_REQUEST');
+export const GET_EVENT_RECIEVED = prefix('GET_EVENT_RECIEVED');
+export const GET_EVENT_REJECTED = prefix('GET_EVENT_REJECTED');
+
+const getEventRequest = payload => ({ type: GET_EVENT_REQUEST, payload });
+const getEventRecieved = payload => ({ type: GET_EVENT_RECIEVED, payload });
+const getEventRejected = payload => ({ type: GET_EVENT_REJECTED, payload });
+
+export const handleGetEvent = payload => (dispatch) => {
+  dispatch(getEventRequest(payload));
+  return getEvent(payload)
+    .then(handleRes)
+    .then(json => dispatch(getEventRecieved(json)))
+    .then(err => dispatch(getEventRejected(err)))
+  ;
+};
+
+export const GEO_SEARCH_REQUEST = prefix('GEO_SEARCH_REQUEST');
+export const GEO_SEARCH_RECIEVED = prefix('GEO_SEARCH_RECIEVED');
+export const GEO_SEARCH_REJECTED = prefix('GEO_SEARCH_REJECTED');
+
+const geoSearchRequest = payload => ({ type: GEO_SEARCH_REQUEST, payload });
+const geoSearchRecieved = payload => ({ type: GEO_SEARCH_RECIEVED, payload });
+const geoSearchRejected = payload => ({ type: GEO_SEARCH_REJECTED, payload });
+
+export const handleGeoSearch = payload => (dispatch) => {
+  dispatch(geoSearchRequest(payload));
+  return geoSearch(payload)
+    .then(handleRes)
+    .then(json => dispatch(geoSearchRecieved(json)))
+    .catch(err => dispatch(geoSearchRejected(err)));
+};
+
+export const LOCATION_SEARCH_REQUEST = prefix('LOCATION_SEARCH_REQUEST');
+export const LOCATION_SEARCH_REJECTED = prefix('LOCATION_SEARCH_REJECTED');
+export const LOCATION_SEARCH_RECIEVED = prefix('LOCATION_SEARCH_RECIEVED');
+
+const locationSearchRequest = payload => ({ type: LOCATION_SEARCH_REQUEST, payload });
+const locationSearchRecieved = payload => ({ type: LOCATION_SEARCH_RECIEVED, payload });
+const locationSearchRejected = payload => ({ type: LOCATION_SEARCH_REJECTED, payload });
+
+export const handleLocationSearch = payload => (dispatch) => {
+  dispatch(locationSearchRequest(payload));
+  return locationSearch(payload)
+    .then(handleRes)
+    .then(json => dispatch(locationSearchRecieved(json)))
+    .catch(err => dispatch(locationSearchRejected(err)));
 };
