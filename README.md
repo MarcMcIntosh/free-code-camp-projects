@@ -65,7 +65,7 @@ Update these when adding a project
  - [x] **url-shortener** [URL Shortener Microservice](https://www.freecodecamp.org/challenges/url-shortener-microservice)
 
 #### Dynamic Web Application Projects
- - [ ] **voting** [Build a Voting App](https://www.freecodecamp.org/challenges/build-a-voting-app)
+ - [x ] **voting** [Build a Voting App](https://www.freecodecamp.org/challenges/build-a-voting-app)
  - [ ] **nightlife-coordination** [Build a Nightlife Coordination App](https://www.freecodecamp.org/challenges/build-a-nightlife-coordination-app)
  - [ ] **stock-market-charts** [Chart the Stock Market](https://www.freecodecamp.org/challenges/chart-the-stock-market)
  - [ ] **book-trader** [Manage a Book Trading Club](https://www.freecodecamp.org/challenges/manage-a-book-trading-club)
